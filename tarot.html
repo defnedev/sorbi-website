@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarot Açılımı — Sorbi Astroloji</title>
+<meta name="description" content="Şu anın enerjisini okumak için tarot. Defne ile 3-kart açılımı — mevcut durum, engel ve rehberlik.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;overflow-x:hidden;background:#080816;color:#f5f0e8;}
+a{text-decoration:none;color:inherit;}
+ul{list-style:none;}
+
+:root{
+  --dark:#080816;
+  --gold:#d4af37;
+  --gold2:rgba(212,175,55,0.12);
+  --purple:#9b6dff;
+  --purple2:rgba(155,109,255,0.12);
+  --green:#25D366;
+  --text-light:#f5f0e8;
+  --text-muted:rgba(245,240,232,0.6);
+  --text-dim:rgba(245,240,232,0.35);
+  --border-gold:rgba(212,175,55,0.22);
+  --radius:12px;
+}
+
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.15;}
+p{line-height:1.85;color:var(--text-muted);}
+
+nav{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  padding:1rem 2rem;
+  display:flex;justify-content:space-between;align-items:center;
+  background:#080816;
+  backdrop-filter:none;
+  box-shadow:none;
+}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3.2rem;font-weight:700;
+  color:var(--text-light);
+  display:flex;align-items:center;gap:0.2rem;line-height:1;
+}
+.nav-logo .star{color:var(--gold);font-size:2.2rem;}
+.nav-back{font-size:0.82rem;color:rgba(245,240,232,0.6);transition:color 0.2s;}
+.nav-back:hover{color:var(--text-light);}
+
+.hero{
+  min-height:100vh;
+  background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(155,109,255,0.2) 0%, transparent 65%),
+             radial-gradient(ellipse 50% 40% at 90% 90%, rgba(212,175,55,0.12) 0%, transparent 60%),
+             var(--dark);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:8rem 1.5rem 5rem;
+  text-align:center;position:relative;overflow:hidden;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  background:rgba(155,109,255,0.12);
+  border:1px solid rgba(155,109,255,0.3);
+  border-radius:999px;
+  padding:0.3rem 1rem;
+  font-size:0.7rem;color:var(--purple);
+  letter-spacing:1.5px;text-transform:uppercase;
+  margin-bottom:1.4rem;
+}
+.hero h1{
+  font-size:clamp(3rem,7vw,5.5rem);
+  color:var(--text-light);
+  margin-bottom:1rem;letter-spacing:-2px;
+}
+.hero h1 em{color:var(--purple);font-style:italic;}
+.hero-subtitle{
+  font-size:1.1rem;color:var(--text-muted);
+  max-width:540px;margin:0 auto 2.5rem;line-height:1.8;
+}
+
+/* CARD VISUAL */
+.tarot-visual{
+  display:flex;gap:1rem;justify-content:center;
+  margin-top:1rem;
+}
+.tarot-card-demo{
+  width:80px;height:130px;
+  border-radius:10px;
+  border:1px solid rgba(155,109,255,0.35);
+  background:linear-gradient(160deg, rgba(155,109,255,0.15), rgba(8,8,22,0.9));
+  display:flex;align-items:center;justify-content:center;
+  font-size:2rem;
+  position:relative;
+  animation:card-float 4s ease-in-out infinite;
+}
+.tarot-card-demo:nth-child(2){animation-delay:0.5s;}
+.tarot-card-demo:nth-child(3){animation-delay:1s;}
+@keyframes card-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.tarot-card-demo::after{
+  content:'';position:absolute;inset:4px;
+  border:1px solid rgba(212,175,55,0.15);
+  border-radius:6px;
+}
+
+.content{max-width:820px;margin:0 auto;padding:5rem 1.5rem;}
+.section{margin-bottom:4rem;}
+.section-label{
+  font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:0.8rem;
+  display:flex;align-items:center;gap:0.5rem;
+}
+.section-label::before{content:'✦';font-size:0.6rem;}
+.section h2{
+  font-size:clamp(1.8rem,3vw,2.6rem);
+  color:var(--text-light);margin-bottom:1.5rem;letter-spacing:-0.8px;
+}
+.section p{margin-bottom:1.2rem;}
+
+.three-cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.2rem;margin-top:2rem;
+}
+.card-pos{
+  border-radius:var(--radius);
+  padding:2rem 1.5rem;text-align:center;
+  transition:transform 0.3s;
+}
+.card-pos:hover{transform:translateY(-4px);}
+.card-pos:nth-child(1){
+  background:rgba(212,175,55,0.07);
+  border:1px solid rgba(212,175,55,0.2);
+}
+.card-pos:nth-child(2){
+  background:rgba(155,109,255,0.07);
+  border:1px solid rgba(155,109,255,0.2);
+}
+.card-pos:nth-child(3){
+  background:rgba(37,211,102,0.06);
+  border:1px solid rgba(37,211,102,0.2);
+}
+.card-pos-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.5rem;font-weight:700;
+  line-height:1;margin-bottom:0.5rem;
+}
+.card-pos:nth-child(1) .card-pos-num{color:var(--gold);}
+.card-pos:nth-child(2) .card-pos-num{color:var(--purple);}
+.card-pos:nth-child(3) .card-pos-num{color:#25D366;}
+.card-pos h3{font-size:1rem;color:var(--text-light);margin-bottom:0.6rem;}
+.card-pos p{font-size:0.85rem;}
+
+.divider{border:none;border-top:1px solid rgba(212,175,55,0.15);margin:4rem 0;}
+
+.quote-block{
+  border-left:3px solid var(--purple);
+  padding:1.5rem 2rem;
+  margin:2rem 0;
+  background:rgba(155,109,255,0.05);
+  border-radius:0 var(--radius) var(--radius) 0;
+}
+.quote-block p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.35rem;font-style:italic;
+  color:var(--text-light);line-height:1.6;
+}
+
+.when-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1rem;margin-top:1.5rem;
+}
+.when-item{
+  background:rgba(155,109,255,0.06);
+  border:1px solid rgba(155,109,255,0.15);
+  border-radius:var(--radius);
+  padding:1.4rem;
+}
+.when-item .icon{font-size:1.5rem;margin-bottom:0.6rem;display:block;}
+.when-item h4{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;color:var(--text-light);margin-bottom:0.4rem;
+}
+.when-item p{font-size:0.85rem;}
+
+.example-block{
+  background:var(--purple2);
+  border:1px solid rgba(155,109,255,0.2);
+  border-radius:var(--radius);
+  padding:2rem;margin-top:1.5rem;
+}
+.example-block h4{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;color:var(--purple);margin-bottom:0.8rem;
+}
+.example-block p{font-size:0.92rem;}
+
+.receive-list{display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem;}
+.receive-item{
+  display:flex;align-items:flex-start;gap:1rem;
+  background:rgba(212,175,55,0.08);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);padding:1.2rem 1.5rem;
+}
+.receive-icon{font-size:1.4rem;flex-shrink:0;margin-top:0.1rem;}
+.receive-text h4{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;color:var(--text-light);margin-bottom:0.3rem;
+}
+.receive-text p{font-size:0.88rem;margin:0;}
+
+.pricing-section{
+  background:linear-gradient(135deg, rgba(155,109,255,0.1) 0%, rgba(212,175,55,0.08) 100%);
+  border:1px solid rgba(155,109,255,0.25);
+  border-radius:20px;
+  padding:3rem 2.5rem;
+  text-align:center;margin:4rem 0;
+}
+.pricing-section h2{
+  font-size:clamp(1.6rem,3vw,2.2rem);
+  color:var(--text-light);margin-bottom:0.5rem;
+}
+.price-tag{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.5rem,8vw,5rem);font-weight:700;
+  color:var(--gold);line-height:1;margin:1rem 0;
+}
+.price-tag{display:flex;align-items:baseline;justify-content:center;gap:0.25rem;}
+.price-tag span{font-size:1.2rem;font-weight:600;letter-spacing:1px;}
+.pricing-section > p{max-width:440px;margin:0 auto 1.5rem;font-size:0.9rem;}
+.price-note{font-size:0.78rem;color:var(--text-dim);margin-top:1rem;}
+
+.wa-btn{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  background:var(--green);color:#fff;
+  padding:1rem 2.2rem;border-radius:999px;
+  font-weight:600;font-size:0.95rem;
+  transition:opacity 0.2s,transform 0.2s;cursor:pointer;border:none;
+}
+.wa-btn:hover{opacity:0.88;transform:translateY(-2px);}
+
+footer{
+  border-top:1px solid rgba(212,175,55,0.1);
+  padding:2.5rem 1.5rem;text-align:center;
+}
+footer p{font-size:0.82rem;color:var(--text-dim);}
+footer a{color:var(--gold);}
+
+@media(max-width:640px){
+  nav{padding:0.8rem 1.2rem;}
+  .nav-logo{font-size:2.4rem;}
+  .three-cards{grid-template-columns:1fr;}
+  .content{padding:3rem 1.2rem;}
+  .pricing-section{padding:2rem 1.5rem;}
+  .tarot-visual{display:none;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index_v3.html" class="nav-logo">Sorbi <span class="star">✦</span></a>
+  <a href="index_v3.html" class="nav-back">← Ana Sayfa</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">✦ Anlık Enerji Okuması</div>
+  <h1>Tarot<br><em>Açılımı</em></h1>
+  <p class="hero-subtitle">
+    Şu an neredesin? Ne seni engelliyor? Hangi enerji seni bekliyor? Üç kart, bütün resmi gösterir.
+  </p>
+  <div class="tarot-visual">
+    <div class="tarot-card-demo">🌙</div>
+    <div class="tarot-card-demo">⭐</div>
+    <div class="tarot-card-demo">☀</div>
+  </div>
+</section>
+
+<div class="content">
+
+  <div class="section">
+    <div class="section-label">Tarot Nedir?</div>
+    <h2>Gözle Görünmeyen Enerjiyi Okumak</h2>
+    <p>
+      Tarot, yaklaşık 600 yıllık kökleri olan, 78 karttan oluşan sembolik bir sistemdir. Her kart, insan deneyiminin bir boyutunu — bir duyguyu, bir durumu, bir geçişi, bir zorluğu ya da bir fırsatı — temsil eder.
+    </p>
+    <p>
+      Tarot geleceği "kehanet" etmez. Bu yaygın bir yanlış anlaşılmadır. Tarot, şu anki enerji alanını okur. Bulunduğun noktayı, seni durduran şeyi ve sana açık olan yolu ayna gibi yansıtır. Bu yansımayı görmek, bilinçli seçimler yapmanı kolaylaştırır.
+    </p>
+    <p>
+      Kartlar senin bilinçaltının zaten bildiği şeyleri yüzeye çıkarır. Bir danışan seansın ardından sıklıkla "zaten bunu biliyordum ama göremiyordum" der. İşte tarotun gücü tam olarak budur — bilinen ama görülemeyen şeyi görünür kılmak.
+    </p>
+    <p>
+      Defne'nin kullandığı Rider-Waite sistemi, sembolik açıdan son derece zengin ve erişilebilir bir destedir. Her kart bir hikaye anlatır; Defne bu hikayeleri senin hayatının bağlamında yorumlar, soyut sembolleri somut anlayışa dönüştürür.
+    </p>
+
+    <div class="quote-block">
+      <p>"Kartlar sana ne olacağını söylemez; sana kim olduğunu ve nerede durduğunu gösterir. Geri kalanı senin elinde."</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">3-Kart Açılımı</div>
+    <h2>Üç Pozisyon, Tam Bir Resim</h2>
+    <p>
+      Sorbi tarot seansında kullanılan 3-kart açılımı, hızlı ama derinlikli bir enerji haritası sunar. Her kart farklı bir zaman boyutuna ya da dinamiğe karşılık gelir:
+    </p>
+    <div class="three-cards">
+      <div class="card-pos">
+        <div class="card-pos-num">I</div>
+        <h3>Şu An / Mevcut Durum</h3>
+        <p>Şu an gerçekte nerede olduğunu, hangi enerji alanında bulunduğunu gösterir. Bu kart seni şaşırtabilir ya da tam olarak hissettiğin şeyi yansıtabilir.</p>
+      </div>
+      <div class="card-pos">
+        <div class="card-pos-num">II</div>
+        <h3>Engel / Gizli Dinamik</h3>
+        <p>Seni durduran, farkında olmasan da etkileyen gizli faktörü açığa çıkarır. Bu bazen bir inanç, bazen bir korku, bazen dış bir durum olabilir.</p>
+      </div>
+      <div class="card-pos">
+        <div class="card-pos-num">III</div>
+        <h3>Rehberlik / Gelecek Enerji</h3>
+        <p>Önündeki enerjiyi ve sana sunulan yönelimi gösterir. Bu bir kehanet değil, şu anki enerjinin doğal akışıdır. Bilinçle yaklaşırsan değişebilir.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="section-label">Ne Zaman Başvurmalı?</div>
+    <h2>Tarot İçin Doğru Zaman</h2>
+    <div class="when-grid">
+      <div class="when-item">
+        <span class="icon">🌀</span>
+        <h4>Zihin Karmaşıklığında</h4>
+        <p>Kafanda çok fazla düşünce dönüyor, net bir karar veremiyorsun. Tarot için zihinsel gürültüyü kesen bir filtre işlevi görür.</p>
+      </div>
+      <div class="when-item">
+        <span class="icon">🔀</span>
+        <h4>Karar Anlarında</h4>
+        <p>İki seçenek arasındasın ve her ikisi de mantıklı görünüyor. Tarot "doğru cevabı" vermez — ama hangi seçeneğe dair daha fazla netlik hissettiğini ortaya çıkarır.</p>
+      </div>
+      <div class="when-item">
+        <span class="icon">💤</span>
+        <h4>Durgunluk Dönemlerinde</h4>
+        <p>Her şeyin yerinde saydığı, ilerleme hissetmediğin dönemlerde tarot neden durduğunu ve hangi adımın önünü açacağını gösterebilir.</p>
+      </div>
+      <div class="when-item">
+        <span class="icon">🌱</span>
+        <h4>Yeni Başlangıçlarda</h4>
+        <p>Yeni bir proje, ilişki ya da hayat dönemi başlamak üzere. Tarot bu başlangıca ne enerji taşıdığını ve nelere dikkat etmen gerektiğini gösterir.</p>
+      </div>
+      <div class="when-item">
+        <span class="icon">❤️‍🩹</span>
+        <h4>İyileşme Süreçlerinde</h4>
+        <p>Bir ayrılık, kayıp ya da hayal kırıklığının ardından. Tarot bu deneyimin sana ne öğrettiğini anlamana yardımcı olabilir.</p>
+      </div>
+      <div class="when-item">
+        <span class="icon">✨</span>
+        <h4>Sadece Merak İçin</h4>
+        <p>Şu an her şey yolunda; ama yaşamın enerjisini merak ediyorsun. Tarot bir döneme genel bir enerji raporu gibi de okunabilir.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Nasıl Çalışır?</div>
+    <h2>Seansın Akışı</h2>
+    <p>
+      WhatsApp üzerinden seansını rezerve ettiğinde, Defne sana odaklanmak istediğin bir konu ya da soru sorar. Bu soru çok genel ya da çok spesifik olabilir — "hayatımın şu anki enerjisini görmek istiyorum" de geçerlidir, "bu işe girip girmemeli miyim" de.
+    </p>
+    <p>
+      Defne kartları bizzat fiziksel olarak çeker ve her kartın fotoğrafını seninle paylaşır. Ardından kısa ama derinlikli bir sözlü okuma yapar — ya sesli mesaj ya da kısa bir görüntülü görüşme yoluyla. Her kartın ne anlama geldiğini, üç kartın birlikte ne söylediğini ve senin durumunla nasıl örtüştüğünü anlatır.
+    </p>
+    <p>
+      Tarot seansı yaklaşık 30–40 dakika sürer. Özellikle belirli bir konuya odaklanmak istiyorsan, bunu önceden belirtmeni öneririm.
+    </p>
+
+    <div class="example-block">
+      <h4>✦ Gerçek Açılım Örneği</h4>
+      <p>
+        Bir danışanım yeni bir iş teklifini kabul edip etmemeyi düşünüyordu. Çektiğimiz kartlar: Birinci pozisyonda "Beşler-Kılıçlar" (çatışma, endişe); ikinci pozisyonda "Ay" (belirsizlik, gizli faktörler); üçüncü pozisyonda "Güneş" (netlik, başarı). Bu açılım şunu söylüyordu: Şu an çatışma ve belirsizlik içindeydin, karar süreci gerçekten kafanı karıştırıyor. Ama engel farkında olmadığın bir bilgi eksikliğiydi — o anda teklif veren şirket hakkında yeterli araştırma yapmamıştın. Üçüncü kart ise bu belirsizliği aşıp karar verildiğinde olumlu bir enerji işaret ediyordu. Danışanım iki gün içinde şirket hakkında derinlemesine araştırma yaptı ve teklife evet dedi — üç ay sonra bunun "aldığı en iyi karar" olduğunu söyledi.
+      </p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Ne Alırsın?</div>
+    <h2>Tarot Seansında Sana Verilen</h2>
+    <div class="receive-list">
+      <div class="receive-item">
+        <div class="receive-icon">🃏</div>
+        <div class="receive-text">
+          <h4>3-Kart Açılımı ve Fotoğrafı</h4>
+          <p>Fiziksel olarak çekilen kartların fotoğrafı WhatsApp üzerinden paylaşılır. Elinde kalıcı bir görsel belge olur.</p>
+        </div>
+      </div>
+      <div class="receive-item">
+        <div class="receive-icon">🎙</div>
+        <div class="receive-text">
+          <h4>Sesli Yorum veya Kısa Görüntülü Görüşme</h4>
+          <p>Her kartın ve tüm açılımın bütünsel yorumu sesli mesaj ya da kısa görüntülü görüşme ile iletilir. Sorularını gerçek zamanlı olarak sorabilirsin.</p>
+        </div>
+      </div>
+      <div class="receive-item">
+        <div class="receive-icon">📝</div>
+        <div class="receive-text">
+          <h4>Kısa Yazılı Özet</h4>
+          <p>Seansın ardından WhatsApp üzerinden her kart için kısa yazılı notlar gönderilir. İstediğin zaman tekrar okuyabilirsin.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="pricing-section">
+    <h2>Tarot Açılımı Ücreti</h2>
+    <div class="price-tag">450<span>TL</span></div>
+    <p>3-kart açılımı + kart fotoğrafları + sesli/görüntülü yorum + yazılı özet dahildir.</p>
+    <a href="https://wa.me/905434309702?text=Merhaba%20Defne!%20Tarot%20a%C3%A7%C4%B1l%C4%B1m%C4%B1%20yapt%C4%B1rmak%20istiyorum%2C%20bilgi%20alabilir%20miyim%3F" class="wa-btn">
+      <svg viewBox="0 0 32 32" width="17" height="17" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.837.744 5.497 2.044 7.8L0 32l8.4-2.003C10.643 31.283 13.27 32 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.07 22.587c-.338.952-1.968 1.82-2.729 1.936-.698.104-1.583.148-2.554-.16-.588-.19-1.343-.444-2.31-.87-4.065-1.757-6.72-5.863-6.924-6.136-.205-.273-1.666-2.218-1.666-4.23 0-2.012 1.054-3 1.428-3.41.375-.41.82-.512 1.092-.512.273 0 .547.002.787.014.252.013.59-.095.923.705.338.82 1.15 2.83 1.252 3.035.103.205.171.444.034.718-.137.273-.205.444-.41.684-.205.24-.43.537-.615.72-.205.205-.42.43-.18.843.24.41 1.067 1.762 2.29 2.855 1.573 1.402 2.9 1.835 3.31 2.04.41.205.65.171.89-.103.24-.273 1.025-1.196 1.298-1.606.272-.41.545-.342.922-.205.375.137 2.39 1.128 2.8 1.333.41.205.683.308.786.478.103.17.103.985-.235 1.937z"/></svg>
+      WhatsApp'tan Randevu Al
+    </a>
+    <p class="price-note">Seanslar genellikle 1–3 gün içinde gerçekleştirilir. Konu veya soru önceden paylaşılabilir.</p>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 Sorbi — <a href="index_v3.html">Ana Sayfaya Dön</a></p>
+</footer>
+
+</body>
+</html>

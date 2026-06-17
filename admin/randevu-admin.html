@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorbi Admin — Randevu Yönetimi</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;}
+body{font-family:'Inter',sans-serif;background:#0A0E1A;color:#f4f0e4;min-height:100vh;}
+a{text-decoration:none;color:inherit;}
+:root{
+  --dark:#0A0E1A; --dark2:#0D1B2A;
+  --gold:#C9A84C; --gold-light:#E6CF8A; --gold-deep:#9A7E33;
+  --gold2:rgba(201,168,76,0.1); --gold3:rgba(201,168,76,0.25);
+  --light:#F6F1E7;
+  --green:#25D366;
+  --text-light:#f4f0e4; --text-muted:rgba(244,240,228,0.6); --text-dim:rgba(244,240,228,0.3);
+  --border:rgba(244,240,228,0.08); --border-gold:rgba(201,168,76,0.2);
+  --radius:10px; --radius-lg:16px;
+  --pending:#f5a623; --approved:#5de882; --rejected:#ff7070;
+}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.15;}
+
+/* ── Login ── */
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:1rem;}
+.login-card{background:rgba(255,255,255,0.03);border:1px solid var(--border-gold);border-radius:var(--radius-lg);padding:2.5rem;width:100%;max-width:360px;text-align:center;}
+.login-card .logo{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--text-light);margin-bottom:0.2rem;}
+.login-card .logo span{color:var(--gold);}
+.login-card p{font-size:0.8rem;color:var(--text-dim);margin-bottom:2rem;}
+.login-card input{width:100%;background:rgba(10,14,26,0.6);border:1px solid rgba(244,240,228,0.12);border-radius:8px;padding:0.7rem 1rem;font-size:0.9rem;color:var(--text-light);font-family:'Inter',sans-serif;text-align:center;margin-bottom:0.8rem;}
+.login-card input:focus{outline:none;border-color:var(--gold);}
+.login-card input::placeholder{color:var(--text-dim);}
+.btn-login{width:100%;background:linear-gradient(135deg,var(--gold-light),var(--gold-deep));color:var(--dark);padding:0.8rem;border-radius:10px;font-size:0.95rem;font-weight:600;border:none;cursor:pointer;}
+.btn-login:hover{opacity:0.9;}
+.login-err{font-size:0.8rem;color:#ff7070;margin-top:0.5rem;}
+
+/* ── App Shell ── */
+#app{display:none;min-height:100vh;}
+.sidebar{position:fixed;left:0;top:0;width:240px;height:100vh;background:rgba(255,255,255,0.02);border-right:1px solid var(--border);padding:1.5rem 1rem;display:flex;flex-direction:column;gap:0.3rem;z-index:10;}
+.sidebar-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--text-light);padding:0.5rem 0.8rem 1.2rem;border-bottom:1px solid var(--border);margin-bottom:0.3rem;}
+.sidebar-logo span{color:var(--gold);}
+.nav-item{display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;border-radius:8px;font-size:0.85rem;color:var(--text-muted);cursor:pointer;transition:all 0.15s;border:1px solid transparent;}
+.nav-item:hover{background:rgba(255,255,255,0.04);color:var(--text-light);}
+.nav-item.active{background:var(--gold2);border-color:var(--border-gold);color:var(--gold-light);}
+.nav-item .icon{font-size:1rem;width:20px;text-align:center;}
+.sidebar-bottom{margin-top:auto;}
+.btn-logout{width:100%;background:transparent;border:1px solid rgba(244,240,228,0.1);color:var(--text-dim);padding:0.5rem;border-radius:8px;cursor:pointer;font-size:0.78rem;font-family:'Inter',sans-serif;}
+.btn-logout:hover{border-color:rgba(255,80,80,0.3);color:#ff8080;}
+
+.main-content{margin-left:240px;padding:2rem 2.5rem;min-height:100vh;}
+.page{display:none;}
+.page.active{display:block;}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:1.7rem;margin-bottom:0.3rem;}
+.page-sub{font-size:0.82rem;color:var(--text-muted);margin-bottom:2rem;}
+
+/* ── Stat kartları ── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem;}
+.stat-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.2rem 1.4rem;}
+.stat-card .label{font-size:0.68rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:0.5rem;}
+.stat-card .value{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;}
+.stat-card.pending .value{color:var(--pending);}
+.stat-card.approved .value{color:var(--approved);}
+.stat-card.rejected .value{color:var(--rejected);}
+
+/* ── Tablo ── */
+.table-wrap{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;}
+table{width:100%;border-collapse:collapse;}
+thead tr{background:rgba(255,255,255,0.04);border-bottom:1px solid var(--border);}
+th{padding:0.8rem 1rem;text-align:left;font-size:0.68rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;font-weight:500;}
+td{padding:0.9rem 1rem;font-size:0.84rem;border-bottom:1px solid rgba(255,255,255,0.04);}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:hover td{background:rgba(255,255,255,0.02);}
+.badge{display:inline-block;padding:0.2rem 0.65rem;border-radius:999px;font-size:0.68rem;font-weight:600;letter-spacing:0.3px;}
+.badge-pending{background:rgba(245,166,35,0.15);color:var(--pending);}
+.badge-approved{background:rgba(93,232,130,0.12);color:var(--approved);}
+.badge-rejected{background:rgba(255,112,112,0.12);color:var(--rejected);}
+
+/* ── Onay/Red butonları ── */
+.action-btns{display:flex;gap:0.4rem;}
+.btn-approve,.btn-reject,.btn-sm{padding:0.3rem 0.75rem;border-radius:6px;border:1px solid transparent;cursor:pointer;font-size:0.73rem;font-family:'Inter',sans-serif;font-weight:500;transition:all 0.15s;}
+.btn-approve{background:rgba(93,232,130,0.12);border-color:rgba(93,232,130,0.25);color:var(--approved);}
+.btn-approve:hover{background:rgba(93,232,130,0.22);}
+.btn-reject{background:rgba(255,112,112,0.1);border-color:rgba(255,112,112,0.2);color:var(--rejected);}
+.btn-reject:hover{background:rgba(255,112,112,0.18);}
+.btn-sm{background:var(--gold2);border-color:var(--border-gold);color:var(--gold-light);}
+.btn-wa{background:rgba(37,211,102,0.12);border-color:rgba(37,211,102,0.25);color:var(--green);display:inline-flex;align-items:center;gap:0.3rem;}
+.btn-wa:hover{background:rgba(37,211,102,0.22);}
+
+/* ── Filtre Bar ── */
+.filter-bar{display:flex;gap:0.5rem;margin-bottom:1.2rem;flex-wrap:wrap;align-items:center;}
+.filter-btn{padding:0.38rem 0.9rem;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;font-size:0.76rem;transition:all 0.15s;}
+.filter-btn.active{background:var(--gold2);border-color:var(--border-gold);color:var(--gold-light);}
+.filter-btn:hover:not(.active){border-color:var(--border-gold);color:var(--text-light);}
+.filter-spacer{flex:1;}
+.search-input{background:rgba(10,14,26,0.6);border:1px solid rgba(244,240,228,0.1);border-radius:8px;padding:0.4rem 0.8rem;font-size:0.82rem;color:var(--text-light);font-family:'Inter',sans-serif;width:200px;}
+.search-input:focus{outline:none;border-color:var(--gold);}
+.search-input::placeholder{color:var(--text-dim);}
+
+/* ── Takvim (admin) ── */
+.cal-admin-wrap{display:grid;grid-template-columns:1fr 340px;gap:1.5rem;align-items:start;}
+.cal-admin-panel{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;}
+.cal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;}
+.cal-hdr h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;}
+.cal-nav-btn{background:transparent;border:1px solid var(--border-gold);border-radius:6px;padding:0.3rem 0.7rem;color:var(--text-muted);cursor:pointer;transition:all 0.2s;}
+.cal-nav-btn:hover{border-color:var(--gold);color:var(--gold);}
+.admin-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
+.admin-cal-wday{text-align:center;font-size:0.6rem;color:var(--text-dim);text-transform:uppercase;padding:0.3rem 0;}
+.admin-cal-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:8px;font-size:0.8rem;cursor:pointer;transition:all 0.15s;border:1px solid transparent;position:relative;}
+.admin-cal-day.empty{cursor:default;}
+.admin-cal-day.has-bookings{border-color:rgba(93,232,130,0.2);color:var(--text-light);}
+.admin-cal-day.has-bookings:hover{background:rgba(93,232,130,0.08);}
+.admin-cal-day.unavailable{color:var(--text-dim);}
+.admin-cal-day.today{font-weight:700;}
+.admin-cal-day.today::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:var(--gold);border-radius:50%;}
+.admin-cal-day.selected-day{background:var(--gold2);border-color:var(--gold);color:var(--gold-light);}
+.day-dot{font-size:0.48rem;color:var(--pending);opacity:0.9;}
+
+/* ── Günün Detayı ── */
+.day-detail{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;position:sticky;top:1rem;}
+.day-detail h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;margin-bottom:1rem;color:var(--gold-light);}
+.slot-row{padding:0.7rem 0;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:0.5rem;}
+.slot-row:last-child{border-bottom:none;}
+.slot-time{font-size:0.88rem;font-weight:600;min-width:55px;}
+.slot-info{flex:1;font-size:0.78rem;color:var(--text-muted);}
+.slot-info strong{display:block;color:var(--text-light);font-weight:500;}
+.slot-empty{font-size:0.75rem;color:var(--text-dim);font-style:italic;}
+.empty-day-msg{font-size:0.85rem;color:var(--text-dim);font-style:italic;padding:1rem 0;}
+
+/* ── Müsaitlik Yönetimi ── */
+.avail-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+.avail-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;}
+.avail-card h4{font-family:'Cormorant Garamond',serif;font-size:1rem;margin-bottom:1rem;color:var(--text-light);}
+.day-row{display:flex;align-items:center;gap:0.8rem;padding:0.55rem 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+.day-row:last-child{border-bottom:none;}
+.day-label{font-size:0.82rem;width:90px;color:var(--text-muted);}
+.toggle{position:relative;display:inline-block;width:36px;height:20px;}
+.toggle input{opacity:0;width:0;height:0;}
+.toggle-slider{position:absolute;inset:0;background:rgba(255,255,255,0.1);border-radius:999px;cursor:pointer;transition:background 0.2s;}
+.toggle input:checked+.toggle-slider{background:var(--gold);}
+.toggle-slider::before{content:'';position:absolute;width:14px;height:14px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:transform 0.2s;}
+.toggle input:checked+.toggle-slider::before{transform:translateX(16px);}
+.slot-tags{display:flex;flex-wrap:wrap;gap:0.3rem;}
+.slot-tag{padding:0.2rem 0.5rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;font-size:0.7rem;color:var(--text-muted);}
+.override-date-row{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.8rem;}
+.override-date-row input[type="date"]{background:rgba(10,14,26,0.6);border:1px solid rgba(244,240,228,0.1);border-radius:8px;padding:0.4rem 0.7rem;font-size:0.82rem;color:var(--text-light);font-family:'Inter',sans-serif;}
+.override-date-row input[type="date"]:focus{outline:none;border-color:var(--gold);}
+.override-slots{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.5rem;}
+.override-slot{padding:0.25rem 0.6rem;border:1px solid rgba(255,255,255,0.08);border-radius:6px;font-size:0.72rem;color:var(--text-muted);cursor:pointer;background:transparent;transition:all 0.15s;}
+.override-slot.sel{background:var(--gold2);border-color:var(--border-gold);color:var(--gold-light);}
+.override-list{margin-top:1rem;}
+.override-item{padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;}
+.override-item .del{background:none;border:none;color:var(--rejected);cursor:pointer;font-size:0.75rem;opacity:0.7;}
+.override-item .del:hover{opacity:1;}
+.btn-save{background:var(--gold2);border:1px solid var(--border-gold);color:var(--gold-light);padding:0.45rem 1.1rem;border-radius:8px;cursor:pointer;font-size:0.8rem;font-family:'Inter',sans-serif;}
+.btn-save:hover{background:var(--gold3);}
+.save-ok{font-size:0.72rem;color:var(--approved);margin-left:0.5rem;opacity:0;transition:opacity 0.3s;}
+.save-ok.show{opacity:1;}
+
+/* ── Randevu Detay Modal ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:#0D1B2A;border:1px solid var(--border-gold);border-radius:var(--radius-lg);padding:2rem;width:100%;max-width:480px;position:relative;}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:1.2rem;}
+.modal h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold-light);margin-bottom:1.2rem;}
+.detail-row{display:flex;gap:0.5rem;margin-bottom:0.55rem;font-size:0.86rem;}
+.detail-label{color:var(--text-dim);width:90px;flex-shrink:0;}
+.modal-actions{margin-top:1.5rem;display:flex;gap:0.6rem;flex-wrap:wrap;}
+
+/* ── Toast ── */
+.toast{position:fixed;bottom:2rem;right:2rem;background:#0D1B2A;border:1px solid var(--border-gold);border-radius:10px;padding:0.8rem 1.3rem;font-size:0.84rem;color:var(--text-light);z-index:300;transform:translateY(20px);opacity:0;transition:all 0.3s;pointer-events:none;max-width:320px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.success{border-color:rgba(93,232,130,0.3);}
+.toast.error{border-color:rgba(255,112,112,0.3);}
+
+/* ── Responsive ── */
+@media(max-width:900px){.sidebar{display:none;}.main-content{margin-left:0;padding:1.5rem 1rem;}.stats-row{grid-template-columns:1fr 1fr;}.avail-grid{grid-template-columns:1fr;}.cal-admin-wrap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- ── Login ────────────────────────────────────────────────────────── -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="logo">Sorbi<span>✦</span></div>
+    <p>Admin Paneli</p>
+    <input type="password" id="pw-input" placeholder="Şifre" onkeydown="if(event.key==='Enter')login()">
+    <button class="btn-login" onclick="login()">Giriş Yap</button>
+    <div class="login-err" id="login-err"></div>
+  </div>
+</div>
+
+<!-- ── App ──────────────────────────────────────────────────────────── -->
+<div id="app">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-logo">Sorbi<span>✦</span></div>
+    <div class="nav-item active" data-page="dashboard" onclick="nav('dashboard',this)">
+      <span class="icon">◈</span> Gösterge
+    </div>
+    <div class="nav-item" data-page="bookings" onclick="nav('bookings',this)">
+      <span class="icon">◷</span> Randevular
+    </div>
+    <div class="nav-item" data-page="calendar" onclick="nav('calendar',this)">
+      <span class="icon">⊞</span> Takvim
+    </div>
+    <div class="nav-item" data-page="availability" onclick="nav('availability',this)">
+      <span class="icon">◑</span> Müsaitlik
+    </div>
+    <div class="sidebar-bottom">
+      <button class="btn-logout" onclick="logout()">⇤ Çıkış</button>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main-content">
+
+    <!-- ── Dashboard ── -->
+    <div class="page active" id="page-dashboard">
+      <h1 class="page-title">Gösterge Paneli</h1>
+      <p class="page-sub">Sorbi randevu sistemi genel durumu</p>
+      <div class="stats-row">
+        <div class="stat-card"><div class="label">Toplam</div><div class="value" id="stat-total">—</div></div>
+        <div class="stat-card pending"><div class="label">Bekleyen</div><div class="value" id="stat-pending">—</div></div>
+        <div class="stat-card approved"><div class="label">Onaylanan</div><div class="value" id="stat-approved">—</div></div>
+        <div class="stat-card rejected"><div class="label">Reddedilen</div><div class="value" id="stat-rejected">—</div></div>
+      </div>
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;margin-bottom:0.8rem;">Bekleyen Talepler</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>#</th><th>Hizmet</th><th>Ad Soyad</th><th>Tarih</th><th>Saat</th><th>İşlem</th>
+          </tr></thead>
+          <tbody id="dash-pending-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── Randevular ── -->
+    <div class="page" id="page-bookings">
+      <h1 class="page-title">Tüm Randevular</h1>
+      <p class="page-sub">Arama, filtre ve detay görüntüleme</p>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all" onclick="filterBookings('all',this)">Tümü</button>
+        <button class="filter-btn" data-filter="pending" onclick="filterBookings('pending',this)">Bekleyen</button>
+        <button class="filter-btn" data-filter="approved" onclick="filterBookings('approved',this)">Onaylı</button>
+        <button class="filter-btn" data-filter="rejected" onclick="filterBookings('rejected',this)">Reddedilen</button>
+        <div class="filter-spacer"></div>
+        <input class="search-input" type="text" placeholder="İsim veya telefon ara…" oninput="searchBookings(this.value)" id="search-input">
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>#</th><th>Durum</th><th>Hizmet</th><th>Ad Soyad</th><th>Telefon</th><th>Tarih</th><th>Saat</th><th>Kayıt</th><th>İşlem</th>
+          </tr></thead>
+          <tbody id="all-bookings-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── Takvim ── -->
+    <div class="page" id="page-calendar">
+      <h1 class="page-title">Takvim Görünümü</h1>
+      <p class="page-sub">Günlük randevu dağılımı</p>
+
+      <div class="cal-admin-wrap">
+        <div class="cal-admin-panel">
+          <div class="cal-hdr">
+            <button class="cal-nav-btn" onclick="adminCalPrev()">‹</button>
+            <h3 id="admin-cal-title">—</h3>
+            <button class="cal-nav-btn" onclick="adminCalNext()">›</button>
+          </div>
+          <div class="admin-cal-grid" id="admin-cal-grid-wdays">
+            <div class="admin-cal-wday">Pzt</div><div class="admin-cal-wday">Sal</div>
+            <div class="admin-cal-wday">Çar</div><div class="admin-cal-wday">Per</div>
+            <div class="admin-cal-wday">Cum</div><div class="admin-cal-wday">Cmt</div>
+            <div class="admin-cal-wday">Paz</div>
+          </div>
+          <div class="admin-cal-grid" id="admin-cal-grid"></div>
+        </div>
+
+        <div class="day-detail" id="day-detail-panel">
+          <h4 id="day-detail-title">Bir gün seçin</h4>
+          <div id="day-detail-content"><p class="empty-day-msg">Takvimden bir gün seçin.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Müsaitlik ── -->
+    <div class="page" id="page-availability">
+      <h1 class="page-title">Müsaitlik Yönetimi</h1>
+      <p class="page-sub">Haftalık şablon ve özel gün override'ları</p>
+
+      <div class="avail-grid">
+        <!-- Haftalık Şablon -->
+        <div class="avail-card">
+          <h4>Haftalık Şablon</h4>
+          <div id="template-rows"></div>
+          <div style="margin-top:1rem;display:flex;align-items:center;">
+            <button class="btn-save" onclick="saveTemplate()">Kaydet</button>
+            <span class="save-ok" id="tmpl-ok">✓ Kaydedildi</span>
+          </div>
+        </div>
+
+        <!-- Override -->
+        <div class="avail-card">
+          <h4>Özel Gün Override</h4>
+          <p style="font-size:0.78rem;color:var(--text-dim);margin-bottom:1rem;">Belirli bir günü şablondan farklı ayarla (tatil, ekstra seans vb.)</p>
+          <div class="override-date-row">
+            <input type="date" id="ov-date">
+            <label style="font-size:0.78rem;color:var(--text-muted);display:flex;align-items:center;gap:0.4rem;">
+              <input type="checkbox" id="ov-enabled" checked style="accent-color:var(--gold);"> Açık
+            </label>
+          </div>
+          <p style="font-size:0.72rem;color:var(--text-dim);margin-bottom:0.4rem;">Slotlar (seç/kaldır):</p>
+          <div class="override-slots" id="override-slots">
+            <button class="override-slot sel" data-time="10:00">10:00</button>
+            <button class="override-slot sel" data-time="11:30">11:30</button>
+            <button class="override-slot sel" data-time="13:00">13:00</button>
+            <button class="override-slot sel" data-time="14:30">14:30</button>
+            <button class="override-slot" data-time="16:00">16:00</button>
+            <button class="override-slot" data-time="17:30">17:30</button>
+          </div>
+          <div style="margin-top:0.8rem;display:flex;align-items:center;gap:0.5rem;">
+            <button class="btn-save" onclick="addOverride()">Override Ekle</button>
+            <span class="save-ok" id="ov-ok">✓ Eklendi</span>
+          </div>
+          <div class="override-list" id="override-list"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main-content -->
+</div><!-- /app -->
+
+<!-- ── Modal ─────────────────────────────────────────────────────────── -->
+<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3 id="modal-title">Randevu Detayı</h3>
+    <div id="modal-body"></div>
+    <div class="modal-actions" id="modal-actions"></div>
+  </div>
+</div>
+
+<!-- ── Toast ──────────────────────────────────────────────────────────── -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Config ─────────────────────────────────────────────────────────────────
+const API = 'http://localhost:3001';
+const WA  = '905434309702';
+const ALL_SLOTS = ['10:00','11:30','13:00','14:30','16:00','17:30'];
+const TR_MONTHS = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+const TR_DAYS   = ['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'];
+const TR_DAYS_SHORT = ['Paz','Pzt','Sal','Çar','Per','Cum','Cmt'];
+const SERVICES = {'natal-harita':'Natal Harita','sinastri':'Sinastri','tarot':'Tarot Açılımı','horary':'Horary','yasam-donguleri':'Yaşam Döngüleri','sorbi-ongorisu':'Sorbi Öngörüsü'};
+
+// ── State ──────────────────────────────────────────────────────────────────
+let token = null;
+let allBookings = [];
+let currentFilter = 'all';
+let currentSearch = '';
+let adminCalYear, adminCalMonth, selectedAdminDay;
+let adminCalData = {}; // date → [bookings]
+let templateData = [];
+
+// ── Auth ───────────────────────────────────────────────────────────────────
+async function login() {
+  const pw = document.getElementById('pw-input').value;
+  const err = document.getElementById('login-err');
+  err.textContent = '';
+  try {
+    const r = await fetch(`${API}/api/admin/login`, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:pw})});
+    if (!r.ok) { err.textContent = 'Yanlış şifre.'; return; }
+    const d = await r.json();
+    token = d.token;
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    await initApp();
+  } catch { err.textContent = 'Bağlantı hatası.'; }
+}
+document.getElementById('pw-input').addEventListener('keydown', e => { if(e.key==='Enter') login(); });
+
+function logout() {
+  token = null;
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('pw-input').value = '';
+}
+
+// ── API helpers ────────────────────────────────────────────────────────────
+async function api(path, opts={}) {
+  const r = await fetch(`${API}${path}`, { ...opts, headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${token}`, ...(opts.headers||{}) } });
+  if (!r.ok) throw new Error((await r.json()).error || 'Hata');
+  return r.json();
+}
+
+// ── Init ───────────────────────────────────────────────────────────────────
+async function initApp() {
+  const now = new Date();
+  adminCalYear = now.getFullYear();
+  adminCalMonth = now.getMonth() + 1;
+  await Promise.all([loadStats(), loadAllBookings(), loadAdminCal(), loadTemplate(), loadOverrides()]);
+}
+
+// ── Navigation ─────────────────────────────────────────────────────────────
+function nav(page, el) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(`page-${page}`).classList.add('active');
+}
+
+// ── Stats ──────────────────────────────────────────────────────────────────
+async function loadStats() {
+  const s = await api('/api/admin/stats');
+  document.getElementById('stat-total').textContent    = s.total;
+  document.getElementById('stat-pending').textContent  = s.pending;
+  document.getElementById('stat-approved').textContent = s.approved;
+  document.getElementById('stat-rejected').textContent = s.rejected;
+}
+
+// ── Bookings ───────────────────────────────────────────────────────────────
+async function loadAllBookings() {
+  allBookings = await api('/api/admin/bookings');
+  renderPendingDash();
+  renderAllBookings();
+}
+
+function renderPendingDash() {
+  const pending = allBookings.filter(b => b.status === 'pending');
+  const tbody = document.getElementById('dash-pending-tbody');
+  if (!pending.length) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text-dim);padding:2rem;">Bekleyen talep yok ✦</td></tr>';
+    return;
+  }
+  tbody.innerHTML = pending.map(b => `
+    <tr id="booking-${b.id}">
+      <td style="color:var(--text-dim);">#${b.id}</td>
+      <td>${SERVICES[b.service]||b.service}</td>
+      <td>${b.name}</td>
+      <td>${formatDate(b.date)}</td>
+      <td>${b.time}</td>
+      <td><div class="action-btns">
+        <button class="btn-sm btn-approve" onclick="openModal(${b.id})">Detay</button>
+        <button class="btn-sm btn-approve btn-approve" onclick="approveBooking(${b.id})">✓ Onayla</button>
+        <button class="btn-sm btn-reject" onclick="rejectBooking(${b.id})">✕ Reddet</button>
+        <a class="btn-sm btn-wa" href="${waLink(b)}" target="_blank">WA</a>
+      </div></td>
+    </tr>`).join('');
+}
+
+function renderAllBookings() {
+  let list = allBookings;
+  if (currentFilter !== 'all') list = list.filter(b => b.status === currentFilter);
+  if (currentSearch) {
+    const q = currentSearch.toLowerCase();
+    list = list.filter(b => b.name.toLowerCase().includes(q) || b.phone.includes(q));
+  }
+  const tbody = document.getElementById('all-bookings-tbody');
+  if (!list.length) {
+    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:var(--text-dim);padding:2rem;">Sonuç bulunamadı</td></tr>';
+    return;
+  }
+  tbody.innerHTML = list.map(b => `
+    <tr id="all-booking-${b.id}">
+      <td style="color:var(--text-dim);">#${b.id}</td>
+      <td><span class="badge badge-${b.status}">${{pending:'Bekliyor',approved:'Onaylı',rejected:'Reddedildi'}[b.status]}</span></td>
+      <td>${SERVICES[b.service]||b.service}</td>
+      <td>${b.name}</td>
+      <td>${b.phone}</td>
+      <td>${formatDate(b.date)}</td>
+      <td>${b.time}</td>
+      <td style="color:var(--text-dim);font-size:0.75rem;">${b.created_at?.slice(0,10)||'—'}</td>
+      <td><div class="action-btns">
+        <button class="btn-sm" onclick="openModal(${b.id})">Detay</button>
+        ${b.status==='pending'?`<button class="btn-sm btn-approve" onclick="approveBooking(${b.id})">✓</button><button class="btn-sm btn-reject" onclick="rejectBooking(${b.id})">✕</button>`:''}
+      </div></td>
+    </tr>`).join('');
+}
+
+function filterBookings(filter, el) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  renderAllBookings();
+}
+
+function searchBookings(q) { currentSearch = q; renderAllBookings(); }
+
+// ── Approve / Reject ───────────────────────────────────────────────────────
+async function approveBooking(id) {
+  try {
+    await api(`/api/admin/bookings/${id}/approve`, { method: 'POST' });
+    const b = allBookings.find(x => x.id === id);
+    if (b) b.status = 'approved';
+    await loadStats();
+    renderPendingDash();
+    renderAllBookings();
+    toast('✓ Randevu onaylandı. Danışana bildirim gönderildi.', 'success');
+    if (selectedAdminDay) loadDayDetail(selectedAdminDay);
+  } catch(e) { toast(e.message, 'error'); }
+}
+
+async function rejectBooking(id) {
+  if (!confirm('Bu randevu talebini reddetmek istediğine emin misin?')) return;
+  try {
+    await api(`/api/admin/bookings/${id}/reject`, { method: 'POST' });
+    const b = allBookings.find(x => x.id === id);
+    if (b) b.status = 'rejected';
+    await loadStats();
+    renderPendingDash();
+    renderAllBookings();
+    toast('Randevu reddedildi.', 'error');
+    closeModal();
+  } catch(e) { toast(e.message, 'error'); }
+}
+
+// ── Modal ──────────────────────────────────────────────────────────────────
+function openModal(id) {
+  const b = allBookings.find(x => x.id === id);
+  if (!b) return;
+  const statusLabel = {pending:'Bekliyor',approved:'Onaylı',rejected:'Reddedildi'}[b.status];
+  document.getElementById('modal-title').textContent = `Randevu #${b.id}`;
+  document.getElementById('modal-body').innerHTML = `
+    <div class="detail-row"><span class="detail-label">Durum</span><span class="badge badge-${b.status}">${statusLabel}</span></div>
+    <div class="detail-row"><span class="detail-label">Hizmet</span><span>${SERVICES[b.service]||b.service}</span></div>
+    <div class="detail-row"><span class="detail-label">Tarih & Saat</span><span>${formatDate(b.date)} — ${b.time}</span></div>
+    <div class="detail-row"><span class="detail-label">Ad Soyad</span><span>${b.name}</span></div>
+    <div class="detail-row"><span class="detail-label">Telefon</span><span>${b.phone}</span></div>
+    <div class="detail-row"><span class="detail-label">Email</span><span>${b.email||'—'}</span></div>
+    ${b.notes?`<div class="detail-row"><span class="detail-label">Not</span><span style="font-style:italic;">"${b.notes}"</span></div>`:''}
+    <div class="detail-row"><span class="detail-label">Kayıt</span><span style="color:var(--text-dim);">${b.created_at||'—'}</span></div>
+  `;
+  const actions = document.getElementById('modal-actions');
+  actions.innerHTML = '';
+  if (b.status === 'pending') {
+    const aBtn = document.createElement('button');
+    aBtn.className = 'btn-sm btn-approve';
+    aBtn.textContent = '✓ Onayla';
+    aBtn.onclick = () => { approveBooking(b.id); closeModal(); };
+    const rBtn = document.createElement('button');
+    rBtn.className = 'btn-sm btn-reject';
+    rBtn.textContent = '✕ Reddet';
+    rBtn.onclick = () => rejectBooking(b.id);
+    actions.append(aBtn, rBtn);
+  }
+  const waBtn = document.createElement('a');
+  waBtn.className = 'btn-sm btn-wa';
+  waBtn.href = waLink(b);
+  waBtn.target = '_blank';
+  waBtn.innerHTML = `<svg viewBox="0 0 32 32" width="12" height="12" fill="currentColor"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.837.744 5.497 2.044 7.8L0 32l8.4-2.003C10.643 31.283 13.27 32 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.07 22.587c-.338.952-1.968 1.82-2.729 1.936-.698.104-1.583.148-2.554-.16-.588-.19-1.343-.444-2.31-.87-4.065-1.757-6.72-5.863-6.924-6.136-.205-.273-1.666-2.218-1.666-4.23 0-2.012 1.054-3 1.428-3.41.375-.41.82-.512 1.092-.512.273 0 .547.002.787.014.252.013.59-.095.923.705.338.82 1.15 2.83 1.252 3.035.103.205.171.444.034.718-.137.273-.205.444-.41.684-.205.24-.43.537-.615.72-.205.205-.42.43-.18.843.24.41 1.067 1.762 2.29 2.855 1.573 1.402 2.9 1.835 3.31 2.04.41.205.65.171.89-.103.24-.273 1.025-1.196 1.298-1.606.272-.41.545-.342.922-.205.375.137 2.39 1.128 2.8 1.333.41.205.683.308.786.478.103.17.103.985-.235 1.937z"/></svg> WA ile Yaz`;
+  actions.append(waBtn);
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+
+// ── Admin Takvim ───────────────────────────────────────────────────────────
+async function loadAdminCal() {
+  const title = `${TR_MONTHS[adminCalMonth-1]} ${adminCalYear}`;
+  document.getElementById('admin-cal-title').textContent = title;
+
+  // Tüm randevuları date → booking[] haritasına dönüştür
+  adminCalData = {};
+  for (const b of allBookings) {
+    if (!adminCalData[b.date]) adminCalData[b.date] = [];
+    adminCalData[b.date].push(b);
+  }
+  renderAdminCal();
+}
+
+function renderAdminCal() {
+  const grid = document.getElementById('admin-cal-grid');
+  grid.innerHTML = '';
+  const today = new Date();
+  const firstDay = new Date(adminCalYear, adminCalMonth - 1, 1);
+  let offset = (firstDay.getDay() + 6) % 7;
+  const daysInMonth = new Date(adminCalYear, adminCalMonth, 0).getDate();
+
+  for (let i = 0; i < offset; i++) {
+    const el = document.createElement('div');
+    el.className = 'admin-cal-day empty';
+    grid.appendChild(el);
+  }
+  for (let d = 1; d <= daysInMonth; d++) {
+    const ds = `${adminCalYear}-${String(adminCalMonth).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isToday = new Date(adminCalYear, adminCalMonth-1, d).toDateString() === today.toDateString();
+    const bookings = adminCalData[ds] || [];
+    const hasPending = bookings.some(b => b.status === 'pending');
+    const el = document.createElement('div');
+    el.className = 'admin-cal-day' + (bookings.length?' has-bookings':' unavailable') + (isToday?' today':'') + (selectedAdminDay===ds?' selected-day':'');
+    el.innerHTML = `<span>${d}</span>${hasPending?'<span class="day-dot">●</span>':''}`;
+    if (bookings.length) el.onclick = () => selectAdminDay(ds, el);
+    grid.appendChild(el);
+  }
+}
+
+function selectAdminDay(ds, el) {
+  document.querySelectorAll('.admin-cal-day.selected-day').forEach(e => e.classList.remove('selected-day'));
+  el.classList.add('selected-day');
+  selectedAdminDay = ds;
+  loadDayDetail(ds);
+}
+
+function loadDayDetail(ds) {
+  const d = new Date(ds + 'T12:00:00Z');
+  document.getElementById('day-detail-title').textContent =
+    `${d.getUTCDate()} ${TR_MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+  const bookings = adminCalData[ds] || [];
+  const content = document.getElementById('day-detail-content');
+  if (!bookings.length) {
+    content.innerHTML = '<p class="empty-day-msg">Bu gün randevu yok.</p>';
+    return;
+  }
+  // Sort by time
+  const sorted = [...bookings].sort((a,b) => a.time.localeCompare(b.time));
+  content.innerHTML = sorted.map(b => `
+    <div class="slot-row">
+      <span class="slot-time">${b.time}</span>
+      <span class="slot-info">
+        <strong>${b.name}</strong>
+        ${SERVICES[b.service]||b.service}
+      </span>
+      <span class="badge badge-${b.status}">${{pending:'Bekliyor',approved:'✓',rejected:'✕'}[b.status]}</span>
+      ${b.status==='pending'?`<div class="action-btns"><button class="btn-sm btn-approve" onclick="approveBooking(${b.id})" title="Onayla">✓</button><button class="btn-sm btn-reject" onclick="rejectBooking(${b.id})" title="Reddet">✕</button></div>`:''}
+    </div>`).join('');
+}
+
+function adminCalPrev() {
+  adminCalMonth--;
+  if (adminCalMonth < 1) { adminCalMonth = 12; adminCalYear--; }
+  loadAdminCal();
+}
+function adminCalNext() {
+  adminCalMonth++;
+  if (adminCalMonth > 12) { adminCalMonth = 1; adminCalYear++; }
+  loadAdminCal();
+}
+
+// ── Availability Template ──────────────────────────────────────────────────
+async function loadTemplate() {
+  templateData = await api('/api/admin/availability/template');
+  renderTemplate();
+}
+
+function renderTemplate() {
+  const dayNames = ['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'];
+  const container = document.getElementById('template-rows');
+  container.innerHTML = templateData.map((t,i) => `
+    <div class="day-row" data-day="${t.day_of_week}">
+      <span class="day-label">${dayNames[t.day_of_week]}</span>
+      <label class="toggle"><input type="checkbox" ${t.enabled?'checked':''} onchange="toggleTemplateDay(${t.day_of_week},this.checked)"><span class="toggle-slider"></span></label>
+      <div class="slot-tags" id="tmpl-slots-${t.day_of_week}">
+        ${ALL_SLOTS.map(s=>`<span class="slot-tag ${t.enabled&&t.slots.includes(s)?'':'inactive'}" onclick="toggleTemplateSlot(${t.day_of_week},'${s}',this)" style="${t.enabled&&t.slots.includes(s)?'color:var(--gold-light);border-color:var(--border-gold);background:var(--gold2);':''}">${s}</span>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function toggleTemplateDay(day, enabled) {
+  const t = templateData.find(x => x.day_of_week === day);
+  if (t) t.enabled = enabled;
+  renderTemplate();
+}
+
+function toggleTemplateSlot(day, slot, el) {
+  const t = templateData.find(x => x.day_of_week === day);
+  if (!t || !t.enabled) return;
+  if (t.slots.includes(slot)) t.slots = t.slots.filter(s => s !== slot);
+  else t.slots = [...t.slots, slot].sort();
+  renderTemplate();
+}
+
+async function saveTemplate() {
+  for (const t of templateData) {
+    await api('/api/admin/availability/template', {
+      method: 'PUT',
+      body: JSON.stringify({ day: t.day_of_week, enabled: t.enabled, slots: t.slots })
+    });
+  }
+  const ok = document.getElementById('tmpl-ok');
+  ok.classList.add('show');
+  setTimeout(() => ok.classList.remove('show'), 2000);
+  toast('✓ Şablon kaydedildi.', 'success');
+}
+
+// ── Overrides ──────────────────────────────────────────────────────────────
+let overrides = [];
+document.querySelectorAll('.override-slot').forEach(btn => {
+  btn.addEventListener('click', () => btn.classList.toggle('sel'));
+});
+
+async function loadOverrides() {
+  const now = new Date();
+  overrides = await api(`/api/admin/availability/overrides?year=${now.getFullYear()}&month=${now.getMonth()+1}`);
+  renderOverrides();
+}
+
+function renderOverrides() {
+  const container = document.getElementById('override-list');
+  if (!overrides.length) { container.innerHTML = '<p style="font-size:0.78rem;color:var(--text-dim);margin-top:0.5rem;">Henüz override yok.</p>'; return; }
+  container.innerHTML = overrides.map(o => `
+    <div class="override-item">
+      <div>
+        <span style="color:var(--text-light);">${formatDate(o.date)}</span>
+        <span style="font-size:0.72rem;color:var(--text-dim);margin-left:0.5rem;">${o.enabled?((o.slots||[]).join(', ')||'—'):'Kapalı'}</span>
+      </div>
+      <button class="del" onclick="deleteOverride('${o.date}')">✕</button>
+    </div>`).join('');
+}
+
+async function addOverride() {
+  const date = document.getElementById('ov-date').value;
+  if (!date) { toast('Lütfen bir tarih seçin.', 'error'); return; }
+  const enabled = document.getElementById('ov-enabled').checked;
+  const slots = [...document.querySelectorAll('.override-slot.sel')].map(b => b.dataset.time);
+  await api(`/api/admin/availability/overrides/${date}`, {
+    method: 'PUT', body: JSON.stringify({ enabled, slots })
+  });
+  await loadOverrides();
+  const ok = document.getElementById('ov-ok');
+  ok.classList.add('show');
+  setTimeout(() => ok.classList.remove('show'), 2000);
+  toast('✓ Override eklendi.', 'success');
+}
+
+async function deleteOverride(date) {
+  await api(`/api/admin/availability/overrides/${date}`, {method:'PUT',body:JSON.stringify({remove:true})});
+  await loadOverrides();
+  toast('Override silindi.');
+}
+
+// ── Helpers ────────────────────────────────────────────────────────────────
+function formatDate(ds) {
+  const d = new Date(ds + 'T12:00:00Z');
+  return `${d.getUTCDate()} ${TR_MONTHS[d.getUTCMonth()]} — ${TR_DAYS[d.getUTCDay()]}`;
+}
+
+function waLink(b) {
+  const msg = b.status === 'pending'
+    ? `Merhaba ${b.name}! Randevu talebinizi onayladım. ${formatDate(b.date)} saat ${b.time}'de görüşmek üzere. ✦`
+    : `Merhaba ${b.name}! Sorbi randevu sistemi üzerinden mesaj gönderiyorum.`;
+  return `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+}
+
+function toast(msg, type='') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `toast show ${type}`;
+  setTimeout(() => el.classList.remove('show'), 3500);
+}
+</script>
+</body>
+</html>

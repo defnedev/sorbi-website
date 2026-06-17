@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sinastri — Sorbi Astroloji</title>
+<meta name="description" content="İki haritanın dansı. Aşk, çekim, sürtüşme ve derin uyumu kozmik olarak keşfet. Defne ile sinastri analizi.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:'Inter',sans-serif;overflow-x:hidden;background:#080816;color:#f5f0e8;}
+a{text-decoration:none;color:inherit;}
+ul{list-style:none;}
+
+:root{
+  --dark:#080816;
+  --gold:#d4af37;
+  --gold2:rgba(212,175,55,0.12);
+  --purple:#9b6dff;
+  --purple2:rgba(155,109,255,0.12);
+  --green:#25D366;
+  --text-light:#f5f0e8;
+  --text-muted:rgba(245,240,232,0.6);
+  --text-dim:rgba(245,240,232,0.35);
+  --border-gold:rgba(212,175,55,0.22);
+  --radius:12px;
+}
+
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.15;}
+p{line-height:1.85;color:var(--text-muted);}
+
+nav{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  padding:1rem 2rem;
+  display:flex;justify-content:space-between;align-items:center;
+  background:#080816;
+  backdrop-filter:none;
+  box-shadow:none;
+}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3.2rem;font-weight:700;
+  color:var(--text-light);
+  display:flex;align-items:center;gap:0.2rem;line-height:1;
+}
+.nav-logo .star{color:var(--gold);font-size:2.2rem;}
+.nav-back{font-size:0.82rem;color:rgba(245,240,232,0.6);transition:color 0.2s;}
+.nav-back:hover{color:var(--text-light);}
+
+.hero{
+  min-height:100vh;
+  background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212,175,55,0.14) 0%, transparent 65%),
+             radial-gradient(ellipse 50% 40% at 10% 80%, rgba(155,109,255,0.12) 0%, transparent 60%),
+             var(--dark);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:8rem 1.5rem 5rem;
+  text-align:center;position:relative;overflow:hidden;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  background:rgba(212,175,55,0.1);
+  border:1px solid var(--border-gold);
+  border-radius:999px;
+  padding:0.3rem 1rem;
+  font-size:0.7rem;color:var(--gold);
+  letter-spacing:1.5px;text-transform:uppercase;
+  margin-bottom:1.4rem;
+}
+.hero h1{
+  font-size:clamp(3rem,7vw,5.5rem);
+  color:var(--text-light);
+  margin-bottom:1rem;letter-spacing:-2px;
+}
+.hero h1 em{color:var(--gold);font-style:italic;}
+.hero-subtitle{
+  font-size:1.1rem;color:var(--text-muted);
+  max-width:540px;margin:0 auto 2.5rem;line-height:1.8;
+}
+.hero-deco{
+  position:absolute;font-family:'Cormorant Garamond',serif;
+  animation:float 7s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-18px);}}
+
+.content{max-width:820px;margin:0 auto;padding:5rem 1.5rem;}
+.section{margin-bottom:4rem;}
+.section-label{
+  font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:0.8rem;
+  display:flex;align-items:center;gap:0.5rem;
+}
+.section-label::before{content:'✦';font-size:0.6rem;}
+.section h2{
+  font-size:clamp(1.8rem,3vw,2.6rem);
+  color:var(--text-light);margin-bottom:1.5rem;letter-spacing:-0.8px;
+}
+.section p{margin-bottom:1.2rem;}
+
+.comparison-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.2rem;margin-top:2rem;
+}
+.comp-card{
+  border-radius:var(--radius);
+  padding:1.8rem 1.5rem;
+}
+.comp-card.attraction{
+  background:rgba(212,175,55,0.07);
+  border:1px solid rgba(212,175,55,0.2);
+}
+.comp-card.friction{
+  background:rgba(155,109,255,0.07);
+  border:1px solid rgba(155,109,255,0.2);
+}
+.comp-card h3{
+  font-size:1.2rem;margin-bottom:0.8rem;
+}
+.comp-card.attraction h3{color:var(--gold);}
+.comp-card.friction h3{color:var(--purple);}
+.comp-card p{font-size:0.9rem;}
+
+.planet-list{
+  display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem;
+}
+.planet-item{
+  display:flex;align-items:flex-start;gap:1rem;
+  padding:1.2rem 1.5rem;
+  background:rgba(155,109,255,0.06);
+  border:1px solid rgba(155,109,255,0.15);
+  border-radius:var(--radius);
+}
+.planet-symbol{
+  font-size:1.6rem;flex-shrink:0;line-height:1;
+  font-family:'Cormorant Garamond',serif;
+  color:var(--gold);
+}
+.planet-info h4{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;color:var(--text-light);margin-bottom:0.3rem;
+}
+.planet-info p{font-size:0.88rem;margin:0;}
+
+.divider{border:none;border-top:1px solid rgba(212,175,55,0.15);margin:4rem 0;}
+
+.quote-block{
+  border-left:3px solid var(--gold);
+  padding:1.5rem 2rem;
+  margin:2rem 0;
+  background:rgba(212,175,55,0.04);
+  border-radius:0 var(--radius) var(--radius) 0;
+}
+.quote-block p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.35rem;font-style:italic;
+  color:var(--text-light);line-height:1.6;
+}
+
+.example-block{
+  background:var(--purple2);
+  border:1px solid rgba(155,109,255,0.2);
+  border-radius:var(--radius);
+  padding:2rem;margin-top:1.5rem;
+}
+.example-block h4{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;color:var(--purple);margin-bottom:0.8rem;
+}
+.example-block p{font-size:0.92rem;}
+
+.receive-list{display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem;}
+.receive-item{
+  display:flex;align-items:flex-start;gap:1rem;
+  background:rgba(212,175,55,0.08);
+  border:1px solid var(--border-gold);
+  border-radius:var(--radius);padding:1.2rem 1.5rem;
+}
+.receive-icon{font-size:1.4rem;flex-shrink:0;margin-top:0.1rem;}
+.receive-text h4{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;color:var(--text-light);margin-bottom:0.3rem;
+}
+.receive-text p{font-size:0.88rem;margin:0;}
+
+.pricing-section{
+  background:linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(155,109,255,0.08) 100%);
+  border:1px solid var(--border-gold);
+  border-radius:20px;
+  padding:3rem 2.5rem;
+  text-align:center;margin:4rem 0;
+}
+.pricing-section h2{
+  font-size:clamp(1.6rem,3vw,2.2rem);
+  color:var(--text-light);margin-bottom:0.5rem;
+}
+.price-tag{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.5rem,8vw,5rem);font-weight:700;
+  color:var(--gold);line-height:1;margin:1rem 0;
+}
+.price-tag{display:flex;align-items:baseline;justify-content:center;gap:0.25rem;}
+.price-tag span{font-size:1.2rem;font-weight:600;letter-spacing:1px;}
+.pricing-section > p{max-width:440px;margin:0 auto 1.5rem;font-size:0.9rem;}
+.price-note{font-size:0.78rem;color:var(--text-dim);margin-top:1rem;}
+
+.wa-btn{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  background:var(--green);color:#fff;
+  padding:1rem 2.2rem;border-radius:999px;
+  font-weight:600;font-size:0.95rem;
+  transition:opacity 0.2s,transform 0.2s;cursor:pointer;border:none;
+}
+.wa-btn:hover{opacity:0.88;transform:translateY(-2px);}
+
+footer{
+  border-top:1px solid rgba(212,175,55,0.1);
+  padding:2.5rem 1.5rem;text-align:center;
+}
+footer p{font-size:0.82rem;color:var(--text-dim);}
+footer a{color:var(--gold);}
+
+@media(max-width:640px){
+  nav{padding:0.8rem 1.2rem;}
+  .nav-logo{font-size:2.4rem;}
+  .comparison-grid{grid-template-columns:1fr;}
+  .content{padding:3rem 1.2rem;}
+  .pricing-section{padding:2rem 1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index_v3.html" class="nav-logo">Sorbi <span class="star">✦</span></a>
+  <a href="index_v3.html" class="nav-back">← Ana Sayfa</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">✦ İlişki Astrolojisi</div>
+  <h1>Sinastri:<br><em>İki Haritanın Dansı</em></h1>
+  <p class="hero-subtitle">
+    Her ilişkinin kendine özgü bir kozmik dili vardır. Sinastri, iki kişinin haritasını üst üste koyarak aralarındaki çekim, uyum ve sürtüşmenin kökenini ortaya koyar.
+  </p>
+</section>
+
+<div class="content">
+
+  <div class="section">
+    <div class="section-label">Sinastri Nedir?</div>
+    <h2>Gökyüzündeki Birliktelik Haritası</h2>
+    <p>
+      Sinastri — kelime anlamıyla "yıldızların birlikteliği" — iki kişinin doğum haritasının birbirinin üzerine yerleştirilerek incelenmesidir. Bu teknik, astrolojinin en güçlü araçlarından biridir; çünkü ilişkilerin neden bazılarında anında "tanıdıklık" hissi yarattığını, bazılarında ise ne kadar çabalarsak çabalayalım aynı meseleyi tekrar tekrar yaşadığımızı açıklar.
+    </p>
+    <p>
+      İki harita bir araya geldiğinde, gezegenler birbirini etkiler. A kişisinin Venüs'ü B kişisinin Mars'ını tatlı bir açıyla tetikliyorsa, aralarındaki çekim neredeyse kaçınılmaz hisseder. A kişisinin Satürn'ü B kişisinin Ay'ının tam üstüne düşüyorsa, bir kişi diğerine sürekli "kısıtlayıcı" ya da "soğuk" görünebilir — bunu bilinçsizce yaşarlar ve anlamazlar.
+    </p>
+    <p>
+      Sinastri bir ilişkinin "iyi mi kötü mü" olduğuna karar vermez. Her ilişkinin bir amacı vardır. Bazı sinastri haritaları yoğun bir karmayı gösterir; bu ilişki büyük büyüme yaratabilir — ama rahatsız da edebilir. Bazıları sakin, destekleyici bir uyumu işaret eder. Hangisi daha "doğru"? Bu sorunun cevabı sende.
+    </p>
+
+    <div class="quote-block">
+      <p>"Sevgi rastlantı değil; iki haritanın oluşturduğu bir dans alanıdır. Sinastri o dans alanının haritasını çıkarır."</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Çekim ve Sürtüşme</div>
+    <h2>İki Kişi Arasında Neler Olur?</h2>
+    <p>
+      Sinastri haritasında gördüğümüz açılar ve gezegen temasları iki farklı enerji alanı yaratır:
+    </p>
+
+    <div class="comparison-grid">
+      <div class="comp-card attraction">
+        <h3>✦ Çekim & Akış</h3>
+        <p>Üçgen, sextil ve bazı kavuşumlar kolaylık, anlayış ve doğal uyum yaratır. İki kişi birbirini zahmetsizce anlar, iletişimde akıcılık hisseder. Bu açılar ilişkinin "neden bu kadar kolay hissettirdiğini" açıklar.</p>
+      </div>
+      <div class="comp-card friction">
+        <h3>◈ Gerilim & Büyüme</h3>
+        <p>Kare ve karşıt açılar sürtüşme yaratır — ama aynı zamanda en büyük büyümeyi de. Bu gerilimler "neden aynı kavgayı tekrar tekrar yapıyoruz?" sorusunu yanıtlar. Anlaşılınca dönüştürücü olabilirler.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="section-label">Temel Gezegen Temasları</div>
+    <h2>Haritalar Arasındaki Köprüler</h2>
+    <p>
+      Sinastri analizinde odaklandığımız bazı gezegen temasları şunlardır:
+    </p>
+
+    <div class="planet-list">
+      <div class="planet-item">
+        <div class="planet-symbol">♀</div>
+        <div class="planet-info">
+          <h4>Venüs Temasları — Sevginin Dili</h4>
+          <p>Venüs, nasıl sevdiğimizi, ne aradığımızı ve kendimizi nasıl ifade ettiğimizi gösterir. Birinin Venüs'ü diğerinin kişisel gezegenlerine temas ettiğinde, sevgi ve güzellik duygusu bu temas noktasında yoğunlaşır. Venüs–Mars teması fiziksel çekimi; Venüs–Jüpiter teması bolluğu ve pozitifliği; Venüs–Neptün teması romantizmi ama bazen idealizasyonu getirir.</p>
+        </div>
+      </div>
+      <div class="planet-item">
+        <div class="planet-symbol">☽</div>
+        <div class="planet-info">
+          <h4>Ay Temasları — Duygusal Güven</h4>
+          <p>Ay, içimizin en kırılgan katmanıdır. Bir kişinin Ay'ı, diğerinin haritasının sıcak bir noktasına temas ettiğinde derin bir duygusal güven ve tanıdıklık hissi doğar. Ay–Ay teması iki kişinin duygusal dünyalarının ne kadar uyumlu olduğunu gösterir. Ay–Satürn teması ise bir kişinin diğeri için ağır, kısıtlayıcı hissettirebildiği dinamiği işaret eder.</p>
+        </div>
+      </div>
+      <div class="planet-item">
+        <div class="planet-symbol">♂</div>
+        <div class="planet-info">
+          <h4>Mars Temasları — Arzu ve Eylem</h4>
+          <p>Mars, arzuyu, rekabeti ve eylemi yönetir. İlişkide Mars temasları fiziksel çekimi ve motivasyonu belirler. Mars–Venüs teması klasik "çekim" formülüdür. Mars–Mars teması ise iki kişinin enerji ve eylem tarzlarının ne kadar uyumlu ya da çatışıcı olduğunu gösterir.</p>
+        </div>
+      </div>
+      <div class="planet-item">
+        <div class="planet-symbol">♄</div>
+        <div class="planet-info">
+          <h4>Satürn Temasları — Bağlılık ve Ders</h4>
+          <p>Satürn temasları ağır ve öğreticidir. Satürn'ü olan kişi diğerine ders vermek, sınırlamak ya da sorumluluğa çekmek gibi hissedebilir — bunu bilinçli yapmıyor bile olsa. Bu temaslar güçlü bir bağlılık yaratabilir; ama aynı zamanda baskı da üretebilir.</p>
+        </div>
+      </div>
+      <div class="planet-item">
+        <div class="planet-symbol">♇</div>
+        <div class="planet-info">
+          <h4>Plüton Temasları — Dönüşüm ve Yoğunluk</h4>
+          <p>Plüton temasları bir ilişkiyi tamamen değiştirir. Bu temas söz konusu olduğunda ilişki sıradan hissetmez — her şey daha yoğun, daha derin, bazen daha obsesif gelir. Plüton–Venüs ya da Plüton–Ay teması "birinden bir türlü kurtulamama" hissini açıklayabilir.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Kim İçin?</div>
+    <h2>Bu Analiz Kimlere Yöneliktir?</h2>
+    <p>
+      Sinastri yalnızca romantik ilişkiler için değildir. Haritalar arasındaki dinamikler her tür ilişkide işler:
+    </p>
+    <p>
+      <strong style="color:var(--text-light)">Çiftler:</strong> Yıllardır süren bir ilişkide aynı kalıpları tekrar tekrar yaşıyorsan ya da partnerinle neden bu kadar güçlü bir bağ hissettiğini anlamak istiyorsan, sinastri bu dinamikleri netleştirir. Anlaşmazlıkların kökenini görmek, eleştirmekten anlama moduna geçmeni sağlar.
+    </p>
+    <p>
+      <strong style="color:var(--text-light)">Yeni Başlayan İlişkiler:</strong> Tanıştığın biriyle potansiyel görüyorsun; ama devam edip etmemek konusunda kararsızsın. Sinastri, bu kişiyle ne tür bir büyüme ya da zorluk yaşayabileceğine dair kozmik bir ön değerlendirme sunar. Karar sende — ama harita sana daha geniş bir perspektif verir.
+    </p>
+    <p>
+      <strong style="color:var(--text-light)">Dostluklar ve Aile İlişkileri:</strong> Anne-çocuk, kardeşler ya da yakın arkadaşlıklar da sinastri ile incelenebilir. Neden bazı aile bireylerinin seni tükettiğini ya da tam aksine neden bazı insanlarla anında derin bir bağ kurduğunu harita üzerinden görmek mümkündür.
+    </p>
+    <p>
+      <strong style="color:var(--text-light)">Ayrılık Sonrası:</strong> Bir ilişkinin sona ermesi bazen anlam ifade etmez. Sinastri, o ilişkinin sana ne öğrettiğini ve hangi karma döngüsünü kapattığını görmene yardım eder. Bu anlayış, iyileşmeyi hızlandırır.
+    </p>
+
+    <div class="example-block">
+      <h4>✦ Gerçek Yaşam Örneği</h4>
+      <p>
+        Bir danışanım, uzun süredir aynı kişiyle ilişkisini bitirip yeniden başlatıyordu. Neden bir türlü kopamadiğini anlayamıyordu. Sinastri haritasına baktığımızda partnerinin Plüton'unun tam olarak danışanımın Ay'ının üzerine düştüğünü gördük — bu, kozmik anlamda çok yoğun ve dönüştürücü bir temastır. Ayrıca karşılıklı Güney Düğümü teması vardı; iki kişi muhtemelen geçmiş yaşamlarından birbirini tanıyordu ve tamamlanmamış bir karma döngüsü vardı. Bu görüşmeden sonra danışanım "neden bu kadar çekildim" sorusuna cevap buldu ve ilişkisine bilinçli bir gözle bakabildi.
+      </p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Ne Alırsın?</div>
+    <h2>Sinastri Seansında Sana Verilen</h2>
+    <div class="receive-list">
+      <div class="receive-item">
+        <div class="receive-icon">🔗</div>
+        <div class="receive-text">
+          <h4>İki Haritanın Karşılaştırmalı Analizi</h4>
+          <p>Her iki kişinin doğum haritası ayrı ayrı değerlendirilir; ardından birlikte çakıştırılarak temel temaların sentezi yapılır. Hangi alanlar güçlü, hangilerinde dikkat edilmesi gereken noktalar var — ikisi birlikte görülür.</p>
+        </div>
+      </div>
+      <div class="receive-item">
+        <div class="receive-icon">📝</div>
+        <div class="receive-text">
+          <h4>Yazılı İlişki Raporu</h4>
+          <p>Seansın ardından en az 1.200 kelimelik yazılı rapor gönderilir. Temel gezegen temasları, çekim dinamikleri, olası sürtüşme noktaları ve ilişkiyi güçlendirecek tavsiyeler içerir.</p>
+        </div>
+      </div>
+      <div class="receive-item">
+        <div class="receive-icon">🎙</div>
+        <div class="receive-text">
+          <h4>60–75 Dakika Birebir Görüşme</h4>
+          <p>İki kişinin haritası birlikte ele alınır. Her iki taraf hakkında sorular sorabilir, kendi bakış açını paylaşabilir ve dinamikleri derinlemesine anlayabilirsin. Çift olarak katılmak da mümkündür.</p>
+        </div>
+      </div>
+      <div class="receive-item">
+        <div class="receive-icon">💬</div>
+        <div class="receive-text">
+          <h4>48 Saat Takip Sorusu</h4>
+          <p>Görüşme sonrasında aklına gelen soruları 48 saat içinde WhatsApp üzerinden iletebilirsin. Kısa ve odaklı yanıtlar alırsın.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="pricing-section">
+    <h2>Sinastri Ücreti</h2>
+    <div class="price-tag">790<span>TL</span></div>
+    <p>İki kişinin tam harita analizi + yazılı rapor + 60–75 dk görüşme + 48 saat takip sorusu dahildir.</p>
+    <a href="https://wa.me/905434309702?text=Merhaba%20Defne!%20Sevgilimle%20aram%C4%B1zdaki%20uyumu%20sinastri%20analiziyle%20incelemek%20istiyorum%2C%20bilgi%20alabilir%20miyim%3F" class="wa-btn">
+      <svg viewBox="0 0 32 32" width="17" height="17" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.837.744 5.497 2.044 7.8L0 32l8.4-2.003C10.643 31.283 13.27 32 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.07 22.587c-.338.952-1.968 1.82-2.729 1.936-.698.104-1.583.148-2.554-.16-.588-.19-1.343-.444-2.31-.87-4.065-1.757-6.72-5.863-6.924-6.136-.205-.273-1.666-2.218-1.666-4.23 0-2.012 1.054-3 1.428-3.41.375-.41.82-.512 1.092-.512.273 0 .547.002.787.014.252.013.59-.095.923.705.338.82 1.15 2.83 1.252 3.035.103.205.171.444.034.718-.137.273-.205.444-.41.684-.205.24-.43.537-.615.72-.205.205-.42.43-.18.843.24.41 1.067 1.762 2.29 2.855 1.573 1.402 2.9 1.835 3.31 2.04.41.205.65.171.89-.103.24-.273 1.025-1.196 1.298-1.606.272-.41.545-.342.922-.205.375.137 2.39 1.128 2.8 1.333.41.205.683.308.786.478.103.17.103.985-.235 1.937z"/></svg>
+      WhatsApp'tan Randevu Al
+    </a>
+    <p class="price-note">İki kişinin doğum tarihi, saati ve yeri seansa başlamadan önce paylaşılır.</p>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 Sorbi — <a href="index_v3.html">Ana Sayfaya Dön</a></p>
+</footer>
+
+</body>
+</html>
