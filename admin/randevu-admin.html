@@ -11,18 +11,18 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{font-size:16px;}
-body{font-family:'Inter',sans-serif;background:#0A0E1A;color:#f4f0e4;min-height:100vh;}
+body{font-family:'Inter',sans-serif;background:#0B1110;color:#F5F1EA;min-height:100vh;}
 a{text-decoration:none;color:inherit;}
 :root{
-  --dark:#0A0E1A; --dark2:#0D1B2A;
-  --gold:#C9A84C; --gold-light:#E6CF8A; --gold-deep:#9A7E33;
+  --dark:#0B1110; --dark2:#0E1615;
+  --gold:#46C5B0; --gold-light:#E6CF8A; --gold-deep:#9A7E33;
   --gold2:rgba(201,168,76,0.1); --gold3:rgba(201,168,76,0.25);
-  --light:#F6F1E7;
+  --light:#F5F1EA;
   --green:#25D366;
-  --text-light:#f4f0e4; --text-muted:rgba(244,240,228,0.6); --text-dim:rgba(244,240,228,0.3);
+  --text-light:#F5F1EA; --text-muted:rgba(244,240,228,0.6); --text-dim:rgba(244,240,228,0.3);
   --border:rgba(244,240,228,0.08); --border-gold:rgba(201,168,76,0.2);
   --radius:10px; --radius-lg:16px;
-  --pending:#f5a623; --approved:#5de882; --rejected:#ff7070;
+  --pending:#f5a623; --approved:#5de882; --rejected:#E08A5E;
 }
 h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.15;}
 
@@ -37,7 +37,7 @@ h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1
 .login-card input::placeholder{color:var(--text-dim);}
 .btn-login{width:100%;background:linear-gradient(135deg,var(--gold-light),var(--gold-deep));color:var(--dark);padding:0.8rem;border-radius:10px;font-size:0.95rem;font-weight:600;border:none;cursor:pointer;}
 .btn-login:hover{opacity:0.9;}
-.login-err{font-size:0.8rem;color:#ff7070;margin-top:0.5rem;}
+.login-err{font-size:0.8rem;color:#E08A5E;margin-top:0.5rem;}
 
 /* ── App Shell ── */
 #app{display:none;min-height:100vh;}
@@ -50,7 +50,7 @@ h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1
 .nav-item .icon{font-size:1rem;width:20px;text-align:center;}
 .sidebar-bottom{margin-top:auto;}
 .btn-logout{width:100%;background:transparent;border:1px solid rgba(244,240,228,0.1);color:var(--text-dim);padding:0.5rem;border-radius:8px;cursor:pointer;font-size:0.78rem;font-family:'Inter',sans-serif;}
-.btn-logout:hover{border-color:rgba(255,80,80,0.3);color:#ff8080;}
+.btn-logout:hover{border-color:rgba(255,80,80,0.3);color:#E08A5E;}
 
 .main-content{margin-left:240px;padding:2rem 2.5rem;min-height:100vh;}
 .page{display:none;}
@@ -164,7 +164,7 @@ tbody tr:hover td{background:rgba(255,255,255,0.02);}
 /* ── Randevu Detay Modal ── */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;}
 .modal-overlay.open{display:flex;}
-.modal{background:#0D1B2A;border:1px solid var(--border-gold);border-radius:var(--radius-lg);padding:2rem;width:100%;max-width:480px;position:relative;}
+.modal{background:#0E1615;border:1px solid var(--border-gold);border-radius:var(--radius-lg);padding:2rem;width:100%;max-width:480px;position:relative;}
 .modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:1.2rem;}
 .modal h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold-light);margin-bottom:1.2rem;}
 .detail-row{display:flex;gap:0.5rem;margin-bottom:0.55rem;font-size:0.86rem;}
@@ -172,7 +172,7 @@ tbody tr:hover td{background:rgba(255,255,255,0.02);}
 .modal-actions{margin-top:1.5rem;display:flex;gap:0.6rem;flex-wrap:wrap;}
 
 /* ── Toast ── */
-.toast{position:fixed;bottom:2rem;right:2rem;background:#0D1B2A;border:1px solid var(--border-gold);border-radius:10px;padding:0.8rem 1.3rem;font-size:0.84rem;color:var(--text-light);z-index:300;transform:translateY(20px);opacity:0;transition:all 0.3s;pointer-events:none;max-width:320px;}
+.toast{position:fixed;bottom:2rem;right:2rem;background:#0E1615;border:1px solid var(--border-gold);border-radius:10px;padding:0.8rem 1.3rem;font-size:0.84rem;color:var(--text-light);z-index:300;transform:translateY(20px);opacity:0;transition:all 0.3s;pointer-events:none;max-width:320px;}
 .toast.show{transform:translateY(0);opacity:1;}
 .toast.success{border-color:rgba(93,232,130,0.3);}
 .toast.error{border-color:rgba(255,112,112,0.3);}
