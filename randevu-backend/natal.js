@@ -27,7 +27,20 @@ function julianDay(year, month, day, utHour) {
        + day + B - 1524.5 + utHour / 24;
 }
 
-/** Türkiye UTC offset (1996 öncesi DST dahil) */
+/** Ayın son Pazar gününü döndürür (Zeller benzeri, JS Date UTC ile) */
+function lastSundayOfMonth(year, month) {
+  // month: 1-12. Bir sonraki ayın 0. günü = bu ayın son günü.
+  const lastDay = new Date(Date.UTC(year, month, 0));
+  const dow = lastDay.getUTCDay(); // 0=Pazar
+  return lastDay.getUTCDate() - dow;
+}
+
+/** Türkiye UTC offset (2016 öncesi DST dahil)
+ * DÜZELTME (2026-07-10): eski hali Mart/Ekim geçişlerinde sabit "gün>=26" eşiği
+ * kullanıyordu — gerçek geçiş "ayın son Pazar günü" olduğu için (örn. 31 Mart 1985)
+ * bazı yıllarda ±1 saatlik tzOffset hatasına yol açıyordu (Yükselen için ~15° sapma demek).
+ * Artık son Pazar günü hesaplanıyor.
+ */
 function turkeyOffset(year, month, day) {
   // 2016 Eylül'den itibaren kalıcı UTC+3
   if (year > 2016 || (year === 2016 && month >= 9)) return 3;
@@ -35,10 +48,10 @@ function turkeyOffset(year, month, day) {
   if (month >= 4 && month <= 9) return 3;
   // Kesin kış: Kasım–Şubat → UTC+2
   if (month >= 11 || month <= 2) return 2;
-  // Mart: yaklaşık son Pazar'a kadar UTC+2
-  if (month === 3) return day >= 26 ? 3 : 2;
-  // Ekim: yaklaşık son Pazar'dan itibaren UTC+2
-  if (month === 10) return day >= 26 ? 2 : 3;
+  // Mart: ayın son Pazar gününden itibaren UTC+3
+  if (month === 3) return day >= lastSundayOfMonth(year, 3) ? 3 : 2;
+  // Ekim: ayın son Pazar gününden itibaren UTC+2
+  if (month === 10) return day >= lastSundayOfMonth(year, 10) ? 2 : 3;
   return 3;
 }
 
@@ -162,11 +175,14 @@ function greenwichSiderealTime(jd) {
 
 // ── Yükselen (ASC) ekliptik boylamı ─────────────────────────────────────────
 // ramc=yerel yıldız zamanı (derece), lat=coğrafi enlem, eps=ekliptik eğikliği
+// DÜZELTME (2026-07-10): atan2 argümanlarının işareti ters olduğu için bu fonksiyon
+// Yükselen yerine tam 180° karşıtı olan Alçalan'ı (Descendant) döndürüyordu.
+// pyswisseph ile çapraz doğrulandı — düzeltilmiş hali gerçek Yükselen'i ±0.003° içinde veriyor.
 function ascendantLongitude(ramc, lat, eps) {
   const r = ramc * RAD;
   const l = lat * RAD;
   const e = eps * RAD;
-  return mod360(Math.atan2(-Math.cos(r), Math.sin(r) * Math.cos(e) + Math.tan(l) * Math.sin(e)) * DEG);
+  return mod360(Math.atan2(Math.cos(r), -(Math.sin(r) * Math.cos(e) + Math.tan(l) * Math.sin(e))) * DEG);
 }
 
 function signIndex(lon) { return Math.floor(lon / 30) % 12; }

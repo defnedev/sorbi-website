@@ -513,7 +513,8 @@ function getSunSign(month,day){
   const R=Math.PI/180,D=180/Math.PI;
   function m360(x){return((x%360)+360)%360;}
   function jd(yr,mo,dy,utH){let y=yr,m=mo;if(m<=2){y--;m+=12;}const A=Math.floor(y/100);const B=2-A+Math.floor(A/4);return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+dy+B-1524.5+utH/24;}
-  function tzTR(yr,mo,dy){if(yr>2016||(yr===2016&&mo>=9))return 3;if(mo>=4&&mo<=9)return 3;if(mo>=11||mo<=2)return 2;if(mo===3)return dy>=26?3:2;if(mo===10)return dy>=26?2:3;return 3;}
+  function lastSunday(yr,mo){const ld=new Date(Date.UTC(yr,mo,0));return ld.getUTCDate()-ld.getUTCDay();} // ayın son Pazar günü
+  function tzTR(yr,mo,dy){if(yr>2016||(yr===2016&&mo>=9))return 3;if(mo>=4&&mo<=9)return 3;if(mo>=11||mo<=2)return 2;if(mo===3)return dy>=lastSunday(yr,3)?3:2;if(mo===10)return dy>=lastSunday(yr,10)?2:3;return 3;} // FIX 2026-07-10: sabit gün>=26 yerine gerçek son Pazar
   function sunLon(J){const T=(J-2451545)/36525;const L0=m360(280.46646+36000.76983*T+0.0003032*T*T);const M=m360(357.52911+35999.05029*T-0.0001537*T*T);const Mr=M*R;const C=(1.914602-0.004817*T-0.000014*T*T)*Math.sin(Mr)+(0.019993-0.000101*T)*Math.sin(2*Mr)+0.000289*Math.sin(3*Mr);const sl=m360(L0+C);const om=m360(125.04-1934.136*T);return m360(sl-0.00569-0.00478*Math.sin(om*R));}
   function moonLon(J){
     const T=(J-2451545)/36525,T2=T*T,T3=T2*T,T4=T3*T;
@@ -530,7 +531,7 @@ function getSunSign(month,day){
   }
   function obl(T){return 23.4392911111-(46.8150/3600)*T-(0.00059/3600)*T*T+(0.001813/3600)*T*T*T;}
   function gst(J){const T=(J-2451545)/36525;return m360(280.46061837+360.98564736629*(J-2451545)+0.000387933*T*T-T*T*T/38710000);}
-  function ascLon(ramc,lat,eps){const r=ramc*R,l=lat*R,e=eps*R;return m360(Math.atan2(-Math.cos(r),Math.sin(r)*Math.cos(e)+Math.tan(l)*Math.sin(e))*D);}
+  function ascLon(ramc,lat,eps){const r=ramc*R,l=lat*R,e=eps*R;return m360(Math.atan2(Math.cos(r),-(Math.sin(r)*Math.cos(e)+Math.tan(l)*Math.sin(e)))*D);} // FIX 2026-07-10: eski hali Yükselen yerine Alçalan (180° ters) veriyordu
   window._calcNatalLocal=function(year,month,day,hour,minute,lat,lng){
     const tz=tzTR(year,month,day);
     let utH=hour+minute/60-tz,dy=day;
