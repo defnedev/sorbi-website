@@ -31,249 +31,249 @@ a{text-decoration:none;color:inherit;}
 ul{list-style:none;}
 
 :root{
-  --dark:#0B0E15;
-  --gold:#C9A962;
-  --gold2:rgba(201,169,98,0.12);
-  --purple:#C9A962;
-  --purple2:rgba(201,169,98,0.12);
-  --green:#25D366;
-  --text-light:#F6F1E7;
-  --text-muted:rgba(246,241,231,0.6);
-  --text-dim:rgba(246,241,231,0.35);
-  --border-gold:rgba(201,169,98,0.22);
-  --radius:12px;
+ --dark:#0B0E15;
+ --gold:#C9A962;
+ --gold2:rgba(201,169,98,0.12);
+ --purple:#C9A962;
+ --purple2:rgba(201,169,98,0.12);
+ --green:#25D366;
+ --text-light:#F6F1E7;
+ --text-muted:rgba(246,241,231,0.6);
+ --text-dim:rgba(246,241,231,0.35);
+ --border-gold:rgba(201,169,98,0.22);
+ --radius:12px;
 }
 
 h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.15;}
 p{line-height:1.85;color:var(--text-muted);}
 
 nav{
-  position:fixed;top:0;left:0;width:100%;z-index:1000;
-  padding:1rem 2rem;
-  display:flex;justify-content:space-between;align-items:center;
-  background:#0B0E15;
-  backdrop-filter:none;
-  box-shadow:none;
+ position:fixed;top:0;left:0;width:100%;z-index:1000;
+ padding:1rem 2rem;
+ display:flex;justify-content:space-between;align-items:center;
+ background:#0B0E15;
+ backdrop-filter:none;
+ box-shadow:none;
 }
 .nav-logo{
-  font-family:'Cormorant Garamond',serif;
-  font-size:3.2rem;font-weight:700;
-  color:var(--text-light);
-  display:flex;align-items:center;gap:0.2rem;line-height:1;
+ font-family:'Cormorant Garamond',serif;
+ font-size:3.2rem;font-weight:700;
+ color:var(--text-light);
+ display:flex;align-items:center;gap:0.2rem;line-height:1;
 }
 .nav-logo .star{color:var(--gold);font-size:2.2rem;}
 .nav-back{font-size:0.82rem;color:rgba(246,241,231,0.6);transition:color 0.2s;}
 .nav-back:hover{color:var(--text-light);}
 
 .hero{
-  min-height:100vh;
-  background:radial-gradient(ellipse 60% 50% at 50% 0%, rgba(201,169,98,0.16) 0%, transparent 65%),
-             radial-gradient(ellipse 40% 40% at 90% 80%, rgba(201,169,98,0.12) 0%, transparent 60%),
-             var(--dark);
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  padding:8rem 1.5rem 5rem;
-  text-align:center;position:relative;overflow:hidden;
+ min-height:100vh;
+ background:radial-gradient(ellipse 60% 50% at 50% 0%, rgba(201,169,98,0.16) 0%, transparent 65%),
+ radial-gradient(ellipse 40% 40% at 90% 80%, rgba(201,169,98,0.12) 0%, transparent 60%),
+ var(--dark);
+ display:flex;flex-direction:column;
+ align-items:center;justify-content:center;
+ padding:8rem 1.5rem 5rem;
+ text-align:center;position:relative;overflow:hidden;
 }
 .hero-badge{
-  display:inline-flex;align-items:center;gap:0.4rem;
-  background:rgba(201,169,98,0.1);
-  border:1px solid var(--border-gold);
-  border-radius:999px;
-  padding:0.3rem 1rem;
-  font-size:0.7rem;color:var(--gold);
-  letter-spacing:1.5px;text-transform:uppercase;
-  margin-bottom:1.4rem;
+ display:inline-flex;align-items:center;gap:0.4rem;
+ background:rgba(201,169,98,0.1);
+ border:1px solid var(--border-gold);
+ border-radius:999px;
+ padding:0.3rem 1rem;
+ font-size:0.7rem;color:var(--gold);
+ letter-spacing:1.5px;text-transform:uppercase;
+ margin-bottom:1.4rem;
 }
 .delivery-badge{
-  display:inline-flex;align-items:center;gap:0.4rem;
-  background:rgba(37,211,102,0.1);
-  border:1px solid rgba(37,211,102,0.3);
-  border-radius:999px;
-  padding:0.3rem 1rem;
-  font-size:0.7rem;color:#25D366;
-  letter-spacing:1.5px;text-transform:uppercase;
-  margin-bottom:1rem;
-  margin-left:0.5rem;
+ display:inline-flex;align-items:center;gap:0.4rem;
+ background:rgba(37,211,102,0.1);
+ border:1px solid rgba(37,211,102,0.3);
+ border-radius:999px;
+ padding:0.3rem 1rem;
+ font-size:0.7rem;color:#25D366;
+ letter-spacing:1.5px;text-transform:uppercase;
+ margin-bottom:1rem;
+ margin-left:0.5rem;
 }
 .hero h1{
-  font-size:clamp(3rem,7vw,5.5rem);
-  color:var(--text-light);
-  margin-bottom:1rem;letter-spacing:-2px;
+ font-size:clamp(3rem,7vw,5.5rem);
+ color:var(--text-light);
+ margin-bottom:1rem;letter-spacing:-2px;
 }
 .hero h1 em{color:var(--gold);font-style:italic;}
 .hero-subtitle{
-  font-size:1.1rem;color:var(--text-muted);
-  max-width:540px;margin:0 auto 2.5rem;line-height:1.8;
+ font-size:1.1rem;color:var(--text-muted);
+ max-width:540px;margin:0 auto 2.5rem;line-height:1.8;
 }
 .hero-badges{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-bottom:1.4rem;}
 
 /* Clock visual */
 .clock-deco{
-  width:120px;height:120px;border-radius:50%;
-  border:2px solid var(--border-gold);
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 2rem;
-  position:relative;
-  background:rgba(201,169,98,0.04);
+ width:120px;height:120px;border-radius:50%;
+ border:2px solid var(--border-gold);
+ display:flex;align-items:center;justify-content:center;
+ margin:0 auto 2rem;
+ position:relative;
+ background:rgba(201,169,98,0.04);
 }
 .clock-deco::before{
-  content:'';position:absolute;
-  width:2px;height:40px;
-  background:var(--gold);
-  bottom:50%;left:50%;
-  transform-origin:bottom center;
-  transform:translateX(-50%) rotate(-30deg);
-  border-radius:2px;
+ content:'';position:absolute;
+ width:2px;height:40px;
+ background:var(--gold);
+ bottom:50%;left:50%;
+ transform-origin:bottom center;
+ transform:translateX(-50%) rotate(-30deg);
+ border-radius:2px;
 }
 .clock-deco::after{
-  content:'';position:absolute;
-  width:2px;height:30px;
-  background:var(--purple);
-  bottom:50%;left:50%;
-  transform-origin:bottom center;
-  transform:translateX(-50%) rotate(90deg);
-  border-radius:2px;
+ content:'';position:absolute;
+ width:2px;height:30px;
+ background:var(--purple);
+ bottom:50%;left:50%;
+ transform-origin:bottom center;
+ transform:translateX(-50%) rotate(90deg);
+ border-radius:2px;
 }
 .clock-center{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--gold);
-  position:absolute;
-  z-index:2;
+ width:8px;height:8px;border-radius:50%;
+ background:var(--gold);
+ position:absolute;
+ z-index:2;
 }
 .clock-label{
-  font-size:0.68rem;color:var(--gold);
-  letter-spacing:1px;text-align:center;
-  margin-top:-1rem;
+ font-size:0.68rem;color:var(--gold);
+ letter-spacing:1px;text-align:center;
+ margin-top:-1rem;
 }
 
 .content{max-width:820px;margin:0 auto;padding:5rem 1.5rem;}
 .section{margin-bottom:4rem;}
 .section-label{
-  font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;
-  color:var(--gold);margin-bottom:0.8rem;
-  display:flex;align-items:center;gap:0.5rem;
+ font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;
+ color:var(--gold);margin-bottom:0.8rem;
+ display:flex;align-items:center;gap:0.5rem;
 }
 .section-label::before{content:'✦';font-size:0.6rem;}
 .section h2{
-  font-size:clamp(1.8rem,3vw,2.6rem);
-  color:var(--text-light);margin-bottom:1.5rem;letter-spacing:-0.8px;
+ font-size:clamp(1.8rem,3vw,2.6rem);
+ color:var(--text-light);margin-bottom:1.5rem;letter-spacing:-0.8px;
 }
 .section p{margin-bottom:1.2rem;}
 
 .divider{border:none;border-top:1px solid rgba(201,169,98,0.15);margin:4rem 0;}
 
 .quote-block{
-  border-left:3px solid var(--gold);
-  padding:1.5rem 2rem;
-  margin:2rem 0;
-  background:rgba(201,169,98,0.04);
-  border-radius:0 var(--radius) var(--radius) 0;
+ border-left:3px solid var(--gold);
+ padding:1.5rem 2rem;
+ margin:2rem 0;
+ background:rgba(201,169,98,0.04);
+ border-radius:0 var(--radius) var(--radius) 0;
 }
 .quote-block p{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.35rem;font-style:italic;
-  color:var(--text-light);line-height:1.6;
+ font-family:'Cormorant Garamond',serif;
+ font-size:1.35rem;font-style:italic;
+ color:var(--text-light);line-height:1.6;
 }
 
 .question-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:1rem;margin-top:1.5rem;
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+ gap:1rem;margin-top:1.5rem;
 }
 .question-card{
-  border-radius:var(--radius);
-  padding:1.5rem;
-  background:rgba(201,169,98,0.06);
-  border:1px solid var(--border-gold);
+ border-radius:var(--radius);
+ padding:1.5rem;
+ background:rgba(201,169,98,0.06);
+ border:1px solid var(--border-gold);
 }
 .question-card.good{
-  border-color:rgba(37,211,102,0.2);
-  background:rgba(37,211,102,0.05);
+ border-color:rgba(37,211,102,0.2);
+ background:rgba(37,211,102,0.05);
 }
 .question-card.avoid{
-  border-color:rgba(201,169,98,0.2);
-  background:rgba(201,169,98,0.05);
+ border-color:rgba(201,169,98,0.2);
+ background:rgba(201,169,98,0.05);
 }
 .question-card h4{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1rem;margin-bottom:0.8rem;
+ font-family:'Cormorant Garamond',serif;
+ font-size:1rem;margin-bottom:0.8rem;
 }
 .question-card.good h4{color:#25D366;}
 .question-card.avoid h4{color:var(--purple);}
 .question-card ul{list-style:none;}
 .question-card ul li{
-  font-size:0.85rem;color:var(--text-muted);
-  padding:0.3rem 0;
-  border-bottom:1px solid rgba(246,241,231,0.06);
-  line-height:1.5;
+ font-size:0.85rem;color:var(--text-muted);
+ padding:0.3rem 0;
+ border-bottom:1px solid rgba(246,241,231,0.06);
+ line-height:1.5;
 }
 .question-card ul li:last-child{border:none;}
 .question-card ul li::before{content:'— ';}
 
 .how-steps{
-  display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem;
+ display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem;
 }
 .how-step{
-  display:flex;align-items:flex-start;gap:1rem;
-  padding:1.2rem 1.5rem;
-  background:rgba(201,169,98,0.06);
-  border:1px solid rgba(201,169,98,0.15);
-  border-radius:var(--radius);
+ display:flex;align-items:flex-start;gap:1rem;
+ padding:1.2rem 1.5rem;
+ background:rgba(201,169,98,0.06);
+ border:1px solid rgba(201,169,98,0.15);
+ border-radius:var(--radius);
 }
 .step-num{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.8rem;font-weight:700;
-  color:var(--gold);flex-shrink:0;
-  line-height:1;
+ font-family:'Cormorant Garamond',serif;
+ font-size:1.8rem;font-weight:700;
+ color:var(--gold);flex-shrink:0;
+ line-height:1;
 }
 .step-content h4{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.1rem;color:var(--text-light);margin-bottom:0.3rem;
+ font-family:'Cormorant Garamond',serif;
+ font-size:1.1rem;color:var(--text-light);margin-bottom:0.3rem;
 }
 .step-content p{font-size:0.88rem;margin:0;}
 
 .example-block{
-  background:var(--purple2);
-  border:1px solid rgba(201,169,98,0.2);
-  border-radius:var(--radius);
-  padding:2rem;margin-top:1.5rem;
+ background:var(--purple2);
+ border:1px solid rgba(201,169,98,0.2);
+ border-radius:var(--radius);
+ padding:2rem;margin-top:1.5rem;
 }
 .example-block h4{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.2rem;color:var(--purple);margin-bottom:0.8rem;
+ font-family:'Cormorant Garamond',serif;
+ font-size:1.2rem;color:var(--purple);margin-bottom:0.8rem;
 }
 .example-block p{font-size:0.92rem;}
 
 .receive-list{display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem;}
 .receive-item{
-  display:flex;align-items:flex-start;gap:1rem;
-  background:rgba(201,169,98,0.08);
-  border:1px solid var(--border-gold);
-  border-radius:var(--radius);padding:1.2rem 1.5rem;
+ display:flex;align-items:flex-start;gap:1rem;
+ background:rgba(201,169,98,0.08);
+ border:1px solid var(--border-gold);
+ border-radius:var(--radius);padding:1.2rem 1.5rem;
 }
 .receive-icon{font-size:1.4rem;flex-shrink:0;margin-top:0.1rem;}
 .receive-text h4{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.1rem;color:var(--text-light);margin-bottom:0.3rem;
+ font-family:'Cormorant Garamond',serif;
+ font-size:1.1rem;color:var(--text-light);margin-bottom:0.3rem;
 }
 .receive-text p{font-size:0.88rem;margin:0;}
 
 .pricing-section{
-  background:linear-gradient(135deg, rgba(201,169,98,0.08) 0%, rgba(37,211,102,0.06) 100%);
-  border:1px solid var(--border-gold);
-  border-radius:20px;
-  padding:3rem 2.5rem;
-  text-align:center;margin:4rem 0;
+ background:linear-gradient(135deg, rgba(201,169,98,0.08) 0%, rgba(37,211,102,0.06) 100%);
+ border:1px solid var(--border-gold);
+ border-radius:20px;
+ padding:3rem 2.5rem;
+ text-align:center;margin:4rem 0;
 }
 .pricing-section h2{
-  font-size:clamp(1.6rem,3vw,2.2rem);
-  color:var(--text-light);margin-bottom:0.5rem;
+ font-size:clamp(1.6rem,3vw,2.2rem);
+ color:var(--text-light);margin-bottom:0.5rem;
 }
 .price-tag{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(3.5rem,8vw,5rem);font-weight:700;
-  color:var(--gold);line-height:1;margin:1rem 0;
+ font-family:'Cormorant Garamond',serif;
+ font-size:clamp(3.5rem,8vw,5rem);font-weight:700;
+ color:var(--gold);line-height:1;margin:1rem 0;
 }
 .price-tag{display:flex;align-items:baseline;justify-content:center;gap:0.25rem;}
 .price-tag span{font-size:1.2rem;font-weight:600;letter-spacing:1px;}
@@ -281,203 +281,203 @@ nav{
 .price-note{font-size:0.78rem;color:var(--text-dim);margin-top:1rem;}
 
 .wa-btn{
-  display:inline-flex;align-items:center;gap:0.6rem;
-  background:var(--green);color:#fff;
-  padding:1rem 2.2rem;border-radius:999px;
-  font-weight:600;font-size:0.95rem;
-  transition:opacity 0.2s,transform 0.2s;cursor:pointer;border:none;
+ display:inline-flex;align-items:center;gap:0.6rem;
+ background:var(--green);color:#fff;
+ padding:1rem 2.2rem;border-radius:999px;
+ font-weight:600;font-size:0.95rem;
+ transition:opacity 0.2s,transform 0.2s;cursor:pointer;border:none;
 }
 .wa-btn:hover{opacity:0.88;transform:translateY(-2px);}
 
 footer{
-  border-top:1px solid rgba(201,169,98,0.1);
-  padding:2.5rem 1.5rem;text-align:center;
+ border-top:1px solid rgba(201,169,98,0.1);
+ padding:2.5rem 1.5rem;text-align:center;
 }
 footer p{font-size:0.82rem;color:var(--text-dim);}
 footer a{color:var(--gold);}
 
 @media(max-width:640px){
-  nav{padding:0.8rem 1.2rem;}
-  .nav-logo{font-size:2.4rem;}
-  .content{padding:3rem 1.2rem;}
-  .pricing-section{padding:2rem 1.5rem;}
-  .question-grid{grid-template-columns:1fr;}
+ nav{padding:0.8rem 1.2rem;}
+ .nav-logo{font-size:2.4rem;}
+ .content{padding:3rem 1.2rem;}
+ .pricing-section{padding:2rem 1.5rem;}
+ .question-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="index_v3.html" class="nav-logo">Sorbi <span class="star">✦</span></a>
-  <a href="index_v3.html" class="nav-back">← Ana Sayfa</a>
+ <a href="index_v3.html" class="nav-logo">Sorbi <span class="star">✦</span></a>
+ <a href="index_v3.html" class="nav-back">← Ana Sayfa</a>
 </nav>
 
 <section class="hero">
-  <div class="hero-badges">
-    <span class="hero-badge">✦ Soru Astrolojisi</span>
-    <span class="delivery-badge">⚡ 2 Saatte Teslim</span>
-  </div>
-  <h1>Horary:<br><em>Bir Soru, Bir Harita</em></h1>
-  <p class="hero-subtitle">
-    Tek bir sorun var ve net bir cevap istiyorsun. Soruyu sorduğun anda çizilen harita, cevabı içinde taşır. 2 saat içinde yanın.
-  </p>
-  <div class="clock-deco">
-    <div class="clock-center"></div>
-  </div>
-  <p class="clock-label">2 SAAT İÇİNDE TESLİM</p>
+ <div class="hero-badges">
+ <span class="hero-badge">✦ Soru Astrolojisi</span>
+ <span class="delivery-badge"> 2 Saatte Teslim</span>
+ </div>
+ <h1>Horary:<br><em>Bir Soru, Bir Harita</em></h1>
+ <p class="hero-subtitle">
+ Tek bir sorun var ve net bir cevap istiyorsun. Soruyu sorduğun anda çizilen harita, cevabı içinde taşır. 2 saat içinde yanın.
+ </p>
+ <div class="clock-deco">
+ <div class="clock-center"></div>
+ </div>
+ <p class="clock-label">2 SAAT İÇİNDE TESLİM</p>
 </section>
 
 <div class="content">
 
-  <div class="section">
-    <div class="section-label">Horary Nedir?</div>
-    <h2>Sorunun Sorulduğu Anın Haritası</h2>
-    <p>
-      Horary astroloji, astrolojinin en eski ve en kesin dallarından biridir. Latince "hora" — saat — kelimesinden gelir. Temel prensibi basittir ama derinden etkileyicidir: Bir soru gerçekten ve içtenlikle sorulduğunda, o anın gökyüzü haritası sorunun cevabını içinde taşır.
-    </p>
-    <p>
-      Yüzyıllarca bu teknik hakim kararlarında, tıbbi teşhislerde, kayıp eşyaları bulmada ve önemli yaşam sorularını yanıtlamada kullanılmıştır. William Lilly'nin 17. yüzyıldaki "Christian Astrology" adlı eseri, horary'nin altın çağını belgeler — ve bugün hala geçerliliğini korur.
-    </p>
-    <p>
-      Modern natal astrolojiden farklı olarak horary, doğum saatine ihtiyaç duymaz. İhtiyacı olan tek şey sorunun sorulduğu yer ve zaman. Bu özellik onu, doğum bilgisi olmayan kişiler için de son derece değerli kılar.
-    </p>
-    <p>
-      Horary'nin en güçlü özelliği, karmaşık yoruma gerek bırakmadan net cevaplar sunabilmesidir. Belirli teknik kurallar çerçevesinde haritayı okuyan deneyimli bir astroloji, "evet ya da hayır", "bu gerçekleşir mi", "ne zaman olur" gibi spesifik sorulara yanıt verebilir.
-    </p>
+ <div class="section">
+ <div class="section-label">Horary Nedir?</div>
+ <h2>Sorunun Sorulduğu Anın Haritası</h2>
+ <p>
+ Horary astroloji, astrolojinin en eski ve en kesin dallarından biridir. Latince "hora" — saat — kelimesinden gelir. Temel prensibi basittir ama derinden etkileyicidir: Bir soru gerçekten ve içtenlikle sorulduğunda, o anın gökyüzü haritası sorunun cevabını içinde taşır.
+ </p>
+ <p>
+ Yüzyıllarca bu teknik hakim kararlarında, tıbbi teşhislerde, kayıp eşyaları bulmada ve önemli yaşam sorularını yanıtlamada kullanılmıştır. William Lilly'nin 17. yüzyıldaki "Christian Astrology" adlı eseri, horary'nin altın çağını belgeler — ve bugün hala geçerliliğini korur.
+ </p>
+ <p>
+ Modern natal astrolojiden farklı olarak horary, doğum saatine ihtiyaç duymaz. İhtiyacı olan tek şey sorunun sorulduğu yer ve zaman. Bu özellik onu, doğum bilgisi olmayan kişiler için de son derece değerli kılar.
+ </p>
+ <p>
+ Horary'nin en güçlü özelliği, karmaşık yoruma gerek bırakmadan net cevaplar sunabilmesidir. Belirli teknik kurallar çerçevesinde haritayı okuyan deneyimli bir astroloji, "evet ya da hayır", "bu gerçekleşir mi", "ne zaman olur" gibi spesifik sorulara yanıt verebilir.
+ </p>
 
-    <div class="quote-block">
-      <p>"Doğru zamanda sorulan doğru soru, cevabını yıldızlarda zaten taşır. Horary yalnızca onu okumaktır."</p>
-    </div>
-  </div>
+ <div class="quote-block">
+ <p>"Doğru zamanda sorulan doğru soru, cevabını yıldızlarda zaten taşır. Horary yalnızca onu okumaktır."</p>
+ </div>
+ </div>
 
-  <div class="section">
-    <div class="section-label">Sorular</div>
-    <h2>Hangi Sorular İşe Yarar?</h2>
-    <p>
-      Horary her tür soru için uygun değildir. En iyi sonuçları, gerçekten merak edilen, içten gelen ve spesifik olan sorular verir. İşte hangi soruların güçlü haritalar ürettiği ve hangilerinin zayıf kaldığı:
-    </p>
-    <div class="question-grid">
-      <div class="question-card good">
-        <h4>✓ İyi Horary Soruları</h4>
-        <ul>
-          <li>Bu işi alacak mıyım?</li>
-          <li>Şu an bulunduğum ilişki ilerleyecek mi?</li>
-          <li>Kaybettiğim nesneyi bulabilir miyim?</li>
-          <li>Bu yatırım kazançlı olacak mı?</li>
-          <li>X kişisi beni seviyor mu?</li>
-          <li>Bu eve taşınmalı mıyım?</li>
-          <li>Muayene sonucu ciddi mi?</li>
-        </ul>
-      </div>
-      <div class="question-card avoid">
-        <h4>◈ Zayıf Kalan Sorular</h4>
-        <ul>
-          <li>Hayatımda ne olacak? (Çok geniş)</li>
-          <li>Hangi birini seçmeliyim? (Çok belirsiz)</li>
-          <li>Mutlu olacak mıyım? (Tanımsız)</li>
-          <li>Pişmanlık duyar mıyım? (Soyut)</li>
-          <li>Eğlence amaçlı sorular</li>
-          <li>Başkalarını test etme amaçlı</li>
-        </ul>
-      </div>
-    </div>
-    <p style="margin-top:1.5rem;">
-      Sorun bu kriterlere uygun olup olmadığından emin değilsen, WhatsApp üzerinden soruyu paylaşabilirsin. Defne, horary için uygun olup olmadığını değerlendirir ve gerekirse soruyu birlikte yeniden çerçevelersiniz.
-    </p>
-  </div>
+ <div class="section">
+ <div class="section-label">Sorular</div>
+ <h2>Hangi Sorular İşe Yarar?</h2>
+ <p>
+ Horary her tür soru için uygun değildir. En iyi sonuçları, gerçekten merak edilen, içten gelen ve spesifik olan sorular verir. İşte hangi soruların güçlü haritalar ürettiği ve hangilerinin zayıf kaldığı:
+ </p>
+ <div class="question-grid">
+ <div class="question-card good">
+ <h4>✓ İyi Horary Soruları</h4>
+ <ul>
+ <li>Bu işi alacak mıyım?</li>
+ <li>Şu an bulunduğum ilişki ilerleyecek mi?</li>
+ <li>Kaybettiğim nesneyi bulabilir miyim?</li>
+ <li>Bu yatırım kazançlı olacak mı?</li>
+ <li>X kişisi beni seviyor mu?</li>
+ <li>Bu eve taşınmalı mıyım?</li>
+ <li>Muayene sonucu ciddi mi?</li>
+ </ul>
+ </div>
+ <div class="question-card avoid">
+ <h4>◈ Zayıf Kalan Sorular</h4>
+ <ul>
+ <li>Hayatımda ne olacak? (Çok geniş)</li>
+ <li>Hangi birini seçmeliyim? (Çok belirsiz)</li>
+ <li>Mutlu olacak mıyım? (Tanımsız)</li>
+ <li>Pişmanlık duyar mıyım? (Soyut)</li>
+ <li>Eğlence amaçlı sorular</li>
+ <li>Başkalarını test etme amaçlı</li>
+ </ul>
+ </div>
+ </div>
+ <p style="margin-top:1.5rem;">
+ Sorun bu kriterlere uygun olup olmadığından emin değilsen, WhatsApp üzerinden soruyu paylaşabilirsin. Defne, horary için uygun olup olmadığını değerlendirir ve gerekirse soruyu birlikte yeniden çerçevelersiniz.
+ </p>
+ </div>
 
-  <hr class="divider">
+ <hr class="divider">
 
-  <div class="section">
-    <div class="section-label">Nasıl Çalışır?</div>
-    <h2>2 Saatte Cevabına Ulaş</h2>
-    <p>
-      Horary seansı son derece hızlı ve pratik bir süreçtir. Uzun görüşmeler ya da doğum bilgisi gerekmez. Tek ihtiyacın soruyu netleştirmek ve göndermek.
-    </p>
-    <div class="how-steps">
-      <div class="how-step">
-        <div class="step-num">1</div>
-        <div class="step-content">
-          <h4>Soruyu Gönder</h4>
-          <p>WhatsApp üzerinden sorunuzu net bir şekilde yazın. "Bu işi alacak mıyım?", "A ile B arasında hangisini seçmeliyim?" gibi. Soruyu gönderdiğiniz an, haritanın başlangıç noktası olur.</p>
-        </div>
-      </div>
-      <div class="how-step">
-        <div class="step-num">2</div>
-        <div class="step-content">
-          <h4>Harita Çizilir</h4>
-          <p>Defne, soruyu aldığı anın tam koordinatlarıyla horary haritasını çizer. Swiss Ephemeris destekli yazılım milimetrik hassasiyetle hesaplar. Haritanın teknik analizi başlar.</p>
-        </div>
-      </div>
-      <div class="how-step">
-        <div class="step-num">3</div>
-        <div class="step-content">
-          <h4>2 Saat İçinde Yanıt</h4>
-          <p>Soruyu aldıktan en fazla 2 saat içinde yanıt WhatsApp üzerinden iletilir. Yanıt: harita görseli + sesli veya yazılı yorum + varsa zamanlama bilgisi içerir.</p>
-        </div>
-      </div>
-    </div>
+ <div class="section">
+ <div class="section-label">Nasıl Çalışır?</div>
+ <h2>2 Saatte Cevabına Ulaş</h2>
+ <p>
+ Horary seansı son derece hızlı ve pratik bir süreçtir. Uzun görüşmeler ya da doğum bilgisi gerekmez. Tek ihtiyacın soruyu netleştirmek ve göndermek.
+ </p>
+ <div class="how-steps">
+ <div class="how-step">
+ <div class="step-num">1</div>
+ <div class="step-content">
+ <h4>Soruyu Gönder</h4>
+ <p>WhatsApp üzerinden sorunuzu net bir şekilde yazın. "Bu işi alacak mıyım?", "A ile B arasında hangisini seçmeliyim?" gibi. Soruyu gönderdiğiniz an, haritanın başlangıç noktası olur.</p>
+ </div>
+ </div>
+ <div class="how-step">
+ <div class="step-num">2</div>
+ <div class="step-content">
+ <h4>Harita Çizilir</h4>
+ <p>Defne, soruyu aldığı anın tam koordinatlarıyla horary haritasını çizer. Swiss Ephemeris destekli yazılım milimetrik hassasiyetle hesaplar. Haritanın teknik analizi başlar.</p>
+ </div>
+ </div>
+ <div class="how-step">
+ <div class="step-num">3</div>
+ <div class="step-content">
+ <h4>2 Saat İçinde Yanıt</h4>
+ <p>Soruyu aldıktan en fazla 2 saat içinde yanıt WhatsApp üzerinden iletilir. Yanıt: harita görseli + sesli veya yazılı yorum + varsa zamanlama bilgisi içerir.</p>
+ </div>
+ </div>
+ </div>
 
-    <div class="example-block">
-      <h4>✦ Gerçek Horary Örneği</h4>
-      <p>
-        Bir danışanım bana şu soruyu sordu: "Başvurduğum şirketten olumlu dönüş alacak mıyım?" Soruyu gönderdiği andaki haritaya baktığımda, 10. ev lordu (kariyer ve işveren) ile 1. ev lordu (danışanın kendisi) güçlü bir üçgen açı kuruyordu — bu iki lord arasındaki akış iş teklifini işaret eder. Üstelik Ay (anlık akışın göstergesi) her iki lorda da olumlu açıyla yaklaşıyordu. Cevabım netti: "Evet, olumlu dönüş alacaksın. Olası zaman dilimi: 10 gün içinde." 8 gün sonra danışanım işe alındığını bildirdi.
-      </p>
-    </div>
-  </div>
+ <div class="example-block">
+ <h4>✦ Gerçek Horary Örneği</h4>
+ <p>
+ Bir danışanım bana şu soruyu sordu: "Başvurduğum şirketten olumlu dönüş alacak mıyım?" Soruyu gönderdiği andaki haritaya baktığımda, 10. ev lordu (kariyer ve işveren) ile 1. ev lordu (danışanın kendisi) güçlü bir üçgen açı kuruyordu — bu iki lord arasındaki akış iş teklifini işaret eder. Üstelik Ay (anlık akışın göstergesi) her iki lorda da olumlu açıyla yaklaşıyordu. Cevabım netti: "Evet, olumlu dönüş alacaksın. Olası zaman dilimi: 10 gün içinde." 8 gün sonra danışanım işe alındığını bildirdi.
+ </p>
+ </div>
+ </div>
 
-  <div class="section">
-    <div class="section-label">Ne Alırsın?</div>
-    <h2>Horary Seansında Sana Verilen</h2>
-    <div class="receive-list">
-      <div class="receive-item">
-        <div class="receive-icon">⏱</div>
-        <div class="receive-text">
-          <h4>2 Saat İçinde Yanıt Garantisi</h4>
-          <p>Soruyu gönderdikten en geç 2 saat içinde cevabın iletilir. Acele durumlarda bile güvenilir bir süre. (Gece 23:00–08:00 saatleri arası gönderilen sorular sabah öncelikli olarak yanıtlanır.)</p>
-        </div>
-      </div>
-      <div class="receive-item">
-        <div class="receive-icon">🗺</div>
-        <div class="receive-text">
-          <h4>Horary Harita Görseli</h4>
-          <p>Sorunun sorulduğu ana ait harita görseli PDF olarak paylaşılır. İstersen saklayabilir ya da ilerleyen dönemde referans alabilirsin.</p>
-        </div>
-      </div>
-      <div class="receive-item">
-        <div class="receive-icon">🎙</div>
-        <div class="receive-text">
-          <h4>Sesli veya Yazılı Yorum</h4>
-          <p>Cevabın nedeni açıklanır — sadece "evet/hayır" değil, neden böyle göründüğü de anlatılır. Haritadaki hangi göstergeler bu sonuca işaret ediyor, bunu da bilirsin.</p>
-        </div>
-      </div>
-      <div class="receive-item">
-        <div class="receive-icon">📅</div>
-        <div class="receive-text">
-          <h4>Zamanlama (Varsa)</h4>
-          <p>Harita zamanlamaya dair bilgi taşıyorsa, beklenen zaman dilimi de paylaşılır. Her harita zamanlama veremez — ama verebiliyorsa mutlaka belirtilir.</p>
-        </div>
-      </div>
-    </div>
-  </div>
+ <div class="section">
+ <div class="section-label">Ne Alırsın?</div>
+ <h2>Horary Seansında Sana Verilen</h2>
+ <div class="receive-list">
+ <div class="receive-item">
+ <div class="receive-icon">⏱</div>
+ <div class="receive-text">
+ <h4>2 Saat İçinde Yanıt Garantisi</h4>
+ <p>Soruyu gönderdikten en geç 2 saat içinde cevabın iletilir. Acele durumlarda bile güvenilir bir süre. (Gece 23:00–08:00 saatleri arası gönderilen sorular sabah öncelikli olarak yanıtlanır.)</p>
+ </div>
+ </div>
+ <div class="receive-item">
+ <div class="receive-icon"></div>
+ <div class="receive-text">
+ <h4>Horary Harita Görseli</h4>
+ <p>Sorunun sorulduğu ana ait harita görseli PDF olarak paylaşılır. İstersen saklayabilir ya da ilerleyen dönemde referans alabilirsin.</p>
+ </div>
+ </div>
+ <div class="receive-item">
+ <div class="receive-icon"></div>
+ <div class="receive-text">
+ <h4>Sesli veya Yazılı Yorum</h4>
+ <p>Cevabın nedeni açıklanır — sadece "evet/hayır" değil, neden böyle göründüğü de anlatılır. Haritadaki hangi göstergeler bu sonuca işaret ediyor, bunu da bilirsin.</p>
+ </div>
+ </div>
+ <div class="receive-item">
+ <div class="receive-icon"></div>
+ <div class="receive-text">
+ <h4>Zamanlama (Varsa)</h4>
+ <p>Harita zamanlamaya dair bilgi taşıyorsa, beklenen zaman dilimi de paylaşılır. Her harita zamanlama veremez — ama verebiliyorsa mutlaka belirtilir.</p>
+ </div>
+ </div>
+ </div>
+ </div>
 
-  <hr class="divider">
+ <hr class="divider">
 
-  <div class="pricing-section">
-    <h2>Horary Ücreti</h2>
-    <div class="price-tag">350<span>TL</span></div>
-    <p>Tek soru + harita görseli + sesli/yazılı yorum + varsa zamanlama. 2 saat içinde teslim.</p>
-    <a href="https://wa.me/905434309702?text=Merhaba%20Defne!%20Akl%C4%B1mda%20yan%C4%B1t%20arad%C4%B1%C4%9F%C4%B1m%20bir%20sorum%20var%2C%20horary%20harita%20bakt%C4%B1rmak%20istiyorum.%20Bilgi%20alabilir%20miyim%3F" class="wa-btn">
-      <svg viewBox="0 0 32 32" width="17" height="17" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.837.744 5.497 2.044 7.8L0 32l8.4-2.003C10.643 31.283 13.27 32 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.07 22.587c-.338.952-1.968 1.82-2.729 1.936-.698.104-1.583.148-2.554-.16-.588-.19-1.343-.444-2.31-.87-4.065-1.757-6.72-5.863-6.924-6.136-.205-.273-1.666-2.218-1.666-4.23 0-2.012 1.054-3 1.428-3.41.375-.41.82-.512 1.092-.512.273 0 .547.002.787.014.252.013.59-.095.923.705.338.82 1.15 2.83 1.252 3.035.103.205.171.444.034.718-.137.273-.205.444-.41.684-.205.24-.43.537-.615.72-.205.205-.42.43-.18.843.24.41 1.067 1.762 2.29 2.855 1.573 1.402 2.9 1.835 3.31 2.04.41.205.65.171.89-.103.24-.273 1.025-1.196 1.298-1.606.272-.41.545-.342.922-.205.375.137 2.39 1.128 2.8 1.333.41.205.683.308.786.478.103.17.103.985-.235 1.937z"/></svg>
-      WhatsApp'tan Soru Gönder
-    </a>
-    <p class="price-note">Ücret ödeme teyidinin ardından soru değerlendirmeye alınır. Gece 23:00–08:00 arası gönderilen sorular sabah yanıtlanır.</p>
-  </div>
+ <div class="pricing-section">
+ <h2>Horary Ücreti</h2>
+ <div class="price-tag">350<span>TL</span></div>
+ <p>Tek soru + harita görseli + sesli/yazılı yorum + varsa zamanlama. 2 saat içinde teslim.</p>
+ <a href="https://wa.me/905434309702?text=Merhaba%20Defne!%20Akl%C4%B1mda%20yan%C4%B1t%20arad%C4%B1%C4%9F%C4%B1m%20bir%20sorum%20var%2C%20horary%20harita%20bakt%C4%B1rmak%20istiyorum.%20Bilgi%20alabilir%20miyim%3F" class="wa-btn">
+ <svg viewBox="0 0 32 32" width="17" height="17" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.837.744 5.497 2.044 7.8L0 32l8.4-2.003C10.643 31.283 13.27 32 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.07 22.587c-.338.952-1.968 1.82-2.729 1.936-.698.104-1.583.148-2.554-.16-.588-.19-1.343-.444-2.31-.87-4.065-1.757-6.72-5.863-6.924-6.136-.205-.273-1.666-2.218-1.666-4.23 0-2.012 1.054-3 1.428-3.41.375-.41.82-.512 1.092-.512.273 0 .547.002.787.014.252.013.59-.095.923.705.338.82 1.15 2.83 1.252 3.035.103.205.171.444.034.718-.137.273-.205.444-.41.684-.205.24-.43.537-.615.72-.205.205-.42.43-.18.843.24.41 1.067 1.762 2.29 2.855 1.573 1.402 2.9 1.835 3.31 2.04.41.205.65.171.89-.103.24-.273 1.025-1.196 1.298-1.606.272-.41.545-.342.922-.205.375.137 2.39 1.128 2.8 1.333.41.205.683.308.786.478.103.17.103.985-.235 1.937z"/></svg>
+ WhatsApp'tan Soru Gönder
+ </a>
+ <p class="price-note">Ücret ödeme teyidinin ardından soru değerlendirmeye alınır. Gece 23:00–08:00 arası gönderilen sorular sabah yanıtlanır.</p>
+ </div>
 
 </div>
 
 <footer>
-  <p>© 2025 Sorbi — <a href="index_v3.html">Ana Sayfaya Dön</a></p>
+ <p>© 2025 Sorbi — <a href="index_v3.html">Ana Sayfaya Dön</a></p>
 </footer>
 
 </body>

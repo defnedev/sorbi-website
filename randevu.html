@@ -29,14 +29,14 @@ html{scroll-behavior:smooth;font-size:16px;}
 body{font-family:'Inter',sans-serif;background:#0B0E15;color:#F6F1E7;min-height:100vh;}
 a{text-decoration:none;color:inherit;}
 :root{
-  --dark:#0B0E15; --dark2:#1B1F2B;
-  --gold:#C9A962; --gold-light:#E6CF8A; --gold-deep:#9A7E33;
-  --gold2:rgba(201,169,98,0.12); --gold3:rgba(201,169,98,0.28);
-  --light:#F6F1E7; --warm:#EFE8DA;
-  --green:#25D366;
-  --text-light:#F6F1E7; --text-muted:rgba(244,240,228,0.6); --text-dim:rgba(244,240,228,0.36);
-  --border-gold:rgba(201,169,98,0.22);
-  --radius:12px; --radius-lg:20px;
+ --dark:#0B0E15; --dark2:#1B1F2B;
+ --gold:#C9A962; --gold-light:#E6CF8A; --gold-deep:#9A7E33;
+ --gold2:rgba(201,169,98,0.12); --gold3:rgba(201,169,98,0.28);
+ --light:#F6F1E7; --warm:#EFE8DA;
+ --green:#25D366;
+ --text-light:#F6F1E7; --text-muted:rgba(244,240,228,0.6); --text-dim:rgba(244,240,228,0.36);
+ --border-gold:rgba(201,169,98,0.22);
+ --radius:12px; --radius-lg:20px;
 }
 h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.15;}
 
@@ -159,370 +159,370 @@ main{padding-top:5rem;min-height:100vh;}
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">Sorbi<span>✦</span></a>
-  <a href="index.html" class="nav-back">← Ana Sayfa</a>
+ <a href="index.html" class="nav-logo">Sorbi<span>✦</span></a>
+ <a href="index.html" class="nav-back">← Ana Sayfa</a>
 </nav>
 
 <main>
-  <div class="page-header">
-    <span class="eyebrow">Randevu</span>
-    <h1>Seans rezervasyonu yap</h1>
-    <p>Müsait bir gün ve saat seç, bilgilerini gir. Defne onaylayınca bildirim alırsın.</p>
-  </div>
+ <div class="page-header">
+ <span class="eyebrow">Randevu</span>
+ <h1>Seans rezervasyonu yap</h1>
+ <p>Müsait bir gün ve saat seç, bilgilerini gir. Defne onaylayınca bildirim alırsın.</p>
+ </div>
 
-  <!-- Booking UI -->
-  <div class="booking-wrap" id="booking-ui">
+ <!-- Booking UI -->
+ <div class="booking-wrap" id="booking-ui">
 
-    <!-- Sol: Takvim + Slotlar -->
-    <div>
-      <div class="calendar-panel">
-        <div class="cal-header">
-          <button class="cal-nav-btn" id="prev-month">‹</button>
-          <h3 id="cal-title">Yükleniyor…</h3>
-          <button class="cal-nav-btn" id="next-month">›</button>
-        </div>
-        <div class="cal-weekdays">
-          <div class="cal-weekday">Pzt</div>
-          <div class="cal-weekday">Sal</div>
-          <div class="cal-weekday">Çar</div>
-          <div class="cal-weekday">Per</div>
-          <div class="cal-weekday">Cum</div>
-          <div class="cal-weekday">Cmt</div>
-          <div class="cal-weekday">Paz</div>
-        </div>
-        <div class="cal-grid" id="cal-grid"></div>
+ <!-- Sol: Takvim + Slotlar -->
+ <div>
+ <div class="calendar-panel">
+ <div class="cal-header">
+ <button class="cal-nav-btn" id="prev-month">‹</button>
+ <h3 id="cal-title">Yükleniyor…</h3>
+ <button class="cal-nav-btn" id="next-month">›</button>
+ </div>
+ <div class="cal-weekdays">
+ <div class="cal-weekday">Pzt</div>
+ <div class="cal-weekday">Sal</div>
+ <div class="cal-weekday">Çar</div>
+ <div class="cal-weekday">Per</div>
+ <div class="cal-weekday">Cum</div>
+ <div class="cal-weekday">Cmt</div>
+ <div class="cal-weekday">Paz</div>
+ </div>
+ <div class="cal-grid" id="cal-grid"></div>
 
-        <!-- Saat seçimi -->
-        <div class="slots-panel" id="slots-panel" style="display:none;">
-          <div class="slots-panel-header">
-            <h4>Saat seç</h4>
-            <span class="selected-date-label" id="selected-date-label"></span>
-          </div>
-          <div class="slots-grid" id="slots-grid"></div>
-        </div>
-      </div>
+ <!-- Saat seçimi -->
+ <div class="slots-panel" id="slots-panel" style="display:none;">
+ <div class="slots-panel-header">
+ <h4>Saat seç</h4>
+ <span class="selected-date-label" id="selected-date-label"></span>
+ </div>
+ <div class="slots-grid" id="slots-grid"></div>
+ </div>
+ </div>
 
-      <!-- Durum sorgulama -->
-      <div class="status-check">
-        <h3>Mevcut randevunu sorgula</h3>
-        <div class="status-input-row">
-          <input type="number" id="status-id-input" placeholder="Randevu ID numarası">
-          <button class="btn-check" onclick="checkStatus()">Sorgula</button>
-        </div>
-        <div class="status-result" id="status-result"></div>
-      </div>
-    </div>
+ <!-- Durum sorgulama -->
+ <div class="status-check">
+ <h3>Mevcut randevunu sorgula</h3>
+ <div class="status-input-row">
+ <input type="number" id="status-id-input" placeholder="Randevu ID numarası">
+ <button class="btn-check" onclick="checkStatus()">Sorgula</button>
+ </div>
+ <div class="status-result" id="status-result"></div>
+ </div>
+ </div>
 
-    <!-- Sağ: Form -->
-    <div class="form-panel">
-      <h3>Randevu Bilgileri</h3>
-      <p style="font-size:0.8rem;color:var(--text-dim);margin-bottom:1rem;">Lütfen önce takvimden gün ve saat seçin.</p>
+ <!-- Sağ: Form -->
+ <div class="form-panel">
+ <h3>Randevu Bilgileri</h3>
+ <p style="font-size:0.8rem;color:var(--text-dim);margin-bottom:1rem;">Lütfen önce takvimden gün ve saat seçin.</p>
 
-      <div class="selected-summary" id="selected-summary">
-        <strong>Seçilen Tarih & Saat</strong>
-        <span id="summary-datetime">—</span>
-      </div>
+ <div class="selected-summary" id="selected-summary">
+ <strong>Seçilen Tarih & Saat</strong>
+ <span id="summary-datetime">—</span>
+ </div>
 
-      <span class="svc-label">Hizmet</span>
-      <div class="service-select" id="service-select">
-        <button class="svc-btn" data-svc="natal-harita">Natal Harita</button>
-        <button class="svc-btn" data-svc="sinastri">Sinastri</button>
-        <button class="svc-btn" data-svc="tarot">Tarot Açılımı</button>
-        <button class="svc-btn" data-svc="horary">Horary</button>
-        <button class="svc-btn" data-svc="yasam-donguleri">Yaşam Döngüleri</button>
-        <button class="svc-btn" data-svc="sorbi-ongorisu">Sorbi Öngörüsü</button>
-      </div>
+ <span class="svc-label">Hizmet</span>
+ <div class="service-select" id="service-select">
+ <button class="svc-btn" data-svc="natal-harita">Natal Harita</button>
+ <button class="svc-btn" data-svc="sinastri">Sinastri</button>
+ <button class="svc-btn" data-svc="tarot">Tarot Açılımı</button>
+ <button class="svc-btn" data-svc="horary">Horary</button>
+ <button class="svc-btn" data-svc="yasam-donguleri">Yaşam Döngüleri</button>
+ <button class="svc-btn" data-svc="sorbi-ongorisu">Sorbi Öngörüsü</button>
+ </div>
 
-      <div class="fg"><label>Ad Soyad *</label><input type="text" id="f-name" placeholder="Adın ve soyadın"></div>
-      <div class="fg"><label>Telefon *</label><input type="tel" id="f-phone" placeholder="+90 5XX XXX XX XX"></div>
-      <div class="fg"><label>Email <span style="opacity:0.5">(isteğe bağlı)</span></label><input type="email" id="f-email" placeholder="onay için email"></div>
-      <div class="fg"><label>Not <span style="opacity:0.5">(isteğe bağlı)</span></label><textarea id="f-notes" placeholder="Danışmak istediğin konu veya sorular…"></textarea></div>
+ <div class="fg"><label>Ad Soyad *</label><input type="text" id="f-name" placeholder="Adın ve soyadın"></div>
+ <div class="fg"><label>Telefon *</label><input type="tel" id="f-phone" placeholder="+90 5XX XXX XX XX"></div>
+ <div class="fg"><label>Email <span style="opacity:0.5">(isteğe bağlı)</span></label><input type="email" id="f-email" placeholder="onay için email"></div>
+ <div class="fg"><label>Not <span style="opacity:0.5">(isteğe bağlı)</span></label><textarea id="f-notes" placeholder="Danışmak istediğin konu veya sorular…"></textarea></div>
 
-      <button class="btn-submit" id="submit-btn" onclick="submitBooking()">Randevu Talep Et ✦</button>
-      <p class="form-note">Talebiniz Defne'ye iletilir. Onay sonrası bildirim alırsınız.</p>
-    </div>
-  </div>
+ <button class="btn-submit" id="submit-btn" onclick="submitBooking()">Randevu Talep Et ✦</button>
+ <p class="form-note">Talebiniz Defne'ye iletilir. Onay sonrası bildirim alırsınız.</p>
+ </div>
+ </div>
 
-  <!-- Başarı Ekranı (gizli) -->
-  <div id="success-screen" style="display:none;padding:2rem 1.5rem 4rem;">
-    <div class="success-card">
-      <div class="success-icon">✦</div>
-      <h2>Talebiniz Alındı</h2>
-      <p>Randevu talebiniz Defne'ye iletildi. Onay verdiğinde e-posta veya WhatsApp ile haberdar edileceksiniz.</p>
-      <div class="booking-id-badge" id="success-booking-id">Randevu #—</div>
-      <br>
-      <a id="success-wa" href="#" target="_blank" class="btn-wa">
-        <svg viewBox="0 0 32 32" width="16" height="16" fill="white"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.837.744 5.497 2.044 7.8L0 32l8.4-2.003C10.643 31.283 13.27 32 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.07 22.587c-.338.952-1.968 1.82-2.729 1.936-.698.104-1.583.148-2.554-.16-.588-.19-1.343-.444-2.31-.87-4.065-1.757-6.72-5.863-6.924-6.136-.205-.273-1.666-2.218-1.666-4.23 0-2.012 1.054-3 1.428-3.41.375-.41.82-.512 1.092-.512.273 0 .547.002.787.014.252.013.59-.095.923.705.338.82 1.15 2.83 1.252 3.035.103.205.171.444.034.718-.137.273-.205.444-.41.684-.205.24-.43.537-.615.72-.205.205-.42.43-.18.843.24.41 1.067 1.762 2.29 2.855 1.573 1.402 2.9 1.835 3.31 2.04.41.205.65.171.89-.103.24-.273 1.025-1.196 1.298-1.606.272-.41.545-.342.922-.205.375.137 2.39 1.128 2.8 1.333.41.205.683.308.786.478.103.17.103.985-.235 1.937z"/></svg>
-        Defne'ye WhatsApp'tan Yaz
-      </a>
-      <br><br>
-      <button onclick="resetBooking()" style="background:transparent;border:1px solid var(--border-gold);color:var(--text-muted);padding:0.55rem 1.3rem;border-radius:999px;cursor:pointer;font-size:0.82rem;">Yeni Randevu Al</button>
-    </div>
-  </div>
+ <!-- Başarı Ekranı (gizli) -->
+ <div id="success-screen" style="display:none;padding:2rem 1.5rem 4rem;">
+ <div class="success-card">
+ <div class="success-icon">✦</div>
+ <h2>Talebiniz Alındı</h2>
+ <p>Randevu talebiniz Defne'ye iletildi. Onay verdiğinde e-posta veya WhatsApp ile haberdar edileceksiniz.</p>
+ <div class="booking-id-badge" id="success-booking-id">Randevu #—</div>
+ <br>
+ <a id="success-wa" href="#" target="_blank" class="btn-wa">
+ <svg viewBox="0 0 32 32" width="16" height="16" fill="white"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.837.744 5.497 2.044 7.8L0 32l8.4-2.003C10.643 31.283 13.27 32 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.07 22.587c-.338.952-1.968 1.82-2.729 1.936-.698.104-1.583.148-2.554-.16-.588-.19-1.343-.444-2.31-.87-4.065-1.757-6.72-5.863-6.924-6.136-.205-.273-1.666-2.218-1.666-4.23 0-2.012 1.054-3 1.428-3.41.375-.41.82-.512 1.092-.512.273 0 .547.002.787.014.252.013.59-.095.923.705.338.82 1.15 2.83 1.252 3.035.103.205.171.444.034.718-.137.273-.205.444-.41.684-.205.24-.43.537-.615.72-.205.205-.42.43-.18.843.24.41 1.067 1.762 2.29 2.855 1.573 1.402 2.9 1.835 3.31 2.04.41.205.65.171.89-.103.24-.273 1.025-1.196 1.298-1.606.272-.41.545-.342.922-.205.375.137 2.39 1.128 2.8 1.333.41.205.683.308.786.478.103.17.103.985-.235 1.937z"/></svg>
+ Defne'ye WhatsApp'tan Yaz
+ </a>
+ <br><br>
+ <button onclick="resetBooking()" style="background:transparent;border:1px solid var(--border-gold);color:var(--text-muted);padding:0.55rem 1.3rem;border-radius:999px;cursor:pointer;font-size:0.82rem;">Yeni Randevu Al</button>
+ </div>
+ </div>
 </main>
 
 <script>
 // ── Yapılandırma ──────────────────────────────────────────────────────────────
 const API = 'http://localhost:3001';
-const WA  = '905434309702';
+const WA = '905434309702';
 
 // Sabit çalışma saatleri (90 dk bloklar)
 const DEFAULT_SLOTS = ['10:00','11:30','13:00','14:30','16:00','17:30'];
 
-const TR_MONTHS    = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+const TR_MONTHS = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
 const TR_DAYS_LONG = ['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'];
 
 // ── State ─────────────────────────────────────────────────────────────────────
-let currentYear  = new Date().getFullYear();
+let currentYear = new Date().getFullYear();
 let currentMonth = new Date().getMonth() + 1;
-let availability = {};   // {date: slotCount} — backend'den veya offline default
-let apiOnline    = false;
+let availability = {}; // {date: slotCount} — backend'den veya offline default
+let apiOnline = false;
 let selectedDate = null;
 let selectedTime = null;
-let selectedSvc  = null;
+let selectedSvc = null;
 
 // ── Offline Availability ─────────────────────────────────────────────────────
 // Backend yoksa: Pzt-Cmt haftaiçi ve haftası, Pazar hariç tüm gelecek günler müsait
 function offlineAvailability(year, month) {
-  const av = {};
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  const daysInMonth = new Date(year, month, 0).getDate();
-  for (let d = 1; d <= daysInMonth; d++) {
-    const dt = new Date(year, month - 1, d);
-    if (dt < today) continue;           // geçmiş
-    if (dt.getDay() === 0) continue;    // Pazar kapalı
-    const ds = `${year}-${String(month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    av[ds] = DEFAULT_SLOTS.length;
-  }
-  return av;
+ const av = {};
+ const today = new Date();
+ today.setHours(0,0,0,0);
+ const daysInMonth = new Date(year, month, 0).getDate();
+ for (let d = 1; d <= daysInMonth; d++) {
+ const dt = new Date(year, month - 1, d);
+ if (dt < today) continue; // geçmiş
+ if (dt.getDay() === 0) continue; // Pazar kapalı
+ const ds = `${year}-${String(month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+ av[ds] = DEFAULT_SLOTS.length;
+ }
+ return av;
 }
 
 // ── Takvim ───────────────────────────────────────────────────────────────────
 async function loadMonth(year, month) {
-  document.getElementById('cal-title').textContent = `${TR_MONTHS[month-1]} ${year}`;
-  document.getElementById('cal-grid').innerHTML = '';
+ document.getElementById('cal-title').textContent = `${TR_MONTHS[month-1]} ${year}`;
+ document.getElementById('cal-grid').innerHTML = '';
 
-  try {
-    const r = await fetch(`${API}/api/slots?year=${year}&month=${month}`, { signal: AbortSignal.timeout(3000) });
-    if (!r.ok) throw new Error();
-    availability = await r.json();
-    apiOnline = true;
-  } catch {
-    apiOnline = false;
-    availability = offlineAvailability(year, month);
-  }
-  renderCalendar(year, month);
+ try {
+ const r = await fetch(`${API}/api/slots?year=${year}&month=${month}`, { signal: AbortSignal.timeout(3000) });
+ if (!r.ok) throw new Error();
+ availability = await r.json();
+ apiOnline = true;
+ } catch {
+ apiOnline = false;
+ availability = offlineAvailability(year, month);
+ }
+ renderCalendar(year, month);
 }
 
 function renderCalendar(year, month) {
-  const grid    = document.getElementById('cal-grid');
-  grid.innerHTML = '';
+ const grid = document.getElementById('cal-grid');
+ grid.innerHTML = '';
 
-  const today      = new Date(); today.setHours(0,0,0,0);
-  const firstDay   = new Date(year, month - 1, 1);
-  const startOffset = (firstDay.getDay() + 6) % 7; // Pzt = 0
-  const daysInMonth = new Date(year, month, 0).getDate();
+ const today = new Date(); today.setHours(0,0,0,0);
+ const firstDay = new Date(year, month - 1, 1);
+ const startOffset = (firstDay.getDay() + 6) % 7; // Pzt = 0
+ const daysInMonth = new Date(year, month, 0).getDate();
 
-  for (let i = 0; i < startOffset; i++) {
-    const el = document.createElement('div'); el.className = 'cal-day empty'; grid.appendChild(el);
-  }
+ for (let i = 0; i < startOffset; i++) {
+ const el = document.createElement('div'); el.className = 'cal-day empty'; grid.appendChild(el);
+ }
 
-  for (let d = 1; d <= daysInMonth; d++) {
-    const dateStr  = `${year}-${String(month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const cellDate = new Date(year, month - 1, d);
-    const isPast   = cellDate < today;
-    const isSun    = cellDate.getDay() === 0;
-    const isToday  = cellDate.toDateString() === new Date().toDateString();
-    const count    = availability[dateStr] ?? 0;
+ for (let d = 1; d <= daysInMonth; d++) {
+ const dateStr = `${year}-${String(month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+ const cellDate = new Date(year, month - 1, d);
+ const isPast = cellDate < today;
+ const isSun = cellDate.getDay() === 0;
+ const isToday = cellDate.toDateString() === new Date().toDateString();
+ const count = availability[dateStr] ?? 0;
 
-    const el = document.createElement('div');
-    el.className = 'cal-day';
+ const el = document.createElement('div');
+ el.className = 'cal-day';
 
-    if (isPast || isSun)  { el.classList.add(isPast ? 'past' : 'unavailable'); }
-    else if (!count)       { el.classList.add('unavailable'); }
-    else                   { el.classList.add('has-slots'); }
-    if (isToday)           { el.classList.add('today'); }
-    if (selectedDate === dateStr) el.classList.add('selected');
+ if (isPast || isSun) { el.classList.add(isPast ? 'past' : 'unavailable'); }
+ else if (!count) { el.classList.add('unavailable'); }
+ else { el.classList.add('has-slots'); }
+ if (isToday) { el.classList.add('today'); }
+ if (selectedDate === dateStr) el.classList.add('selected');
 
-    const canClick = !isPast && !isSun && count > 0;
-    el.innerHTML = `<span>${d}</span>${canClick ? `<span class="slot-count">${count} saat</span>` : ''}`;
+ const canClick = !isPast && !isSun && count > 0;
+ el.innerHTML = `<span>${d}</span>${canClick ? `<span class="slot-count">${count} saat</span>` : ''}`;
 
-    if (canClick) {
-      el.style.cursor = 'pointer';
-      el.addEventListener('click', () => selectDate(dateStr, el));
-    }
-    grid.appendChild(el);
-  }
+ if (canClick) {
+ el.style.cursor = 'pointer';
+ el.addEventListener('click', () => selectDate(dateStr, el));
+ }
+ grid.appendChild(el);
+ }
 }
 
 async function selectDate(dateStr, el) {
-  selectedDate = dateStr;
-  selectedTime = null;
-  document.querySelectorAll('.cal-day.selected').forEach(e => e.classList.remove('selected'));
-  el.classList.add('selected');
+ selectedDate = dateStr;
+ selectedTime = null;
+ document.querySelectorAll('.cal-day.selected').forEach(e => e.classList.remove('selected'));
+ el.classList.add('selected');
 
-  const d = new Date(dateStr + 'T12:00:00Z');
-  document.getElementById('selected-date-label').textContent =
-    `${d.getUTCDate()} ${TR_MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()} — ${TR_DAYS_LONG[d.getUTCDay()]}`;
+ const d = new Date(dateStr + 'T12:00:00Z');
+ document.getElementById('selected-date-label').textContent =
+ `${d.getUTCDate()} ${TR_MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()} — ${TR_DAYS_LONG[d.getUTCDay()]}`;
 
-  const slotsPanel = document.getElementById('slots-panel');
-  const slotsGrid  = document.getElementById('slots-grid');
-  slotsPanel.style.display = 'block';
-  slotsGrid.innerHTML = '<div class="loading-shimmer" style="height:44px;width:100%;border-radius:8px;"></div>';
+ const slotsPanel = document.getElementById('slots-panel');
+ const slotsGrid = document.getElementById('slots-grid');
+ slotsPanel.style.display = 'block';
+ slotsGrid.innerHTML = '<div class="loading-shimmer" style="height:44px;width:100%;border-radius:8px;"></div>';
 
-  let slots = DEFAULT_SLOTS;
-  if (apiOnline) {
-    try {
-      const r = await fetch(`${API}/api/slots/${dateStr}`, { signal: AbortSignal.timeout(3000) });
-      const data = await r.json();
-      if (data.slots && data.slots.length) slots = data.slots;
-    } catch { /* fallback to defaults */ }
-  }
+ let slots = DEFAULT_SLOTS;
+ if (apiOnline) {
+ try {
+ const r = await fetch(`${API}/api/slots/${dateStr}`, { signal: AbortSignal.timeout(3000) });
+ const data = await r.json();
+ if (data.slots && data.slots.length) slots = data.slots;
+ } catch { /* fallback to defaults */ }
+ }
 
-  renderSlots(slots);
-  updateSummary();
+ renderSlots(slots);
+ updateSummary();
 
-  // Smooth scroll to slots on mobile
-  if (window.innerWidth < 820) {
-    setTimeout(() => slotsPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
-  }
+ // Smooth scroll to slots on mobile
+ if (window.innerWidth < 820) {
+ setTimeout(() => slotsPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+ }
 }
 
 function renderSlots(slots) {
-  const grid = document.getElementById('slots-grid');
-  if (!slots.length) {
-    grid.innerHTML = '<p class="no-slots">Bu gün müsait saat bulunmuyor.</p>';
-    return;
-  }
-  grid.innerHTML = slots.map(s =>
-    `<button class="slot-btn${selectedTime===s?' selected':''}" onclick="selectTime('${s}',this)">
-      <span style="font-size:1rem;">${s}</span>
-      <span style="display:block;font-size:0.62rem;opacity:0.55;margin-top:1px;">90 dk</span>
-    </button>`
-  ).join('');
+ const grid = document.getElementById('slots-grid');
+ if (!slots.length) {
+ grid.innerHTML = '<p class="no-slots">Bu gün müsait saat bulunmuyor.</p>';
+ return;
+ }
+ grid.innerHTML = slots.map(s =>
+ `<button class="slot-btn${selectedTime===s?' selected':''}" onclick="selectTime('${s}',this)">
+ <span style="font-size:1rem;">${s}</span>
+ <span style="display:block;font-size:0.62rem;opacity:0.55;margin-top:1px;">90 dk</span>
+ </button>`
+ ).join('');
 }
 
 function selectTime(time, el) {
-  selectedTime = time;
-  document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
-  el.classList.add('selected');
-  updateSummary();
-  // Formu kaydır
-  setTimeout(() => document.querySelector('.form-panel').scrollIntoView({ behavior:'smooth', block:'nearest' }), 150);
+ selectedTime = time;
+ document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
+ el.classList.add('selected');
+ updateSummary();
+ // Formu kaydır
+ setTimeout(() => document.querySelector('.form-panel').scrollIntoView({ behavior:'smooth', block:'nearest' }), 150);
 }
 
 function updateSummary() {
-  const el = document.getElementById('selected-summary');
-  const dt = document.getElementById('summary-datetime');
-  if (selectedDate && selectedTime) {
-    const d = new Date(selectedDate + 'T12:00:00Z');
-    dt.textContent = `${d.getUTCDate()} ${TR_MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()} — ${selectedTime}`;
-    el.classList.add('visible');
-  } else {
-    el.classList.remove('visible');
-  }
+ const el = document.getElementById('selected-summary');
+ const dt = document.getElementById('summary-datetime');
+ if (selectedDate && selectedTime) {
+ const d = new Date(selectedDate + 'T12:00:00Z');
+ dt.textContent = `${d.getUTCDate()} ${TR_MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()} — ${selectedTime}`;
+ el.classList.add('visible');
+ } else {
+ el.classList.remove('visible');
+ }
 }
 
 // Hizmet seçimi
 document.querySelectorAll('.svc-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.svc-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    selectedSvc = btn.dataset.svc;
-  });
+ btn.addEventListener('click', () => {
+ document.querySelectorAll('.svc-btn').forEach(b => b.classList.remove('selected'));
+ btn.classList.add('selected');
+ selectedSvc = btn.dataset.svc;
+ });
 });
 
 // ── Randevu Gönder ────────────────────────────────────────────────────────────
 async function submitBooking() {
-  if (!selectedDate || !selectedTime) { alert('Lütfen bir tarih ve saat seçin.'); return; }
-  if (!selectedSvc)                   { alert('Lütfen bir hizmet seçin.'); return; }
+ if (!selectedDate || !selectedTime) { alert('Lütfen bir tarih ve saat seçin.'); return; }
+ if (!selectedSvc) { alert('Lütfen bir hizmet seçin.'); return; }
 
-  const name  = document.getElementById('f-name').value.trim();
-  const phone = document.getElementById('f-phone').value.trim();
-  const email = document.getElementById('f-email').value.trim();
-  const notes = document.getElementById('f-notes').value.trim();
+ const name = document.getElementById('f-name').value.trim();
+ const phone = document.getElementById('f-phone').value.trim();
+ const email = document.getElementById('f-email').value.trim();
+ const notes = document.getElementById('f-notes').value.trim();
 
-  if (!name)  { alert('Ad soyad zorunlu.'); return; }
-  if (!phone) { alert('Telefon numarası zorunlu.'); return; }
+ if (!name) { alert('Ad soyad zorunlu.'); return; }
+ if (!phone) { alert('Telefon numarası zorunlu.'); return; }
 
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true; btn.textContent = 'Gönderiliyor…';
+ const btn = document.getElementById('submit-btn');
+ btn.disabled = true; btn.textContent = 'Gönderiliyor…';
 
-  // Backend yoksa WhatsApp'a yönlendir
-  if (!apiOnline) {
-    const d = new Date(selectedDate + 'T12:00:00Z');
-    const dateLabel = `${d.getUTCDate()} ${TR_MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
-    const svcLabels = {'natal-harita':'Natal Harita','sinastri':'Sinastri','tarot':'Tarot Açılımı','horary':'Horary','yasam-donguleri':'Yaşam Döngüleri','sorbi-ongorisu':'Sorbi Öngörüsü'};
-    const waMsg = encodeURIComponent(`Merhaba Defne! Randevu almak istiyorum.\n\nHizmet: ${svcLabels[selectedSvc]||selectedSvc}\nTarih: ${dateLabel}\nSaat: ${selectedTime}\nAd: ${name}\nTelefon: ${phone}${notes?'\nNot: '+notes:''}`);
-    window.open(`https://wa.me/${WA}?text=${waMsg}`, '_blank');
-    btn.disabled = false; btn.textContent = 'Randevu Talep Et ✦';
-    return;
-  }
+ // Backend yoksa WhatsApp'a yönlendir
+ if (!apiOnline) {
+ const d = new Date(selectedDate + 'T12:00:00Z');
+ const dateLabel = `${d.getUTCDate()} ${TR_MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+ const svcLabels = {'natal-harita':'Natal Harita','sinastri':'Sinastri','tarot':'Tarot Açılımı','horary':'Horary','yasam-donguleri':'Yaşam Döngüleri','sorbi-ongorisu':'Sorbi Öngörüsü'};
+ const waMsg = encodeURIComponent(`Merhaba Defne! Randevu almak istiyorum.\n\nHizmet: ${svcLabels[selectedSvc]||selectedSvc}\nTarih: ${dateLabel}\nSaat: ${selectedTime}\nAd: ${name}\nTelefon: ${phone}${notes?'\nNot: '+notes:''}`);
+ window.open(`https://wa.me/${WA}?text=${waMsg}`, '_blank');
+ btn.disabled = false; btn.textContent = 'Randevu Talep Et ✦';
+ return;
+ }
 
-  try {
-    const r = await fetch(`${API}/api/bookings`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ service:selectedSvc, name, phone, email:email||undefined, date:selectedDate, time:selectedTime, notes:notes||undefined })
-    });
-    const data = await r.json();
-    if (!r.ok) throw new Error(data.error || 'Hata oluştu');
-    showSuccess(data.bookingId, name);
-  } catch (e) {
-    alert(e.message);
-    btn.disabled = false; btn.textContent = 'Randevu Talep Et ✦';
-  }
+ try {
+ const r = await fetch(`${API}/api/bookings`, {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify({ service:selectedSvc, name, phone, email:email||undefined, date:selectedDate, time:selectedTime, notes:notes||undefined })
+ });
+ const data = await r.json();
+ if (!r.ok) throw new Error(data.error || 'Hata oluştu');
+ showSuccess(data.bookingId, name);
+ } catch (e) {
+ alert(e.message);
+ btn.disabled = false; btn.textContent = 'Randevu Talep Et ✦';
+ }
 }
 
 function showSuccess(bookingId, name) {
-  document.getElementById('booking-ui').style.display = 'none';
-  document.getElementById('success-screen').style.display = 'block';
-  document.getElementById('success-booking-id').textContent = `Randevu #${bookingId}`;
-  const waMsg = encodeURIComponent(`Merhaba Defne! #${bookingId} numaralı randevu talebimi gönderdim, onayını bekliyorum.`);
-  document.getElementById('success-wa').href = `https://wa.me/${WA}?text=${waMsg}`;
+ document.getElementById('booking-ui').style.display = 'none';
+ document.getElementById('success-screen').style.display = 'block';
+ document.getElementById('success-booking-id').textContent = `Randevu #${bookingId}`;
+ const waMsg = encodeURIComponent(`Merhaba Defne! #${bookingId} numaralı randevu talebimi gönderdim, onayını bekliyorum.`);
+ document.getElementById('success-wa').href = `https://wa.me/${WA}?text=${waMsg}`;
 }
 
 function resetBooking() {
-  document.getElementById('booking-ui').style.display = 'grid';
-  document.getElementById('success-screen').style.display = 'none';
-  selectedDate = selectedTime = selectedSvc = null;
-  ['f-name','f-phone','f-email','f-notes'].forEach(id => document.getElementById(id).value = '');
-  document.querySelectorAll('.svc-btn').forEach(b => b.classList.remove('selected'));
-  document.getElementById('slots-panel').style.display = 'none';
-  document.getElementById('selected-summary').classList.remove('visible');
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = false; btn.textContent = 'Randevu Talep Et ✦';
-  loadMonth(currentYear, currentMonth);
+ document.getElementById('booking-ui').style.display = 'grid';
+ document.getElementById('success-screen').style.display = 'none';
+ selectedDate = selectedTime = selectedSvc = null;
+ ['f-name','f-phone','f-email','f-notes'].forEach(id => document.getElementById(id).value = '');
+ document.querySelectorAll('.svc-btn').forEach(b => b.classList.remove('selected'));
+ document.getElementById('slots-panel').style.display = 'none';
+ document.getElementById('selected-summary').classList.remove('visible');
+ const btn = document.getElementById('submit-btn');
+ btn.disabled = false; btn.textContent = 'Randevu Talep Et ✦';
+ loadMonth(currentYear, currentMonth);
 }
 
 // ── Durum Sorgulama ───────────────────────────────────────────────────────────
 async function checkStatus() {
-  const id = document.getElementById('status-id-input').value.trim();
-  if (!id) { alert('Randevu ID girin.'); return; }
-  const el = document.getElementById('status-result');
-  el.className = 'status-result visible'; el.textContent = 'Sorgulanıyor…';
-  try {
-    const r = await fetch(`${API}/api/bookings/${id}`);
-    if (!r.ok) { el.textContent = 'Randevu bulunamadı.'; return; }
-    const b = await r.json();
-    const d = new Date(b.date + 'T12:00:00Z');
-    const dateLabel = `${d.getUTCDate()} ${TR_MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
-    const statusMap = { pending:'⏳ Onay Bekleniyor', approved:'✅ Onaylandı', rejected:'✗ Reddedildi' };
-    const classMap  = { pending:'status-pending', approved:'status-approved', rejected:'status-rejected' };
-    el.className = `status-result visible ${classMap[b.status]}`;
-    el.innerHTML = `<strong>#${b.id} — ${b.name}</strong><br>${dateLabel} / ${b.time}<br><span style="font-size:0.78rem;">${statusMap[b.status]}</span>`;
-  } catch { el.textContent = 'Bağlantı hatası.'; }
+ const id = document.getElementById('status-id-input').value.trim();
+ if (!id) { alert('Randevu ID girin.'); return; }
+ const el = document.getElementById('status-result');
+ el.className = 'status-result visible'; el.textContent = 'Sorgulanıyor…';
+ try {
+ const r = await fetch(`${API}/api/bookings/${id}`);
+ if (!r.ok) { el.textContent = 'Randevu bulunamadı.'; return; }
+ const b = await r.json();
+ const d = new Date(b.date + 'T12:00:00Z');
+ const dateLabel = `${d.getUTCDate()} ${TR_MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+ const statusMap = { pending:'⏳ Onay Bekleniyor', approved:' Onaylandı', rejected:' Reddedildi' };
+ const classMap = { pending:'status-pending', approved:'status-approved', rejected:'status-rejected' };
+ el.className = `status-result visible ${classMap[b.status]}`;
+ el.innerHTML = `<strong>#${b.id} — ${b.name}</strong><br>${dateLabel} / ${b.time}<br><span style="font-size:0.78rem;">${statusMap[b.status]}</span>`;
+ } catch { el.textContent = 'Bağlantı hatası.'; }
 }
 
 // ── Ay Navigasyonu ────────────────────────────────────────────────────────────
 document.getElementById('prev-month').addEventListener('click', () => {
-  currentMonth--; if (currentMonth < 1) { currentMonth = 12; currentYear--; }
-  loadMonth(currentYear, currentMonth);
+ currentMonth--; if (currentMonth < 1) { currentMonth = 12; currentYear--; }
+ loadMonth(currentYear, currentMonth);
 });
 document.getElementById('next-month').addEventListener('click', () => {
-  currentMonth++; if (currentMonth > 12) { currentMonth = 1; currentYear++; }
-  loadMonth(currentYear, currentMonth);
+ currentMonth++; if (currentMonth > 12) { currentMonth = 1; currentYear++; }
+ loadMonth(currentYear, currentMonth);
 });
 
 // ── Init ──────────────────────────────────────────────────────────────────────

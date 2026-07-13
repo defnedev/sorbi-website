@@ -45,9 +45,9 @@ footer{border-top:1px solid var(--line);padding:2rem 0;text-align:center;color:v
 <div class="wrap">
 <div class="hero"><h1>Burç Uyumu</h1><p class="sub">Senin ve partnerinin burcunu seç, aranızdaki element temelli uyumu gör. Unutma: gerçek uyum yalnızca Güneş burcuyla değil, tüm haritayla anlaşılır.</p></div>
 <div class="pick">
-  <div><label>Senin burcun</label><select id="a"></select></div>
-  <div class="amp">&#10022;</div>
-  <div><label>Partnerinin burcu</label><select id="b"></select></div>
+ <div><label>Senin burcun</label><select id="a"></select></div>
+ <div class="amp">&#10022;</div>
+ <div><label>Partnerinin burcu</label><select id="b"></select></div>
 </div>
 <div id="res"></div>
 
@@ -61,36 +61,36 @@ footer{border-top:1px solid var(--line);padding:2rem 0;text-align:center;color:v
 <footer><div class="wrap">Sorbi &#10022; · <a href="/gunluk-burc-yorumlari" style="color:var(--gold)">Günlük burç yorumları</a> · <a href="/" style="color:var(--gold)">sorbiapp.com</a></div></footer>
 <script>
 (function(){
-  var SIGNS=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
-  var EL=['Ateş','Toprak','Hava','Su','Ateş','Toprak','Hava','Su','Ateş','Toprak','Hava','Su'];
-  var a=document.getElementById('a'),b=document.getElementById('b');
-  SIGNS.forEach(function(s,i){a.add(new Option(s,i));b.add(new Option(s,i));});
-  a.value=0;b.value=6;
-  function key(x,y){return [x,y].sort().join('-');}
-  var TXT={
-   'Ateş-Ateş':['İki ateş: tutku, enerji ve hız. Birbirinizi ateşlersiniz — ego yarışına düşmeyin.',85],
-   'Toprak-Toprak':['İki toprak: istikrar, güven ve sağlam bir zemin. Rutine sıkışmamaya özen gösterin.',85],
-   'Hava-Hava':['İki hava: zihinsel uyum, sohbet ve özgürlük. Duygusal derinliği ihmal etmeyin.',85],
-   'Su-Su':['İki su: derin duygu, sezgi ve empati. Sınırları korumak ilişkiyi sağlıklı tutar.',85],
-   'Ateş-Hava':['Ateş ve hava birbirini büyütür — hava ateşi körükler. Canlı, ilham veren bir bağ.',90],
-   'Su-Toprak':['Toprak ve su besleyicidir: toprak güven verir, su derinlik katar. Doğal bir uyum.',90],
-   'Ateş-Toprak':['Biri hız ister, diğeri istikrar. Denge kurulursa güçlü; kurulmazsa sürtünme.',62],
-   'Ateş-Su':['Güçlü çekim ama farklı ritim: ateş coşar, su derinleşir. Anlayış şart.',58],
-   'Hava-Su':['Zihin ve duygu buluşur. Farklı diller konuşabilirsiniz; köprü kurmak güzelleştirir.',63],
-   'Hava-Toprak':['Fikir ve uygulama: biri uçar, diğeri kök salar. Birbirinizi tamamlayabilirsiniz.',63]
-  };
-  function verdict(sc){return sc>=85?'Çok Uyumlu':sc>=72?'Uyumlu':sc>=60?'Dengeli · Çaba İster':'Zorlayıcı ama Öğretici';}
-  function stars(sc){var n=Math.max(1,Math.round(sc/20));return '★★★★★'.slice(0,n)+'☆☆☆☆☆'.slice(0,5-n);}
-  function calc(){
-    var x=+a.value,y=+b.value;var ex=EL[x],ey=EL[y];
-    var sameSign=(x===y);
-    var t,sc;
-    if(sameSign){t='Aynı burç: bir ayna gibisiniz — güçlü bir anlayış, ama aynı zayıflıkları da paylaşırsınız. Farkındalık ilişkiyi büyütür.';sc=80;}
-    else{var k=key(ex,ey);var e=TXT[k]||['Farklı enerjiler bir araya geliyor; anlayışla güzel bir denge kurulabilir.',65];t=e[0];sc=e[1];}
-    var r=document.getElementById('res');
-    r.innerHTML='<div class="stars">'+stars(sc)+'</div><div class="score">%'+sc+'</div><div class="verdict">'+SIGNS[x]+' &#10022; '+SIGNS[y]+' — '+verdict(sc)+'</div><div class="read">'+t+'</div><div style="font-size:.8rem;color:var(--muted)">Element: '+ex+' & '+ey+'</div>';
-    r.style.display='block';
-  }
-  a.onchange=calc;b.onchange=calc;calc();
+ var SIGNS=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
+ var EL=['Ateş','Toprak','Hava','Su','Ateş','Toprak','Hava','Su','Ateş','Toprak','Hava','Su'];
+ var a=document.getElementById('a'),b=document.getElementById('b');
+ SIGNS.forEach(function(s,i){a.add(new Option(s,i));b.add(new Option(s,i));});
+ a.value=0;b.value=6;
+ function key(x,y){return [x,y].sort().join('-');}
+ var TXT={
+ 'Ateş-Ateş':['İki ateş: tutku, enerji ve hız. Birbirinizi ateşlersiniz — ego yarışına düşmeyin.',85],
+ 'Toprak-Toprak':['İki toprak: istikrar, güven ve sağlam bir zemin. Rutine sıkışmamaya özen gösterin.',85],
+ 'Hava-Hava':['İki hava: zihinsel uyum, sohbet ve özgürlük. Duygusal derinliği ihmal etmeyin.',85],
+ 'Su-Su':['İki su: derin duygu, sezgi ve empati. Sınırları korumak ilişkiyi sağlıklı tutar.',85],
+ 'Ateş-Hava':['Ateş ve hava birbirini büyütür — hava ateşi körükler. Canlı, ilham veren bir bağ.',90],
+ 'Su-Toprak':['Toprak ve su besleyicidir: toprak güven verir, su derinlik katar. Doğal bir uyum.',90],
+ 'Ateş-Toprak':['Biri hız ister, diğeri istikrar. Denge kurulursa güçlü; kurulmazsa sürtünme.',62],
+ 'Ateş-Su':['Güçlü çekim ama farklı ritim: ateş coşar, su derinleşir. Anlayış şart.',58],
+ 'Hava-Su':['Zihin ve duygu buluşur. Farklı diller konuşabilirsiniz; köprü kurmak güzelleştirir.',63],
+ 'Hava-Toprak':['Fikir ve uygulama: biri uçar, diğeri kök salar. Birbirinizi tamamlayabilirsiniz.',63]
+ };
+ function verdict(sc){return sc>=85?'Çok Uyumlu':sc>=72?'Uyumlu':sc>=60?'Dengeli · Çaba İster':'Zorlayıcı ama Öğretici';}
+ function stars(sc){var n=Math.max(1,Math.round(sc/20));return '★★★★★'.slice(0,n)+'☆☆☆☆☆'.slice(0,5-n);}
+ function calc(){
+ var x=+a.value,y=+b.value;var ex=EL[x],ey=EL[y];
+ var sameSign=(x===y);
+ var t,sc;
+ if(sameSign){t='Aynı burç: bir ayna gibisiniz — güçlü bir anlayış, ama aynı zayıflıkları da paylaşırsınız. Farkındalık ilişkiyi büyütür.';sc=80;}
+ else{var k=key(ex,ey);var e=TXT[k]||['Farklı enerjiler bir araya geliyor; anlayışla güzel bir denge kurulabilir.',65];t=e[0];sc=e[1];}
+ var r=document.getElementById('res');
+ r.innerHTML='<div class="stars">'+stars(sc)+'</div><div class="score">%'+sc+'</div><div class="verdict">'+SIGNS[x]+' &#10022; '+SIGNS[y]+' — '+verdict(sc)+'</div><div class="read">'+t+'</div><div style="font-size:.8rem;color:var(--muted)">Element: '+ex+' & '+ey+'</div>';
+ r.style.display='block';
+ }
+ a.onchange=calc;b.onchange=calc;calc();
 })();
 </script></body></html>

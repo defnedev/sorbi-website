@@ -47,62 +47,62 @@ td.pl{font-weight:600;color:var(--ink)}
 .rp-foot{margin-top:34px;border-top:1px solid var(--line);padding-top:14px;font-size:.72rem;color:var(--tx2);display:flex;justify-content:space-between}
 .tag{display:inline-block;font-size:.66rem;background:#F1EAD6;color:var(--gold);padding:2px 8px;border-radius:999px;font-weight:700;letter-spacing:.5px}
 @media print{
-  body{background:#fff;padding:0}.controls{display:none}
-  .page{box-shadow:none;border-radius:0;max-width:100%;padding:26mm 20mm}
-  .write{border-color:#ccc}@page{size:A4;margin:0}
+ body{background:#fff;padding:0}.controls{display:none}
+ .page{box-shadow:none;border-radius:0;max-width:100%;padding:26mm 20mm}
+ .write{border-color:#ccc}@page{size:A4;margin:0}
 }
 </style></head><body>
 <div class="controls">
-  <h2>Danışman Rapor Aracı</h2>
-  <div class="sub">Danışan doğum verisini gir → harita + aspektler otomatik. Yorum bölümlerini doldur → "PDF olarak Yazdır". Veriler hiçbir yere gönderilmez.</div>
-  <div class="grid">
-    <div class="full"><label>Danışan Adı</label><input id="cName" placeholder="Ad Soyad"></div>
-    <div><label>Doğum Tarihi</label><input type="date" id="cDate"></div>
-    <div><label>Doğum Saati</label><input type="time" id="cTime"></div>
-    <div><label>Enlem</label><input type="number" step="0.0001" id="cLat" value="41.0082"></div>
-    <div><label>Boylam</label><input type="number" step="0.0001" id="cLon" value="28.9784"></div>
-    <div><label>Şehir (etiket)</label><input id="cCity" placeholder="İstanbul"></div>
-    <div><label>Saat Dilimi</label><input id="cTz" value="Europe/Istanbul"></div>
-    <div><label>Ev Sistemi</label><select id="cHouse"><option value="P">Placidus</option><option value="W">Whole Sign</option></select></div>
-    <div><label>Paket</label><select id="cPkg"><option>Mini Natal Rapor</option><option>Detaylı Natal + Sinastri</option><option>Premium Paket</option><option>1:1 Danışmanlık Özeti</option></select></div>
-  </div>
-  <div class="btns"><button class="b1" id="gen">Haritayı Oluştur</button><button class="b2" onclick="window.print()">PDF olarak Yazdır</button></div>
+ <h2>Danışman Rapor Aracı</h2>
+ <div class="sub">Danışan doğum verisini gir → harita + aspektler otomatik. Yorum bölümlerini doldur → "PDF olarak Yazdır". Veriler hiçbir yere gönderilmez.</div>
+ <div class="grid">
+ <div class="full"><label>Danışan Adı</label><input id="cName" placeholder="Ad Soyad"></div>
+ <div><label>Doğum Tarihi</label><input type="date" id="cDate"></div>
+ <div><label>Doğum Saati</label><input type="time" id="cTime"></div>
+ <div><label>Enlem</label><input type="number" step="0.0001" id="cLat" value="41.0082"></div>
+ <div><label>Boylam</label><input type="number" step="0.0001" id="cLon" value="28.9784"></div>
+ <div><label>Şehir (etiket)</label><input id="cCity" placeholder="İstanbul"></div>
+ <div><label>Saat Dilimi</label><input id="cTz" value="Europe/Istanbul"></div>
+ <div><label>Ev Sistemi</label><select id="cHouse"><option value="P">Placidus</option><option value="W">Whole Sign</option></select></div>
+ <div><label>Paket</label><select id="cPkg"><option>Mini Natal Rapor</option><option>Detaylı Natal + Sinastri</option><option>Premium Paket</option><option>1:1 Danışmanlık Özeti</option></select></div>
+ </div>
+ <div class="btns"><button class="b1" id="gen">Haritayı Oluştur</button><button class="b2" onclick="window.print()">PDF olarak Yazdır</button></div>
 </div>
 
 <div class="page" id="page">
-  <div class="rp-head">
-    <div class="rp-brand">astro<span class="i">defne</span><small>Profesyonel Astroloji</small></div>
-    <div class="rp-meta"><span class="tag" id="pTag">Natal Rapor</span><div id="pDate"></div></div>
-  </div>
-  <div class="rp-title" id="pName">Danışan Adı</div>
-  <div class="rp-sub" id="pBirth">Doğum bilgileri</div>
+ <div class="rp-head">
+ <div class="rp-brand">astro<span class="i">defne</span><small>Profesyonel Astroloji</small></div>
+ <div class="rp-meta"><span class="tag" id="pTag">Natal Rapor</span><div id="pDate"></div></div>
+ </div>
+ <div class="rp-title" id="pName">Danışan Adı</div>
+ <div class="rp-sub" id="pBirth">Doğum bilgileri</div>
 
-  <div class="rp-sec"><h3>Temel Kimlik</h3>
-    <div class="bt3" id="pBt3"></div>
-    <div class="write" contenteditable="true" id="wIdentity">Güneş–Ay–Yükselen üçlüsü hakkında kişiye özel giriş yorumu…</div>
-  </div>
+ <div class="rp-sec"><h3>Temel Kimlik</h3>
+ <div class="bt3" id="pBt3"></div>
+ <div class="write" contenteditable="true" id="wIdentity">Güneş–Ay–Yükselen üçlüsü hakkında kişiye özel giriş yorumu…</div>
+ </div>
 
-  <div class="rp-sec"><h3>Doğum Haritası</h3>
-    <div class="rp-flex">
-      <div id="pWheelWrap"><svg id="rWheel" viewBox="0 0 320 320"></svg></div>
-      <div><table id="pTable"><thead><tr><th>Gezegen</th><th>Konum</th><th>Ev</th></tr></thead><tbody></tbody></table></div>
-    </div>
-  </div>
+ <div class="rp-sec"><h3>Doğum Haritası</h3>
+ <div class="rp-flex">
+ <div id="pWheelWrap"><svg id="rWheel" viewBox="0 0 320 320"></svg></div>
+ <div><table id="pTable"><thead><tr><th>Gezegen</th><th>Konum</th><th>Ev</th></tr></thead><tbody></tbody></table></div>
+ </div>
+ </div>
 
-  <div class="rp-sec"><h3>Başlıca Açılar (Aspektler)</h3>
-    <table class="asp-grid" id="pAsp"><tbody></tbody></table>
-    <div class="write" contenteditable="true" id="wAspects" style="margin-top:12px">Öne çıkan açıların yaşam temalarına etkisi…</div>
-  </div>
-  <div class="rp-sec"><h3>Sabit Yıldızlar</h3>
-    <table class="asp-grid" id="pStars"><tbody></tbody></table>
-    <div class="write" contenteditable="true" id="wStars" style="margin-top:12px">Sabit yıldız kavuşumlarının kişilik ve kader temalarına katkısı…</div>
-  </div>
+ <div class="rp-sec"><h3>Başlıca Açılar (Aspektler)</h3>
+ <table class="asp-grid" id="pAsp"><tbody></tbody></table>
+ <div class="write" contenteditable="true" id="wAspects" style="margin-top:12px">Öne çıkan açıların yaşam temalarına etkisi…</div>
+ </div>
+ <div class="rp-sec"><h3>Sabit Yıldızlar</h3>
+ <table class="asp-grid" id="pStars"><tbody></tbody></table>
+ <div class="write" contenteditable="true" id="wStars" style="margin-top:12px">Sabit yıldız kavuşumlarının kişilik ve kader temalarına katkısı…</div>
+ </div>
 
-  <div class="rp-sec"><h3>Öne Çıkan Temalar & Öneriler</h3>
-    <div class="write" contenteditable="true" id="wThemes" style="min-height:140px">Kariyer, ilişkiler, içsel dünya ve zamanlama üzerine kişiye özel değerlendirme…</div>
-  </div>
+ <div class="rp-sec"><h3>Öne Çıkan Temalar & Öneriler</h3>
+ <div class="write" contenteditable="true" id="wThemes" style="min-height:140px">Kariyer, ilişkiler, içsel dünya ve zamanlama üzerine kişiye özel değerlendirme…</div>
+ </div>
 
-  <div class="rp-foot"><span>Swiss Ephemeris tabanlı hesaplama · astrodefne · sorbiapp.com</span><span>Kader değil, farkındalık.</span></div>
+ <div class="rp-foot"><span>Swiss Ephemeris tabanlı hesaplama · astrodefne · sorbiapp.com</span><span>Kader değil, farkındalık.</span></div>
 </div>
 
 <script>
@@ -133,58 +133,58 @@ const ASC_T=['enerjik ve doğrudan bir ilk izlenim','sakin, güven veren, istikr
 const PL_THEME={'Güneş':'kimliğin ve özün','Ay':'duygusal dünyan','Merkür':'düşünce ve iletişimin','Venüs':'sevme ve değer verme biçimin','Mars':'harekete geçme tarzın','Jüpiter':'büyüme ve şans alanın','Satürn':'sorumluluk ve olgunlaşma alanın','Uranüs':'özgünlük ve değişim ihtiyacın','Neptün':'hayal ve sezgin','Plüton':'derin dönüşüm gücün'};
 const SIGN_ADJ=['cesur ve doğrudan','sabırlı ve istikrarlı','meraklı ve çevik','duygusal ve koruyucu','gösterişli ve sıcak','analitik ve titiz','dengeli ve ilişkisel','yoğun ve derin','özgür ve keşifçi','disiplinli ve hedefli','özgün ve bağımsız','sezgisel ve şefkatli'];
 function draftIdentity(ch){const su=signOf(ch.pls[0].lon),mo=signOf(ch.pls[1].lon),as=signOf(ch.asc);
-  return `Güneş ${SIGNS[su]} — ${SUN_T[su]}. Ay ${SIGNS[mo]} — ${MOON_T[mo]}. Yükselen ${SIGNS[as]} — ${ASC_T[as]}. Bu üçlü, kişinin özü, duygusal ihtiyaçları ve dışa yansıyan tarzı arasındaki dengeyi anlatır.`;}
+ return `Güneş ${SIGNS[su]} — ${SUN_T[su]}. Ay ${SIGNS[mo]} — ${MOON_T[mo]}. Yükselen ${SIGNS[as]} — ${ASC_T[as]}. Bu üçlü, kişinin özü, duygusal ihtiyaçları ve dışa yansıyan tarzı arasındaki dengeyi anlatır.`;}
 function draftThemes(ch){return ch.pls.map(p=>`${p.n} ${SIGNS[signOf(p.lon)]}${p.rx?' (R)':''} — ${PL_THEME[p.n]} ${SIGN_ADJ[signOf(p.lon)]}.`).join(' ');}
 function draftAspects(ch){if(!ch.asps.length)return 'Belirgin bir major açı yok; enerjiler daha bağımsız çalışıyor.';
-  const tone=nm=>(nm==='Üçgen'||nm==='Altmışlık')?'akış ve doğal yetenek':(nm==='Kare'||nm==='Karşıt')?'gerilim ve gelişim alanı':'yoğunlaşma';
-  return ch.asps.slice(0,4).map(a=>`${a.a}–${a.b} ${a.nm.toLowerCase()}: ${tone(a.nm)}.`).join(' ');}
+ const tone=nm=>(nm==='Üçgen'||nm==='Altmışlık')?'akış ve doğal yetenek':(nm==='Kare'||nm==='Karşıt')?'gerilim ve gelişim alanı':'yoğunlaşma';
+ return ch.asps.slice(0,4).map(a=>`${a.a}–${a.b} ${a.nm.toLowerCase()}: ${tone(a.nm)}.`).join(' ');}
 function draftStars(ch){if(!ch.fixedStars.length)return '2° içinde belirgin sabit yıldız kavuşumu yok.';
-  return ch.fixedStars.map(fs=>`${fs.star}, ${fs.point} ile (${fs.orb.toFixed(1)}°): ${fs.nature}.`).join(' ');}
+ return ch.fixedStars.map(fs=>`${fs.star}, ${fs.point} ile (${fs.orb.toFixed(1)}°): ${fs.nature}.`).join(' ');}
 
 function compute(A,o){const utc=localToUTC(o.y,o.mo,o.d,o.h,o.mi,o.tz);const t=A.MakeTime(utc);const e=obliquity(t);const ramc=norm(A.SiderealTime(t)*15+o.lon);const asc=ascendant(ramc,e,o.lat),mc=mcLon(ramc,e);
-  const pls=PL(A).map(([n,ab,b])=>{const l=eclOfDate(A,b,t);let rx=false;if(n!=='Güneş'&&n!=='Ay'){const t2=A.MakeTime(new Date(utc.getTime()+3600e3));let dl=eclOfDate(A,b,t2)-l;if(dl>180)dl-=360;if(dl<-180)dl+=360;rx=dl<0;}return{n,ab,lon:l,rx};});
-  let c=new Array(13).fill(0);
-  if(o.house==='W'){const st=signOf(asc)*30;for(let i=1;i<=12;i++)c[i]=norm(st+(i-1)*30);}
-  else{c[1]=asc;c[10]=mc;c[4]=norm(mc+180);c[7]=norm(asc+180);c[11]=plac(ramc,e,o.lat,30,1/3);c[12]=plac(ramc,e,o.lat,60,2/3);c[2]=plac(ramc,e,o.lat,120,2/3);c[3]=plac(ramc,e,o.lat,150,1/3);c[5]=norm(c[11]+180);c[6]=norm(c[12]+180);c[8]=norm(c[2]+180);c[9]=norm(c[3]+180);}
-  pls.forEach(p=>p.house=houseOf(p.lon,c));
-  const asps=[];for(let i=0;i<pls.length;i++)for(let j=i+1;j<pls.length;j++){let diff=Math.abs(norm(pls[i].lon-pls[j].lon));if(diff>180)diff=360-diff;for(const[ang,nm,orb]of ASPECTS){if(Math.abs(diff-ang)<=orb){asps.push({a:pls[i].n,b:pls[j].n,nm,orb:(diff-ang)});break;}}}
-  const starPoints=pls.map(p=>({name:p.n,lon:p.lon})).concat([{name:'Yükselen',lon:asc},{name:'MC',lon:mc}]);
-  const fixedStars=computeFixedStars(A,t,starPoints);
-  return{asc,mc,pls,c,asps,fixedStars};}
-function wheel(ch){const cx=160,cy=160,rO=150,rS=126,rP=98,asc=ch.asc;const pos=(l,r)=>{const t=norm(l-asc)*RAD;return[cx-r*Math.cos(t),cy-r*Math.sin(t)];};
-  let s='';s+=`<circle cx="${cx}" cy="${cy}" r="${rO}" fill="none" stroke="#B8941F" stroke-width="1.2"/><circle cx="${cx}" cy="${cy}" r="${rS}" fill="none" stroke="#D8CBA0" stroke-width="1"/><circle cx="${cx}" cy="${cy}" r="72" fill="none" stroke="#E4DECF" stroke-width="1"/>`;
-  for(let i=0;i<12;i++){const[x1,y1]=pos(i*30,rS),[x2,y2]=pos(i*30,rO);s+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#D8CBA0"/>`;const[lx,ly]=pos(i*30+15,(rS+rO)/2);s+=`<text x="${lx.toFixed(1)}" y="${(ly+3).toFixed(1)}" fill="#7A6A3A" font-size="9" font-family="Inter" text-anchor="middle">${SIGN3[i]}</text>`;}
-  for(let i=1;i<=12;i++){const[x2,y2]=pos(ch.c[i],rP+14);const mj=(i===1||i===4||i===7||i===10);s+=`<line x1="${cx}" y1="${cy}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${mj?'#C4744E':'#E4DECF'}" stroke-width="${mj?1.3:.7}"/>`;}
-  // aspect lines inner
-  ch.asps.forEach(a=>{const pa=ch.pls.find(p=>p.n===a.a),pb=ch.pls.find(p=>p.n===a.b);const[x1,y1]=pos(pa.lon,72),[x2,y2]=pos(pb.lon,72);const col=(a.nm==='Kare'||a.nm==='Karşıt')?'#C4744E':(a.nm==='Kavuşum'?'#B8941F':'#9AA778');s+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${col}" stroke-width=".6" opacity=".6"/>`;});
-  const sorted=[...ch.pls].sort((a,b)=>norm(a.lon-asc)-norm(b.lon-asc));let last=-99,lay=0;
-  sorted.forEach(p=>{const t=norm(p.lon-asc);if(t-last<11)lay=(lay+1)%3;else lay=0;last=t;const[px,py]=pos(p.lon,rP-lay*16);s+=`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="9.5" fill="#FBF8F1" stroke="#B8941F"/><text x="${px.toFixed(1)}" y="${(py+3).toFixed(1)}" fill="#8A6D1E" font-size="8.5" font-family="Inter" font-weight="600" text-anchor="middle">${p.ab}</text>`;});
-  s+=`<text x="6" y="163" fill="#C4744E" font-size="10" font-weight="600">ASC</text>`;
-  document.getElementById('rWheel').innerHTML=s;}
+ const pls=PL(A).map(([n,ab,b])=>{const l=eclOfDate(A,b,t);let rx=false;if(n!=='Güneş'&&n!=='Ay'){const t2=A.MakeTime(new Date(utc.getTime()+3600e3));let dl=eclOfDate(A,b,t2)-l;if(dl>180)dl-=360;if(dl<-180)dl+=360;rx=dl<0;}return{n,ab,lon:l,rx};});
+ let c=new Array(13).fill(0);
+ if(o.house==='W'){const st=signOf(asc)*30;for(let i=1;i<=12;i++)c[i]=norm(st+(i-1)*30);}
+ else{c[1]=asc;c[10]=mc;c[4]=norm(mc+180);c[7]=norm(asc+180);c[11]=plac(ramc,e,o.lat,30,1/3);c[12]=plac(ramc,e,o.lat,60,2/3);c[2]=plac(ramc,e,o.lat,120,2/3);c[3]=plac(ramc,e,o.lat,150,1/3);c[5]=norm(c[11]+180);c[6]=norm(c[12]+180);c[8]=norm(c[2]+180);c[9]=norm(c[3]+180);}
+ pls.forEach(p=>p.house=houseOf(p.lon,c));
+ const asps=[];for(let i=0;i<pls.length;i++)for(let j=i+1;j<pls.length;j++){let diff=Math.abs(norm(pls[i].lon-pls[j].lon));if(diff>180)diff=360-diff;for(const[ang,nm,orb]of ASPECTS){if(Math.abs(diff-ang)<=orb){asps.push({a:pls[i].n,b:pls[j].n,nm,orb:(diff-ang)});break;}}}
+ const starPoints=pls.map(p=>({name:p.n,lon:p.lon})).concat([{name:'Yükselen',lon:asc},{name:'MC',lon:mc}]);
+ const fixedStars=computeFixedStars(A,t,starPoints);
+ return{asc,mc,pls,c,asps,fixedStars};}
+function wheel(ch){const cx=160,cy=160,rO=150,rS=126,rP=98,asc=ch.asc;const pos=(l,r)=>{const t=norm(l-asc)*RAD;return[cx-r*Math.cos(t),cy+r*Math.sin(t)];};
+ let s='';s+=`<circle cx="${cx}" cy="${cy}" r="${rO}" fill="none" stroke="#B8941F" stroke-width="1.2"/><circle cx="${cx}" cy="${cy}" r="${rS}" fill="none" stroke="#D8CBA0" stroke-width="1"/><circle cx="${cx}" cy="${cy}" r="72" fill="none" stroke="#E4DECF" stroke-width="1"/>`;
+ for(let i=0;i<12;i++){const[x1,y1]=pos(i*30,rS),[x2,y2]=pos(i*30,rO);s+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#D8CBA0"/>`;const[lx,ly]=pos(i*30+15,(rS+rO)/2);s+=`<text x="${lx.toFixed(1)}" y="${(ly+3).toFixed(1)}" fill="#7A6A3A" font-size="9" font-family="Inter" text-anchor="middle">${SIGN3[i]}</text>`;}
+ for(let i=1;i<=12;i++){const[x2,y2]=pos(ch.c[i],rP+14);const mj=(i===1||i===4||i===7||i===10);s+=`<line x1="${cx}" y1="${cy}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${mj?'#C4744E':'#E4DECF'}" stroke-width="${mj?1.3:.7}"/>`;}
+ // aspect lines inner
+ ch.asps.forEach(a=>{const pa=ch.pls.find(p=>p.n===a.a),pb=ch.pls.find(p=>p.n===a.b);const[x1,y1]=pos(pa.lon,72),[x2,y2]=pos(pb.lon,72);const col=(a.nm==='Kare'||a.nm==='Karşıt')?'#C4744E':(a.nm==='Kavuşum'?'#B8941F':'#9AA778');s+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${col}" stroke-width=".6" opacity=".6"/>`;});
+ const sorted=[...ch.pls].sort((a,b)=>norm(a.lon-asc)-norm(b.lon-asc));let last=-99,lay=0;
+ sorted.forEach(p=>{const t=norm(p.lon-asc);if(t-last<11)lay=(lay+1)%3;else lay=0;last=t;const[px,py]=pos(p.lon,rP-lay*16);s+=`<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="9.5" fill="#FBF8F1" stroke="#B8941F"/><text x="${px.toFixed(1)}" y="${(py+3).toFixed(1)}" fill="#8A6D1E" font-size="8.5" font-family="Inter" font-weight="600" text-anchor="middle">${p.ab}</text>`;});
+ s+=`<text x="6" y="163" fill="#C4744E" font-size="10" font-weight="600">ASC</text>`;
+ document.getElementById('rWheel').innerHTML=s;}
 document.getElementById('gen').onclick=()=>{
-  const A=window.Astronomy;if(!A){alert('Motor yükleniyor, tekrar dene.');return;}
-  const dv=document.getElementById('cDate').value,tv=document.getElementById('cTime').value||'12:00';
-  if(!dv){alert('Doğum tarihi gir.');return;}
-  const[y,mo,d]=dv.split('-').map(Number),[h,mi]=tv.split(':').map(Number);
-  const lat=parseFloat(document.getElementById('cLat').value),lon=parseFloat(document.getElementById('cLon').value),tz=document.getElementById('cTz').value||'Europe/Istanbul';
-  const house=document.getElementById('cHouse').value;
-  const ch=compute(A,{y,mo,d,h,mi,lat,lon,tz,house});
-  document.getElementById('pName').textContent=document.getElementById('cName').value||'Danışan';
-  document.getElementById('pTag').textContent=document.getElementById('cPkg').value;
-  document.getElementById('pDate').textContent='Rapor: '+new Date().toLocaleDateString('tr-TR');
-  document.getElementById('pBirth').textContent=`${dv} · ${tv} · ${document.getElementById('cCity').value||''} (${lat.toFixed(2)}, ${lon.toFixed(2)}) · ${house==='W'?'Whole Sign':'Placidus'}`;
-  const b3=[['Güneş',ch.pls[0].lon],['Ay',ch.pls[1].lon],['Yükselen',ch.asc]];
-  document.getElementById('pBt3').innerHTML=b3.map(([r,l])=>{const s=signOf(l),g=norm(l)-s*30;return `<div class="c"><div class="r">${r}</div><div class="s">${SIGNS[s]}</div><div class="d">${Math.floor(g)}°${String(Math.round((g-Math.floor(g))*60)).padStart(2,'0')}</div></div>`;}).join('');
-  let rows=ch.pls.map(p=>`<tr><td class="pl">${p.n}${p.rx?' <span class="rx">R</span>':''}</td><td>${fmtDeg(p.lon)}</td><td>${p.house}</td></tr>`).join('');
-  rows+=`<tr><td class="pl" style="color:#C4744E">Yükselen (ASC)</td><td>${fmtDeg(ch.asc)}</td><td>1</td></tr><tr><td class="pl" style="color:#C4744E">Tepe Noktası (MC)</td><td>${fmtDeg(ch.mc)}</td><td>10</td></tr>`;
-  document.querySelector('#pTable tbody').innerHTML=rows;
-  wheel(ch);
-  document.querySelector('#pAsp tbody').innerHTML=ch.asps.length?ch.asps.map(a=>`<tr><td class="pl" style="text-align:left">${a.a}</td><td>${a.nm}</td><td class="pl" style="text-align:right">${a.b}</td><td style="color:#8A8578">orb ${Math.abs(a.orb).toFixed(1)}°</td></tr>`).join(''):'<tr><td>Belirgin major açı bulunamadı.</td></tr>';
-  document.querySelector('#pStars tbody').innerHTML=ch.fixedStars.length?ch.fixedStars.map(fs=>`<tr><td class="pl" style="text-align:left">${fs.star}</td><td>${fs.point}</td><td>orb ${fs.orb.toFixed(1)}°</td><td style="color:#8A8578">${fs.nature}</td></tr>`).join(''):'<tr><td>2° içinde belirgin sabit yıldız kavuşumu yok.</td></tr>';
-  document.getElementById('wIdentity').textContent=draftIdentity(ch);
-  document.getElementById('wAspects').textContent=draftAspects(ch);
-  document.getElementById('wStars').textContent=draftStars(ch);
-  document.getElementById('wThemes').textContent=draftThemes(ch);
-  window.scrollTo({top:document.getElementById('page').offsetTop-20,behavior:'smooth'});
+ const A=window.Astronomy;if(!A){alert('Motor yükleniyor, tekrar dene.');return;}
+ const dv=document.getElementById('cDate').value,tv=document.getElementById('cTime').value||'12:00';
+ if(!dv){alert('Doğum tarihi gir.');return;}
+ const[y,mo,d]=dv.split('-').map(Number),[h,mi]=tv.split(':').map(Number);
+ const lat=parseFloat(document.getElementById('cLat').value),lon=parseFloat(document.getElementById('cLon').value),tz=document.getElementById('cTz').value||'Europe/Istanbul';
+ const house=document.getElementById('cHouse').value;
+ const ch=compute(A,{y,mo,d,h,mi,lat,lon,tz,house});
+ document.getElementById('pName').textContent=document.getElementById('cName').value||'Danışan';
+ document.getElementById('pTag').textContent=document.getElementById('cPkg').value;
+ document.getElementById('pDate').textContent='Rapor: '+new Date().toLocaleDateString('tr-TR');
+ document.getElementById('pBirth').textContent=`${dv} · ${tv} · ${document.getElementById('cCity').value||''} (${lat.toFixed(2)}, ${lon.toFixed(2)}) · ${house==='W'?'Whole Sign':'Placidus'}`;
+ const b3=[['Güneş',ch.pls[0].lon],['Ay',ch.pls[1].lon],['Yükselen',ch.asc]];
+ document.getElementById('pBt3').innerHTML=b3.map(([r,l])=>{const s=signOf(l),g=norm(l)-s*30;return `<div class="c"><div class="r">${r}</div><div class="s">${SIGNS[s]}</div><div class="d">${Math.floor(g)}°${String(Math.round((g-Math.floor(g))*60)).padStart(2,'0')}</div></div>`;}).join('');
+ let rows=ch.pls.map(p=>`<tr><td class="pl">${p.n}${p.rx?' <span class="rx">R</span>':''}</td><td>${fmtDeg(p.lon)}</td><td>${p.house}</td></tr>`).join('');
+ rows+=`<tr><td class="pl" style="color:#C4744E">Yükselen (ASC)</td><td>${fmtDeg(ch.asc)}</td><td>1</td></tr><tr><td class="pl" style="color:#C4744E">Tepe Noktası (MC)</td><td>${fmtDeg(ch.mc)}</td><td>10</td></tr>`;
+ document.querySelector('#pTable tbody').innerHTML=rows;
+ wheel(ch);
+ document.querySelector('#pAsp tbody').innerHTML=ch.asps.length?ch.asps.map(a=>`<tr><td class="pl" style="text-align:left">${a.a}</td><td>${a.nm}</td><td class="pl" style="text-align:right">${a.b}</td><td style="color:#8A8578">orb ${Math.abs(a.orb).toFixed(1)}°</td></tr>`).join(''):'<tr><td>Belirgin major açı bulunamadı.</td></tr>';
+ document.querySelector('#pStars tbody').innerHTML=ch.fixedStars.length?ch.fixedStars.map(fs=>`<tr><td class="pl" style="text-align:left">${fs.star}</td><td>${fs.point}</td><td>orb ${fs.orb.toFixed(1)}°</td><td style="color:#8A8578">${fs.nature}</td></tr>`).join(''):'<tr><td>2° içinde belirgin sabit yıldız kavuşumu yok.</td></tr>';
+ document.getElementById('wIdentity').textContent=draftIdentity(ch);
+ document.getElementById('wAspects').textContent=draftAspects(ch);
+ document.getElementById('wStars').textContent=draftStars(ch);
+ document.getElementById('wThemes').textContent=draftThemes(ch);
+ window.scrollTo({top:document.getElementById('page').offsetTop-20,behavior:'smooth'});
 };
 </script></body></html>
