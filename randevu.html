@@ -508,7 +508,7 @@ async function checkStatus() {
  const b = await r.json();
  const d = new Date(b.date + 'T12:00:00Z');
  const dateLabel = `${d.getUTCDate()} ${TR_MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
- const statusMap = { pending:'⏳ Onay Bekleniyor', approved:' Onaylandı', rejected:' Reddedildi' };
+ const statusMap = { pending:'Onay Bekleniyor', approved:'Onaylandı', rejected:'Reddedildi' };
  const classMap = { pending:'status-pending', approved:'status-approved', rejected:'status-rejected' };
  el.className = `status-result visible ${classMap[b.status]}`;
  el.innerHTML = `<strong>#${b.id} — ${b.name}</strong><br>${dateLabel} / ${b.time}<br><span style="font-size:0.78rem;">${statusMap[b.status]}</span>`;
