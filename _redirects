@@ -1,0 +1,6 @@
+# Universal-link fallback (Cloudflare Pages).
+# App yüklüyse iOS/Android linki uygulamada açar (.well-known AASA/assetlinks).
+# Yüklü değilse tarayıcı bu yollara düşer → 404 yerine ana sayfa + app bölümü.
+/ref/*      /?ref=:splat#uygulama      302
+/invite/*   /?ref=:splat#uygulama      302
+/share/*    /#uygulama                 302

@@ -2,7 +2,7 @@
   "relation": ["delegate_permission/common.handle_all_urls"],
   "target": {
     "namespace": "android_app",
-    "package_name": "com.sorbi.app",
-    "sha256_cert_fingerprints": ["PLACEHOLDER"]
+    "package_name": "com.sorbi.astrology",
+    "sha256_cert_fingerprints": ["PLACEHOLDER_PLAY_SIGNING_SHA256"]
   }
 }]
