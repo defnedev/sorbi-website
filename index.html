@@ -1009,7 +1009,16 @@ async function calculateChart(){
  let sunIdx,moonIdx,risingIdx;
  const api=USE_API?await fetchNatal({name,year,month,day,hour,minute,il}):null;
  if(api){sunIdx=api.sunIdx;moonIdx=api.moonIdx;risingIdx=timeVal?api.risingIdx:null;}
- else{const c=IL_COORDS[il]||IL_COORDS.Istanbul;const loc=window._calcNatalLocal(year,month,day,hour,minute,c[0],c[1]);sunIdx=loc.sunIdx;moonIdx=loc.moonIdx;risingIdx=timeVal?loc.risingIdx:null;}
+ else{
+   // Yerel fallback (API/CORS yoksa) astronomy motorunu ister; `defer` script
+   // henüz yüklenmemişse null döner ve hesaplama sessizce çökerdi. Motor hazır
+   // olana kadar ~4sn bekle, sonra dene.
+   if(!window.Astronomy){await new Promise(res=>{let n=0;const iv=setInterval(()=>{if(window.Astronomy||++n>40){clearInterval(iv);res();}},100);});}
+   const c=IL_COORDS[il]||IL_COORDS.Istanbul;
+   const loc=window._calcNatalLocal(year,month,day,hour,minute,c[0],c[1]);
+   if(!loc){alert('Hesaplama motoru henüz hazırlanıyor — bir saniye sonra tekrar dener misin?');return;}
+   sunIdx=loc.sunIdx;moonIdx=loc.moonIdx;risingIdx=timeVal?loc.risingIdx:null;
+ }
  const sun=SIGNS[sunIdx],moon=SIGNS[moonIdx];
  const rising=risingIdx!==null&&risingIdx!=null?SIGNS[risingIdx]:null;
  const r=READINGS[sunIdx];
