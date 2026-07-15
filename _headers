@@ -1,0 +1,5 @@
+# Apple universal-link dosyası JSON olarak servis edilmeli (en güvenli).
+/.well-known/apple-app-site-association
+  Content-Type: application/json
+/.well-known/assetlinks.json
+  Content-Type: application/json
