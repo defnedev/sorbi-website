@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Randevu Al — Sorbi Astroloji Danışmanlığı</title>
+<meta name="robots" content="noindex,nofollow">
 <meta name="description" content="Defne ile astroloji danışmanlığı için randevu al. Natal harita, sinastri, horary ve yaşam döngüleri seansları.">
 <link rel="canonical" href="https://sorbiapp.com/randevu">
-<meta name="theme-color" content="#0B0E15">
+<meta name="theme-color" content="#0B0F14">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sorbi">
 <meta property="og:locale" content="tr_TR">
@@ -22,15 +23,15 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;font-size:16px;}
-body{font-family:'Inter',sans-serif;background:#0B0E15;color:#F6F1E7;min-height:100vh;}
+body{font-family:'Inter',sans-serif;background:#0B0F14;color:#F6F1E7;min-height:100vh;}
 a{text-decoration:none;color:inherit;}
-:root{
- --dark:#0B0E15; --dark2:#1B1F2B;
- --gold:#C9A962; --gold-light:#E6CF8A; --gold-deep:#9A7E33;
+:root{--terra:#C4744E;--btn-ink:#F6EFE1;
+ --dark:#0B0F14; --dark2:#1B1F2B;
+ --gold:#C9A962; --gold-light:#E39B77; --gold-deep:#9E4B2C;
  --gold2:rgba(201,169,98,0.12); --gold3:rgba(201,169,98,0.28);
  --light:#F6F1E7; --warm:#EFE8DA;
  --green:#25D366;
@@ -38,11 +39,11 @@ a{text-decoration:none;color:inherit;}
  --border-gold:rgba(201,169,98,0.22);
  --radius:12px; --radius-lg:20px;
 }
-h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.15;}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600;line-height:1.15;}
 
 /* ── Nav ── */
 nav{position:fixed;top:0;left:0;width:100%;z-index:100;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(11,14,21,0.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,169,98,0.1);}
-.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;color:var(--text-light);display:flex;align-items:center;gap:0.3rem;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;color:var(--text-light);display:flex;align-items:center;gap:0.3rem;}
 .nav-logo span{color:var(--gold);font-size:1.3rem;}
 .nav-back{font-size:0.82rem;color:var(--text-muted);display:flex;align-items:center;gap:0.4rem;transition:color 0.2s;}
 .nav-back:hover{color:var(--gold);}
@@ -60,7 +61,7 @@ main{padding-top:5rem;min-height:100vh;}
 /* ── Takvim ── */
 .calendar-panel{background:rgba(255,255,255,0.03);border:1px solid var(--border-gold);border-radius:var(--radius-lg);padding:1.8rem;}
 .cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;}
-.cal-header h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--text-light);}
+.cal-header h3{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--text-light);}
 .cal-nav-btn{background:transparent;border:1px solid var(--border-gold);border-radius:8px;padding:0.4rem 0.8rem;color:var(--text-muted);cursor:pointer;transition:all 0.2s;font-size:1rem;}
 .cal-nav-btn:hover{border-color:var(--gold);color:var(--gold);}
 .cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:4px;}
@@ -74,12 +75,14 @@ main{padding-top:5rem;min-height:100vh;}
 .cal-day.has-slots:hover{background:var(--gold2);border-color:var(--gold3);}
 .cal-day.selected{background:rgba(201,169,98,0.18);border-color:var(--gold);color:var(--gold-light);}
 .cal-day.today{font-weight:600;}
-.cal-day.today::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:var(--gold);border-radius:50%;}
+.cal-day.today::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:var(--terra);border-radius:50%;}
 .slot-count{font-size:0.52rem;color:var(--gold);opacity:0.7;margin-top:1px;}
+.booked-label{font-size:0.5rem;color:rgba(244,240,228,0.28);margin-top:1px;text-transform:uppercase;letter-spacing:0.5px;}
+.cal-day.booked-day{color:rgba(244,240,228,0.32);}
 
 /* ── Saat Seçimi ── */
 .slots-panel{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(201,169,98,0.12);}
-.slots-panel h4{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-muted);margin-bottom:1rem;}
+.slots-panel h4{font-family:'Playfair Display',serif;font-size:1rem;color:var(--text-muted);margin-bottom:1rem;}
 .slots-panel .selected-date-label{color:var(--gold-light);font-size:1rem;}
 .slots-grid{display:flex;flex-wrap:wrap;gap:0.5rem;}
 .slot-btn{padding:0.5rem 1.1rem;border:1px solid var(--border-gold);border-radius:8px;background:transparent;color:var(--text-muted);cursor:pointer;font-size:0.82rem;transition:all 0.2s;}
@@ -89,7 +92,7 @@ main{padding-top:5rem;min-height:100vh;}
 
 /* ── Form Panel ── */
 .form-panel{background:rgba(255,255,255,0.03);border:1px solid var(--border-gold);border-radius:var(--radius-lg);padding:1.8rem;position:sticky;top:5.5rem;}
-.form-panel h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:0.3rem;}
+.form-panel h3{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:0.3rem;}
 .selected-summary{background:var(--gold2);border:1px solid var(--border-gold);border-radius:10px;padding:0.9rem 1rem;margin-bottom:1.5rem;font-size:0.82rem;color:var(--gold-light);display:none;}
 .selected-summary.visible{display:block;}
 .selected-summary strong{display:block;color:var(--gold);margin-bottom:0.2rem;font-size:0.7rem;text-transform:uppercase;letter-spacing:1px;}
@@ -112,18 +115,21 @@ main{padding-top:5rem;min-height:100vh;}
 .btn-submit:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(201,169,98,0.3);}
 .btn-submit:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
 .form-note{font-size:0.72rem;color:var(--text-dim);text-align:center;margin-top:0.8rem;line-height:1.5;}
+.kvkk-consent{display:flex;gap:0.5rem;align-items:flex-start;font-size:0.72rem;color:var(--text-muted);line-height:1.5;margin:0.4rem 0 0.2rem;cursor:pointer;}
+.kvkk-consent input{margin-top:0.15rem;accent-color:var(--gold);flex-shrink:0;width:15px;height:15px;cursor:pointer;}
+.kvkk-consent a{color:var(--gold-light);text-decoration:underline;}
 
 /* ── Başarı Ekranı ── */
 .success-card{background:rgba(255,255,255,0.03);border:1px solid var(--border-gold);border-radius:var(--radius-lg);padding:2.5rem;text-align:center;max-width:500px;margin:0 auto;}
 .success-icon{font-size:2.5rem;margin-bottom:1rem;}
-.success-card h2{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--gold-light);margin-bottom:0.6rem;}
+.success-card h2{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--gold-light);margin-bottom:0.6rem;}
 .success-card p{font-size:0.9rem;color:var(--text-muted);line-height:1.7;margin-bottom:1.2rem;}
 .booking-id-badge{display:inline-block;background:var(--gold2);border:1px solid var(--border-gold);border-radius:999px;padding:0.3rem 1rem;font-size:0.75rem;color:var(--gold);margin-bottom:1.5rem;}
-.btn-wa{background:var(--green);color:#fff;padding:0.65rem 1.5rem;border-radius:999px;font-size:0.85rem;font-weight:600;display:inline-flex;align-items:center;gap:0.4rem;}
+.btn-wa{background:var(--green);color:#EBF0F8;padding:0.65rem 1.5rem;border-radius:999px;font-size:0.85rem;font-weight:600;display:inline-flex;align-items:center;gap:0.4rem;}
 
 /* ── Durum Sorgulama ── */
 .status-check{max-width:480px;margin:2rem auto 4rem;text-align:center;}
-.status-check h3{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text-muted);margin-bottom:1rem;}
+.status-check h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--text-muted);margin-bottom:1rem;}
 .status-input-row{display:flex;gap:0.5rem;}
 .status-input-row input{flex:1;background:rgba(11,14,21,0.6);border:1px solid rgba(244,240,228,0.13);border-radius:8px;padding:0.6rem 0.9rem;font-size:0.88rem;color:var(--text-light);font-family:'Inter',sans-serif;}
 .status-input-row input:focus{outline:none;border-color:var(--gold);}
@@ -141,7 +147,7 @@ main{padding-top:5rem;min-height:100vh;}
 /* ── Saat Slotları Büyük Görünüm ── */
 .slots-panel{margin-top:1.5rem;padding:1.5rem;border-top:none;background:rgba(201,169,98,0.04);border:1px solid rgba(201,169,98,0.15);border-radius:var(--radius);margin-top:1rem;}
 .slots-panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;}
-.slots-panel-header h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--text-light);}
+.slots-panel-header h4{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--text-light);}
 .slots-panel-header .selected-date-label{color:var(--gold);font-size:1rem;}
 .slots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.55rem;}
 .slot-btn{padding:0.65rem 0.5rem;border:1px solid var(--border-gold);border-radius:10px;background:rgba(11,14,21,0.5);color:var(--text-muted);cursor:pointer;font-size:0.9rem;font-weight:500;transition:all 0.2s;text-align:center;letter-spacing:0.3px;}
@@ -154,7 +160,7 @@ main{padding-top:5rem;min-height:100vh;}
 @media(max-width:820px){.booking-wrap{grid-template-columns:1fr;}.form-panel{position:static;}}
 @media(max-width:640px){.slots-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:480px){.service-select{grid-template-columns:1fr;}.status-input-row{flex-direction:column;}}
-</style>
+@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}</style>
 </head>
 <body>
 
@@ -165,9 +171,9 @@ main{padding-top:5rem;min-height:100vh;}
 
 <main>
  <div class="page-header">
- <span class="eyebrow">Randevu</span>
- <h1>Seans rezervasyonu yap</h1>
- <p>Müsait bir gün ve saat seç, bilgilerini gir. Defne onaylayınca bildirim alırsın.</p>
+ <span class="eyebrow">Danışmanlık & Rapor</span>
+ <h1>Hizmet Al</h1>
+ <p>Bir hizmet seç, bilgilerini bırak. Talebin Defne'ye iletilir ve en kısa sürede WhatsApp'tan iletişime geçeriz.</p>
  </div>
 
  <!-- Booking UI -->
@@ -192,21 +198,14 @@ main{padding-top:5rem;min-height:100vh;}
  </div>
  <div class="cal-grid" id="cal-grid"></div>
 
- <!-- Saat seçimi -->
- <div class="slots-panel" id="slots-panel" style="display:none;">
- <div class="slots-panel-header">
- <h4>Saat seç</h4>
- <span class="selected-date-label" id="selected-date-label"></span>
- </div>
- <div class="slots-grid" id="slots-grid"></div>
- </div>
+ <p style="font-size:0.72rem;color:var(--text-dim);text-align:center;margin-top:1rem;line-height:1.5;">Takvim güncel yoğunluğumu gösterir · saat seçimi yok. Talebini aldıktan sonra WhatsApp'tan iletişime geçeriz.</p>
  </div>
 
  <!-- Durum sorgulama -->
  <div class="status-check">
- <h3>Mevcut randevunu sorgula</h3>
+ <h3>Talebini sorgula</h3>
  <div class="status-input-row">
- <input type="number" id="status-id-input" placeholder="Randevu ID numarası">
+ <input type="number" id="status-id-input" placeholder="Talep numarası">
  <button class="btn-check" onclick="checkStatus()">Sorgula</button>
  </div>
  <div class="status-result" id="status-result"></div>
@@ -215,31 +214,45 @@ main{padding-top:5rem;min-height:100vh;}
 
  <!-- Sağ: Form -->
  <div class="form-panel">
- <h3>Randevu Bilgileri</h3>
- <p style="font-size:0.8rem;color:var(--text-dim);margin-bottom:1rem;">Lütfen önce takvimden gün ve saat seçin.</p>
-
- <div class="selected-summary" id="selected-summary">
- <strong>Seçilen Tarih & Saat</strong>
- <span id="summary-datetime">—</span>
- </div>
+ <h3>Talep Bilgileri</h3>
+ <p style="font-size:0.8rem;color:var(--text-dim);margin-bottom:1rem;">Hizmetini seç, doğum bilgilerini gir — WhatsApp'tan iletişime geçeriz.</p>
 
  <span class="svc-label">Hizmet</span>
- <div class="service-select" id="service-select">
- <button class="svc-btn" data-svc="natal-harita">Natal Harita</button>
- <button class="svc-btn" data-svc="sinastri">Sinastri</button>
- <button class="svc-btn" data-svc="tarot">Tarot Açılımı</button>
- <button class="svc-btn" data-svc="horary">Horary</button>
- <button class="svc-btn" data-svc="yasam-donguleri">Yaşam Döngüleri</button>
- <button class="svc-btn" data-svc="sorbi-ongorisu">Sorbi Öngörüsü</button>
- </div>
+ <div class="service-select" id="service-select"></div>
+ <div style="text-align:right;margin:0.1rem 0 0.6rem;"><a href="/karma-paketler" style="font-size:0.72rem;color:var(--gold);">Karma paketlere bak →</a></div>
 
  <div class="fg"><label>Ad Soyad *</label><input type="text" id="f-name" placeholder="Adın ve soyadın"></div>
  <div class="fg"><label>Telefon *</label><input type="tel" id="f-phone" placeholder="+90 5XX XXX XX XX"></div>
- <div class="fg"><label>Email <span style="opacity:0.5">(isteğe bağlı)</span></label><input type="email" id="f-email" placeholder="onay için email"></div>
- <div class="fg"><label>Not <span style="opacity:0.5">(isteğe bağlı)</span></label><textarea id="f-notes" placeholder="Danışmak istediğin konu veya sorular…"></textarea></div>
+ <div class="fg"><label>E-posta <span style="opacity:0.5">(opsiyonel)</span></label><input type="email" id="f-email" placeholder="teslim bildirimi için"></div>
 
- <button class="btn-submit" id="submit-btn" onclick="submitBooking()">Randevu Talep Et ✦</button>
- <p class="form-note">Talebiniz Defne'ye iletilir. Onay sonrası bildirim alırsınız.</p>
+ <span class="svc-label">Doğum Bilgilerin</span>
+ <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;">
+ <div class="fg"><label>Doğum tarihi *</label><input type="date" id="f-bdate"></div>
+ <div class="fg"><label>Saat <span style="opacity:0.5">(varsa)</span></label><input type="time" id="f-btime"></div>
+ </div>
+ <div class="fg"><label>Doğum yeri *</label><input type="text" id="f-bplace" placeholder="örn. İstanbul"></div>
+
+ <div id="person2-block" style="display:none;">
+ <span class="svc-label">2. Kişi (ilişki analizi için)</span>
+ <div class="fg"><label>Ad Soyad</label><input type="text" id="f-name2" placeholder="2. kişinin adı"></div>
+ <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;">
+ <div class="fg"><label>Doğum tarihi</label><input type="date" id="f-bdate2"></div>
+ <div class="fg"><label>Saat</label><input type="time" id="f-btime2"></div>
+ </div>
+ <div class="fg"><label>Doğum yeri</label><input type="text" id="f-bplace2" placeholder="örn. Ankara"></div>
+ </div>
+
+ <div class="fg"><label>Not <span style="opacity:0.5">(opsiyonel)</span></label><textarea id="f-notes" placeholder="Danışmak istediğin konu veya soru…"></textarea></div>
+
+ <label class="kvkk-consent" for="f-kvkk">
+ <input type="checkbox" id="f-kvkk">
+ <span><a href="privacy.html" target="_blank" rel="noopener">Gizlilik Politikası</a>'nı okudum; kişisel verilerimin sipariş amacıyla işlenmesine onay veriyorum. <span style="opacity:0.6">(KVKK)</span></span>
+ </label>
+
+ <input type="text" id="f-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+ <button class="btn-submit" id="submit-btn" onclick="submitOrder()">Talep Gönder ✦</button>
+ <button id="pay-btn" onclick="payWithShopier()" style="width:100%;background:transparent;border:1px solid var(--gold);color:var(--gold-light);padding:0.85rem;border-radius:12px;font-size:0.95rem;font-weight:600;cursor:pointer;margin-top:0.6rem;font-family:'Inter';">Shopier ile Güvenli Öde 🔒</button>
+ <p class="form-note">Talebin Defne'ye iletilir · WhatsApp'tan iletişime geçeriz.</p>
  </div>
  </div>
 
@@ -247,27 +260,44 @@ main{padding-top:5rem;min-height:100vh;}
  <div id="success-screen" style="display:none;padding:2rem 1.5rem 4rem;">
  <div class="success-card">
  <div class="success-icon">✦</div>
- <h2>Talebiniz Alındı</h2>
- <p>Randevu talebiniz Defne'ye iletildi. Onay verdiğinde e-posta veya WhatsApp ile haberdar edileceksiniz.</p>
- <div class="booking-id-badge" id="success-booking-id">Randevu #—</div>
+ <h2>Talebin Alındı</h2>
+ <p>Talebin Defne'ye iletildi ve en kısa sürede WhatsApp'tan iletişime geçeceğiz.</p>
+ <div class="booking-id-badge" id="success-booking-id">Talep #—</div>
  <br>
  <a id="success-wa" href="#" target="_blank" class="btn-wa">
  <svg viewBox="0 0 32 32" width="16" height="16" fill="white"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.837.744 5.497 2.044 7.8L0 32l8.4-2.003C10.643 31.283 13.27 32 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm8.07 22.587c-.338.952-1.968 1.82-2.729 1.936-.698.104-1.583.148-2.554-.16-.588-.19-1.343-.444-2.31-.87-4.065-1.757-6.72-5.863-6.924-6.136-.205-.273-1.666-2.218-1.666-4.23 0-2.012 1.054-3 1.428-3.41.375-.41.82-.512 1.092-.512.273 0 .547.002.787.014.252.013.59-.095.923.705.338.82 1.15 2.83 1.252 3.035.103.205.171.444.034.718-.137.273-.205.444-.41.684-.205.24-.43.537-.615.72-.205.205-.42.43-.18.843.24.41 1.067 1.762 2.29 2.855 1.573 1.402 2.9 1.835 3.31 2.04.41.205.65.171.89-.103.24-.273 1.025-1.196 1.298-1.606.272-.41.545-.342.922-.205.375.137 2.39 1.128 2.8 1.333.41.205.683.308.786.478.103.17.103.985-.235 1.937z"/></svg>
  Defne'ye WhatsApp'tan Yaz
  </a>
  <br><br>
- <button onclick="resetBooking()" style="background:transparent;border:1px solid var(--border-gold);color:var(--text-muted);padding:0.55rem 1.3rem;border-radius:999px;cursor:pointer;font-size:0.82rem;">Yeni Randevu Al</button>
+ <button onclick="resetBooking()" style="background:transparent;border:1px solid var(--border-gold);color:var(--text-muted);padding:0.55rem 1.3rem;border-radius:999px;cursor:pointer;font-size:0.82rem;">Yeni Talep</button>
  </div>
  </div>
 </main>
 
 <script>
 // ── Yapılandırma ──────────────────────────────────────────────────────────────
-const API = 'http://localhost:3001';
+const API = ''; // same-origin — Cloudflare Pages Function
 const WA = '905434309702';
 
-// Sabit çalışma saatleri (90 dk bloklar)
-const DEFAULT_SLOTS = ['10:00','11:30','13:00','14:30','16:00','17:30'];
+// Funnel event gönder (best-effort, hata yutulur)
+const _tracked = {};
+function track(type, date) { try { fetch(`${API}/api/track`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ type, date }), keepalive:true }); } catch {} }
+function trackOnce(type, date) { if (_tracked[type]) return; _tracked[type] = 1; track(type, date); }
+
+// Mesai saatleri (90 dk gündüz blokları) — takvimde DOLU/çizili gösterilir
+const WORK_SLOTS = ['10:00','11:30','13:00','14:30','16:00','17:30'];
+
+// ── Manuel Doluluk (Defne tarafından elle ayarlandı — 2026-07-21) ──────────────
+// Sadece burada listelenen günlerde boşluk var; hepsi MESAİ DIŞI (erken sabah / akşam).
+// Listede olmayan tüm gelecek günler "dolu" görünür.
+const MANUAL_SLOTS = {
+ '2026-07-22': ['21:00'],                 // Çarşamba (yarın) — 1 boşluk
+ '2026-07-23': ['08:30'],                 // Perşembe — 1 boşluk
+ '2026-07-24': ['08:30','20:00','21:30'], // Cuma — 3 boşluk
+ '2026-07-25': ['09:00','19:30'],         // Cumartesi — 2 boşluk
+ '2026-07-29': ['08:30','20:00','22:00'], // Gelecek hafta Çarşamba — 3 boşluk
+ '2026-08-02': ['09:00','20:00','21:30'], // Gelecek hafta Pazar — 3 boşluk
+};
 
 const TR_MONTHS = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
 const TR_DAYS_LONG = ['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'];
@@ -282,18 +312,18 @@ let selectedTime = null;
 let selectedSvc = null;
 
 // ── Offline Availability ─────────────────────────────────────────────────────
-// Backend yoksa: Pzt-Cmt haftaiçi ve haftası, Pazar hariç tüm gelecek günler müsait
+// Backend yoksa (prod'da her zaman böyle): sadece MANUAL_SLOTS'taki günlerde boşluk,
+// diğer tüm gelecek günler dolu. Boşluk sayısı = o günün mesai dışı boş saat adedi.
 function offlineAvailability(year, month) {
  const av = {};
  const today = new Date();
  today.setHours(0,0,0,0);
- const daysInMonth = new Date(year, month, 0).getDate();
- for (let d = 1; d <= daysInMonth; d++) {
- const dt = new Date(year, month - 1, d);
- if (dt < today) continue; // geçmiş
- if (dt.getDay() === 0) continue; // Pazar kapalı
- const ds = `${year}-${String(month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
- av[ds] = DEFAULT_SLOTS.length;
+ for (const [ds, slots] of Object.entries(MANUAL_SLOTS)) {
+ const [y, m, d] = ds.split('-').map(Number);
+ if (y !== year || m !== month) continue;
+ const dt = new Date(y, m - 1, d);
+ if (dt < today) continue; // geçmiş günü gösterme
+ av[ds] = slots.length;
  }
  return av;
 }
@@ -302,16 +332,8 @@ function offlineAvailability(year, month) {
 async function loadMonth(year, month) {
  document.getElementById('cal-title').textContent = `${TR_MONTHS[month-1]} ${year}`;
  document.getElementById('cal-grid').innerHTML = '';
-
- try {
- const r = await fetch(`${API}/api/slots?year=${year}&month=${month}`, { signal: AbortSignal.timeout(3000) });
- if (!r.ok) throw new Error();
- availability = await r.json();
- apiOnline = true;
- } catch {
- apiOnline = false;
+ // Doluluk her zaman client-side MANUAL_SLOTS ile (Kurucu kontrolü — backend'e bağlı değil)
  availability = offlineAvailability(year, month);
- }
  renderCalendar(year, month);
 }
 
@@ -332,183 +354,177 @@ function renderCalendar(year, month) {
  const dateStr = `${year}-${String(month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
  const cellDate = new Date(year, month - 1, d);
  const isPast = cellDate < today;
- const isSun = cellDate.getDay() === 0;
  const isToday = cellDate.toDateString() === new Date().toDateString();
  const count = availability[dateStr] ?? 0;
 
  const el = document.createElement('div');
  el.className = 'cal-day';
 
- if (isPast || isSun) { el.classList.add(isPast ? 'past' : 'unavailable'); }
- else if (!count) { el.classList.add('unavailable'); }
- else { el.classList.add('has-slots'); }
+ if (isPast) { el.classList.add('past'); }
+ else if (count > 0) { el.classList.add('has-slots'); }
+ else { el.classList.add('unavailable', 'booked-day'); }
  if (isToday) { el.classList.add('today'); }
  if (selectedDate === dateStr) el.classList.add('selected');
 
- const canClick = !isPast && !isSun && count > 0;
- el.innerHTML = `<span>${d}</span>${canClick ? `<span class="slot-count">${count} saat</span>` : ''}`;
-
- if (canClick) {
- el.style.cursor = 'pointer';
- el.addEventListener('click', () => selectDate(dateStr, el));
- }
+ el.style.cursor = 'default'; // display-only: seçilemez
+ let label = '';
+ if (!isPast) label = count > 0 ? `<span class="slot-count">${count} kişilik</span>` : `<span class="booked-label">dolu</span>`;
+ el.innerHTML = `<span>${d}</span>${label}`;
  grid.appendChild(el);
  }
 }
 
-async function selectDate(dateStr, el) {
- selectedDate = dateStr;
- selectedTime = null;
- document.querySelectorAll('.cal-day.selected').forEach(e => e.classList.remove('selected'));
- el.classList.add('selected');
+// ── Hizmetler ─────────────────────────────────────────────────────────────────
+// shopier: ileride Shopier ürün linkini buraya koy → buton "Satın Al" olur, ödeme Shopier'de.
+const SERVICES = [
+ { id:'natal-harita',    name:'Natal Harita Analizi', persons:1, detail:'1 kişilik · doğum haritası derin analizi', shopier:'https://www.shopier.com/39027299' },
+ { id:'gezegen-danismanligi', name:'Gezegen Danışmanlığı', persons:1, detail:'1 kişilik · tek gezegen (Venüs, Mars, Ay...) derin yorumu', shopier:'https://www.shopier.com/49201980' },
+ { id:'sorbi-ongorisu',  name:'Sorbi Öngörüsü',       persons:1, detail:'1 kişilik · anlık transit öngörüsü', shopier:'https://www.shopier.com/39029374' },
+ { id:'tarot',           name:'Tarot Açılımı',        persons:1, detail:'1 kişilik · 3 kart açılımı', shopier:'https://www.shopier.com/39027411' },
+ { id:'horary',          name:'Horary',               persons:1, detail:'1 kişilik · tek net soru', shopier:'https://www.shopier.com/39027218' },
+ { id:'sinastri',        name:'Sinastri (İlişki)',    persons:2, detail:'2 kişilik · ilişki uyumu analizi', shopier:'https://www.shopier.com/39029356' },
+ { id:'yasam-donguleri', name:'Yaşam Döngüleri',      persons:1, detail:'1 kişilik · 3 yıllık zamanlama', shopier:'https://www.shopier.com/39142802' },
+];
+const SVC_BY_ID = Object.fromEntries(SERVICES.map(s => [s.id, s]));
 
- const d = new Date(dateStr + 'T12:00:00Z');
- document.getElementById('selected-date-label').textContent =
- `${d.getUTCDate()} ${TR_MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()} — ${TR_DAYS_LONG[d.getUTCDay()]}`;
-
- const slotsPanel = document.getElementById('slots-panel');
- const slotsGrid = document.getElementById('slots-grid');
- slotsPanel.style.display = 'block';
- slotsGrid.innerHTML = '<div class="loading-shimmer" style="height:44px;width:100%;border-radius:8px;"></div>';
-
- let slots = DEFAULT_SLOTS;
- if (apiOnline) {
- try {
- const r = await fetch(`${API}/api/slots/${dateStr}`, { signal: AbortSignal.timeout(3000) });
- const data = await r.json();
- if (data.slots && data.slots.length) slots = data.slots;
- } catch { /* fallback to defaults */ }
- }
-
- renderSlots(slots);
- updateSummary();
-
- // Smooth scroll to slots on mobile
- if (window.innerWidth < 820) {
- setTimeout(() => slotsPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
- }
-}
-
-function renderSlots(slots) {
- const grid = document.getElementById('slots-grid');
- if (!slots.length) {
- grid.innerHTML = '<p class="no-slots">Bu gün müsait saat bulunmuyor.</p>';
- return;
- }
- grid.innerHTML = slots.map(s =>
- `<button class="slot-btn${selectedTime===s?' selected':''}" onclick="selectTime('${s}',this)">
- <span style="font-size:1rem;">${s}</span>
- <span style="display:block;font-size:0.62rem;opacity:0.55;margin-top:1px;">90 dk</span>
- </button>`
- ).join('');
-}
-
-function selectTime(time, el) {
- selectedTime = time;
- document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
- el.classList.add('selected');
- updateSummary();
- // Formu kaydır
- setTimeout(() => document.querySelector('.form-panel').scrollIntoView({ behavior:'smooth', block:'nearest' }), 150);
-}
-
-function updateSummary() {
- const el = document.getElementById('selected-summary');
- const dt = document.getElementById('summary-datetime');
- if (selectedDate && selectedTime) {
- const d = new Date(selectedDate + 'T12:00:00Z');
- dt.textContent = `${d.getUTCDate()} ${TR_MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()} — ${selectedTime}`;
- el.classList.add('visible');
- } else {
- el.classList.remove('visible');
- }
-}
-
-// Hizmet seçimi
-document.querySelectorAll('.svc-btn').forEach(btn => {
+function renderServices() {
+ document.getElementById('service-select').innerHTML = SERVICES.map(s =>
+ `<button class="svc-btn" data-svc="${s.id}">
+ <span style="display:block;font-weight:600;color:var(--text-light);font-size:0.78rem;">${s.name}</span>
+ <span style="display:block;font-size:0.62rem;opacity:0.7;margin-top:2px;line-height:1.3;">${s.detail}</span>
+ </button>`).join('');
+ document.querySelectorAll('.svc-btn').forEach(btn => {
  btn.addEventListener('click', () => {
  document.querySelectorAll('.svc-btn').forEach(b => b.classList.remove('selected'));
  btn.classList.add('selected');
  selectedSvc = btn.dataset.svc;
+ const svc = SVC_BY_ID[selectedSvc];
+ document.getElementById('person2-block').style.display = (svc && svc.persons === 2) ? 'block' : 'none';
+ trackOnce('booking_started', selectedSvc);
  });
-});
+ });
+}
+renderServices();
 
-// ── Randevu Gönder ────────────────────────────────────────────────────────────
-async function submitBooking() {
- if (!selectedDate || !selectedTime) { alert('Lütfen bir tarih ve saat seçin.'); return; }
+async function payWithShopier(){
+ if(!selectedSvc){ alert('Lütfen bir hizmet seçin.'); return; }
+ const svc=SVC_BY_ID[selectedSvc];
+ if(!svc || !svc.shopier){ alert('Bu hizmet için ödeme yakında aktif olacak.'); return; }
+ const name=document.getElementById('f-name').value.trim();
+ const phone=document.getElementById('f-phone').value.trim();
+ const email=document.getElementById('f-email').value.trim();
+ const bdate=document.getElementById('f-bdate').value;
+ const btime=document.getElementById('f-btime').value;
+ const bplace=document.getElementById('f-bplace').value.trim();
+ const notes=document.getElementById('f-notes').value.trim();
+ if(!name){ alert('Ad soyad zorunlu.'); return; }
+ if(!phone){ alert('Telefon zorunlu.'); return; }
+ if(!bdate){ alert('Doğum tarihi zorunlu.'); return; }
+ if(!bplace){ alert('Doğum yeri zorunlu.'); return; }
+ if(!document.getElementById('f-kvkk').checked){ alert('Devam etmek için KVKK onayını işaretle.'); return; }
+ let p2='';
+ if(svc&&svc.persons===2){ const n2=document.getElementById('f-name2').value.trim(),d2=document.getElementById('f-bdate2').value,t2=document.getElementById('f-btime2').value,pl2=document.getElementById('f-bplace2').value.trim(); if(n2||d2||pl2) p2='\n2. Kisi: '+(n2||'-')+' | '+(d2||'-')+(t2?' '+t2:'')+' | '+(pl2||'-'); }
+ const fullNotes='[SHOPIER ODEME] '+(notes?notes+'\n':'')+'Dogum: '+bdate+(btime?' '+btime:'')+' | '+bplace+p2;
+ const pb=document.getElementById('pay-btn'); pb.disabled=true; pb.textContent='Yönlendiriliyor…';
+ try{ await fetch(API+'/api/bookings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service:selectedSvc,name,phone,email:email||undefined,notes:fullNotes,kvkk:true,hp:(document.getElementById('f-hp')||{}).value}),signal:AbortSignal.timeout(6000)}); }catch(e){}
+ window.location.href=svc.shopier;
+}
+
+// -- Talep Gonder --
+async function submitOrder() {
  if (!selectedSvc) { alert('Lütfen bir hizmet seçin.'); return; }
+ const svc = SVC_BY_ID[selectedSvc];
 
  const name = document.getElementById('f-name').value.trim();
  const phone = document.getElementById('f-phone').value.trim();
  const email = document.getElementById('f-email').value.trim();
+ const bdate = document.getElementById('f-bdate').value;
+ const btime = document.getElementById('f-btime').value;
+ const bplace = document.getElementById('f-bplace').value.trim();
  const notes = document.getElementById('f-notes').value.trim();
 
  if (!name) { alert('Ad soyad zorunlu.'); return; }
  if (!phone) { alert('Telefon numarası zorunlu.'); return; }
+ if (!bdate) { alert('Doğum tarihi zorunlu.'); return; }
+ if (!bplace) { alert('Doğum yeri zorunlu.'); return; }
+ if (!document.getElementById('f-kvkk').checked) { alert('Devam etmek için Gizlilik Politikası / KVKK onayını işaretleyin.'); return; }
+
+ // 2. kişi (sinastri)
+ let p2 = '';
+ if (svc && svc.persons === 2) {
+ const n2 = document.getElementById('f-name2').value.trim();
+ const d2 = document.getElementById('f-bdate2').value;
+ const t2 = document.getElementById('f-btime2').value;
+ const pl2 = document.getElementById('f-bplace2').value.trim();
+ if (n2 || d2 || pl2) p2 = `\n2. Kişi: ${n2||'-'} · ${d2||'-'}${t2?' '+t2:''} · ${pl2||'-'}`;
+ }
+
+ const detay = `Doğum: ${bdate}${btime?' '+btime:''} · ${bplace}${p2}`;
+ const fullNotes = (notes ? notes + '\n' : '') + detay;
+
+ // Shopier ürün linki tanımlıysa ödeme sayfasını aç (sipariş yine kaydedilir)
+ 
 
  const btn = document.getElementById('submit-btn');
  btn.disabled = true; btn.textContent = 'Gönderiliyor…';
 
- // Backend yoksa WhatsApp'a yönlendir
- if (!apiOnline) {
- const d = new Date(selectedDate + 'T12:00:00Z');
- const dateLabel = `${d.getUTCDate()} ${TR_MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
- const svcLabels = {'natal-harita':'Natal Harita','sinastri':'Sinastri','tarot':'Tarot Açılımı','horary':'Horary','yasam-donguleri':'Yaşam Döngüleri','sorbi-ongorisu':'Sorbi Öngörüsü'};
- const waMsg = encodeURIComponent(`Merhaba Defne! Randevu almak istiyorum.\n\nHizmet: ${svcLabels[selectedSvc]||selectedSvc}\nTarih: ${dateLabel}\nSaat: ${selectedTime}\nAd: ${name}\nTelefon: ${phone}${notes?'\nNot: '+notes:''}`);
+ const svcLabel = svc ? svc.name : selectedSvc;
+ const waMsg = encodeURIComponent(`Merhaba Defne! Talep göndermek istiyorum.\n\nHizmet: ${svcLabel}\nAd: ${name}\nTelefon: ${phone}\n${detay}${notes?'\nNot: '+notes:''}`);
+
+ let r;
+ try {
+ r = await fetch(`${API}/api/bookings`, {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify({ service:selectedSvc, name, phone, email:email||undefined, notes:fullNotes, kvkk:true, hp:(document.getElementById('f-hp')||{}).value }),
+ signal: AbortSignal.timeout(6000)
+ });
+ } catch (netErr) {
+ // Backend erişilemedi → WhatsApp'a düş, sipariş kaybolmasın
  window.open(`https://wa.me/${WA}?text=${waMsg}`, '_blank');
- btn.disabled = false; btn.textContent = 'Randevu Talep Et ✦';
+ btn.disabled = false; btn.textContent = 'Talep Gönder ✦';
  return;
  }
 
- try {
- const r = await fetch(`${API}/api/bookings`, {
- method: 'POST',
- headers: { 'Content-Type': 'application/json' },
- body: JSON.stringify({ service:selectedSvc, name, phone, email:email||undefined, date:selectedDate, time:selectedTime, notes:notes||undefined })
- });
- const data = await r.json();
- if (!r.ok) throw new Error(data.error || 'Hata oluştu');
+ const data = await r.json().catch(() => ({}));
+ if (!r.ok) { alert(data.error || 'Bir hata oluştu, lütfen tekrar deneyin.'); btn.disabled = false; btn.textContent = 'Talep Gönder ✦'; return; }
  showSuccess(data.bookingId, name);
- } catch (e) {
- alert(e.message);
- btn.disabled = false; btn.textContent = 'Randevu Talep Et ✦';
- }
 }
 
 function showSuccess(bookingId, name) {
  document.getElementById('booking-ui').style.display = 'none';
  document.getElementById('success-screen').style.display = 'block';
- document.getElementById('success-booking-id').textContent = `Randevu #${bookingId}`;
- const waMsg = encodeURIComponent(`Merhaba Defne! #${bookingId} numaralı randevu talebimi gönderdim, onayını bekliyorum.`);
+ document.getElementById('success-booking-id').textContent = `Talep #${bookingId}`;
+ const waMsg = encodeURIComponent(`Merhaba Defne! #${bookingId} numaralı talebimi gönderdim.`);
  document.getElementById('success-wa').href = `https://wa.me/${WA}?text=${waMsg}`;
 }
 
 function resetBooking() {
  document.getElementById('booking-ui').style.display = 'grid';
  document.getElementById('success-screen').style.display = 'none';
- selectedDate = selectedTime = selectedSvc = null;
- ['f-name','f-phone','f-email','f-notes'].forEach(id => document.getElementById(id).value = '');
+ selectedSvc = null;
+ ['f-name','f-phone','f-email','f-bdate','f-btime','f-bplace','f-notes','f-name2','f-bdate2','f-btime2','f-bplace2'].forEach(id => { const e = document.getElementById(id); if (e) e.value = ''; });
+ document.getElementById('f-kvkk').checked = false;
+ document.getElementById('person2-block').style.display = 'none';
  document.querySelectorAll('.svc-btn').forEach(b => b.classList.remove('selected'));
- document.getElementById('slots-panel').style.display = 'none';
- document.getElementById('selected-summary').classList.remove('visible');
  const btn = document.getElementById('submit-btn');
- btn.disabled = false; btn.textContent = 'Randevu Talep Et ✦';
+ btn.disabled = false; btn.textContent = 'Talep Gönder ✦';
  loadMonth(currentYear, currentMonth);
 }
 
 // ── Durum Sorgulama ───────────────────────────────────────────────────────────
 async function checkStatus() {
  const id = document.getElementById('status-id-input').value.trim();
- if (!id) { alert('Randevu ID girin.'); return; }
+ if (!id) { alert('Talep numarası girin.'); return; }
  const el = document.getElementById('status-result');
  el.className = 'status-result visible'; el.textContent = 'Sorgulanıyor…';
  try {
  const r = await fetch(`${API}/api/bookings/${id}`);
- if (!r.ok) { el.textContent = 'Randevu bulunamadı.'; return; }
+ if (!r.ok) { el.textContent = 'Talep bulunamadı.'; return; }
  const b = await r.json();
  const d = new Date(b.date + 'T12:00:00Z');
  const dateLabel = `${d.getUTCDate()} ${TR_MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
- const statusMap = { pending:'Onay Bekleniyor', approved:'Onaylandı', rejected:'Reddedildi' };
+ const statusMap = { pending:'Alındı · dönüş yapılacak', approved:'Tamamlandı', rejected:'İptal edildi' };
  const classMap = { pending:'status-pending', approved:'status-approved', rejected:'status-rejected' };
  el.className = `status-result visible ${classMap[b.status]}`;
  el.innerHTML = `<strong>#${b.id} — ${b.name}</strong><br>${dateLabel} / ${b.time}<br><span style="font-size:0.78rem;">${statusMap[b.status]}</span>`;
@@ -528,5 +544,8 @@ document.getElementById('next-month').addEventListener('click', () => {
 // ── Init ──────────────────────────────────────────────────────────────────────
 loadMonth(currentYear, currentMonth);
 </script>
+
+<!-- Cloudflare Web Analytics — cookiesiz/KVKK-dostu. CF panel > Web Analytics'ten aç (kod gerekmez) ya da token'ı aşağıya koy. -->
+<!-- <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"BURAYA_CF_TOKEN"}'></script> -->
 </body>
 </html>

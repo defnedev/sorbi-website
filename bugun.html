@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bugün — Kişisel Astroloji Günlüğün | Sorbi</title>
+<meta name="description" content="Bugün gökyüzünde ne var ve senin haritana ne yapıyor? Ay burcu, evre, ay boşlukta, retro ve sana özel günlük transit — her gün taze, kişisel astroloji rehberin.">
+<link rel="canonical" href="https://sorbiapp.com/bugun">
+<meta name="theme-color" content="#0B0E15">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Sorbi">
+<meta property="og:title" content="Bugün — Kişisel Astroloji Günlüğün"><meta property="og:description" content="Bugünkü gökyüzü + senin haritana etkisi. Her gün taze."><meta property="og:url" content="https://sorbiapp.com/bugun"><meta property="og:image" content="https://sorbiapp.com/og-image.png"><meta property="og:locale" content="tr_TR">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="/astronomy.browser.min.js" defer></script>
+<style>
+:root{--bg:#0B0F14;--panel:rgba(235,240,248,.03);--gold:#C9A962;--gold-lt:#E4CF9A;--gold-br:#F4E4BA;--ink:#EBF0F8;--mut:#B8C5D6;--dim:#8A9DB5;--terra:#C4744E;--btn-ink:#F6EFE1;--line:rgba(235,240,248,.06);--line2:rgba(235,240,248,.08);--lstrong:rgba(235,240,248,.14);--lineg:rgba(201,169,98,.18);--lineg2:rgba(201,169,98,.45);--foil:linear-gradient(135deg,#8A6D2E,#C9A962,#F4E4BA,#C9A962,#8A6D2E);--ease:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1100px 520px at 50% -8%,#10151d 0,var(--bg) 62%);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.62}
+.wrap{max-width:640px;margin:0 auto;padding:2rem 1.15rem 4rem}
+.brand{font-family:'Playfair Display',serif;letter-spacing:3px;color:var(--gold);font-size:.82rem;text-decoration:none;text-transform:uppercase}
+.top{text-align:center;margin-bottom:1.2rem}
+.date{font-family:'Inter';font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);margin-top:.6rem}
+h1{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(1.6rem,5vw,2.2rem);margin:.35rem 0 .2rem;color:var(--ink)}
+.sub{color:var(--dim);font-size:.95rem}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1.3rem 1.2rem;margin-top:1.3rem}
+.sec-h{font-family:'Inter';font-size:.72rem;text-transform:uppercase;letter-spacing:2.2px;color:var(--gold);font-weight:600;margin-bottom:.9rem;display:flex;align-items:center;gap:.6rem}
+.sec-h::after{content:'';flex:1;height:1px;background:var(--lineg)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.pill{display:inline-flex;align-items:center;gap:.4rem;background:rgba(11,14,21,.5);border:1px solid var(--line);border-radius:99px;padding:.45rem .85rem;font-size:.84rem;color:var(--mut)}
+.pill b{color:var(--gold-lt);font-weight:600}
+.pill.r{border-color:rgba(196,116,78,.4);color:var(--terra)}
+.today .lead{font-family:'Playfair Display',serif;font-style:italic;font-size:1.5rem;color:var(--gold-lt);line-height:1.35;margin-bottom:.6rem}
+.today p{font-size:.97rem;color:var(--mut);line-height:1.7}
+.more{margin-top:.9rem;padding-top:.8rem;border-top:1px solid var(--line);font-size:.9rem;color:var(--dim)}
+.more b{color:var(--mut)}
+.voc{background:rgba(196,116,78,.07);border:1px solid rgba(196,116,78,.2);border-radius:10px;padding:.7rem .9rem;margin-top:.8rem;font-size:.85rem;color:var(--mut)}
+.cta{margin-top:1.1rem;text-align:center}
+.cta a{display:inline-block;text-decoration:none;padding:.7rem 1.4rem;border-radius:99px;font-weight:600;font-size:.9rem;margin:.2rem}
+.cta a.buy{background:var(--terra);color:var(--btn-ink)}
+.cta a.ghost{background:transparent;border:1px solid var(--lineg);color:var(--gold-lt)}
+.empty{background:linear-gradient(180deg,rgba(196,116,78,.12),rgba(22,26,37,.4));border:1px solid var(--lineg);border-radius:16px;padding:1.4rem 1.2rem;text-align:center;margin-top:1.3rem}
+.empty h3{font-family:'Playfair Display',serif;color:var(--ink);font-size:1.2rem;margin:.2rem 0 .4rem}
+.empty p{font-size:.9rem;color:var(--mut);max-width:420px;margin:0 auto .9rem}
+.empty a{display:inline-block;background:var(--terra2);color:var(--ink);text-decoration:none;padding:.7rem 1.4rem;border-radius:99px;font-weight:600;font-size:.9rem}
+.foot{text-align:center;color:var(--dim);font-size:.78rem;margin-top:2.2rem}.foot a{color:var(--gold)}
+.load{color:var(--dim);text-align:center;padding:1rem;font-size:.9rem}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}</style>
+</head>
+<body>
+<style>
+.sorbi-topnav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.55rem 1rem;background:rgba(11,15,20,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid rgba(201,169,98,.2)}
+.sorbi-topnav .lg{font-family:'Playfair Display',serif;letter-spacing:2px;color:#C9A962;font-size:.82rem;text-decoration:none;text-transform:uppercase;white-space:nowrap}
+.sorbi-topnav nav{display:flex;gap:.25rem;align-items:center}
+.sorbi-topnav nav a{color:#B8C5D6;text-decoration:none;font-size:.82rem;padding:.35rem .65rem;border-radius:99px;white-space:nowrap}
+.sorbi-topnav nav a:hover{color:#EBF0F8;background:rgba(235,240,248,.06)}
+.sorbi-topnav nav a.on{color:#C9A962;background:rgba(235,240,248,.08);font-weight:600}
+@media(max-width:480px){.sorbi-topnav{padding:.5rem .6rem;gap:.4rem}.sorbi-topnav .lg{font-size:.72rem;letter-spacing:1px}.sorbi-topnav nav a{font-size:.78rem;padding:.35rem .5rem}}
+</style>
+<header class="sorbi-topnav">
+ <a href="/" class="lg">✦ Sorbi</a>
+ <nav>
+  <a href="/haritam" id="sorbiNavHaritam">Haritam</a>
+ </nav>
+</header>
+<script>(function(){try{if(JSON.parse(localStorage.getItem('sorbi_profile')||'null')){var e=document.getElementById('sorbiNavHaritam');if(e)e.style.display='';}var p=location.pathname.replace(/\/+$/,'');document.querySelectorAll('.sorbi-topnav nav a').forEach(function(a){if(a.getAttribute('href')===p)a.className='on';});}catch(e){}})();</script>
+
+<div class="wrap">
+ <div class="top">
+  <a href="/" class="brand">✦ Sorbi</a>
+  <div class="date" id="date"></div>
+  <h1 id="hello">Bugün</h1>
+  <p class="sub" id="sub">Gökyüzünde ne var, sana ne söylüyor.</p>
+ </div>
+
+ <div class="card">
+  <div class="sec-h">Gökyüzü Bugün</div>
+  <div class="chips" id="sky"><div class="load">Gökyüzü okunuyor…</div></div>
+  <div class="voc" id="voc" style="display:none"></div>
+ </div>
+
+ <div class="card today" id="personalCard" style="display:none">
+  <div class="sec-h">Sana Bugün</div>
+  <div id="personal"></div>
+  <div class="cta">
+   <a class="buy" href="/soru-sor">Bugün bir şey mi var? Astroloğa sor ✦</a>
+  </div>
+ </div>
+
+ <div class="empty" id="empty" style="display:none">
+  <h3>Bugün sana özel olsun</h3>
+  <p>Gökyüzü herkes için aynı. Ama bugünün <em>senin</em> haritana ne yaptığını görmek için doğum haritanı çıkar — sonra her gün buraya kişisel bugünün gelir.</p>
+  <a href="/dogum-haritasi-hesaplama">Ücretsiz haritamı çıkar ✦</a>
+ </div>
+
+ <p class="foot" id="foot">Kader değil, farkındalık. · <a href="/">sorbiapp.com</a> · <a href="/retro-ay-takvimi">Retro & ay takvimi</a></p>
+</div>
+<script>
+const SIGNS=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
+const norm=d=>((d%360)+360)%360,RAD=Math.PI/180;
+const signOf=l=>Math.floor(norm(l)/30);
+function tzOffMin(date,tz){try{const p=new Intl.DateTimeFormat('en-US',{timeZone:tz,hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(date).reduce((a,x)=>(a[x.type]=x.value,a),{});const h=p.hour==='24'?0:+p.hour;return(Date.UTC(+p.year,+p.month-1,+p.day,h,+p.minute,+p.second)-date.getTime())/60000;}catch(e){return 180;}}
+function localToUTC(y,mo,d,h,mi,tz){let g=Date.UTC(y,mo-1,d,h,mi,0);for(let i=0;i<3;i++){const o=tzOffMin(new Date(g),tz);const c=Date.UTC(y,mo-1,d,h,mi,0)-o*60000;if(c===g)break;g=c;}return new Date(g);}
+function ecl(A,body,t){let v=(body===A.Body.Moon)?A.GeoMoon(t):A.GeoVector(body,t,true);return norm(A.SphereFromVector(A.RotateVector(A.Rotation_EQJ_ECT(t),v)).lon);}
+function obliquity(t){const T=t.tt/36525;return(84381.448-46.8150*T-0.00059*T*T+0.001813*T*T*T)/3600;}
+function ascendant(r,e,lat){return norm(Math.atan2(Math.cos(r*RAD),-(Math.sin(r*RAD)*Math.cos(e*RAD)+Math.tan(lat*RAD)*Math.sin(e*RAD)))/RAD);}
+function getProfile(){try{return JSON.parse(localStorage.getItem('sorbi_profile')||'null');}catch(e){return null;}}
+function vel(A,body,ms){let a=ecl(A,body,A.MakeTime(new Date(ms-43200000))),b=ecl(A,body,A.MakeTime(new Date(ms+43200000)));let d=b-a;if(d>180)d-=360;if(d<-180)d+=360;return d;}
+
+const PHN=[[0,'Yeniay'],[45,'Büyüyen Hilal'],[90,'İlk Dördün'],[135,'Şişkin Ay'],[180,'Dolunay'],[225,'Solan Ay'],[270,'Son Dördün'],[315,'Balzamik Ay']];
+const MOODS=['ateşli ve hareketli','sakin ve topraklı','meraklı ve konuşkan','duygusal ve içe dönük','cömert ve parlak','düzenli ve pratik','uyumlu ve ilişkisel','yoğun ve derin','özgür ve maceracı','ciddi ve hedefli','özgün ve mesafeli','sezgisel ve hayalperest'];
+
+// transiting -> natal aspect interpretation
+const TTHEME={'Ay':'duyguların ve günün ritmi','Güneş':'enerjin ve odağın','Merkür':'zihnin ve iletişimin','Venüs':'aşkın, keyfin ve ilişkilerin','Mars':'harekete geçme ve cesaret enerjin','Jüpiter':'şansın ve açılımların','Satürn':'sorumlulukların ve sınavların'};
+const NPT={'Güneş':'özünle','Ay':'iç dünyanla','Venüs':'aşk hayatınla','Mars':'enerjinle','Yükselen':'dışa yansıyan seninle'};
+function toneLine(theme,nat,ang){
+ if(ang===0)return `Bugün <b>${theme}</b>, ${nat} güçlü şekilde buluşuyor — belirgin, dolu bir gün. Bu enerjiyi bilinçli kullan.`;
+ if(ang===120||ang===60)return `Bugün <b>${theme}</b> ${nat} uyumlu akıyor — kolaylık ve fırsat günü. Ertelediğin adımı bugün at.`;
+ return `Bugün <b>${theme}</b> ${nat} gerilimde — acele etme, tepki vermeden önce dur. Zorlanma değil, farkındalık günü.`;
+}
+const TASP=[[0,0],[60,60],[90,90],[120,120],[180,180]];
+
+function draw(){
+ const A=window.Astronomy;if(!A){setTimeout(draw,300);return;}
+ const now=A.MakeTime(new Date());const nowMs=Date.now();
+ document.getElementById('date').textContent=new Date().toLocaleDateString('tr-TR',{weekday:'long',day:'numeric',month:'long'});
+ // sky
+ const moon=ecl(A,A.Body.Moon,now),sun=ecl(A,A.Body.Sun,now);const ms=signOf(moon);
+ const ph=A.MoonPhase(now);let bi=0,bd=999;PHN.forEach((p,i)=>{let dd=Math.min(Math.abs(ph-p[0]),360-Math.abs(ph-p[0]));if(dd<bd){bd=dd;bi=i;}});
+ const RP=[['Merkür',A.Body.Mercury],['Venüs',A.Body.Venus],['Mars',A.Body.Mars],['Jüpiter',A.Body.Jupiter],['Satürn',A.Body.Saturn],['Uranüs',A.Body.Uranus],['Neptün',A.Body.Neptune],['Plüton',A.Body.Pluto]];
+ const retros=RP.filter(p=>vel(A,p[1],nowMs)<0).map(p=>p[0]);
+ let chips=`<span class="pill"><b>Ay</b> ${SIGNS[ms]}</span><span class="pill"><b>Evre</b> ${PHN[bi][1]}</span><span class="pill"><b>Güneş</b> ${SIGNS[signOf(sun)]}</span>`;
+ retros.forEach(r=>{chips+=`<span class="pill r">℞ ${r} retro</span>`;});
+ if(!retros.length)chips+=`<span class="pill">Retro yok — gök net</span>`;
+ document.getElementById('sky').innerHTML=chips;
+ // void of course (compact): next sign ingress + last major aspect of Moon
+ try{
+  let ing=null;for(let t=nowMs+1800000;t<=nowMs+2.6*86400000;t+=1800000){if(signOf(ecl(A,A.Body.Moon,A.MakeTime(new Date(t))))!==ms){let lo=t-1800000,hi=t;for(let i=0;i<20;i++){const m=(lo+hi)/2;if(signOf(ecl(A,A.Body.Moon,A.MakeTime(new Date(m))))===ms)lo=m;else hi=m;}ing=(lo+hi)/2;break;}}
+  const VP=[A.Body.Sun,A.Body.Mercury,A.Body.Venus,A.Body.Mars,A.Body.Jupiter,A.Body.Saturn];const TG=[0,60,90,120,180,240,270,300];
+  const nts=s=>{let bv=999;for(const T of TG){let x=s-T;if(x>180)x-=360;if(x<-180)x+=360;if(Math.abs(x)<Math.abs(bv))bv=x;}return bv;};
+  let last=null;if(ing)for(const bd2 of VP){let pT=nowMs-3*86400000,pS=nts(norm(ecl(A,A.Body.Moon,A.MakeTime(new Date(pT)))-ecl(A,bd2,A.MakeTime(new Date(pT)))));for(let t=pT+3600000;t<=ing;t+=3600000){const s=nts(norm(ecl(A,A.Body.Moon,A.MakeTime(new Date(t)))-ecl(A,bd2,A.MakeTime(new Date(t)))));if((pS<0)!==(s<0)){let lo=t-3600000,hi=t;for(let i=0;i<16;i++){const m=(lo+hi)/2;const sm=nts(norm(ecl(A,A.Body.Moon,A.MakeTime(new Date(m)))-ecl(A,bd2,A.MakeTime(new Date(m)))));if((sm<0)===(pS<0))lo=m;else hi=m;}const am=(lo+hi)/2;if(last==null||am>last)last=am;}pS=s;pT=t;}}
+  const isVoid=(last!=null&&nowMs>=last&&ing&&nowMs<ing);
+  const f=ms2=>new Date(ms2).toLocaleTimeString('tr-TR',{timeZone:'Europe/Istanbul',hour:'2-digit',minute:'2-digit'});
+  const vd=document.getElementById('voc');vd.style.display='block';
+  vd.innerHTML=isVoid?`🌙 <b style="color:var(--terra)">Ay şu an boşlukta</b> — ${SIGNS[(ms+1)%12]}'a geçene dek (${ing?f(ing):''}). Yeni iş başlatma, imza ve kritik kararları ertele.`:`Ay ${SIGNS[ms]}'de, ${MOODS[ms]} bir gün. ${ing?SIGNS[(ms+1)%12]+"'a geçiş: "+f(ing):''}`;
+ }catch(e){}
+
+ // personal
+ const pr=getProfile();const b=pr&&pr.birth&&pr.birth.date?pr.birth:null;
+ if(pr)document.getElementById('hello').textContent='Bugün, '+((pr.name||(pr.email||'').split('@')[0])||'');
+ if(!b){document.getElementById('empty').style.display='block';return;}
+ try{
+  const[y,mo,d]=b.date.split('-').map(Number);const[hh,mm]=(b.time||'12:00').split(':').map(Number);
+  const bu=localToUTC(y,mo,d,hh,mm,b.tz||'Europe/Istanbul');const bt=A.MakeTime(bu);
+  const nat={'Güneş':ecl(A,A.Body.Sun,bt),'Ay':ecl(A,A.Body.Moon,bt),'Venüs':ecl(A,A.Body.Venus,bt),'Mars':ecl(A,A.Body.Mars,bt)};
+  if(b.time&&b.lat){const e=obliquity(bt);const ramc=norm(A.SiderealTime(bt)*15+(+b.lon));nat['Yükselen']=ascendant(ramc,e,+b.lat);}
+  const TB=[['Ay',A.Body.Moon,6],['Güneş',A.Body.Sun,4],['Merkür',A.Body.Mercury,4],['Venüs',A.Body.Venus,4],['Mars',A.Body.Mars,4],['Jüpiter',A.Body.Jupiter,3],['Satürn',A.Body.Saturn,3]];
+  const hits=[];
+  for(const[tn,tb,orb]of TB){const tl=ecl(A,tb,now);for(const nn of Object.keys(nat)){let dd=Math.abs(norm(tl-nat[nn]));if(dd>180)dd=360-dd;for(const[ang]of TASP){if(Math.abs(dd-ang)<=orb){hits.push({t:tn,n:nn,ang,orb:Math.abs(dd-ang)});break;}}}}
+  hits.sort((a,b)=>a.orb-b.orb);
+  const pc=document.getElementById('personalCard');pc.style.display='block';
+  if(!hits.length){
+   document.getElementById('personal').innerHTML=`<div class="lead">Bugün gök seninle sakin.</div><p>Haritana değen belirgin bir transit yok — akışına güvenebileceğin, kendine dönebileceğin bir gün. Ay ${SIGNS[ms]}'de, ${MOODS[ms]} bir enerji taşıyor.</p>`;
+  }else{
+   const top=hits[0];const theme=TTHEME[top.t]||top.t;const nat2=NPT[top.n]||top.n;
+   let h=`<div class="lead">${['Güçlü bir gün.','Akış günü.','Dikkat günü.'][top.ang===0?0:(top.ang===60||top.ang===120?1:2)]}</div>`;
+   h+=`<p>${toneLine(theme,nat2,top.ang)}</p>`;
+   if(hits[1]){const t2=hits[1];h+=`<div class="more"><b>Ayrıca:</b> transit ${t2.t} — natal ${t2.n}: ${['kavuşum','altmışlık','kare','üçgen','karşıt'][[0,60,90,120,180].indexOf(t2.ang)]}.</div>`;}
+   document.getElementById('personal').innerHTML=h;
+  }
+ }catch(e){document.getElementById('empty').style.display='block';}
+}
+draw();
+</script>
+</body>
+</html>

@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://sorbiapp.com/</loc><lastmod>2026-07-13</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
-  <url><loc>https://sorbiapp.com/natal-harita</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://sorbiapp.com/sinastri</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://sorbiapp.com/tarot</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://sorbiapp.com/horary</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://sorbiapp.com/yasam-donguleri</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://sorbiapp.com/karma-paketler</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://sorbiapp.com/astrodefne-hizmetler-section</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://sorbiapp.com/dogum-haritasi-hesaplama</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://sorbiapp.com/yorumlar</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://sorbiapp.com/randevu</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://sorbiapp.com/privacy</loc><lastmod>2026-07-13</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
   <url><loc>https://sorbiapp.com/gunluk-burc-yorumlari</loc><lastmod>2026-07-13</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>
   <url><loc>https://sorbiapp.com/koc-burcu-gunluk-yorum</loc><lastmod>2026-07-13</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
@@ -24,24 +17,10 @@
   <url><loc>https://sorbiapp.com/oglak-burcu-gunluk-yorum</loc><lastmod>2026-07-13</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://sorbiapp.com/kova-burcu-gunluk-yorum</loc><lastmod>2026-07-13</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
   <url><loc>https://sorbiapp.com/balik-burcu-gunluk-yorum</loc><lastmod>2026-07-13</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-  <url><loc>https://sorbiapp.com/burc-uyumu</loc><lastmod>2026-07-13</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://sorbiapp.com/rehber</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://sorbiapp.com/yukselen-burc-nedir</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://sorbiapp.com/ay-burcu-nedir</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://sorbiapp.com/gunes-burcu-nedir</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://sorbiapp.com/dogum-haritasi-nedir</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://sorbiapp.com/merkur-retrosu-nedir</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://sorbiapp.com/saturn-donusu-nedir</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://sorbiapp.com/sinastri-nedir</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://sorbiapp.com/transit-nedir</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://sorbiapp.com/ates-burclari</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://sorbiapp.com/toprak-burclari</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://sorbiapp.com/hava-burclari</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://sorbiapp.com/su-burclari</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://sorbiapp.com/en-uyumlu-burclar</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://sorbiapp.com/burclar-ve-tarihleri</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://sorbiapp.com/astroloji-sozlugu</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://sorbiapp.com/yukselen-burc-hesaplama</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://sorbiapp.com/burc-ozellikleri</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://sorbiapp.com/koc-burcu-ozellikleri</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://sorbiapp.com/boga-burcu-ozellikleri</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -56,4 +35,14 @@
   <url><loc>https://sorbiapp.com/kova-burcu-ozellikleri</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://sorbiapp.com/balik-burcu-ozellikleri</loc><lastmod>2026-07-13</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://sorbiapp.com/gunun-karti</loc><lastmod>2026-07-13</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>https://sorbiapp.com/burc-uyumu</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://sorbiapp.com/yukselen-burc-hesaplama</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://sorbiapp.com/ay-burcu-hesaplama</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://sorbiapp.com/retro-ay-takvimi</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+<url><loc>https://sorbiapp.com/uygun-gun-secimi</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+<url><loc>https://sorbiapp.com/soru-sor</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+<url><loc>https://sorbiapp.com/bugun</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
+<url><loc>https://sorbiapp.com/araclar</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://sorbiapp.com/seni-taniyorum</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+<url><loc>https://sorbiapp.com/astrokartografi</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
 </urlset>

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Danışan Yorumları — Sorbi Astroloji Danışmanlığı</title>
 <link rel="canonical" href="https://sorbiapp.com/yorumlar">
-<meta name="theme-color" content="#0B0E15">
+<meta name="theme-color" content="#0B0F14">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sorbi">
 <meta property="og:locale" content="tr_TR">
@@ -22,17 +22,17 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{font-family:'Inter',sans-serif;background:#F6F1E7;color:#12151F;overflow-x:hidden;}
 a{text-decoration:none;color:inherit;}
 
-:root{
+:root{--terra:#C4744E;--btn-ink:#F6EFE1;
  --gold:#C9A962;
- --purple:#C9A962;
- --dark:#0B0E15;
+ --purple:#C4744E;
+ --dark:#0B0F14;
  --warm:#F6F1E7;
  --light:#F6F1E7;
  --text-dark:#12151F;
@@ -50,7 +50,7 @@ nav{
  position:sticky;top:0;z-index:100;
  border-bottom:1px solid rgba(201,169,98,0.2);
 }
-.nav-logo{font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:700;color:#F6F1E7;display:flex;align-items:center;gap:0.35rem;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:700;color:#F6F1E7;display:flex;align-items:center;gap:0.35rem;}
 .nav-logo span{color:var(--gold);font-size:2.4rem;}
 .nav-back{font-size:0.82rem;color:rgba(246,241,231,0.55);display:flex;align-items:center;gap:0.4rem;transition:color 0.2s;}
 .nav-back:hover{color:#F6F1E7;}
@@ -64,15 +64,15 @@ nav{
 }
 .page-header::before{
  content:'✦';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
- font-size:30rem;color:rgba(201,169,98,0.03);font-family:'Cormorant Garamond',serif;
+ font-size:30rem;color:rgba(201,169,98,0.03);font-family:'Playfair Display',serif;
  pointer-events:none;line-height:0;
 }
 .page-header .eyebrow{font-size:0.68rem;text-transform:uppercase;letter-spacing:2px;color:var(--gold);font-weight:600;display:block;margin-bottom:0.8rem;}
-.page-header h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;color:#F6F1E7;margin-bottom:0.8rem;}
+.page-header h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;color:#F6F1E7;margin-bottom:0.8rem;}
 .page-header p{font-size:0.92rem;color:rgba(246,241,231,0.55);max-width:440px;margin:0 auto 1.5rem;line-height:1.7;}
 .stats-bar{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;}
 .stat{text-align:center;}
-.stat-n{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--gold);display:block;line-height:1;}
+.stat-n{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold);display:block;line-height:1;}
 .stat-l{font-size:0.7rem;color:rgba(246,241,231,0.4);margin-top:0.2rem;display:block;}
 
 /* FILTERS */
@@ -147,9 +147,9 @@ nav{
  background:var(--dark);
  padding:4rem 1.5rem;text-align:center;
 }
-.bottom-cta h2{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:#F6F1E7;margin-bottom:0.8rem;}
+.bottom-cta h2{font-family:'Playfair Display',serif;font-size:2.2rem;color:#F6F1E7;margin-bottom:0.8rem;}
 .bottom-cta p{font-size:0.92rem;color:rgba(246,241,231,0.55);margin-bottom:1.8rem;}
-.btn-gold{background:var(--gold);color:var(--dark);padding:0.8rem 2rem;border-radius:999px;font-weight:600;font-size:0.9rem;display:inline-flex;align-items:center;gap:0.4rem;transition:opacity 0.2s;}
+.btn-gold{background:var(--terra);color:var(--dark);padding:0.8rem 2rem;border-radius:999px;font-weight:600;font-size:0.9rem;display:inline-flex;align-items:center;gap:0.4rem;transition:opacity 0.2s;}
 .btn-gold:hover{opacity:0.88;}
 
 /* HIDDEN CARDS */
@@ -172,7 +172,7 @@ nav{
 }
 .comment-inner{max-width:640px;margin:0 auto;}
 .comment-eyebrow{font-size:0.68rem;text-transform:uppercase;letter-spacing:2px;color:var(--purple);font-weight:600;display:block;margin-bottom:0.7rem;text-align:center;}
-.comment-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:700;color:var(--dark);text-align:center;margin-bottom:0.5rem;}
+.comment-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:700;color:var(--dark);text-align:center;margin-bottom:0.5rem;}
 .comment-sub{font-size:0.88rem;color:var(--text-muted);text-align:center;margin-bottom:2.2rem;line-height:1.6;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
 @media(max-width:520px){.form-row{grid-template-columns:1fr;}}
@@ -206,7 +206,7 @@ nav{
 .star-rating input:checked~label{color:var(--gold);}
 .btn-wa-submit{
  width:100%;display:flex;align-items:center;justify-content:center;gap:0.55rem;
- background:#25D366;color:#fff;
+ background:#25D366;color:#EBF0F8;
  padding:0.9rem 1.5rem;border-radius:999px;
  font-size:0.95rem;font-weight:700;letter-spacing:0.3px;
  border:none;cursor:pointer;
@@ -219,7 +219,7 @@ nav{
 
 @media(max-width:900px){.reviews-grid{columns:2;}}
 @media(max-width:580px){.reviews-grid{columns:1;}}
-</style>
+@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}</style>
 </head>
 <body>
 

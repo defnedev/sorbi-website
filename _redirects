@@ -4,3 +4,29 @@
 /ref/*      /?ref=:splat#uygulama      302
 /invite/*   /?ref=:splat#uygulama      302
 /share/*    /#uygulama                 302
+
+# Parked pages → kept pages (2026-07-21)
+/rehber       /   301
+/rehber.html  /   301
+/astroloji-sozlugu       /   301
+/astroloji-sozlugu.html  /   301
+/en-uyumlu-burclar       /sinastri   301
+/en-uyumlu-burclar.html  /sinastri   301
+/sinastri-nedir       /sinastri   301
+/sinastri-nedir.html  /sinastri   301
+/transit-nedir       /   301
+/transit-nedir.html  /   301
+/saturn-donusu-nedir       /   301
+/saturn-donusu-nedir.html  /   301
+/merkur-retrosu-nedir       /   301
+/merkur-retrosu-nedir.html  /   301
+/dogum-haritasi-nedir       /dogum-haritasi-hesaplama   301
+/dogum-haritasi-nedir.html  /dogum-haritasi-hesaplama   301
+/gunes-burcu-nedir       /burc-ozellikleri   301
+/gunes-burcu-nedir.html  /burc-ozellikleri   301
+/ay-burcu-nedir       /burc-ozellikleri   301
+/ay-burcu-nedir.html  /burc-ozellikleri   301
+/yukselen-burc-nedir       /dogum-haritasi-hesaplama   301
+/yukselen-burc-nedir.html  /dogum-haritasi-hesaplama   301
+/burclar-ve-tarihleri       /burc-ozellikleri   301
+/burclar-ve-tarihleri.html  /burc-ozellikleri   301

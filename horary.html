@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Horary Astroloji: Tek Soru, Net Cevap — Sorbi</title>
+<meta name="robots" content="noindex,nofollow">
 <link rel="canonical" href="https://sorbiapp.com/horary">
-<meta name="theme-color" content="#0B0E15">
+<meta name="theme-color" content="#0B0F14">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sorbi">
 <meta property="og:locale" content="tr_TR">
@@ -22,19 +23,19 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{font-family:'Inter',sans-serif;overflow-x:hidden;background:#0B0E15;color:#F6F1E7;}
+body{font-family:'Inter',sans-serif;overflow-x:hidden;background:#0B0F14;color:#F6F1E7;}
 a{text-decoration:none;color:inherit;}
 ul{list-style:none;}
 
-:root{
- --dark:#0B0E15;
+:root{--terra:#C4744E;--btn-ink:#F6EFE1;
+ --dark:#0B0F14;
  --gold:#C9A962;
  --gold2:rgba(201,169,98,0.12);
- --purple:#C9A962;
+ --purple:#C4744E;
  --purple2:rgba(201,169,98,0.12);
  --green:#25D366;
  --text-light:#F6F1E7;
@@ -44,19 +45,19 @@ ul{list-style:none;}
  --radius:12px;
 }
 
-h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:600;line-height:1.15;}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600;line-height:1.15;}
 p{line-height:1.85;color:var(--text-muted);}
 
 nav{
  position:fixed;top:0;left:0;width:100%;z-index:1000;
  padding:1rem 2rem;
  display:flex;justify-content:space-between;align-items:center;
- background:#0B0E15;
+ background:#0B0F14;
  backdrop-filter:none;
  box-shadow:none;
 }
 .nav-logo{
- font-family:'Cormorant Garamond',serif;
+ font-family:'Playfair Display',serif;
  font-size:3.2rem;font-weight:700;
  color:var(--text-light);
  display:flex;align-items:center;gap:0.2rem;line-height:1;
@@ -120,7 +121,7 @@ nav{
 .clock-deco::before{
  content:'';position:absolute;
  width:2px;height:40px;
- background:var(--gold);
+ background:var(--terra);
  bottom:50%;left:50%;
  transform-origin:bottom center;
  transform:translateX(-50%) rotate(-30deg);
@@ -137,7 +138,7 @@ nav{
 }
 .clock-center{
  width:8px;height:8px;border-radius:50%;
- background:var(--gold);
+ background:var(--terra);
  position:absolute;
  z-index:2;
 }
@@ -171,7 +172,7 @@ nav{
  border-radius:0 var(--radius) var(--radius) 0;
 }
 .quote-block p{
- font-family:'Cormorant Garamond',serif;
+ font-family:'Playfair Display',serif;
  font-size:1.35rem;font-style:italic;
  color:var(--text-light);line-height:1.6;
 }
@@ -196,7 +197,7 @@ nav{
  background:rgba(201,169,98,0.05);
 }
 .question-card h4{
- font-family:'Cormorant Garamond',serif;
+ font-family:'Playfair Display',serif;
  font-size:1rem;margin-bottom:0.8rem;
 }
 .question-card.good h4{color:#25D366;}
@@ -222,13 +223,13 @@ nav{
  border-radius:var(--radius);
 }
 .step-num{
- font-family:'Cormorant Garamond',serif;
+ font-family:'Playfair Display',serif;
  font-size:1.8rem;font-weight:700;
  color:var(--gold);flex-shrink:0;
  line-height:1;
 }
 .step-content h4{
- font-family:'Cormorant Garamond',serif;
+ font-family:'Playfair Display',serif;
  font-size:1.1rem;color:var(--text-light);margin-bottom:0.3rem;
 }
 .step-content p{font-size:0.88rem;margin:0;}
@@ -240,7 +241,7 @@ nav{
  padding:2rem;margin-top:1.5rem;
 }
 .example-block h4{
- font-family:'Cormorant Garamond',serif;
+ font-family:'Playfair Display',serif;
  font-size:1.2rem;color:var(--purple);margin-bottom:0.8rem;
 }
 .example-block p{font-size:0.92rem;}
@@ -254,7 +255,7 @@ nav{
 }
 .receive-icon{font-size:1.4rem;flex-shrink:0;margin-top:0.1rem;}
 .receive-text h4{
- font-family:'Cormorant Garamond',serif;
+ font-family:'Playfair Display',serif;
  font-size:1.1rem;color:var(--text-light);margin-bottom:0.3rem;
 }
 .receive-text p{font-size:0.88rem;margin:0;}
@@ -271,7 +272,7 @@ nav{
  color:var(--text-light);margin-bottom:0.5rem;
 }
 .price-tag{
- font-family:'Cormorant Garamond',serif;
+ font-family:'Playfair Display',serif;
  font-size:clamp(3.5rem,8vw,5rem);font-weight:700;
  color:var(--gold);line-height:1;margin:1rem 0;
 }
@@ -282,7 +283,7 @@ nav{
 
 .wa-btn{
  display:inline-flex;align-items:center;gap:0.6rem;
- background:var(--green);color:#fff;
+ background:var(--green);color:#EBF0F8;
  padding:1rem 2.2rem;border-radius:999px;
  font-weight:600;font-size:0.95rem;
  transition:opacity 0.2s,transform 0.2s;cursor:pointer;border:none;
@@ -303,7 +304,7 @@ footer a{color:var(--gold);}
  .pricing-section{padding:2rem 1.5rem;}
  .question-grid{grid-template-columns:1fr;}
 }
-</style>
+@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}</style>
 </head>
 <body>
 

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haritam — Sorbi</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0B0F14">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="/astronomy.browser.min.js" defer></script>
+<style>
+:root{--terra:#C4744E;--btn-ink:#F6EFE1;--bg:#0B0F14;--panel:#161a25;--gold:#C9A962;--gold-lt:#E4CF9A;--gold-dk:#B05A32;--ink:#EBF0F8;--mut:#B8C5D6;--dim:#8A9DB5;--terra:#C4744E;--terra2:#B05A32;--line:rgba(201,169,98,.16);--lineg:rgba(201,169,98,.28);--lineg2:rgba(201,169,98,.42)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1100px 520px at 50% -8%,#10151d 0,var(--bg) 62%);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.62}
+.wrap{max-width:680px;margin:0 auto;padding:2rem 1.15rem 4rem}
+.brand{font-family:'Playfair Display',serif;letter-spacing:3px;color:var(--gold);font-size:.82rem;text-decoration:none;text-transform:uppercase}
+.top{text-align:center;margin-bottom:1.3rem}
+h1{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(1.6rem,5vw,2.2rem);margin:.5rem 0 .2rem;color:#EBF0F8}
+.sub{color:var(--dim);font-size:.95rem}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1.3rem 1.2rem;margin-top:1.3rem}
+.sec-h{font-family:'Inter';font-size:.72rem;text-transform:uppercase;letter-spacing:2.2px;color:var(--gold);font-weight:600;margin-bottom:.9rem;display:flex;align-items:center;gap:.6rem}
+.sec-h::after{content:'';flex:1;height:1px;background:var(--lineg)}
+.muhur{text-align:center;margin:.2rem 0 .4rem}
+.muhur .e{font-size:.64rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.muhur .t{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.6rem,7vw,2.2rem);background:linear-gradient(135deg,#8A6D2E,#C9A962,#F4E4BA,#C9A962,#8A6D2E);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#F4E4BA;margin:.1rem 0}
+.hero3{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:1.3rem}
+.hero3 a{background:var(--panel);border:1px solid var(--lineg);border-radius:16px;padding:1.15rem .7rem;text-align:center;text-decoration:none;transition:border-color .15s,transform .1s;display:flex;flex-direction:column;align-items:center;gap:.35rem}
+.hero3 a:hover{border-color:var(--lineg2);transform:translateY(-1px)}
+.hero3 a.hot{background:linear-gradient(180deg,rgba(196,116,78,.16),rgba(22,26,37,.4));border-color:var(--lineg2)}
+.hero3 .g{font-family:'Noto Sans Symbols2','Segoe UI Symbol',sans-serif;font-size:1.7rem;color:var(--gold)}
+.hero3 .n{font-family:'Playfair Display',serif;font-size:1rem;color:var(--ink)}
+.hero3 .d{font-size:.68rem;color:var(--dim);line-height:1.35}
+@media(max-width:480px){.hero3{grid-template-columns:1fr;gap:.55rem}.hero3 a{flex-direction:row;text-align:left;justify-content:flex-start;gap:.7rem;padding:.85rem 1rem}}
+.bt3{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.bt3 .c{background:rgba(201,169,98,.05);border:1px solid var(--lineg);border-radius:14px;padding:1rem .6rem;text-align:center}
+.bt3 .g{font-family:'Noto Sans Symbols2','Segoe UI Symbol',sans-serif;font-size:1.7rem;color:var(--gold)}
+.bt3 .r{font-size:.66rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin:.35rem 0 .15rem}
+.bt3 .s{font-family:'Playfair Display',serif;font-size:1.05rem;color:#EBF0F8}
+.meta{font-size:.82rem;color:var(--dim);text-align:center;margin-top:.8rem}
+.ask h3{font-family:'Playfair Display',serif;color:#EBF0F8;font-size:1.3rem;margin:.1rem 0 .4rem;text-align:center}
+.ask p{font-size:.9rem;color:var(--mut);text-align:center;max-width:460px;margin:0 auto 1rem}
+label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin:.7rem 0 .3rem}
+textarea,input{width:100%;background:rgba(11,14,21,.7);border:1px solid var(--line);border-radius:10px;padding:.7rem .8rem;color:var(--ink);font-size:.94rem;font-family:'Inter'}
+textarea{min-height:90px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem}
+.chip{background:rgba(201,169,98,.08);border:1px solid var(--line);color:var(--mut);border-radius:99px;padding:.4rem .8rem;font-size:.82rem;cursor:pointer}
+.chip:hover{border-color:var(--lineg2);color:var(--gold-lt)}
+.kvkk{font-size:.72rem;color:var(--dim);margin:.7rem 0 0;line-height:1.5}
+.kvkk input{width:auto;margin-right:.4rem;vertical-align:-1px}
+.btn{display:block;width:100%;border:none;border-radius:12px;background:var(--terra);color:#F6EFE1;font:600 15px 'Inter';padding:.9rem;cursor:pointer;margin-top:1rem}
+.msg{font-size:.85rem;color:var(--gold-lt);margin-top:.7rem;text-align:center;min-height:1em}
+.linkrow{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem;justify-content:center}
+.linkrow a{color:var(--gold);text-decoration:none;font-size:.86rem;border:1px solid var(--lineg);border-radius:99px;padding:.5rem 1rem}
+.empty{text-align:center;padding:2rem 1rem}
+.empty a{display:inline-block;background:var(--terra2);color:#EBF0F8;text-decoration:none;padding:.75rem 1.5rem;border-radius:99px;font-weight:600;margin-top:1rem}
+.foot{text-align:center;color:var(--dim);font-size:.78rem;margin-top:2.2rem}.foot a{color:var(--gold)}
+.logout{color:var(--dim);font-size:.78rem;cursor:pointer;text-decoration:underline}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}</style>
+</head>
+<body>
+<style>
+.sorbi-topnav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.55rem 1rem;background:rgba(11,14,21,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid rgba(201,169,98,.2)}
+.sorbi-topnav .lg{font-family:'Playfair Display',serif;letter-spacing:2px;color:#C9A962;font-size:.82rem;text-decoration:none;text-transform:uppercase;white-space:nowrap}
+.sorbi-topnav nav{display:flex;gap:.25rem;align-items:center}
+.sorbi-topnav nav a{color:#B8C5D6;text-decoration:none;font-size:.82rem;padding:.35rem .65rem;border-radius:99px;white-space:nowrap}
+.sorbi-topnav nav a:hover{color:#EBF0F8;background:rgba(235,240,248,.06)}
+.sorbi-topnav nav a.on{color:#C9A962;background:rgba(235,240,248,.08);font-weight:600}
+@media(max-width:480px){.sorbi-topnav{padding:.5rem .6rem;gap:.4rem}.sorbi-topnav .lg{font-size:.72rem;letter-spacing:1px}.sorbi-topnav nav a{font-size:.78rem;padding:.35rem .5rem}}
+</style>
+<header class="sorbi-topnav">
+ <a href="/" class="lg">✦ Sorbi</a>
+ <nav>
+  <a href="/haritam" id="sorbiNavHaritam">Haritam</a>
+ </nav>
+</header>
+<script>(function(){try{if(JSON.parse(localStorage.getItem('sorbi_profile')||'null')){var e=document.getElementById('sorbiNavHaritam');if(e)e.style.display='';}var p=location.pathname.replace(/\/+$/,'');document.querySelectorAll('.sorbi-topnav nav a').forEach(function(a){if(a.getAttribute('href')===p)a.className='on';});}catch(e){}})();</script>
+
+<div class="wrap">
+ <div class="top"><a href="/" class="brand">✦ Sorbi</a></div>
+
+ <div id="noProfile" class="empty" style="display:none">
+  <h1>Haritam</h1>
+  <p class="sub" style="max-width:420px;margin:.6rem auto 0">Burası senin evin — ama önce seni tanımam lazım. Doğduğun anı ver, bir kez; her şey burada toplansın.</p>
+  <a href="/seni-taniyorum">Beni tanı ✦</a>
+ </div>
+
+ <div id="app" style="display:none">
+  <div class="top" style="margin-top:-.6rem">
+   <h1 id="hello">Merhaba ✦</h1>
+   <div class="muhur" id="muhur" style="display:none"><div class="e">Senin mührün</div><div class="t" id="muhurT"></div></div>
+   <p class="sub" id="birthMeta"></p>
+  </div>
+
+  <div class="hero3">
+   <a class="hot" href="/bugun"><span class="g">✦</span><span class="n">Bugün</span><span class="d">Göğün bugün sana etkisi</span></a>
+   <a href="/dogum-haritasi-hesaplama"><span class="g">⊹</span><span class="n">Tam Haritam</span><span class="d">10 gezegen, evler, açılar</span></a>
+   <a href="#ask"><span class="g">✦</span><span class="n">Soru Sor</span><span class="d">Aklındakine kişisel cevap</span></a>
+  </div>
+
+  <div class="card">
+   <div class="sec-h">Büyük Üçlü</div>
+   <div class="bt3" id="bt3"></div>
+   <div class="linkrow"><a href="/araclar">Tüm araçlar →</a><a href="/uygun-gun-secimi">Uygun gün</a><a href="/astrokartografi">Astrokartografi</a><a href="/burc-uyumu">İlişki uyumu</a></div>
+  </div>
+
+  <div class="card ask" id="ask" style="scroll-margin-top:70px">
+   <h3>Sana özel bir soru sor</h3>
+   <p>Aklındaki soruyu yaz — haritana göre, kişisel olarak cevaplayayım. Genel yorum değil; senin haritan, senin sorun.</p>
+   <div class="chips" id="chips"></div>
+   <label>Sorun</label>
+   <textarea id="q" placeholder="Örn: Bu yıl ilişkim ciddiye biner mi? İş değişikliği için doğru zaman mı?"></textarea>
+   <label>WhatsApp numaran</label>
+   <input id="phone" type="tel" placeholder="05xx xxx xx xx" inputmode="tel">
+   <label class="kvkk"><input type="checkbox" id="kvkk"> Sorumun ve doğum bilgilerimin kişisel yorum için işlenmesine izin veriyorum · <a href="/privacy" style="color:var(--gold)">KVKK</a></label>
+   <button class="btn" id="send">Sorumu gönder ✦</button>
+   <div class="msg" id="msg"></div>
+  </div>
+
+  <div class="card" id="readingsCard" style="display:none">
+   <div class="sec-h">Okumalarım</div>
+   <div id="readingsList"></div>
+  </div>
+
+  <div class="card" style="text-align:center">
+   <div class="sec-h" style="justify-content:center">Hazır Okumalar</div>
+   <p style="font-size:.88rem;color:var(--mut);margin:0 auto .8rem;max-width:440px">Natal analiz, ilişki uyumu (sinastri), yıllık öngörü — hazır paketler.</p>
+   <a href="/randevu" style="display:inline-block;background:var(--terra2);color:#EBF0F8;text-decoration:none;padding:.7rem 1.4rem;border-radius:99px;font-weight:600;font-size:.9rem">Okumalara bak →</a>
+  </div>
+
+  <p class="foot"><span class="logout" id="logout">profilden çık</span> · <a href="/">sorbiapp.com</a></p>
+ </div>
+</div>
+<script>
+const SIGNS=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
+const PGLYPH=['☉','☽'];
+const norm=d=>((d%360)+360)%360,RAD=Math.PI/180;
+const signOf=l=>Math.floor(norm(l)/30);
+function tzOffMin(date,tz){try{const p=new Intl.DateTimeFormat('en-US',{timeZone:tz,hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(date).reduce((a,x)=>(a[x.type]=x.value,a),{});const h=p.hour==='24'?0:+p.hour;return(Date.UTC(+p.year,+p.month-1,+p.day,h,+p.minute,+p.second)-date.getTime())/60000;}catch(e){return 180;}}
+function localToUTC(y,mo,d,h,mi,tz){let g=Date.UTC(y,mo-1,d,h,mi,0);for(let i=0;i<3;i++){const o=tzOffMin(new Date(g),tz);const c=Date.UTC(y,mo-1,d,h,mi,0)-o*60000;if(c===g)break;g=c;}return new Date(g);}
+function eclOfDate(A,b,t){let v=(b===A.Body.Moon)?A.GeoMoon(t):A.GeoVector(b,t,true);return norm(A.SphereFromVector(A.RotateVector(A.Rotation_EQJ_ECT(t),v)).lon);}
+function obliquity(t){const T=t.tt/36525;return(84381.448-46.8150*T-0.00059*T*T+0.001813*T*T*T)/3600;}
+function ascendant(r,e,lat){return norm(Math.atan2(Math.cos(r*RAD),-(Math.sin(r*RAD)*Math.cos(e*RAD)+Math.tan(lat*RAD)*Math.sin(e*RAD)))/RAD);}
+function getProfile(){try{return JSON.parse(localStorage.getItem('sorbi_profile')||'null');}catch(e){return null;}}
+function saveProfile(){try{localStorage.setItem('sorbi_profile',JSON.stringify(PR));}catch(e){}}
+function statusTr(s){return {pending:'Cevap hazırlanıyor',approved:'Cevaplandı ✓',awaiting_payment:'Ödeme bekliyor',rejected:'İptal'}[s]||'Alındı ✦';}
+function renderList(){
+ const rs=(PR&&PR.readings)||[];const c=document.getElementById('readingsCard');
+ if(!rs.length){c.style.display='none';return;}
+ c.style.display='block';
+ document.getElementById('readingsList').innerHTML=rs.slice().reverse().map(x=>{
+  const d=x.at?new Date(x.at).toLocaleDateString('tr-TR',{day:'numeric',month:'short'}):'';
+  return `<div style="display:flex;justify-content:space-between;gap:.6rem;align-items:center;padding:.6rem 0;border-bottom:1px solid rgba(201,169,98,.1);font-size:.88rem"><span style="color:#B8C5D6;flex:1">${(x.q||'').slice(0,72)}${(x.q||'').length>72?'…':''}<span style="color:#8A9DB5;font-size:.72rem"> · ${d}</span></span><span style="color:#C9A962;font-size:.75rem;white-space:nowrap">${statusTr(x.status)}</span></div>`;
+ }).join('');
+}
+function refreshStatuses(){
+ const rs=(PR&&PR.readings)||[];const pend=rs.filter(x=>x.id&&x.status!=='approved'&&x.status!=='rejected');
+ if(!pend.length)return;
+ Promise.all(pend.map(x=>fetch('/api/bookings/'+x.id).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.status)x.status=j.status;}).catch(()=>{}))).then(()=>{saveProfile();renderList();});
+}
+
+const CHIPS=['Aşk & ilişki','Kariyer & iş','Para & bolluk','Zamanlama (ne zaman?)','Genel yıllık','Kişisel bir karar'];
+let PR=null, BIRTH=null;
+
+function initBig3(){
+ const A=window.Astronomy;if(!A){setTimeout(initBig3,300);return;}
+ const b=BIRTH; if(!b||!b.date)return;
+ try{
+  const[y,mo,d]=b.date.split('-').map(Number);const[h,mi]=(b.time||'12:00').split(':').map(Number);
+  const noTime=!b.time;
+  const utc=localToUTC(y,mo,d,h,mi,b.tz||'Europe/Istanbul');const t=A.MakeTime(utc);
+  const sun=eclOfDate(A,A.Body.Sun,t),moon=eclOfDate(A,A.Body.Moon,t);
+  let cards=[['☉','Güneş',signOf(sun)],['☽','Ay',signOf(moon)]];
+  if(!noTime&&b.lat){const e=obliquity(t);const ramc=norm(A.SiderealTime(t)*15+(+b.lon));const asc=ascendant(ramc,e,+b.lat);cards.push(['⌖','Yükselen',signOf(asc)]);}
+  document.getElementById('bt3').innerHTML=cards.map(([g,r,s])=>`<div class="c"><div class="g">${g}</div><div class="r">${r}</div><div class="s">${SIGNS[s]}</div></div>`).join('');
+  const MOON_ADJ=['Ateşli','Sabırlı','Tedirgin','Hüzünlü','Gururlu','Titiz','Kararsız','Derin','Özgür','Mesafeli','Uzak','Rüyalı'];
+  const SUN_NOUN=['Fırtına','Dağ','Rüzgâr','Deniz','Alev','Pusula','Ayna','Girdap','Ok','Zirve','Şimşek','Sis'];
+  document.getElementById('muhurT').textContent=MOON_ADJ[signOf(moon)]+' '+SUN_NOUN[signOf(sun)];
+  document.getElementById('muhur').style.display='block';
+ }catch(e){document.getElementById('bt3').innerHTML='<div style="color:var(--dim);grid-column:1/-1;text-align:center">Harita bilgisi eksik — <a href="/dogum-haritasi-hesaplama" style="color:var(--gold)">yeniden çıkar</a>.</div>';}
+}
+
+(function(){
+ PR=getProfile();
+ if(!PR){document.getElementById('noProfile').style.display='block';return;}
+ BIRTH=PR.birth||{};
+ document.getElementById('app').style.display='block';
+ document.getElementById('hello').textContent='Merhaba '+((PR.name||(PR.email||'').split('@')[0])||'')+' ✦';
+ if(BIRTH.date){const pl=(BIRTH.place||'').split(',')[0];document.getElementById('birthMeta').textContent=BIRTH.date+(BIRTH.time?' · '+BIRTH.time:'')+(pl?' · '+pl:'');}
+ document.getElementById('chips').innerHTML=CHIPS.map(c=>`<span class="chip">${c}</span>`).join('');
+ document.querySelectorAll('#chips .chip').forEach(el=>el.onclick=()=>{const q=document.getElementById('q');q.value=(q.value?q.value+' ':'')+el.textContent+': ';q.focus();});
+ document.getElementById('logout').onclick=()=>{if(confirm('Profilinden çıkılsın mı?')){localStorage.removeItem('sorbi_profile');location.href='/';}};
+ initBig3(); renderList(); refreshStatuses();
+})();
+
+document.getElementById('send')&&(document.getElementById('send').onclick=async()=>{
+ const msg=document.getElementById('msg');
+ const q=document.getElementById('q').value.trim();
+ const phone=document.getElementById('phone').value.trim();
+ if(q.length<8){msg.style.color='var(--terra)';msg.textContent='Lütfen sorunu biraz daha açık yaz.';return;}
+ if(phone.replace(/\D/g,'').length<10){msg.style.color='var(--terra)';msg.textContent='Geçerli bir numara gir (WhatsApp).';return;}
+ if(!document.getElementById('kvkk').checked){msg.style.color='var(--terra)';msg.textContent='Devam için KVKK onayı gerekli.';return;}
+ msg.style.color='var(--dim)';msg.textContent='Gönderiliyor…';
+ const b=BIRTH||{};
+ const birthTxt=b.date?`${b.date}${b.time?' '+b.time:''} ${(b.place||'').split(',')[0]}`:'—';
+ try{
+  const r=await fetch('/api/bookings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+   service:'soru-cevap', name:PR.name||PR.email||'Sorbi kullanıcısı', phone, email:PR.email||null,
+   notes:`[SORU] ${q}\n[HARİTA] ${birthTxt}`, kvkk:1
+  })});
+  const j=await r.json().catch(()=>({}));
+  if(r.ok){msg.style.color='var(--gold-lt)';msg.textContent='Sorun alındı ✦ En kısa sürede WhatsApp\'tan kişisel cevabınla döneceğiz.';
+   PR.readings=PR.readings||[];PR.readings.push({id:j.bookingId||null,q,at:Date.now(),status:'pending'});saveProfile();renderList();
+   document.getElementById('q').value='';}
+  else{msg.style.color='var(--terra)';msg.textContent=j.error||'Bir hata oldu, tekrar dene.';}
+ }catch(e){msg.style.color='var(--terra)';msg.textContent='Bağlantı hatası, tekrar dene.';}
+});
+</script>
+</body>
+</html>
