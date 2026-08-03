@@ -7,15 +7,15 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="/astronomy.browser.min.js" defer></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Retro Takvimi & Ay Boşlukta","applicationCategory":"LifestyleApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"url":"https://sorbiapp.com/retro-ay-takvimi","provider":{"@type":"ProfessionalService","name":"Sorbi — astrodefne","url":"https://sorbiapp.com/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Retro Takvimi & Ay Boşlukta","applicationCategory":"LifestyleApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"url":"https://sorbiapp.com/retro-ay-takvimi","provider":{"@type":"Organization","name":"Sorbi","url":"https://sorbiapp.com/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Merkür retrosu ne zaman biter?","acceptedAnswer":{"@type":"Answer","text":"Merkür yılda 3-4 kez yaklaşık 3 hafta retro yapar. Bu sayfadaki takvim, Merkür'ün geri gitmeye başladığı ve düzeldiği tam tarihleri canlı olarak Swiss Ephemeris hassasiyetinde hesaplar."}},{"@type":"Question","name":"Ay boşlukta ne demek?","acceptedAnswer":{"@type":"Answer","text":"Ay boşlukta (void of course), Ay'ın bir burçtaki son büyük açısını tamamlayıp bir sonraki burca geçene kadar geçen süredir. Bu aralıkta başlatılan işler genelde beklenen sonucu vermez; rutin işler ve dinlenme için uygundur."}},{"@type":"Question","name":"Retro dönemde ne yapmalı?","acceptedAnswer":{"@type":"Answer","text":"Retro bir ceza değil, bir davettir: gözden geçir, düzelt, tamamla. Yeni sözleşme, cihaz alımı ve büyük başlangıçları mümkünse retro sonrasına bırak; eski işleri kapatmak, geri dönüşler ve onarım için ise ideal bir dönemdir."}}]}</script>
 <style>
-:root{--terra:#C4744E;--btn-ink:#F6EFE1;--bg:#0B0F14;--gold:#C9A962;--gold-light:#E4CF9A;--terra:#C4744E;--terra2:#B05A32;--text:#EBF0F8;--muted:#8A9DB5;--line:rgba(201,169,98,.25);--card:#161a25;--green:#7FB37A;--red:#D08A6A}
+:root{--terra:#C4744E;--btn-ink:#F6EFE1;--bg:#0B0F14;--gold:#C9A962;--gold-light:#E4CF9A;--terra:#C4744E;--terra2:#B05A32;--text:#E8E4DA;--muted:#8A8578;--line:rgba(201,169,98,.25);--card:#161a25;--green:#7FB37A;--red:#D08A6A}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#1a1e2b 0,var(--bg) 60%);color:var(--text);font-family:'Inter',sans-serif;line-height:1.65}
 .wrap{max-width:680px;margin:0 auto;padding:2.2rem 1.1rem 3rem}
 .top{text-align:center;margin-bottom:1.2rem}
 .brand{font-family:'Playfair Display',serif;letter-spacing:2px;color:var(--gold);font-size:.8rem;text-decoration:none}
-h1{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,5vw,2.15rem);margin:.5rem 0 .3rem;color:#EBF0F8}
+h1{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,5vw,2.15rem);margin:.5rem 0 .3rem;color:#E8E4DA}
 .sub{color:var(--muted);font-size:.95rem;max-width:480px;margin:0 auto}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.2rem 1.15rem;margin-top:1.3rem}
 .now{background:linear-gradient(180deg,rgba(201,169,98,.14),rgba(201,169,98,.03))}
@@ -23,13 +23,13 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,5vw,2.15rem);marg
 @media(max-width:460px){.nowgrid{grid-template-columns:1fr}}
 .nb{background:rgba(11,14,21,.5);border:1px solid var(--line);border-radius:12px;padding:.75rem .85rem}
 .nb .k{font-size:.72rem;color:var(--gold-light);text-transform:uppercase;letter-spacing:.5px}
-.nb .v{font-family:'Playfair Display',serif;font-size:1.15rem;color:#EBF0F8;margin-top:.15rem}
+.nb .v{font-family:'Playfair Display',serif;font-size:1.15rem;color:#E8E4DA;margin-top:.15rem}
 .nb .d{font-size:.8rem;color:var(--muted);margin-top:.1rem}
 .sect{font-family:'Playfair Display',serif;color:var(--gold-light);font-size:1.5rem;margin:1.8rem 0 .3rem;font-weight:600}
 .sectn{color:var(--muted);font-size:.85rem;margin:0 0 .5rem}
 .row{display:flex;align-items:center;gap:.6rem;padding:.7rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
 .row:last-child{border-bottom:none}
-.pl{font-family:'Playfair Display',serif;font-size:.98rem;color:#EBF0F8;min-width:78px}
+.pl{font-family:'Playfair Display',serif;font-size:.98rem;color:#E8E4DA;min-width:78px}
 .per{flex:1;font-size:.9rem;color:#d8cfbf}
 .chip{font-size:.7rem;font-weight:600;padding:.18rem .5rem;border-radius:99px;white-space:nowrap}
 .chip.r{background:rgba(208,138,106,.2);color:var(--red);border:1px solid rgba(208,138,106,.4)}
@@ -39,9 +39,9 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,5vw,2.15rem);marg
 @media(max-width:460px){.lun{grid-template-columns:1fr}}
 .lun div{font-size:.88rem;color:#d8cfbf;padding:.35rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
 .lun b{color:var(--gold-light);font-weight:600}
-.cta{margin-top:1.3rem;text-align:center}.cta a{display:inline-block;background:var(--terra2);color:#EBF0F8;text-decoration:none;padding:.75rem 1.4rem;border-radius:99px;font-weight:600;font-size:.9rem;margin:.25rem}
+.cta{margin-top:1.3rem;text-align:center}.cta a{display:inline-block;background:var(--terra2);color:#E8E4DA;text-decoration:none;padding:.75rem 1.4rem;border-radius:99px;font-weight:600;font-size:.9rem;margin:.25rem}
 .cta a.ghost{background:transparent;border:1px solid var(--terra);color:var(--gold-light)}
-.seo{margin-top:2.2rem;color:#B8C5D6}.seo h2{font-family:'Playfair Display',serif;color:var(--gold-light);font-size:1.4rem;margin:1.5rem 0 .4rem}.seo p{font-size:.92rem;color:#bdb5a6}
+.seo{margin-top:2.2rem;color:#A9A396}.seo h2{font-family:'Playfair Display',serif;color:var(--gold-light);font-size:1.4rem;margin:1.5rem 0 .4rem}.seo p{font-size:.92rem;color:#bdb5a6}
 .foot{text-align:center;color:var(--muted);font-size:.78rem;margin-top:2rem}.foot a{color:var(--gold)}
 .load{color:var(--muted);font-size:.9rem;text-align:center;padding:.5rem}
 @media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}</style></head><body>
@@ -49,8 +49,8 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,5vw,2.15rem);marg
 .sorbi-topnav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.55rem 1rem;background:rgba(11,14,21,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid rgba(201,169,98,.2)}
 .sorbi-topnav .lg{font-family:'Playfair Display',serif;letter-spacing:2px;color:#C9A962;font-size:.82rem;text-decoration:none;text-transform:uppercase;white-space:nowrap}
 .sorbi-topnav nav{display:flex;gap:.25rem;align-items:center}
-.sorbi-topnav nav a{color:#B8C5D6;text-decoration:none;font-size:.82rem;padding:.35rem .65rem;border-radius:99px;white-space:nowrap}
-.sorbi-topnav nav a:hover{color:#EBF0F8;background:rgba(235,240,248,.06)}
+.sorbi-topnav nav a{color:#A9A396;text-decoration:none;font-size:.82rem;padding:.35rem .65rem;border-radius:99px;white-space:nowrap}
+.sorbi-topnav nav a:hover{color:#E8E4DA;background:rgba(235,240,248,.06)}
 .sorbi-topnav nav a.on{color:#C9A962;background:rgba(235,240,248,.08);font-weight:600}
 @media(max-width:480px){.sorbi-topnav{padding:.5rem .6rem;gap:.4rem}.sorbi-topnav .lg{font-size:.72rem;letter-spacing:1px}.sorbi-topnav nav a{font-size:.78rem;padding:.35rem .5rem}}
 </style>
@@ -80,7 +80,7 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,5vw,2.15rem);marg
  <div class="card"><div class="lun" id="lunList"><div class="load">Ay evreleri hesaplanıyor…</div></div></div>
 
  <div class="cta">
-  <a href="/soru-sor">Bu dönem seni nasıl etkiler? → Astroloğa sor ✦</a>
+  <a href="/soru-sor">Bu dönem seni nasıl etkiler? → Sorunu sor ✦</a>
   <a class="ghost" href="/dogum-haritasi-hesaplama">Ücretsiz doğum haritan</a>
  </div>
 
@@ -92,7 +92,7 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,5vw,2.15rem);marg
   <h2>Retro dönemde ne yapmalı?</h2>
   <p>Retro bir ceza değil, bir davettir. Anahtar sözcükler "re-" ile başlar: gözden geçir, düzelt, tamamla, geri dön. Yeni bir sözleşme imzalamak, pahalı bir cihaz almak veya büyük bir başlangıç yapmak için mümkünse retro sonrasını beklemek iyidir. Buna karşılık eski bir işi kapatmak, dağınık kalmış bir konuyu toparlamak, eski bir bağlantıya dönmek ve onarım yapmak için retro dönemleri oldukça verimlidir. Yani panik yok — sadece ritmi değiştir.</p>
   <h2>Bu takvim ne kadar doğru?</h2>
-  <p>Bu sayfadaki tüm tarihler cihazında, açık kaynak gökbilim motoruyla anlık hesaplanır ve profesyonel Swiss Ephemeris ile birebir doğrulanmıştır. Hiçbir tarih elle girilmez; sayfa her açıldığında güncel gökyüzünü yeniden okur. Kişisel haritanla nasıl kesiştiğini merak ediyorsan <a href="/dogum-haritasi-hesaplama" style="color:var(--gold)">ücretsiz doğum haritanı</a> çıkarabilir ya da <a href="/randevu" style="color:var(--gold)">birebir yorum</a> alabilirsin.</p>
+  <p>Bu sayfadaki tüm tarihler cihazında, açık kaynak gökbilim motoruyla anlık hesaplanır ve profesyonel Swiss Ephemeris ile birebir doğrulanmıştır. Hiçbir tarih elle girilmez; sayfa her açıldığında güncel gökyüzünü yeniden okur. Kişisel haritanla nasıl kesiştiğini merak ediyorsan <a href="/dogum-haritasi-hesaplama" style="color:var(--gold)">ücretsiz doğum haritanı</a> çıkarabilirsin.</p>
  </div>
  <p class="foot">Kader değil, farkındalık. · <a href="/">sorbiapp.com</a> · <a href="/yukselen-burc-hesaplama" style="color:var(--gold)">Yükselen</a> · <a href="/ay-burcu-hesaplama" style="color:var(--gold)">Ay burcu</a> · <a href="/burc-uyumu" style="color:var(--gold)">Burç uyumu</a> · <a href="/uygun-gun-secimi" style="color:var(--gold)">Uygun gün</a> · <a href="/astrokartografi" style="color:var(--gold)">Astrokartografi</a></p>
 </div>

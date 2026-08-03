@@ -15,7 +15,7 @@
 <script src="/astronomy.browser.min.js" defer></script>
 <style>
 /* Sorbi design tokens — varak okunur, terracotta basılır */
-:root{--bg:#0B0F14;--panel:rgba(235,240,248,.03);--gold:#C9A962;--gold-lt:#E4CF9A;--gold-br:#F4E4BA;--ink:#EBF0F8;--mut:#B8C5D6;--dim:#8A9DB5;--terra:#C4744E;--btn-ink:#F6EFE1;
+:root{--bg:#0B0F14;--panel:rgba(235,240,248,.03);--gold:#C9A962;--gold-lt:#E4CF9A;--gold-br:#F4E4BA;--ink:#E8E4DA;--mut:#A9A396;--dim:#8A8578;--terra:#C4744E;--btn-ink:#F6EFE1;
 --line:rgba(235,240,248,.06);--line2:rgba(235,240,248,.08);--lstrong:rgba(235,240,248,.14);--lineg:rgba(201,169,98,.18);--lineg2:rgba(201,169,98,.45);
 --foil:linear-gradient(135deg,#8A6D2E,#C9A962,#F4E4BA,#C9A962,#8A6D2E);--ease:cubic-bezier(.2,.8,.2,1)}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(1100px 620px at 50% -6%,#10151d 0,var(--bg) 60%);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.62}
@@ -47,11 +47,11 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
 .rthanks{font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;color:var(--gold-lt);margin-top:.7rem;min-height:1.2rem}
 .share{margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--line2);font-size:.85rem;color:var(--mut)}
 .share button{background:none;border:none;color:var(--gold);font:600 .85rem 'Inter';cursor:pointer;text-decoration:underline;padding:0}
-.crown{text-align:center;opacity:0;transform:translateY(10px) scale(.97);transition:opacity .48s var(--ease),transform .48s var(--ease);margin-top:.4rem}
+.crown{text-align:center;opacity:0;transform:translateY(10px) scale(.97);transition:opacity .48s var(--ease),transform .48s var(--ease);margin-top:1.1rem}
 .crown.show{opacity:1;transform:none}
 .cr-eyebrow{font-family:'Inter';font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:500}
 /* mühür = foil materyali */
-.cr-title{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(2rem,8vw,2.9rem);letter-spacing:.3px;margin:.25rem 0 .15rem;background:var(--foil);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--gold-br)}
+.cr-title{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(2.2rem,9vw,3.3rem);letter-spacing:.3px;margin:.25rem 0 .15rem;background:var(--foil);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--gold-br)}
 .cr-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:1.15rem;color:var(--mut)}
 .wheel{display:block;width:230px;height:230px;margin:1.1rem auto .3rem;opacity:0;transform:scale(.94) rotate(-6deg);transition:opacity .5s var(--ease),transform .5s var(--ease)}
 .wheel.show{opacity:1;transform:none}
@@ -64,7 +64,7 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
 .big3 .b .g{font-family:'Noto Sans Symbols2','Segoe UI Symbol',sans-serif;font-size:1.5rem;color:var(--gold)}
 .big3 .b .r{font-size:.62rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim);margin-top:.2rem}
 .big3 .b .s{font-family:'Playfair Display',serif;font-weight:600;font-size:1rem;color:var(--ink)}
-.line{font-family:'Playfair Display',serif;font-size:1.4rem;line-height:1.45;color:var(--ink);margin:0 0 1.2rem;opacity:0;transform:translateY(8px);transition:opacity .45s var(--ease),transform .45s var(--ease);text-align:center}
+.line{font-family:'Playfair Display',serif;font-size:1.4rem;line-height:1.45;color:var(--ink);margin:0 0 1.7rem;opacity:0;transform:translateY(8px);transition:opacity .45s var(--ease),transform .45s var(--ease);text-align:center}
 .line.show{opacity:1;transform:none}
 .line b{color:var(--gold);font-weight:600;font-style:normal}
 .line.k{font-family:'Inter';font-size:.95rem;color:var(--mut);font-style:normal}
@@ -79,10 +79,40 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
 .foot{text-align:center;color:var(--dim);font-size:.78rem;margin-top:2.2rem}.foot a{color:var(--gold)}
 .seo{margin-top:2.4rem;color:var(--mut);font-size:.9rem;line-height:1.7}.seo h2{font-family:'Playfair Display',serif;font-weight:600;color:var(--gold-lt);font-size:1.3rem;margin:1.2rem 0 .3rem}
 .seo b{color:var(--gold)}
+/* fotoğraf anı — deklanşör (app'teki an yakalama) */
+.shutter{position:fixed;inset:0;z-index:2000;pointer-events:none;display:none}
+.shutter .blade{position:absolute;inset:0;background:#0B0F14;clip-path:circle(0% at 50% 44%)}
+.shutter .ap{position:absolute;left:50%;top:44%;width:2px;height:2px;transform:translate(-50%,-50%);border-radius:50%;opacity:0}
+.shutter .flash{position:absolute;inset:0;background:radial-gradient(circle at 50% 44%,rgba(244,228,186,.95),rgba(201,169,98,.32) 42%,transparent 70%);opacity:0}
+.shutter.capture{display:block}
+.shutter.capture .blade{animation:irisClose .34s var(--ease) forwards,irisOpen .34s var(--ease) .43s forwards}
+.shutter.capture .flash{animation:flashPop .2s ease-out .32s}
+.shutter.capture .ap{animation:apRing .55s var(--ease) .12s}
+@keyframes irisClose{from{clip-path:circle(0% at 50% 44%)}to{clip-path:circle(150% at 50% 44%)}}
+@keyframes irisOpen{from{clip-path:circle(150% at 50% 44%)}to{clip-path:circle(0% at 50% 44%)}}
+@keyframes flashPop{0%{opacity:0}35%{opacity:1}100%{opacity:0}}
+@keyframes apRing{0%{opacity:0;box-shadow:0 0 0 130px rgba(201,169,98,0)}45%{opacity:.7;box-shadow:0 0 0 7px rgba(201,169,98,.5)}100%{opacity:0;box-shadow:0 0 0 2px rgba(201,169,98,0)}}
+/* anlam küreleri — Özün · İç Dünyan · Masken (app hero pill'leri) */
+.orbs{display:flex;justify-content:center;gap:1.25rem;margin:.9rem 0 2.2rem;flex-wrap:wrap}
+.orb{display:flex;flex-direction:column;align-items:center;gap:.35rem;opacity:0;transform:scale(.6);animation:orbPop .5s var(--ease) forwards}
+.orb .disc{width:66px;height:66px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans Symbols2','Segoe UI Symbol',sans-serif;font-size:1.7rem;color:#F6EFE1;box-shadow:0 8px 22px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.18);border:1px solid rgba(201,169,98,.28)}
+.orb .role{font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
+.orb .sn{font-family:'Playfair Display',serif;font-weight:600;font-size:.95rem;color:var(--ink);margin-top:-.1rem}
+@keyframes orbPop{0%{opacity:0;transform:scale(.6)}60%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
+.el-fire{background:radial-gradient(circle at 34% 28%,#E8A56B,#C4744E)}
+.el-earth{background:radial-gradient(circle at 34% 28%,#8FB39A,#4B7358)}
+.el-air{background:radial-gradient(circle at 34% 28%,#AEC6E4,#5A7CA8)}
+.el-water{background:radial-gradient(circle at 34% 28%,#8FC2CC,#3E7885)}
+/* evrenin mesajı ayracı */
+.msg-head{text-align:center;opacity:0;transition:opacity .5s var(--ease);margin:1.3rem 0 1.5rem}
+.msg-head.show{opacity:1}
+.msg-head span{font-size:.66rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+.msg-head:before,.msg-head:after{content:'';display:inline-block;width:26px;height:1px;background:var(--lineg2);vertical-align:middle;margin:0 .6rem}
 /* ZORUNLU: reduced-motion → tüm animasyon kapanır, son kare durur */
 @media (prefers-reduced-motion: reduce){
  *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
- .crown,.wheel,.react,.sell,.line,.wheel .pl{opacity:1!important;transform:none!important}
+ .crown,.wheel,.react,.sell,.line,.wheel .pl,.orb,.msg-head{opacity:1!important;transform:none!important}
+ .shutter{display:none!important}
 }
 </style>
 </head>
@@ -91,8 +121,8 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
 .sorbi-topnav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.55rem 1rem;background:rgba(11,15,20,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid rgba(201,169,98,.2)}
 .sorbi-topnav .lg{font-family:'Playfair Display',serif;letter-spacing:2px;color:#C9A962;font-size:.82rem;text-decoration:none;text-transform:uppercase;white-space:nowrap}
 .sorbi-topnav nav{display:flex;gap:.25rem;align-items:center}
-.sorbi-topnav nav a{color:#B8C5D6;text-decoration:none;font-size:.82rem;padding:.4rem .65rem;border-radius:99px;white-space:nowrap}
-.sorbi-topnav nav a:hover{color:#EBF0F8;background:rgba(235,240,248,.06)}
+.sorbi-topnav nav a{color:#A9A396;text-decoration:none;font-size:.82rem;padding:.4rem .65rem;border-radius:99px;white-space:nowrap}
+.sorbi-topnav nav a:hover{color:#E8E4DA;background:rgba(235,240,248,.06)}
 .sorbi-topnav nav a.on{color:#C9A962;background:rgba(235,240,248,.08);font-weight:600}
 @media(max-width:480px){.sorbi-topnav{padding:.5rem .6rem;gap:.4rem}.sorbi-topnav .lg{font-size:.72rem;letter-spacing:1px}.sorbi-topnav nav a{font-size:.78rem;padding:.4rem .5rem}}
 </style>
@@ -103,6 +133,7 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
  </nav>
 </header>
 <script>(function(){try{if(JSON.parse(localStorage.getItem('sorbi_profile')||'null')){var e=document.getElementById('sorbiNavHaritam');if(e)e.style.display='';}var p=location.pathname.replace(/\/+$/,'');document.querySelectorAll('.sorbi-topnav nav a').forEach(function(a){if(a.getAttribute('href')===p)a.className='on';});}catch(e){}})();</script>
+<div class="shutter" id="shutter"><div class="blade"></div><div class="ap"></div><div class="flash"></div></div>
 <div class="wrap">
  <div class="top">
   <a href="/" class="brand">✦ Sorbi</a>
@@ -130,6 +161,7 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
   </div>
   <svg class="wheel" id="wheel" viewBox="0 0 260 260" style="display:none" aria-hidden="true"></svg>
   <div class="big3" id="big3" style="display:none"></div>
+  <div class="msg-head" id="msgHead"><span>Evrenin mesajı</span></div>
   <div id="lines"></div>
   <div class="react" id="react">
    <span class="rq">Ne kadar denk geldi?</span>
@@ -141,10 +173,10 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
    <div class="rthanks" id="rthanks"></div>
   </div>
   <div class="sell" id="sell">
-   <h3>Bu senin evin artık.</h3>
-   <p>Bilgin kaydedildi — bir daha girmene gerek yok. Evinde her gün bugünün, tam haritan ve sana özel cevap seni bekliyor.</p>
-   <a class="buy" href="/haritam">Evime gir →</a>
-   <a class="ghost" href="/dogum-haritasi-hesaplama">Tam haritam</a>
+   <h3>Aklında asıl bir soru mu var?</h3>
+   <p>Bu okuma yüzeyi çizdi. Merak ettiğin belirli bir şey varsa — bir ilişki, bir zamanlama, bir karar — doğrudan haritanla sor, sana özel yanıtlansın.</p>
+   <a class="buy" href="/soru-sor">Aklındaki soruyu sor →</a>
+   <a class="ghost" href="/haritam">Evime gir →</a>
    <div class="share" id="share">✦ Seni de bu kadar iyi okudu mu? <button id="shareBtn">Bir arkadaşına gönder</button></div>
   </div>
  </div>
@@ -160,6 +192,7 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
 </div>
 <script>
 const SIGNS=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
+const SIGN_GLYPH=['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];const ELEMC=['fire','earth','air','water'];
 const norm=d=>((d%360)+360)%360,RAD=Math.PI/180;
 const signOf=l=>Math.floor(norm(l)/30);
 function tzOffMin(date,tz){try{const p=new Intl.DateTimeFormat('en-US',{timeZone:tz,hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(date).reduce((a,x)=>(a[x.type]=x.value,a),{});const h=p.hour==='24'?0:+p.hour;return(Date.UTC(+p.year,+p.month-1,+p.day,h,+p.minute,+p.second)-date.getTime())/60000;}catch(e){return 180;}}
@@ -277,7 +310,7 @@ document.getElementById('go').onclick=()=>{
  // save birth to memory
  try{var pr=JSON.parse(localStorage.getItem('sorbi_profile')||'null');var bo={date:dv,time:tv||'',place:pk.label,lat:pk.lat.toFixed(4),lon:pk.lon.toFixed(4),tz:pk.tz};localStorage.setItem('sorbi_birth',JSON.stringify(bo));if(!pr)pr={name:'',email:'',birth:bo,createdAt:Date.now(),readings:[]};pr.birth=bo;localStorage.setItem('sorbi_profile',JSON.stringify(pr));}catch(e){}
  const su=signOf(ch.pls[0].lon),mo=signOf(ch.pls[1].lon),as=signOf(ch.asc);
- const lines=sentences(ch);
+ const lines=sentences(ch).slice(0,3);
  document.getElementById('form').style.display='none';
  const rev=document.getElementById('reveal');rev.style.display='block';
  const reading=document.getElementById('reading');reading.style.display='block';
@@ -291,27 +324,33 @@ document.getElementById('go').onclick=()=>{
  let pi=0;reading.innerHTML=RM?'✦':phrases[0];
  const cyc=RM?null:setInterval(()=>{reading.style.opacity=0;setTimeout(()=>{pi++;if(pi<phrases.length){reading.innerHTML=phrases[pi];reading.style.opacity=1;}},380);},880);
  const revealAt=RM?30:880*phrases.length+250;
- const dWheel=RM?0:700,dBig=RM?0:1500,lineStart=RM?0:1900,stagger=RM?0:620,dReact=RM?0:200,dSell=RM?0:400;
+ const dWheel=RM?0:900,dBig=RM?0:1650,lineStart=RM?0:2100,stagger=RM?0:620,dReact=RM?0:200,dSell=RM?0:400;
  const arch=MOON_ADJ[mo]+' '+SUN_NOUN[su];window._sorbiArch=arch;
  setTimeout(()=>{
   if(cyc)clearInterval(cyc);
   reading.style.display='none';
-  // 1) the mühür (archetype identity)
+  // 1) the mühür (archetype identity) — app'teki "fotoğraf anı": deklanşör kapanır,
+  //    flaş çakar, açıldığında mühür "çekilmiş" gibi ortaya çıkar
   document.getElementById('crTitle').textContent=arch;
   document.getElementById('crSub').textContent=ARCH_SUB[su];
-  document.getElementById('crown').classList.add('show');
+  const sh=document.getElementById('shutter');
+  const showCrown=()=>document.getElementById('crown').classList.add('show');
+  if(!RM&&sh){sh.classList.add('capture');setTimeout(showCrown,360);setTimeout(()=>sh.classList.remove('capture'),840);}
+  else{showCrown();}
   // 2) the natal wheel draws in
   setTimeout(()=>{const w=document.getElementById('wheel');w.innerHTML=drawWheel(ch);w.style.display='block';requestAnimationFrame(()=>w.classList.add('show'));},dWheel);
   // 3) big three
   setTimeout(()=>{
-   const b3=document.getElementById('big3');b3.style.display='flex';
-   let bh=`<div class="b"><div class="g">☉</div><div class="r">Güneş</div><div class="s">${SIGNS[su]}</div></div><div class="b"><div class="g">☽</div><div class="r">Ay</div><div class="s">${SIGNS[mo]}</div></div>`;
-   if(!noTime)bh+=`<div class="b"><div class="g">⌖</div><div class="r">Yükselen</div><div class="s">${SIGNS[as]}</div></div>`;
+   const b3=document.getElementById('big3');b3.className='orbs';b3.style.display='flex';
+   const orb=(role,s,i)=>`<div class="orb" style="animation-delay:${RM?0:i*160}ms"><div class="disc el-${ELEMC[s%4]}">${SIGN_GLYPH[s]}</div><div class="role">${role}</div><div class="sn">${SIGNS[s]}</div></div>`;
+   let bh=orb('Özün',su,0)+orb('İç Dünyan',mo,1);
+   if(!noTime)bh+=orb('Masken',as,2);
    b3.innerHTML=bh;
   },dBig);
   // 4) lines stream in
   const cont=document.getElementById('lines');cont.innerHTML=lines.map(t=>`<p class="line">${t}</p>`).join('')+(noTime?'<p class="line k">Doğum saatini bilseydin yükselenini ve ev yığılmalarını da okurdum — okuma çok daha derinleşir.</p>':'');
   const els=[...cont.querySelectorAll('.line')];
+  setTimeout(()=>document.getElementById('msgHead').classList.add('show'),Math.max(0,lineStart-260));
   els.forEach((el,i)=>setTimeout(()=>el.classList.add('show'),lineStart+i*stagger));
   const after=lineStart+els.length*stagger+dReact;
   setTimeout(()=>document.getElementById('react').classList.add('show'),after);

@@ -34,19 +34,19 @@ ul{list-style:none;}
 svg{display:block;}
 :root{
  /* ── Sorbi Gece Göğü Paleti (ink / gold / terracotta) ── */
- --parchment:#F6F1E7; --parchmentDeep:#ECE4D5; --parchmentLite:#EBF0F8;
+ --parchment:#F6F1E7; --parchmentDeep:#ECE4D5; --parchmentLite:#E8E4DA;
  --lapis:#0B0F14; --lapisLite:#12151F;
  --gold:#C9A962; --goldStar:#F4E4BA;
  --vermilion:#C4744E;
- --ink:#0C1526; --inkSoft:#1C2333; --muted:#8A9DB5;
+ --ink:#0C1526; --inkSoft:#1C2333; --muted:#8A8578;
  --line:rgba(201,169,98,0.4);
  --green:#25D366;
  /* geriye dönük uyumluluk takma adları */
  --dark:#0B0F14; --dark2:#12151F; --dark3:#1B1F2B;
- --light:#EBF0F8; --warm:#F6F1E7;
+ --light:#E8E4DA; --warm:#F6F1E7;
  --gold-light:#F4E4BA; --gold-deep:#B8941F;
  --gold2:rgba(201,169,98,0.14); --gold3:rgba(201,169,98,0.3);
- --text-light:#EBF0F8; --text-muted:#B8C5D6; --text-dim:#8A9DB5;
+ --text-light:#E8E4DA; --text-muted:#A9A396; --text-dim:#8A8578;
  --text-dark:#0C1526; --text-dark-muted:rgba(12,21,38,0.65);
  --border-gold:rgba(201,169,98,0.3); --border-light:rgba(12,21,38,0.1);
  --btn-ink:#F6EFE1;
@@ -99,6 +99,10 @@ nav.light-section .nav-hamburger span{background:var(--ink);}
 .btn-ghost:hover{border-color:var(--goldStar);color:var(--goldStar);}
 .hero-sign-label{margin:3rem auto 1.2rem;font-size:0.65rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(232,228,218,0.42);display:flex;align-items:center;gap:0.6rem;justify-content:center;font-family:'Playfair Display',serif;}
 .hero-sign-label::before,.hero-sign-label::after{content:'';width:30px;height:1px;background:rgba(201,169,98,0.35);}
+/* sade hero: hero içi burç seçici gizli (aynı seçici #burç bölümünde var) */
+#hero-zodiac,.hero-sign-label{display:none!important;}
+#hero .hero-subtitle{margin-bottom:2.4rem;}
+#hero .hero-stats{margin-top:2.6rem;}
 .zodiac-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:8px;max-width:780px;width:100%;margin:0 auto;position:relative;z-index:2;}
 .zodiac-card{background:transparent;border:1px solid rgba(232,228,218,0.1);border-radius:14px;padding:15px 6px 11px;text-align:center;cursor:pointer;transition:all 0.3s ease;user-select:none;}
 .zodiac-card:hover{background:rgba(201,169,98,0.16);border-color:rgba(201,169,98,0.42);transform:translateY(-2px);}
@@ -272,6 +276,8 @@ footer{background:var(--ink);padding:4rem 1.5rem 2.5rem;border-top:2px solid var
 <nav id="main-nav">
  <div class="nav-logo">Sorbi<span>✦</span></div>
  <div class="nav-links">
+ <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
+ <a href="/araclar">Araçlar</a>
  <a href="/haritam">Haritam</a>
  
  </div>
@@ -279,6 +285,8 @@ footer{background:var(--ink);padding:4rem 1.5rem 2.5rem;border-top:2px solid var
 </nav>
 <div class="nav-mobile" id="mobile-nav">
  <span class="close-btn" onclick="toggleMobileNav()">✕</span>
+ <a href="/detayli-dogum-haritasi" onclick="toggleMobileNav()">Harita Atölyesi</a>
+ <a href="/araclar" onclick="toggleMobileNav()">Araçlar</a>
  <a href="/haritam" onclick="toggleMobileNav()">Haritam</a>
  <a href="/seni-taniyorum" onclick="toggleMobileNav()">Beni tanı ✦</a>
  
@@ -292,6 +300,7 @@ footer{background:var(--ink);padding:4rem 1.5rem 2.5rem;border-top:2px solid var
  <div class="hero-buttons">
  <a href="/seni-taniyorum" class="btn-gold">Seni birkaç cümlede okuyayım ✦</a>
  <a href="#dogum-haritasi" class="btn-ghost">Ücretsiz Haritamı Hesapla</a>
+ <a href="/detayli-dogum-haritasi" class="btn-ghost">Harita Atölyesi ✦</a>
  </div>
  </div>
  <div class="hero-sign-label">Burcunu seç, günün yorumunu oku</div>
@@ -744,7 +753,8 @@ function buildReadings(){
  </div>
  <div class="reading-card" style="margin-bottom:1rem;"><span class="rc-icon">${ICON.future}</span><h4>Yön &amp; Odak</h4><p>${r.gelecek}</p></div>
  <div class="reading-cta">
- <p>Haritana özel derin analiz için Defne ile çalış.</p>
+ <p>Aklında belirli bir soru mu var? Haritanla birlikte sor, sana özel yanıtlansın.</p>
+ <a href="/soru-sor" class="btn-gold" style="font-size:0.85rem;padding:0.7rem 1.8rem;">Aklındaki soruyu sor →</a>
  
  </div>
  </div>`;
@@ -866,9 +876,10 @@ async function calculateChart(){
  <div class="chart-daily-card" style="margin-bottom:1rem;"><div class="cdc-label">${ICON.future} Yön &amp; Odak</div><p>${r.gelecek}</p></div>
  ${rising?`<div style="background:rgba(201,169,98,0.06);border:1px solid var(--border-gold);border-radius:var(--radius);padding:1rem;margin-bottom:1rem;"><p style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;"><strong style="color:var(--gold-light);">Yükselen ${rising.name} olarak</strong> — dünyaya ${PLANET_READINGS.yukselen[0]} farklı bir renk katıyorsun. <strong style="color:var(--gold-light);">Ay ${moon.name}'de</strong> — ${PLANET_READINGS.ay[0]} derinlik taşıyorsun.</p></div>`:''}
  <div class="chart-result-cta">
- <p>Bu sadece başlangıç — günlük yorumunu her sabah Sorbi uygulamasında al, ya da haritanın tüm derinliği için Defne ile çalış.</p>
+ <p>Bu sadece başlangıç — günlük yorumunu her sabah Sorbi uygulamasında al, ya da aklındaki soruyu haritanla birlikte sor.</p>
  <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:center;">
  <a href="#uygulama" class="btn-gold" style="font-size:0.85rem;padding:0.7rem 1.8rem;">Sorbi'yi Al →</a>
+ <a href="/soru-sor" class="btn-ghost" style="font-size:0.85rem;padding:0.7rem 1.8rem;">Aklındaki soruyu sor →</a>
  
  </div>
  </div>

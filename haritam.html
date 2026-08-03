@@ -11,12 +11,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="/astronomy.browser.min.js" defer></script>
 <style>
-:root{--terra:#C4744E;--btn-ink:#F6EFE1;--bg:#0B0F14;--panel:#161a25;--gold:#C9A962;--gold-lt:#E4CF9A;--gold-dk:#B05A32;--ink:#EBF0F8;--mut:#B8C5D6;--dim:#8A9DB5;--terra:#C4744E;--terra2:#B05A32;--line:rgba(201,169,98,.16);--lineg:rgba(201,169,98,.28);--lineg2:rgba(201,169,98,.42)}
+:root{--terra:#C4744E;--btn-ink:#F6EFE1;--bg:#0B0F14;--panel:#161a25;--gold:#C9A962;--gold-lt:#E4CF9A;--gold-dk:#B05A32;--ink:#E8E4DA;--mut:#A9A396;--dim:#8A8578;--terra:#C4744E;--terra2:#B05A32;--line:rgba(201,169,98,.16);--lineg:rgba(201,169,98,.28);--lineg2:rgba(201,169,98,.42)}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(1100px 520px at 50% -8%,#10151d 0,var(--bg) 62%);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.62}
 .wrap{max-width:680px;margin:0 auto;padding:2rem 1.15rem 4rem}
 .brand{font-family:'Playfair Display',serif;letter-spacing:3px;color:var(--gold);font-size:.82rem;text-decoration:none;text-transform:uppercase}
 .top{text-align:center;margin-bottom:1.3rem}
-h1{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(1.6rem,5vw,2.2rem);margin:.5rem 0 .2rem;color:#EBF0F8}
+h1{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(1.6rem,5vw,2.2rem);margin:.5rem 0 .2rem;color:#E8E4DA}
 .sub{color:var(--dim);font-size:.95rem}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1.3rem 1.2rem;margin-top:1.3rem}
 .sec-h{font-family:'Inter';font-size:.72rem;text-transform:uppercase;letter-spacing:2.2px;color:var(--gold);font-weight:600;margin-bottom:.9rem;display:flex;align-items:center;gap:.6rem}
@@ -36,9 +36,9 @@ h1{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(1.6rem,5
 .bt3 .c{background:rgba(201,169,98,.05);border:1px solid var(--lineg);border-radius:14px;padding:1rem .6rem;text-align:center}
 .bt3 .g{font-family:'Noto Sans Symbols2','Segoe UI Symbol',sans-serif;font-size:1.7rem;color:var(--gold)}
 .bt3 .r{font-size:.66rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin:.35rem 0 .15rem}
-.bt3 .s{font-family:'Playfair Display',serif;font-size:1.05rem;color:#EBF0F8}
+.bt3 .s{font-family:'Playfair Display',serif;font-size:1.05rem;color:#E8E4DA}
 .meta{font-size:.82rem;color:var(--dim);text-align:center;margin-top:.8rem}
-.ask h3{font-family:'Playfair Display',serif;color:#EBF0F8;font-size:1.3rem;margin:.1rem 0 .4rem;text-align:center}
+.ask h3{font-family:'Playfair Display',serif;color:#E8E4DA;font-size:1.3rem;margin:.1rem 0 .4rem;text-align:center}
 .ask p{font-size:.9rem;color:var(--mut);text-align:center;max-width:460px;margin:0 auto 1rem}
 label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin:.7rem 0 .3rem}
 textarea,input{width:100%;background:rgba(11,14,21,.7);border:1px solid var(--line);border-radius:10px;padding:.7rem .8rem;color:var(--ink);font-size:.94rem;font-family:'Inter'}
@@ -53,7 +53,7 @@ textarea{min-height:90px;resize:vertical}
 .linkrow{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem;justify-content:center}
 .linkrow a{color:var(--gold);text-decoration:none;font-size:.86rem;border:1px solid var(--lineg);border-radius:99px;padding:.5rem 1rem}
 .empty{text-align:center;padding:2rem 1rem}
-.empty a{display:inline-block;background:var(--terra2);color:#EBF0F8;text-decoration:none;padding:.75rem 1.5rem;border-radius:99px;font-weight:600;margin-top:1rem}
+.empty a{display:inline-block;background:var(--terra2);color:#E8E4DA;text-decoration:none;padding:.75rem 1.5rem;border-radius:99px;font-weight:600;margin-top:1rem}
 .foot{text-align:center;color:var(--dim);font-size:.78rem;margin-top:2.2rem}.foot a{color:var(--gold)}
 .logout{color:var(--dim);font-size:.78rem;cursor:pointer;text-decoration:underline}
 @media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}</style>
@@ -63,8 +63,8 @@ textarea{min-height:90px;resize:vertical}
 .sorbi-topnav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.55rem 1rem;background:rgba(11,14,21,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid rgba(201,169,98,.2)}
 .sorbi-topnav .lg{font-family:'Playfair Display',serif;letter-spacing:2px;color:#C9A962;font-size:.82rem;text-decoration:none;text-transform:uppercase;white-space:nowrap}
 .sorbi-topnav nav{display:flex;gap:.25rem;align-items:center}
-.sorbi-topnav nav a{color:#B8C5D6;text-decoration:none;font-size:.82rem;padding:.35rem .65rem;border-radius:99px;white-space:nowrap}
-.sorbi-topnav nav a:hover{color:#EBF0F8;background:rgba(235,240,248,.06)}
+.sorbi-topnav nav a{color:#A9A396;text-decoration:none;font-size:.82rem;padding:.35rem .65rem;border-radius:99px;white-space:nowrap}
+.sorbi-topnav nav a:hover{color:#E8E4DA;background:rgba(235,240,248,.06)}
 .sorbi-topnav nav a.on{color:#C9A962;background:rgba(235,240,248,.08);font-weight:600}
 @media(max-width:480px){.sorbi-topnav{padding:.5rem .6rem;gap:.4rem}.sorbi-topnav .lg{font-size:.72rem;letter-spacing:1px}.sorbi-topnav nav a{font-size:.78rem;padding:.35rem .5rem}}
 </style>
@@ -122,11 +122,6 @@ textarea{min-height:90px;resize:vertical}
    <div id="readingsList"></div>
   </div>
 
-  <div class="card" style="text-align:center">
-   <div class="sec-h" style="justify-content:center">Hazır Okumalar</div>
-   <p style="font-size:.88rem;color:var(--mut);margin:0 auto .8rem;max-width:440px">Natal analiz, ilişki uyumu (sinastri), yıllık öngörü — hazır paketler.</p>
-   <a href="/randevu" style="display:inline-block;background:var(--terra2);color:#EBF0F8;text-decoration:none;padding:.7rem 1.4rem;border-radius:99px;font-weight:600;font-size:.9rem">Okumalara bak →</a>
-  </div>
 
   <p class="foot"><span class="logout" id="logout">profilden çık</span> · <a href="/">sorbiapp.com</a></p>
  </div>
@@ -150,7 +145,7 @@ function renderList(){
  c.style.display='block';
  document.getElementById('readingsList').innerHTML=rs.slice().reverse().map(x=>{
   const d=x.at?new Date(x.at).toLocaleDateString('tr-TR',{day:'numeric',month:'short'}):'';
-  return `<div style="display:flex;justify-content:space-between;gap:.6rem;align-items:center;padding:.6rem 0;border-bottom:1px solid rgba(201,169,98,.1);font-size:.88rem"><span style="color:#B8C5D6;flex:1">${(x.q||'').slice(0,72)}${(x.q||'').length>72?'…':''}<span style="color:#8A9DB5;font-size:.72rem"> · ${d}</span></span><span style="color:#C9A962;font-size:.75rem;white-space:nowrap">${statusTr(x.status)}</span></div>`;
+  return `<div style="display:flex;justify-content:space-between;gap:.6rem;align-items:center;padding:.6rem 0;border-bottom:1px solid rgba(201,169,98,.1);font-size:.88rem"><span style="color:#A9A396;flex:1">${(x.q||'').slice(0,72)}${(x.q||'').length>72?'…':''}<span style="color:#8A8578;font-size:.72rem"> · ${d}</span></span><span style="color:#C9A962;font-size:.75rem;white-space:nowrap">${statusTr(x.status)}</span></div>`;
  }).join('');
 }
 function refreshStatuses(){

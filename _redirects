@@ -5,6 +5,11 @@
 /invite/*   /?ref=:splat#uygulama      302
 /share/*    /#uygulama                 302
 
+# App Store Support URL alias (2026-08-03)
+/support        /destek.html   301
+/support.html   /destek.html   301
+/destek         /destek.html   301
+
 # Parked pages → kept pages (2026-07-21)
 /rehber       /   301
 /rehber.html  /   301
@@ -30,3 +35,22 @@
 /yukselen-burc-nedir.html  /dogum-haritasi-hesaplama   301
 /burclar-ve-tarihleri       /burc-ozellikleri   301
 /burclar-ve-tarihleri.html  /burc-ozellikleri   301
+
+# Paralı-hizmet sayfaları söküldü (2026-07-30) → ana sayfa
+/randevu                      /   301
+/randevu.html                 /   301
+/karma-paketler               /   301
+/karma-paketler.html          /   301
+/astrodefne-hizmetler-section /   301
+/astrodefne-hizmetler-section.html /   301
+/yorumlar                     /   301
+/yorumlar.html                /   301
+
+# Tek kanonik gizlilik politikası (2026-08-03)
+# Yerel privacy.html app + App Store Connect ile çelişiyordu (üçüncü taraf
+# paylaşımı: PostHog analytics, Sentry crash reporting, Apple satın alma).
+# Sayfa arşive alındı, tüm trafik kanonik politikaya yönlendiriliyor.
+/privacy        https://defnedev.github.io/sorbi-legal/privacy/   301
+/privacy.html   https://defnedev.github.io/sorbi-legal/privacy/   301
+/gizlilik       https://defnedev.github.io/sorbi-legal/privacy/   301
+/gizlilik.html  https://defnedev.github.io/sorbi-legal/privacy/   301

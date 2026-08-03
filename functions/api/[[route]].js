@@ -18,7 +18,7 @@ const PRICES = {
   'natal-harita': 0, 'sorbi-ongorisu': 0, 'tarot': 0, 'horary': 0, 'sinastri': 0, 'yasam-donguleri': 0,
 };
 const SVC_NAMES = {
-  'natal-harita':'Natal Harita Analizi','sorbi-ongorisu':'Sorbi Öngörüsü','tarot':'Tarot Açılımı',
+  'natal-harita':'Detaylı Doğum Haritası Raporu','sorbi-ongorisu':'Sorbi Öngörüsü','tarot':'Tarot Açılımı',
   'horary':'Horary','sinastri':'Sinastri (İlişki)','yasam-donguleri':'Yaşam Döngüleri',
 };
 const SHOPIER_ENDPOINT = 'https://www.shopier.com/ShowProduct/api_pay4.php';
