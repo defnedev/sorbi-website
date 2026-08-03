@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Sorunu Sor — Haritana Göre Kişisel Yorum | Sorbi</title>
+<title>Sorunu Sor — Haritan Ne Diyor | Sorbi</title>
 <meta name="description" content="Doğum bilgini gir, haritanı anında gör; sorunu haritanla birlikte yaz. Genel burç yorumu değil — senin doğum haritana göre kişisel bir yorum. Swiss Ephemeris doğrulamalı hesaplama.">
 <link rel="canonical" href="https://sorbiapp.com/soru-sor">
 <meta name="theme-color" content="#0B0F14">
@@ -18,7 +18,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Haritama göre soru sormak nasıl çalışır?","acceptedAnswer":{"@type":"Answer","text":"Doğum tarihini, saatini ve yerini girersin; haritan sayfada anında hesaplanır ve çizilir. Sorunu haritanla birlikte yazarsın. Sorunun değdiği ev, o evin yöneticisi ve o döneme denk gelen transitler okunur; sana özel bir yorum hazırlanıp WhatsApp'tan iletilir."}},
 {"@type":"Question","name":"Doğum saatimi bilmiyorum, yine de sorabilir miyim?","acceptedAnswer":{"@type":"Answer","text":"Sorabilirsin. Saat olmadan Yükselen ve ev sistemi hesaplanamaz; bu durumda yorum gezegenlerin burçları ve o dönemin transitleri üzerinden kurulur. Saat biliniyorsa yorum belirgin şekilde daha isabetli olur."}},
@@ -28,21 +28,33 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
- --bg:#0B0F14; --panel:#12151F; --panel2:#161A25;
- --gold:#C9A962; --gold-lt:#E4CF9A; --gold-br:#F4E4BA;
- --ink:#E8E4DA; --mut:#A9A396; --dim:#8A8578;
+ --bg:#0D0810; --panel:rgba(255,255,255,.032); --panel2:rgba(255,255,255,.055);
+ --gold:#E3A692; --gold-lt:#E8CD8F; --gold-br:#F2D3B8;
+ --ink:#F2EFE9; --mut:#9BA0AB; --dim:#666B76;
  --terra:#C4744E; --terra2:#B05A32; --soft:#7FB3A8;
- --line:rgba(201,169,98,.16); --line2:rgba(201,169,98,.28); --line3:rgba(201,169,98,.45);
+ --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.14); --line3:rgba(255,255,255,.22);
+ --fire:#C75B39; --earth:#9E8B4E; --air:#B58A5E; --water:#5E8C86;
  --radius:16px;
 }
 html{scroll-behavior:smooth}
+/* aurora zemin */
+.sky{position:fixed;inset:0;pointer-events:none;z-index:-1;background:
+ radial-gradient(52% 38% at 50% -6%,rgba(227,166,146,.10),transparent 65%),
+ radial-gradient(40% 32% at 88% 12%,rgba(94,147,168,.07),transparent 70%),
+ radial-gradient(1px 1px at 14% 24%,rgba(241,220,168,.45) 50%,transparent 51%),
+ radial-gradient(1px 1px at 36% 9%,rgba(242,239,233,.3) 50%,transparent 51%),
+ radial-gradient(1.4px 1.4px at 61% 27%,rgba(227,166,146,.4) 50%,transparent 51%),
+ radial-gradient(1px 1px at 82% 15%,rgba(242,239,233,.35) 50%,transparent 51%),
+ radial-gradient(1px 1px at 25% 60%,rgba(242,239,233,.2) 50%,transparent 51%),
+ radial-gradient(1.2px 1.2px at 72% 70%,rgba(227,166,146,.25) 50%,transparent 51%)}
+
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
 a{color:inherit;text-decoration:none}
 svg{display:block}
 .wrap{max-width:1140px;margin:0 auto;padding:0 1.1rem}
 
 .sorbi-topnav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.55rem 1rem;background:rgba(11,14,21,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.sorbi-topnav .lg{font-family:'Playfair Display',serif;letter-spacing:2px;color:var(--gold);font-size:.82rem;text-transform:uppercase;white-space:nowrap}
+.sorbi-topnav .lg{font-family:'Space Grotesk',sans-serif;letter-spacing:2px;color:var(--gold);font-size:.82rem;text-transform:uppercase;white-space:nowrap}
 .sorbi-topnav nav{display:flex;gap:.25rem;align-items:center;overflow-x:auto;scrollbar-width:none}
 .sorbi-topnav nav::-webkit-scrollbar{display:none}
 .sorbi-topnav nav a{color:var(--mut);font-size:.82rem;padding:.35rem .65rem;border-radius:99px;white-space:nowrap}
@@ -50,16 +62,16 @@ svg{display:block}
 
 /* ── hero ── */
 .hero{text-align:center;padding:2.6rem 0 1.6rem}
-.hero h1{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(1.9rem,5.2vw,2.9rem);letter-spacing:-.4px;margin-bottom:.6rem}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(1.9rem,5.2vw,2.9rem);letter-spacing:-.4px;margin-bottom:.6rem}
 .hero .sub{color:var(--mut);font-size:1.02rem;max-width:610px;margin:0 auto}
 .hero .tags{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;margin-top:1.1rem}
 .tag{font-size:.7rem;letter-spacing:.6px;text-transform:uppercase;color:var(--gold-lt);border:1px solid var(--line2);border-radius:99px;padding:.3rem .75rem}
 
 /* ── bölüm ── */
 section{padding:2.2rem 0}
-.sec-h{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3.4vw,1.75rem);color:var(--gold-br);margin-bottom:.35rem}
+.sec-h{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.3rem,3.4vw,1.75rem);color:var(--gold-br);margin-bottom:.35rem}
 .sec-s{color:var(--mut);font-size:.94rem;max-width:640px;margin-bottom:1.3rem}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem}
+.card{background:var(--panel);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem}
 
 /* ── canlı harita ── */
 .live{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:1.2rem;align-items:start}
@@ -69,16 +81,16 @@ section{padding:2.2rem 0}
 label{display:block;font-size:.68rem;letter-spacing:.7px;text-transform:uppercase;color:var(--dim);margin-bottom:.32rem}
 input,textarea,select{width:100%;background:#0E121A;border:1px solid var(--line2);color:var(--ink);border-radius:11px;padding:.68rem .75rem;font-size:.95rem;font-family:inherit}
 textarea{min-height:110px;resize:vertical;line-height:1.55}
-input:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,169,98,.12)}
+input:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(223,169,143,.12)}
 .geo{position:relative}
 .geolist{position:absolute;top:100%;left:0;right:0;z-index:60;background:var(--panel2);border:1px solid var(--line2);border-radius:11px;margin-top:4px;max-height:220px;overflow:auto}
 .geolist div{padding:.55rem .7rem;font-size:.88rem;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.04)}
-.geolist div:hover{background:rgba(201,169,98,.12)}
+.geolist div:hover{background:rgba(223,169,143,.12)}
 .hint{font-size:.75rem;color:var(--dim);margin-top:.6rem;line-height:1.55}
 
 .chartbox{background:#F7F2E8;border:1px solid var(--line2);border-radius:var(--radius);overflow:hidden;min-height:210px;display:flex;align-items:center;justify-content:center;position:relative}
 .chartbox .ph{color:#8A8578;font-size:.88rem;text-align:center;padding:2rem 1.2rem;line-height:1.7}
-.chartbox .ph b{color:#3A3F4C;display:block;font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:.3rem}
+.chartbox .ph b{color:#3A3F4C;display:block;font-family:'Space Grotesk',sans-serif;font-size:1.05rem;margin-bottom:.3rem}
 .spin{width:26px;height:26px;border:2px solid rgba(24,28,38,.15);border-top-color:#8A6A2A;border-radius:50%;animation:sp .8s linear infinite;margin:0 auto .7rem}
 @keyframes sp{to{transform:rotate(360deg)}}
 
@@ -99,8 +111,8 @@ input:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 
 
 /* ── işçilik ── */
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:.8rem}
-.step{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.05rem}
-.step .n{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold);line-height:1}
+.step{background:var(--panel);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:14px;padding:1.05rem}
+.step .n{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;color:var(--gold);line-height:1}
 .step h4{font-size:.95rem;margin:.45rem 0 .35rem;color:var(--ink);font-weight:600}
 .step p{font-size:.84rem;color:var(--mut);line-height:1.62}
 .step code{font-family:inherit;color:var(--gold-lt);font-size:.82rem}
@@ -111,30 +123,30 @@ input:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 
 .ex-q{background:rgba(196,116,78,.07);border:1px solid rgba(196,116,78,.25);border-radius:14px;padding:1.05rem}
 .ex-q .who{font-size:.68rem;letter-spacing:.7px;text-transform:uppercase;color:var(--terra);margin-bottom:.4rem}
 .ex-q p{font-size:.95rem;font-style:italic;color:var(--ink);line-height:1.6}
-.ex-a{background:var(--panel);border:1px solid var(--line2);border-radius:14px;padding:1.05rem}
+.ex-a{background:var(--panel);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--line2);border-radius:14px;padding:1.05rem}
 .ex-a .who{font-size:.68rem;letter-spacing:.7px;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
 .ex-a p{font-size:.89rem;color:var(--mut);line-height:1.68;margin-bottom:.6rem}
 .ex-a p:last-child{margin-bottom:0}
 .ex-a b{color:var(--gold-lt);font-weight:500}
 .ex-facts{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.7rem}
-.fact{font-size:.7rem;color:var(--gold-lt);background:rgba(201,169,98,.1);border:1px solid var(--line2);border-radius:99px;padding:.22rem .6rem}
+.fact{font-size:.7rem;color:var(--gold-lt);background:rgba(223,169,143,.1);border:1px solid var(--line2);border-radius:99px;padding:.22rem .6rem}
 
 /* ── form ── */
 .formwrap{max-width:660px;margin:0 auto}
 .chips{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.7rem}
 .chip{font-size:.79rem;border:1px solid var(--line2);border-radius:99px;padding:.34rem .75rem;cursor:pointer;color:var(--mut);background:none;font-family:inherit}
-.chip:hover,.chip.on{border-color:var(--gold);color:var(--gold-br);background:rgba(201,169,98,.09)}
-.btn{background:linear-gradient(135deg,#B8941F,var(--gold),var(--gold-br));color:#20180A;border:none;border-radius:99px;padding:.85rem 1.6rem;font-weight:600;font-size:.98rem;cursor:pointer;font-family:inherit;width:100%;margin-top:.9rem}
+.chip:hover,.chip.on{border-color:var(--gold);color:var(--gold-br);background:rgba(223,169,143,.09)}
+.btn{background:linear-gradient(135deg,#C9A254,var(--gold),var(--gold-br));color:#20180A;border:none;border-radius:99px;padding:.85rem 1.6rem;font-weight:600;font-size:.98rem;cursor:pointer;font-family:inherit;width:100%;margin-top:.9rem}
 .btn:hover{filter:brightness(1.07)}
 .btn[disabled]{opacity:.55;cursor:default}
 .kvkk{display:flex;gap:.5rem;align-items:flex-start;font-size:.79rem;color:var(--mut);margin-top:.9rem;line-height:1.5}
 .kvkk input{width:auto;margin-top:.15rem}
 .msg{font-size:.87rem;margin-top:.7rem;min-height:1.2em}
-.summary{background:rgba(201,169,98,.07);border:1px solid var(--line2);border-radius:12px;padding:.65rem .8rem;font-size:.83rem;color:var(--mut);margin-bottom:.9rem}
+.summary{background:rgba(223,169,143,.07);border:1px solid var(--line2);border-radius:12px;padding:.65rem .8rem;font-size:.83rem;color:var(--mut);margin-bottom:.9rem}
 .summary b{color:var(--gold-lt);font-weight:500}
 .done{display:none;text-align:center;padding:2rem 1rem}
 .done .lk{font-size:2rem;color:var(--gold)}
-.done h3{font-family:'Playfair Display',serif;font-size:1.4rem;margin:.5rem 0 .4rem}
+.done h3{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;margin:.5rem 0 .4rem}
 .done p{color:var(--mut);font-size:.94rem;max-width:420px;margin:0 auto 1.1rem}
 .done a{display:inline-block;border:1px solid var(--line3);color:var(--gold-lt);border-radius:99px;padding:.6rem 1.3rem;font-size:.88rem}
 
@@ -145,7 +157,7 @@ input:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 
 .lim p{font-size:.8rem;color:var(--dim);line-height:1.6}
 
 .seo{color:var(--mut);font-size:.93rem;line-height:1.78}
-.seo h2{font-family:'Playfair Display',serif;color:var(--gold-lt);font-size:1.22rem;margin:1.5rem 0 .5rem}
+.seo h2{font-family:'Space Grotesk',sans-serif;color:var(--gold-lt);font-size:1.22rem;margin:1.5rem 0 .5rem}
 .seo b{color:var(--ink);font-weight:500}
 footer{border-top:1px solid var(--line);margin-top:2rem;padding:1.5rem 0 2.6rem;text-align:center;color:var(--dim);font-size:.79rem;line-height:1.9}
 footer a{color:var(--mut)}
@@ -153,6 +165,7 @@ footer a{color:var(--mut)}
 </style>
 </head>
 <body>
+<div class="sky"></div>
 
 <header class="sorbi-topnav">
  <a href="/" class="lg">✦ Sorbi</a>
@@ -294,7 +307,7 @@ footer a{color:var(--mut)}
       <div class="done" id="done">
         <div class="lk">✦</div>
         <h3>Sorun alındı</h3>
-        <p>En kısa sürede WhatsApp'tan sana özel yorumunla dönülecek.</p>
+        <p>Sorun, haritanın gösterdikleriyle birlikte değerlendirilir; hazır olduğunda haber verilir.</p>
         <a href="/detayli-dogum-haritasi">Bu arada haritanı derinlemesine incele →</a>
       </div>
     </div>
@@ -324,10 +337,7 @@ footer a{color:var(--mut)}
   <p>Sayfadaki harita, gezegen konumlarını tarayıcı içi bir astronomi motoruyla hesaplar; ev başlangıçları ve açısal noktalar Swiss Ephemeris çıktısına karşı test edilmiş, yedi ev sisteminde de fark ölçülebilir düzeyin altında kalmıştır. Yani burada gördüğün derece ve dakika değerleri, profesyonel astroloji yazılımlarının verdikleriyle eşleşir.</p>
 </section>
 
-<footer>
-  Kader değil, farkındalık. · <a href="/">sorbiapp.com</a> · <a href="/detayli-dogum-haritasi">Harita Atölyesi</a> · <a href="/araclar">Araçlar</a> · <a href="/privacy">Gizlilik</a><br>
-  Astroloji bir yorum geleneğidir; bu sayfadaki hesaplamalar astronomik veridir, kesin bir sonuç ya da öngörü sunmaz.
-</footer>
+
 </div>
 
 <script>
@@ -527,5 +537,59 @@ loadSaved();
 if($('bd').value && PICKED) render();
 })();
 </script>
+<!-- SORBI-FOOTER:START -->
+<style>
+.sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0D0810;font-family:'Inter',system-ui,sans-serif}
+.sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr 1fr;gap:2rem}
+.sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#E3A692;margin:0 0 .8rem;font-weight:600}
+.sbft a{display:block;color:#9BA0AB;text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
+.sbft a:hover{color:#F2EFE9}
+.sbft .sbft-brand b{font-size:1.05rem;color:#F2EFE9;font-weight:700}
+.sbft .sbft-brand b i{font-style:normal;color:#E3A692;margin-right:.3rem}
+.sbft .sbft-brand p{color:#9BA0AB;font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#6D7280;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+@media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
+@media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
+</style>
+<footer class="sbft">
+ <div class="sbft-in">
+  <div class="sbft-brand"><b><i>✦</i>Sorbi</b><p>Gökyüzünü veriyle okuyan astroloji atölyesi. Hesaplamalar tarayıcında, saniyeler içinde.</p></div>
+  <div><h4>Hesaplayıcılar</h4>
+   <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
+   <a href="/dogum-haritasi-hesaplama">Doğum Haritası</a>
+   <a href="/yukselen-burc-hesaplama">Yükselen Burç</a>
+   <a href="/ay-burcu-hesaplama">Ay Burcu</a>
+   <a href="/sinastri">Sinastri Rehberi</a>
+   <a href="/natal-harita">Natal Harita Rehberi</a>
+  </div>
+  <div><h4>Gökyüzü</h4>
+   <a href="/bugun">Bugün Gökyüzünde</a>
+   <a href="/horary">An Haritası (Horary)</a>
+   <a href="/uygun-gun-secimi">Uygun Gün Seçimi</a>
+   <a href="/retro-ay-takvimi">Retro & Ay Takvimi</a>
+   <a href="/astrokartografi">Astrokartografi</a>
+   <a href="/yasam-donguleri">Yaşam Döngüleri</a>
+  </div>
+  <div><h4>Burçlar</h4>
+   <a href="/burc-ozellikleri">Burç Özellikleri</a>
+   <a href="/gunluk-burc-yorumlari">Günlük Yorumlar</a>
+   <a href="/ates-burclari">Ateş Burçları</a>
+   <a href="/toprak-burclari">Toprak Burçları</a>
+   <a href="/hava-burclari">Hava Burçları</a>
+   <a href="/su-burclari">Su Burçları</a>
+  </div>
+  <div><h4>Sorbi</h4>
+   <a href="/">Ana Sayfa</a>
+   <a href="/soru-sor">Sorunu Sor</a>
+   <a href="/gunun-karti">Günün Kartı</a>
+   <a href="/seni-taniyorum">Seni Tanıyorum</a>
+   <a href="/#uygulama">Uygulama</a>
+   <a href="/destek">Destek</a>
+  </div>
+ </div>
+ <div class="sbft-bot"><span>© 2026 Sorbi · sorbiapp.com</span><span>Astroloji içerikleri kişisel farkındalık amaçlıdır; kesin gelecek vaadi değildir.</span></div>
+</footer>
+<!-- SORBI-FOOTER:END -->
+<script src="/sorbi-form.js" defer></script>
 </body>
 </html>

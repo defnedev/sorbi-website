@@ -213,6 +213,7 @@ function houseOf(l,c){
 
 /* ═════════ ZAMAN ═════════ */
 function tzOffMin(date,tz){
+  if(tz!==undefined&&tz!==null&&tz!==''&&isFinite(tz))return (+tz)*60;
   try{
     var p=new Intl.DateTimeFormat('en-US',{timeZone:tz,hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'})
       .formatToParts(date).reduce(function(a,x){a[x.type]=x.value;return a;},{});

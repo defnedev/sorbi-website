@@ -1,14 +1,14 @@
 <!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
-<title>astrodefne · Danışman Rapor Aracı</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>astrodefne · Rapor Atölyesi</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="/astronomy.browser.min.js" defer></script>
 <script src="/sorbi-chart.js" defer></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--terra:#C4744E;--btn-ink:#F6EFE1;--ink:#0B0F14;--paper:#FBF8F1;--card:#fff;--gold:#B05A32;--gold2:#C4744E;--accent:#C4744E;--tx:#1E2230;--tx2:#5A5D6B;--line:#E4DECF}
+:root{--terra:#E3A692;--btn-ink:#F6EFE1;--ink:#0B0F14;--paper:#FBF8F1;--card:#fff;--gold:#B05A32;--gold2:#C4744E;--accent:#C4744E;--tx:#1E2230;--tx2:#5A5D6B;--line:#E4DECF}
 body{font-family:'Inter',sans-serif;background:#20232E;color:var(--tx);line-height:1.6;padding:20px}
-.controls{max-width:900px;margin:0 auto 22px;background:#12151F;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:22px;color:#E8E4DA}
+.controls{max-width:900px;margin:0 auto 22px;background:#1A1220;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:22px;color:#E8E4DA}
 .controls h2{font-family:'Playfair Display';color:#C4744E;margin-bottom:4px}
 .controls .sub{font-size:.85rem;color:#8A8578;margin-bottom:16px}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
@@ -53,11 +53,36 @@ td.pl{font-weight:600;color:var(--ink)}
  .write{border-color:#ccc}@page{size:A4;margin:0}
 }
 @media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}</style></head><body>
+<!-- SORBI-NAV:START -->
+<style>
+.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;padding:.68rem 1.2rem;background:rgba(13,8,16,.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.08);font-family:'Inter',system-ui,-apple-system,sans-serif}
+.sbnav .sbnav-lg{font-weight:700;letter-spacing:.3px;color:#F2EFE9;font-size:.95rem;text-decoration:none;white-space:nowrap;flex:0 0 auto}
+.sbnav .sbnav-lg i{font-style:normal;color:#E3A692;margin-right:.3rem}
+.sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin-left:auto}
+.sbnav nav::-webkit-scrollbar{display:none}
+.sbnav nav a{color:#9BA0AB;text-decoration:none;font-size:.85rem;font-weight:500;padding:.4rem .78rem;border-radius:99px;white-space:nowrap;transition:color .15s,background .15s}
+.sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.06)}
+.sbnav nav a.on{color:#F2D3B8;background:rgba(227,166,146,.13)}
+@media(max-width:560px){.sbnav{padding:.55rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem}.sbnav nav a{font-size:.79rem;padding:.34rem .55rem}}
+</style>
+<header class="sbnav">
+ <a href="/" class="sbnav-lg"><i>✦</i>Sorbi</a>
+ <nav>
+  <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
+  <a href="/dogum-haritasi-hesaplama">Doğum Haritası</a>
+  <a href="/araclar">Araçlar</a>
+  <a href="/bugun">Bugün</a>
+  <a href="/burc-ozellikleri">Burçlar</a>
+  <a href="/soru-sor">Sorunu Sor</a>
+ </nav>
+</header>
+<script>(function(){try{var p=location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';document.querySelectorAll('.sbnav nav a').forEach(function(a){var h=a.getAttribute('href').replace(/\.html$/,'');if(h===p||(h!=='/'&&p.indexOf(h)===0))a.classList.add('on');});}catch(e){}})();</script>
+<!-- SORBI-NAV:END -->
 <div class="controls">
- <h2>Danışman Rapor Aracı</h2>
- <div class="sub">Danışan doğum verisini gir → harita + aspektler otomatik. Yorum bölümlerini doldur → "PDF olarak Yazdır". Veriler hiçbir yere gönderilmez.</div>
+ <h2>Rapor Atölyesi</h2>
+ <div class="sub">Doğum verisini gir → harita + aspektler otomatik. Yorum bölümlerini doldur → "PDF olarak Yazdır". Veriler hiçbir yere gönderilmez.</div>
  <div class="grid">
- <div class="full"><label>Danışan Adı</label><input id="cName" placeholder="Ad Soyad"></div>
+ <div class="full"><label>Kişi Adı</label><input id="cName" placeholder="Ad Soyad"></div>
  <div><label>Doğum Tarihi</label><input type="date" id="cDate"></div>
  <div><label>Doğum Saati</label><input type="time" id="cTime"></div>
  <div><label>Enlem</label><input type="number" step="0.0001" id="cLat" value="41.0082"></div>
@@ -65,7 +90,7 @@ td.pl{font-weight:600;color:var(--ink)}
  <div><label>Şehir (etiket)</label><input id="cCity" placeholder="İstanbul"></div>
  <div><label>Saat Dilimi</label><input id="cTz" value="Europe/Istanbul"></div>
  <div><label>Ev Sistemi</label><select id="cHouse"><option value="P">Placidus</option><option value="W">Whole Sign</option></select></div>
- <div><label>Rapor türü</label><select id="cPkg"><option>Mini Natal Rapor</option><option>Detaylı Natal + Sinastri</option><option>Detaylı Okuma</option><option>1:1 Okuma Özeti</option></select></div>
+ <div><label>Rapor türü</label><select id="cPkg"><option>Mini Natal Rapor</option><option>Detaylı Natal + Sinastri</option><option>Detaylı Okuma</option><option>Derin Okuma Özeti</option></select></div>
  </div>
  <div class="btns"><button class="b1" id="gen">Haritayı Oluştur</button><button class="b2" onclick="window.print()">PDF olarak Yazdır</button></div>
 </div>
@@ -75,7 +100,7 @@ td.pl{font-weight:600;color:var(--ink)}
  <div class="rp-brand">astro<span class="i">defne</span><small>Profesyonel Astroloji</small></div>
  <div class="rp-meta"><span class="tag" id="pTag">Natal Rapor</span><div id="pDate"></div></div>
  </div>
- <div class="rp-title" id="pName">Danışan Adı</div>
+ <div class="rp-title" id="pName">Kişi Adı</div>
  <div class="rp-sub" id="pBirth">Doğum bilgileri</div>
 
  <div class="rp-sec"><h3>Temel Kimlik</h3>
@@ -112,7 +137,7 @@ const SIGN3=['Koç','Boğ','İki','Yen','Asl','Baş','Ter','Akr','Yay','Oğl','K
 const norm=d=>((d%360)+360)%360,RAD=Math.PI/180;
 const signOf=l=>Math.floor(norm(l)/30);
 function fmtDeg(l){l=norm(l);const s=signOf(l);const g=l-s*30;const d=Math.floor(g);let m=Math.round((g-d)*60);let dd=d;if(m===60){m=0;dd++;}return dd+'°'+String(m).padStart(2,'0')+' '+SIGNS[s];}
-function tzOffMin(date,tz){const p=new Intl.DateTimeFormat('en-US',{timeZone:tz,hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(date).reduce((a,x)=>(a[x.type]=x.value,a),{});const h=p.hour==='24'?0:+p.hour;return(Date.UTC(+p.year,+p.month-1,+p.day,h,+p.minute,+p.second)-date.getTime())/60000;}
+function tzOffMin(date,tz){if(tz!==undefined&&tz!==null&&tz!==''&&isFinite(tz))return (+tz)*60;const p=new Intl.DateTimeFormat('en-US',{timeZone:tz,hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(date).reduce((a,x)=>(a[x.type]=x.value,a),{});const h=p.hour==='24'?0:+p.hour;return(Date.UTC(+p.year,+p.month-1,+p.day,h,+p.minute,+p.second)-date.getTime())/60000;}
 function localToUTC(y,mo,d,h,mi,tz){let g=Date.UTC(y,mo-1,d,h,mi,0);for(let i=0;i<3;i++){const o=tzOffMin(new Date(g),tz);const c=Date.UTC(y,mo-1,d,h,mi,0)-o*60000;if(c===g)break;g=c;}return new Date(g);}
 function eclOfDate(A,b,t){let v=(b===A.Body.Moon)?A.GeoMoon(t):A.GeoVector(b,t,true);return norm(A.SphereFromVector(A.RotateVector(A.Rotation_EQJ_ECT(t),v)).lon);}
 function obliquity(t){const T=t.tt/36525;return(84381.448-46.8150*T-0.00059*T*T+0.001813*T*T*T)/3600;}
@@ -169,7 +194,7 @@ document.getElementById('gen').onclick=()=>{
  const lat=parseFloat(document.getElementById('cLat').value),lon=parseFloat(document.getElementById('cLon').value),tz=document.getElementById('cTz').value||'Europe/Istanbul';
  const house=document.getElementById('cHouse').value;
  const ch=compute(A,{y,mo,d,h,mi,lat,lon,tz,house});
- document.getElementById('pName').textContent=document.getElementById('cName').value||'Danışan';
+ document.getElementById('pName').textContent=document.getElementById('cName').value||'Kişi';
  document.getElementById('pTag').textContent=document.getElementById('cPkg').value;
  document.getElementById('pDate').textContent='Rapor: '+new Date().toLocaleDateString('tr-TR');
  document.getElementById('pBirth').textContent=`${dv} · ${tv} · ${document.getElementById('cCity').value||''} (${lat.toFixed(2)}, ${lon.toFixed(2)}) · ${house==='W'?'Whole Sign':'Placidus'}`;
@@ -187,4 +212,58 @@ document.getElementById('gen').onclick=()=>{
  document.getElementById('wThemes').textContent=draftThemes(ch);
  window.scrollTo({top:document.getElementById('page').offsetTop-20,behavior:'smooth'});
 };
-</script></body></html>
+</script><!-- SORBI-FOOTER:START -->
+<style>
+.sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0D0810;font-family:'Inter',system-ui,sans-serif}
+.sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr 1fr;gap:2rem}
+.sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#E3A692;margin:0 0 .8rem;font-weight:600}
+.sbft a{display:block;color:#9BA0AB;text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
+.sbft a:hover{color:#F2EFE9}
+.sbft .sbft-brand b{font-size:1.05rem;color:#F2EFE9;font-weight:700}
+.sbft .sbft-brand b i{font-style:normal;color:#E3A692;margin-right:.3rem}
+.sbft .sbft-brand p{color:#9BA0AB;font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#6D7280;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+@media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
+@media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
+</style>
+<footer class="sbft">
+ <div class="sbft-in">
+  <div class="sbft-brand"><b><i>✦</i>Sorbi</b><p>Gökyüzünü veriyle okuyan astroloji atölyesi. Hesaplamalar tarayıcında, saniyeler içinde.</p></div>
+  <div><h4>Hesaplayıcılar</h4>
+   <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
+   <a href="/dogum-haritasi-hesaplama">Doğum Haritası</a>
+   <a href="/yukselen-burc-hesaplama">Yükselen Burç</a>
+   <a href="/ay-burcu-hesaplama">Ay Burcu</a>
+   <a href="/sinastri">Sinastri Rehberi</a>
+   <a href="/natal-harita">Natal Harita Rehberi</a>
+  </div>
+  <div><h4>Gökyüzü</h4>
+   <a href="/bugun">Bugün Gökyüzünde</a>
+   <a href="/horary">An Haritası (Horary)</a>
+   <a href="/uygun-gun-secimi">Uygun Gün Seçimi</a>
+   <a href="/retro-ay-takvimi">Retro & Ay Takvimi</a>
+   <a href="/astrokartografi">Astrokartografi</a>
+   <a href="/yasam-donguleri">Yaşam Döngüleri</a>
+  </div>
+  <div><h4>Burçlar</h4>
+   <a href="/burc-ozellikleri">Burç Özellikleri</a>
+   <a href="/gunluk-burc-yorumlari">Günlük Yorumlar</a>
+   <a href="/ates-burclari">Ateş Burçları</a>
+   <a href="/toprak-burclari">Toprak Burçları</a>
+   <a href="/hava-burclari">Hava Burçları</a>
+   <a href="/su-burclari">Su Burçları</a>
+  </div>
+  <div><h4>Sorbi</h4>
+   <a href="/">Ana Sayfa</a>
+   <a href="/soru-sor">Sorunu Sor</a>
+   <a href="/gunun-karti">Günün Kartı</a>
+   <a href="/seni-taniyorum">Seni Tanıyorum</a>
+   <a href="/#uygulama">Uygulama</a>
+   <a href="/destek">Destek</a>
+  </div>
+ </div>
+ <div class="sbft-bot"><span>© 2026 Sorbi · sorbiapp.com</span><span>Astroloji içerikleri kişisel farkındalık amaçlıdır; kesin gelecek vaadi değildir.</span></div>
+</footer>
+<!-- SORBI-FOOTER:END -->
+<script src="/sorbi-form.js" defer></script>
+</body></html>

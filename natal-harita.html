@@ -6,7 +6,7 @@
 <title>Doğum Haritası Analizi &amp; Natal Harita Yorumu — Sorbi</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="canonical" href="https://sorbiapp.com/natal-harita">
-<meta name="theme-color" content="#0B0F14">
+<meta name="theme-color" content="#F4EFE4">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sorbi">
 <meta property="og:locale" content="tr_TR">
@@ -23,7 +23,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;font-size:16px;}
@@ -32,28 +32,28 @@ img{max-width:100%;display:block;}
 a{text-decoration:none;color:inherit;}
 ul{list-style:none;}
 
-:root{--terra:#C4744E;--btn-ink:#F6EFE1;
+:root{--terra:#1D2A4A;--btn-ink:#F4EFE4;
  --dark:#0B0F14;
  --dark2:#0d0d28;
  --dark3:#12102a;
- --gold:#C9A962;
- --gold2:rgba(201,169,98,0.12);
- --gold3:rgba(201,169,98,0.25);
+ --gold:#8A6C2E;
+ --gold2:rgba(223,169,143,0.12);
+ --gold3:rgba(223,169,143,0.25);
  --purple:#C4744E;
- --purple2:rgba(201,169,98,0.12);
+ --purple2:rgba(223,169,143,0.12);
  --green:#25D366;
  --text-light:#F6F1E7;
  --text-muted:rgba(246,241,231,0.6);
  --text-dim:rgba(246,241,231,0.35);
- --border-gold:rgba(201,169,98,0.22);
+ --border-gold:rgba(223,169,143,0.22);
  --radius:12px;
 }
 
-h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:600;line-height:1.15;}
+h1,h2,h3,h4{font-family:'Space Grotesk','Inter',sans-serif;font-weight:600;line-height:1.15;}
 p{line-height:1.85;color:var(--text-muted);}
 
 /* NAV */
-nav{
+nav.__eski{
  position:fixed;top:0;left:0;width:100%;z-index:1000;
  padding:1rem 2rem;
  display:flex;justify-content:space-between;align-items:center;
@@ -62,7 +62,7 @@ nav{
  box-shadow:none;
 }
 .nav-logo{
- font-family:'Playfair Display',serif;
+ font-family:'Space Grotesk','Inter',sans-serif;
  font-size:3.2rem;font-weight:700;letter-spacing:-0.5px;
  color:var(--text-light);
  display:flex;align-items:center;gap:0.2rem;
@@ -79,8 +79,8 @@ nav{
 /* HERO */
 .hero{
  min-height:100vh;
- background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,169,98,0.18) 0%, transparent 70%),
- radial-gradient(ellipse 60% 40% at 80% 100%, rgba(201,169,98,0.1) 0%, transparent 60%),
+ background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(223,169,143,0.18) 0%, transparent 70%),
+ radial-gradient(ellipse 60% 40% at 80% 100%, rgba(223,169,143,0.1) 0%, transparent 60%),
  var(--dark);
  display:flex;flex-direction:column;
  align-items:center;justify-content:center;
@@ -90,12 +90,12 @@ nav{
 }
 .hero::before{
  content:'';position:absolute;inset:0;
- background:url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='200' cy='200' r='180' stroke='rgba(201,169,98,0.06)' stroke-width='1' fill='none'/%3E%3Ccircle cx='200' cy='200' r='130' stroke='rgba(201,169,98,0.06)' stroke-width='1' fill='none'/%3E%3Ccircle cx='200' cy='200' r='80' stroke='rgba(201,169,98,0.04)' stroke-width='1' fill='none'/%3E%3C/svg%3E") center center / 600px 600px no-repeat;
+ background:url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='200' cy='200' r='180' stroke='rgba(223,169,143,0.06)' stroke-width='1' fill='none'/%3E%3Ccircle cx='200' cy='200' r='130' stroke='rgba(223,169,143,0.06)' stroke-width='1' fill='none'/%3E%3Ccircle cx='200' cy='200' r='80' stroke='rgba(223,169,143,0.04)' stroke-width='1' fill='none'/%3E%3C/svg%3E") center center / 600px 600px no-repeat;
  opacity:0.6;pointer-events:none;
 }
 .hero-badge{
  display:inline-flex;align-items:center;gap:0.4rem;
- background:rgba(201,169,98,0.1);
+ background:rgba(223,169,143,0.1);
  border:1px solid var(--border-gold);
  border-radius:999px;
  padding:0.3rem 1rem;
@@ -117,13 +117,13 @@ nav{
 .hero-symbol{
  font-size:5rem;color:var(--purple);opacity:0.3;
  position:absolute;top:10%;right:8%;
- font-family:'Playfair Display',serif;
+ font-family:'Space Grotesk','Inter',sans-serif;
  animation:float 6s ease-in-out infinite;
 }
 .hero-symbol2{
  font-size:3.5rem;color:var(--gold);opacity:0.2;
  position:absolute;bottom:15%;left:6%;
- font-family:'Playfair Display',serif;
+ font-family:'Space Grotesk','Inter',sans-serif;
  animation:float 8s ease-in-out infinite reverse;
 }
 @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-18px);}}
@@ -153,14 +153,14 @@ nav{
  margin-top:2rem;
 }
 .card{
- background:rgba(201,169,98,0.06);
- border:1px solid rgba(201,169,98,0.18);
+ background:rgba(223,169,143,0.06);
+ border:1px solid rgba(223,169,143,0.18);
  border-radius:var(--radius);
  padding:1.8rem 1.5rem;
  transition:all 0.3s;
 }
 .card:hover{
- background:rgba(201,169,98,0.06);
+ background:rgba(223,169,143,0.06);
  border-color:var(--border-gold);
  transform:translateY(-3px);
 }
@@ -171,7 +171,7 @@ nav{
 /* DIVIDER */
 .divider{
  border:none;
- border-top:1px solid rgba(201,169,98,0.15);
+ border-top:1px solid rgba(223,169,143,0.15);
  margin:4rem 0;
 }
 
@@ -180,11 +180,11 @@ nav{
  border-left:3px solid var(--gold);
  padding:1.5rem 2rem;
  margin:2rem 0;
- background:rgba(201,169,98,0.04);
+ background:rgba(223,169,143,0.04);
  border-radius:0 var(--radius) var(--radius) 0;
 }
 .quote-block p{
- font-family:'Playfair Display',serif;
+ font-family:'Space Grotesk','Inter',sans-serif;
  font-size:1.35rem;
  font-style:italic;
  color:var(--text-light);
@@ -207,7 +207,7 @@ nav{
  font-size:1.4rem;flex-shrink:0;margin-top:0.1rem;
 }
 .receive-text h4{
- font-family:'Playfair Display',serif;
+ font-family:'Space Grotesk','Inter',sans-serif;
  font-size:1.1rem;color:var(--text-light);
  margin-bottom:0.3rem;
 }
@@ -216,13 +216,13 @@ nav{
 /* EXAMPLE */
 .example-block{
  background:var(--purple2);
- border:1px solid rgba(201,169,98,0.2);
+ border:1px solid rgba(223,169,143,0.2);
  border-radius:var(--radius);
  padding:2rem;
  margin-top:1.5rem;
 }
 .example-block h4{
- font-family:'Playfair Display',serif;
+ font-family:'Space Grotesk','Inter',sans-serif;
  font-size:1.2rem;color:var(--purple);
  margin-bottom:0.8rem;
 }
@@ -230,7 +230,7 @@ nav{
 
 /* PRICING */
 .pricing-section{
- background:linear-gradient(135deg, rgba(201,169,98,0.08) 0%, rgba(201,169,98,0.08) 100%);
+ background:linear-gradient(135deg, rgba(223,169,143,0.08) 0%, rgba(223,169,143,0.08) 100%);
  border:1px solid var(--border-gold);
  border-radius:20px;
  padding:3rem 2.5rem;
@@ -243,7 +243,7 @@ nav{
  margin-bottom:0.5rem;
 }
 .price-tag{
- font-family:'Playfair Display',serif;
+ font-family:'Space Grotesk','Inter',sans-serif;
  font-size:clamp(3.5rem,8vw,5rem);
  font-weight:700;
  color:var(--gold);
@@ -258,7 +258,7 @@ nav{
 .wa-btn{
  display:inline-flex;align-items:center;gap:0.6rem;
  background:var(--green);
- color:#E8E4DA;
+ color:#241F16;
  padding:1rem 2.2rem;
  border-radius:999px;
  font-weight:600;font-size:0.95rem;
@@ -269,7 +269,7 @@ nav{
 
 /* FOOTER */
 footer{
- border-top:1px solid rgba(201,169,98,0.1);
+ border-top:1px solid rgba(223,169,143,0.1);
  padding:2.5rem 1.5rem;
  text-align:center;
 }
@@ -279,7 +279,7 @@ footer a:hover{text-decoration:underline;}
 
 /* RESPONSIVE */
 @media(max-width:640px){
- nav{padding:0.8rem 1.2rem;}
+ nav.__eski{padding:0.8rem 1.2rem;}
  .nav-logo{font-size:2.4rem;}
  .hero{padding:7rem 1.2rem 4rem;}
  .content{padding:3rem 1.2rem;}
@@ -289,11 +289,32 @@ footer a:hover{text-decoration:underline;}
 @media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}</style>
 </head>
 <body>
+<!-- SORBI-NAV:START -->
+<style>
+.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;padding:.68rem 1.2rem;background:rgba(13,8,16,.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.08);font-family:'Inter',system-ui,-apple-system,sans-serif}
+.sbnav .sbnav-lg{font-weight:700;letter-spacing:.3px;color:#F2EFE9;font-size:.95rem;text-decoration:none;white-space:nowrap;flex:0 0 auto}
+.sbnav .sbnav-lg i{font-style:normal;color:#E3A692;margin-right:.3rem}
+.sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin-left:auto}
+.sbnav nav::-webkit-scrollbar{display:none}
+.sbnav nav a{color:#9BA0AB;text-decoration:none;font-size:.85rem;font-weight:500;padding:.4rem .78rem;border-radius:99px;white-space:nowrap;transition:color .15s,background .15s}
+.sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.06)}
+.sbnav nav a.on{color:#F2D3B8;background:rgba(227,166,146,.13)}
+@media(max-width:560px){.sbnav{padding:.55rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem}.sbnav nav a{font-size:.79rem;padding:.34rem .55rem}}
+</style>
+<header class="sbnav">
+ <a href="/" class="sbnav-lg"><i>✦</i>Sorbi</a>
+ <nav>
+  <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
+  <a href="/dogum-haritasi-hesaplama">Doğum Haritası</a>
+  <a href="/araclar">Araçlar</a>
+  <a href="/bugun">Bugün</a>
+  <a href="/burc-ozellikleri">Burçlar</a>
+  <a href="/soru-sor">Sorunu Sor</a>
+ </nav>
+</header>
+<script>(function(){try{var p=location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';document.querySelectorAll('.sbnav nav a').forEach(function(a){var h=a.getAttribute('href').replace(/\.html$/,'');if(h===p||(h!=='/'&&p.indexOf(h)===0))a.classList.add('on');});}catch(e){}})();</script>
+<!-- SORBI-NAV:END -->
 
-<nav>
- <a href="/" class="nav-logo">Sorbi <span class="star">✦</span></a>
- <a href="/" class="nav-back">← Ana Sayfa</a>
-</nav>
 
 <section class="hero">
  <div class="hero-badge">✦ Doğum Haritası</div>
@@ -302,6 +323,15 @@ footer a:hover{text-decoration:underline;}
  Doğduğun an gökyüzü dondu. O an, sana özgü bir şifreydi. Bu harita, kim olduğunu, neden burada olduğunu ve hangi kuvvetlerin seni şekillendirdiğini anlatır.
  </p>
 </section>
+
+<!-- SORBI-MODE-CTA -->
+<div style="max-width:760px;margin:1.6rem auto;padding:0 20px">
+ <div style="background:rgba(227,166,146,.08);border:1px solid rgba(227,166,146,.3);border-radius:18px;padding:1.5rem 1.6rem;text-align:center">
+  <div style="font-family:'Space Grotesk','Inter',sans-serif;font-weight:600;font-size:1.15rem;margin-bottom:.35rem">Doğum haritanı şimdi çıkar</div>
+  <p style="color:inherit;opacity:.75;font-size:.9rem;margin:0 0 1rem;max-width:52ch;margin-left:auto;margin-right:auto">Tarih, saat, yer — üç bilgiyle profesyonel natal çark, 7 ev sistemi ve tüm açılar Atölye'de.</p>
+  <a href="/detayli-dogum-haritasi?m=natal" style="display:inline-block;background:linear-gradient(135deg,#E3A692,#F2D3B8);color:#2B140C;padding:.75rem 1.7rem;border-radius:99px;font-weight:600;font-size:.92rem;text-decoration:none">Atölye'de aç ✦</a>
+ </div>
+</div>
 
 <div class="content">
 
@@ -408,9 +438,69 @@ footer a:hover{text-decoration:underline;}
 
 </div>
 
-<footer>
- <p>© 2026 Sorbi — <a href="/">Ana Sayfaya Dön</a></p>
-</footer>
 
+
+
+<!-- SORBI-MODE-CTA -->
+<div style="max-width:760px;margin:1.6rem auto;padding:0 20px">
+ <div style="background:rgba(227,166,146,.08);border:1px solid rgba(227,166,146,.3);border-radius:18px;padding:1.5rem 1.6rem;text-align:center">
+  <div style="font-family:'Space Grotesk','Inter',sans-serif;font-weight:600;font-size:1.15rem;margin-bottom:.35rem">Doğum haritanı şimdi çıkar</div>
+  <p style="color:inherit;opacity:.75;font-size:.9rem;margin:0 0 1rem;max-width:52ch;margin-left:auto;margin-right:auto">Tarih, saat, yer — üç bilgiyle profesyonel natal çark, 7 ev sistemi ve tüm açılar Atölye'de.</p>
+  <a href="/detayli-dogum-haritasi?m=natal" style="display:inline-block;background:linear-gradient(135deg,#E3A692,#F2D3B8);color:#2B140C;padding:.75rem 1.7rem;border-radius:99px;font-weight:600;font-size:.92rem;text-decoration:none">Atölye'de aç ✦</a>
+ </div>
+</div>
+<!-- SORBI-FOOTER:START -->
+<style>
+.sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0D0810;font-family:'Inter',system-ui,sans-serif}
+.sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr 1fr;gap:2rem}
+.sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#E3A692;margin:0 0 .8rem;font-weight:600}
+.sbft a{display:block;color:#9BA0AB;text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
+.sbft a:hover{color:#F2EFE9}
+.sbft .sbft-brand b{font-size:1.05rem;color:#F2EFE9;font-weight:700}
+.sbft .sbft-brand b i{font-style:normal;color:#E3A692;margin-right:.3rem}
+.sbft .sbft-brand p{color:#9BA0AB;font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#6D7280;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+@media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
+@media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
+</style>
+<footer class="sbft">
+ <div class="sbft-in">
+  <div class="sbft-brand"><b><i>✦</i>Sorbi</b><p>Gökyüzünü veriyle okuyan astroloji atölyesi. Hesaplamalar tarayıcında, saniyeler içinde.</p></div>
+  <div><h4>Hesaplayıcılar</h4>
+   <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
+   <a href="/dogum-haritasi-hesaplama">Doğum Haritası</a>
+   <a href="/yukselen-burc-hesaplama">Yükselen Burç</a>
+   <a href="/ay-burcu-hesaplama">Ay Burcu</a>
+   <a href="/sinastri">Sinastri Rehberi</a>
+   <a href="/natal-harita">Natal Harita Rehberi</a>
+  </div>
+  <div><h4>Gökyüzü</h4>
+   <a href="/bugun">Bugün Gökyüzünde</a>
+   <a href="/horary">An Haritası (Horary)</a>
+   <a href="/uygun-gun-secimi">Uygun Gün Seçimi</a>
+   <a href="/retro-ay-takvimi">Retro & Ay Takvimi</a>
+   <a href="/astrokartografi">Astrokartografi</a>
+   <a href="/yasam-donguleri">Yaşam Döngüleri</a>
+  </div>
+  <div><h4>Burçlar</h4>
+   <a href="/burc-ozellikleri">Burç Özellikleri</a>
+   <a href="/gunluk-burc-yorumlari">Günlük Yorumlar</a>
+   <a href="/ates-burclari">Ateş Burçları</a>
+   <a href="/toprak-burclari">Toprak Burçları</a>
+   <a href="/hava-burclari">Hava Burçları</a>
+   <a href="/su-burclari">Su Burçları</a>
+  </div>
+  <div><h4>Sorbi</h4>
+   <a href="/">Ana Sayfa</a>
+   <a href="/soru-sor">Sorunu Sor</a>
+   <a href="/gunun-karti">Günün Kartı</a>
+   <a href="/seni-taniyorum">Seni Tanıyorum</a>
+   <a href="/#uygulama">Uygulama</a>
+   <a href="/destek">Destek</a>
+  </div>
+ </div>
+ <div class="sbft-bot"><span>© 2026 Sorbi · sorbiapp.com</span><span>Astroloji içerikleri kişisel farkındalık amaçlıdır; kesin gelecek vaadi değildir.</span></div>
+</footer>
+<!-- SORBI-FOOTER:END -->
 </body>
 </html>

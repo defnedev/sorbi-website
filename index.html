@@ -2,1072 +2,489 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ücretsiz Doğum Haritası Hesaplama — Sorbi</title>
-<meta name="description" content="Sorbi — kişisel astroloji uygulaması. Doğum haritanı ücretsiz hesapla; günlük gök yorumu, ilişki uyumu ve doğru zamanı gör. Uygulamayı erken erişimle edin.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Doğum Haritası Hesaplama — Ücretsiz, Anında | Sorbi</title>
+<meta name="description" content="Doğum tarihini, saatini ve yerini gir — doğum haritan anında hesaplanıp çizilsin. Swiss Ephemeris doğrulamalı, ücretsiz, kayıt yok. Yükselen, Güneş, Ay ve bugünkü transitlerin tek ekranda.">
 <link rel="canonical" href="https://sorbiapp.com/">
-<meta name="keywords" content="doğum haritası hesaplama, natal harita, sinastri, horary, yükselen burç, ücretsiz doğum haritası, Sorbi">
-<meta name="theme-color" content="#0B0E15">
-<meta property="og:title" content="Ücretsiz Doğum Haritası — Sorbi">
-<meta property="og:description" content="Sorbi — kişisel astroloji uygulaması. Ücretsiz doğum haritası, günlük gök yorumu, ilişki uyumu. Erken erişime katıl.">
+<meta name="theme-color" content="#0B0F14">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://sorbiapp.com/">
-<meta property="og:image" content="https://sorbiapp.com/og-image.png">
 <meta property="og:site_name" content="Sorbi">
 <meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Doğum Haritası Hesaplama — Sorbi">
+<meta property="og:description" content="Doğum bilgini gir, haritan anında çizilsin. Ücretsiz, kayıt yok.">
+<meta property="og:url" content="https://sorbiapp.com/">
+<meta property="og:image" content="https://sorbiapp.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Ücretsiz Doğum Haritası — Sorbi">
-<meta name="twitter:description" content="Ücretsiz doğum haritası + kişiye özel günlük gök yorumu.">
-<meta name="twitter:image" content="https://sorbiapp.com/og-image.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="/astronomy.browser.min.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[
+{"@type":"WebSite","name":"Sorbi","url":"https://sorbiapp.com/"},
+{"@type":"WebApplication","name":"Ücretsiz Doğum Haritası Hesaplayıcı","applicationCategory":"LifestyleApplication","operatingSystem":"Web","url":"https://sorbiapp.com/","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"}},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Doğum haritası hesaplama ücretsiz mi?","acceptedAnswer":{"@type":"Answer","text":"Evet. Doğum tarihini, saatini ve yerini girmen yeterli — haritan tarayıcında anında hesaplanır ve çizilir. Kayıt, e-posta ya da ücret yok."}},
+{"@type":"Question","name":"Hesaplama ne kadar doğru?","acceptedAnswer":{"@type":"Answer","text":"Gezegen konumları ve ev başlangıçları Swiss Ephemeris çıktısına karşı test edildi; fark ölçülebilir düzeyin altındadır. Gördüğün derece ve dakika değerleri profesyonel astroloji yazılımlarıyla eşleşir."}}]}]}</script>
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;font-size:16px;}
-body{font-family:'Inter',sans-serif;overflow-x:hidden;background:#F6F1E7;color:#0C1526;}
-img{max-width:100%;display:block;}
-a{text-decoration:none;color:inherit;}
-ul{list-style:none;}
-svg{display:block;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
- /* ── Sorbi Gece Göğü Paleti (ink / gold / terracotta) ── */
- --parchment:#F6F1E7; --parchmentDeep:#ECE4D5; --parchmentLite:#E8E4DA;
- --lapis:#0B0F14; --lapisLite:#12151F;
- --gold:#C9A962; --goldStar:#F4E4BA;
- --vermilion:#C4744E;
- --ink:#0C1526; --inkSoft:#1C2333; --muted:#8A8578;
- --line:rgba(201,169,98,0.4);
- --green:#25D366;
- /* geriye dönük uyumluluk takma adları */
- --dark:#0B0F14; --dark2:#12151F; --dark3:#1B1F2B;
- --light:#E8E4DA; --warm:#F6F1E7;
- --gold-light:#F4E4BA; --gold-deep:#B8941F;
- --gold2:rgba(201,169,98,0.14); --gold3:rgba(201,169,98,0.3);
- --text-light:#E8E4DA; --text-muted:#A9A396; --text-dim:#8A8578;
- --text-dark:#0C1526; --text-dark-muted:rgba(12,21,38,0.65);
- --border-gold:rgba(201,169,98,0.3); --border-light:rgba(12,21,38,0.1);
- --btn-ink:#F6EFE1;
- --radius:12px; --radius-lg:20px;
+ --bg:#0D0810; --bg2:#0C0E14;
+ --card:rgba(255,255,255,.032); --card2:rgba(255,255,255,.05);
+ --stroke:rgba(255,255,255,.08); --stroke2:rgba(255,255,255,.14);
+ --gold:#E3A692; --gold-br:#F2D3B8;
+ --ink:#F2EFE9; --mut:#9BA0AB; --dim:#666B76;
+ --soft:#7FB3A8; --terra:#C4744E;
+ --r:18px;
 }
-h1,h2{font-family:'Playfair Display',serif;font-weight:600;line-height:1.2;letter-spacing:0.04em;}
-h3,h4{font-family:'Playfair Display',serif;font-weight:600;line-height:1.15;}
-h1{font-size:clamp(2rem,4.5vw,3.4rem);}
-h2{font-size:clamp(1.6rem,3vw,2.4rem);}
-h3{font-size:1.4rem;}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6}
+a{color:inherit;text-decoration:none}
+svg{display:block}
+.wrap{max-width:1120px;margin:0 auto;padding:0 1.2rem}
+::selection{background:rgba(227,166,146,.3)}
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:transparent;transition:all 0.4s ease;border-bottom:1px solid transparent;}
-nav.scrolled{background:rgba(11,14,21,0.92);backdrop-filter:blur(20px);border-bottom-color:rgba(201,169,98,0.25);}
-nav.light-section{background:rgba(246,241,231,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom-color:rgba(201,169,98,0.3);box-shadow:0 1px 0 rgba(12,21,38,0.06);}
-nav.light-section .nav-logo{color:var(--ink);}
-nav.light-section .nav-logo span{color:var(--gold);}
-nav.light-section .nav-links a{color:var(--inkSoft);}
-nav.light-section .nav-links a:hover{color:var(--lapis);}
-nav.light-section .nav-cta{background:var(--vermilion);color:var(--btn-ink)!important;}
-nav.light-section .nav-hamburger span{background:var(--ink);}
-.nav-logo{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;letter-spacing:0.1em;color:var(--parchmentLite);display:flex;align-items:center;gap:0.3rem;line-height:1;}
-.nav-logo span{color:var(--goldStar);font-size:1.3rem;}
-.nav-links{display:flex;gap:2rem;align-items:center;}
-.nav-links a{font-family:'Playfair Display',serif;font-size:0.68rem;color:rgba(232,228,218,0.78);transition:color 0.2s;letter-spacing:0.08em;text-transform:uppercase;}
-.nav-links a:hover{color:var(--goldStar);}
-.nav-cta{background:var(--vermilion);color:var(--btn-ink)!important;padding:0.55rem 1.3rem;border-radius:999px;font-weight:600;font-size:0.66rem;letter-spacing:0.06em;transition:transform 0.2s,box-shadow 0.2s;}
-.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(196,116,78,0.35);}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
-.nav-hamburger span{width:24px;height:2px;background:var(--parchmentLite);border-radius:2px;transition:all 0.3s;}
-.nav-mobile{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:var(--lapis);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2rem;}
-.nav-mobile.open{display:flex;}
-.nav-mobile a{font-size:1.4rem;font-family:'Playfair Display',serif;color:var(--parchmentLite);letter-spacing:0.06em;}
-.nav-mobile .close-btn{position:absolute;top:1.5rem;right:2rem;font-size:1.8rem;cursor:pointer;color:rgba(232,228,218,0.5);}
+/* ── aurora zemin ── */
+.sky{position:fixed;inset:0;pointer-events:none;z-index:-1;
+ background:
+  radial-gradient(52% 38% at 50% -6%,rgba(227,166,146,.11),transparent 65%),
+  radial-gradient(40% 32% at 88% 12%,rgba(94,147,168,.08),transparent 70%),
+  radial-gradient(36% 30% at 8% 30%,rgba(196,116,78,.05),transparent 70%),
+  radial-gradient(1px 1px at 14% 24%,rgba(241,220,168,.5) 50%,transparent 51%),
+  radial-gradient(1px 1px at 36% 9%,rgba(242,239,233,.35) 50%,transparent 51%),
+  radial-gradient(1.4px 1.4px at 61% 27%,rgba(227,166,146,.45) 50%,transparent 51%),
+  radial-gradient(1px 1px at 82% 15%,rgba(242,239,233,.4) 50%,transparent 51%),
+  radial-gradient(1px 1px at 92% 44%,rgba(241,220,168,.3) 50%,transparent 51%),
+  radial-gradient(1px 1px at 25% 60%,rgba(242,239,233,.25) 50%,transparent 51%),
+  radial-gradient(1.2px 1.2px at 72% 70%,rgba(227,166,146,.3) 50%,transparent 51%)}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.rise{animation:rise .55s cubic-bezier(.2,.8,.2,1) both}
 
-/* ── HERO (lapis / gök atlası) ── */
-#hero{min-height:100vh;background:var(--lapis);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:7rem 1.5rem 3rem;position:relative;overflow:hidden;text-align:center;}
-.hero-stars{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
-.hero-star{position:absolute;color:var(--goldStar);opacity:0;}
-@keyframes twinkle{0%,100%{opacity:0;}50%{opacity:0.85;}}
-.hero-content{max-width:680px;margin:0 auto;position:relative;z-index:2;}
-.hero-badge{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(201,169,98,0.16);border:1px solid rgba(201,169,98,0.38);border-radius:999px;padding:0.3rem 1rem;font-size:0.68rem;color:var(--goldStar);letter-spacing:1.8px;text-transform:uppercase;margin-bottom:1.4rem;font-family:'Playfair Display',serif;}
-.hero-content h1{color:var(--parchmentLite);margin-bottom:1.1rem;}
-.hero-content h1 em{font-style:italic;color:var(--goldStar);}
-.hero-subtitle{font-size:1.05rem;color:rgba(232,228,218,0.72);max-width:480px;margin:0 auto 2rem;line-height:1.8;font-family:'Playfair Display',serif;font-weight:400;}
-.hero-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
-.btn-gold{background:var(--vermilion);color:var(--btn-ink);padding:0.8rem 2rem;border-radius:999px;font-family:'Playfair Display',serif;font-weight:600;font-size:0.76rem;letter-spacing:0.07em;border:none;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;display:inline-flex;align-items:center;gap:0.45rem;}
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(196,116,78,0.38);}
-.btn-ghost{background:transparent;border:1px solid rgba(201,169,98,0.42);color:var(--parchmentLite);padding:0.8rem 2rem;border-radius:999px;font-size:0.92rem;cursor:pointer;transition:all 0.2s;font-family:'Playfair Display',serif;}
-.btn-ghost:hover{border-color:var(--goldStar);color:var(--goldStar);}
-.hero-sign-label{margin:3rem auto 1.2rem;font-size:0.65rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(232,228,218,0.42);display:flex;align-items:center;gap:0.6rem;justify-content:center;font-family:'Playfair Display',serif;}
-.hero-sign-label::before,.hero-sign-label::after{content:'';width:30px;height:1px;background:rgba(201,169,98,0.35);}
-/* sade hero: hero içi burç seçici gizli (aynı seçici #burç bölümünde var) */
-#hero-zodiac,.hero-sign-label{display:none!important;}
-#hero .hero-subtitle{margin-bottom:2.4rem;}
-#hero .hero-stats{margin-top:2.6rem;}
-.zodiac-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:8px;max-width:780px;width:100%;margin:0 auto;position:relative;z-index:2;}
-.zodiac-card{background:transparent;border:1px solid rgba(232,228,218,0.1);border-radius:14px;padding:15px 6px 11px;text-align:center;cursor:pointer;transition:all 0.3s ease;user-select:none;}
-.zodiac-card:hover{background:rgba(201,169,98,0.16);border-color:rgba(201,169,98,0.42);transform:translateY(-2px);}
-.zodiac-card.active{background:rgba(201,169,98,0.2);border-color:var(--gold);box-shadow:0 0 18px rgba(201,169,98,0.2);}
-.z-symbol{display:flex;justify-content:center;color:rgba(244,228,186,0.52);margin-bottom:7px;transition:color 0.3s;}
-.z-symbol svg{width:26px;height:26px;}
-.zodiac-card:hover .z-symbol,.zodiac-card.active .z-symbol{color:var(--goldStar);}
-.z-name{font-size:0.63rem;color:rgba(232,228,218,0.38);letter-spacing:0.2px;}
-.zodiac-card:hover .z-name,.zodiac-card.active .z-name{color:var(--goldStar);}
-.hero-stats{display:flex;gap:2.5rem;justify-content:center;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(201,169,98,0.22);flex-wrap:wrap;position:relative;z-index:2;}
-.stat-item{text-align:center;}
-.stat-num{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:var(--goldStar);line-height:1;display:block;}
-.stat-lbl{font-size:0.65rem;color:rgba(232,228,218,0.42);margin-top:0.3rem;display:block;letter-spacing:0.3px;font-family:'Playfair Display',serif;}
+/* ── nav ── */
+.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;padding:.7rem 1.2rem;
+ background:rgba(13,8,16,.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);
+ border-bottom:1px solid var(--stroke)}
+.sbnav .lg{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:.4px;color:var(--ink);font-size:.98rem;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center;gap:.4rem}
+.sbnav .lg i{font-style:normal;color:var(--gold)}
+.sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+.sbnav nav::-webkit-scrollbar{display:none}
+.sbnav nav a{color:var(--mut);font-size:.86rem;font-weight:500;padding:.42rem .8rem;border-radius:99px;white-space:nowrap;transition:.18s}
+.sbnav nav a:hover{color:var(--ink);background:var(--card2)}
+@media(max-width:560px){.sbnav{padding:.55rem .7rem;gap:.5rem}.sbnav .lg{font-size:.85rem}.sbnav nav a{font-size:.79rem;padding:.36rem .6rem}}
 
-/* ── BÖLÜMLER ── */
-.section-dark{background:var(--lapis);color:var(--parchmentLite);padding:6rem 1.5rem;}
-.section-light{background:var(--parchmentLite);color:var(--ink);padding:6rem 1.5rem;}
-.section-warm{background:var(--parchment);color:var(--ink);padding:6rem 1.5rem;}
-.container{max-width:1140px;margin:0 auto;}
-.section-header{text-align:center;margin-bottom:3.5rem;}
-.section-header h2{margin-bottom:0.8rem;}
-.section-header p{font-size:1rem;opacity:0.7;max-width:520px;margin:0 auto;line-height:1.7;}
-.section-header.left{text-align:left;display:grid;grid-template-columns:1.3fr 1fr;gap:2rem;align-items:end;margin-bottom:3rem;}
-.section-header.left p{margin:0;max-width:none;text-align:left;}
-.section-header.left .sh-title{border-left:2px solid var(--gold);padding-left:1.2rem;}
-.eyebrow{font-size:0.68rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--gold);font-weight:600;margin-bottom:0.7rem;display:block;font-family:'Playfair Display',serif;}
+/* ── hero ── */
+.hero{text-align:center;padding:4rem 0 1.8rem}
+.hero .kicker{display:inline-flex;align-items:center;gap:.45rem;font-size:.78rem;font-weight:500;color:var(--mut);
+ border:1px solid var(--stroke2);border-radius:99px;padding:.38rem .9rem;margin-bottom:1.3rem;background:var(--card)}
+.hero .kicker i{font-style:normal;color:var(--gold)}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(2.3rem,6.4vw,3.9rem);letter-spacing:-.03em;line-height:1.06;margin-bottom:.9rem}
+.hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--gold) 10%,var(--gold-br) 50%,var(--gold) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mut);font-size:1.06rem;max-width:520px;margin:0 auto;font-weight:300}
+.trust{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-top:1.3rem}
+.trust span{font-size:.74rem;font-weight:500;color:var(--mut);border:1px solid var(--stroke);border-radius:99px;padding:.32rem .8rem;background:var(--card)}
+.trust span::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin-right:.45rem;vertical-align:2px}
 
-/* ── HİZMETLER ── */
-.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;}
-.service-card{background:var(--parchmentDeep);border:1px solid rgba(12,21,38,0.12);border-radius:var(--radius-lg);padding:2rem;transition:all 0.3s ease;display:flex;flex-direction:column;position:relative;overflow:hidden;}
-.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:linear-gradient(90deg,var(--gold),var(--vermilion));opacity:0;transition:opacity 0.3s;}
-.service-card:hover{transform:translateY(-4px);box-shadow:0 14px 44px rgba(12,21,38,0.14);}
-.service-card:hover::before{opacity:1;}
-.service-icon{width:44px;height:44px;margin-bottom:1.1rem;color:var(--gold);}
-.service-icon svg{width:100%;height:100%;}
-.service-card h3{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--ink);margin-bottom:0.5rem;}
-.service-card .service-what{font-size:0.82rem;color:var(--muted);margin-bottom:0.8rem;font-style:italic;}
-.service-card .service-desc{font-size:0.9rem;color:var(--inkSoft);line-height:1.7;flex:1;}
+/* ── hesaplayıcı ── */
+.calc{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:1.4rem;align-items:start;margin-top:2rem}
+@media(max-width:880px){.calc{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);padding:1.35rem;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.fields .full{grid-column:1/-1}
+label{display:block;font-size:.72rem;font-weight:500;color:var(--mut);margin-bottom:.38rem}
+input{width:100%;background:rgba(0,0,0,.35);border:1px solid var(--stroke2);color:var(--ink);border-radius:12px;padding:.78rem .85rem;font-size:.98rem;font-family:inherit;transition:border-color .15s,box-shadow .15s;color-scheme:dark}
+input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(227,166,146,.15)}
+.geo{position:relative}
+.geolist{position:absolute;top:100%;left:0;right:0;z-index:60;background:#12141B;border:1px solid var(--stroke2);border-radius:12px;margin-top:5px;max-height:220px;overflow:auto;box-shadow:0 16px 40px rgba(0,0,0,.5)}
+.geolist div{padding:.6rem .8rem;font-size:.9rem;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.04)}
+.geolist div:hover{background:rgba(227,166,146,.1)}
+.hint{font-size:.76rem;color:var(--dim);margin-top:.65rem;line-height:1.6}
 
-/* ── GÜNLÜK BURÇ (lapis section) ── */
-.sign-tabs{display:grid;grid-template-columns:repeat(12,1fr);gap:8px;max-width:780px;margin:0 auto 2.5rem;}
-.sign-tab{background:transparent;border:1px solid rgba(232,228,218,0.1);border-radius:14px;padding:15px 6px 11px;text-align:center;cursor:pointer;transition:all 0.3s;}
-.sign-tab:hover{background:rgba(201,169,98,0.16);border-color:rgba(201,169,98,0.38);}
-.sign-tab.active{background:rgba(201,169,98,0.2);border-color:var(--gold);}
-.st-sym{display:flex;justify-content:center;color:rgba(244,228,186,0.52);margin-bottom:7px;transition:color 0.3s;}
-.st-sym svg{width:26px;height:26px;}
-.sign-tab:hover .st-sym,.sign-tab.active .st-sym{color:var(--goldStar);}
-.st-name{font-size:0.63rem;color:rgba(232,228,218,0.38);}
-.sign-tab:hover .st-name,.sign-tab.active .st-name{color:var(--goldStar);}
-.daily-reading{max-width:820px;margin:0 auto 3rem;background:rgba(255,255,255,0.06);border:1px solid rgba(201,169,98,0.3);border-radius:var(--radius-lg);padding:2rem;display:none;}
-.daily-reading.active{display:block;animation:fadeUp 0.4s ease;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-.reading-header{display:flex;align-items:center;gap:1.1rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(201,169,98,0.2);}
-.reading-sign-sym{color:var(--goldStar);flex-shrink:0;}
-.reading-sign-sym svg{width:44px;height:44px;}
-.reading-sign-info h3{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--parchmentLite);margin-bottom:0.2rem;}
-.reading-sign-info .dates{font-size:0.78rem;color:rgba(232,228,218,0.42);}
-.reading-today{display:inline-block;background:rgba(201,169,98,0.18);border:1px solid rgba(201,169,98,0.35);border-radius:999px;padding:0.2rem 0.7rem;font-size:0.7rem;color:var(--goldStar);margin-top:0.4rem;}
-.reading-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
-.reading-card{background:rgba(255,255,255,0.06);border:1px solid rgba(232,228,218,0.1);border-radius:var(--radius);padding:1.2rem;}
-.reading-card .rc-icon{display:block;width:22px;height:22px;margin-bottom:0.6rem;color:var(--gold);}
-.reading-card .rc-icon svg{width:100%;height:100%;}
-.reading-card h4{font-family:'Playfair Display',serif;font-size:1rem;color:var(--goldStar);margin-bottom:0.4rem;font-weight:600;}
-.reading-card p{font-size:0.82rem;color:rgba(232,228,218,0.68);line-height:1.7;}
-.reading-general{background:rgba(255,255,255,0.04);border:1px solid rgba(232,228,218,0.08);border-radius:var(--radius);padding:1.2rem;margin-bottom:1rem;}
-.reading-general h4{font-family:'Playfair Display',serif;font-size:1rem;color:var(--parchmentLite);margin-bottom:0.5rem;}
-.reading-general p{font-size:0.88rem;color:rgba(232,228,218,0.65);line-height:1.75;}
-.reading-cta{text-align:center;padding-top:1rem;border-top:1px solid rgba(201,169,98,0.15);}
-.reading-cta p{font-size:0.8rem;color:rgba(232,228,218,0.4);margin-bottom:0.8rem;}
+/* ── harita ── */
+.chartwrap{position:relative}
+.chartbox{background:#F7F2E8;border-radius:20px;overflow:hidden;min-height:240px;display:flex;align-items:center;justify-content:center;
+ border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 80px rgba(0,0,0,.55),0 4px 16px rgba(0,0,0,.4)}
+.chartbox .ph{color:#8A8578;font-size:.9rem;text-align:center;padding:2.4rem 1.4rem;line-height:1.7}
+.chartbox .ph b{color:#3A3F4C;display:block;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.05rem;margin-bottom:.35rem}
+.spin{width:26px;height:26px;border:2px solid rgba(24,28,38,.15);border-top-color:#8A6A2A;border-radius:50%;animation:sp .8s linear infinite;margin:0 auto .7rem}
+@keyframes sp{to{transform:rotate(360deg)}}
+.datastrip{display:none;justify-content:center;gap:.5rem;flex-wrap:wrap;margin-top:1rem}
+.datastrip.on{display:flex}
+.datastrip span{font-size:.73rem;color:var(--mut);border:1px solid var(--stroke);background:var(--card);border-radius:99px;padding:.3rem .75rem;font-variant-numeric:tabular-nums}
+.datastrip b{color:var(--ink);font-weight:500}
 
-/* ── DOĞUM HARİTASI (lapis section) ── */
-.chart-section{max-width:560px;margin:0 auto;text-align:center;}
-.chart-section h3{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--parchmentLite);margin-bottom:0.5rem;}
-.chart-section>p{font-size:0.86rem;color:rgba(232,228,218,0.65);margin-bottom:1.8rem;line-height:1.7;}
-.chart-form{position:relative;background:rgba(255,255,255,0.06);border:1px solid rgba(201,169,98,0.3);border-radius:16px;padding:1.8rem;text-align:left;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.28);}
-.chart-form::before{content:'';position:absolute;top:-1px;left:1.8rem;right:1.8rem;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.7;}
-.chart-form::after{content:'';position:absolute;width:240px;height:240px;right:-90px;bottom:-90px;border-radius:50%;border:1px solid rgba(201,169,98,0.14);box-shadow:0 0 0 22px rgba(201,169,98,0.04),inset 0 0 0 22px rgba(201,169,98,0.04);pointer-events:none;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;margin-bottom:0.9rem;position:relative;z-index:1;}
-.form-row.single{grid-template-columns:1fr;}
-.form-group{display:flex;flex-direction:column;gap:0.35rem;}
-.form-group label{font-size:0.62rem;color:rgba(232,228,218,0.48);text-transform:uppercase;letter-spacing:1.4px;font-family:'Playfair Display',serif;}
-.form-group input,.form-group select{background:rgba(11,14,21,0.45);border:1px solid rgba(232,228,218,0.15);border-radius:10px;padding:0.62rem 0.8rem;font-size:1rem;color:var(--parchmentLite);font-family:'Inter',sans-serif;transition:border-color 0.2s,box-shadow 0.2s;width:100%;color-scheme:dark;}
-.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,169,98,0.18);background:rgba(11,14,21,0.55);}
-.form-group input::placeholder{color:rgba(232,228,218,0.32);}
-.form-group input[type="date"]::-webkit-calendar-picker-indicator,.form-group input[type="time"]::-webkit-calendar-picker-indicator{filter:invert(70%) sepia(55%) saturate(420%) hue-rotate(2deg);cursor:pointer;opacity:0.85;}
-.form-group select option{background:var(--lapisLite);color:var(--parchmentLite);}
-.btn-chart{position:relative;z-index:1;width:100%;background:var(--vermilion);color:var(--parchmentLite);padding:0.85rem;border-radius:12px;font-size:0.82rem;font-weight:600;font-family:'Playfair Display',serif;letter-spacing:0.06em;border:none;cursor:pointer;margin-top:0.6rem;transition:transform 0.2s,box-shadow 0.2s;display:inline-flex;align-items:center;justify-content:center;gap:0.4rem;}
-.btn-chart:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(196,116,78,0.38);}
-.chart-result{background:rgba(255,255,255,0.06);border:1px solid rgba(201,169,98,0.28);border-radius:var(--radius-lg);padding:2rem;margin-top:1.5rem;display:none;animation:fadeUp 0.5s ease;}
-.chart-result.visible{display:block;}
-.chart-result-header{text-align:center;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(201,169,98,0.18);}
-.chart-result-header h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--parchmentLite);margin-bottom:0.4rem;}
-.chart-result-header p{font-size:0.8rem;color:rgba(232,228,218,0.42);}
-.chart-planets{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;margin-bottom:1.5rem;}
-.planet-card{background:rgba(201,169,98,0.13);border:1px solid rgba(201,169,98,0.28);border-radius:var(--radius);padding:1rem;text-align:center;}
-.planet-card .pc-planet{font-size:0.62rem;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.5rem;display:flex;align-items:center;justify-content:center;gap:0.35rem;}
-.planet-card .pc-planet svg{width:14px;height:14px;}
-.planet-card .pc-sign{display:flex;justify-content:center;color:var(--goldStar);margin-bottom:0.3rem;}
-.planet-card .pc-sign svg{width:26px;height:26px;}
-.planet-card .pc-sign-q{font-size:1.4rem;color:var(--goldStar);}
-.planet-card .pc-name{font-family:'Playfair Display',serif;font-size:1rem;color:var(--parchmentLite);}
-.planet-card .pc-desc{font-size:0.66rem;color:rgba(232,228,218,0.42);margin-top:0.3rem;line-height:1.4;}
-.chart-daily-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:1.5rem;}
-.chart-daily-card{background:rgba(255,255,255,0.05);border:1px solid rgba(232,228,218,0.1);border-radius:var(--radius);padding:1rem;}
-.chart-daily-card .cdc-label{font-size:0.68rem;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.6rem;display:flex;align-items:center;gap:0.4rem;}
-.chart-daily-card .cdc-label svg{width:15px;height:15px;}
-.chart-daily-card p{font-size:0.8rem;color:rgba(232,228,218,0.65);line-height:1.65;}
-.chart-result-cta{text-align:center;padding-top:1rem;border-top:1px solid rgba(201,169,98,0.15);}
-.chart-result-cta p{font-size:0.82rem;color:rgba(232,228,218,0.4);margin-bottom:0.8rem;}
+/* ── büyük üçlü ── */
+.big3{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:.85rem}
+.b3{background:var(--card);border:1px solid var(--stroke);border-radius:14px;padding:.8rem .5rem;text-align:center;transition:.18s}
+.b3:hover{border-color:var(--stroke2);background:var(--card2)}
+.b3 .g{font-size:1.2rem;color:var(--gold);line-height:1.2}
+.b3 .l{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-top:.3rem;font-weight:600}
+.b3 .v{font-size:.88rem;margin-top:.22rem;white-space:nowrap;font-weight:500}
+.b3 .v .sg{font-size:1rem;vertical-align:-1px;margin-right:.15rem}
+.b3.na .v{color:var(--dim);font-size:.76rem;font-weight:400}
 
-/* ── YOR UMLAR ── */
-.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;}
-.testi-card{background:var(--parchmentDeep);border:1px solid rgba(12,21,38,0.1);border-radius:var(--radius-lg);padding:1.5rem;transition:all 0.3s;}
-.testi-card:hover{transform:translateY(-3px);box-shadow:0 10px 34px rgba(12,21,38,0.12);}
-.testi-meta{display:flex;align-items:center;gap:0.7rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid rgba(12,21,38,0.08);}
-.testi-avatar{width:42px;height:42px;border-radius:50%;background:rgba(201,169,98,0.2);color:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.testi-avatar svg{width:22px;height:22px;}
-.testi-name{font-weight:600;font-size:0.88rem;color:var(--ink);display:block;}
-.testi-sign{font-size:0.72rem;color:var(--gold);display:block;margin-top:0.1rem;}
-.testi-stars{margin-left:auto;color:var(--gold);font-size:0.78rem;letter-spacing:2px;}
-.chat-bubbles{display:flex;flex-direction:column;gap:0.5rem;}
-.bubble{padding:0.6rem 0.9rem;border-radius:14px;font-size:0.82rem;line-height:1.55;max-width:90%;}
-.bubble-user{background:rgba(12,21,38,0.09);color:var(--inkSoft);border-bottom-left-radius:4px;align-self:flex-start;}
-.bubble-defne{background:rgba(201,169,98,0.18);border:1px solid rgba(201,169,98,0.28);color:var(--inkSoft);border-bottom-right-radius:4px;align-self:flex-end;text-align:right;}
-.bubble-tag{font-size:0.65rem;color:var(--muted);display:flex;align-items:center;gap:0.3rem;margin-top:0.3rem;}
+/* ── transitler ── */
+.tr-list{margin-top:.85rem;display:grid;gap:.5rem}
+.tr{display:grid;grid-template-columns:auto 1fr auto;gap:.65rem;align-items:center;background:var(--card);border:1px solid var(--stroke);border-radius:13px;padding:.6rem .8rem;transition:.18s}
+.tr:hover{border-color:rgba(127,179,168,.35)}
+.tr .gl{font-size:1.05rem;color:var(--soft)}
+.tr .tx{font-size:.84rem;line-height:1.45;color:var(--mut)}
+.tr .tx b{color:var(--ink);font-weight:500}
+.tr .orb{font-size:.71rem;color:var(--dim);white-space:nowrap;font-variant-numeric:tabular-nums}
 
-/* ── FOOTER ── */
-footer{background:var(--ink);padding:4rem 1.5rem 2.5rem;border-top:2px solid var(--gold);}
-.footer-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem;}
-.footer-brand h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--parchmentLite);display:flex;align-items:center;gap:0.35rem;margin-bottom:0.8rem;line-height:1;letter-spacing:0.08em;}
-.footer-brand h3 span{color:var(--goldStar);font-size:1.2rem;}
-.footer-brand p{font-size:0.92rem;color:rgba(232,228,218,0.5);line-height:1.8;}
-.footer-links h4,.footer-contact h4{font-size:0.66rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:1.2rem;font-weight:600;font-family:'Playfair Display',serif;}
-.footer-links ul{display:flex;flex-direction:column;gap:0.7rem;}
-.footer-links li a{font-size:0.92rem;color:rgba(232,228,218,0.5);transition:color 0.2s;}
-.footer-links li a:hover{color:var(--parchmentLite);}
-.footer-contact p{font-size:0.92rem;color:rgba(232,228,218,0.5);line-height:1.8;margin-bottom:1.2rem;}
-.btn-wa{background:var(--green);color:var(--parchmentLite);padding:0.55rem 1.1rem;border-radius:999px;font-size:0.78rem;font-weight:600;display:inline-flex;align-items:center;gap:0.4rem;transition:opacity 0.2s;}
-.btn-wa:hover{opacity:0.88;}
-.btn-dark{background:var(--lapisLite);color:var(--parchmentLite);padding:0.5rem 1.1rem;border-radius:999px;font-size:0.78rem;font-weight:600;transition:opacity 0.2s;}
-.footer-bottom{padding-top:2rem;border-top:1px solid rgba(232,228,218,0.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-.footer-bottom p{font-size:0.82rem;color:rgba(232,228,218,0.3);}
+.after{display:none;gap:.55rem;flex-wrap:wrap;margin-top:1rem}
+.after.on{display:flex}
+.btn{display:inline-block;background:var(--ink);color:#0B0C10;border:none;border-radius:99px;padding:.72rem 1.4rem;font-weight:600;font-size:.9rem;cursor:pointer;font-family:inherit;transition:.18s}
+.btn:hover{background:#fff;transform:translateY(-1px)}
+.btn.gold{background:linear-gradient(120deg,var(--gold),var(--gold-br));color:#141006}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--stroke2)}
+.btn.ghost:hover{background:var(--card2);transform:none}
 
-/* ── ANİMASYON ── */
-.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
-.fade-in.visible{opacity:1;transform:translateY(0);}
+/* ── yollar ── */
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:.7rem;padding:3rem 0 0}
+.path{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);padding:1.2rem 1.25rem;transition:.2s;position:relative}
+.path:hover{border-color:var(--stroke2);background:var(--card2);transform:translateY(-2px)}
+.path .g{font-size:1.25rem;color:var(--gold);line-height:1}
+.path h3{font-family:'Space Grotesk',sans-serif;font-size:1.02rem;margin:.6rem 0 .3rem;font-weight:600}
+.path p{font-size:.83rem;color:var(--mut);line-height:1.6}
+.path .go{display:inline-block;margin-top:.55rem;font-size:.82rem;font-weight:500;color:var(--gold-br)}
 
-/* ── RESPONSIVE ── */
-@media(max-width:900px){
- .nav-links{display:none;}
- .nav-hamburger{display:flex;}
- .zodiac-grid,.sign-tabs{grid-template-columns:repeat(6,1fr);}
- .reading-grid{grid-template-columns:1fr;}
- .chart-planets{grid-template-columns:1fr 1fr;}
- .chart-daily-grid{grid-template-columns:1fr;}
- .section-header.left{grid-template-columns:1fr;gap:1rem;}
- .footer-inner{grid-template-columns:1fr;}
- .footer-bottom{flex-direction:column;text-align:center;}
-}
-@media(max-width:600px){
- .zodiac-grid,.sign-tabs{grid-template-columns:repeat(4,1fr);max-width:340px;}
- h1{font-size:1.9rem;}
- .hero-stats{gap:1.5rem;}
- .stat-num{font-size:1.6rem;}
- .form-row{grid-template-columns:1fr;}
- .chart-planets{grid-template-columns:1fr;}
-}
-@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}</style>
+/* ── uygulama ── */
+#uygulama{scroll-margin-top:70px;margin-top:3.4rem;text-align:center;background:var(--card);border:1px solid var(--stroke);border-radius:24px;padding:2.6rem 1.4rem}
+#uygulama h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.4rem,3.6vw,1.9rem);font-weight:600;letter-spacing:-.02em;margin-bottom:.45rem}
+#uygulama p{color:var(--mut);font-size:.95rem;max-width:500px;margin:0 auto 1.2rem;font-weight:300}
+.wl{display:flex;gap:.55rem;max-width:430px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.wl input{flex:1 1 220px}
+.wl .st{flex-basis:100%;font-size:.82rem;color:var(--dim);min-height:1.2em;margin-top:.3rem}
+
+footer{margin-top:3.4rem;padding:1.8rem 0 2.8rem;color:var(--dim);font-size:.82rem;border-top:1px solid var(--stroke)}
+footer .cols{display:flex;gap:1.6rem;flex-wrap:wrap;justify-content:center;margin-bottom:1rem}
+footer a{color:var(--mut);transition:.15s}
+footer a:hover{color:var(--ink)}
+footer .fine{text-align:center;line-height:1.85;font-weight:300}
+</style>
 </head>
 <body>
-<nav id="main-nav">
- <div class="nav-logo">Sorbi<span>✦</span></div>
- <div class="nav-links">
- <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
- <a href="/araclar">Araçlar</a>
- <a href="/haritam">Haritam</a>
- 
- </div>
- <div class="nav-hamburger" id="hamburger" onclick="toggleMobileNav()"><span></span><span></span><span></span></div>
-</nav>
-<div class="nav-mobile" id="mobile-nav">
- <span class="close-btn" onclick="toggleMobileNav()">✕</span>
- <a href="/detayli-dogum-haritasi" onclick="toggleMobileNav()">Harita Atölyesi</a>
- <a href="/araclar" onclick="toggleMobileNav()">Araçlar</a>
- <a href="/haritam" onclick="toggleMobileNav()">Haritam</a>
- <a href="/seni-taniyorum" onclick="toggleMobileNav()">Beni tanı ✦</a>
- 
+
+<header class="sbnav">
+ <a href="/" class="lg"><i>✦</i> Sorbi</a>
+ <nav>
+  <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
+  <a href="/araclar">Araçlar</a>
+  <a href="/bugun">Bugün</a>
+  <a href="/burc-ozellikleri">Burçlar</a>
+  <a href="/soru-sor">Sorunu Sor</a>
+  <a href="/haritam" id="sorbiNavHaritam" style="display:none">Haritam</a>
+ </nav>
+</header>
+
+<div class="wrap">
+
+<div class="sky"></div>
+<div class="hero">
+  <div class="kicker"><i>✦</i> Profesyonel doğum haritası — tarayıcında</div>
+  <h1>Doğum haritanı <em>şimdi</em> çıkar</h1>
+  <p>Tarih, saat, yer — çarkın anında çizilir.</p>
+  <div class="trust"><span>Ücretsiz</span><span>Kayıt yok</span><span>Swiss Ephemeris doğrulamalı</span></div>
 </div>
-<section id="hero">
- <div class="hero-stars" id="hero-stars"></div>
- <div class="hero-content">
- <div class="hero-badge">Kişisel Astroloji Uygulaması</div>
- <h1>Haritanda saklı<br><em>içgörülere</em> ulaş</h1>
- <p class="hero-subtitle">Gökyüzünün dilini birlikte çözelim. Doğduğun ana ait izler haritanda seni bekliyor — keşfetme zamanı.</p>
- <div class="hero-buttons">
- <a href="/seni-taniyorum" class="btn-gold">Seni birkaç cümlede okuyayım ✦</a>
- <a href="#dogum-haritasi" class="btn-ghost">Ücretsiz Haritamı Hesapla</a>
- <a href="/detayli-dogum-haritasi" class="btn-ghost">Harita Atölyesi ✦</a>
- </div>
- </div>
- <div class="hero-sign-label">Burcunu seç, günün yorumunu oku</div>
- <div class="zodiac-grid" id="hero-zodiac"></div>
- <div class="hero-stats fade-in">
- <div class="stat-item"><span class="stat-num">6</span><span class="stat-lbl">Astroloji Aracı</span></div>
- <div class="stat-item"><span class="stat-num">Hellenistik</span><span class="stat-lbl">&amp; Horary Uzmanlığı</span></div>
- <div class="stat-item"><span class="stat-num">Ücretsiz</span><span class="stat-lbl">Doğum Haritası</span></div>
- </div>
-</section>
-<section id="burc" class="section-dark">
- <div class="container">
- <div class="section-header"><span class="eyebrow">Burç &amp; Doğum Haritası</span><h2>Günlük enerjini keşfet</h2><p>Burcunu seç, bugünün yorumunu oku. Ya da doğum bilgilerini gir — haritanı hemen görüntüle.</p><div style="text-align:center;margin-top:.6rem;"><a href="/gunluk-burc-yorumlari" style="color:var(--gold);font-size:.9rem;font-weight:500;">Tüm günlük burç yorumları →</a></div></div>
- <div id="skyToday" style="max-width:760px;margin:0 auto 2.2rem;"></div>
- <div id="gunluk-burc" style="scroll-margin-top:80px;"></div>
- <div class="sign-tabs" id="sign-tabs"></div>
- <div id="readings-container"></div>
- <hr style="border:none;border-top:1px solid rgba(201,169,98,0.12);max-width:560px;margin:3rem auto;">
- <div id="dogum-haritasi" style="scroll-margin-top:80px;"></div>
- <div class="chart-section">
- <h3>Doğum haritanı hesapla</h3>
- <p>Ad, doğum tarihi, saati ve konumunu gir — güneş, ay ve yükselen burcunu, günlük aşk, kariyer ve yön yorumunu hemen görüntüle.</p>
- <div class="chart-form">
- <div class="form-row single"><div class="form-group"><label>Adın</label><input type="text" id="f-name" placeholder="örn. Elif"></div></div>
- <div class="form-row">
- <div class="form-group"><label>Doğum Tarihi</label><input type="date" id="f-date"></div>
- <div class="form-group"><label>Doğum Saati</label><input type="time" id="f-time" placeholder="14:30"></div>
- </div>
- <div class="form-row">
- <div class="form-group"><label>İl</label>
- <select id="f-il">
-<option value="">İl seçin</option>
- <option value="Adana">Adana</option>
- <option value="Adiyaman">Adıyaman</option>
- <option value="Afyonkarahisar">Afyonkarahisar</option>
- <option value="Aksaray">Aksaray</option>
- <option value="Amasya">Amasya</option>
- <option value="Ankara">Ankara</option>
- <option value="Antalya">Antalya</option>
- <option value="Ardahan">Ardahan</option>
- <option value="Artvin">Artvin</option>
- <option value="Aydin">Aydın</option>
- <option value="Agri">Ağrı</option>
- <option value="Balikesir">Balıkesir</option>
- <option value="Bartin">Bartın</option>
- <option value="Batman">Batman</option>
- <option value="Bayburt">Bayburt</option>
- <option value="Bilecik">Bilecik</option>
- <option value="Bingol">Bingöl</option>
- <option value="Bitlis">Bitlis</option>
- <option value="Bolu">Bolu</option>
- <option value="Burdur">Burdur</option>
- <option value="Bursa">Bursa</option>
- <option value="Denizli">Denizli</option>
- <option value="Diyarbakir">Diyarbakır</option>
- <option value="Duzce">Düzce</option>
- <option value="Edirne">Edirne</option>
- <option value="Elazig">Elazığ</option>
- <option value="Erzincan">Erzincan</option>
- <option value="Erzurum">Erzurum</option>
- <option value="Eskisehir">Eskişehir</option>
- <option value="Gaziantep">Gaziantep</option>
- <option value="Giresun">Giresun</option>
- <option value="Gumushane">Gümüşhane</option>
- <option value="Hakkari">Hakkari</option>
- <option value="Hatay">Hatay</option>
- <option value="Isparta">Isparta</option>
- <option value="Istanbul">İstanbul</option>
- <option value="Izmir">İzmir</option>
- <option value="Igdir">Iğdır</option>
- <option value="Kahramanmaras">Kahramanmaraş</option>
- <option value="Karabuk">Karabük</option>
- <option value="Karaman">Karaman</option>
- <option value="Kars">Kars</option>
- <option value="Kastamonu">Kastamonu</option>
- <option value="Kayseri">Kayseri</option>
- <option value="Kilis">Kilis</option>
- <option value="Kocaeli">Kocaeli</option>
- <option value="Konya">Konya</option>
- <option value="Kutahya">Kütahya</option>
- <option value="Kirklareli">Kırklareli</option>
- <option value="Kirikkale">Kırıkkale</option>
- <option value="Kirsehir">Kırşehir</option>
- <option value="Malatya">Malatya</option>
- <option value="Manisa">Manisa</option>
- <option value="Mardin">Mardin</option>
- <option value="Mersin">Mersin</option>
- <option value="Mugla">Muğla</option>
- <option value="Mus">Muş</option>
- <option value="Nevsehir">Nevşehir</option>
- <option value="Nigde">Niğde</option>
- <option value="Ordu">Ordu</option>
- <option value="Osmaniye">Osmaniye</option>
- <option value="Rize">Rize</option>
- <option value="Sakarya">Sakarya</option>
- <option value="Samsun">Samsun</option>
- <option value="Siirt">Siirt</option>
- <option value="Sinop">Sinop</option>
- <option value="Sivas">Sivas</option>
- <option value="Tekirdag">Tekirdağ</option>
- <option value="Tokat">Tokat</option>
- <option value="Trabzon">Trabzon</option>
- <option value="Tunceli">Tunceli</option>
- <option value="Usak">Uşak</option>
- <option value="Van">Van</option>
- <option value="Yalova">Yalova</option>
- <option value="Yozgat">Yozgat</option>
- <option value="Zonguldak">Zonguldak</option>
- <option value="Canakkale">Çanakkale</option>
- <option value="Cankiri">Çankırı</option>
- <option value="Corum">Çorum</option>
- <option value="Sanliurfa">Şanlıurfa</option>
- <option value="Sirnak">Şırnak</option>
- <option value="Other">Diğer / Yurt dışı</option>
- </select>
- </div>
- <div class="form-group"><label>İlçe</label><input type="text" id="f-ilce" placeholder="örn. Kadıköy"></div>
- </div>
- <button class="btn-chart" onclick="calculateChart()">Haritamı Hesapla ✦</button>
- </div>
- <div class="chart-result" id="chart-result"></div>
- </div>
- </div>
-</section>
 
-<!-- ===== BUGÜN SEN — kişiye özel günlük transit ===== -->
-<section id="bugun-sen" style="scroll-margin-top:80px;padding:clamp(3rem,7vw,5rem) 1.25rem;background:var(--lapis);">
- <div style="max-width:620px;margin:0 auto;text-align:center;">
-  <span style="font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;color:var(--gold);">Her sabah yenilenir</span>
-  <h2 style="margin:.35rem 0 .7rem;color:var(--parchmentLite);">Bugün sana ne söylüyor?</h2>
-  <p style="color:var(--text-muted);max-width:520px;margin:0 auto 1.5rem;">Doğum bilgini bir kez gir; her gün göğün <em>senin</em> haritanla ne konuştuğunu gör. Genel burç değil — tamamen sana özel.</p>
-  <a href="/bugun" class="btn-gold">Bugünümü gör ✦</a>
- </div>
-</section>
-
-
-<!-- ===== SORBI UYGULAMASI (app funnel + erken erişim) ===== -->
-<section id="uygulama" style="scroll-margin-top:80px;padding:clamp(3rem,7vw,5.5rem) 1.25rem;background:linear-gradient(180deg,#0B0E15 0%,#12151F 100%);">
- <div style="max-width:920px;margin:0 auto;">
-  <div class="section-header">
-   <div class="hero-badge">Sorbi — iOS Uygulaması</div>
-   <h2>Günlük astrolojin, cebinde</h2>
-   <p>Yukarıda gördüğün kişisel okuma her sabah telefonunda. Sorbi doğum haritanı okur, bugünün göğüyle konuşturur; uyumunu ve doğru zamanı gösterir — genel burç yorumu değil, tamamen sana özel, bir koç sesiyle.</p>
-  </div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(206px,1fr));gap:1rem;margin-bottom:2.2rem;">
-   <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border-gold);border-radius:var(--radius);padding:1.4rem;">
-    <div style="font-size:1.5rem;color:var(--gold);line-height:1;margin-bottom:0.7rem;">☀</div>
-    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--parchmentLite);margin-bottom:0.35rem;">Bugünün okuması</h3>
-    <p style="font-size:0.84rem;color:var(--text-muted);line-height:1.6;">Her sabah göğün seninle ne konuştuğunu tek, net bir mesajla söyler.</p>
-   </div>
-   <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border-gold);border-radius:var(--radius);padding:1.4rem;">
-    <div style="font-size:1.5rem;color:var(--gold);line-height:1;margin-bottom:0.7rem;">☾</div>
-    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--parchmentLite);margin-bottom:0.35rem;">Uyum</h3>
-    <p style="font-size:0.84rem;color:var(--text-muted);line-height:1.6;">Sevdiğin, çalıştığın, tanıştığın kişiyle haritalarınız arasındaki gerçek bağ.</p>
-   </div>
-   <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border-gold);border-radius:var(--radius);padding:1.4rem;">
-    <div style="font-size:1.5rem;color:var(--gold);line-height:1;margin-bottom:0.7rem;">✦</div>
-    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--parchmentLite);margin-bottom:0.35rem;">Ne zaman</h3>
-    <p style="font-size:0.84rem;color:var(--text-muted);line-height:1.6;">Karar, konuşma, başlangıç — göğün ne zaman yanında olduğunu gösterir.</p>
-   </div>
-   <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border-gold);border-radius:var(--radius);padding:1.4rem;">
-    <div style="font-size:1.5rem;color:var(--gold);line-height:1;margin-bottom:0.7rem;">⛢</div>
-    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--parchmentLite);margin-bottom:0.35rem;">Sen</h3>
-    <p style="font-size:0.84rem;color:var(--text-muted);line-height:1.6;">Doğum haritan derinlemesine; kim olduğunu anlatan katmanlar tek tek açılır.</p>
-   </div>
-  </div>
-  <div style="max-width:520px;margin:0 auto;text-align:center;background:rgba(201,169,98,0.06);border:1px solid var(--border-gold);border-radius:var(--radius-lg);padding:2rem 1.6rem;">
-   <div id="appDownload" style="display:none;"></div>
-   <div id="appWaitlist">
-    <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--parchmentLite);margin-bottom:0.4rem;">Çıkınca ilk sen öğren</h3>
-    <p style="font-size:0.86rem;color:var(--text-muted);line-height:1.6;margin-bottom:1.2rem;">Erken erişim listesine katıl; Sorbi App Store'da yayınlandığında ilk sana haber verelim.</p>
-    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
-     <input id="wlMail" type="email" placeholder="E-posta adresin" autocomplete="email" style="flex:1;min-width:170px;background:rgba(255,255,255,0.06);border:1px solid var(--border-gold);border-radius:999px;padding:0.75rem 1.1rem;color:var(--parchmentLite);font-family:'Playfair Display',serif;font-size:0.95rem;outline:none;">
-     <button id="wlBtn" class="btn-gold" style="white-space:nowrap;">Listeye katıl</button>
+<div class="calc">
+  <div>
+    <div class="card">
+      <div class="fields">
+        <div><label for="bd">Doğum tarihi</label><input type="date" id="bd"></div>
+        <div><label for="bt">Saat <span style="opacity:.55;text-transform:none;letter-spacing:0">(biliyorsan)</span></label><input type="time" id="bt" step="60"></div>
+        <div class="full geo"><label for="bp">Doğum yeri</label><input id="bp" placeholder="Örn: İstanbul" autocomplete="off"><div class="geolist" id="geoList" hidden></div></div>
+      </div>
+      <div class="hint">Saati bilmiyorsan boş bırak. Bilgin cihazında kalır.</div>
     </div>
-    <div id="wlStatus" style="font-size:0.8rem;margin-top:0.7rem;min-height:1.1rem;"></div>
-   </div>
-   <p style="font-size:0.72rem;color:var(--text-dim);margin-top:0.9rem;">E-postanı yalnızca yayın haberini vermek için kullanırız; spam yok.</p>
+
+    <div class="big3" id="big3" hidden>
+      <div class="b3"><div class="g">☉︎</div><div class="l">Güneş</div><div class="v" id="v-sun">—</div></div>
+      <div class="b3"><div class="g">☽︎</div><div class="l">Ay</div><div class="v" id="v-moon">—</div></div>
+      <div class="b3" id="b3-asc"><div class="g">AC</div><div class="l">Yükselen</div><div class="v" id="v-asc">—</div></div>
+    </div>
+
+    <div id="trBox" hidden>
+      <div class="tr-list" id="trList"></div>
+    </div>
+
+    <div class="after" id="after">
+      <a class="btn gold" id="goAtolye" href="/detayli-dogum-haritasi">Tüm ayrıntıyı aç — Harita Atölyesi →</a>
+      <a class="btn ghost" href="/soru-sor">Aklındaki soruyu sor</a>
+    </div>
+  </div>
+
+  <div class="chartwrap">
+    <div class="chartbox" id="chartbox">
+      <div class="ph"><b>Gökyüzü yükleniyor…</b>Şu anın haritası çiziliyor.</div>
+    </div>
+    <div class="datastrip" id="datastrip"></div>
+  </div>
+</div>
+
+<div class="paths">
+  <a class="path" href="/detayli-dogum-haritasi"><div class="g">◎</div><h3>Harita Atölyesi</h3><p>Transit, ilerletim, sinastri — tam derinlik.</p><span class="go">Aç →</span></a>
+  <a class="path" href="/bugun"><div class="g">☉︎</div><h3>Bugünün göğü</h3><p>Gökyüzü bugün ne diyor — her gün taze.</p><span class="go">Bak →</span></a>
+  <a class="path" href="/soru-sor"><div class="g">✦</div><h3>Sorunu sor</h3><p>Sorunu haritanla birlikte gönder.</p><span class="go">Sor →</span></a>
+  <a class="path" href="/araclar"><div class="g">⊹</div><h3>Tüm araçlar</h3><p>Yükselen, Ay burcu, uyum ve fazlası.</p><span class="go">Keşfet →</span></a>
+</div>
+
+<section id="uygulama">
+  <h2>Sorbi — iOS uygulaması</h2>
+  <p>Günlük okuma, uyum ve doğru zaman cebinde — çıktığında ilk sen haber al.</p>
+  <div class="wl">
+    <input type="email" id="wlEmail" placeholder="e-posta adresin" autocomplete="email">
+    <button class="btn" id="wlBtn">Haber ver ✦</button>
+    <div class="st" id="wlSt"></div>
+  </div>
+</section>
+
+
+</div>
+
+<script>
+(function(){
+"use strict";
+var $=function(id){return document.getElementById(id);};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+/* haritam menü linki */
+try{ if(JSON.parse(localStorage.getItem('sorbi_profile')||'null')){ $('sorbiNavHaritam').style.display=''; } }catch(e){}
+
+/* ── motor tembel yükleme ── */
+var LOADING=false, READY=false, QUEUE=null;
+function loadEngine(cb){
+  if(READY) return cb();
+  QUEUE=cb;
+  if(LOADING) return;
+  LOADING=true;
+  var srcs=['/astronomy.browser.min.js','/sorbi-chart.js','/sorbi-astro.js'];
+  (function next(i){
+    if(i>=srcs.length){ READY=true; LOADING=false; if(QUEUE){var f=QUEUE;QUEUE=null;f();} return; }
+    var s=document.createElement('script');
+    s.src=srcs[i]; s.async=false;
+    s.onload=function(){ next(i+1); };
+    s.onerror=function(){ LOADING=false; showPh('Harita motoru yüklenemedi. Sayfayı yenilemeyi dene.'); };
+    document.head.appendChild(s);
+  })(0);
+}
+function showPh(html){ $('chartbox').innerHTML='<div class="ph">'+html+'</div>'; }
+function showSpin(){ $('chartbox').innerHTML='<div class="ph"><div class="spin"></div>Haritan hesaplanıyor…</div>'; }
+
+/* ── yer arama ── */
+var geoT=null, PICKED=null;
+$('bp').addEventListener('input',function(e){
+  clearTimeout(geoT); PICKED=null;
+  var q=e.target.value.trim(), list=$('geoList');
+  if(q.length<2){ list.hidden=true; return; }
+  geoT=setTimeout(function(){
+    fetch('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(q)+'&count=6&language=tr&format=json')
+      .then(function(r){return r.json();})
+      .then(function(j){
+        if(!j.results||!j.results.length){ list.hidden=true; return; }
+        list.innerHTML=j.results.map(function(r,i){
+          return '<div data-i="'+i+'">'+esc(r.name)+(r.admin1?', '+esc(r.admin1):'')+' · '+esc(r.country||'')+'</div>';
+        }).join('');
+        list.hidden=false;
+        Array.prototype.forEach.call(list.children,function(el){
+          el.onclick=function(){
+            var r=j.results[+el.dataset.i];
+            $('bp').value=r.name+(r.country?', '+r.country:'');
+            PICKED={lat:r.latitude,lon:r.longitude,tz:r.timezone||'Europe/Istanbul',label:r.name};
+            list.hidden=true; render();
+          };
+        });
+      }).catch(function(){ list.hidden=true; });
+  },320);
+});
+document.addEventListener('click',function(e){ if(!e.target.closest('.geo')) $('geoList').hidden=true; });
+
+/* ── kayıtlı doğum bilgisi ── */
+function loadSaved(){
+  try{
+    var b=JSON.parse(localStorage.getItem('sorbi_birth')||'null');
+    if(!b){ var pr=JSON.parse(localStorage.getItem('sorbi_profile')||'null'); if(pr&&pr.birth) b=pr.birth; }
+    if(b){
+      if(b.date) $('bd').value=b.date;
+      if(b.time) $('bt').value=b.time;
+      if(b.place) $('bp').value=b.place;
+      if(b.lat&&b.lon) PICKED={lat:+b.lat,lon:+b.lon,tz:b.tz||'Europe/Istanbul',label:(b.place||'').split(',')[0]};
+    }
+  }catch(e){}
+}
+function saveBirth(){
+  if(!PICKED) return;
+  try{ localStorage.setItem('sorbi_birth',JSON.stringify({
+    date:$('bd').value, time:$('bt').value, place:$('bp').value,
+    lat:PICKED.lat, lon:PICKED.lon, tz:PICKED.tz })); }catch(e){}
+}
+
+/* ── çizim ── */
+var CH=null, NOTIME=false;
+function render(){
+  if(!$('bd').value || !PICKED) return;
+  showSpin();
+  loadEngine(draw);
+}
+function draw(){
+  try{
+    var d=$('bd').value.split('-'), t=($('bt').value||'').split(':');
+    NOTIME = !$('bt').value;
+    var o={y:+d[0],mo:+d[1],d:+d[2],h:NOTIME?12:+t[0],mi:NOTIME?0:+t[1],
+           tz:PICKED.tz,lat:PICKED.lat,lon:PICKED.lon,house:NOTIME?'W':'P'};
+    if(o.y<1850||o.y>2069){ showPh('1850–2069 aralığı destekleniyor.'); return; }
+    CH=SorbiAstro.chart(o);
+    CH.o.house=NOTIME?'W':'P';
+    var asps=SorbiAstro.within(CH,1,false);
+    var tstr=$('bt').value||'';
+    $('chartbox').innerHTML=window.SorbiChart.draw(CH,null,{
+      theme:'paper', aspects:asps, noHouses:NOTIME,
+      title:(PICKED.label||''), sub:$('bd').value,
+      plate:{name:'Doğum Haritası',
+        l1:$('bd').value+(tstr?' · '+tstr:' · saat bilinmiyor'),
+        l2:(PICKED.label||'')+' · '+Math.abs(PICKED.lat).toFixed(2)+'°'+(PICKED.lat>=0?'K':'G')+' '+Math.abs(PICKED.lon).toFixed(2)+'°'+(PICKED.lon>=0?'D':'B'),
+        l3:(NOTIME?'Whole Sign':'Placidus')+' · Tropikal · Gerçek düğüm'}
+    });
+    $('chartbox').classList.add('rise');
+    var ds=$('datastrip'); ds.classList.add('on');
+    ds.innerHTML='<span>UTC <b>'+CH.utc.toISOString().replace('T',' ').slice(0,16)+'</b></span>'+
+      '<span>Ev sistemi <b>'+(NOTIME?'Whole Sign':'Placidus')+'</b></span>'+
+      (NOTIME?'':'<span>MC <b>'+SorbiAstro.fmt(CH.mc)+'</b></span>')+
+      '<span><b>'+(CH.day?'Gündüz':'Gece')+'</b> haritası</span>';
+    fillBig3(); fillTransits(); saveBirth();
+    $('after').classList.add('on');
+    var q='?d='+$('bd').value+($('bt').value?'&t='+$('bt').value:'')+'&lat='+PICKED.lat+'&lon='+PICKED.lon+'&tz='+encodeURIComponent(PICKED.tz)+'&p='+encodeURIComponent((PICKED.label||''));
+    $('goAtolye').href='/detayli-dogum-haritasi'+q;
+  }catch(e){ showPh('Harita çizilemedi: '+esc(e.message)); }
+}
+function pl(k){ return CH.pls.filter(function(p){return p.k===k;})[0]; }
+var ELC=['#C4634A','#7E9C63','#DFA98F','#5E93A8'];
+function big3html(lon){
+  var x=SorbiAstro.dms(lon);
+  return '<span class="sg" style="color:'+ELC[x.s%4]+'">'+SorbiAstro.SGLYPH[x.s]+'</span>'+x.d+'° '+SorbiAstro.SIGNS[x.s]+' '+String(x.m).padStart(2,'0')+'′';
+}
+function fillBig3(){
+  $('big3').hidden=false; $('big3').classList.add('rise');
+  $('v-sun').innerHTML=big3html(pl('sun').lon);
+  $('v-moon').innerHTML=big3html(pl('moon').lon);
+  var asc=$('b3-asc');
+  if(NOTIME){ asc.classList.add('na'); $('v-asc').textContent='saat gerekli'; }
+  else { asc.classList.remove('na'); $('v-asc').innerHTML=big3html(CH.asc); }
+}
+var SLOW={jup:1,sat:1,ura:1,nep:1,plu:1};
+function fillTransits(){
+  try{
+    var tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'Europe/Istanbul';
+    var tr=SorbiAstro.now({tz:tz,lat:PICKED.lat,lon:PICKED.lon,house:'W'});
+    var hits=SorbiAstro.cross(CH,tr,1,false).filter(function(x){
+      if(!SLOW[x.a.k]) return false;
+      if(x.b.k==='pof'||x.b.k==='sno') return false;
+      if(NOTIME && (x.b.k==='asc'||x.b.k==='mc')) return false;
+      return true;
+    }).slice(0,3);
+    if(!hits.length){ $('trBox').hidden=true; return; }
+    $('trBox').hidden=false;
+    $('trList').innerHTML=hits.map(function(x){
+      var yon = x.app===null ? '' : (x.app?' · yaklaşıyor':' · ayrılıyor');
+      var ev = (!NOTIME && x.b.house) ? ' <span style="color:var(--dim)">('+x.b.house+'. ev)</span>' : '';
+      return '<div class="tr"><span class="gl">'+x.a.g+'</span>'+
+        '<span class="tx">Şu an: transit <b>'+x.a.n+'</b> · '+x.as.n.toLowerCase()+' · natal <b>'+x.b.n+'</b>'+ev+'</span>'+
+        '<span class="orb">'+x.abs.toFixed(1)+'°'+yon+'</span></div>';
+    }).join('');
+  }catch(e){ $('trBox').hidden=true; }
+}
+['bd','bt'].forEach(function(id){ $(id).addEventListener('change',render); });
+
+/* ── waitlist (App Store canlı olunca link ile değiştir) ── */
+$('wlBtn').onclick=async function(){
+  var em=($('wlEmail').value||'').trim(), st=$('wlSt');
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){ st.style.color='var(--terra)'; st.textContent='Geçerli bir e-posta gir.'; return; }
+  st.style.color='var(--dim)'; st.textContent='Kaydediliyor…';
+  try{
+    var r=await fetch('https://formsubmit.co/ajax/defneturann@gmail.com',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({email:em,_subject:'Sorbi erken erisim kaydi',type:'sorbi-waitlist'})});
+    if(r.ok){ st.style.color='var(--gold-lt)'; st.textContent='Listedesin — Sorbi çıkınca ilk sana yazacağız.'; try{localStorage.setItem('sorbi_wl','1');}catch(e){} }
+    else { st.style.color='var(--terra)'; st.textContent='Kaydedilemedi, tekrar dener misin?'; }
+  }catch(e){ st.style.color='var(--terra)'; st.textContent='Bağlantı kurulamadı.'; }
+};
+
+/* ── girişte: şu anın haritası ── */
+function drawMoment(){
+  loadEngine(function(){
+    try{
+      if($('bd').value && PICKED) return; // kullanıcı kendi haritasını çizdiyse dokunma
+      var tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'Europe/Istanbul';
+      var ch=SorbiAstro.now({tz:tz,lat:41.0082,lon:28.9784,house:'P'});
+      var asps=SorbiAstro.within(ch,1,false);
+      var now=new Date();
+      var dsr=now.toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});
+      var tsr=now.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});
+      $('chartbox').innerHTML=window.SorbiChart.draw(ch,null,{
+        theme:'paper', aspects:asps,
+        plate:{name:'Şu Anın Gökyüzü', l1:dsr+' · '+tsr, l2:'İstanbul', l3:'Canlı — sayfa her açılışta yeniden çizer'}
+      });
+      $('chartbox').classList.add('rise');
+      var d2=$('datastrip'); d2.classList.add('on');
+      d2.innerHTML='<span><b>Şu anın gökyüzü</b> — bilgini gir, bu çark seninkine dönüşsün ✦</span>';
+    }catch(e){}
+  });
+}
+
+loadSaved();
+if($('bd').value && PICKED) render(); else setTimeout(drawMoment,120);
+})();
+</script>
+<!-- SORBI-FOOTER:START -->
+<style>
+.sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0D0810;font-family:'Inter',system-ui,sans-serif}
+.sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr 1fr;gap:2rem}
+.sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#E3A692;margin:0 0 .8rem;font-weight:600}
+.sbft a{display:block;color:#9BA0AB;text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
+.sbft a:hover{color:#F2EFE9}
+.sbft .sbft-brand b{font-size:1.05rem;color:#F2EFE9;font-weight:700}
+.sbft .sbft-brand b i{font-style:normal;color:#E3A692;margin-right:.3rem}
+.sbft .sbft-brand p{color:#9BA0AB;font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#6D7280;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+@media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
+@media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
+</style>
+<footer class="sbft">
+ <div class="sbft-in">
+  <div class="sbft-brand"><b><i>✦</i>Sorbi</b><p>Gökyüzünü veriyle okuyan astroloji atölyesi. Hesaplamalar tarayıcında, saniyeler içinde.</p></div>
+  <div><h4>Hesaplayıcılar</h4>
+   <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
+   <a href="/dogum-haritasi-hesaplama">Doğum Haritası</a>
+   <a href="/yukselen-burc-hesaplama">Yükselen Burç</a>
+   <a href="/ay-burcu-hesaplama">Ay Burcu</a>
+   <a href="/sinastri">Sinastri Rehberi</a>
+   <a href="/natal-harita">Natal Harita Rehberi</a>
+  </div>
+  <div><h4>Gökyüzü</h4>
+   <a href="/bugun">Bugün Gökyüzünde</a>
+   <a href="/horary">An Haritası (Horary)</a>
+   <a href="/uygun-gun-secimi">Uygun Gün Seçimi</a>
+   <a href="/retro-ay-takvimi">Retro & Ay Takvimi</a>
+   <a href="/astrokartografi">Astrokartografi</a>
+   <a href="/yasam-donguleri">Yaşam Döngüleri</a>
+  </div>
+  <div><h4>Burçlar</h4>
+   <a href="/burc-ozellikleri">Burç Özellikleri</a>
+   <a href="/gunluk-burc-yorumlari">Günlük Yorumlar</a>
+   <a href="/ates-burclari">Ateş Burçları</a>
+   <a href="/toprak-burclari">Toprak Burçları</a>
+   <a href="/hava-burclari">Hava Burçları</a>
+   <a href="/su-burclari">Su Burçları</a>
+  </div>
+  <div><h4>Sorbi</h4>
+   <a href="/">Ana Sayfa</a>
+   <a href="/soru-sor">Sorunu Sor</a>
+   <a href="/gunun-karti">Günün Kartı</a>
+   <a href="/seni-taniyorum">Seni Tanıyorum</a>
+   <a href="/#uygulama">Uygulama</a>
+   <a href="/destek">Destek</a>
   </div>
  </div>
-</section>
-<script>
-/* SORBI APP — waitlist + App Store swap. App Store'da CANLIYA çıkınca linki
-   aşağıya yaz → bölüm otomatik "İndir" butonuna döner. */
-const SORBI_APPSTORE_URL='';
-(function(){
-  var dl=document.getElementById('appDownload'),wl=document.getElementById('appWaitlist');
-  if(SORBI_APPSTORE_URL&&dl&&wl){dl.style.display='block';wl.style.display='none';
-    dl.innerHTML='<h3 style="font-family:\'Playfair Display\',serif;font-size:1.5rem;color:var(--parchmentLite);margin-bottom:1rem;">Sorbi yayında</h3><a href="'+SORBI_APPSTORE_URL+'" class="btn-gold" style="padding:0.85rem 2rem;">App Store’dan indir</a>';}
-  var b=document.getElementById('wlBtn');
-  if(b)b.onclick=async function(){
-    var em=(document.getElementById('wlMail').value||'').trim(),st=document.getElementById('wlStatus');
-    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){st.style.color='var(--vermilion)';st.textContent='Geçerli bir e-posta gir.';return;}
-    st.style.color='var(--text-dim)';st.textContent='Kaydediliyor…';
-    try{var r=await fetch('https://formsubmit.co/ajax/defneturann@gmail.com',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({email:em,_subject:'Sorbi erken erisim kaydi',type:'sorbi-waitlist'})});
-      if(r.ok){st.style.color='var(--goldStar)';st.textContent='Listedesin — Sorbi çıkınca ilk sana yazacağız.';try{localStorage.setItem('sorbi_waitlist',em);}catch(e){}}else throw 0;}
-    catch(e){st.style.color='var(--vermilion)';st.textContent='Şu an kaydedilemedi, birazdan tekrar dene.';}
-  };
-})();
-</script>
-
-<!-- ===== İLİŞKİ UYUMU (ücretsiz sinastri) ===== -->
-<section id="uyum" style="scroll-margin-top:80px;padding:clamp(3rem,7vw,5rem) 1.25rem;background:var(--lapis);">
- <div style="max-width:620px;margin:0 auto;text-align:center;">
-  <span class="eyebrow" style="color:var(--gold);">İlişki</span>
-  <h2 style="margin:.35rem 0 .7rem;color:var(--parchmentLite);">Aranızdaki uyumu gör</h2>
-  <p style="color:var(--text-muted);max-width:520px;margin:0 auto 1.5rem;">İki burcun ne kadar uyumlu olduğuna anında bak.</p>
-  <a href="/burc-uyumu" class="btn-gold">Burç uyumuna bak ✦</a>
- </div>
-</section>
-
-<footer>
- <div class="container">
- <div class="footer-inner">
- <div class="footer-brand"><h3>Sorbi<span>✦</span></h3><p>Sorbi; "soru" ve "rehber" kelimelerinden doğan bir isimdir. Gökyüzünün dilini seninle birlikte çözmek, haritanın sesini duymana eşlik etmek için buradayız.</p></div>
- <div class="footer-links"><h4>Hizmetler</h4><ul><li><a href="/gunun-karti">Günün Kartı</a></li><li><a href="/gunluk-burc-yorumlari">Günlük Burç Yorumları</a></li><li><a href="/burc-ozellikleri">Burç Özellikleri</a></li><li><a href="/rehber">Astroloji Rehberi</a></li></ul></div>
- <div class="footer-contact"><h4>İletişim</h4><p>Sorbi, astroloji tabanlı bir farkındalık ve hesaplama aracıdır.</p></div>
- </div>
- <div class="footer-bottom"><p>© 2026 Sorbi Astrology. Tüm hakları saklıdır.</p><p>Astroloji içgörü ve kişisel gelişim amaçlıdır. Tıbbi veya hukuki tavsiye değildir.</p></div>
- </div>
+ <div class="sbft-bot"><span>© 2026 Sorbi · sorbiapp.com</span><span>Astroloji içerikleri kişisel farkındalık amaçlıdır; kesin gelecek vaadi değildir.</span></div>
 </footer>
-<script>
-const SIGNS = [
- {name:'Koç',dates:'21 Mar – 19 Nis',element:'Ateş',ruler:'Mars'},
- {name:'Boğa',dates:'20 Nis – 20 May',element:'Toprak',ruler:'Venüs'},
- {name:'İkizler',dates:'21 May – 20 Haz',element:'Hava',ruler:'Merkür'},
- {name:'Yengeç',dates:'21 Haz – 22 Tem',element:'Su',ruler:'Ay'},
- {name:'Aslan',dates:'23 Tem – 22 Ağu',element:'Ateş',ruler:'Güneş'},
- {name:'Başak',dates:'23 Ağu – 22 Eyl',element:'Toprak',ruler:'Merkür'},
- {name:'Terazi',dates:'23 Eyl – 22 Eki',element:'Hava',ruler:'Venüs'},
- {name:'Akrep',dates:'23 Eki – 21 Kas',element:'Su',ruler:'Plüton'},
- {name:'Yay',dates:'22 Kas – 21 Ara',element:'Ateş',ruler:'Jüpiter'},
- {name:'Oğlak',dates:'22 Ara – 19 Oca',element:'Toprak',ruler:'Satürn'},
- {name:'Kova',dates:'20 Oca – 18 Şub',element:'Hava',ruler:'Uranüs'},
- {name:'Balık',dates:'19 Şub – 20 Mar',element:'Su',ruler:'Neptün'}
-];
-const _S='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">';
-const ZSYM=[
- _S+'<path d="M12 20V12"/><path d="M12 12C12 6 7.5 6 7.5 9.8"/><path d="M12 12C12 6 16.5 6 16.5 9.8"/></svg>',
- _S+'<circle cx="12" cy="14.5" r="4.3"/><path d="M6.5 8 Q12 13.5 17.5 8"/></svg>',
- _S+'<path d="M8 5V19"/><path d="M14 5V19"/><path d="M6 5 Q11 3 16 5"/><path d="M6 19 Q11 21 16 19"/></svg>',
- _S+'<path d="M5 11 C5 8 9 6.5 12.5 8"/><circle cx="15" cy="9" r="1.8" fill="currentColor" stroke="none"/><path d="M19 13 C19 16 15 17.5 11.5 16"/><circle cx="9" cy="15" r="1.8" fill="currentColor" stroke="none"/></svg>',
- _S+'<circle cx="8.5" cy="15" r="3"/><path d="M11 13.5 C13 9.5 11.5 6 14.5 5.5 C16.8 5 17.5 7.5 16 9"/></svg>',
- _S+'<path d="M5 17.5 V10 Q5 7.5 7.25 7.5 T9.5 10 V17.5 M9.5 10 Q9.5 7.5 11.75 7.5 T14 10 V14 Q14 18 17 16.5 Q19 15.3 17.2 13.4"/></svg>',
- _S+'<path d="M4 17 H20"/><path d="M4 12 H8 A4 4 0 0 1 16 12 H20"/></svg>',
- _S+'<path d="M4 8V16 M4 8 Q4 6 6.5 6 Q9 6 9 8 V16 M9 8 Q9 6 11.5 6 Q14 6 14 8 V17 L18 20"/><path d="M18 20 L14.5 20 M18 20 L18 16.5"/></svg>',
- _S+'<path d="M6 18 L17 7"/><path d="M17 7 L11 7 M17 7 L17 13"/><path d="M8.5 9.5 L14.5 15.5"/></svg>',
- _S+'<path d="M5 8 V15 M5 8 C5 17 10 17 10 9 C10 14 12.5 17.5 15.5 16.5 A3 3 0 1 0 13.5 11.8"/></svg>',
- _S+'<path d="M4 10 L8 7.5 L12 10 L16 7.5 L20 10"/><path d="M4 15 L8 12.5 L12 15 L16 12.5 L20 15"/></svg>',
- _S+'<path d="M7 4 C3 8 3 16 7 20"/><path d="M17 4 C21 8 21 16 17 20"/><path d="M5 12 H19"/></svg>'
-];
-const ICON = {
- love:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 20s-7-4.6-7-9.4A3.6 3.6 0 0 1 12 8a3.6 3.6 0 0 1 7 2.6C19 15.4 12 20 12 20z"/></svg>',
- money:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 16 9 10 13 14 21 6"/><polyline points="15 6 21 6 21 12"/></svg>',
- future:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M20 14a8 8 0 1 1-9.8-9.8A6.5 6.5 0 0 0 20 14z"/></svg>',
- sun:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><line x1="12" y1="3" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21"/><line x1="3" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21" y2="12"/></svg>',
- moon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M20 14a8 8 0 1 1-9.8-9.8A6.5 6.5 0 0 0 20 14z"/></svg>',
- asc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 14 12 8 18 14"/></svg>'
-};
-const READINGS = [
- {genel:"Bugün Mars enerjisi seni harekete geçiriyor. İçinde biriken bir enerji var, bunu yaratıcı bir alana yönlendirirsen çok verimli bir gün geçirebilirsin. Erken saatlerde başladığın işleri tamamlaman daha kolay olabilir.",ask:"İlişkinde bugün açık iletişim çok önemli. Karşındaki kişiyle konuşmaktan çekinme; sözlerini doğrudan ama nazikçe söylersen anlaşılırsın. Bekar Koçlar için beklenmedik bir çekim söz konusu olabilir.",para:"Yeni bir finansal fırsat kapıya dayanabilir. Acele karar verme ama kapıyı da tam kapatma. Bu hafta küçük bir yatırım ya da tasarruf hamlesi yapmak için enerjik bir dönemdesin.",gelecek:"Önümüzdeki birkaç günde hız kazanabilirsin. Bugün attığın adımlar yakın gelecekte kendini gösterecek. Sabırlı ol, ama hareketsiz de durma."},
- {genel:"Venüs etkisi bugün seni konfor alanında tutuyor. Rutinlerin seni rahatlatıyor; bundan yararlan ama tamamen donup kalma. Güzellik, doğa veya yaratıcılıkla geçirilen zaman ruhunu besler.",ask:"Duygusal derinlik bugün ön planda. Sevdiğin kişiyle sessizce vakit geçirmek, büyük sözlerden daha etkili olabilir. Bekar Boğalar için eski bir tanışın tekrar gündeme gelmesi mümkün.",para:"Mali konularda temkinli bir gün. Büyük harcamalar yerine küçük güzellikler için para harcamak sana iyi gelir. Beklediğin bir ödeme veya onay bu hafta gelebilir.",gelecek:"Yavaş ama sağlam ilerlemek senin tarzın. Acele etmeden attığın adımlar kalıcı sonuçlar doğuruyor. Gelecek birkaç haftada maddi bir istikrar hissedebilirsin."},
- {genel:"Güneş burcundayken enerji yüksek ve zihinsel akış hızlı. Birçok konuyu aynı anda ele alabilirsin ama odaklanmaya çalış. İletişim ve bilgi alışverişi için mükemmel bir gün.",ask:"Esprili ve zeki yanın bugün ilgi çekiyor. Duygusal değil entelektüel bir bağlantı kuruyorsun — bu güzel ama karşındaki kişinin derinlik aradığını unutma. Bekar İkizler için dijital bir tanışıklık gelişebilir.",para:"Fikirlerin para kazandırabilir. Kısa vadeli bir proje veya yan gelir kapısı açılıyor. Bilgi ve iletişim yeteneğini kullandığın işlerde bugün parlıyorsun.",gelecek:"Önümüzdeki dönemde çeşitlilik seni besleyecek. Tek bir alana sıkışmak yerine birden fazla alanda ilerlemek en doğrusu. Merakını kaybetme, seni doğru yere götürecek."},
- {genel:"Ay burcunda gezinirken duygular biraz yoğunlaşabilir. Bu sezgisel enerjini kullanmak için harika bir fırsat — iç sesinle daha derin bir bağlantı kurabilirsin. Ev ve aile konularında güzel bir enerji var.",ask:"Bugün duygularına güven. Sezgilerinle bir ilişkide eksik olanı hissedebilir, bunu nazikçe ifade edebilirsin. Bekar Yengeçler için ev ortamında ya da aile çevresinde bir tanışıklık mümkün.",para:"Ev ve aile harcamalarında dikkatli ol. Mali bir karar alacaksan güvendiğin birine danış. Uzun vadeli tasarruf için iyi bir motivasyon günü.",gelecek:"Gelecekte güvenli bir liman arıyorsun ve onu inşa etme zamanın geliyor. Duygusal sağlamlık sağlarsan dış koşullar da düzelecek. Sabırlı ol."},
- {genel:"Güneş burcunda ilerlerken görünürlüğün artıyor. Bugün öne çıkmaktan çekinme — fikirlerini paylaş, yaratıcı enerjini göster. Liderlik fırsatları kapında.",ask:"Romantik enerji yüksek! Bugün karşındaki kişiye dikkatini ve enerjini verirsen muhteşem bir bağlantı kurabilirsin. Bekar Aslanlar için parlak, göz alıcı bir çekim söz konusu.",para:"Kariyer ve para konularında cesur adımlar atmak için güçlü bir gün. Değerini bil ve talep et — bu hafta fark edilmeye hazırsın.",gelecek:"Yakın gelecekte seni gerçekten mutlu eden bir şey için çalışma zamanı. Sahte alçakgönüllülüğü bırak; öne çıkmak senin hakkın."},
- {genel:"Detaylara olan dikkat bugün işine yarıyor. Karmaşık bir problemi çözmek ya da uzun zamandır ertelediğin bir görevi tamamlamak için mükemmel bir enerji. Bedeninle de ilgilen — küçük sağlık rutinleri büyük fark yaratır.",ask:"Bugün hizmet etmek ve önemsemek bir aşk dili oluyor. Sevdiğin kişi için küçük ama anlamlı şeyler yapmak ilişkini derinleştirir. Bekar Başaklar için iş veya gündelik hayatta bir tanışma mümkün.",para:"Düzenli ve planlı adımlar bu hafta seni öne taşıyor. Bütçeni gözden geçirmek, küçük tasarruflar yapmak için harika bir zaman.",gelecek:"Gelecek birkaç haftada sistematik çabaların meyvesini verecek. Sabırsızlanma — doğru yapılan işler doğru zamanda kendini gösteriyor."},
- {genel:"Venüs etkisiyle denge ve uyum arıyorsun. Bugün estetik, güzellik veya sanatla ilgili bir şey yapmak seni besler. İlişkilerde adillik ve eşitlik önemli; ortaklıklarda dengeli iletişim kur.",ask:"İlişkinde bugün karşılıklılık ön planda. Ver ve al dengesi kuruluyorsa mükemmel bir bağlantı günü seni bekliyor. Bekar Teraziler için sanatsal ya da kültürel bir ortamda çekim yaşanabilir.",para:"Ortaklık ve iş birliği gerektiren mali konularda güçlü bir gün. Tek başına almak yerine birlikte karar verilen bir adım daha sağlam sonuç üretiyor.",gelecek:"Önümüzdeki dönemde denge bulmak senin en büyük kazanımın olabilir. Hem vereceğin hem alacağın şeyleri netleştirirsen gerçek refaha ulaşırsın."},
- {genel:"Bugün derinlere inmek için güçlü bir motivasyonun var. Yüzeyde kalan konularla yetinme; gerçeği aramak seni doğru yere götürür. Dönüşüm ve bırakma enerjisi güçlü.",ask:"Yoğun duygular bugün yüzeye çıkabilir. Kırılgan olmaktan korkmadan karşındaki kişiye güven — bu açıklık ilişkini derin bir zemine taşır. Bekar Akrepler için güçlü ve anlık bir çekim yaşanabilir.",para:"Ortak kaynaklar, miras veya yatırım konularında araştırma yapılacak bir gün. Derinlemesine analize girdiğinde iyi bir fırsat görebilirsin.",gelecek:"Gelecekte büyük bir dönüşüm seni bekliyor. Bugünkü derin bakışın bu dönüşümü kolaylaştıracak. Kontrolü bırakmak seni güçsüz yapmaz — aksine özgürleştirir."},
- {genel:"Jüpiter enerjisi bugün ufkunu genişletiyor. Büyük hayaller kur, yeni bir şey öğren ya da bir seyahat planla. Felsefe, eğitim ve özgürlük temaları güçlü.",ask:"Özgürlüğünü kısıtlamayan bir ilişki enerjisi hissediyorsun. Karşındaki kişiyle ortak değer ve hayallerini konuşmak bugün bağınızı derinleştirir. Bekar Yaylar için yabancı kökenli ya da farklı kültürden bir çekim söz konusu.",para:"Büyük ölçekli düşünmek bu hafta işine yarıyor. Küçük adımlarla değil uzun vadeli bir vizyonla hareket etmek mali konularda seni doğru yönde tutuyor.",gelecek:"Yakında yeni bir ufuk açılacak. Güven duygusu ve iyimserliğin koruduğu sürece fırsatlar seni bulmaya devam edecek. Genişle."},
- {genel:"Satürn disiplini bugün seni yapıcı bir odağa sokuyor. Uzun vadeli hedeflerin için bugün atacağın adımlar çok değerli. Çalışkanlığın ve kararlılığın meyvesini vermeye başlıyor.",ask:"Güven ve taahhüt bugün ilişkinde önemli. Belki büyük duygusal gösteriler yapmıyorsun ama istikrarlı ve güvenilir olman karşındaki kişi için çok değerli. Bekar Oğlaklar için iş çevresinde bir tanışıklık gelişebilir.",para:"Kariyer ve uzun vadeli yatırım için güçlü bir gün. Planlı ve disiplinli adımlar atıyorsan bu hafta somut bir ilerleme görebilirsin.",gelecek:"Emeklerinin karşılığını almaya başlıyorsun. Gelecek birkaç ay meyvesini topladığın bir dönem olabilir — sabırla devam et."},
- {genel:"Uranüs etkisiyle bugün alışılmışın dışına çıkmak istiyorsun. Topluluk, teknoloji ve özgün fikirler öne çıkıyor. Sıradışı bir çözüm ya da farklı bir yol bugün sana iyi gelir.",ask:"Entelektüel bağlantı bugün önemli. Benzer değerlere sahip, özgür ruhlu biriyle bir araya gelmek seni besler. Bekar Kovalar için sosyal medya veya dijital bir ortamda güçlü bir çekim yaşanabilir.",para:"İnovatif düşünme ve teknolojik araçlar bu hafta mali avantaj sağlıyor. Alışılmış yolların dışında bir gelir kapısı açılıyor olabilir.",gelecek:"Yakın gelecekte topluma katkı sağlayan bir projeye dahil olabilirsin. Bağlantıların ve networkin seni önemli fırsatlara taşıyacak."},
- {genel:"Neptün etkisiyle bugün sezgiler ve hayal gücü güçlü. Yaratıcı işler, meditasyon ya da müzik için mükemmel bir enerji var. Sınırlarını korumayı unutma; enerji verici insanlarla vakit geç.",ask:"Duygusal empati bugün hem gücün hem de zafiyetin. Karşındaki kişinin ihtiyacını hissediyorsun ama kendi ihtiyaçlarını da dile getir. Romantik hayal gücün yüksek; gerçekçi de ol.",para:"Sezgisel bir mali karar bugün beklenmedik sonuçlar getirebilir. Büyük harcamalardan kaçın ama içinden gelen küçük bir fırsatı da göz ardı etme.",gelecek:"Gelecekte ruhsal ve yaratıcı yolculuğun seni taşıyacak. Saf kalplilik ve empatin en büyük zenginliğin — bunu koru."}
-];
-
-// ===== GERÇEK BACKEND ENTEGRASYONU =====
-// Sorbi mobil app'in kullandığı gerçek Sorbi.Api (NASA JPL/Skyfield ephemeris) — tek API mimarisi (2026-07-10).
-// Endpoint: ChartController.GetMiniReading — stateless, [AllowAnonymous], rate-limited ("heavy").
-const API_BASE = "https://sorbi-api-r67kam5uuq-ew.a.run.app";
-const USE_API = API_BASE.trim() !== "";
-const IL_COORDS = {
- Adana:[37.0,35.32],
- Adiyaman:[37.76,38.28],
- Afyonkarahisar:[38.76,30.54],
- Agri:[39.72,43.05],
- Amasya:[40.65,35.83],
- Ankara:[39.93,32.86],
- Antalya:[36.9,30.71],
- Artvin:[41.18,41.82],
- Aydin:[37.85,27.84],
- Balikesir:[39.65,27.88],
- Bilecik:[40.14,29.98],
- Bingol:[38.88,40.5],
- Bitlis:[38.4,42.11],
- Bolu:[40.74,31.61],
- Burdur:[37.72,30.29],
- Bursa:[40.19,29.06],
- Canakkale:[40.16,26.41],
- Cankiri:[40.6,33.62],
- Corum:[40.55,34.95],
- Denizli:[37.78,29.09],
- Diyarbakir:[37.91,40.24],
- Edirne:[41.68,26.56],
- Elazig:[38.68,39.22],
- Erzincan:[39.75,39.49],
- Erzurum:[39.9,41.27],
- Eskisehir:[39.78,30.52],
- Gaziantep:[37.07,37.38],
- Giresun:[40.91,38.39],
- Gumushane:[40.46,39.48],
- Hakkari:[37.57,43.74],
- Hatay:[36.2,36.16],
- Isparta:[37.76,30.55],
- Mersin:[36.81,34.64],
- Istanbul:[41.01,28.98],
- Izmir:[38.42,27.14],
- Kars:[40.6,43.1],
- Kastamonu:[41.39,33.78],
- Kayseri:[38.73,35.48],
- Kirklareli:[41.74,27.22],
- Kirsehir:[39.15,34.16],
- Kocaeli:[40.85,29.88],
- Konya:[37.87,32.48],
- Kutahya:[39.42,29.98],
- Malatya:[38.36,38.31],
- Manisa:[38.62,27.43],
- Kahramanmaras:[37.58,36.93],
- Mardin:[37.31,40.74],
- Mugla:[37.22,28.36],
- Mus:[38.73,41.49],
- Nevsehir:[38.62,34.71],
- Nigde:[37.97,34.68],
- Ordu:[40.98,37.88],
- Rize:[41.02,40.52],
- Sakarya:[40.76,30.38],
- Samsun:[41.29,36.33],
- Siirt:[37.93,41.94],
- Sinop:[42.03,35.15],
- Sivas:[39.75,37.02],
- Tekirdag:[40.98,27.51],
- Tokat:[40.31,36.55],
- Trabzon:[41.0,39.72],
- Tunceli:[39.11,39.55],
- Sanliurfa:[37.16,38.8],
- Usak:[38.68,29.41],
- Van:[38.49,43.41],
- Yozgat:[39.82,34.81],
- Zonguldak:[41.45,31.79],
- Aksaray:[38.37,34.03],
- Bayburt:[40.26,40.23],
- Karaman:[37.18,33.22],
- Kirikkale:[39.85,33.51],
- Batman:[37.88,41.13],
- Sirnak:[37.52,42.46],
- Bartin:[41.64,32.34],
- Ardahan:[41.11,42.7],
- Igdir:[39.92,44.04],
- Yalova:[40.65,29.28],
- Karabuk:[41.2,32.63],
- Kilis:[36.72,37.12],
- Osmaniye:[37.07,36.25],
- Duzce:[40.84,31.16]
-};
-const SIGN_LOOKUP=(()=>{const m={};const en=['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'];const ab=['ari','tau','gem','can','leo','vir','lib','sco','sag','cap','aqu','pis'];const tr=['koç','boğa','ikizler','yengeç','aslan','başak','terazi','akrep','yay','oğlak','kova','balık'];for(let i=0;i<12;i++){m[en[i]]=i;m[ab[i]]=i;m[tr[i]]=i;}return m;})();
-function signToIdx(s){if(s==null)return null;const k=String(s).toLowerCase().trim();if(k in SIGN_LOOKUP)return SIGN_LOOKUP[k];const a=k.slice(0,3);return a in SIGN_LOOKUP?SIGN_LOOKUP[a]:null;}
-function pad2(n){return String(n).padStart(2,'0');}
-async function fetchNatal({name,year,month,day,hour,minute,il}){
- try{
- const c=IL_COORDS[il]||IL_COORDS.Istanbul;
- const birthDate=`${year}-${pad2(month)}-${pad2(day)}`;
- const birthTime=`${pad2(hour)}:${pad2(minute)}`;
- const res=await fetch(API_BASE.replace(/\/$/,'')+"/api/v1/astro/chart/mini-reading",{
- method:"POST",headers:{"Content-Type":"application/json"},
- body:JSON.stringify({birthDate,birthTime,latitude:c[0],longitude:c[1],timeZone:"Europe/Istanbul"})
- });
- if(!res.ok)throw new Error("HTTP "+res.status);
- const d=await res.json();
- const sunIdx=signToIdx(d.sun&&d.sun.signEn);
- const moonIdx=signToIdx(d.moon&&d.moon.signEn);
- const risingIdx=signToIdx(d.rising&&d.rising.signEn);
- // Keplerian fallback (Moon üretmiyor) tam üçlüyü garanti eden yerel hesaba düşsün.
- if(sunIdx==null||moonIdx==null)return null;
- return{
- sunIdx,moonIdx,risingIdx,
- sunMeaning:d.sun&&d.sun.meaning, moonMeaning:d.moon&&d.moon.meaning, risingMeaning:d.rising&&d.rising.meaning,
- dominantElement:d.dominantElement, dominantElementEmoji:d.dominantElementEmoji, elementPersonality:d.elementPersonality,
- reading:d.reading, inspiration:d.inspiration, engine:d.engine
- };
- }catch(e){console.warn("Natal API'ye ulaşılamadı, yerel hesaba düşülüyor:",e);return null;}
-}
-
-let currentSign = 0;
-function buildZodiacGrids(){
- const hero=document.getElementById('hero-zodiac');
- const tabs=document.getElementById('sign-tabs');
- if(hero) hero.innerHTML=SIGNS.map((s,i)=>`<div class="zodiac-card" data-sign="${i}" onclick="goToSign(${i})"><span class="z-symbol">${ZSYM[i]}</span><span class="z-name">${s.name}</span></div>`).join('');
- if(tabs) tabs.innerHTML=SIGNS.map((s,i)=>`<div class="sign-tab${i===0?' active':''}" data-sign="${i}" onclick="selectSign(${i})"><span class="st-sym">${ZSYM[i]}</span><span class="st-name">${s.name}</span></div>`).join('');
-}
-
-/* ===== GERÇEK TRANSİT GÜNLÜK BURÇ ÜRETECİ (solar house, her gün değişir) ===== */
-function _dtEcl(A,b,t){var v=(b===A.Body.Moon)?A.GeoMoon(t):A.GeoVector(b,t,true);var l=A.SphereFromVector(A.RotateVector(A.Rotation_EQJ_ECT(t),v)).lon;return ((l%360)+360)%360;}
-window._dailyTransit=function(){
- var A=window.Astronomy; if(!A) return null;
- var t=A.MakeTime(new Date());
- var P={Sun:A.Body.Sun,Moon:A.Body.Moon,Mercury:A.Body.Mercury,Venus:A.Body.Venus,Mars:A.Body.Mars,Jupiter:A.Body.Jupiter};
- var L={}; for(var k in P) L[k]=_dtEcl(A,P[k],t);
- var sgn=function(l){return Math.floor((((l%360)+360)%360)/30);};
- var S={}; for(var k2 in L) S[k2]=sgn(L[k2]);
- var e=(((L.Moon-L.Sun)%360)+360)%360;
- var phases=['Yeni Ay','Büyüyen Hilal','İlk Dördün','Büyüyen Şişkin Ay','Dolunay','Küçülen Şişkin Ay','Son Dördün','Küçülen Hilal'];
- var ph=phases[Math.floor(((e+22.5)%360)/45)];
- var PN={'Yeni Ay':'yeni bir niyet ekmek için uygun','Büyüyen Hilal':'yeni başlayanı beslemek için iyi','İlk Dördün':'harekete geçme ve engel aşma zamanı','Büyüyen Şişkin Ay':'ayrıntıları ayarlamaya odaklan','Dolunay':'bir şey doruğa ulaşıyor, farkındalık önemli','Küçülen Şişkin Ay':'paylaşmak ve olgunlaştırmak için uygun','Son Dördün':'gözden geçir ve gereksizi bırak','Küçülen Hilal':'dinlen, topla ve içe dön'}[ph];
- var HT=['','kendine ve yeni başlangıçlara','paraya ve güven hissine','iletişime ve yakın çevrene','eve ve aileye','aşka, keyfe ve yaratıcılığa','işe, rutine ve sağlığa','ilişkilere ve ortaklıklara','derinliğe ve dönüşüme','öğrenmeye, seyahate ve anlama','kariyere ve görünürlüğe','arkadaşlara ve hedeflere','içsel dünyaya ve dinlenmeye'];
- var LOVE=['','kendini gösterme ve çekim öne çıkıyor','değer ve güven ilişkinin merkezinde','konuşarak yakınlaşma günü','duygusal, sıcak bir ev havası','flört, oyun ve romantizm yüksek','küçük jestlerle özenle sevme','ortaklık ve karşılıklılık ön planda','yoğun, derin bir çekim mümkün','ortak maceralar bağı güçlendirir','ilişkiye ciddiyet ve emek','arkadaşça, özgür bir yakınlık','sezgisel, şefkatli bir bağ'];
- var MONEY=['','kişisel girişimlerin öne çıkıyor','gelir ve bütçede net ol','anlaşma ve iletişim iş getirebilir','ev/aile temelli mali konular','yaratıcı iş kazanç kapısı','iş rutini ve verimlilik günü','ortaklık ve iş birliği önemli','ortak kaynaklar, borç-alacakta dikkat','uzak/eğitim bağlantılı fırsat','kariyer hamlesi için güçlü zaman','ağın ve hedeflerin kazandırır','arka planda hazırlan, acele etme'];
- var DIR=['','kendini yeniden tanımlıyorsun','sağlam bir temel kuruyorsun','merak seni ileri taşıyor','köklerin sana güç veriyor','kalbinin sesini takip et','düzen ve sağlık öncelik','ilişkiler seni büyütüyor','derin bir dönüşüm içindesin','ufkunu genişletiyorsun','hedeflerine tırmanıyorsun','geleceğini tasarlıyorsun','ruhunu dinlendirme zamanı'];
- var Hf=function(planetSign,signI){return ((planetSign-signI+12)%12)+1;};
- var out=[];
- for(var i=0;i<12;i++){
- var mh=Hf(S.Moon,i),vh=Hf(S.Venus,i),ah=Hf(S.Mars,i),sh=Hf(S.Sun,i);
- out.push({
- genel:'Bugün Ay senin '+mh+'. güneş-evinde — enerjin '+HT[mh]+' yöneliyor. '+ph+', '+PN+'.',
- ask:'Venüs bugün '+vh+'. evinde: '+LOVE[vh]+'.',
- para:'Mars '+ah+'. evinde: '+MONEY[ah]+'.',
- gelecek:'Güneş bu dönem '+sh+'. evinde — odağın '+HT[sh]+'; '+DIR[sh]+'.'
- });
- }
- return out;
-};
-
-function buildReadings(){
- const container = document.getElementById('readings-container');
- const today = new Date();
- const dateStr = today.toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});
- const DT = (typeof window._dailyTransit==='function') ? window._dailyTransit() : null;
- container.innerHTML = SIGNS.map((s,i)=>{
- const r = (DT&&DT[i]) ? DT[i] : READINGS[i];
- return `<div class="daily-reading${i===0?' active':''}" id="reading-${i}">
- <div class="reading-header">
- <div class="reading-sign-sym">${ZSYM[i]}</div>
- <div class="reading-sign-info">
- <h3>${s.name} • ${s.element}</h3>
- <div class="dates">${s.dates} • Yönetici Gezegen: ${s.ruler}</div>
- <span class="reading-today">${dateStr}</span>
- </div>
- </div>
- <div class="reading-general"><h4>✦ Genel Enerji</h4><p>${r.genel}</p></div>
- <div class="reading-grid">
- <div class="reading-card"><span class="rc-icon">${ICON.love}</span><h4>Aşk</h4><p>${r.ask}</p></div>
- <div class="reading-card"><span class="rc-icon">${ICON.money}</span><h4>Para &amp; Kariyer</h4><p>${r.para}</p></div>
- </div>
- <div class="reading-card" style="margin-bottom:1rem;"><span class="rc-icon">${ICON.future}</span><h4>Yön &amp; Odak</h4><p>${r.gelecek}</p></div>
- <div class="reading-cta">
- <p>Aklında belirli bir soru mu var? Haritanla birlikte sor, sana özel yanıtlansın.</p>
- <a href="/soru-sor" class="btn-gold" style="font-size:0.85rem;padding:0.7rem 1.8rem;">Aklındaki soruyu sor →</a>
- 
- </div>
- </div>`;
- }).join('');
-}
-function selectSign(idx){
- currentSign = idx;
- document.querySelectorAll('.sign-tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
- document.querySelectorAll('.daily-reading').forEach((rd,i)=>rd.classList.toggle('active',i===idx));
-}
-function goToSign(idx){
- document.getElementById('burc').scrollIntoView({behavior:'smooth'});
- setTimeout(()=>selectSign(idx),600);
-}
-function getSunSign(month,day){
- const ranges=[[3,21,0],[4,20,1],[5,21,2],[6,21,3],[7,23,4],[8,23,5],[9,23,6],[10,23,7],[11,22,8],[12,22,9],[1,20,10],[2,19,11],[3,20,11]];
- for(let i=0;i<ranges.length-1;i++){
- if((month===ranges[i][0]&&day>=ranges[i][1])||(month===ranges[i+1][0]&&day<ranges[i+1][1])) return ranges[i][2];
- }
- return 0;
-}
-// ── Jean Meeus "Astronomical Algorithms" — tarayıcı içi tam hesap ──────────
-(function(){
- const R=Math.PI/180,D=180/Math.PI;
- function m360(x){return((x%360)+360)%360;}
- function jd(yr,mo,dy,utH){let y=yr,m=mo;if(m<=2){y--;m+=12;}const A=Math.floor(y/100);const B=2-A+Math.floor(A/4);return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+dy+B-1524.5+utH/24;}
- function lastSunday(yr,mo){const ld=new Date(Date.UTC(yr,mo,0));return ld.getUTCDate()-ld.getUTCDay();} // ayın son Pazar günü
- function tzTR(yr,mo,dy){if(yr>2016||(yr===2016&&mo>=9))return 3;if(mo>=4&&mo<=9)return 3;if(mo>=11||mo<=2)return 2;if(mo===3)return dy>=lastSunday(yr,3)?3:2;if(mo===10)return dy>=lastSunday(yr,10)?2:3;return 3;} // FIX 2026-07-10: sabit gün>=26 yerine gerçek son Pazar
- function sunLon(J){const T=(J-2451545)/36525;const L0=m360(280.46646+36000.76983*T+0.0003032*T*T);const M=m360(357.52911+35999.05029*T-0.0001537*T*T);const Mr=M*R;const C=(1.914602-0.004817*T-0.000014*T*T)*Math.sin(Mr)+(0.019993-0.000101*T)*Math.sin(2*Mr)+0.000289*Math.sin(3*Mr);const sl=m360(L0+C);const om=m360(125.04-1934.136*T);return m360(sl-0.00569-0.00478*Math.sin(om*R));}
- function moonLon(J){
- const T=(J-2451545)/36525,T2=T*T,T3=T2*T,T4=T3*T;
- const Lp=m360(218.3164477+481267.88123421*T-0.0015786*T2+T3/538841-T4/65194000);
- const Dv=m360(297.8501921+445267.1114034*T-0.0018819*T2+T3/545868-T4/113065000);
- const Mv=m360(357.5291092+35999.0502909*T-0.0001536*T2+T3/24490000);
- const Mp=m360(134.9633964+477198.8675055*T+0.0087414*T2+T3/69699-T4/14712000);
- const F=m360(93.2720950+483202.0175233*T-0.0036539*T2-T3/3526000+T4/863310000);
- const E=1-0.002516*T-0.0000074*T2,E2=E*E;
- const TR=[[0,0,1,0,1,6288774],[2,0,-1,0,1,1274027],[2,0,0,0,1,658314],[0,0,2,0,1,213618],[0,1,0,0,E,-185116],[0,0,0,2,1,-114332],[2,0,-2,0,1,58793],[2,-1,-1,0,E,57066],[2,0,1,0,1,53322],[2,-1,0,0,E,45758],[0,1,-1,0,E,-40923],[1,0,0,0,1,-34720],[0,1,1,0,E,-30383],[2,0,0,-2,1,15327],[0,0,1,2,1,-12528],[0,0,1,-2,1,10980],[4,0,-1,0,1,10675],[0,0,3,0,1,10034],[4,0,-2,0,1,8548],[2,1,-1,0,E,-7888],[2,1,0,0,E,-6766],[1,0,-1,0,1,-5163],[1,1,0,0,E,4987],[2,-1,1,0,E,4036],[2,0,2,0,1,3994],[4,0,0,0,1,3861],[2,0,-3,0,1,3665],[0,1,-2,0,E,-2689],[2,0,-1,2,1,-2602],[2,-1,-2,0,E,2390],[1,0,1,0,1,-2348],[2,-2,0,0,1,2236],[0,1,2,0,E,-2120],[0,2,0,0,E2,-2069],[2,-2,-1,0,1,2048],[2,0,1,-2,1,-1773],[2,0,0,2,1,-1595],[4,-1,-1,0,E,1215],[0,0,2,2,1,-1110],[3,0,-1,0,1,-892],[2,1,1,0,E,-810],[4,-1,-2,0,E,759],[0,2,-1,0,E2,-713],[2,2,-1,0,E,-700],[2,1,-2,0,E,691],[2,-1,0,-2,E,596],[4,0,1,0,1,549],[0,0,4,0,1,537],[4,-1,0,0,E,520],[1,0,-2,0,1,-487],[2,1,0,-2,E,-399],[0,0,2,-2,1,-381],[1,1,1,0,E,351],[3,0,-2,0,1,-340],[4,0,-3,0,1,330],[2,-1,2,0,E,327],[0,2,1,0,E2,-323],[1,1,-1,0,E,299],[2,0,3,0,1,294]];
- const Dr=Dv*R,Mr_=Mv*R,Mpr=Mp*R,Fr=F*R;
- let sl=0;for(const[d,mv,mp,f,ef,c]of TR)sl+=ef*c*Math.sin(d*Dr+mv*Mr_+mp*Mpr+f*Fr);
- return m360(Lp+sl/1e6);
- }
- function obl(T){return 23.4392911111-(46.8150/3600)*T-(0.00059/3600)*T*T+(0.001813/3600)*T*T*T;}
- function gst(J){const T=(J-2451545)/36525;return m360(280.46061837+360.98564736629*(J-2451545)+0.000387933*T*T-T*T*T/38710000);}
- function ascLon(ramc,lat,eps){const r=ramc*R,l=lat*R,e=eps*R;return m360(Math.atan2(Math.cos(r),-(Math.sin(r)*Math.cos(e)+Math.tan(l)*Math.sin(e)))*D);} // FIX 2026-07-10: eski hali Yükselen yerine Alçalan (180° ters) veriyordu
- window._calcNatalLocal=function(year,month,day,hour,minute,lat,lng){
- const tz=tzTR(year,month,day);
- let utH=hour+minute/60-tz,dy=day;
- if(utH<0){utH+=24;dy--;}if(utH>=24){utH-=24;dy++;}
- const J=jd(year,month,dy,utH),T=(J-2451545)/36525,eps=obl(T);
- const sLon=sunLon(J),mLon=moonLon(J);
- const lst=m360(gst(J)+lng);
- const aLon=ascLon(lst,lat,eps);
- return{sunIdx:Math.floor(sLon/30)%12,moonIdx:Math.floor(mLon/30)%12,risingIdx:Math.floor(aLon/30)%12};
- };
-})();
-function getMoonSign(y,m,d){return 0;} // artık kullanılmıyor — _calcNatalLocal kullan
-function getRisingSign(h,mn,mo){return 0;} // artık kullanılmıyor — _calcNatalLocal kullan
-const SIGN_KEYWORDS=['Öncü, cesur, ateşli','Kararlı, güvenilir, duyusal','Çok yönlü, meraklı, iletişimci','Sezgisel, koruyucu, duygusal','Yaratıcı, cömert, karizmatik','Analitik, titiz, yardımsever','Dengeli, adil, zarif','Derin, dönüştürücü, yoğun','Özgür, iyimser, filozofik','Disiplinli, hırslı, güvenilir','Yenilikçi, bağımsız, vizyoner','Sezgisel, empati kuran, yaratıcı'];
-const PLANET_READINGS={yukselen:['dış dünyaya yansıttığın yüzde'],ay:['duygusal dünyanda ve içgüdülerinde']};
-async function calculateChart(){
- const name=document.getElementById('f-name').value||'Sen';
- const dateVal=document.getElementById('f-date').value;
- const timeVal=document.getElementById('f-time').value;
- const il=document.getElementById('f-il').value;
- const ilce=document.getElementById('f-ilce').value;
- if(!dateVal){alert('Lütfen doğum tarihini gir.');return;}
- const [year,month,day]=dateVal.split('-').map(Number);
- let hour=12,minute=0;
- if(timeVal){[hour,minute]=timeVal.split(':').map(Number);}
- let sunIdx,moonIdx,risingIdx;
- const api=USE_API?await fetchNatal({name,year,month,day,hour,minute,il}):null;
- if(api){sunIdx=api.sunIdx;moonIdx=api.moonIdx;risingIdx=timeVal?api.risingIdx:null;}
- else{
-   // Yerel fallback (API/CORS yoksa) astronomy motorunu ister; `defer` script
-   // henüz yüklenmemişse null döner ve hesaplama sessizce çökerdi. Motor hazır
-   // olana kadar ~4sn bekle, sonra dene.
-   if(!window.Astronomy){await new Promise(res=>{let n=0;const iv=setInterval(()=>{if(window.Astronomy||++n>40){clearInterval(iv);res();}},100);});}
-   const c=IL_COORDS[il]||IL_COORDS.Istanbul;
-   const loc=window._calcNatalLocal(year,month,day,hour,minute,c[0],c[1]);
-   if(!loc){alert('Hesaplama motoru henüz hazırlanıyor — bir saniye sonra tekrar dener misin?');return;}
-   sunIdx=loc.sunIdx;moonIdx=loc.moonIdx;risingIdx=timeVal?loc.risingIdx:null;
- }
- const sun=SIGNS[sunIdx],moon=SIGNS[moonIdx];
- const rising=risingIdx!==null&&risingIdx!=null?SIGNS[risingIdx]:null;
- const r=READINGS[sunIdx];
- // api!=null => gerçek Sorbi.Api (NASA JPL/Skyfield) servisinden geldi: kişiselleştirilmiş
- // Reading/Inspiration/DominantElement + gerçek Meaning metinleri var. Yoksa (yerel Meeus
- // fallback) statik SIGN_KEYWORDS/READINGS içeriğine düşülüyor.
- const sunDesc=api&&api.sunMeaning?api.sunMeaning:SIGN_KEYWORDS[sunIdx];
- const moonDesc=api&&api.moonMeaning?api.moonMeaning:SIGN_KEYWORDS[moonIdx];
- const risingDesc=rising?(api&&api.risingMeaning?api.risingMeaning:SIGN_KEYWORDS[risingIdx]):'';
- const mainReading=api&&api.reading?api.reading:r.genel;
- const dateStr=new Date().toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});
- const resultEl=document.getElementById('chart-result');
- resultEl.innerHTML=`
- <div class="chart-result-header">
- <h3>${name}'nin Doğum Haritası</h3>
- <p>${il?il+', ':''} ${ilce?ilce+' — ':''} ${dateVal?new Date(dateVal).toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'}):''} ${timeVal?'/ '+timeVal:''}</p>
- </div>
- <div class="chart-planets">
- <div class="planet-card"><div class="pc-planet">${ICON.sun} Güneş Burcu</div><div class="pc-sign">${ZSYM[sunIdx]}</div><div class="pc-name">${sun.name}</div><div class="pc-desc">${sunDesc}</div></div>
- <div class="planet-card"><div class="pc-planet">${ICON.moon} Ay Burcu</div><div class="pc-sign">${ZSYM[moonIdx]}</div><div class="pc-name">${moon.name}</div><div class="pc-desc">${moonDesc}</div></div>
- ${rising?`<div class="planet-card"><div class="pc-planet">${ICON.asc} Yükselen</div><div class="pc-sign">${ZSYM[risingIdx]}</div><div class="pc-name">${rising.name}</div><div class="pc-desc">${risingDesc}</div></div>`:`<div class="planet-card" style="border-style:dashed;opacity:0.5;"><div class="pc-planet">${ICON.asc} Yükselen</div><div class="pc-sign"><span class="pc-sign-q">?</span></div><div class="pc-name">Bilinmiyor</div><div class="pc-desc">Doğum saati gerekli</div></div>`}
- </div>
- ${api&&api.dominantElement?`<div style="display:flex;align-items:center;gap:0.7rem;background:rgba(201,169,98,0.06);border:1px solid var(--border-gold);border-radius:var(--radius);padding:0.9rem 1.1rem;margin-bottom:1rem;">
- <span style="font-size:1.4rem;">${api.dominantElementEmoji||'✦'}</span>
- <p style="font-size:0.82rem;color:var(--text-muted);line-height:1.6;"><strong style="color:var(--gold-light);">Baskın Element: ${api.dominantElement}</strong> — ${api.elementPersonality||''}</p>
- </div>`:''}
- <div style="background:var(--gold2);border:1px solid var(--border-gold);border-radius:var(--radius);padding:1.2rem;margin-bottom:1rem;">
- <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);margin-bottom:0.8rem;">✦ Kişisel yorumun — ${dateStr}</h4>
- <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.75;"><strong style="color:var(--text-light);">Güneş Burcu ${sun.name} olarak</strong> — ${mainReading}</p>
- ${api&&api.inspiration?`<p style="font-size:0.8rem;color:var(--gold-light);font-style:italic;margin-top:0.7rem;">"${api.inspiration}"</p>`:''}
- </div>
- <div class="chart-daily-grid">
- <div class="chart-daily-card"><div class="cdc-label">${ICON.love} Aşk &amp; İlişkiler</div><p>${r.ask}</p></div>
- <div class="chart-daily-card"><div class="cdc-label">${ICON.money} Para &amp; Kariyer</div><p>${r.para}</p></div>
- </div>
- <div class="chart-daily-card" style="margin-bottom:1rem;"><div class="cdc-label">${ICON.future} Yön &amp; Odak</div><p>${r.gelecek}</p></div>
- ${rising?`<div style="background:rgba(201,169,98,0.06);border:1px solid var(--border-gold);border-radius:var(--radius);padding:1rem;margin-bottom:1rem;"><p style="font-size:0.82rem;color:var(--text-muted);line-height:1.7;"><strong style="color:var(--gold-light);">Yükselen ${rising.name} olarak</strong> — dünyaya ${PLANET_READINGS.yukselen[0]} farklı bir renk katıyorsun. <strong style="color:var(--gold-light);">Ay ${moon.name}'de</strong> — ${PLANET_READINGS.ay[0]} derinlik taşıyorsun.</p></div>`:''}
- <div class="chart-result-cta">
- <p>Bu sadece başlangıç — günlük yorumunu her sabah Sorbi uygulamasında al, ya da aklındaki soruyu haritanla birlikte sor.</p>
- <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:center;">
- <a href="#uygulama" class="btn-gold" style="font-size:0.85rem;padding:0.7rem 1.8rem;">Sorbi'yi Al →</a>
- <a href="/soru-sor" class="btn-ghost" style="font-size:0.85rem;padding:0.7rem 1.8rem;">Aklındaki soruyu sor →</a>
- 
- </div>
- </div>
- ${api&&api.engine&&!/keplerian/i.test(api.engine)?`<p style="text-align:center;font-size:0.68rem;color:var(--text-faint,var(--text-muted));opacity:0.6;margin-top:0.8rem;">Sorbi'nin gerçek astroloji motoru (NASA JPL efemeris) ile hesaplandı</p>`:''}`;
- if(timeVal&&window.Astronomy&&il&&il!=='Other'&&IL_COORDS[il]){try{const _c=IL_COORDS[il];const _fc=window._fullChart({y:year,mo:month,d:day,h:hour,mi:minute,lat:_c[0],lon:_c[1],tz:'Europe/Istanbul'});window.__lastChart={ch:_fc,name:name,birth:(il?il+' · ':'')+(dateVal||'')+(timeVal?' · '+timeVal:'')};resultEl.insertAdjacentHTML('beforeend',window._renderFullChartHTML(_fc,name));}catch(_e){console.warn('tam harita',_e);}}
- resultEl.classList.add('visible');
- resultEl.scrollIntoView({behavior:'smooth',block:'center'});
-}
-function toggleMobileNav(){document.getElementById('mobile-nav').classList.toggle('open');}
-function updateNav(){
- const nav=document.getElementById('main-nav');
- const navH=nav.offsetHeight||72;
- const scrolled=window.scrollY>60;
- let inLight=false;
- [].forEach(id=>{
- const el=document.getElementById(id);
- if(el){const rc=el.getBoundingClientRect();if(rc.top<=navH&&rc.bottom>navH) inLight=true;}
- });
- if(inLight){nav.classList.add('light-section');nav.classList.remove('scrolled');}
- else{nav.classList.remove('light-section');nav.classList.toggle('scrolled',scrolled);}
-}
-window.addEventListener('scroll',updateNav,{passive:true});
-function buildStars(){
- const c=document.getElementById('hero-stars');
- for(let i=0;i<55;i++){
- const s=document.createElement('span');
- s.className='hero-star';
- s.textContent=Math.random()>0.5?'✦':'·';
- s.style.left=Math.random()*100+'%';
- s.style.top=Math.random()*100+'%';
- s.style.fontSize=(8+Math.random()*14)+'px';
- s.style.animation=`twinkle ${(2+Math.random()*6).toFixed(1)}s ${(Math.random()*4).toFixed(1)}s infinite`;
- c.appendChild(s);
- }
-}
-function initFadeIn(){
- const obs=new IntersectionObserver((entries)=>{
- entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
- },{threshold:0.1});
- document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
-}
-document.addEventListener('DOMContentLoaded',()=>{
- try{buildStars();}catch(e){}
- try{buildZodiacGrids();}catch(e){}
- try{buildReadings();selectSign(0);}catch(e){}
- if(!window.Astronomy){var _dtT=0,_dtIv=setInterval(function(){if(window.Astronomy){try{buildReadings();selectSign(currentSign);}catch(e){}clearInterval(_dtIv);}else if(++_dtT>40){clearInterval(_dtIv);}},300);}
- try{initFadeIn();}catch(e){}
- updateNav();
-});
-</script>
-
-<script>
-/* ===== TAM NATAL HARİTA — doğrulanmış motor (Swiss Ephemeris ile birebir) ===== */
-(function(){
- const SIGNS=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
- const S3=['Koç','Boğ','İki','Yen','Asl','Baş','Ter','Akr','Yay','Oğl','Kov','Bal'];
- const norm=d=>((d%360)+360)%360,RAD=Math.PI/180,signOf=l=>Math.floor(norm(l)/30);
- function fmt(l){l=norm(l);const s=signOf(l),g=l-s*30,d=Math.floor(g);let m=Math.round((g-d)*60),dd=d;if(m===60){m=0;dd++;}return dd+'°'+String(m).padStart(2,'0')+' '+SIGNS[s];}
- function tzOff(dt,tz){const p=new Intl.DateTimeFormat('en-US',{timeZone:tz,hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(dt).reduce((a,x)=>(a[x.type]=x.value,a),{});const h=p.hour==='24'?0:+p.hour;return(Date.UTC(+p.year,+p.month-1,+p.day,h,+p.minute,+p.second)-dt.getTime())/60000;}
- function toUTC(y,mo,d,h,mi,tz){let g=Date.UTC(y,mo-1,d,h,mi,0);for(let i=0;i<3;i++){const o=tzOff(new Date(g),tz),c=Date.UTC(y,mo-1,d,h,mi,0)-o*60000;if(c===g)break;g=c;}return new Date(g);}
- function ecl(A,b,t){let v=(b===A.Body.Moon)?A.GeoMoon(t):A.GeoVector(b,t,true);return norm(A.SphereFromVector(A.RotateVector(A.Rotation_EQJ_ECT(t),v)).lon);}
- function obl(t){const T=t.tt/36525;return(84381.448-46.815*T-0.00059*T*T+0.001813*T*T*T)/3600;}
- function ascf(r,e,lat){return norm(Math.atan2(Math.cos(r*RAD),-(Math.sin(r*RAD)*Math.cos(e*RAD)+Math.tan(lat*RAD)*Math.sin(e*RAD)))/RAD);}
- function mcf(r,e){return norm(Math.atan2(Math.sin(r*RAD),Math.cos(r*RAD)*Math.cos(e*RAD))/RAD);}
- function plac(r,e,lat,off,fr){let ra=norm(r+off);for(let i=0;i<80;i++){let lon=norm(Math.atan2(Math.sin(ra*RAD),Math.cos(ra*RAD)*Math.cos(e*RAD))/RAD);const dec=Math.asin(Math.sin(e*RAD)*Math.sin(lon*RAD))/RAD,ad=Math.asin(Math.tan(lat*RAD)*Math.tan(dec*RAD))/RAD,nr=norm(r+off+fr*ad);if(Math.abs(((nr-ra+540)%360)-180)<1e-8){ra=nr;break;}ra=nr;}return norm(Math.atan2(Math.sin(ra*RAD),Math.cos(ra*RAD)*Math.cos(e*RAD))/RAD);}
- const PL=A=>[['Güneş','Gü',A.Body.Sun],['Ay','Ay',A.Body.Moon],['Merkür','Me',A.Body.Mercury],['Venüs','Ve',A.Body.Venus],['Mars','Ma',A.Body.Mars],['Jüpiter','Jü',A.Body.Jupiter],['Satürn','Sa',A.Body.Saturn],['Uranüs','Ur',A.Body.Uranus],['Neptün','Ne',A.Body.Neptune],['Plüton','Pl',A.Body.Pluto]];
- const STARS=[['Algol',47.04222,40.95565],['Aldebaran',68.98016,16.5093],['Rigel',78.63446,-8.20164],['Capella',79.17232,45.99799],['Bellatrix',81.28276,6.3497],['Betelgeuse',88.79294,7.40706],['Sirius',101.28716,-16.71612],['Castor',113.64947,31.88828],['Pollux',116.32897,28.0262],['Regulus',152.09296,11.96722],['Spica',201.29825,-11.16124],['Arcturus',213.9153,19.18241],['Antares',247.35192,-26.432],['Vega',279.23474,38.78369],['Altair',297.69582,8.86832],['Fomalhaut',344.41269,-29.62224],['Pleiades',56.87124,24.10523],['Denebola',177.26491,14.57206]];
- const STARNAT={Algol:'yoğun tutku',Aldebaran:'onur, cesaret',Rigel:'teknik yükseliş',Capella:'meraklı zihin',Bellatrix:'hızlı zekâ',Betelgeuse:'başarı, güç',Sirius:'büyük hedefler, ün',Castor:'zekâ, iletişim',Pollux:'kararlılık',Regulus:'liderlik, onur',Spica:'yetenek, bereket',Arcturus:'öncülük, refah',Antares:'yoğunluk, dönüşüm',Vega:'sanat, çekicilik',Altair:'cesaret, hırs',Fomalhaut:'ilham, idealizm',Pleiades:'vizyon, yaratıcılık',Denebola:'cesur kararlar'};
- const ASP=[[0,'Kavuşum',8],[60,'Altmışlık',5],[90,'Kare',7],[120,'Üçgen',7],[180,'Karşıt',8]];
- function houseOf(l,c){l=norm(l);for(let i=1;i<=12;i++){const a=c[i],b=c[i===12?1:i+1],sp=norm(b-a);if(norm(l-a)<sp||sp===0)return i;}return 1;}
- function starLon(A,t,ra,dec){A.DefineStar(A.Body.Star1,ra/15,dec,1000);return norm(A.SphereFromVector(A.RotateVector(A.Rotation_EQJ_ECT(t),A.GeoVector(A.Body.Star1,t,false))).lon);}
- window._fullChart=function(p){
- const A=window.Astronomy;const utc=toUTC(p.y,p.mo,p.d,p.h,p.mi,p.tz),t=A.MakeTime(utc),e=obl(t);
- const ramc=norm(A.SiderealTime(t)*15+p.lon),asc=ascf(ramc,e,p.lat),mc=mcf(ramc,e);
- const pls=PL(A).map(([n,ab,b])=>{const l=ecl(A,b,t);let rx=false;if(n!=='Güneş'&&n!=='Ay'){const t2=A.MakeTime(new Date(utc.getTime()+3600e3));let dl=ecl(A,b,t2)-l;if(dl>180)dl-=360;if(dl<-180)dl+=360;rx=dl<0;}return{n,ab,lon:l,rx};});
- let c=new Array(13).fill(0);c[1]=asc;c[10]=mc;c[4]=norm(mc+180);c[7]=norm(asc+180);c[11]=plac(ramc,e,p.lat,30,1/3);c[12]=plac(ramc,e,p.lat,60,2/3);c[2]=plac(ramc,e,p.lat,120,2/3);c[3]=plac(ramc,e,p.lat,150,1/3);c[5]=norm(c[11]+180);c[6]=norm(c[12]+180);c[8]=norm(c[2]+180);c[9]=norm(c[3]+180);
- pls.forEach(x=>x.house=houseOf(x.lon,c));
- const asps=[];for(let i=0;i<pls.length;i++)for(let j=i+1;j<pls.length;j++){let df=Math.abs(norm(pls[i].lon-pls[j].lon));if(df>180)df=360-df;for(const[a,nm,orb]of ASP){if(Math.abs(df-a)<=orb){asps.push({a:pls[i].n,b:pls[j].n,nm,orb:Math.abs(df-a)});break;}}}
- const fs=[];STARS.forEach(([nm,ra,dec])=>{const sl=starLon(A,t,ra,dec);const pts=pls.map(x=>({name:x.n,lon:x.lon})).concat([{name:'Yükselen',lon:asc},{name:'MC',lon:mc}]);pts.forEach(np=>{let df=Math.abs(norm(sl-np.lon));if(df>180)df=360-df;const lum=(np.name==='Güneş'||np.name==='Ay'||np.name==='Yükselen'||np.name==='MC');if(df<=(lum?2.0:1.5))fs.push({star:nm,point:np.name,orb:df,nat:STARNAT[nm]});});});
- fs.sort((a,b)=>a.orb-b.orb);
- return{pls,asc,mc,c,asps,fs};
- };
- function wheel(ch){const cx=150,cy=150,rO=142,rS=120,rP=94,asc=ch.asc,pos=(l,r)=>{const th=norm(l-asc)*RAD;return[cx-r*Math.cos(th),cy+r*Math.sin(th)];};
- let s='<svg viewBox="0 0 300 300" style="width:100%;max-width:300px;height:auto;margin:0 auto;">';
- s+='<circle cx="150" cy="150" r="142" fill="none" stroke="#C9A962" stroke-width="1.1"/><circle cx="150" cy="150" r="120" fill="none" stroke="rgba(201,169,98,.4)"/><circle cx="150" cy="150" r="70" fill="none" stroke="rgba(232,228,218,.14)"/>';
- for(let i=0;i<12;i++){const[x1,y1]=pos(i*30,rS),[x2,y2]=pos(i*30,rO);s+='<line x1="'+x1.toFixed(1)+'" y1="'+y1.toFixed(1)+'" x2="'+x2.toFixed(1)+'" y2="'+y2.toFixed(1)+'" stroke="rgba(201,169,98,.35)"/>';const[lx,ly]=pos(i*30+15,(rS+rO)/2);s+='<text x="'+lx.toFixed(1)+'" y="'+(ly+3).toFixed(1)+'" fill="#A9A396" font-size="8.5" font-family="Inter" text-anchor="middle">'+S3[i]+'</text>';}
- for(let i=1;i<=12;i++){const mj=(i===1||i===4||i===7||i===10),[x2,y2]=pos(ch.c[i],rP+14);s+='<line x1="150" y1="150" x2="'+x2.toFixed(1)+'" y2="'+y2.toFixed(1)+'" stroke="'+(mj?'rgba(196,116,78,.75)':'rgba(232,228,218,.14)')+'" stroke-width="'+(mj?1.3:.7)+'"/>';}
- const so=[...ch.pls].sort((a,b)=>norm(a.lon-asc)-norm(b.lon-asc));let last=-99,lay=0;
- so.forEach(p=>{const th=norm(p.lon-asc);if(th-last<11)lay=(lay+1)%3;else lay=0;last=th;const[px,py]=pos(p.lon,rP-lay*15);s+='<circle cx="'+px.toFixed(1)+'" cy="'+py.toFixed(1)+'" r="9" fill="#0B0E15" stroke="#C9A962"/><text x="'+px.toFixed(1)+'" y="'+(py+3).toFixed(1)+'" fill="#F4E4BA" font-size="8" font-family="Inter" font-weight="600" text-anchor="middle">'+p.ab+'</text>';});
- s+='<text x="6" y="153" fill="#C4744E" font-size="9" font-weight="600">ASC</text><text x="140" y="14" fill="#C4744E" font-size="9" font-weight="600">MC</text></svg>';return s;
- }
- window._renderFullChartHTML=function(ch,name){
- const T='rgba(232,228,218,.85)',M='rgba(232,228,218,.5)';
- let h='<div style="margin-top:1.6rem;padding-top:1.4rem;border-top:1px solid rgba(201,169,98,.18);">';
- h+='<h4 style="font-family:\'Playfair Display\',serif;font-size:1.25rem;color:#C9A962;text-align:center;margin-bottom:1rem;">Tam Doğum Haritan</h4>';
- h+='<div style="display:grid;grid-template-columns:300px 1fr;gap:1.2rem;align-items:start;">';
- h+='<div>'+wheel(ch)+'</div>';
- h+='<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:.82rem;color:'+T+';"><thead><tr><th style="text-align:left;color:'+M+';font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;padding:5px 6px;border-bottom:1px solid rgba(201,169,98,.2);">Gezegen</th><th style="text-align:left;color:'+M+';font-size:.68rem;text-transform:uppercase;padding:5px 6px;border-bottom:1px solid rgba(201,169,98,.2);">Konum</th><th style="color:'+M+';font-size:.68rem;padding:5px 6px;border-bottom:1px solid rgba(201,169,98,.2);">Ev</th></tr></thead><tbody>';
- ch.pls.forEach(p=>{h+='<tr><td style="padding:5px 6px;border-bottom:1px solid rgba(201,169,98,.08);color:#E8E4DA;font-weight:600;">'+p.n+(p.rx?' <span style="color:#C4744E;font-weight:700;">R</span>':'')+'</td><td style="padding:5px 6px;border-bottom:1px solid rgba(201,169,98,.08);">'+fmt(p.lon)+'</td><td style="padding:5px 6px;border-bottom:1px solid rgba(201,169,98,.08);text-align:center;">'+p.house+'</td></tr>';});
- h+='<tr><td style="padding:5px 6px;color:#C4744E;font-weight:600;">Yükselen</td><td style="padding:5px 6px;">'+fmt(ch.asc)+'</td><td style="text-align:center;">1</td></tr><tr><td style="padding:5px 6px;color:#C4744E;font-weight:600;">MC</td><td style="padding:5px 6px;">'+fmt(ch.mc)+'</td><td style="text-align:center;">10</td></tr>';
- h+='</tbody></table></div></div>';
- if(ch.asps.length){h+='<div style="margin-top:1rem;font-size:.8rem;color:'+T+';line-height:1.8;"><span style="color:#C9A962;font-family:\'Playfair Display\',serif;font-size:1.05rem;">Başlıca açılar:</span> '+ch.asps.slice(0,6).map(a=>a.a+'–'+a.b+' '+a.nm.toLowerCase()).join(' · ')+'</div>';}
- if(ch.fs.length){h+='<div style="margin-top:.7rem;font-size:.8rem;color:'+T+';line-height:1.8;"><span style="color:#C9A962;font-family:\'Playfair Display\',serif;font-size:1.05rem;">Sabit yıldızlar:</span> '+ch.fs.slice(0,4).map(f=>f.star+' ('+f.point+', '+f.orb.toFixed(1)+'°): '+f.nat).join(' · ')+'</div>';}
- h+='<div style="text-align:center;margin-top:1.1rem;"><button type="button" onclick="_shareChart()" class="btn-gold" style="font-size:.82rem;cursor:pointer;">Haritamı indir (görsel) ↓</button></div>';
- h+='<p style="text-align:center;font-size:.66rem;color:'+M+';margin-top:.9rem;">Swiss Ephemeris hassasiyetinde, tarayıcında hesaplandı. Placidus ev sistemi.</p>';
- h+='</div>';return h;
- };
-})();
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[
-{"@type":"WebSite","name":"Sorbi — astrodefne","url":"https://sorbiapp.com/","image":"https://sorbiapp.com/og-image.png","description":"Swiss Ephemeris hassasiyetinde ücretsiz doğum haritası hesaplama ve astroloji rehberi.","inLanguage":"tr","sameAs":["https://instagram.com/astrodefne","https://x.com/astrodefne"]},
-{"@type":"WebApplication","name":"Ücretsiz Doğum Haritası Hesaplayıcı","applicationCategory":"LifestyleApplication","operatingSystem":"Web","url":"https://sorbiapp.com/#dogum-haritasi"},
-{"@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"Doğum haritası hesaplaması ne kadar doğru?","acceptedAnswer":{"@type":"Answer","text":"Gezegen konumları, yükselen ve ev uçları Swiss Ephemeris hassasiyetinde, gerçek bir efemeris motoruyla hesaplanır. Tarihsel yaz saati de otomatik dikkate alınır."}},
-{"@type":"Question","name":"Doğum saatimi bilmiyorsam olur mu?","acceptedAnswer":{"@type":"Answer","text":"Güneş ve gezegen burçları saatten neredeyse bağımsızdır. Yükselen ve ev yerleşimleri saate bağlıdır; bilinmiyorsa yaklaşık kabul edilir."}}
-]}
-]}
-</script>
-<!-- Cloudflare Web Analytics — cookiesiz/KVKK-dostu. CF panel > Web Analytics'ten aç (kod gerekmez) ya da token'ı aşağıya koy. -->
-<!-- <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"BURAYA_CF_TOKEN"}'></script> -->
-<script>
-window._shareChart=function(){
- var data=window.__lastChart; if(!data||!data.ch){return;}
- var ch=data.ch, name=data.name||'Doğum Haritası', birth=data.birth||'';
- var W=1080,H=1350,cv=document.createElement('canvas');cv.width=W;cv.height=H;var g=cv.getContext('2d');
- if(!g){alert('Tarayıcın görsel oluşturmayı desteklemiyor.');return;}
- g.fillStyle='#0B0E15';g.fillRect(0,0,W,H);
- g.strokeStyle='rgba(201,169,98,.35)';g.lineWidth=3;g.strokeRect(34,34,W-68,H-68);
- g.textAlign='center';g.textBaseline='alphabetic';
- g.fillStyle='#E8E4DA';g.font="600 58px 'Playfair Display', Georgia, serif";g.fillText(name,W/2,150);
- g.fillStyle='#C9A962';g.font="italic 34px 'Playfair Display', Georgia, serif";g.fillText('Doğum Haritası',W/2,198);
- var SIGNS=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
- var S3=['Koç','Boğ','İki','Yen','Asl','Baş','Ter','Akr','Yay','Oğl','Kov','Bal'];
- var sgn=function(l){return Math.floor((((l%360)+360)%360)/30);};
- var b3=[['GÜNEŞ',ch.pls[0].lon],['AY',ch.pls[1].lon],['YÜKSELEN',ch.asc]],bx=[W/2-300,W/2,W/2+300];
- b3.forEach(function(it,i){g.fillStyle='#C9A962';g.font="600 22px Inter, sans-serif";g.fillText(it[0],bx[i],268);g.fillStyle='#E8E4DA';g.font="600 38px 'Playfair Display', serif";g.fillText(SIGNS[sgn(it[1])],bx[i],314);});
- var cx=W/2,cy=800,rO=356,rS=302,rP=228,asc=ch.asc;
- function pos(l,r){var t=((((l-asc)%360)+360)%360)*Math.PI/180;return [cx-r*Math.cos(t),cy+r*Math.sin(t)];}
- g.textAlign='center';g.textBaseline='middle';
- g.strokeStyle='#C9A962';g.lineWidth=2;g.beginPath();g.arc(cx,cy,rO,0,Math.PI*2);g.stroke();
- g.strokeStyle='rgba(201,169,98,.4)';g.beginPath();g.arc(cx,cy,rS,0,Math.PI*2);g.stroke();
- g.strokeStyle='rgba(232,228,218,.12)';g.beginPath();g.arc(cx,cy,176,0,Math.PI*2);g.stroke();
- for(var i=0;i<12;i++){var p1=pos(i*30,rS),p2=pos(i*30,rO);g.strokeStyle='rgba(201,169,98,.35)';g.lineWidth=1;g.beginPath();g.moveTo(p1[0],p1[1]);g.lineTo(p2[0],p2[1]);g.stroke();var lp=pos(i*30+15,(rS+rO)/2);g.fillStyle='#A9A396';g.font="21px Inter, sans-serif";g.fillText(S3[i],lp[0],lp[1]);}
- for(var j=1;j<=12;j++){var mj=(j===1||j===4||j===7||j===10);var e2=pos(ch.c[j],rP+34);g.strokeStyle=mj?'rgba(196,116,78,.8)':'rgba(232,228,218,.14)';g.lineWidth=mj?3:1;g.beginPath();g.moveTo(cx,cy);g.lineTo(e2[0],e2[1]);g.stroke();}
- var so=ch.pls.slice().sort(function(a,b){return ((((a.lon-asc)%360)+360)%360)-((((b.lon-asc)%360)+360)%360);});
- var last=-99,lay=0;
- so.forEach(function(p){var t=(((p.lon-asc)%360)+360)%360;if(t-last<12)lay=(lay+1)%3;else lay=0;last=t;var pp=pos(p.lon,rP-lay*44);g.fillStyle='#12151F';g.strokeStyle='#C9A962';g.lineWidth=2;g.beginPath();g.arc(pp[0],pp[1],25,0,Math.PI*2);g.fill();g.stroke();g.fillStyle='#F4E4BA';g.font="600 21px Inter, sans-serif";g.fillText(p.ab,pp[0],pp[1]);});
- g.textAlign='left';g.fillStyle='#C4744E';g.font="600 22px Inter, sans-serif";g.fillText('ASC',48,cy);
- g.textAlign='center';g.fillStyle='#A9A396';g.font="26px Inter, sans-serif";g.textBaseline='alphabetic';g.fillText(birth,W/2,H-135);
- g.fillStyle='#C9A962';g.font="600 32px 'Playfair Display', serif";g.fillText('sorbiapp.com',W/2,H-98);
- g.fillStyle='#8A8578';g.font="22px Inter, sans-serif";g.fillText('Swiss Ephemeris hassasiyetinde',W/2,H-60);
- try{var url=cv.toDataURL('image/png');var a=document.createElement('a');a.href=url;a.download=(String(name).replace(/[^\w]+/g,'_')||'harita')+'_dogum_haritasi.png';document.body.appendChild(a);a.click();a.remove();}catch(e){alert('Görsel oluşturulamadı.');}
-};
-</script>
-<script>
-window._skyToday=function(){
- var A=window.Astronomy;if(!A)return null;
- var now=A.MakeTime(new Date()),nxt=A.MakeTime(new Date(Date.now()+86400000));
- function el(b,t){var v=(b===A.Body.Moon)?A.GeoMoon(t):A.GeoVector(b,t,true);var l=A.SphereFromVector(A.RotateVector(A.Rotation_EQJ_ECT(t),v)).lon;return((l%360)+360)%360;}
- var SIGNS=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
- var sun=el(A.Body.Sun,now),moon=el(A.Body.Moon,now);
- var e=(((moon-sun)%360)+360)%360;
- var ph=['Yeni Ay','Büyüyen Hilal','İlk Dördün','Büyüyen Şişkin Ay','Dolunay','Küçülen Şişkin Ay','Son Dördün','Küçülen Hilal'][Math.floor(((e+22.5)%360)/45)];
- var RP=[['Merkür',A.Body.Mercury],['Venüs',A.Body.Venus],['Mars',A.Body.Mars],['Jüpiter',A.Body.Jupiter],['Satürn',A.Body.Saturn],['Uranüs',A.Body.Uranus],['Neptün',A.Body.Neptune],['Plüton',A.Body.Pluto]];
- var base=Date.now();
- function stationDir(body){var prev=null;for(var d=0;d<=185;d++){var t=A.MakeTime(new Date(base+d*86400000));var l=el(body,t);if(prev!==null){var dl=l-prev;if(dl>180)dl-=360;if(dl<-180)dl+=360;if(dl>=0)return d;}prev=l;}return null;}
- var retros=[];RP.forEach(function(p){var a=el(p[1],now),b=el(p[1],nxt),dl=b-a;if(dl>180)dl-=360;if(dl<-180)dl+=360;if(dl<0){retros.push({name:p[0],end:stationDir(p[1])});}});
- return {sunSign:SIGNS[Math.floor(sun/30)],moonSign:SIGNS[Math.floor(moon/30)],moonPhase:ph,retros:retros};
-};
-(function(){
- function draw(){
- var el=document.getElementById('skyToday');if(!el)return;
- if(!window.Astronomy){setTimeout(draw,300);return;}
- var s=window._skyToday();if(!s)return;
- var today=new Date().toLocaleDateString('tr-TR',{day:'numeric',month:'long'});
- var chip=function(txt,accent){return '<span style="display:inline-flex;align-items:center;gap:.35rem;background:rgba(11,14,21,0.35);border:1px solid '+(accent?'rgba(212,142,104,.45)':'rgba(201,169,98,.28)')+';border-radius:999px;padding:.4rem .85rem;font-size:.82rem;color:var(--text-light);">'+txt+'</span>';};
- var chips='';
- chips+=chip('<b style="color:var(--gold);">Güneş</b> '+s.sunSign);
- chips+=chip('<b style="color:var(--gold);">Ay</b> '+s.moonSign+' · '+s.moonPhase);
- if(s.retros.length){ s.retros.forEach(function(r){ var fast=(r.name==='Merkür'||r.name==='Venüs'||r.name==='Mars'); var et=(fast&&r.end!=null)?' → '+new Date(Date.now()+r.end*86400000).toLocaleDateString('tr-TR',{day:'numeric',month:'short'})+' bitiyor':''; chips+=chip('<b style="color:var(--vermilion);">℞</b> '+r.name+' retro'+et, true); }); }
- else { chips+=chip('Retro gezegen yok — gök net'); }
- el.innerHTML='<div style="background:var(--lapisLite);border:1px solid var(--border-gold);border-radius:16px;padding:1.1rem 1.3rem;text-align:center;">'
- +'<div style="font-family:\'Playfair Display\',serif;font-style:italic;color:var(--gold);font-size:1.05rem;margin-bottom:.7rem;">Gökyüzü bugün · '+today+'</div>'
- +'<div style="display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;">'+chips+'</div></div>';
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',draw);else draw();
-})();
-</script>
+<!-- SORBI-FOOTER:END -->
+<script src="/sorbi-form.js" defer></script>
 </body>
 </html>

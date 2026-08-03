@@ -18,20 +18,30 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
- --bg:#0B0F14; --panel:#12151F; --panel2:#161A25;
- --gold:#C9A962; --gold-lt:#E4CF9A; --gold-br:#F4E4BA;
- --ink:#E8E4DA; --mut:#A9A396; --dim:#8A8578;
- --terra:#C4744E; --terra2:#B05A32;
- --line:rgba(201,169,98,.16); --line2:rgba(201,169,98,.28); --line3:rgba(201,169,98,.45);
+ --bg:#0D0810; --panel:rgba(255,255,255,.032); --panel2:rgba(255,255,255,.055);
+ --gold:#E3A692; --gold-lt:#E8CD8F; --gold-br:#F2D3B8;
+ --ink:#F2EFE9; --mut:#9BA0AB; --dim:#666B76;
+ --terra:#C4744E; --terra2:#B05A32; --soft:#7FB3A8;
+ --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.14); --line3:rgba(255,255,255,.22);
  --fire:#C75B39; --earth:#9E8B4E; --air:#B58A5E; --water:#5E8C86;
- --soft:#7FB3A8;
- --radius:14px;
+ --radius:16px;
 }
 html{scroll-behavior:smooth}
+/* aurora zemin */
+.sky{position:fixed;inset:0;pointer-events:none;z-index:-1;background:
+ radial-gradient(52% 38% at 50% -6%,rgba(227,166,146,.10),transparent 65%),
+ radial-gradient(40% 32% at 88% 12%,rgba(94,147,168,.07),transparent 70%),
+ radial-gradient(1px 1px at 14% 24%,rgba(241,220,168,.45) 50%,transparent 51%),
+ radial-gradient(1px 1px at 36% 9%,rgba(242,239,233,.3) 50%,transparent 51%),
+ radial-gradient(1.4px 1.4px at 61% 27%,rgba(227,166,146,.4) 50%,transparent 51%),
+ radial-gradient(1px 1px at 82% 15%,rgba(242,239,233,.35) 50%,transparent 51%),
+ radial-gradient(1px 1px at 25% 60%,rgba(242,239,233,.2) 50%,transparent 51%),
+ radial-gradient(1.2px 1.2px at 72% 70%,rgba(227,166,146,.25) 50%,transparent 51%)}
+
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 svg{display:block}
@@ -39,23 +49,23 @@ svg{display:block}
 
 .topnav{position:sticky;top:0;z-index:60;background:rgba(11,15,20,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .topnav .row{display:flex;align-items:center;gap:1rem;height:56px}
-.brand{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold-br);letter-spacing:.5px;white-space:nowrap}
+.brand{font-family:'Space Grotesk',sans-serif;font-size:1.15rem;color:var(--gold-br);letter-spacing:.5px;white-space:nowrap}
 .topnav nav{display:flex;gap:.15rem;overflow-x:auto;scrollbar-width:none}
 .topnav nav::-webkit-scrollbar{display:none}
 .topnav nav a{color:var(--mut);font-size:.82rem;padding:.35rem .65rem;border-radius:99px;white-space:nowrap}
-.topnav nav a:hover,.topnav nav a[aria-current]{color:var(--ink);background:rgba(201,169,98,.1)}
+.topnav nav a:hover,.topnav nav a[aria-current]{color:var(--ink);background:rgba(223,169,143,.1)}
 
 header.hd{padding:2.2rem 0 1.2rem;text-align:center}
-header.hd h1{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(1.7rem,4.6vw,2.5rem);letter-spacing:-.3px;margin-bottom:.5rem}
+header.hd h1{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(1.7rem,4.6vw,2.5rem);letter-spacing:-.3px;margin-bottom:.5rem}
 header.hd p{color:var(--mut);font-size:.95rem;max-width:660px;margin:0 auto;line-height:1.65}
 
-.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.15rem}
+.card{background:var(--panel);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:var(--radius);padding:1.15rem}
 .card+.card{margin-top:.8rem}
 .form{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.72rem;align-items:end}
 label{display:block;font-size:.68rem;letter-spacing:.7px;text-transform:uppercase;color:var(--dim);margin-bottom:.32rem}
 input,select{width:100%;background:#0E121A;border:1px solid var(--line2);color:var(--ink);border-radius:10px;padding:.6rem .68rem;font-size:.92rem;font-family:inherit}
-input:focus,select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,169,98,.12)}
-.btn{background:linear-gradient(135deg,#B8941F,var(--gold),var(--gold-br));color:#20180A;border:none;border-radius:99px;padding:.7rem 1.45rem;font-weight:600;font-size:.9rem;cursor:pointer;font-family:inherit;white-space:nowrap}
+input:focus,select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(223,169,143,.12)}
+.btn{background:linear-gradient(135deg,#C9A254,var(--gold),var(--gold-br));color:#20180A;border:none;border-radius:99px;padding:.7rem 1.45rem;font-weight:600;font-size:.9rem;cursor:pointer;font-family:inherit;white-space:nowrap}
 .btn:hover{filter:brightness(1.07)}
 .btn.ghost{background:transparent;color:var(--gold-lt);border:1px solid var(--line3)}
 .btn.sm{padding:.42rem .95rem;font-size:.78rem}
@@ -63,19 +73,19 @@ input:focus,select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 
 .geo{position:relative}
 .geolist{position:absolute;top:100%;left:0;right:0;z-index:40;background:var(--panel2);border:1px solid var(--line2);border-radius:10px;margin-top:4px;max-height:230px;overflow:auto}
 .geolist div{padding:.55rem .7rem;font-size:.85rem;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.04)}
-.geolist div:hover{background:rgba(201,169,98,.12)}
+.geolist div:hover{background:rgba(223,169,143,.12)}
 .err{color:var(--terra);font-size:.85rem;margin-top:.6rem}
 
 /* mod çubuğu */
 .modes{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.8rem}
 .modes button{background:none;border:1px solid var(--line2);color:var(--mut);font-family:inherit;font-size:.83rem;padding:.45rem .95rem;border-radius:99px;cursor:pointer}
-.modes button.on{background:rgba(201,169,98,.16);border-color:var(--gold);color:var(--gold-br)}
+.modes button.on{background:rgba(255,255,255,.08);border-color:var(--gold);color:var(--gold-br)}
 
 .result{display:none;margin-top:1.3rem}
 .result.on{display:block}
 .grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:1.05rem;align-items:start}
 @media(max-width:980px){.grid{grid-template-columns:1fr}}
-.wheelbox{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:.55rem;position:sticky;top:66px}
+.wheelbox{background:var(--panel);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:var(--radius);padding:.55rem;position:sticky;top:66px}
 #wheel{border-radius:10px;overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.38)}
 @media(max-width:980px){.wheelbox{position:static}}
 .wheelbar{display:flex;gap:.38rem;flex-wrap:wrap;justify-content:center;padding:.5rem .3rem .15rem}
@@ -84,12 +94,32 @@ input:focus,select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 
 .tabs::-webkit-scrollbar{display:none}
 .tabs button{background:none;border:none;color:var(--mut);font-family:inherit;font-size:.83rem;padding:.55rem .7rem;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
 .tabs button.on{color:var(--gold-br);border-bottom-color:var(--gold)}
-.pane{display:none}.pane.on{display:block}
+.pane{display:none}.pane.on{display:block;margin-bottom:1.6rem}
+.subh{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.95rem;color:var(--gold-br);margin:.2rem 0 .7rem;display:flex;align-items:center;gap:.6rem}
+.subh::after{content:'';flex:1;height:1px;background:var(--line)}
+.adv{margin-top:.65rem}
+.adv summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--dim);padding:.35rem .8rem;border:1px solid var(--line);border-radius:99px;user-select:none}
+.adv summary::-webkit-details-marker{display:none}
+.adv summary::before{content:'⚙';font-size:.85rem}
+.adv.libd summary::before{content:'✦';color:var(--gold)}
+.adv[open] summary{color:var(--mut);border-color:var(--line2)}
+.sum-big3{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:.9rem}
+.sum-b{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:.95rem .5rem;text-align:center}
+.sum-b .g{font-size:1.4rem;color:var(--gold-br)}
+.sum-b .l{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-top:.3rem;font-weight:600}
+.sum-b .v{font-size:.95rem;margin-top:.2rem;font-weight:500;white-space:nowrap}
+.sum-chips{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.1rem}
+.sum-chip{font-size:.75rem;color:var(--mut);border:1px solid var(--line);border-radius:99px;padding:.3rem .75rem;background:var(--panel)}
+.sum-chip b{color:var(--ink);font-weight:500}
+.sum-asp{display:grid;gap:.4rem;margin-bottom:1.1rem}
+.sum-a{display:grid;grid-template-columns:auto 1fr auto;gap:.6rem;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.5rem .75rem;font-size:.85rem}
+.sum-a .orb{font-size:.72rem;color:var(--dim);font-variant-numeric:tabular-nums}
+.sum-note{font-size:.76rem;color:var(--dim)}
 
 table{width:100%;border-collapse:collapse;font-size:.82rem;font-variant-numeric:tabular-nums}
 th{text-align:left;font-weight:500;font-size:.66rem;letter-spacing:.7px;text-transform:uppercase;color:var(--dim);padding:.48rem .42rem;border-bottom:1px solid var(--line2)}
 td{padding:.42rem .42rem;border-bottom:1px solid rgba(255,255,255,.045)}
-tr:hover td{background:rgba(201,169,98,.05)}
+tr:hover td{background:rgba(223,169,143,.05)}
 .gl{font-size:1.05rem;color:var(--gold-br);width:1.6rem}
 .rx{color:var(--terra);font-size:.78rem}
 .pos{white-space:nowrap}
@@ -98,8 +128,8 @@ tr:hover td{background:rgba(201,169,98,.05)}
 .scroll{overflow-x:auto}
 
 .agrid{border-collapse:collapse;font-size:.7rem;margin:0 auto}
-.agrid td,.agrid th{border:1px solid rgba(201,169,98,.14);width:31px;height:31px;text-align:center;padding:0}
-.agrid th{background:rgba(201,169,98,.06);color:var(--gold-br);font-size:.95rem}
+.agrid td,.agrid th{border:1px solid rgba(255,255,255,.08);width:31px;height:31px;text-align:center;padding:0}
+.agrid th{background:rgba(255,255,255,.04);color:var(--gold-br);font-size:.95rem}
 .agrid td .ob{font-size:.54rem;color:var(--dim);line-height:1}
 .a-maj{color:var(--gold-br)}.a-hard{color:var(--terra)}.a-soft{color:var(--soft)}.a-min{color:var(--dim)}
 .aapp{font-size:.5rem;color:var(--gold)}
@@ -109,12 +139,12 @@ tr:hover td{background:rgba(201,169,98,.05)}
 .bar .t{height:8px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}
 .bar .t i{display:block;height:100%;border-radius:99px}
 
-.pat{border:1px solid var(--line2);border-radius:12px;padding:.75rem .85rem;margin-bottom:.6rem;background:rgba(201,169,98,.04)}
-.pat h4{font-family:'Playfair Display',serif;font-size:1rem;color:var(--gold-br);margin-bottom:.2rem}
+.pat{border:1px solid var(--line2);border-radius:12px;padding:.75rem .85rem;margin-bottom:.6rem;background:rgba(255,255,255,.03)}
+.pat h4{font-family:'Space Grotesk',sans-serif;font-size:1rem;color:var(--gold-br);margin-bottom:.2rem}
 .pat .members{font-size:.95rem;color:var(--ink);letter-spacing:2px;margin:.25rem 0}
 .pat p{font-size:.79rem;color:var(--mut);line-height:1.6}
 .sectcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.6rem;margin-bottom:1rem}
-.sectcard{background:rgba(201,169,98,.055);border:1px solid var(--line2);border-radius:13px;padding:.85rem .95rem}
+.sectcard{background:rgba(223,169,143,.055);border:1px solid var(--line2);border-radius:13px;padding:.85rem .95rem}
 .sectcard .n{font-size:1.25rem;color:var(--gold);line-height:1}
 .sectcard h4{font-size:.9rem;margin:.35rem 0 .3rem;color:var(--gold-br);font-weight:600}
 .sectcard p{font-size:.81rem;color:var(--mut);line-height:1.6}
@@ -127,12 +157,12 @@ tr:hover td{background:rgba(201,169,98,.05)}
 .chip .rr{font-size:.6rem;color:var(--gold);margin-left:.25rem}
 .libhead{font-size:.68rem;letter-spacing:.7px;text-transform:uppercase;color:var(--dim)}
 
-.cta{margin-top:1.5rem;text-align:center;background:var(--panel);border:1px solid var(--line2);border-radius:var(--radius);padding:1.45rem 1.1rem}
-.cta h3{font-family:'Playfair Display',serif;font-size:1.22rem;margin-bottom:.4rem;color:var(--gold-br)}
+.cta{margin-top:1.5rem;text-align:center;background:var(--panel);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--line2);border-radius:var(--radius);padding:1.45rem 1.1rem}
+.cta h3{font-family:'Space Grotesk',sans-serif;font-size:1.22rem;margin-bottom:.4rem;color:var(--gold-br)}
 .cta p{color:var(--mut);font-size:.89rem;max-width:520px;margin:0 auto 1rem;line-height:1.65}
 
 .seo{margin:2.4rem 0 1rem;color:var(--mut);font-size:.9rem;line-height:1.75}
-.seo h2{font-family:'Playfair Display',serif;color:var(--gold-lt);font-size:1.22rem;margin:1.4rem 0 .5rem}
+.seo h2{font-family:'Space Grotesk',sans-serif;color:var(--gold-lt);font-size:1.22rem;margin:1.4rem 0 .5rem}
 footer{border-top:1px solid var(--line);margin-top:2.3rem;padding:1.4rem 0 2.4rem;text-align:center;color:var(--dim);font-size:.78rem;line-height:1.8}
 .note{font-size:.73rem;color:var(--dim);line-height:1.6;margin-top:.75rem}
 .hidden{display:none!important}
@@ -147,9 +177,49 @@ footer{border-top:1px solid var(--line);margin-top:2.3rem;padding:1.4rem 0 2.4re
  .card,.wheelbox{background:#fff;border-color:#ccc}
  .grid{grid-template-columns:1fr}
 }
+
+/* ══ SAKİNLEŞTİRME: tek vurgu rengi, gökkuşağı yok ══ */
+header.hd{padding:1.6rem 0 .9rem}
+header.hd h1{font-size:clamp(1.5rem,3.6vw,2.1rem);margin-bottom:.3rem}
+header.hd p{font-size:.88rem;color:var(--dim)}
+.modes{margin-bottom:.7rem}
+.modes button{border-color:transparent;background:var(--panel);color:var(--dim)}
+.modes button:hover{color:var(--mut)}
+.modes button.on{background:var(--panel2);border-color:var(--line2);color:var(--gold-br)}
+/* tablolardaki element gökkuşağı → nötr */
+td.el-0,td.el-1,td.el-2,td.el-3,.pos.el-0,.pos.el-1,.pos.el-2,.pos.el-3{color:var(--ink)}
+.gl{color:var(--mut)}
+/* özet: çip kalabalığı → yumuşak etiket */
+.sum-chip{border:none;background:var(--panel2);color:var(--dim)}
+.sum-chip b{color:var(--mut)}
+.sum-a{border:none;border-bottom:1px solid var(--line);border-radius:0;background:none;padding:.6rem .15rem}
+.sum-a:last-child{border-bottom:none}
+.sum-a .gl{color:var(--mut)}
+.sum-b{background:var(--panel);border-color:var(--line)}
+.sum-b .g{color:var(--gold)}
+/* kalıp & sect kartları nötr */
+.pat{background:var(--panel);border-color:var(--line)}
+.pat h4{color:var(--ink)}
+.sectcard{background:var(--panel);border-color:var(--line)}
+.sectcard h4{color:var(--ink)}
+/* kitaplık çipleri sakin */
+.chip{color:var(--dim);border-color:var(--line)}
+.chip b{color:var(--mut)}
+.chip .rr{color:var(--dim)}
+/* açı sınıfları: doygunluğu düşür */
+.a-hard{color:#C98A6E}.a-soft{color:#8FB8AE}.a-maj{color:var(--gold-lt)}.a-min{color:var(--dim)}
+.dig-p{color:var(--gold-lt)}.dig-n{color:#C98A6E}
+.rx{color:#C98A6E}
+/* tablo başlıkları daha sessiz */
+th{color:var(--dim)}
+.subh{color:var(--mut)}
+.tabs button.on{color:var(--gold-br)}
+.note{color:var(--dim)}
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Sorbi Harita Atölyesi — Detaylı Doğum Haritası","url":"https://sorbiapp.com/detayli-dogum-haritasi","applicationCategory":"LifestyleApplication","operatingSystem":"Web","inLanguage":"tr","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"publisher":{"@type":"Organization","name":"Sorbi","url":"https://sorbiapp.com/"}}</script>
 </head>
 <body>
+<div class="sky"></div>
 
 <div class="topnav"><div class="wrap row">
   <a href="/" class="brand">Sorbi ✦</a>
@@ -158,7 +228,7 @@ footer{border-top:1px solid var(--line);margin-top:2.3rem;padding:1.4rem 0 2.4re
     <a href="/detayli-dogum-haritasi" aria-current="page">Detaylı Harita</a>
     <a href="/dogum-haritasi-hesaplama">Doğum Haritası</a>
     <a href="/bugun">Bugün</a>
-    <a href="/sinastri">Sinastri</a>
+    <a href="/sinastri">Sinastri Rehberi</a>
     <a href="/soru-sor">Sorunu Sor</a>
   </nav>
 </div></div>
@@ -167,7 +237,7 @@ footer{border-top:1px solid var(--line);margin-top:2.3rem;padding:1.4rem 0 2.4re
 
 <header class="hd">
   <h1>Harita Atölyesi</h1>
-  <p>Doğum haritası, transit, ilerletim, güneş dönüşü ve sinastri — tek ekranda. Yedi ev sistemi, tam açı ızgarası, açı kalıpları, sabit yıldızlar, deklinasyon ve dignite tablosu. Ev matematiği Swiss Ephemeris'e karşı arcsaniye düzeyinde doğrulandı.</p>
+  <p>Natal, transit, ilerletim, güneş dönüşü ve sinastri — profesyonel hassasiyette.</p>
 </header>
 
 <div class="modes" id="modes">
@@ -197,6 +267,7 @@ footer{border-top:1px solid var(--line);margin-top:2.3rem;padding:1.4rem 0 2.4re
       </select></div>
     <div><button class="btn" id="goBtn" style="width:100%">Haritayı Aç</button></div>
   </div>
+  <details class="adv"><summary>Gelişmiş ayarlar</summary>
   <div class="form" style="margin-top:.65rem">
     <div><label for="fLat">Enlem</label><input id="fLat" type="number" step="0.0001" value="41.0082"></div>
     <div><label for="fLon">Boylam</label><input id="fLon" type="number" step="0.0001" value="28.9784"></div>
@@ -206,6 +277,7 @@ footer{border-top:1px solid var(--line);margin-top:2.3rem;padding:1.4rem 0 2.4re
     <div><label for="fMinor">Küçük açılar</label><select id="fMinor"><option value="1">Açık</option><option value="0">Kapalı</option></select></div>
     <div><label for="fPat">Kalıp noktaları</label><select id="fPat"><option value="classic">Klasik (10 gezegen + AC/MC)</option><option value="ext">Genişletilmiş (+Chiron, düğüm, Lilith)</option></select></div>
   </div>
+  </details>
 
   <!-- ikinci katman: moda göre -->
   <div class="form hidden" id="rowTransit" style="margin-top:.65rem;border-top:1px solid var(--line);padding-top:.8rem">
@@ -241,9 +313,10 @@ footer{border-top:1px solid var(--line);margin-top:2.3rem;padding:1.4rem 0 2.4re
   </div>
 </div>
 
-<div class="card" style="padding:.85rem 1.15rem">
-  <div class="lib" id="lib"></div>
-</div>
+<details class="adv libd" style="margin:.8rem 0 0">
+  <summary>Kitaplık — ünlü haritaları</summary>
+  <div class="card" style="padding:.85rem 1.15rem;margin-top:.6rem"><div class="lib" id="lib"></div></div>
+</details>
 
 <div class="result" id="result">
  <div class="grid">
@@ -266,37 +339,33 @@ footer{border-top:1px solid var(--line);margin-top:2.3rem;padding:1.4rem 0 2.4re
 
   <div>
     <div class="tabs" id="tabs">
-      <button class="on" data-p="p1">Gezegenler</button>
-      <button data-p="p2">Evler</button>
-      <button data-p="p3">Açı ızgarası</button>
-      <button data-p="p4">Açı listesi</button>
-      <button data-p="p7">Kalıplar</button>
-      <button data-p="p5">Dağılım</button>
-      <button data-p="p6">Dignite</button>
-      <button data-p="p8">Sabit yıldızlar</button>
-      <button data-p="p9">Deklinasyon</button>
-      <button data-p="p10">Sect · gece/gündüz</button>
+      <button class="on" data-p="p0">Özet</button>
+      <button data-p="p1,p2">Gezegenler · Evler</button>
+      <button data-p="p4,p3">Açılar</button>
+      <button data-p="p7,p5,p6,p10">Analiz</button>
+      <button data-p="p8,p9">Uzman</button>
     </div>
-    <div class="pane on" id="p1"><div class="scroll"><table id="tPlanets"></table></div>
+    <div class="pane on" id="p0"><div id="sumBox"></div></div>
+    <div class="pane" id="p1"><div class="subh">Gezegenler</div><div class="scroll"><table id="tPlanets"></table></div>
       <div class="scroll" id="tPlanetsB"></div>
       <div class="note">Konum derece°dakika′saniye″ olarak burç içindedir. <b>R</b> = geri hareket. Hız günlük ekliptik hareket.</div></div>
-    <div class="pane" id="p2"><div class="scroll"><table id="tHouses"></table></div>
+    <div class="pane" id="p2"><div class="subh">Evler</div><div class="scroll"><table id="tHouses"></table></div>
       <div class="note" id="houseNote"></div></div>
-    <div class="pane" id="p3"><div class="scroll" id="gridBox"></div>
+    <div class="pane" id="p3"><div class="subh">Açı ızgarası</div><div class="scroll" id="gridBox"></div>
       <div class="note">Hücrede açı glifi, altında orb (derece). <span class="aapp">▲</span> yaklaşan, <span class="aapp">▽</span> ayrılan.</div></div>
-    <div class="pane" id="p4"><div class="scroll"><table id="tAspects"></table></div></div>
-    <div class="pane" id="p7"><div id="patterns"></div></div>
-    <div class="pane" id="p5"><div id="dist"></div></div>
-    <div class="pane" id="p6"><div class="scroll"><table id="tDign"></table></div>
+    <div class="pane" id="p4"><div class="subh">Açı listesi</div><div class="scroll"><table id="tAspects"></table></div></div>
+    <div class="pane" id="p7"><div class="subh">Açı kalıpları</div><div id="patterns"></div></div>
+    <div class="pane" id="p5"><div class="subh">Dağılım</div><div id="dist"></div></div>
+    <div class="pane" id="p6"><div class="subh">Esansiyel dignite</div><div class="scroll"><table id="tDign"></table></div>
       <div class="note">Ptolemaik esansiyel dignite: yönetici +5, yücelme +4, üçlü yönetici +3, sınır +2, dekan +1; düşüş −4, zararlı −5. Hiçbirine sahip olmayan gezegen <i>peregrin</i> sayılır.</div></div>
-    <div class="pane" id="p8"><div class="scroll"><table id="tStars"></table></div>
+    <div class="pane" id="p8"><div class="subh">Sabit yıldızlar</div><div class="scroll"><table id="tStars"></table></div>
       <div class="note">Sabit yıldız konumları presesyon ve öz hareket hesaba katılarak türetildi. Işıklar ve açısal noktalar için 1°, diğerleri için 40′ orb. Yıldız nitelikleri geleneksel literatürden aktarılmıştır.</div></div>
-    <div class="pane" id="p10">
+    <div class="pane" id="p10"><div class="subh">Sect — gece/gündüz</div>
       <div id="sectTop"></div>
       <div class="scroll"><table id="tSect"></table></div>
       <div class="note" id="sectNote"></div>
     </div>
-    <div class="pane" id="p9"><div class="scroll"><table id="tDecl"></table></div>
+    <div class="pane" id="p9"><div class="subh">Deklinasyon & antisya</div><div class="scroll"><table id="tDecl"></table></div>
       <div class="scroll" style="margin-top:1rem"><table id="tAnti"></table></div>
       <div class="note">Deklinasyon: gök ekvatoruna göre açı. <b>Paralel</b> aynı yönde, <b>karşıt paralel</b> ters yönde eşit deklinasyon — kavuşum ve karşıtlık gibi okunur (orb 1°). <b>Antisya</b>, Yengeç–Oğlak ekseninde ayna nokta; <b>karşı antisya</b> Koç–Terazi ekseninde.</div></div>
   </div>
@@ -320,10 +389,7 @@ footer{border-top:1px solid var(--line);margin-top:2.3rem;padding:1.4rem 0 2.4re
   <p>Ev başlangıçları, açısal noktalar ve Vertex, Swiss Ephemeris çıktısına karşı test edildi; yedi sistemde de fark ölçülebilir düzeyin altında kaldı. Gezegen boylamları için tarayıcı içi astronomi motoru kullanılıyor; Chiron, Lilith ve Ay düğümleri için Swiss Ephemeris'ten türetilmiş sıkıştırılmış efemeris tablosu okunuyor. Sabit yıldızlar 1850–2070 aralığında öz hareket ve presesyonla birlikte hesaplanır.</p>
 </div>
 
-<footer>
-  Sorbi ✦ · <a href="/araclar">Araçlar</a> · <a href="/gizlilik">Gizlilik</a><br>
-  Astroloji bir yorum geleneğidir; bu sayfadaki hesaplamalar astronomik veridir, kesin bir sonuç ya da öngörü sunmaz.
-</footer>
+
 </div>
 
 <script src="/astronomy.browser.min.js"></script>
@@ -646,6 +712,7 @@ function houseOf(l,c){
 
 /* ═════════ ZAMAN ═════════ */
 function tzOffMin(date,tz){
+  if(tz!==undefined&&tz!==null&&tz!==''&&isFinite(tz))return (+tz)*60;
   try{
     var p=new Intl.DateTimeFormat('en-US',{timeZone:tz,hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'})
       .formatToParts(date).reduce(function(a,x){a[x.type]=x.value;return a;},{});
@@ -1087,6 +1154,38 @@ function renderAll(){
   + '<div class="note">Kalıplar '+(extOn?'Chiron, Ay düğümü ve Lilith dahil':'klasik on gezegen ile Yükselen–MC üzerinden')+' hesaplandı.'+
     (extOn?'':' Chiron, düğüm ve Lilith\u2019i de katmak için yukarıdaki <b>Kalıp noktaları</b> seçimini değiştir — genellikle daha fazla kalıp çıkar.')+'</div>';
 
+  /* ── ÖZET ── */
+  (function(){
+    var g3=function(k,lab){
+      var p2 = k==='asc' ? {lon:ch.asc,g:'AC'} : ch.pls.filter(function(x){return x.k===k;})[0];
+      var x=dms(p2.lon);
+      var gl = k==='asc' ? '<span style="font-family:Space Grotesk,sans-serif;font-weight:700">AC</span>' : p2.g;
+      return '<div class="sum-b"><div class="g">'+gl+'</div><div class="l">'+lab+'</div><div class="v">'+x.d+'° '+SIGNS[x.s]+' '+pad2(x.m)+'′</div></div>';
+    };
+    var ec=[0,0,0,0],mo=[0,0,0];
+    ch.pls.forEach(function(p2){ if(p2.k==='pof'||p2.k==='sno')return; var si=Math.floor(norm(p2.lon)/30); ec[si%4]++; mo[si%3]++; });
+    var SR=null; try{ SR=sectReport(ch); }catch(e){}
+    var chips='<span class="sum-chip"><b>'+(ch.day?'Gündüz':'Gece')+'</b> haritası</span>'+
+      (SR?'<span class="sum-chip">Sekt ışığı <b>'+SR.light.n+'</b></span>':'')+
+      '<span class="sum-chip">Baskın element <b>'+ELEM[ec.indexOf(Math.max.apply(null,ec))]+'</b></span>'+
+      '<span class="sum-chip">Baskın nitelik <b>'+MODAL[mo.indexOf(Math.max.apply(null,mo))]+'</b></span>'+
+      '<span class="sum-chip">'+({P:'Placidus',W:'Whole Sign',K:'Koch',E:'Eşit',O:'Porphyry',R:'Regiomontanus',C:'Campanus'}[ch.o.house]||'')+'</span>';
+    var top=asps.filter(function(x){return ['pof','sno'].indexOf(x.a.k)<0&&['pof','sno'].indexOf(x.b.k)<0&&x.as.major;}).slice(0,5);
+    var arows=top.map(function(x){
+      return '<div class="sum-a"><span class="gl">'+x.a.g+'</span>'+
+        '<span>'+x.a.n+' <span class="'+x.as.cls+'">'+agl(x.as.a,13)+'</span> '+x.b.n+
+        ' <span style="color:var(--dim)">· '+x.as.n.toLowerCase()+'</span></span>'+
+        '<span class="orb">'+x.abs.toFixed(1)+'°'+(x.app===null?'':(x.app?' · yaklaşıyor':''))+'</span></div>';
+    }).join('');
+    var patline = pats.length ? pats.slice(0,4).map(function(x){return '<span class="sum-chip"><b>'+x.t+'</b></span>';}).join('') : '';
+    document.getElementById('sumBox').innerHTML=
+      '<div class="sum-big3">'+g3('sun','Güneş')+g3('moon','Ay')+g3('asc','Yükselen')+'</div>'+
+      '<div class="sum-chips">'+chips+'</div>'+
+      (arows?'<div class="subh" style="font-size:.85rem">En sıkı açılar</div><div class="sum-asp">'+arows+'</div>':'')+
+      (patline?'<div class="subh" style="font-size:.85rem">Açı kalıpları</div><div class="sum-chips">'+patline+'</div>':'')+
+      '<div class="sum-note">Tam tablolar için üstteki sekmeler: gezegen konumları, evler, açı ızgarası, dignite, sabit yıldızlar ve daha fazlası.</div>';
+  })();
+
   /* dağılım */
   renderDist(ch);
 
@@ -1464,7 +1563,8 @@ document.getElementById('nowBtn').onclick=function(){
 document.getElementById('tabs').onclick=function(e){
   var b=e.target.closest('button'); if(!b) return;
   Array.prototype.forEach.call(this.children,function(x){ x.classList.toggle('on',x===b); });
-  document.querySelectorAll('.pane').forEach(function(p){ p.classList.toggle('on',p.id===b.dataset.p); });
+  var ids=b.dataset.p.split(',');
+  document.querySelectorAll('.pane').forEach(function(p){ p.classList.toggle('on',ids.indexOf(p.id)>=0); });
 };
 
 document.getElementById('saveBtn').onclick=function(){
@@ -1582,6 +1682,7 @@ function boot(){
     }
   }catch(e){}
   var q=new URLSearchParams(location.search);
+  if(q.get('m')&&!q.get('d')) setMode(q.get('m'));
   if(q.get('d')){
     document.getElementById('fDate').value=q.get('d');
     if(q.get('t')) document.getElementById('fTime').value=q.get('t');
@@ -1598,5 +1699,59 @@ function boot(){
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
 })();
 </script>
+<!-- SORBI-FOOTER:START -->
+<style>
+.sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0D0810;font-family:'Inter',system-ui,sans-serif}
+.sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr 1fr;gap:2rem}
+.sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#E3A692;margin:0 0 .8rem;font-weight:600}
+.sbft a{display:block;color:#9BA0AB;text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
+.sbft a:hover{color:#F2EFE9}
+.sbft .sbft-brand b{font-size:1.05rem;color:#F2EFE9;font-weight:700}
+.sbft .sbft-brand b i{font-style:normal;color:#E3A692;margin-right:.3rem}
+.sbft .sbft-brand p{color:#9BA0AB;font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#6D7280;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+@media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
+@media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
+</style>
+<footer class="sbft">
+ <div class="sbft-in">
+  <div class="sbft-brand"><b><i>✦</i>Sorbi</b><p>Gökyüzünü veriyle okuyan astroloji atölyesi. Hesaplamalar tarayıcında, saniyeler içinde.</p></div>
+  <div><h4>Hesaplayıcılar</h4>
+   <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
+   <a href="/dogum-haritasi-hesaplama">Doğum Haritası</a>
+   <a href="/yukselen-burc-hesaplama">Yükselen Burç</a>
+   <a href="/ay-burcu-hesaplama">Ay Burcu</a>
+   <a href="/sinastri">Sinastri Rehberi</a>
+   <a href="/natal-harita">Natal Harita Rehberi</a>
+  </div>
+  <div><h4>Gökyüzü</h4>
+   <a href="/bugun">Bugün Gökyüzünde</a>
+   <a href="/horary">An Haritası (Horary)</a>
+   <a href="/uygun-gun-secimi">Uygun Gün Seçimi</a>
+   <a href="/retro-ay-takvimi">Retro & Ay Takvimi</a>
+   <a href="/astrokartografi">Astrokartografi</a>
+   <a href="/yasam-donguleri">Yaşam Döngüleri</a>
+  </div>
+  <div><h4>Burçlar</h4>
+   <a href="/burc-ozellikleri">Burç Özellikleri</a>
+   <a href="/gunluk-burc-yorumlari">Günlük Yorumlar</a>
+   <a href="/ates-burclari">Ateş Burçları</a>
+   <a href="/toprak-burclari">Toprak Burçları</a>
+   <a href="/hava-burclari">Hava Burçları</a>
+   <a href="/su-burclari">Su Burçları</a>
+  </div>
+  <div><h4>Sorbi</h4>
+   <a href="/">Ana Sayfa</a>
+   <a href="/soru-sor">Sorunu Sor</a>
+   <a href="/gunun-karti">Günün Kartı</a>
+   <a href="/seni-taniyorum">Seni Tanıyorum</a>
+   <a href="/#uygulama">Uygulama</a>
+   <a href="/destek">Destek</a>
+  </div>
+ </div>
+ <div class="sbft-bot"><span>© 2026 Sorbi · sorbiapp.com</span><span>Astroloji içerikleri kişisel farkındalık amaçlıdır; kesin gelecek vaadi değildir.</span></div>
+</footer>
+<!-- SORBI-FOOTER:END -->
+<script src="/sorbi-form.js" defer></script>
 </body>
 </html>
