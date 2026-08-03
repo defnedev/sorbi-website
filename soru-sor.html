@@ -364,7 +364,7 @@ function loadEngine(cb){
   QUEUE=cb;
   if(LOADING) return;
   LOADING=true;
-  var srcs=['/astronomy.browser.min.js','/sorbi-chart.js','/sorbi-astro.js'];
+  var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=3','/sorbi-astro.js?v=3'];
   (function next(i){
     if(i>=srcs.length){ READY=true; LOADING=false; if(QUEUE){var f=QUEUE;QUEUE=null;f();} return; }
     var s=document.createElement('script');
@@ -590,6 +590,6 @@ if($('bd').value && PICKED) render();
  <div class="sbft-bot"><span>© 2026 Sorbi · sorbiapp.com</span><span>Astroloji içerikleri kişisel farkındalık amaçlıdır; kesin gelecek vaadi değildir.</span></div>
 </footer>
 <!-- SORBI-FOOTER:END -->
-<script src="/sorbi-form.js" defer></script>
+<script src="/sorbi-form.js?v=3" defer></script>
 </body>
 </html>
