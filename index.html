@@ -352,6 +352,20 @@ function draw(){
       (NOTIME?'':'<span>MC <b>'+SorbiAstro.fmt(CH.mc)+'</b></span>')+
       '<span><b>'+(CH.day?'Gündüz':'Gece')+'</b> haritası</span>';
     fillBig3(); fillTransits(); saveBirth();
+    /* merak kancası */
+    try{
+      var MAJK=['sun','moon','mer','ven','mar','jup','sat','ura','nep','plu'];
+      var tight=asps.filter(function(x){return x.as.major&&x.abs<0.34;}).length;
+      var rc=CH.pls.filter(function(p){return p.rx&&MAJK.indexOf(p.k)>=0;}).length;
+      var n=tight+(rc>=4?1:0);
+      var tz=document.getElementById('teaser');
+      if(!tz){ tz=document.createElement('div'); tz.id='teaser';
+        tz.style.cssText='margin-top:.7rem;font-size:.86rem;color:var(--mut)';
+        $('after').parentNode.insertBefore(tz,$('after').nextSibling); }
+      tz.innerHTML = n>0
+        ? '✦ Haritanda <b style="color:var(--gold-br)">'+n+' dikkat çekici ayrıntı</b> yakaladım — <a href="'+$('goAtolye').href+'" style="color:var(--gold-br);text-decoration:underline;text-underline-offset:3px">Atölye\'de gör →</a>'
+        : '✦ 13 aylık kişisel transit takvimin hazır — <a href="'+$('goAtolye').href+'" style="color:var(--gold-br);text-decoration:underline;text-underline-offset:3px">Atölye\'de aç →</a>';
+    }catch(e){}
     $('after').classList.add('on');
     var q='?d='+$('bd').value+($('bt').value?'&t='+$('bt').value:'')+'&lat='+PICKED.lat+'&lon='+PICKED.lon+'&tz='+encodeURIComponent(PICKED.tz)+'&p='+encodeURIComponent((PICKED.label||''));
     $('goAtolye').href='/detayli-dogum-haritasi'+q;

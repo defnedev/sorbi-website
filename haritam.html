@@ -209,6 +209,12 @@ function initBig3(){
  document.querySelectorAll('#chips .chip').forEach(el=>el.onclick=()=>{const q=document.getElementById('q');q.value=(q.value?q.value+' ':'')+el.textContent+': ';q.focus();});
  document.getElementById('logout').onclick=()=>{if(confirm('Profilinden çıkılsın mı?')){localStorage.removeItem('sorbi_profile');location.href='/';}};
  initBig3(); renderList(); refreshStatuses();
+ /* takvim teaser */
+ try{
+   var tt=document.createElement('div');
+   tt.innerHTML='<div style="margin-top:1.4rem;background:rgba(227,166,146,.07);border:1px solid rgba(227,166,146,.28);border-radius:14px;padding:.9rem 1.05rem;font-size:.88rem;color:#F2EFE9">✦ Önümüzdeki <b>13 ayın</b> gökyüzü senin haritana tarih tarih işlendi — Atölye\'deki <b>Takvim</b> sekmesinde. <a href="/detayli-dogum-haritasi" style="color:#F2D3B8;text-decoration:underline;text-underline-offset:3px">Aç →</a></div>';
+   document.getElementById('app').appendChild(tt);
+ }catch(e){}
  /* kayıtlı haritalar */
  try{
   var charts=JSON.parse(localStorage.getItem('sorbi_charts')||'[]')||[];

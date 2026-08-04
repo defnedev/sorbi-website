@@ -1204,9 +1204,35 @@ function renderAll(){
         '<span class="orb">'+x.abs.toFixed(1)+'°'+(x.app===null?'':(x.app?' · yaklaşıyor':''))+'</span></div>';
     }).join('');
     var patline = pats.length ? pats.slice(0,4).map(function(x){return '<span class="sum-chip"><b>'+x.t+'</b></span>';}).join('') : '';
+    /* ── merak kancası: nadirlik tespiti ── */
+    var rare=[];
+    try{
+      var MAJK=['sun','moon','mer','ven','mar','jup','sat','ura','nep','plu'];
+      /* saniyeler içinde kesinleşen açı */
+      var t0=asps.filter(function(x){return x.as.major&&x.abs<0.34&&MAJK.indexOf(x.a.k)>=0&&(MAJK.indexOf(x.b.k)>=0||x.b.k==='asc'||x.b.k==='mc');})[0];
+      if(t0) rare.push('<b>'+t0.a.n+'</b> ile <b>'+t0.b.n+'</b> arasındaki '+t0.as.n.toLowerCase()+' '+(t0.abs*60).toFixed(0)+'′ içinde — bu kadar kesin bir temas her haritada görülmez.');
+      /* retro yoğunluğu */
+      var rc=ch.pls.filter(function(p){return p.rx&&MAJK.indexOf(p.k)>=0;}).length;
+      if(rc>=4) rare.push('Doğduğun an <b>'+rc+' gezegen retroda</b>ydı — içe dönük işleyen güçlü bir katman.');
+      /* sınır dışı deklinasyon */
+      var ob=ch.pls.filter(function(p){return MAJK.indexOf(p.k)>=0&&p.dec!==undefined&&Math.abs(p.dec)>23.44;})[0];
+      if(ob) rare.push('<b>'+ob.n+'</b> deklinasyonda sınır dışında (out-of-bounds) — kurallara sığmayan bir ifade alanı.');
+      /* açısız gezegen */
+      var un=ch.pls.filter(function(p){ if(MAJK.indexOf(p.k)<0) return false;
+        return !asps.some(function(x){return x.as.major&&(x.a.k===p.k||x.b.k===p.k);}); })[0];
+      if(un) rare.push('<b>'+un.n+'</b> majör açı yapmıyor — haritada kendi başına konuşan bir ses.');
+      /* kalıp */
+      if(pats.length&&rare.length<3) rare.push('Haritanda <b>'+pats[0].t+'</b> kalıbı var — '+pats[0].m.length+' gezegen tek bir hikâyeye bağlanıyor.');
+    }catch(e){}
+    var rareHtml = rare.length ?
+      '<div style="margin-top:1rem;background:rgba(227,166,146,.07);border:1px solid rgba(227,166,146,.28);border-radius:14px;padding:.95rem 1.1rem">'+
+      '<div style="font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">✦ Haritanda dikkatimi çekenler</div>'+
+      rare.slice(0,3).map(function(r){return '<div style="font-size:.86rem;margin:.3rem 0;color:var(--ink)">· '+r+'</div>';}).join('')+
+      '<a href="/soru-sor" style="display:inline-block;margin-top:.6rem;color:var(--gold-br);text-decoration:underline;text-underline-offset:3px;font-size:.84rem">Bunlar senin hayatında nasıl görünüyor? Sorunu ilet — dönüş WhatsApp\'tan →</a></div>' : '';
     document.getElementById('sumBox').innerHTML=
       '<div class="sum-big3">'+g3('sun','Güneş')+g3('moon','Ay')+g3('asc','Yükselen')+'</div>'+
       '<div class="sum-chips">'+chips+'</div>'+
+      rareHtml+
       (arows?'<div class="subh" style="font-size:.85rem">En sıkı açılar</div><div class="sum-asp">'+arows+'</div>':'')+
       (patline?'<div class="subh" style="font-size:.85rem">Açı kalıpları</div><div class="sum-chips">'+patline+'</div>':'')+
       '<div class="sum-note">Tam tablolar için üstteki sekmeler: gezegen konumları, evler, açı ızgarası, dignite, sabit yıldızlar ve daha fazlası.</div>';
