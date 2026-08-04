@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="/astronomy.browser.min.js?v=3" defer></script>
+<script src="/sorbi-chart.js?v=3" defer></script>
 <style>
 :root{--terra:#E3A692;--btn-ink:#F6EFE1;
  --bg:#0B0F14;--panel:#161a25;--panel2:#1a1f2b;
@@ -264,8 +265,8 @@ function computeFixedStars(A,time,points){const hits=[];for(const[name,ra,dec,na
 function houseOf(l,c){l=norm(l);for(let i=1;i<=12;i++){const a=c[i],b=c[i===12?1:i+1];const sp=norm(b-a);if(norm(l-a)<sp||sp===0)return i;}return 1;}
 const ASPECTS=[[0,'Kavuşum',8],[60,'Altmışlık',5],[90,'Kare',7],[120,'Üçgen',7],[180,'Karşıt',8]];
 const DETAY_URL='/';
-const PGLYPH={'Güneş':'☉','Ay':'☽','Merkür':'☿','Venüs':'♀','Mars':'♂','Jüpiter':'♃','Satürn':'♄','Uranüs':'♅','Neptün':'♆','Plüton':'♇'};
-const AGLYPH={'Kavuşum':'☌','Altmışlık':'⚹','Kare':'□','Üçgen':'△','Karşıt':'☍'};
+const PGLYPH={'Güneş':'☉︎','Ay':'☽︎','Merkür':'☿︎','Venüs':'♀︎','Mars':'♂︎','Jüpiter':'♃︎','Satürn':'♄︎','Uranüs':'♅︎','Neptün':'♆︎','Plüton':'♇︎'};
+const AGLYPH={'Kavuşum':'☌︎','Altmışlık':'⚹','Kare':'□','Üçgen':'△','Karşıt':'☍︎'};
 const PGOV={'Güneş':'özün, egon, hayat enerjin ve parladığın alan','Ay':'duygusal dünyan, ihtiyaçların ve iç güvenliğin','Merkür':'zihnin, iletişim tarzın ve öğrenme biçimin','Venüs':'aşkın, çekimin, zevklerin ve neye değer verdiğin','Mars':'arzun, cesaretin, öfken ve harekete geçme biçimin','Jüpiter':'şansın, büyümen, inancın ve genişlediğin alan','Satürn':'disiplinin, sınırların, sorumlulukların ve olgunlaştığın alan','Uranüs':'özgürlük, ani değişim ve farklılık enerjin (kuşak gezegeni)','Neptün':'hayal, sezgi, ilham ve sınırların eridiği yer (kuşak gezegeni)','Plüton':'dönüşüm, güç ve kök krizlerin enerjisi (kuşak gezegeni)'};
 const HOUSE_AREA={1:'kimlik, beden, dışa yansıyan sen',2:'para, değerler, sahip oldukların',3:'iletişim, kardeşler, yakın çevre',4:'ev, aile, kökler',5:'aşk, yaratıcılık, çocuklar, oyun',6:'iş, sağlık, günlük rutin',7:'ilişkiler, ortaklıklar, evlilik',8:'dönüşüm, ortak kaynaklar, derinlik',9:'seyahat, inanç, yüksek öğrenim',10:'kariyer, itibar, hedefler',11:'arkadaşlar, gruplar, umutlar',12:'bilinçdışı, ruhsal dünya, geri çekilme'};
 const ORD=['','birinci','ikinci','üçüncü','dördüncü','beşinci','altıncı','yedinci','sekizinci','dokuzuncu','onuncu','on birinci','on ikinci'];
@@ -302,7 +303,7 @@ function signatures(ch,noTime){
  const dom=ec.indexOf(Math.max(...ec));if(ec[dom]>=5)list.push({pri:6,g:'◆',lab:`${ELEM[dom]} baskın`,head:`${ELEM[dom]} senin baskın elementin.`,prose:`gezegenlerinin çoğu ${ELEM[dom].toLowerCase()} burçlarında — ${ELINE[dom]}`});
  if(!noTime){const rs=signOf(ch.asc);const rp=P[RULER[rs]];list.push({pri:5,g:PGLYPH[rp.n],lab:`Yönetici ${rp.n}`,head:`Harita yöneticin ${rp.n}, ${SIGNS[signOf(rp.lon)]}'de${rp.house?' '+ORD[rp.house]+' evde':''}.`,prose:`yükselenin ${SIGNS[rs]}, o yüzden bütün haritanın tonunu ${rp.n} veriyor — nereye baksan onun rengi düşüyor.`});}
  const su=signOf(P[0].lon),mo=signOf(P[1].lon);
- list.push({pri:3,g:'☉',lab:`Güneş ${SIGN3[su]} · Ay ${SIGN3[mo]}`,head:`Özün ${SIGNS[su]}, kalbin ${SIGNS[mo]}.`,prose:`dışarıda ${SUN_T[su]}; içeride ise ${MOON_T[mo]}.`});
+ list.push({pri:3,g:'☉︎',lab:`Güneş ${SIGN3[su]} · Ay ${SIGN3[mo]}`,head:`Özün ${SIGNS[su]}, kalbin ${SIGNS[mo]}.`,prose:`dışarıda ${SUN_T[su]}; içeride ise ${MOON_T[mo]}.`});
  return list.sort((a,b)=>b.pri-a.pri);
 }
 
@@ -320,11 +321,16 @@ function renderPlanet(pname){
 
 /* WHEEL — site paleti (terracotta/altın · gece) */
 function wheel(ch,hasHouses){
+ if(!window.SorbiChart){ var _n=0; (function W(){ if(window.SorbiChart){ try{ wheel(ch,hasHouses); }catch(e){} } else if(_n++<40) setTimeout(W,150); })(); }
+ if(window.SorbiChart){ try{
+   var _w=document.getElementById('rWheel'), _p=_w?_w.parentNode:document.querySelector('.wheelwrap');
+   if(_p){ _p.innerHTML=window.SorbiChart.draw(window.SorbiChart.adapt(ch),null,{theme:'paper',noHouses:!hasHouses}); return; }
+ }catch(e){ window.__wheelErr=(e&&e.message)||String(e); } }
  const cx=280,cy=280,rZodOut=272,rZodIn=234,rHouseIn=150,rPlanet=208;const rAsp=rHouseIn;
  const orient=hasHouses?ch.asc:0;
  const P=(lon,r)=>{const t=norm(lon-orient)*RAD;return[(cx-r*Math.cos(t)),(cy+r*Math.sin(t))];};
  const f=n=>n.toFixed(1);
- const ZG=['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
+ const ZG=['♈︎','♉︎','♊︎','♋︎','♌︎','♍︎','♎︎','♏︎','♐︎','♑︎','♒︎','♓︎'];
  const SF="'Noto Sans Symbols2','Segoe UI Symbol','Apple Symbols',sans-serif";const VS='︎';
  const G='#DFA98F',CR='#E4CF9A',DM='#8A8578';
  const elc=i=>ELCOL[i%4];

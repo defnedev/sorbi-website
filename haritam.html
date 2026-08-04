@@ -112,7 +112,7 @@ textarea{min-height:90px;resize:vertical}
   <div class="hero3">
    <a class="hot" href="/bugun"><span class="g">✦</span><span class="n">Bugün</span><span class="d">Göğün bugün sana etkisi</span></a>
    <a href="/dogum-haritasi-hesaplama"><span class="g">⊹</span><span class="n">Tam Haritam</span><span class="d">10 gezegen, evler, açılar</span></a>
-   <a href="#ask"><span class="g">✦</span><span class="n">Soru Sor</span><span class="d">Aklındakine kişisel cevap</span></a>
+   <a href="#ask"><span class="g">✦</span><span class="n">Soru Sor</span><span class="d">Aklındaki soruyu ilet</span></a>
   </div>
 
   <div class="card">
@@ -145,7 +145,7 @@ textarea{min-height:90px;resize:vertical}
 </div>
 <script>
 const SIGNS=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
-const PGLYPH=['☉','☽'];
+const PGLYPH=['☉︎','☽︎'];
 const norm=d=>((d%360)+360)%360,RAD=Math.PI/180;
 const signOf=l=>Math.floor(norm(l)/30);
 function tzOffMin(date,tz){if(tz!==undefined&&tz!==null&&tz!==''&&isFinite(tz))return (+tz)*60;try{const p=new Intl.DateTimeFormat('en-US',{timeZone:tz,hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(date).reduce((a,x)=>(a[x.type]=x.value,a),{});const h=p.hour==='24'?0:+p.hour;return(Date.UTC(+p.year,+p.month-1,+p.day,h,+p.minute,+p.second)-date.getTime())/60000;}catch(e){return 180;}}
@@ -182,7 +182,7 @@ function initBig3(){
   const noTime=!b.time;
   const utc=localToUTC(y,mo,d,h,mi,b.tz||'Europe/Istanbul');const t=A.MakeTime(utc);
   const sun=eclOfDate(A,A.Body.Sun,t),moon=eclOfDate(A,A.Body.Moon,t);
-  let cards=[['☉','Güneş',signOf(sun)],['☽','Ay',signOf(moon)]];
+  let cards=[['☉︎','Güneş',signOf(sun)],['☽︎','Ay',signOf(moon)]];
   if(!noTime&&b.lat){const e=obliquity(t);const ramc=norm(A.SiderealTime(t)*15+(+b.lon));const asc=ascendant(ramc,e,+b.lat);cards.push(['⌖','Yükselen',signOf(asc)]);}
   document.getElementById('bt3').innerHTML=cards.map(([g,r,s])=>`<div class="c"><div class="g">${g}</div><div class="r">${r}</div><div class="s">${SIGNS[s]}</div></div>`).join('');
   const MOON_ADJ=['Ateşli','Sabırlı','Tedirgin','Hüzünlü','Gururlu','Titiz','Kararsız','Derin','Özgür','Mesafeli','Uzak','Rüyalı'];

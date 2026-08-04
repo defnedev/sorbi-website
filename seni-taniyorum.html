@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="/astronomy.browser.min.js?v=3" defer></script>
+<script src="/sorbi-chart.js?v=3" defer></script>
 <style>
 /* Sorbi design tokens — varak okunur, terracotta basılır */
 :root{--bg:#0B0F14;--panel:rgba(235,240,248,.03);--gold:#DFA98F;--gold-lt:#E4CF9A;--gold-br:#F2D3B8;--ink:#E8E4DA;--mut:#A9A396;--dim:#8A8578;--terra:#E3A692;--btn-ink:#F6EFE1;
@@ -95,14 +96,14 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
 /* anlam küreleri — Özün · İç Dünyan · Masken (app hero pill'leri) */
 .orbs{display:flex;justify-content:center;gap:1.25rem;margin:.9rem 0 2.2rem;flex-wrap:wrap}
 .orb{display:flex;flex-direction:column;align-items:center;gap:.35rem;opacity:0;transform:scale(.6);animation:orbPop .5s var(--ease) forwards}
-.orb .disc{width:66px;height:66px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans Symbols2','Segoe UI Symbol',sans-serif;font-size:1.7rem;color:#F6EFE1;box-shadow:0 8px 22px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.18);border:1px solid rgba(223,169,143,.28)}
+.orb .disc{width:66px;height:66px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans Symbols2','Segoe UI Symbol',sans-serif;font-size:1.7rem;color:#F6EFE1;border:1.5px solid rgba(223,169,143,.28)}
 .orb .role{font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
 .orb .sn{font-family:'Space Grotesk','Inter',sans-serif;font-weight:600;font-size:.95rem;color:var(--ink);margin-top:-.1rem}
 @keyframes orbPop{0%{opacity:0;transform:scale(.6)}60%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
-.el-fire{background:radial-gradient(circle at 34% 28%,#E8A56B,#C4744E)}
-.el-earth{background:radial-gradient(circle at 34% 28%,#8FB39A,#4B7358)}
-.el-air{background:radial-gradient(circle at 34% 28%,#AEC6E4,#5A7CA8)}
-.el-water{background:radial-gradient(circle at 34% 28%,#8FC2CC,#3E7885)}
+.el-fire{background:rgba(255,255,255,.04);border-color:rgba(196,116,78,.55)!important;color:#E8A56B}
+.el-earth{background:rgba(255,255,255,.04);border-color:rgba(143,179,154,.55)!important;color:#8FB39A}
+.el-air{background:rgba(255,255,255,.04);border-color:rgba(174,198,228,.55)!important;color:#AEC6E4}
+.el-water{background:rgba(255,255,255,.04);border-color:rgba(143,194,204,.55)!important;color:#8FC2CC}
 /* evrenin mesajı ayracı */
 .msg-head{text-align:center;opacity:0;transition:opacity .5s var(--ease);margin:1.3rem 0 1.5rem}
 .msg-head.show{opacity:1}
@@ -205,7 +206,7 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
 </div>
 <script>
 const SIGNS=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
-const SIGN_GLYPH=['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];const ELEMC=['fire','earth','air','water'];
+const SIGN_GLYPH=['♈︎','♉︎','♊︎','♋︎','♌︎','♍︎','♎︎','♏︎','♐︎','♑︎','♒︎','♓︎'];const ELEMC=['fire','earth','air','water'];
 const norm=d=>((d%360)+360)%360,RAD=Math.PI/180;
 const signOf=l=>Math.floor(norm(l)/30);
 function tzOffMin(date,tz){if(tz!==undefined&&tz!==null&&tz!==''&&isFinite(tz))return (+tz)*60;try{const p=new Intl.DateTimeFormat('en-US',{timeZone:tz,hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(date).reduce((a,x)=>(a[x.type]=x.value,a),{});const h=p.hour==='24'?0:+p.hour;return(Date.UTC(+p.year,+p.month-1,+p.day,h,+p.minute,+p.second)-date.getTime())/60000;}catch(e){return 180;}}
@@ -215,7 +216,7 @@ function obliquity(t){const T=t.tt/36525;return(84381.448-46.8150*T-0.00059*T*T+
 function ascendant(r,e,lat){return norm(Math.atan2(Math.cos(r*RAD),-(Math.sin(r*RAD)*Math.cos(e*RAD)+Math.tan(lat*RAD)*Math.sin(e*RAD)))/RAD);}
 function mcLon(r,e){return norm(Math.atan2(Math.sin(r*RAD),Math.cos(r*RAD)*Math.cos(e*RAD))/RAD);}
 function houseOf(l,c){l=norm(l);for(let i=1;i<=12;i++){const a=c[i],b=c[i===12?1:i+1];const sp=norm(b-a);if(norm(l-a)<sp||sp===0)return i;}return 1;}
-const PGLY={'Güneş':'☉','Ay':'☽'};
+const PGLY={'Güneş':'☉︎','Ay':'☽︎'};
 const ELEM=['Ateş','Toprak','Hava','Su'];
 const ORD=['','birinci','ikinci','üçüncü','dördüncü','beşinci','altıncı','yedinci','sekizinci','dokuzuncu','onuncu','on birinci','on ikinci'];
 const HAREA={1:'kim olduğun ve nasıl göründüğün',2:'para, değer ve güvenlik',3:'zihnin ve konuşman',4:'aile ve kökler',5:'aşk, yaratmak ve sahne',6:'iş, düzen ve sağlık',7:'ilişkiler ve karşındaki insan',8:'derinlik, kriz ve dönüşüm',9:'anlam, inanç ve uzaklar',10:'kariyer ve dünyadaki yerin',11:'arkadaşlar, gruplar ve gelecek',12:'içe kapanma ve görünmeyen dünya'};
@@ -299,9 +300,11 @@ function sentences(ch){
  return picked;
 }
 
-const ZGLY=['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
-const PLGLY=['☉','☽','☿','♀','♂','♃','♄','♅','♆','♇'];
+const ZGLY=['♈︎','♉︎','♊︎','♋︎','♌︎','♍︎','♎︎','♏︎','♐︎','♑︎','♒︎','♓︎'];
+const PLGLY=['☉︎','☽︎','☿︎','♀︎','♂︎','♃︎','♄︎','♅︎','♆︎','♇︎'];
 function drawWheel(ch){
+ if(window.SorbiChart){ try{ return window.SorbiChart.draw(window.SorbiChart.adapt(ch),null,{theme:'night',noHouses:!!ch.noTime}); }catch(e){} }
+ (function W(n){ if(window.SorbiChart){ try{ var w=document.getElementById('wheel'); if(w&&w.style.display!=='none'){ w.innerHTML=window.SorbiChart.draw(window.SorbiChart.adapt(ch),null,{theme:'night',noHouses:!!ch.noTime}); } }catch(e){} } else if(n<40) setTimeout(function(){W(n+1);},150); })(0);
  const cx=130,cy=130,outR=118,midR=88,cx0=Math.cos,sn=Math.sin;
  const pos=(lon,R)=>[cx-R*cx0(lon*RAD),cy-R*sn(lon*RAD)];
  let s='<circle class="ring" cx="130" cy="130" r="118"/><circle class="ring2" cx="130" cy="130" r="88"/>';
@@ -332,7 +335,7 @@ document.getElementById('go').onclick=()=>{
  // reduced-motion → statik son kare, sinematik akış yok
  const RM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  // cinematic reading: cycle phrases
- const phrases=['✦ Doğduğun anın gökyüzünü kuruyorum<span class="dots">…</span>','☉ Güneşini buluyorum<span class="dots">…</span>','☽ Ay\'ını okuyorum<span class="dots">…</span>'];
+ const phrases=['✦ Doğduğun anın gökyüzünü kuruyorum<span class="dots">…</span>','☉︎ Güneşini buluyorum<span class="dots">…</span>','☽︎ Ay\'ını okuyorum<span class="dots">…</span>'];
  if(!noTime)phrases.push('⌖ Yükselenini çözüyorum<span class="dots">…</span>');
  let pi=0;reading.innerHTML=RM?'✦':phrases[0];
  const cyc=RM?null:setInterval(()=>{reading.style.opacity=0;setTimeout(()=>{pi++;if(pi<phrases.length){reading.innerHTML=phrases[pi];reading.style.opacity=1;}},380);},880);

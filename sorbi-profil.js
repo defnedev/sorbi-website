@@ -36,8 +36,20 @@ function fmtDate(d){ // YYYY-MM-DD -> GG.AA.YYYY
   var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(d||''); return m ? (m[3]+'.'+m[2]+'.'+m[1]) : (d||'');
 }
 
+function navBadge(b,n){
+  var navEl=document.querySelector('.sbnav nav')||document.querySelector('.sorbi-topnav nav')||document.querySelector('.topnav nav');
+  if(!navEl||document.getElementById('sbNavProf')) return;
+  var a=document.createElement('a'); a.id='sbNavProf'; a.href='/haritam';
+  a.textContent='✦ '+(n||'Profilim');
+  a.style.cssText='color:#F2D3B8;background:rgba(227,166,146,.13);border-radius:99px;padding:.36rem .8rem;font-weight:600;white-space:nowrap;text-decoration:none';
+  navEl.insertBefore(a,navEl.firstChild);
+  var h=document.getElementById('sorbiNavHaritam'); if(h) h.style.display='none';
+}
 function chip(){
   var b=birth(); if(!b) return;               // profil yoksa sessiz kal
+  navBadge(b,name());
+  // form içermeyen (okuma) sayfalarda büyük çip basma — rozet yeter
+  if(!document.querySelector('input[type=date]') && !document.getElementById('go') && !document.getElementById('goBtn')) return;
   if(document.getElementById('sbprofil')) return;
   var n=name();
   var css=document.createElement('style');
@@ -75,9 +87,9 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp
 function autorun(){
   if(!birth()) return;
   if(/[?&](d|m)=/.test(location.search)) return;        // deep-link kendi akışını yönetir
-  var go=document.getElementById('go')||document.getElementById('goBtn');
+  var go=document.getElementById('go')||document.getElementById('goBtn')||document.getElementById('gen');
   if(!go||go.dataset.sbAuto) return;
-  var d=document.getElementById('d')||document.getElementById('fDate');
+  var d=document.getElementById('d')||document.getElementById('fDate')||document.getElementById('cDate');
   if(!d||!d.value) return;                              // sayfanın kendi ön-dolumu bitmemişse çalışma
   go.dataset.sbAuto='1';
   var n=0;(function w(){

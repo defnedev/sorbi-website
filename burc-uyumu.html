@@ -111,7 +111,7 @@ h1{font-family:'Space Grotesk','Inter',sans-serif;font-size:clamp(1.7rem,6vw,2.4
 </div>
 <script>
 const SIGNS=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
-const ZG=['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];const VS='︎';
+const ZG=['♈︎','♉︎','♊︎','♋︎','♌︎','♍︎','♎︎','♏︎','♐︎','♑︎','♒︎','♓︎'];const VS='︎';
 const ELN=['Ateş','Toprak','Hava','Su'];
 let a=null,b=null;
 function grid(el,which){el.innerHTML=SIGNS.map((s,i)=>`<div class="sg" data-i="${i}"><span class="g">${ZG[i]}${VS}</span><span class="n">${s}</span></div>`).join('');
@@ -206,4 +206,5 @@ function shareIt(){const t=(a!==null&&b!==null)?`${SIGNS[a]} & ${SIGNS[b]} burç
  <div class="sbft-bot"><span>© 2026 Sorbi · sorbiapp.com</span><span>Astroloji içerikleri kişisel farkındalık amaçlıdır; kesin gelecek vaadi değildir.</span></div>
 </footer>
 <!-- SORBI-FOOTER:END -->
+<script src="/sorbi-profil.js?v=3" defer></script>
 </body></html>
