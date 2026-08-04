@@ -1898,22 +1898,6 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
    };
    document.addEventListener('click',function(e){ if(e.target&&e.target.id==='saveBtn') setTimeout(fill,300); });
  }
- /* atölyeden ilk kez harita açan da "giriş yapmış" olsun */
- var _go=document.getElementById('goBtn');
- if(_go) _go.addEventListener('click',function(){
-   setTimeout(function(){
-     try{
-       if(JSON.parse(localStorage.getItem('sorbi_birth')||'null')) return;
-       var d=document.getElementById('fDate').value; if(!d) return;
-       localStorage.setItem('sorbi_birth',JSON.stringify({
-         name:document.getElementById('fName').value||'',
-         date:d, time:document.getElementById('fTime').value||'',
-         place:document.getElementById('fPlace').value||'',
-         lat:document.getElementById('fLat').value, lon:document.getElementById('fLon').value,
-         tz:document.getElementById('fTz').value||'Europe/Istanbul'}));
-     }catch(e){}
-   },600);
- });
 })();
 </script>
 

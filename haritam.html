@@ -153,7 +153,13 @@ function localToUTC(y,mo,d,h,mi,tz){let g=Date.UTC(y,mo-1,d,h,mi,0);for(let i=0;
 function eclOfDate(A,b,t){let v=(b===A.Body.Moon)?A.GeoMoon(t):A.GeoVector(b,t,true);return norm(A.SphereFromVector(A.RotateVector(A.Rotation_EQJ_ECT(t),v)).lon);}
 function obliquity(t){const T=t.tt/36525;return(84381.448-46.8150*T-0.00059*T*T+0.001813*T*T*T)/3600;}
 function ascendant(r,e,lat){return norm(Math.atan2(Math.cos(r*RAD),-(Math.sin(r*RAD)*Math.cos(e*RAD)+Math.tan(lat*RAD)*Math.sin(e*RAD)))/RAD);}
-function getProfile(){try{return JSON.parse(localStorage.getItem('sorbi_profile')||'null');}catch(e){return null;}}
+function getProfile(){try{
+ var p=JSON.parse(localStorage.getItem('sorbi_profile')||'null');
+ if(p&&p.birth&&p.birth.date) return p;
+ var b=JSON.parse(localStorage.getItem('sorbi_birth')||'null');
+ if(b&&b.date){ p=p||{}; p.birth=b; if(!p.name&&b.name)p.name=b.name; return p; }
+ return p;
+}catch(e){return null;}}
 function saveProfile(){try{localStorage.setItem('sorbi_profile',JSON.stringify(PR));}catch(e){}}
 function statusTr(s){return {pending:'Cevap hazırlanıyor',approved:'Cevaplandı ✓',awaiting_payment:'Ödeme bekliyor',rejected:'İptal'}[s]||'Alındı ✦';}
 function renderList(){
@@ -203,6 +209,25 @@ function initBig3(){
  document.querySelectorAll('#chips .chip').forEach(el=>el.onclick=()=>{const q=document.getElementById('q');q.value=(q.value?q.value+' ':'')+el.textContent+': ';q.focus();});
  document.getElementById('logout').onclick=()=>{if(confirm('Profilinden çıkılsın mı?')){localStorage.removeItem('sorbi_profile');location.href='/';}};
  initBig3(); renderList(); refreshStatuses();
+ /* kayıtlı haritalar */
+ try{
+  var charts=JSON.parse(localStorage.getItem('sorbi_charts')||'[]')||[];
+  charts=charts.filter(function(c){return c&&c.date;});
+  if(charts.length){
+   var sec=document.createElement('div');
+   sec.innerHTML='<div style="font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:#E3A692;margin:1.6rem 0 .6rem">Kayıtlı Haritalarım</div>'+
+    '<div style="display:flex;gap:.5rem;flex-wrap:wrap">'+
+    charts.map(function(c){
+      var q='/detayli-dogum-haritasi?d='+encodeURIComponent(c.date)+(c.time?'&t='+encodeURIComponent(c.time):'')+
+            '&lat='+encodeURIComponent(c.lat)+'&lon='+encodeURIComponent(c.lon)+'&tz='+encodeURIComponent(c.tz||'Europe/Istanbul')+
+            (c.place?'&p='+encodeURIComponent(c.place):'')+(c.name?'&n='+encodeURIComponent(c.name):'');
+      var nm=String(c.name||'İsimsiz').replace(/[<>&"]/g,'');
+      return '<a href="'+q+'" style="display:inline-block;background:rgba(255,255,255,.045);border:1px solid rgba(227,166,146,.28);border-radius:99px;padding:.5rem 1rem;color:#F2EFE9;text-decoration:none;font-size:.85rem"><b style="color:#F2D3B8">'+nm+'</b> · '+c.date+'</a>';
+    }).join('')+
+    '<a href="/detayli-dogum-haritasi" style="display:inline-block;border:1px dashed rgba(227,166,146,.4);border-radius:99px;padding:.5rem 1rem;color:#E3A692;text-decoration:none;font-size:.85rem">＋ yeni harita</a></div>';
+   var app=document.getElementById('app'); app.appendChild(sec);
+  }
+ }catch(e){}
 })();
 
 document.getElementById('send')&&(document.getElementById('send').onclick=async()=>{
