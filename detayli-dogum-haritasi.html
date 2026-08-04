@@ -355,9 +355,9 @@ th{color:var(--dim)}
       <div class="note">Konum derece°dakika′saniye″ olarak burç içindedir. <b>R</b> = geri hareket. Hız günlük ekliptik hareket.</div></div>
     <div class="pane" id="p2"><div class="subh">Evler</div><div class="scroll"><table id="tHouses"></table></div>
       <div class="note" id="houseNote"></div></div>
+    <div class="pane" id="p4"><div class="subh">Açı listesi</div><div class="scroll"><table id="tAspects"></table></div></div>
     <div class="pane" id="p3"><div class="subh">Açı ızgarası</div><div class="scroll" id="gridBox"></div>
       <div class="note">Hücrede açı glifi, altında orb (derece). <span class="aapp">▲</span> yaklaşan, <span class="aapp">▽</span> ayrılan.</div></div>
-    <div class="pane" id="p4"><div class="subh">Açı listesi</div><div class="scroll"><table id="tAspects"></table></div></div>
     <div class="pane" id="p5"><div class="subh">Dağılım</div><div id="dist"></div></div>
     <div class="pane" id="p7"><div class="subh">Açı kalıpları</div><div id="patterns"></div></div>
     <div class="pane" id="p6"><div class="subh">Esansiyel dignite</div><div class="scroll"><table id="tDign"></table></div>
@@ -1120,28 +1120,40 @@ function renderAll(){
   bBox.innerHTML = out ? '<table style="margin-top:1rem">'+planetTable(out,CUR.labelOuter+' — “Ev” sütunu natal evlere göredir')+'</table>' : '';
 
   /* evler */
-  var h2='<tr><th>Ev</th><th>Başlangıç</th><th>Yöneticisi</th><th>Yön. nerede</th></tr>';
+  var h2='<tr><th>Ev</th><th>Başlangıç</th><th>İçindekiler</th><th>Yöneticisi</th><th>Yön. nerede</th></tr>';
   for(var i=1;i<=12;i++){
     var x=dms(ch.c[i]), rk=RULER[x.s];
     var rp=ch.pls.filter(function(p){return p.k===rk;})[0];
-    h2+='<tr><td>'+i+'</td><td class="pos el-'+(x.s%4)+'">'+fmtPos(ch.c[i])+'</td>'+
+    var inh=ch.pls.filter(function(p){return p.house===i && ['pof','sno'].indexOf(p.k)<0;});
+    var nx=ch.c[i%12+1], span=norm(nx-ch.c[i]);
+    var trapped=[];
+    for(var sg=0;sg<12;sg++){ var a0=sg*30, rel=norm(a0-ch.c[i]); if(rel>0 && rel+30<=span) trapped.push(SGLYPH[sg]); }
+    h2+='<tr><td>'+i+'</td><td class="pos el-'+(x.s%4)+'">'+fmtPos(ch.c[i])+
+        (trapped.length?' <span title="araya sıkışan burç" style="color:var(--mut);font-size:.72rem">('+trapped.join(' ')+' sıkışık)</span>':'')+'</td>'+
+        '<td>'+(inh.length?inh.map(function(p){return '<span class="gl" style="font-size:.95rem" title="'+p.n+'">'+p.g+'</span>';}).join(' '):'<span style="color:var(--dim)">—</span>')+'</td>'+
         '<td>'+(rp?rp.g+' '+rp.n:'')+'</td><td>'+(rp?rp.house+'. ev':'')+'</td></tr>';
   }
-  h2+='<tr><td colspan="2" style="color:var(--gold-lt)">Vertex</td><td colspan="2" class="pos">'+fmtPos(ch.vertex)+' · '+houseOf(ch.vertex,ch.c)+'. ev</td></tr>';
+  h2+='<tr><td colspan="2" style="color:var(--gold-lt)">Vertex</td><td colspan="3" class="pos">'+fmtPos(ch.vertex)+' · '+houseOf(ch.vertex,ch.c)+'. ev</td></tr>';
   document.getElementById('tHouses').innerHTML=h2;
   var HN={P:'Placidus — zaman temelli, en yaygın sistem.',W:'Whole Sign — her burç bir ev; Helenistik gelenek.',K:'Koch — doğum yeri temelli.',E:'Eşit — Yükselen\'den itibaren 30°\'lik dilimler.',O:'Porphyry — dörtlükleri eşit üçe böler.',R:'Regiomontanus — göksel ekvator bölmesi; horary geleneği.',C:'Campanus — baş dikey (prime vertical) bölmesi.'};
   document.getElementById('houseNote').textContent=(HN[ch.o.house]||'')+' Vertex, baş dikeyin ekliptiği batıda kestiği noktadır; kader/karşılaşma teması ile anılır.';
 
   /* açı listesi */
+  var srt=asps.slice().sort(function(a,b){ return (b.as.major?1:0)-(a.as.major?1:0) || a.abs-b.abs; });
+  function aspRow(x){
+    var hA=x.a.house?'<span style="color:var(--dim);font-size:.7rem"> '+x.a.house+'</span>':'';
+    var hB=x.b.house?'<span style="color:var(--dim);font-size:.7rem"> '+x.b.house+'</span>':'';
+    var tight=x.abs<1;
+    return '<tr><td class="gl">'+x.a.g+'</td><td style="font-size:.78rem">'+x.a.n+hA+'</td>'+
+      '<td><span class="'+x.as.cls+'">'+agl(x.as.a,15)+'</span> '+x.as.n+'</td>'+
+      '<td style="font-size:.78rem">'+x.b.n+hB+'</td><td class="gl">'+x.b.g+'</td>'+
+      '<td style="font-variant-numeric:tabular-nums'+(tight?';color:var(--gold-br);font-weight:600':'')+'">'+x.abs.toFixed(2)+'°</td>'+
+      '<td style="font-size:.74rem;color:var(--mut)">'+(x.app===null?'—':(x.app?'▲ yaklaşan':'▽ ayrılan'))+'</td></tr>';
+  }
+  var maj=srt.filter(function(x){return x.as.major;}), min_=srt.filter(function(x){return !x.as.major;});
   var h3='<tr><th></th><th>'+(out?esc(CUR.labelOuter):'')+'</th><th>Açı</th><th>'+(out?esc(CUR.labelInner):'')+'</th><th></th><th>Orb</th><th>Durum</th></tr>';
-  asps.forEach(function(x){
-    h3+='<tr><td class="gl">'+x.a.g+'</td><td style="font-size:.78rem">'+x.a.n+(out?' <span style="color:var(--dim)">'+x.a.house+'. ev</span>':'')+'</td>'+
-        '<td><span class="'+x.as.cls+'">'+agl(x.as.a,15)+'</span> '+x.as.n+'</td>'+
-        '<td style="font-size:.78rem">'+x.b.n+'</td>'+
-        '<td class="gl">'+x.b.g+'</td>'+
-        '<td>'+x.abs.toFixed(2)+'°</td>'+
-        '<td>'+(x.app===null?'—':(x.app?'yaklaşan':'ayrılan'))+'</td></tr>';
-  });
+  if(maj.length) h3+='<tr><td colspan="7" style="font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);padding-top:.6rem">Majör açılar · orb sırasıyla</td></tr>'+maj.map(aspRow).join('');
+  if(min_.length) h3+='<tr><td colspan="7" style="font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);padding-top:.8rem">Minör açılar</td></tr>'+min_.map(aspRow).join('');
   document.getElementById('tAspects').innerHTML=h3;
 
   /* ızgara */
@@ -1384,17 +1396,37 @@ document.addEventListener('click',function(e){
 });
 
 /* ═════════ KİTAPLIK ═════════ */
-function libGet(){ try{ return JSON.parse(localStorage.getItem('sorbi_charts')||'null')||SEED.slice(); }catch(e){ return SEED.slice(); } }
+function libGet(){ try{ return JSON.parse(localStorage.getItem('sorbi_charts')||'null')||[]; }catch(e){ return []; } }
+function celebGet(){ return SEED.slice(); }
 function libSet(v){ try{ localStorage.setItem('sorbi_charts',JSON.stringify(v.slice(0,80))); }catch(e){} }
-window.SorbiLib={get:function(){return libGet();}};
+window.SorbiLib={get:function(){return libGet();},celebs:function(){return celebGet();}};
+function fFill(c){ document.getElementById('fName').value=c.name||''; document.getElementById('fDate').value=c.date; document.getElementById('fTime').value=c.time; document.getElementById('fLat').value=c.lat; document.getElementById('fLon').value=c.lon; document.getElementById('fTz').value=c.tz; document.getElementById('fPlace').value=c.place||''; }
+function bFill(c){ document.getElementById('bName').value=c.name||''; document.getElementById('bDate').value=c.date; document.getElementById('bTime').value=c.time; document.getElementById('bLat').value=c.lat; document.getElementById('bLon').value=c.lon; document.getElementById('bTz').value=c.tz; document.getElementById('bPlace').value=c.place||''; }
 function libRender(){
   var l=libGet(), box=document.getElementById('lib');
   box.innerHTML='<span class="libhead">Haritalarım</span>'+
-    l.map(function(c,i){ return '<button class="chip" data-i="'+i+'"><b>'+esc(c.name||'İsimsiz')+'</b> · '+c.date+(c.rr?'<span class="rr">'+c.rr+'</span>':'')+'</button>'; }).join('')+
+    (l.length ? l.map(function(c,i){ return '<button class="chip" data-i="'+i+'"><b>'+esc(c.name||'İsimsiz')+'</b> · '+c.date+'</button>'; }).join('')
+              : '<span style="font-size:.78rem;color:var(--dim)">Henüz kayıtlı harita yok — bir harita açıp <b>Haritayı kaydet ✦</b> de.</span>')+
     '<button class="chip" id="libNew" style="border-color:rgba(227,166,146,.5);color:var(--gold-br)">＋ yeni harita</button>'+
     '<button class="chip" id="libExport">↓ dışa aktar</button>'+
     '<button class="chip" id="libImport">↑ içe aktar</button>'+
-    '<button class="chip" id="libReset">sıfırla</button>';
+    (l.length?'<button class="chip" id="libReset">sıfırla</button>':'')+
+    '<button class="chip" id="libCelebT" style="opacity:.75">✦ ünlü kitaplığı</button>'+
+    '<div id="libCeleb" style="display:none;width:100%;margin-top:.5rem;padding-top:.5rem;border-top:1px dashed rgba(255,255,255,.1)">'+
+      celebGet().map(function(c,i){ return '<button class="chip" data-c="'+i+'">'+esc(c.name)+' · '+c.date+(c.rr?'<span class="rr">'+c.rr+'</span>':'')+'</button>'; }).join('')+
+    '</div>';
+  var ct=document.getElementById('libCelebT');
+  if(ct) ct.onclick=function(){ var d=document.getElementById('libCeleb'); d.style.display=d.style.display==='none'?'block':'none'; };
+  Array.prototype.forEach.call(box.querySelectorAll('.chip[data-c]'),function(b){
+    b.onclick=function(){
+      var c=celebGet()[+b.dataset.c]; if(!c) return;
+      var pre=(MODE==='synastry'&&CUR)?'b':'f';
+      ['Name','Date','Time','Lat','Lon','Tz','Place'].forEach(function(k){
+        var e=document.getElementById(pre+k.replace('Name','Name')); });
+      if(pre==='b'){ bFill(c); } else { fFill(c); }
+      run();
+    };
+  });
   Array.prototype.forEach.call(box.querySelectorAll('.chip[data-i]'),function(b){
     b.onclick=function(){
       var c=libGet()[+b.dataset.i];
@@ -1441,7 +1473,8 @@ function libRender(){
     };
     inp.click();
   };
-  document.getElementById('libReset').onclick=function(){
+  var _lr=document.getElementById('libReset');
+  if(_lr)_lr.onclick=function(){
     try{ localStorage.removeItem('sorbi_charts'); }catch(e){}
     libRender();
   };
@@ -1716,12 +1749,16 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
  var sel=document.getElementById('bPick');
  function fill(){
    if(!sel) return; var l=ppl();
-   sel.innerHTML='<option value="">Kayıtlı kişiden seç…</option>'+l.map(function(c,i){
-     return '<option value="'+i+'">'+String(c.name||'İsimsiz').replace(/[<>&]/g,'')+' · '+c.date+'</option>';}).join('');
+   var cel=(window.SorbiLib&&window.SorbiLib.celebs)?window.SorbiLib.celebs():[];
+   sel.innerHTML='<option value="">Kayıtlı kişiden seç…</option>'+
+     l.map(function(c,i){ return '<option value="u'+i+'">'+String(c.name||'İsimsiz').replace(/[<>&]/g,'')+' · '+c.date+'</option>';}).join('')+
+     (cel.length?'<optgroup label="Ünlüler">'+cel.map(function(c,i){ return '<option value="c'+i+'">'+String(c.name).replace(/[<>&]/g,'')+'</option>';}).join('')+'</optgroup>':'');
  }
  if(sel){ fill();
    sel.onchange=function(){
-     var c=ppl()[+sel.value]; if(!c) return;
+     var v=sel.value; if(!v) return;
+     var c = v.charAt(0)==='c' ? ((window.SorbiLib&&window.SorbiLib.celebs)?window.SorbiLib.celebs():[])[+v.slice(1)] : ppl()[+v.slice(1)];
+     if(!c) return;
      var m={bName:c.name||'',bDate:c.date,bTime:c.time||'12:00',bLat:c.lat,bLon:c.lon,bTz:c.tz||'Europe/Istanbul',bPlace:c.place||''};
      Object.keys(m).forEach(function(id){ var e=document.getElementById(id); if(e!=null&&m[id]!=null) e.value=m[id]; });
    };
