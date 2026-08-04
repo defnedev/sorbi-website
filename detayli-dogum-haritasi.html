@@ -302,6 +302,10 @@ th{color:var(--dim)}
 
 <div class="card hidden" id="bCard">
   <div class="libhead" style="margin-bottom:.6rem">İkinci kişi (sinastri)</div>
+  <div style="margin:0 0 .7rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
+    <select id="bPick" style="max-width:260px"><option value="">Kayıtlı kişiden seç…</option></select>
+    <span style="font-size:.72rem;color:var(--dim)">ya da aşağıya elle gir · kişi eklemek için haritayı açıp "Haritayı kaydet ✦"</span>
+  </div>
   <div class="form">
     <div><label for="bName">İsim</label><input id="bName" placeholder="B kişisi" autocomplete="off"></div>
     <div><label for="bDate">Doğum tarihi</label><input id="bDate" type="date" value="1990-01-01"></div>
@@ -1382,6 +1386,7 @@ document.addEventListener('click',function(e){
 /* ═════════ KİTAPLIK ═════════ */
 function libGet(){ try{ return JSON.parse(localStorage.getItem('sorbi_charts')||'null')||SEED.slice(); }catch(e){ return SEED.slice(); } }
 function libSet(v){ try{ localStorage.setItem('sorbi_charts',JSON.stringify(v.slice(0,80))); }catch(e){} }
+window.SorbiLib={get:function(){return libGet();}};
 function libRender(){
   var l=libGet(), box=document.getElementById('lib');
   box.innerHTML='<span class="libhead">Haritalarım</span>'+
@@ -1704,6 +1709,42 @@ function boot(){
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
 })();
 </script>
+<script>
+/* kayıtlı kişiden seç (sinastri) + ilk haritada profili kaydet */
+(function(){
+ function ppl(){ try{ return (window.SorbiLib?window.SorbiLib.get():[]).filter(function(c){return c&&c.date;}); }catch(e){ return []; } }
+ var sel=document.getElementById('bPick');
+ function fill(){
+   if(!sel) return; var l=ppl();
+   sel.innerHTML='<option value="">Kayıtlı kişiden seç…</option>'+l.map(function(c,i){
+     return '<option value="'+i+'">'+String(c.name||'İsimsiz').replace(/[<>&]/g,'')+' · '+c.date+'</option>';}).join('');
+ }
+ if(sel){ fill();
+   sel.onchange=function(){
+     var c=ppl()[+sel.value]; if(!c) return;
+     var m={bName:c.name||'',bDate:c.date,bTime:c.time||'12:00',bLat:c.lat,bLon:c.lon,bTz:c.tz||'Europe/Istanbul',bPlace:c.place||''};
+     Object.keys(m).forEach(function(id){ var e=document.getElementById(id); if(e!=null&&m[id]!=null) e.value=m[id]; });
+   };
+   document.addEventListener('click',function(e){ if(e.target&&e.target.id==='saveBtn') setTimeout(fill,300); });
+ }
+ /* atölyeden ilk kez harita açan da "giriş yapmış" olsun */
+ var _go=document.getElementById('goBtn');
+ if(_go) _go.addEventListener('click',function(){
+   setTimeout(function(){
+     try{
+       if(JSON.parse(localStorage.getItem('sorbi_birth')||'null')) return;
+       var d=document.getElementById('fDate').value; if(!d) return;
+       localStorage.setItem('sorbi_birth',JSON.stringify({
+         name:document.getElementById('fName').value||'',
+         date:d, time:document.getElementById('fTime').value||'',
+         place:document.getElementById('fPlace').value||'',
+         lat:document.getElementById('fLat').value, lon:document.getElementById('fLon').value,
+         tz:document.getElementById('fTz').value||'Europe/Istanbul'}));
+     }catch(e){}
+   },600);
+ });
+})();
+</script>
 <!-- SORBI-FOOTER:START -->
 <style>
 .sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0D0810;font-family:'Inter',system-ui,sans-serif}
@@ -1758,5 +1799,6 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
 </footer>
 <!-- SORBI-FOOTER:END -->
 <script src="/sorbi-form.js?v=3" defer></script>
+<script src="/sorbi-profil.js?v=3" defer></script>
 </body>
 </html>

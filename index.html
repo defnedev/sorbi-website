@@ -194,7 +194,7 @@ footer .fine{text-align:center;line-height:1.85;font-weight:300}
         <div><label for="bt">Saat <span style="opacity:.55;text-transform:none;letter-spacing:0">(biliyorsan)</span></label><input type="time" id="bt" step="60"></div>
         <div class="full geo"><label for="bp">Doğum yeri</label><input id="bp" placeholder="Örn: İstanbul" autocomplete="off"><div class="geolist" id="geoList" hidden></div></div>
       </div>
-      <div class="hint">Saati bilmiyorsan boş bırak. Bilgin cihazında kalır.</div>
+      <div class="hint">Yer yazmazsan İstanbul varsayılır. Saati bilmiyorsan boş bırak — bilgin cihazında kalır.</div>
     </div>
 
     <div class="big3" id="big3" hidden>
@@ -271,9 +271,10 @@ function showPh(html){ $('chartbox').innerHTML='<div class="ph">'+html+'</div>';
 function showSpin(){ $('chartbox').innerHTML='<div class="ph"><div class="spin"></div>Haritan hesaplanıyor…</div>'; }
 
 /* ── yer arama ── */
-var geoT=null, PICKED=null;
+var DEF={lat:41.0082,lon:28.9784,tz:'Europe/Istanbul',label:'İstanbul'};
+var geoT=null, PICKED=DEF;
 $('bp').addEventListener('input',function(e){
-  clearTimeout(geoT); PICKED=null;
+  clearTimeout(geoT); PICKED=DEF;
   var q=e.target.value.trim(), list=$('geoList');
   if(q.length<2){ list.hidden=true; return; }
   geoT=setTimeout(function(){
@@ -486,5 +487,6 @@ if($('bd').value && PICKED) render(); else setTimeout(drawMoment,120);
 </footer>
 <!-- SORBI-FOOTER:END -->
 <script src="/sorbi-form.js?v=3" defer></script>
+<script src="/sorbi-profil.js?v=3" defer></script>
 </body>
 </html>
