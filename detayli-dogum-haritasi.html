@@ -335,6 +335,7 @@ th{color:var(--dim)}
         <button class="btn ghost sm" id="saveBtn">Haritayı kaydet ✦</button>
         <button class="btn ghost sm" id="dlJson">Veri (JSON)</button>
         <button class="btn ghost sm" id="dlCsv">Tablo (CSV)</button>
+        <button class="btn ghost sm" id="shareBtn">Bağlantıyı paylaş</button>
         <button class="btn ghost sm" id="prBtn">Yazdır</button>
       </div>
       <div class="note" id="meta"></div>
@@ -348,6 +349,7 @@ th{color:var(--dim)}
       <button data-p="p4,p3">Açılar</button>
       <button data-p="p5,p7,p6,p10">Analiz</button>
       <button data-p="p8,p9">Uzman</button>
+      <button data-p="p11">Takvim</button>
     </div>
     <div class="pane on" id="p0"><div id="sumBox"></div></div>
     <div class="pane" id="p1"><div class="subh">Gezegenler</div><div class="scroll"><table id="tPlanets"></table></div>
@@ -369,6 +371,12 @@ th{color:var(--dim)}
       <div class="scroll"><table id="tSect"></table></div>
       <div class="note" id="sectNote"></div>
     </div>
+    <div class="pane" id="p11"><div class="subh">Transit takvimi — 13 ay</div>
+      <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-bottom:.6rem;font-size:.78rem;color:var(--mut)">
+        <label style="display:flex;gap:.4rem;align-items:center;cursor:pointer"><input type="checkbox" id="calMars" style="width:auto"> Mars geçişlerini de göster</label>
+      </div>
+      <div id="calBox"></div>
+      <div class="note">Yavaş gezegenlerin natal noktalarına <b>tam açı</b> yaptığı tarihler. Retro nedeniyle aynı temas 2–3 kez tekrarlanır; geçiş numarası yanında yazar. ℞ = temas anında gezegen geri harekette. Yükselen/MC temasları doğum saatinin kesinliğine bağlıdır.</div></div>
     <div class="pane" id="p9"><div class="subh">Deklinasyon & antisya</div><div class="scroll"><table id="tDecl"></table></div>
       <div class="scroll" style="margin-top:1rem"><table id="tAnti"></table></div>
       <div class="note">Deklinasyon: gök ekvatoruna göre açı. <b>Paralel</b> aynı yönde, <b>karşıt paralel</b> ters yönde eşit deklinasyon — kavuşum ve karşıtlık gibi okunur (orb 1°). <b>Antisya</b>, Yengeç–Oğlak ekseninde ayna nokta; <b>karşı antisya</b> Koç–Terazi ekseninde.</div></div>
@@ -1112,6 +1120,7 @@ function planetTable(ch,title){
 }
 
 function renderAll(){
+  try{ var _cb=document.getElementById('calBox'); if(_cb){ _cb.dataset.key=''; if(getComputedStyle(document.getElementById('p11')).display!=='none') setTimeout(calBuild,50); } }catch(e){}
   var ch=CUR.inner, out=CUR.outer, asps=CUR.aspects;
   if(out) out.pts.forEach(function(p){ p.house=houseOf(p.lon,ch.c); });
 
@@ -1608,6 +1617,92 @@ document.getElementById('tabs').onclick=function(e){
   Array.prototype.forEach.call(this.children,function(x){ x.classList.toggle('on',x===b); });
   var ids=b.dataset.p.split(',');
   document.querySelectorAll('.pane').forEach(function(p){ p.classList.toggle('on',ids.indexOf(p.id)>=0); });
+};
+
+/* ═════ TRANSIT TAKVİMİ ═════ */
+function wrap180(x){ x=norm(x); return x>180?x-360:x; }
+function calBuild(){
+  var box=document.getElementById('calBox'); if(!box||!CUR||!CUR.inner) return;
+  var mars=document.getElementById('calMars').checked;
+  var key=(CUR.o.dateStr||'')+'|'+(CUR.o.timeStr||'')+'|'+(mars?'m':'');
+  if(box.dataset.key===key) return; box.dataset.key=key;
+  box.innerHTML='<div class="note">Gökyüzü taranıyor…</div>';
+  setTimeout(function(){ try{ box.innerHTML=calHTML(mars); }catch(e){ box.innerHTML='<div class="note">Takvim hesaplanamadı: '+esc(e.message)+'</div>'; } },30);
+}
+function calHTML(mars){
+  var ch=CUR.inner;
+  var TKEYS=(mars?['mar']:[]).concat(['jup','sat','ura','nep','plu']);
+  var TB=TKEYS.map(function(k){ return BODIES.filter(function(b){return b.k===k;})[0]; });
+  var NKEYS=['sun','moon','mer','ven','mar','jup','sat','ura','nep','plu','chi','nod'];
+  var NAT=ch.pls.filter(function(p){ return NKEYS.indexOf(p.k)>=0; })
+    .concat([{k:'asc',n:'Yükselen',g:'AC',lon:ch.asc},{k:'mc',n:'MC',g:'MC',lon:ch.mc}]);
+  var ASP=[[0,'kavuşum','a-maj'],[60,'altmışlık','a-soft'],[90,'kare','a-hard'],[120,'üçgen','a-soft'],[180,'karşıt','a-maj']];
+  var t0=Date.now(), DAYS=396, STEP=864e5;
+  var lons=TB.map(function(B){
+    var arr=new Float64Array(DAYS+1);
+    for(var d=0;d<=DAYS;d++) arr[d]=eclOf(A.Body[B.b],A.MakeTime(new Date(t0+d*STEP))).lon;
+    return arr;
+  });
+  var ev=[];
+  TB.forEach(function(B,bi){
+    var L=lons[bi];
+    NAT.forEach(function(np){
+      ASP.forEach(function(as){
+        var prev=null;
+        for(var d=0;d<=DAYS;d++){
+          var e=wrap180(L[d]-np.lon-as[0]);
+          if(prev!==null && Math.abs(e-prev)<30 && ((prev<=0&&e>0)||(prev>=0&&e<0)||e===0)){
+            var frac=(prev===e)?0:(prev/(prev-e));
+            var when=new Date(t0+((d-1)+frac)*STEP);
+            var retro=wrap180(L[d]-L[d-1])<0;
+            ev.push({t:when.getTime(), when:when, B:B, np:np, as:as, retro:retro});
+          }
+          prev=e;
+        }
+      });
+    });
+  });
+  ev.sort(function(a,b){ return a.t-b.t; });
+  /* retro geçiş numaraları */
+  var cnt={};
+  ev.forEach(function(x){ var k=x.B.k+'|'+x.np.k+'|'+x.as[0]; cnt[k]=(cnt[k]||0)+1; x.pass=cnt[k]; });
+  ev.forEach(function(x){ x.total=cnt[x.B.k+'|'+x.np.k+'|'+x.as[0]]; });
+  if(!ev.length) return '<div class="note">Önümüzdeki 13 ayda yavaş gezegenlerden tam açı teması yok.</div>';
+  var mFmt=new Intl.DateTimeFormat('tr-TR',{month:'long',year:'numeric'});
+  var dFmt=new Intl.DateTimeFormat('tr-TR',{day:'numeric',month:'short'});
+  var h='', lastM='';
+  ev.forEach(function(x){
+    var mk=mFmt.format(x.when);
+    if(mk!==lastM){ h+='<div style="font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:1rem 0 .35rem">'+mk+'</div>'; lastM=mk; }
+    h+='<div style="display:flex;gap:.6rem;align-items:baseline;padding:.32rem 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.85rem">'+
+       '<span style="min-width:52px;color:var(--mut);font-variant-numeric:tabular-nums">'+dFmt.format(x.when)+'</span>'+
+       '<span class="gl">'+x.B.g+'</span><span>'+x.B.n+(x.retro?' <span style="color:var(--mut);font-size:.72rem">℞</span>':'')+'</span>'+
+       '<span class="'+x.as[2]+'">'+x.as[1]+'</span>'+
+       '<span class="gl">'+x.np.g+'</span><span>natal '+x.np.n+(x.np.house?' <span style="color:var(--dim);font-size:.72rem">'+x.np.house+'. ev</span>':'')+'</span>'+
+       (x.total>1?'<span style="margin-left:auto;color:var(--dim);font-size:.72rem">'+x.pass+'/'+x.total+'. geçiş</span>':'')+
+       '</div>';
+  });
+  return h;
+}
+document.getElementById('tabs').addEventListener('click',function(e){
+  var b=e.target.closest('button'); if(b&&b.dataset.p==='p11') calBuild();
+});
+document.getElementById('calMars').addEventListener('change',function(){
+  var box=document.getElementById('calBox'); box.dataset.key=''; calBuild();
+});
+
+/* ═════ BAĞLANTI PAYLAŞ ═════ */
+document.getElementById('shareBtn').onclick=function(){
+  if(!CUR){ return; }
+  var o=CUR.o;
+  var q='?d='+(o.dateStr||'')+(o.timeStr?'&t='+o.timeStr:'')+'&lat='+o.lat+'&lon='+o.lon+'&tz='+encodeURIComponent(o.tz)+
+        (o.place?'&p='+encodeURIComponent(o.place):'')+(o.name?'&n='+encodeURIComponent(o.name):'')+(MODE!=='natal'?'&m='+MODE:'');
+  var url=location.origin+'/detayli-dogum-haritasi'+q;
+  var self=this;
+  function done(){ self.textContent='Kopyalandı ✦'; setTimeout(function(){ self.textContent='Bağlantıyı paylaş'; },1600); }
+  if(navigator.share){ navigator.share({title:'Sorbi — Doğum Haritası',url:url}).catch(function(){}); done(); }
+  else if(navigator.clipboard){ navigator.clipboard.writeText(url).then(done,function(){ prompt('Bağlantı:',url); }); }
+  else prompt('Bağlantı:',url);
 };
 
 document.getElementById('saveBtn').onclick=function(){
