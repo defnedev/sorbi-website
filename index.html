@@ -401,8 +401,10 @@ function fillTransits(){
     $('trList').innerHTML=hits.map(function(x){
       var yon = x.app===null ? '' : (x.app?' · yaklaşıyor':' · ayrılıyor');
       var ev = (!NOTIME && x.b.house) ? ' <span style="color:var(--dim)">('+x.b.house+'. ev)</span>' : '';
+      var hardA=(x.as.a===90||x.as.a===180), softA=(x.as.a===60||x.as.a===120);
+      var ac=hardA?'#C98A6E':(softA?'#8FB8AE':'var(--gold-br)');
       return '<div class="tr"><span class="gl">'+x.a.g+'</span>'+
-        '<span class="tx">Şu an: transit <b>'+x.a.n+'</b> · '+x.as.n.toLowerCase()+' · natal <b>'+x.b.n+'</b>'+ev+'</span>'+
+        '<span class="tx">Şu an: transit <b style="color:var(--gold-br)">'+x.a.n+'</b> <span style="color:'+ac+'">· '+x.as.n.toLowerCase()+' ·</span> natal <b style="color:var(--gold-br)">'+x.b.n+'</b>'+ev+'</span>'+
         '<span class="orb">'+x.abs.toFixed(1)+'°'+yon+'</span></div>';
     }).join('');
   }catch(e){ $('trBox').hidden=true; }

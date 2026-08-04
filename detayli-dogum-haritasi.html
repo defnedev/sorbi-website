@@ -1225,10 +1225,12 @@ function renderAll(){
       if(pats.length&&rare.length<3) rare.push('Haritanda <b>'+pats[0].t+'</b> kalıbı var — '+pats[0].m.length+' gezegen tek bir hikâyeye bağlanıyor.');
     }catch(e){}
     var rareHtml = rare.length ?
-      '<div style="margin-top:1rem;background:rgba(227,166,146,.07);border:1px solid rgba(227,166,146,.28);border-radius:14px;padding:.95rem 1.1rem">'+
-      '<div style="font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem">✦ Haritanda dikkatimi çekenler</div>'+
-      rare.slice(0,3).map(function(r){return '<div style="font-size:.86rem;margin:.3rem 0;color:var(--ink)">· '+r+'</div>';}).join('')+
-      '<a href="/soru-sor" style="display:inline-block;margin-top:.6rem;color:var(--gold-br);text-decoration:underline;text-underline-offset:3px;font-size:.84rem">Bunlar senin hayatında nasıl görünüyor? Sorunu ilet — dönüş WhatsApp\'tan →</a></div>' : '';
+      '<div style="margin-top:1.05rem;background:rgba(227,166,146,.045);border-left:3px solid var(--gold);border-radius:0 14px 14px 0;padding:.95rem 1.15rem .9rem">'+
+      '<div style="font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.55rem">✦ Haritanda dikkatimi çekenler</div>'+
+      rare.slice(0,3).map(function(r){return '<div style="font-size:.87rem;line-height:1.55;margin:.38rem 0;color:var(--ink)">'+r+'</div>';}).join('')+
+      '<div style="margin-top:.8rem;display:flex;align-items:center;gap:.7rem;flex-wrap:wrap">'+
+        '<a href="/soru-sor" style="display:inline-block;background:linear-gradient(135deg,#E3A692,#F2D3B8);color:#2B140C;padding:.5rem 1.05rem;border-radius:99px;font-weight:600;font-size:.8rem;text-decoration:none">Sorunu ilet ✦</a>'+
+        '<span style="font-size:.74rem;color:var(--dim)">dönüş WhatsApp\'tan</span></div></div>' : '';
     document.getElementById('sumBox').innerHTML=
       '<div class="sum-big3">'+g3('sun','Güneş')+g3('moon','Ay')+g3('asc','Yükselen')+'</div>'+
       '<div class="sum-chips">'+chips+'</div>'+
@@ -1442,10 +1444,10 @@ function libRender(){
   var l=libGet(), box=document.getElementById('lib');
   box.innerHTML='<span class="libhead">Haritalarım</span>'+
     (l.length ? l.map(function(c,i){ return '<button class="chip" data-i="'+i+'"><b>'+esc(c.name||'İsimsiz')+'</b> · '+c.date+'</button>'; }).join('')
-              : '<span style="font-size:.78rem;color:var(--dim)">Henüz kayıtlı harita yok — bir harita açıp <b>Haritayı kaydet ✦</b> de.</span>')+
+              : '<span style="font-size:.76rem;color:var(--dim)">Henüz kayıtlı harita yok</span>')+
     '<button class="chip" id="libNew" style="border-color:rgba(227,166,146,.5);color:var(--gold-br)">＋ yeni harita</button>'+
-    '<button class="chip" id="libExport">↓ dışa aktar</button>'+
-    '<button class="chip" id="libImport">↑ içe aktar</button>'+
+    (l.length?'<button class="chip" id="libExport">↓ dışa aktar</button>':'<span style="display:none" id="libExport"></span>')+
+    (l.length?'<button class="chip" id="libImport">↑ içe aktar</button>':'<span style="display:none" id="libImport"></span>')+
     (l.length?'<button class="chip" id="libReset">sıfırla</button>':'')+
     '<button class="chip" id="libCelebT" style="opacity:.75">✦ ünlü kitaplığı</button>'+
     '<div id="libCeleb" style="display:none;width:100%;margin-top:.5rem;padding-top:.5rem;border-top:1px dashed rgba(255,255,255,.1)">'+
