@@ -81,6 +81,13 @@ export async function onRequest(context) {
     await ensureSchema(env);
 
     // ---- Public: sipariş/booking oluştur ----
+    // --- Uyum kapısı (2026-09-04): ücretli hizmet siparişi ve ödeme yüzeyi kapalı.
+    // Reklam yasağı (RG 1 Tem 2026/33297, yürürlük 1 Ağu 2026) kapsamında
+    // sorbiapp.com'da astroloji hizmeti satışı/randevusu yok. Bu uçlar 410.
+    if (p === '/api/bookings' || p === '/api/pay/start' || p === '/api/pay/callback') {
+      return json({ error: 'Bu uç kaldırıldı. Sorbi ücretli astroloji hizmeti satmıyor.' }, 410);
+    }
+
     if (p === '/api/bookings' && m === 'POST') {
       const b = await request.json().catch(() => ({}));
       const { service, name, phone, email, notes, kvkk } = b;

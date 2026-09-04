@@ -1,0 +1,9 @@
+# Yayına çıkmayacak dosyalar (uyum denetimi 2026-09-04)
+# randevu-backend: ücretli danışmanlık randevu sistemi — canlıda erişilebilirdi
+randevu-backend
+tools
+*.md
+*.py
+Dockerfile
+node_modules
+.wrangler
