@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Doğum Haritan Ne Kadar Nadir? — Sorbi</title>
+<meta name="description" content="Doğum haritandaki yerleşimlerin gerçekte ne kadar seyrek olduğunu gör. 24.000 gerçek harita üzerinden sayıldı — tahmin değil, ölçüm.">
+<link rel="canonical" href="https://sorbiapp.com/nadirlik">
+<meta name="theme-color" content="#0B0F14">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sorbi">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Doğum haritan ne kadar nadir?">
+<meta property="og:description" content="Yerleşimlerinin kaç kişide bir görüldüğünü 24.000 gerçek harita üzerinden say.">
+<meta property="og:url" content="https://sorbiapp.com/nadirlik">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[
+{"@type":"WebApplication","name":"Harita Nadirlik Ölçer","applicationCategory":"LifestyleApplication",
+ "operatingSystem":"Web","url":"https://sorbiapp.com/nadirlik",
+ "description":"Doğum haritasındaki yerleşimlerin nüfustaki sıklığını 24.000 örnek harita üzerinden hesaplar.",
+ "offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"}},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Nadirlik nasıl hesaplanıyor?","acceptedAnswer":{"@type":"Answer","text":"1950–2009 arasından örneklenmiş 24.000 gerçek harita hesaplandı ve her yerleşimin kaç haritada göründüğü sayıldı. Oranlar tahmin değil, bu örneklemdeki gerçek sayımdır."}},
+{"@type":"Question","name":"Neden bazı yükselen burçlar daha sık?","acceptedAnswer":{"@type":"Answer","text":"Burçlar ufuktan eşit sürede doğmaz. Türkiye enleminde Akrep yükselen, Balık yükselene göre iki katından fazla sıklıkta görülür. Bu astrolojik değil, coğrafi bir sonuçtur."}},
+{"@type":"Question","name":"Dış gezegenler neden nadir çıkmıyor?","acceptedAnswer":{"@type":"Answer","text":"Plüton bir burçta on yıllarca kalır; o yerleşim kişisel değil kuşaksaldır. Bu yüzden kişisel yerleşimlerden ayrı gösterilir."}}]}]}</script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0D0810;--card:rgba(255,255,255,.032);--card2:rgba(255,255,255,.05);
+ --stroke:rgba(255,255,255,.08);--stroke2:rgba(255,255,255,.14);
+ --gold:#E3A692;--gold-br:#F2D3B8;--ink:#F2EFE9;--mut:#9BA0AB;--dim:#7A8090;
+ --soft:#7FB3A8;--terra:#C4744E;--r:16px}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:760px;margin:0 auto;padding:0 1.2rem 4rem}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:6px}
+.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;padding:.7rem 1.2rem;
+ background:rgba(13,8,16,.9);backdrop-filter:blur(18px);border-bottom:1px solid var(--stroke)}
+.sbnav .lg{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.98rem;display:flex;align-items:center;gap:.4rem}
+.sbnav .lg i{font-style:normal;color:var(--gold)}
+.sbnav nav{display:flex;gap:.1rem;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.sbnav nav::-webkit-scrollbar{display:none}
+.sbnav nav a{color:var(--mut);font-size:.86rem;font-weight:500;padding:.42rem .8rem;border-radius:99px;white-space:nowrap}
+.sbnav nav a:hover,.sbnav nav a.on{color:var(--ink);background:var(--card2)}
+.top{padding:3rem 0 1.2rem}
+.kicker{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.8rem,5.4vw,2.6rem);font-weight:600;letter-spacing:-.02em;line-height:1.12}
+h1 em{font-style:italic;color:var(--gold-br)}
+.top p{color:var(--mut);font-size:.95rem;font-weight:300;max-width:54ch;margin-top:.7rem}
+.form{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);padding:1.1rem;margin:1.6rem 0}
+.alanlar{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.65rem}
+label{display:block;font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);margin-bottom:.25rem}
+input{width:100%;font-family:inherit;font-size:.88rem;color:var(--ink);background:rgba(0,0,0,.3);
+ border:1px solid var(--stroke);border-radius:11px;padding:.6rem .8rem;outline:none;color-scheme:dark}
+input:focus{border-color:rgba(227,166,146,.5)}
+input::placeholder{color:var(--dim)}
+.geo{position:relative}
+.geolist{position:absolute;top:100%;left:0;right:0;z-index:40;margin-top:.25rem;max-height:210px;overflow-y:auto;
+ background:#12101A;border:1px solid var(--stroke2);border-radius:11px;box-shadow:0 18px 44px rgba(0,0,0,.6)}
+.geolist>div{font-size:.82rem;padding:.5rem .8rem;cursor:pointer}
+.geolist>div:hover{background:rgba(227,166,146,.12)}
+button.ana{font-family:inherit;font-size:.9rem;font-weight:600;color:#180F14;background:var(--gold-br);
+ border:none;border-radius:11px;padding:.65rem 1.4rem;cursor:pointer;margin-top:.8rem}
+button.ana:hover{background:var(--gold)}
+button.ana:disabled{opacity:.5;cursor:default}
+.st{font-size:.82rem;color:var(--dim);min-height:1.2em;margin-top:.5rem}
+.st.hata{color:var(--terra)}
+.manset{border:1px solid rgba(227,166,146,.3);background:rgba(227,166,146,.06);border-radius:18px;
+ padding:1.5rem 1.4rem;text-align:center;margin:1.4rem 0}
+.manset .et{font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.manset .buyuk{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,7vw,3rem);font-weight:600;
+ color:var(--gold-br);line-height:1.05;letter-spacing:-.02em}
+.manset .alt{font-size:.95rem;color:var(--ink);margin-top:.5rem;font-weight:500}
+.manset .not{font-size:.82rem;color:var(--mut);margin-top:.35rem;font-weight:300}
+h2{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:600;margin:1.8rem 0 .2rem}
+.ac{font-size:.82rem;color:var(--dim);font-weight:300;margin-bottom:.8rem}
+.satir{display:grid;grid-template-columns:1fr 96px 62px;gap:.7rem;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--stroke)}
+.satir:last-child{border-bottom:none}
+.satir .ad{font-size:.88rem}
+.satir .ad b{font-weight:500}
+.satir .ad .gl{color:var(--gold);margin-right:.15rem}
+.cubuk{height:5px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden}
+.cubuk i{display:block;height:100%;background:var(--gold);border-radius:3px}
+.satir.nadir .cubuk i{background:var(--terra)}
+.oran{font-family:ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--mut);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.satir.genis{grid-template-columns:1fr 70px 118px}
+.satir.nadir .oran{color:var(--terra)}
+.ozellik{display:flex;gap:.7rem;align-items:flex-start;padding:.6rem 0;border-bottom:1px solid var(--stroke)}
+.ozellik:last-child{border-bottom:none}
+.ozellik .im{color:var(--gold);font-size:1rem;line-height:1.5}
+.ozellik b{font-weight:500;font-size:.9rem}
+.ozellik span{display:block;font-size:.82rem;color:var(--mut);font-weight:300}
+.paylas{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.4rem}
+.yan{font-family:inherit;font-size:.84rem;font-weight:500;color:var(--mut);background:transparent;
+ border:1px solid var(--stroke);border-radius:11px;padding:.55rem 1rem;cursor:pointer;display:inline-block;line-height:1.3}
+.yan:hover{color:var(--ink);border-color:var(--stroke2)}
+.yontem{margin-top:2.2rem;padding-top:1.2rem;border-top:1px solid var(--stroke);font-size:.83rem;color:var(--mut);font-weight:300;line-height:1.8}
+.yontem h2{margin-top:0}
+.yontem b{color:var(--ink);font-weight:500}
+footer{margin-top:2.4rem;padding-top:1.4rem;border-top:1px solid var(--stroke);color:var(--dim);font-size:.8rem;text-align:center;font-weight:300}
+footer a{color:var(--mut)}
+#sonuc[hidden]{display:none}
+</style>
+</head>
+<body>
+<header class="sbnav">
+ <a href="/" class="lg"><i>✦</i> Sorbi</a>
+ <nav>
+  <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
+  <a href="/nadirlik" class="on">Nadirlik</a>
+  <a href="/bugun">Bugün</a>
+  <a href="/ogren">Öğren</a>
+  <a href="/araclar">Araçlar</a>
+  <a href="/araclar">Araçlar</a>
+ </nav>
+</header>
+
+<div class="wrap">
+<section class="top">
+  <div class="kicker">✦ Sayım, tahmin değil</div>
+  <h1>Doğum haritan <em>ne kadar nadir</em>?</h1>
+  <p>Her yerleşim eşit sıklıkta görülmez. Merkür asla Güneş'ten uzaklaşamaz, Plüton bir burçta on yıl kalır, Balık yükselen Türkiye enleminde Akrep yükselenin yarısı kadar doğar. 24.000 gerçek harita hesaplandı ve senin yerleşimlerinin kaç kişide bir göründüğü sayıldı.</p>
+</section>
+
+<div class="form">
+  <div class="alanlar">
+    <div><label>Doğum tarihi</label><input id="tarih" type="date"></div>
+    <div><label>Saat (bilmiyorsan boş bırak)</label><input id="saat" type="time"></div>
+    <div class="geo" style="grid-column:1/-1"><label>Doğum yeri</label>
+      <input id="yer" type="text" placeholder="Şehir ara" autocomplete="off" value="İstanbul">
+      <div class="geolist" id="geoList" hidden></div></div>
+  </div>
+  <button class="ana" id="hesapla">Nadirliğimi hesapla</button>
+  <div class="st" id="st"></div>
+</div>
+
+<div id="sonuc" hidden></div>
+
+<section class="yontem">
+  <h2>Bu sayılar nereden geliyor?</h2>
+  <p><b>1950–2009 arasından örneklenmiş 24.000 gerçek harita</b> hesaplandı; her yerleşimin kaç haritada göründüğü tek tek sayıldı. Yüzdeler bir tahmin ya da tablo değil, bu örneklemdeki gerçek sayımdır. Gezegen konumları Swiss Ephemeris'e karşı doğrulanmış motorla hesaplanır.</p>
+  <p>Yükselen ve MC için <b>İstanbul enlemi</b> kullanıldı. Yükselen dağılımı enleme göre değişir: burçlar ufuktan eşit sürede doğmaz. Türkiye'de Akrep yükselen, Balık yükselenin iki katından fazla görülür — bu astrolojik değil, coğrafi bir sonuçtur.</p>
+  <p><b>Dış gezegenler ayrı gösterilir.</b> Plüton bir burçta yirmi yıl kalabilir; o yerleşim seni değil, kuşağını anlatır. Nadir çıkması kişisel bir özellik sayılmaz.</p>
+  <p>Nadir olmak "daha iyi" ya da "daha güçlü" demek değildir. Sıklık bir olgudur; yorum değildir.</p>
+</section>
+
+<footer>Sorbi ✦ <a href="/">Ana sayfa</a> · <a href="/detayli-dogum-haritasi">Harita Atölyesi</a> · <a href="/araclar">Araçlar</a></footer>
+</div>
+<script>
+(function(){
+  'use strict';
+  var $=function(i){return document.getElementById(i);};
+  var VERI=null, READY=false, LOADING=false, QUEUE=null, geoT=null;
+  var SECILI={lat:41.0082,lon:28.9784,tz:'Europe/Istanbul',label:'İstanbul'};
+  var S=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
+  var AD={sun:'Güneş',moon:'Ay',mer:'Merkür',ven:'Venüs',mar:'Mars',jup:'Jüpiter',sat:'Satürn',
+          ura:'Uranüs',nep:'Neptün',plu:'Plüton',chi:'Chiron',nod:'Kuzey Ay Düğümü',asc:'Yükselen',mc:'MC'};
+  var GL={sun:'☉',moon:'☽',mer:'☿',ven:'♀',mar:'♂',jup:'♃',sat:'♄',ura:'♅',nep:'♆',plu:'♇',chi:'⚷',nod:'☊',asc:'AC',mc:'MC'};
+  var KISISEL=['sun','moon','mer','ven','mar','asc','mc'];
+  var KUSAK=['jup','sat','ura','nep','plu'];
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function burc(l){return Math.floor(((l%360)+360)%360/30);}
+
+  function motor(cb){
+    if(READY) return cb();
+    QUEUE=cb; if(LOADING) return; LOADING=true;
+    var srcs=['/astronomy.browser.min.js?v=3','/sorbi-astro.js?v=3'];
+    (function next(i){
+      if(i>=srcs.length){ READY=true; LOADING=false; if(QUEUE){var f=QUEUE;QUEUE=null;f();} return; }
+      var s=document.createElement('script'); s.src=srcs[i]; s.async=false;
+      s.onload=function(){ next(i+1); };
+      s.onerror=function(){ LOADING=false; hata('Harita motoru yüklenemedi.'); };
+      document.head.appendChild(s);
+    })(0);
+  }
+  function hata(m){ var st=$('st'); st.className='st hata'; st.textContent=m; }
+
+  /* yer arama */
+  $('yer').addEventListener('input',function(e){
+    clearTimeout(geoT); SECILI=null;
+    var q=e.target.value.trim(), list=$('geoList');
+    if(q.length<2){ list.hidden=true; return; }
+    geoT=setTimeout(function(){
+      fetch('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(q)+'&count=6&language=tr&format=json')
+        .then(function(r){return r.json();}).then(function(j){
+          if(!j.results||!j.results.length){ list.hidden=true; return; }
+          list.innerHTML=j.results.map(function(r,i){
+            return '<div data-i="'+i+'">'+esc(r.name)+(r.admin1?', '+esc(r.admin1):'')+' · '+esc(r.country||'')+'</div>';
+          }).join('');
+          list.hidden=false;
+          Array.prototype.forEach.call(list.children,function(el){
+            el.onclick=function(){
+              var r=j.results[+el.dataset.i];
+              $('yer').value=r.name+(r.country?', '+r.country:'');
+              SECILI={lat:r.latitude,lon:r.longitude,tz:r.timezone||'Europe/Istanbul',label:r.name};
+              list.hidden=true;
+            };
+          });
+        }).catch(function(){ list.hidden=true; });
+    },300);
+  });
+  document.addEventListener('click',function(e){ if(!e.target.closest('.geo')) $('geoList').hidden=true; });
+
+  function oran(sayi,toplam){ return sayi/toplam; }
+  function yuzde(p){ return p>=0.01 ? (p*100).toFixed(1)+'%' : (p*100).toFixed(2)+'%'; }
+  function kacKiside(p){
+    if(p<=0) return 'örneklemde eşi yok';
+    var n=1/p;
+    if(n<10) return Math.round(n)+' kişiden 1';
+    if(n<1000) return Math.round(n)+' kişiden 1';
+    return Math.round(n/100)*100+' kişiden 1';
+  }
+
+  $('hesapla').addEventListener('click',function(){
+    var st=$('st'); st.className='st'; st.textContent='Hesaplanıyor…';
+    if(!$('tarih').value){ hata('Doğum tarihi gerekli.'); return; }
+    if(!SECILI){ hata('Listeden bir şehir seç.'); return; }
+    motor(function(){
+      if(VERI) return ciz();
+      fetch('/nadirlik-veri.json').then(function(r){return r.json();})
+        .then(function(j){ VERI=j; ciz(); })
+        .catch(function(){ hata('Nadirlik verisi yüklenemedi.'); });
+    });
+  });
+
+  function ciz(){
+    var st=$('st');
+    try{
+      var g=$('tarih').value.split('-'), t=($('saat').value||'').split(':');
+      var saatsiz=!$('saat').value;
+      var o={y:+g[0],mo:+g[1],d:+g[2],h:saatsiz?12:+t[0],mi:saatsiz?0:+t[1],
+             tz:SECILI.tz,lat:SECILI.lat,lon:SECILI.lon,house:saatsiz?'W':'P'};
+      if(o.y<1850||o.y>2069){ hata('1850–2069 aralığı destekleniyor.'); return; }
+      var ch=SorbiAstro.chart(o);
+      var pl={}; ch.pls.forEach(function(p){ pl[p.k]=p; });
+      var T=VERI.t;
+
+      /* kişisel yerleşimler — nadirlikten sığa */
+      var kisisel=[];
+      KISISEL.forEach(function(k){
+        if(saatsiz && (k==='asc'||k==='mc')) return;
+        var lon = k==='asc'?ch.asc : (k==='mc'?ch.mc : (pl[k]?pl[k].lon:null));
+        if(lon===null||lon===undefined) return;
+        var b=burc(lon), tablo=VERI.b[k];
+        if(!tablo) return;
+        kisisel.push({k:k, burc:b, p:oran(tablo[b],T), rx:!!(pl[k]&&pl[k].rx)});
+      });
+      kisisel.sort(function(a,b){ return a.p-b.p; });
+
+      var kusak=[];
+      KUSAK.forEach(function(k){
+        if(!pl[k]||!VERI.b[k]) return;
+        var b=burc(pl[k].lon);
+        kusak.push({k:k, burc:b, p:oran(VERI.b[k][b],T), rx:!!pl[k].rx});
+      });
+      kusak.sort(function(a,b){ return a.p-b.p; });
+
+      /* üçlü */
+      var uc=null;
+      if(!saatsiz){
+        var anahtar=burc(pl.sun.lon)+'-'+burc(pl.moon.lon)+'-'+burc(ch.asc);
+        var sayi=VERI.u[anahtar]||0;
+        uc={sayi:sayi, p: sayi>0 ? sayi/T : 0};
+      }
+
+      /* dikkat çeken özellikler */
+      var ozellikler=[];
+      var KLASIK=['sun','moon','mer','ven','mar','jup','sat'];
+      var burcSay={}, elem=[0,0,0,0];
+      KLASIK.forEach(function(k){ if(!pl[k]) return; var b=burc(pl[k].lon);
+        burcSay[b]=(burcSay[b]||0)+1; elem[b%4]++; });
+      var enKalabalik=0, enBurc=0;
+      Object.keys(burcSay).forEach(function(b){ if(burcSay[b]>enKalabalik){ enKalabalik=burcSay[b]; enBurc=+b; } });
+      if(enKalabalik>=4) ozellikler.push({b:'Stelyum: '+enKalabalik+' gezegen '+S[enBurc]+' burcunda',
+        s:'Haritaların %'+(VERI.s/T*100).toFixed(1)+"'inde dört ya da daha fazla klasik gezegen aynı burçta toplanır."});
+      var ELEMAD=['ateş','toprak','hava','su'];
+      elem.forEach(function(v,i){ if(v===0) ozellikler.push({b:ELEMAD[i].charAt(0).toUpperCase()+ELEMAD[i].slice(1)+' elementi boş',
+        s:'Klasik yedi gezegenden hiçbiri '+ELEMAD[i]+' burcunda değil. Haritaların %'+(VERI.e[i]/T*100).toFixed(1)+"'inde görülür."}); });
+      var retro=0; ['mer','ven','mar','jup','sat','ura','nep','plu'].forEach(function(k){ if(pl[k]&&pl[k].rx) retro++; });
+      var retroSik=(VERI.rs[String(retro)]||0)/T;
+      ozellikler.push({b:retro+' gezegen geri hareketli',
+        s:'Haritaların %'+(retroSik*100).toFixed(1)+"'inde tam bu sayıda geri hareket görülür."});
+      if(pl.mer&&pl.mer.rx) ozellikler.push({b:'Merkür geri hareketli doğmuşsun',
+        s:'Haritaların %'+(VERI.r.mer/T*100).toFixed(1)+"'inde Merkür geri hareketlidir."});
+      ozellikler.push({b: ch.day ? 'Gündüz haritası' : 'Gece haritası',
+        s: ch.day ? 'Güneş ufkun üzerinde. Örneklemin %'+(VERI.g/T*100).toFixed(1)+"'i gündüz haritası."
+                  : 'Güneş ufkun altında. Örneklemin %'+((T-VERI.g)/T*100).toFixed(1)+"'i gece haritası."});
+
+      var enNadir=kisisel[0];
+      var manset = enNadir
+        ? { buyuk:kacKiside(enNadir.p),
+            alt:(AD[enNadir.k]||enNadir.k)+' '+S[enNadir.burc]+' burcunda',
+            not:'Haritandaki en seyrek kişisel yerleşim. Örneklemde '+yuzde(enNadir.p)+' oranında görülüyor.' }
+        : { buyuk:'—', alt:'Saat olmadan kişisel yerleşim sıralanamaz', not:'' };
+
+      function satirlar(liste){
+        var enBuyuk=Math.max.apply(null,liste.map(function(x){return x.p;}))||1;
+        return liste.map(function(x){
+          var az=x.p<0.05;
+          return '<div class="satir'+(az?' nadir':'')+'">'+
+            '<div class="ad"><span class="gl">'+GL[x.k]+'</span> <b>'+esc(AD[x.k]||x.k)+'</b> '+esc(S[x.burc])+
+            (x.rx?' <span style="color:var(--terra)">℞</span>':'')+'</div>'+
+            '<div class="cubuk"><i style="width:'+Math.max(4,Math.round(x.p/enBuyuk*100))+'%"></i></div>'+
+            '<div class="oran">'+yuzde(x.p)+'</div></div>';
+        }).join('');
+      }
+
+      var paylasMetni = manset.alt + ' — ' + manset.buyuk + '. Sorbi ile kendi haritanın nadirliğini ölç: sorbiapp.com/nadirlik';
+
+      $('sonuc').hidden=false;
+      $('sonuc').innerHTML=
+        '<div class="manset"><div class="et">En nadir yanın</div>'+
+        '<div class="buyuk">'+esc(manset.buyuk)+'</div>'+
+        '<div class="alt">'+esc(manset.alt)+'</div>'+
+        (manset.not?'<div class="not">'+esc(manset.not)+'</div>':'')+'</div>'+
+
+        '<h2>Kişisel yerleşimlerin</h2>'+
+        '<div class="ac">Seyrekten sığa. Bunlar gün içinde ve yıl içinde hızla değişir — kişiseldir.</div>'+
+        satirlar(kisisel)+
+
+        (uc ? '<h2>Güneş · Ay · Yükselen üçlüsü</h2>'+
+          '<div class="ac">1728 olası üçlüden biri. Örneklemde bu üçlü '+(uc.sayi||0)+' haritada görüldü.</div>'+
+          '<div class="satir genis"><div class="ad"><b>'+esc(S[burc(pl.sun.lon)])+' · '+esc(S[burc(pl.moon.lon)])+' · '+esc(S[burc(ch.asc)])+'</b></div>'+
+          '<div class="cubuk"><i style="width:'+Math.min(100,Math.max(4,uc.p*24000/2))+'%"></i></div>'+
+          '<div class="oran">'+(uc.sayi>0?kacKiside(uc.p):'&lt; 24.000’de 1')+'</div></div>' : '')+
+
+        '<h2>Kuşak yerleşimleri</h2>'+
+        '<div class="ac">Dış gezegenler bir burçta yıllarca kalır. Bunlar seni değil, yaşıtlarını anlatır — nadirliği kişisel sayılmaz.</div>'+
+        satirlar(kusak)+
+
+        '<h2>Dikkat çeken yanlar</h2><div class="ac">Yerleşimlerin ötesinde, haritanın yapısıyla ilgili olgular.</div>'+
+        ozellikler.map(function(x){ return '<div class="ozellik"><span class="im">✦</span><div><b>'+esc(x.b)+'</b><span>'+esc(x.s)+'</span></div></div>'; }).join('')+
+
+        '<div class="paylas">'+
+          '<button class="ana" id="kartIndir" style="margin:0">Kartı indir ✦</button>'+
+          '<button class="yan" id="kopyala">Sonucu kopyala</button>'+
+          '<a class="yan" href="/detayli-dogum-haritasi">Haritanın tamamını aç</a>'+
+          '<a class="yan" href="/araclar">Diğer araçlar</a>'+
+        '</div>';
+
+      $('kartIndir').addEventListener('click',function(){
+        var b=this, eski=b.textContent; b.textContent='Hazırlanıyor…'; b.disabled=true;
+        var kartSatir=kisisel.slice(0,3).map(function(x){
+          return { ad:(AD[x.k]||x.k)+' '+S[x.burc], oran:yuzde(x.p) };
+        });
+        if(uc && uc.sayi!=null){
+          kartSatir.push({ ad:'Güneş · Ay · Yükselen', oran:(uc.sayi>0?kacKiside(uc.p):'24.000’de 1’den az') });
+        }
+        window.SorbiKart.indir({
+          ustEt:'EN NADİR YANIN',
+          buyuk:manset.buyuk,
+          alt:manset.alt,
+          satirlar:kartSatir,
+          dipnot:'24.000 haritalık örneklem · 1950–2009',
+          imza:'Veri ve hesaplama: Sorbi · @astrodefnee'
+        },'sorbi-nadirlik.png').then(function(){
+          b.textContent='İndirildi ✓'; setTimeout(function(){b.textContent=eski;b.disabled=false;},2200);
+        }).catch(function(){
+          b.textContent='Oluşturulamadı'; b.disabled=false;
+        });
+      });
+
+      $('kopyala').addEventListener('click',function(){
+        var b=this;
+        (navigator.clipboard ? navigator.clipboard.writeText(paylasMetni) : Promise.reject())
+          .then(function(){ b.textContent='Kopyalandı'; setTimeout(function(){b.textContent='Sonucu kopyala';},1800); })
+          .catch(function(){ b.textContent='Kopyalanamadı'; });
+      });
+
+      st.className='st'; st.textContent='';
+      $('sonuc').scrollIntoView({behavior:'smooth',block:'start'});
+    }catch(e){ hata('Hesaplama hatası: '+(e.message||e)); }
+  }
+})();
+</script>
+<script src="/sorbi-kart.js?v=1" defer></script>
+<script src="/sorbi-geri-bildirim.js?v=1" defer></script>
+  <script src="/sorbi-olcum.js?v=1" defer></script>
+</body>
+</html>
