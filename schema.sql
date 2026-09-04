@@ -23,3 +23,13 @@ CREATE TABLE IF NOT EXISTS events (
   referrer TEXT,
   created_at TEXT DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now'))
 );
+
+-- E-posta listesi (2026-09-04)
+CREATE TABLE IF NOT EXISTS liste (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  eposta TEXT NOT NULL UNIQUE,
+  kaynak TEXT,
+  referrer TEXT,
+  ip_ozet TEXT,
+  created_at TEXT DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now'))
+);

@@ -234,8 +234,13 @@ footer .fine{text-align:center;line-height:1.85;font-weight:300}
   <div class="wl">
     <input type="email" id="wlEmail" placeholder="e-posta adresin" autocomplete="email">
     <button class="btn" id="wlBtn">Haber ver ✦</button>
+    <input type="text" id="wlHp" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
     <div class="st" id="wlSt"></div>
   </div>
+  <label style="display:flex;gap:.5rem;align-items:flex-start;justify-content:center;font-size:.8rem;color:var(--dim);margin-top:.7rem;line-height:1.5;max-width:440px;margin-left:auto;margin-right:auto;text-align:left">
+    <input type="checkbox" id="wlKvkk" style="width:auto;margin-top:.2rem">
+    <span>E-posta adresimin duyuru göndermek için işlenmesine izin veriyorum. İstediğim zaman çıkabilirim. · <a href="/privacy" style="color:var(--gold)">KVKK</a></span>
+  </label>
 </section>
 
 
@@ -413,14 +418,16 @@ function fillTransits(){
 
 /* ── waitlist (App Store canlı olunca link ile değiştir) ── */
 $('wlBtn').onclick=async function(){
-  var em=($('wlEmail').value||'').trim(), st=$('wlSt');
+  var em=($('wlEmail').value||'').trim(), st=$('wlSt'), btn=this;
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){ st.style.color='var(--terra)'; st.textContent='Geçerli bir e-posta gir.'; return; }
-  st.style.color='var(--dim)'; st.textContent='Kaydediliyor…';
+  if(!$('wlKvkk').checked){ st.style.color='var(--terra)'; st.textContent='Devam için onay kutusunu işaretle.'; return; }
+  st.style.color='var(--dim)'; st.textContent='Kaydediliyor…'; btn.disabled=true;
   try{
-    var r=await fetch('https://formsubmit.co/ajax/defneturann@gmail.com',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({email:em,_subject:'Sorbi erken erisim kaydi',type:'sorbi-waitlist'})});
+    var r=await fetch('/api/liste',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({eposta:em,kvkk:1,kaynak:'ana-sayfa',hp:($('wlHp')||{}).value||''})});
+    var j=await r.json().catch(function(){return {};});
     if(r.ok){ st.style.color='var(--gold-lt)'; st.textContent='Listedesin — Sorbi çıkınca ilk sana yazacağız.'; try{localStorage.setItem('sorbi_wl','1');}catch(e){} }
-    else { st.style.color='var(--terra)'; st.textContent='Kaydedilemedi, tekrar dener misin?'; }
-  }catch(e){ st.style.color='var(--terra)'; st.textContent='Bağlantı kurulamadı.'; }
+    else { btn.disabled=false; st.style.color='var(--terra)'; st.textContent=j.error||'Kaydedilemedi, tekrar dener misin?'; }
+  }catch(e){ btn.disabled=false; st.style.color='var(--terra)'; st.textContent='Bağlantı kurulamadı.'; }
 };
 
 /* ── girişte: şu anın haritası ── */
@@ -504,5 +511,6 @@ if($('bd').value && PICKED) render(); else setTimeout(drawMoment,120);
 <!-- SORBI-FOOTER:END -->
 <script src="/sorbi-form.js?v=3" defer></script>
 <script src="/sorbi-profil.js?v=3" defer></script>
+  <script src="/sorbi-olcum.js?v=1" defer></script>
 </body>
 </html>

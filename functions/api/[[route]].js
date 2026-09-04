@@ -127,6 +127,30 @@ export async function onRequest(context) {
       return json({ success: true, bookingId: id, message: 'Talebin alındı, en kısa sürede WhatsApp\'tan iletişime geçeceğiz.' }, 201);
     }
 
+    // ---- Public: e-posta listesi (uygulama duyurusu / gökyüzü bülteni) ----
+    if (p === '/api/liste' && m === 'POST') {
+      const b = await request.json().catch(() => ({}));
+      if (b.hp) return json({ error: 'Geçersiz istek' }, 400);
+      const eposta = String(b.eposta || b.email || '').trim().toLowerCase().slice(0, 120);
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(eposta)) return json({ error: 'Geçerli bir e-posta gir.' }, 400);
+      if (!b.kvkk) return json({ error: 'Devam için onay kutusunu işaretle.' }, 400);
+      const ip = request.headers.get('cf-connecting-ip') || '';
+      const ipOzet = ip ? await hmac(env.AUTH_SECRET || 'sorbi-secret', 'ip:' + ip) : null;
+      await env.DB.prepare(
+        "CREATE TABLE IF NOT EXISTS liste (id INTEGER PRIMARY KEY AUTOINCREMENT, eposta TEXT NOT NULL UNIQUE, kaynak TEXT, referrer TEXT, ip_ozet TEXT, created_at TEXT DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now')))"
+      ).run();
+      if (ipOzet) {
+        const esik = new Date(Date.now() - 3600000).toISOString().slice(0, 19) + 'Z';
+        const rc = await env.DB.prepare("SELECT COUNT(*) c FROM liste WHERE ip_ozet=? AND created_at > ?").bind(ipOzet, esik).first();
+        if (rc && rc.c >= 5) return json({ error: 'Çok fazla istek. Biraz sonra dener misin?' }, 429);
+      }
+      await env.DB.prepare(
+        "INSERT INTO liste (eposta,kaynak,referrer,ip_ozet) VALUES (?,?,?,?) ON CONFLICT(eposta) DO NOTHING"
+      ).bind(eposta, String(b.kaynak || 'web').slice(0, 40), request.headers.get('referer') || null, ipOzet).run();
+      await env.DB.prepare("INSERT INTO events (type,meta) VALUES ('liste_kaydi',?)").bind(String(b.kaynak || 'web').slice(0,40)).run();
+      return json({ ok: true });
+    }
+
     // ---- Public: funnel event ----
     if (p === '/api/track' && m === 'POST') {
       const b = await request.json().catch(() => ({}));
@@ -231,6 +255,10 @@ export async function onRequest(context) {
     if (p.startsWith('/api/admin/')) {
       if (!(await requireAdmin(request, env))) return json({ error: 'Yetkisiz' }, 401);
 
+      if (p === '/api/admin/liste' && m === 'GET') {
+        const r = await env.DB.prepare("SELECT eposta, kaynak, created_at FROM liste ORDER BY id DESC LIMIT 500").all().catch(() => ({ results: [] }));
+        return json(r.results || []);
+      }
       if (p === '/api/admin/stats' && m === 'GET') {
         const q = async (w) => (await env.DB.prepare(`SELECT COUNT(*) c FROM bookings ${w}`).first()).c;
         const visitors = (await env.DB.prepare("SELECT COUNT(*) c FROM events WHERE type='booking_started'").first()).c;
