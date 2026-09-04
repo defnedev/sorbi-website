@@ -84,7 +84,9 @@ export async function onRequest(context) {
     // --- Uyum kapısı (2026-09-04): ücretli hizmet siparişi ve ödeme yüzeyi kapalı.
     // Reklam yasağı (RG 1 Tem 2026/33297, yürürlük 1 Ağu 2026) kapsamında
     // sorbiapp.com'da astroloji hizmeti satışı/randevusu yok. Bu uçlar 410.
-    if (p === '/api/bookings' || p === '/api/pay/start' || p === '/api/pay/callback') {
+    // NOT: /api/bookings şimdilik açık — /soru-sor ve /haritam formları buna bağlı.
+    // Kurucu kararı bekliyor (bkz. uyum denetimi 2026-09-04).
+    if (p === '/api/pay/start' || p === '/api/pay/callback') {
       return json({ error: 'Bu uç kaldırıldı. Sorbi ücretli astroloji hizmeti satmıyor.' }, 410);
     }
 
