@@ -7,3 +7,6 @@ tools
 Dockerfile
 node_modules
 .wrangler
+
+# eski randevu yonetim paneli (olu)
+admin

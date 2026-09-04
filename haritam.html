@@ -122,16 +122,10 @@ textarea{min-height:90px;resize:vertical}
   </div>
 
   <div class="card ask" id="ask" style="scroll-margin-top:70px">
-   <h3>Sana özel bir soru sor</h3>
-   <p>Aklındaki soruyu yaz — haritana göre, kişisel olarak cevaplayayım. Genel yorum değil; senin haritan, senin sorun.</p>
-   <div class="chips" id="chips"></div>
-   <label>Sorun</label>
-   <textarea id="q" placeholder="Örn: Bu yıl ilişkim ciddiye biner mi? İş değişikliği için doğru zaman mı?"></textarea>
-   <label>WhatsApp numaran</label>
-   <input id="phone" type="tel" placeholder="05xx xxx xx xx" inputmode="tel">
-   <label class="kvkk"><input type="checkbox" id="kvkk"> Sorumun ve doğum bilgilerimin kişisel yorum için işlenmesine izin veriyorum · <a href="/privacy" style="color:var(--gold)">KVKK</a></label>
-   <button class="btn" id="send">Sorumu gönder ✦</button>
-   <div class="msg" id="msg"></div>
+   <h3>Haritanı kendin oku</h3>
+   <p>Sorbi kişiye özel okuma yapmaz, astroloji hizmeti satmaz. Aklındaki soruyu haritanda kendin izleyebilmen için hesap ve yöntem burada.</p>
+   <a class="btn" href="/soru-sor">Bir soru haritada nasıl okunur →</a>
+  </div>
   </div>
 
   <div class="card" id="readingsCard" style="display:none">
@@ -174,7 +168,7 @@ function renderList(){
 function refreshStatuses(){
  const rs=(PR&&PR.readings)||[];const pend=rs.filter(x=>x.id&&x.status!=='approved'&&x.status!=='rejected');
  if(!pend.length)return;
- Promise.all(pend.map(x=>fetch('/api/bookings/'+x.id).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.status)x.status=j.status;}).catch(()=>{}))).then(()=>{saveProfile();renderList();});
+ renderList();
 }
 
 const CHIPS=['Aşk & ilişki','Kariyer & iş','Para & bolluk','Zamanlama (ne zaman?)','Genel yıllık','Kişisel bir karar'];
@@ -236,28 +230,6 @@ function initBig3(){
  }catch(e){}
 })();
 
-document.getElementById('send')&&(document.getElementById('send').onclick=async()=>{
- const msg=document.getElementById('msg');
- const q=document.getElementById('q').value.trim();
- const phone=document.getElementById('phone').value.trim();
- if(q.length<8){msg.style.color='var(--terra)';msg.textContent='Lütfen sorunu biraz daha açık yaz.';return;}
- if(phone.replace(/\D/g,'').length<10){msg.style.color='var(--terra)';msg.textContent='Geçerli bir numara gir (WhatsApp).';return;}
- if(!document.getElementById('kvkk').checked){msg.style.color='var(--terra)';msg.textContent='Devam için KVKK onayı gerekli.';return;}
- msg.style.color='var(--dim)';msg.textContent='Gönderiliyor…';
- const b=BIRTH||{};
- const birthTxt=b.date?`${b.date}${b.time?' '+b.time:''} ${(b.place||'').split(',')[0]}`:'—';
- try{
-  const r=await fetch('/api/bookings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-   service:'soru-cevap', name:PR.name||PR.email||'Sorbi kullanıcısı', phone, email:PR.email||null,
-   notes:`[SORU] ${q}\n[HARİTA] ${birthTxt}`, kvkk:1
-  })});
-  const j=await r.json().catch(()=>({}));
-  if(r.ok){msg.style.color='var(--gold-lt)';msg.textContent='Sorun alındı ✦ En kısa sürede WhatsApp\'tan kişisel cevabınla döneceğiz.';
-   PR.readings=PR.readings||[];PR.readings.push({id:j.bookingId||null,q,at:Date.now(),status:'pending'});saveProfile();renderList();
-   document.getElementById('q').value='';}
-  else{msg.style.color='var(--terra)';msg.textContent=j.error||'Bir hata oldu, tekrar dene.';}
- }catch(e){msg.style.color='var(--terra)';msg.textContent='Bağlantı hatası, tekrar dene.';}
-});
 </script>
 <!-- SORBI-FOOTER:START -->
 <style>
