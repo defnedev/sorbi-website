@@ -47,13 +47,13 @@ function adapt(ch,opts){
     if(x.as) return x;
     var A=ASPMAP[x.nm]; if(!A) return null;
     var pa=byName[x.a]||x.a, pb=byName[x.b]||x.b;
-    if(!pa||!pb||!pa.lon===undefined) return null;
+    if(!pa||!pb||pa.lon===undefined||pb.lon===undefined) return null;
     return {a:pa,b:pb,as:{a:A.a,orb:A.orb,cls:A.cls,major:A.major,n:x.nm},
             abs:Math.abs(x.orb||0), app:null};
   }).filter(Boolean);
   var c=ch.c;
   if(!c||!c.length){ c=[0]; for(var i=1;i<=12;i++) c[i]=norm((ch.asc||0)+(i-1)*30); }
-  return {asc:ch.asc||0, mc:ch.mc||norm((ch.asc||0)+270), c:c, pls:pls, asps:asps,
+  return {asc:ch.asc||0, mc:(ch.mc===undefined||ch.mc===null)?null:ch.mc, c:c, pls:pls, asps:asps,
           o:{house:(opts.house||ch.house||'P')}};
 }
 
@@ -99,6 +99,7 @@ function drawWheel(inner,outer,opt){
     hOut:298, hNum:282, asp:274
   };
 
+  function esc(v){ return String(v==null?'':v).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   var noH = !!opt.noHouses;
   var orient = noH ? 0 : (inner.o.house==='W' ? norm(Math.floor(inner.asc/30)*30) : norm(inner.asc));
   function P(lon,r){ var t=norm(lon-orient)*RAD; return [cx-r*Math.cos(t), cy+r*Math.sin(t)]; }
@@ -155,23 +156,34 @@ function drawWheel(inner,outer,opt){
   circ(R.tickIn,T.ringSoft,.8);
 
   /* ── ev başlangıçları ── */
-  var angs={1:'AC',4:'IC',7:'DC',10:'MC'};
+  /* gercek acisal noktalar: ev sistemi ne olursa olsun ASC/MC'den cizilir */
+  var ANG=[];
+  if(!noH){
+    ANG.push([inner.asc,'AC'],[norm(inner.asc+180),'DC']);
+    if(inner.mc!==null && inner.mc!==undefined) ANG.push([inner.mc,'MC'],[norm(inner.mc+180),'IC']);
+  }
+  function acisalMi(lon){
+    for(var q=0;q<ANG.length;q++){ if(Math.abs(norm(ANG[q][0]-lon+180)-180)<0.08) return true; }
+    return false;
+  }
   if(!noH) for(var h=1;h<=12;h++){
-    var cu=inner.c[h], isAng=!!angs[h];
-    line(P(cu,R.asp),P(cu,R.zi), isAng?T.angle:T.cusp, isAng?2.4:.85, isAng?null:'4,4');
-    if(isAng){
-      var tip=P(cu,R.zo+10), base1=P(cu-1.5,R.zo-1), base2=P(cu+1.5,R.zo-1);
-      o.push('<path d="M'+tip[0].toFixed(1)+' '+tip[1].toFixed(1)+' L'+base1[0].toFixed(1)+' '+base1[1].toFixed(1)+
-             ' L'+base2[0].toFixed(1)+' '+base2[1].toFixed(1)+' Z" fill="'+T.angle+'"/>');
-      var lp=P(cu,R.zo+26);
-      txt(lp[0],lp[1],angs[h],T.angleLbl,13.5,' letter-spacing="1.4"',null,700);
-    }
+    var cu=inner.c[h];
+    if(!acisalMi(cu)) line(P(cu,R.asp),P(cu,R.zi), T.cusp, .85, '4,4');
     var nxt=inner.c[h===12?1:h+1], midA=norm(cu+norm(nxt-cu)/2);
     var np=P(midA,R.hNum);
     txt(np[0],np[1],String(h),T.hnum,16,null,'Playfair Display,Georgia,serif');
     var dp=P(cu+2.4,R.hOut-11), xx=dms(cu);
     txt(dp[0],dp[1],xx.d+'°'+pad2(xx.m)+"′",T.hnum,8,' font-style="italic" opacity=".8"',null,null,true);
   }
+  ANG.forEach(function(a){
+    var cu=a[0];
+    line(P(cu,R.asp),P(cu,R.zi),T.angle,2.4);
+    var tip=P(cu,R.zo+10), base1=P(cu-1.5,R.zo-1), base2=P(cu+1.5,R.zo-1);
+    o.push('<path d="M'+tip[0].toFixed(1)+' '+tip[1].toFixed(1)+' L'+base1[0].toFixed(1)+' '+base1[1].toFixed(1)+
+           ' L'+base2[0].toFixed(1)+' '+base2[1].toFixed(1)+' Z" fill="'+T.angle+'"/>');
+    var lp=P(cu,R.zo+26);
+    txt(lp[0],lp[1],a[1],T.angleLbl,13.5,' letter-spacing="1.4"',null,700);
+  });
   if(!noH) circ(R.hOut,T.ringSoft,.9);
   circ(R.asp,T.ringSoft,1);
   if(outer) circ(R.div,T.ring,1.2);
@@ -222,18 +234,20 @@ function drawWheel(inner,outer,opt){
       var da=norm(disp[i]+orient);
       /* dereceye işaret + kırık kılavuz çizgi */
       line(P(p.lon,tickFrom),P(p.lon,tickFrom-9),col,1.2,null,'round');
-      var k=P(p.lon,tickFrom-9), m=P(da,rg+17), e=P(da,rg+11);
+      var kr=Math.min(rg+17, tickFrom-13);
+      var k=P(p.lon,tickFrom-9), m=P(da,kr), e=P(da,rg+11);
       o.push('<path d="M'+k[0].toFixed(1)+' '+k[1].toFixed(1)+' L'+m[0].toFixed(1)+' '+m[1].toFixed(1)+
              ' L'+e[0].toFixed(1)+' '+e[1].toFixed(1)+'" fill="none" stroke="'+T.lead+'" stroke-width="1.1"/>');
       var gp=P(da,rg);
-      var gcol=p.rx?T.rx:col, gs2=gsz*(p.maj?1:.84);
+      var rxVar = p.rx && !/^(nod|sno|lil|pof)$/.test(p.k);
+      var gcol=col, gs2=gsz*(p.maj?1:.84);
       if(p.k==='pof') pof(gp[0],gp[1],gs2*.8,gcol);
       else if(!glyph(gp[0],gp[1],p.k,gs2,gcol,.5)) txt(gp[0],gp[1],p.g,gcol,gs2);
       /* etiket: her zaman yatay, merkeze doğru kaydırılmış */
       var ux=(cx-gp[0]), uy=(cy-gp[1]), ul=Math.sqrt(ux*ux+uy*uy)||1;
       var off=outer?21:26;
       var x=dms(p.lon);
-      var lbl=x.d+'°'+pad2(x.m)+"′"+(p.rx?'<tspan fill="'+T.rx+'" font-size="'+(outer?9:9.6)+'" font-weight="600"> ℞</tspan>':'');
+      var lbl=x.d+'°'+pad2(x.m)+"′"+(rxVar?'<tspan fill="'+T.rx+'" font-size="'+(outer?9:9.6)+'" font-weight="600"> R</tspan>':'');
       txt(gp[0]+ux/ul*off, gp[1]+uy/ul*off, lbl, degCol, outer?8.8:10, null, null, 500, true);
     });
   }
@@ -251,10 +265,10 @@ function drawWheel(inner,outer,opt){
     var pc = T===THEMES.paper ? '#1B2130' : '#F4E4BA';
     var ps = T===THEMES.paper ? 'rgba(23,28,40,.62)' : 'rgba(232,228,218,.62)';
     var rows=[];
-    if(pl.name) rows.push([pl.name,pc,12.5,'Playfair Display,Georgia,serif',600]);
-    if(pl.l1) rows.push([pl.l1,ps,9.5,null,null]);
-    if(pl.l2) rows.push([pl.l2,ps,9.5,null,null]);
-    if(pl.l3) rows.push([pl.l3,ps,9.5,null,null]);
+    if(pl.name) rows.push([esc(pl.name),pc,12.5,'Playfair Display,Georgia,serif',600]);
+    if(pl.l1) rows.push([esc(pl.l1),ps,9.5,null,null]);
+    if(pl.l2) rows.push([esc(pl.l2),ps,9.5,null,null]);
+    if(pl.l3) rows.push([esc(pl.l3),ps,9.5,null,null]);
     rows.forEach(function(r,i){
       o.push('<text x="'+px+'" y="'+(py+i*lh+(i?4:0))+'" fill="'+r[1]+'" font-size="'+r[2]+
         '" text-anchor="start" dominant-baseline="hanging" font-family="'+(r[3]||"Inter,sans-serif")+'"'+
@@ -265,11 +279,14 @@ function drawWheel(inner,outer,opt){
   }
 
   /* ── merkez ── */
-  circ(outer?64:72,T.ringSoft,1,T.center);
-  txt(cx,cy-(opt.sub?16:8),'✦',T.star,16);
-  var title=(opt.title||'Sorbi');
-  txt(cx,cy+(opt.sub?2:12),title.length>22?title.slice(0,21)+'…':title,T.centerTxt,opt.sub?13:14.5,null,'Playfair Display,Georgia,serif',600);
-  if(opt.sub) txt(cx,cy+21,opt.sub,T.centerSub,11);
+  circ(outer?22:26,T.ringSoft,1,T.center);
+  txt(cx,cy,'✦',T.star,13);
+  if(opt.title||opt.sub){
+    var title=esc(opt.title||''), sub=esc(opt.sub||'');
+    var by=S-30;
+    if(title) txt(S/2,by,title.length>44?title.slice(0,43)+'…':title,T.centerTxt,12.5,null,'Playfair Display,Georgia,serif',600);
+    if(sub) txt(S/2,by+15,sub,T.centerSub,10);
+  }
 
   return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+S+' '+S+'" width="100%" style="max-width:100%;height:auto;border-radius:10px">'+o.join('')+'</svg>';
 }

@@ -39,7 +39,7 @@ function tekil(k, lon, gunduz){
   var L=norm(lon), s=Math.floor(L/30), g=L-s*30;
   var et=[], puan=0;
   if(RULER[s]===k){ et.push({t:'Yönetici',p:5}); puan+=5; }
-  if(RULER[karsit(s)]===k){ et.push({t:'Zararlı',p:-5}); puan-=5; }
+  if(RULER[karsit(s)]===k){ et.push({t:'Zarar',p:-5}); puan-=5; }
   if(EXALT[k] && EXALT[k][0]===s){ et.push({t:'Yücelme',p:4}); puan+=4; }
   if(FALLS[k]===s){ et.push({t:'Düşüş',p:-4}); puan-=4; }
   var t3=TRIP[s%4], ucluYonetici = gunduz ? t3[0] : t3[1];

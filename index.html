@@ -262,7 +262,7 @@ function loadEngine(cb){
   QUEUE=cb;
   if(LOADING) return;
   LOADING=true;
-  var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=3','/sorbi-astro.js?v=3'];
+  var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=4','/sorbi-astro.js?v=4'];
   (function next(i){
     if(i>=srcs.length){ READY=true; LOADING=false; if(QUEUE){var f=QUEUE;QUEUE=null;f();} return; }
     var s=document.createElement('script');

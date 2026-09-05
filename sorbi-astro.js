@@ -270,8 +270,9 @@ function chartFromUTC(utc,o){
 
   var sun=pls.filter(function(p){return p.k==='sun';})[0];
   var moon=pls.filter(function(p){return p.k==='moon';})[0];
-  var sunH=houseOf(sun.lon,H.c);
-  var day=(sunH>=7&&sunH<=12);
+  /* sect: ev numarasi degil ufuk. Whole Sign / Equal secildiginde
+     1. ev ASC'den once basladigi icin ev bazli hesap yaniliyordu. */
+  var day=(norm(sun.lon-H.asc)>=180);
   var pof=norm(day ? H.asc+moon.lon-sun.lon : H.asc+sun.lon-moon.lon);
   pls.push({k:'pof',n:'Şans Noktası',g:'⊗︎',maj:0,lon:pof,blat:0,dec:declination(pof,0,eps),speed:0,rx:false,house:houseOf(pof,H.c)});
 

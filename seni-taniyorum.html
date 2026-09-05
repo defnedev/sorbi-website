@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="/astronomy.browser.min.js?v=3" defer></script>
-<script src="/sorbi-chart.js?v=3" defer></script>
+<script src="/sorbi-chart.js?v=4" defer></script>
 <style>
 /* Sorbi design tokens — varak okunur, terracotta basılır */
 :root{--bg:#0B0F14;--panel:rgba(235,240,248,.03);--gold:#DFA98F;--gold-lt:#E4CF9A;--gold-br:#F2D3B8;--ink:#E8E4DA;--mut:#A9A396;--dim:#8A8578;--terra:#E3A692;--btn-ink:#F6EFE1;
@@ -175,7 +175,7 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
   </div>
   <svg class="wheel" id="wheel" viewBox="0 0 260 260" style="display:none" aria-hidden="true"></svg>
   <div class="big3" id="big3" style="display:none"></div>
-  <div class="msg-head" id="msgHead"><span>Evrenin mesajı</span></div>
+  <div class="msg-head" id="msgHead"><span>Haritanın söyledikleri</span></div>
   <div id="lines"></div>
   <div class="react" id="react">
    <span class="rq">Ne kadar denk geldi?</span>
@@ -219,9 +219,9 @@ function houseOf(l,c){l=norm(l);for(let i=1;i<=12;i++){const a=c[i],b=c[i===12?1
 const PGLY={'Güneş':'☉︎','Ay':'☽︎'};
 const ELEM=['Ateş','Toprak','Hava','Su'];
 const ORD=['','birinci','ikinci','üçüncü','dördüncü','beşinci','altıncı','yedinci','sekizinci','dokuzuncu','onuncu','on birinci','on ikinci'];
-const HAREA={1:'kim olduğun ve nasıl göründüğün',2:'para, değer ve güvenlik',3:'zihnin ve konuşman',4:'aile ve kökler',5:'aşk, yaratmak ve sahne',6:'iş, düzen ve sağlık',7:'ilişkiler ve karşındaki insan',8:'derinlik, kriz ve dönüşüm',9:'anlam, inanç ve uzaklar',10:'kariyer ve dünyadaki yerin',11:'arkadaşlar, gruplar ve gelecek',12:'içe kapanma ve görünmeyen dünya'};
+const HAREA={1:'kim olduğun ve nasıl göründüğün',2:'para, değer ve güvenlik',3:'zihnin ve konuşman',4:'aile ve kökler',5:'aşk, yaratmak ve sahne',6:'iş, düzen ve günlük ritim',7:'ilişkiler ve karşındaki insan',8:'paylaşılan kaynaklar, derinlik ve dönüşüm',9:'anlam, inanç ve uzaklar',10:'kariyer ve dünyadaki yerin',11:'arkadaşlar, gruplar ve gelecek',12:'içe kapanma ve görünmeyen dünya'};
 const SUNADJ=['girişken ve doğrudan','sağlam ve dingin','meraklı ve hareketli','sıcak ve koruyucu','cömert ve görünür','ölçülü ve titiz','uyumlu ve zarif','yoğun ve derin','özgür ve iyimser','ciddi ve hedefli','özgün ve bağımsız','yumuşak ve sezgisel'];
-const MOONADJ=['çabuk parlayıp sönen','huzur ve istikrar arayan','sürekli düşünen','derin bağlanan','takdir bekleyen','kaygısını düzenle yatıştıran','çatışmadan kaçan','hiçbir şeyi yarım hissetmeyen','özgürlüğe susamış','duvarlarını sağlam ören','mesafeden güven duyan','herkesin enerjisini emen'];
+const MOONADJ=['çabuk parlayıp sönen','huzur ve istikrar arayan','sürekli düşünen','derin bağlanan','görülmek isteyen','kaygısını düzenle yatıştıran','çatışmadan kaçan','hiçbir şeyi yarım hissetmeyen','özgürlüğe susamış','duvarlarını sağlam ören','mesafeden güven duyan','ortamın tonunu içine alan'];
 const ASCADJ=['enerjik','sakin','canlı','sıcak','iddialı','ölçülü','zarif','gizemli','samimi','ağırbaşlı','sıradışı','yumuşak'];
 const RULER=[4,3,2,1,0,2,3,4,5,6,6,5],PN=['Güneş','Ay','Merkür','Venüs','Mars','Jüpiter','Satürn','Uranüs','Neptün','Plüton'];
 const RTHEME=['parlamak ve tanınmak','sevmek ve değer bulmak','anlamak ve konuşmak','güzellik ve yakınlık','kazanmak ve fethetmek','büyümek ve anlam','ustalaşmak ve kanıtlamak','özgürleşmek','ilham ve kaçış','dönüştürmek ve derinleşmek'][0];
@@ -232,7 +232,7 @@ const VENUS_LOVE=['ilk adımı atan, ateşli ve doğrudansın; peşinden koşulm
 const MARS_DRIVE=['anında patlar, çabuk geçersin; beklemek sana işkence.','geç kızarsın ama kızınca durdurulamazsın; inatla ilerlersin.','öfkeni kelimelerle savurursun; sözün silahın.','kızgınlığını içine atar, dolaylı gösterirsin; küser, uzaklaşırsın.','gururun tutuşunca sahne senindir; görmezden gelinmeye dayanamazsın.','öfken eleştiriye döner; hatayı bulur, düzeltmek istersin.','çatışmadan kaçarsın ama adaletsizliğe dayanamazsın.','sessiz ama derin bir öfken var; affetsen de unutmazsın.','patlar, söyler, geçersin; içinde tutmak sana göre değil.','öfkeni hedefe çevirirsin; soğukkanlı ama vazgeçmezsin.','aniden mesafe koyar, buz gibi olursun.','öfkeni belli etmez, sessizce kaybolursun.'];
 const MODAL=['Öncü bir haritan var — başlatır, ateşlersin; ama bitirmek çoğu zaman başkasına kalır.','Sabit bir haritan var — bir şeye tutununca kolay bırakmazsın; gücün de inadın da burada.','Değişken bir haritan var — akar, uyum sağlarsın; ama bazen nereye ait olduğunu bilemezsin.'];
 // Archetype "mühür": Ay(iç sıfat) + Güneş(dış isim) → daima akıcı okunur
-const MOON_ADJ=['Ateşli','Sabırlı','Tedirgin','Hüzünlü','Gururlu','Titiz','Kararsız','Derin','Özgür','Mesafeli','Uzak','Rüyalı'];
+const MOON_ADJ=['Ateşli','Sabırlı','Meraklı','Şefkatli','Gururlu','Titiz','Dengeli','Derin','Özgür','Mesafeli','Uzak','Rüyalı'];
 const SUN_NOUN=['Fırtına','Dağ','Rüzgâr','Deniz','Alev','Pusula','Ayna','Girdap','Ok','Zirve','Şimşek','Sis'];
 const ARCH_SUB=['dışarı taşan bir güç, içeride bambaşka bir dünya','sağlam görünüp derinden akan biri','durmadan hareket eden, hep bir yerde aranan biri','hisleriyle yükselen, sezgisiyle yön bulan biri','sahnede parlayan ama içi kendine saklı biri','sessizce her şeyi düzelten biri','dengeyi arayan, iki uç arasında salınan biri','yüzeyi değil dibi seçen biri','ufka bakan, kafeslere sığmayan biri','yavaş ama durdurulamaz biri','herkesten bir adım ötede duran biri','sınırları erimiş, hayalle gerçek arası biri'];
 
@@ -269,7 +269,7 @@ function sentences(ch){
  // Sun–Moon aspect
  let d=Math.abs(norm(P[0].lon-P[1].lon));if(d>180)d=360-d;
  if(Math.abs(d-90)<7||Math.abs(d-180)<8)cand.push([9,`İçindeki iki ses çekişiyor: <b>istediğin</b> (Güneş ${SIGNS[su]}) ile <b>ihtiyacın</b> (Ay ${SIGNS[mo]}) aynı yöne bakmıyor. En derin iç gerilimin bu — ve iyi yönettiğinde en büyük gücün de.`]);
- else if(Math.abs(d-120)<7||Math.abs(d-60)<5)cand.push([6,`İçin ve dışın uyumlu: istediğinle ihtiyacın aynı yöne bakıyor. Nadir bir armağan — kendinle barışık doğmuşsun.`]);
+ else if(Math.abs(d-120)<7||Math.abs(d-60)<5)cand.push([6,`İçin ve dışın uyumlu: istediğinle ihtiyacın aynı yöne bakıyor. İstediğinle ihtiyacın aynı yöne bakıyor; kendinle çatışmadan karar vermek sana daha kolay gelebilir.`]);
  // Mercury retrograde at birth
  if(ch.mercRetro)cand.push([8,`Doğduğunda <b>Merkür geri gidiyordu</b> — dışa değil içe konuşan bir zihin. Söylemeden önce defalarca kurar, çoğu düşünceni kendine saklarsın.`]);
  // element counts
@@ -279,7 +279,7 @@ function sentences(ch){
  else if(ec[dom]>=5)cand.push([5,cap(ELEM_DOM[dom])]);
  // stellium
  if(!noTime){const hc={};P.forEach(p=>{hc[p.house]=(hc[p.house]||0)+1;});const big=Object.entries(hc).filter(([h,n])=>n>=3).sort((a,b)=>b[1]-a[1])[0];
-  if(big){const h=+big[0],n=+big[1];cand.push([7,`<b>${cap(ORD[h])} evinde</b> ${n} gezegenin toplanmış. Hayatın, istesen de istemesen de <b>${HAREA[h]}</b> etrafında dönüyor.`]);}}
+  if(big){const h=+big[0],n=+big[1];cand.push([7,`<b>${cap(ORD[h])} evinde</b> ${n} gezegenin toplanmış. Hayatının ağırlık merkezi <b>${HAREA[h]}</b> alanına kayma eğiliminde olabilir.`]);}}
  else{const sc={};P.forEach(p=>{const s=signOf(p.lon);sc[s]=(sc[s]||0)+1;});const bs=Object.entries(sc).filter(([s,n])=>n>=3).sort((a,b)=>b[1]-a[1])[0];
   if(bs){const s=+bs[0],n=+bs[1];cand.push([7,`${n} gezegenin <b>${SIGNS[s]}</b> burcunda toplanmış. Bu ton her şeye siniyor: ${SIGNTRAIT[s]}.`]);}}
  // Venus — love (always relatable)
@@ -292,7 +292,7 @@ function sentences(ch){
  // chart ruler
  if(!noTime){const rp=P[RULER[as]];cand.push([4,`Yükselenin <b>${SIGNS[as]}</b>, o yüzden tüm haritanın patronu <b>${rp.n}</b> — nereye gidersen ${['parlamak','sevmek ve değer bulmak','anlamak ve konuşmak','güzellik ve yakınlık','kazanmak','büyümek ve anlam','ustalaşmak','özgürleşmek','ilham peşinde koşmak','dönüştürmek'][RULER[as]]} seni takip ediyor.`]);}
  // Saturn house — deepest lesson
- if(!noTime){const sh=P[6].house;cand.push([3,`Satürn <b>${cap(ORD[sh])} evinde</b>: en çok <b>${HAREA[sh]}</b> alanında kendini kanıtlaman gerekiyormuş gibi hissedersin. Hayatın buradaki dersi sabır — ve orada en çok sen olgunlaşırsın.`]);}
+ if(!noTime){const sh=P[6].house;cand.push([3,`Satürn <b>${cap(ORD[sh])} evinde</b>: en çok <b>${HAREA[sh]}</b> alanında kendini kanıtlaman gerekiyormuş gibi hissedersin. Bu alanda geç ama sağlam olgunlaşan bir çizgi görülebilir.`]);}
  // pick top 4 distinct by priority
  cand.sort((a,b)=>b[0]-a[0]);
  const picked=[l1];const seen=new Set();
@@ -326,7 +326,7 @@ document.getElementById('go').onclick=()=>{
  // save birth to memory
  try{var pr=JSON.parse(localStorage.getItem('sorbi_profile')||'null');var bo={date:dv,time:tv||'',place:pk.label,lat:pk.lat.toFixed(4),lon:pk.lon.toFixed(4),tz:pk.tz};localStorage.setItem('sorbi_birth',JSON.stringify(bo));if(!pr)pr={name:'',email:'',birth:bo,createdAt:Date.now(),readings:[]};pr.birth=bo;localStorage.setItem('sorbi_profile',JSON.stringify(pr));}catch(e){}
  const su=signOf(ch.pls[0].lon),mo=signOf(ch.pls[1].lon),as=signOf(ch.asc);
- const lines=sentences(ch).slice(0,3);
+ const lines=sentences(ch).slice(0,5);
  document.getElementById('form').style.display='none';
  const rev=document.getElementById('reveal');rev.style.display='block';
  const reading=document.getElementById('reading');reading.style.display='block';
