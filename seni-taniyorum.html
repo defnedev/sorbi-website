@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Seni Tanıyorum — Doğum Anından Sana Özel Okuma | Sorbi</title>
-<meta name="description" content="Genel burç yorumu değil. Doğduğun anı ver, Sorbi seni birkaç cümlede okusun — dışın, için, gizli gerilimlerin. Tekinsiz derecede kişisel, ücretsiz.">
+<title>Seni Tanıyorum — Doğum Haritandan Kişisel Okuma | Sorbi</title>
+<meta name="description" content="Genel burç yorumu değil. Doğduğun anı gir, harita seni birkaç cümlede okusun — dışın, için, gizli gerilimlerin. Tekinsiz derecede kişisel, ücretsiz.">
 <link rel="canonical" href="https://sorbiapp.com/seni-taniyorum">
 <meta name="theme-color" content="#0B0E15">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Sorbi">
-<meta property="og:title" content="Seni Tanıyorum — Sorbi"><meta property="og:description" content="Doğduğun anı ver, seni birkaç cümlede okuyayım. Genel değil, tam sana."><meta property="og:url" content="https://sorbiapp.com/seni-taniyorum"><meta property="og:image" content="https://sorbiapp.com/og-image.png"><meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Seni Tanıyorum — Sorbi"><meta property="og:description" content="Doğduğun anı gir, harita seni birkaç cümlede okusun. Genel burç yorumu değil, kendi haritan."><meta property="og:url" content="https://sorbiapp.com/seni-taniyorum"><meta property="og:image" content="https://sorbiapp.com/og-image.png"><meta property="og:locale" content="tr_TR">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -141,7 +141,7 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
   <a href="/araclar">Araçlar</a>
   <a href="/bugun">Bugün</a>
   <a href="/burc-ozellikleri">Burçlar</a>
-  <a href="/soru-sor">Sorunu Sor</a>
+  <a href="/soru-sor">Soru Sorma Yöntemi</a>
  </nav>
 </header>
 <script>(function(){try{var p=location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';document.querySelectorAll('.sbnav nav a').forEach(function(a){var h=a.getAttribute('href').replace(/\.html$/,'');if(h===p||(h!=='/'&&p.indexOf(h)===0))a.classList.add('on');});}catch(e){}})();</script>
@@ -187,10 +187,10 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
    <div class="rthanks" id="rthanks"></div>
   </div>
   <div class="sell" id="sell">
-   <h3>Aklında asıl bir soru mu var?</h3>
-   <p>Bu okuma yüzeyi çizdi. Merak ettiğin belirli bir şey varsa — bir ilişki, bir zamanlama, bir karar — doğrudan haritanla sor, sana özel yanıtlansın.</p>
-   <a class="buy" href="/soru-sor">Aklındaki soruyu sor →</a>
-   <a class="ghost" href="/haritam">Evime gir →</a>
+   <h3>Bu okuma haritanın yüzeyi</h3>
+   <p>Güneş, Ay ve yükselenin söyledikleri buraya kadar. Evler, açılar ve o döneme gelen transitler devreye girince okuma çok daha keskinleşebilir.</p>
+   <a class="buy" href="/detayli-dogum-haritasi">Haritanın tamamını aç →</a>
+   <a class="ghost" href="/nadirlik">Bu yerleşimler kaç kişide bir? →</a>
    <div class="share" id="share">✦ Seni de bu kadar iyi okudu mu? <button id="shareBtn">Bir arkadaşına gönder</button></div>
   </div>
  </div>
@@ -376,7 +376,7 @@ document.getElementById('go').onclick=()=>{
 // reaction buttons
 document.querySelectorAll('#react .rbtns button').forEach(b=>{b.onclick=()=>{
  document.querySelectorAll('#react .rbtns button').forEach(x=>x.classList.remove('picked'));b.classList.add('picked');
- const r=b.dataset.r;const msg={tam:'Biliyordum ✦ Haritanın tamamı seni çok daha derin anlatıyor.',cogu:'Geri kalanı tam haritanda netleşiyor ✦',emin:'Doğum saatin tam değilse okuma yüzeyde kalır — tam haritan çok daha keskin.'}[r];
+ const r=b.dataset.r;const msg={tam:'Bunlar sadece üç yerleşim ✦ Evler ve açılar devreye girince okuma daha da netleşebilir.',cogu:'Denk gelmeyen kısım çoğu zaman evlerde ve açılarda saklıdır ✦',emin:'Doğum saatin tam değilse okuma yüzeyde kalabilir — saatini bulursan yükselen ve evler netleşir.'}[r];
  document.getElementById('rthanks').textContent=msg;
  try{fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'seni_taniyorum_react',meta:r}),keepalive:true});}catch(e){}
 };});
@@ -432,7 +432,7 @@ document.getElementById('shareBtn').onclick=async()=>{
   </div>
   <div><h4>Sorbi</h4>
    <a href="/">Ana Sayfa</a>
-   <a href="/soru-sor">Sorunu Sor</a>
+   <a href="/soru-sor">Soru Sorma Yöntemi</a>
    <a href="/gunun-karti">Günün Kartı</a>
    <a href="/seni-taniyorum">Seni Tanıyorum</a>
    <a href="/#uygulama">Uygulama</a>
