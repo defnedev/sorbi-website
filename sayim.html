@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sayım — Astrolojiyi Veriyle Sayan Seri | Sorbi</title>
+<meta name="description" content="Astrolojide çok konuşulan, hiç sayılmayan şeyleri sayıyoruz. Gerçek efemeris, açık yöntem, tekrarlanabilir hesap. Yorum değil, sayım.">
+<link rel="canonical" href="https://sorbiapp.com/sayim">
+<meta name="theme-color" content="#0B0F14">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sorbi">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Sayım — astrolojiyi veriyle sayan seri">
+<meta property="og:description" content="Çok konuşulan, hiç sayılmayan sorular. Gerçek efemeris, açık yöntem.">
+<meta property="og:url" content="https://sorbiapp.com/sayim">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage",
+ "name":"Sayım","url":"https://sorbiapp.com/sayim","inLanguage":"tr-TR",
+ "description":"Astroloji sorularının gerçek efemeris üzerinden sayımı.",
+ "hasPart":[{"@type":"Article","headline":"Türkiye'de hangi yükselen daha sık doğuyor?",
+  "url":"https://sorbiapp.com/sayim-yukselen","datePublished":"2026-09-04",
+  "author":{"@type":"Person","name":"Defne Turan"}}]}</script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0D0810;--card:rgba(255,255,255,.032);--card2:rgba(255,255,255,.05);
+ --stroke:rgba(255,255,255,.08);--stroke2:rgba(255,255,255,.14);
+ --gold:#E3A692;--gold-br:#F2D3B8;--ink:#F2EFE9;--mut:#9BA0AB;--dim:#7A8090;
+ --soft:#7FB3A8;--terra:#C4744E;--r:16px}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;
+ line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--gold);text-decoration:none}
+a:hover{text-decoration:underline}
+header{border-bottom:1px solid var(--stroke);position:sticky;top:0;background:rgba(13,8,16,.92);
+ backdrop-filter:blur(10px);z-index:20}
+nav{max-width:900px;margin:0 auto;padding:.9rem 1.3rem;display:flex;gap:1.1rem;align-items:center;
+ flex-wrap:wrap;font-size:.9rem}
+nav .mrk{font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--gold);margin-right:auto}
+nav a{color:var(--mut)}
+nav a.on{color:var(--ink)}
+main{max-width:760px;margin:0 auto;padding:2.6rem 1.3rem 4rem}
+.et{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.9rem,5vw,2.9rem);line-height:1.15;
+ font-weight:700;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--gold-br)}
+.giris{font-size:1.08rem;color:var(--mut);margin-top:1.1rem;max-width:60ch}
+.kunye{margin-top:1.6rem;padding-top:1.1rem;border-top:1px solid var(--stroke);
+ font-size:.84rem;color:var(--dim);display:flex;gap:.6rem;flex-wrap:wrap}
+.kunye b{color:var(--mut);font-weight:500}
+h2{font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:600;margin:2.8rem 0 .5rem;
+ letter-spacing:-.01em}
+h3{font-size:1.02rem;font-weight:600;margin:1.8rem 0 .4rem;color:var(--gold-br)}
+p{margin:.85rem 0;max-width:64ch}
+.tablo{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);
+ padding:1.2rem 1.3rem;margin:1.4rem 0}
+.tablo .bas{font-size:.82rem;color:var(--mut);margin-bottom:.9rem;padding-bottom:.7rem;
+ border-bottom:1px solid var(--stroke)}
+.satir{display:grid;grid-template-columns:1fr 92px 58px 84px;gap:.7rem;align-items:center;
+ padding:.48rem 0;border-bottom:1px solid var(--stroke)}
+.satir:last-child{border-bottom:none}
+.satir .ad{font-size:.88rem}
+.satir .ad b{font-weight:500}
+.satir .ad .gl{color:var(--gold);margin-right:.2rem}
+.cubuk{height:5px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden}
+.cubuk i{display:block;height:100%;background:var(--gold);border-radius:3px}
+.satir.nadir .cubuk i{background:var(--terra)}
+.oran{font-family:ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--mut);text-align:right;
+ font-variant-numeric:tabular-nums;white-space:nowrap}
+.oran.ikinci{color:var(--dim);font-size:.75rem}
+@media(max-width:560px){
+ .satir{grid-template-columns:1fr 54px 76px}
+ .satir .cubuk{display:none}
+}
+.vurgu{background:var(--card2);border:1px solid var(--stroke2);border-radius:var(--r);
+ padding:1.2rem 1.3rem;margin:1.6rem 0}
+.vurgu .buyuk{font-family:'Space Grotesk',sans-serif;font-size:1.9rem;font-weight:700;color:var(--gold-br)}
+.vurgu .alt{color:var(--mut);font-size:.94rem;margin-top:.25rem}
+.yontem{border-left:2px solid var(--stroke2);padding-left:1.1rem;margin:1.6rem 0;
+ font-size:.88rem;color:var(--dim)}
+.yontem b{color:var(--mut);font-weight:500}
+.yollar{display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:2.4rem}
+.yol{display:block;background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);
+ padding:1rem 1.1rem;color:var(--ink)}
+.yol:hover{border-color:var(--stroke2);text-decoration:none}
+.yol b{display:block;font-weight:600;margin-bottom:.15rem}
+.yol span{font-size:.85rem;color:var(--dim)}
+footer{border-top:1px solid var(--stroke);margin-top:3.5rem;padding:1.6rem 1.3rem;text-align:center;
+ color:var(--dim);font-size:.85rem}
+</style>
+</head>
+<body>
+<header>
+ <nav>
+  <a class="mrk" href="/">✦ Sorbi</a>
+  <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
+  <a href="/nadirlik">Nadirlik</a>
+  <a href="/sayim" class="on">Sayım</a>
+  <a href="/ogren">Öğren</a>
+  <a href="/araclar">Araçlar</a>
+ </nav>
+</header>
+
+<main>
+ <div class="et">Seri</div>
+ <h1>Sayım</h1>
+ <p class="giris">Astrolojide çok konuşulan, hiç sayılmayan sorular var. Bu seri onları sayıyor: gerçek efemerisle hesaplanır, yöntem açık yazılır, isteyen aynı hesabı tekrarlar. Yorum değil, sayım.</p>
+
+ <div class="vurgu">
+  <div class="alt">Kural basit: bir iddia efemeris hesabıyla desteklenemiyorsa yazılmaz. Her yazının sonunda örneklem, konum, motor ve sınırlar yazılı olur — rakamı beğenmeyen kendi hesabını yapabilsin.</div>
+ </div>
+
+ <h2>Yazılar</h2>
+ <div class="yollar" style="grid-template-columns:1fr">
+  <a class="yol" href="/sayim-yukselen">
+   <b>01 · Türkiye'de hangi yükselen daha sık doğuyor?</b>
+   <span>24.000 harita sayıldı. Yükselen dağılımı düz değil: en sık ile en seyrek arasında 2,2 kat fark var. · 4 Eylül 2026</span>
+  </a>
+ </div>
+
+ <h2>Ne sayılacak</h2>
+ <p>Sıradakiler hazırlanıyor: Merkür gerçekte yılın yüzde kaçında geri hareketli, retro dönemde doğanlar ne kadar, Güneş–Ay–Yükselen üçlülerinin kaçı gerçekte hiç görülmüyor.</p>
+ <p>Merak ettiğin bir soru varsa <a href="/nadirlik">kendi haritanı</a> sayıp başlayabilirsin. Sayfalardaki geri bildirim düğmesinden soru da bırakabilirsin.</p>
+</main>
+
+<footer>Sorbi ✦ <a href="/">Ana sayfa</a> · <a href="/nadirlik">Nadirlik</a> · <a href="/ogren">Öğren</a></footer>
+<script src="/sorbi-geri-bildirim.js?v=1" defer></script>
+<script src="/sorbi-olcum.js?v=1" defer></script>
+</body>
+</html>

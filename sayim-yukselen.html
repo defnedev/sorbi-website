@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Türkiye'de Hangi Yükselen Daha Sık Doğuyor? — Sayım | Sorbi</title>
+<meta name="description" content="24.000 gerçek harita sayıldı: İstanbul enleminde Aslan yükselen, Balık yükselenden 2,2 kat daha sık görülüyor. Yorum değil, sayım.">
+<link rel="canonical" href="https://sorbiapp.com/sayim-yukselen">
+<meta name="theme-color" content="#0B0F14">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Sorbi">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Türkiye'de hangi yükselen daha sık doğuyor?">
+<meta property="og:description" content="24.000 harita sayıldı. Yükselen dağılımı düz değil: en sık ile en seyrek arasında 2,2 kat fark var.">
+<meta property="og:url" content="https://sorbiapp.com/sayim-yukselen">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[
+{"@type":"Article","headline":"Türkiye'de hangi yükselen daha sık doğuyor?",
+ "description":"24.000 gerçek doğum haritası üzerinden yükselen burç dağılımının sayımı.",
+ "datePublished":"2026-09-04","inLanguage":"tr-TR",
+ "author":{"@type":"Person","name":"Defne Turan"},
+ "publisher":{"@type":"Organization","name":"Sorbi","url":"https://sorbiapp.com"},
+ "mainEntityOfPage":"https://sorbiapp.com/sayim-yukselen",
+ "isBasedOn":"24.000 örnek harita, 1950-2009, 41.01 K"},
+{"@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"Sorbi","item":"https://sorbiapp.com/"},
+ {"@type":"ListItem","position":2,"name":"Sayım","item":"https://sorbiapp.com/sayim"},
+ {"@type":"ListItem","position":3,"name":"Yükselen dağılımı","item":"https://sorbiapp.com/sayim-yukselen"}]}]}</script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0D0810;--card:rgba(255,255,255,.032);--card2:rgba(255,255,255,.05);
+ --stroke:rgba(255,255,255,.08);--stroke2:rgba(255,255,255,.14);
+ --gold:#E3A692;--gold-br:#F2D3B8;--ink:#F2EFE9;--mut:#9BA0AB;--dim:#7A8090;
+ --soft:#7FB3A8;--terra:#C4744E;--r:16px}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;
+ line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--gold);text-decoration:none}
+a:hover{text-decoration:underline}
+header{border-bottom:1px solid var(--stroke);position:sticky;top:0;background:rgba(13,8,16,.92);
+ backdrop-filter:blur(10px);z-index:20}
+nav{max-width:900px;margin:0 auto;padding:.9rem 1.3rem;display:flex;gap:1.1rem;align-items:center;
+ flex-wrap:wrap;font-size:.9rem}
+nav .mrk{font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--gold);margin-right:auto}
+nav a{color:var(--mut)}
+nav a.on{color:var(--ink)}
+main{max-width:760px;margin:0 auto;padding:2.6rem 1.3rem 4rem}
+.et{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.9rem,5vw,2.9rem);line-height:1.15;
+ font-weight:700;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--gold-br)}
+.giris{font-size:1.08rem;color:var(--mut);margin-top:1.1rem;max-width:60ch}
+.kunye{margin-top:1.6rem;padding-top:1.1rem;border-top:1px solid var(--stroke);
+ font-size:.84rem;color:var(--dim);display:flex;gap:.6rem;flex-wrap:wrap}
+.kunye b{color:var(--mut);font-weight:500}
+h2{font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:600;margin:2.8rem 0 .5rem;
+ letter-spacing:-.01em}
+h3{font-size:1.02rem;font-weight:600;margin:1.8rem 0 .4rem;color:var(--gold-br)}
+p{margin:.85rem 0;max-width:64ch}
+.tablo{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);
+ padding:1.2rem 1.3rem;margin:1.4rem 0}
+.tablo .bas{font-size:.82rem;color:var(--mut);margin-bottom:.9rem;padding-bottom:.7rem;
+ border-bottom:1px solid var(--stroke)}
+.satir{display:grid;grid-template-columns:1fr 92px 58px 84px;gap:.7rem;align-items:center;
+ padding:.48rem 0;border-bottom:1px solid var(--stroke)}
+.satir:last-child{border-bottom:none}
+.satir .ad{font-size:.88rem}
+.satir .ad b{font-weight:500}
+.satir .ad .gl{color:var(--gold);margin-right:.2rem}
+.cubuk{height:5px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden}
+.cubuk i{display:block;height:100%;background:var(--gold);border-radius:3px}
+.satir.nadir .cubuk i{background:var(--terra)}
+.oran{font-family:ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--mut);text-align:right;
+ font-variant-numeric:tabular-nums;white-space:nowrap}
+.oran.ikinci{color:var(--dim);font-size:.75rem}
+@media(max-width:560px){
+ .satir{grid-template-columns:1fr 54px 76px}
+ .satir .cubuk{display:none}
+}
+.vurgu{background:var(--card2);border:1px solid var(--stroke2);border-radius:var(--r);
+ padding:1.2rem 1.3rem;margin:1.6rem 0}
+.vurgu .buyuk{font-family:'Space Grotesk',sans-serif;font-size:1.9rem;font-weight:700;color:var(--gold-br)}
+.vurgu .alt{color:var(--mut);font-size:.94rem;margin-top:.25rem}
+.yontem{border-left:2px solid var(--stroke2);padding-left:1.1rem;margin:1.6rem 0;
+ font-size:.88rem;color:var(--dim)}
+.yontem b{color:var(--mut);font-weight:500}
+.yollar{display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:2.4rem}
+.yol{display:block;background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);
+ padding:1rem 1.1rem;color:var(--ink)}
+.yol:hover{border-color:var(--stroke2);text-decoration:none}
+.yol b{display:block;font-weight:600;margin-bottom:.15rem}
+.yol span{font-size:.85rem;color:var(--dim)}
+footer{border-top:1px solid var(--stroke);margin-top:3.5rem;padding:1.6rem 1.3rem;text-align:center;
+ color:var(--dim);font-size:.85rem}
+</style>
+</head>
+<body>
+<header>
+ <nav>
+  <a class="mrk" href="/">✦ Sorbi</a>
+  <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
+  <a href="/nadirlik">Nadirlik</a>
+  <a href="/sayim" class="on">Sayım</a>
+  <a href="/ogren">Öğren</a>
+  <a href="/araclar">Araçlar</a>
+ </nav>
+</header>
+
+<main>
+ <div class="et">Sayım · 01</div>
+ <h1>Türkiye'de hangi yükselen <em>daha sık</em> doğuyor?</h1>
+ <p class="giris">Astrolojide en çok konuşulan şey yükselen burcun ne anlattığı. Kimse kimin daha sık doğduğunu sormuyor. Sorduk ve saydık: yükselen dağılımı düz değil, hiç olmamış.</p>
+ <div class="kunye">
+  <span><b>Defne Turan</b></span><span>·</span><span>4 Eylül 2026</span><span>·</span>
+  <span>24.000 harita sayıldı</span>
+ </div>
+
+ <div class="vurgu">
+  <div class="buyuk">2,2 kat</div>
+  <div class="alt">İstanbul enleminde Aslan yükselen, Balık yükselene göre bu kadar sık görülüyor. Yüzde 8,33 olması gereken oranlar yüzde 4,87 ile 10,67 arasında dağılıyor.</div>
+ </div>
+
+ <h2>Sayım</h2>
+ <p>1950–2009 aralığından örneklenmiş 24.000 harita İstanbul koordinatıyla hesaplandı ve her haritanın yükseleni sayıldı. Aşağıdaki oranlar tahmin değil, bu örneklemdeki gerçek sayım.</p>
+ <div class="tablo">
+  <div class="bas">Yükselen burç dağılımı · 24.000 harita · 41,01°K · düz olsaydı her burç %8,33</div>
+   <div class="satir"><div class="ad"><span class="gl">♌</span> <b>Aslan</b></div><div class="cubuk"><i style="width:100%"></i></div><div class="oran">10.67%</div><div class="oran ikinci">9 kişide 1</div></div>
+   <div class="satir"><div class="ad"><span class="gl">♎</span> <b>Terazi</b></div><div class="cubuk"><i style="width:100%"></i></div><div class="oran">10.65%</div><div class="oran ikinci">9 kişide 1</div></div>
+   <div class="satir"><div class="ad"><span class="gl">♏</span> <b>Akrep</b></div><div class="cubuk"><i style="width:99%"></i></div><div class="oran">10.62%</div><div class="oran ikinci">9 kişide 1</div></div>
+   <div class="satir"><div class="ad"><span class="gl">♍</span> <b>Başak</b></div><div class="cubuk"><i style="width:99%"></i></div><div class="oran">10.52%</div><div class="oran ikinci">10 kişide 1</div></div>
+   <div class="satir"><div class="ad"><span class="gl">♐</span> <b>Yay</b></div><div class="cubuk"><i style="width:94%"></i></div><div class="oran">9.99%</div><div class="oran ikinci">10 kişide 1</div></div>
+   <div class="satir"><div class="ad"><span class="gl">♋</span> <b>Yengeç</b></div><div class="cubuk"><i style="width:93%"></i></div><div class="oran">9.94%</div><div class="oran ikinci">10 kişide 1</div></div>
+   <div class="satir"><div class="ad"><span class="gl">♑</span> <b>Oğlak</b></div><div class="cubuk"><i style="width:75%"></i></div><div class="oran">7.96%</div><div class="oran ikinci">13 kişide 1</div></div>
+   <div class="satir"><div class="ad"><span class="gl">♊</span> <b>İkizler</b></div><div class="cubuk"><i style="width:74%"></i></div><div class="oran">7.87%</div><div class="oran ikinci">13 kişide 1</div></div>
+   <div class="satir nadir"><div class="ad"><span class="gl">♉</span> <b>Boğa</b></div><div class="cubuk"><i style="width:56%"></i></div><div class="oran">6.01%</div><div class="oran ikinci">17 kişide 1</div></div>
+   <div class="satir nadir"><div class="ad"><span class="gl">♒</span> <b>Kova</b></div><div class="cubuk"><i style="width:56%"></i></div><div class="oran">5.95%</div><div class="oran ikinci">17 kişide 1</div></div>
+   <div class="satir nadir"><div class="ad"><span class="gl">♈</span> <b>Koç</b></div><div class="cubuk"><i style="width:46%"></i></div><div class="oran">4.94%</div><div class="oran ikinci">20 kişide 1</div></div>
+   <div class="satir nadir"><div class="ad"><span class="gl">♓</span> <b>Balık</b></div><div class="cubuk"><i style="width:46%"></i></div><div class="oran">4.87%</div><div class="oran ikinci">21 kişide 1</div></div>
+ </div>
+
+ <h2>Neden?</h2>
+ <p>Bunun astrolojiyle ilgisi yok, coğrafyayla ilgisi var. Burçlar ufuktan eşit sürede doğmaz. Tutulum düzlemi ufka eğik durur ve bu eğim enleme göre değişir. Bazı burçlar ufku dik açıyla keser, çabuk geçer, bazıları yatay keser ve saatlerce yukarıda kalır. 41° kuzeyde — yani Türkiye'nin büyük kısmında — Aslan, Terazi, Akrep ve Başak yavaş doğan burçlar. Koç ve Balık hızlı doğar. Ufukta kısa kalır, dolayısıyla daha az insanın yükseleni olur.</p>
+ <p>Ekvatorda bu fark neredeyse kaybolur. Kuzeye çıktıkça açılır: Oslo'da fark burada gördüğünüzden kat kat büyüktür. Yani "yükselenim nadir" cümlesi enlem söylenmeden eksik kalır.</p>
+
+ <h2>Kontrol: Güneş burcu</h2>
+ <p>Bir sayımın doğru olup olmadığı kontrol gerektirir. Aynı 24.000 haritanın Güneş burcu dağılımına baktık: eğer yöntemde bir bozukluk olsaydı burada da çarpıklık görünürdü. Görünmüyor — Güneş %7,83 ile %8,70 arasında, yani beklenen %8,33'ün etrafında düz duruyor.</p>
+ <div class="tablo">
+  <div class="bas">Güneş burcu dağılımı · aynı 24.000 harita · düz çıkması beklenir</div>
+   <div class="satir"><div class="ad"><span class="gl">♋</span> <b>Yengeç</b></div><div class="cubuk"><i style="width:100%"></i></div><div class="oran">8.70%</div><div class="oran ikinci">11 kişide 1</div></div>
+   <div class="satir"><div class="ad"><span class="gl">♉</span> <b>Boğa</b></div><div class="cubuk"><i style="width:99%"></i></div><div class="oran">8.61%</div><div class="oran ikinci">12 kişide 1</div></div>
+   <div class="satir"><div class="ad"><span class="gl">♍</span> <b>Başak</b></div><div class="cubuk"><i style="width:98%"></i></div><div class="oran">8.53%</div><div class="oran ikinci">12 kişide 1</div></div>
+   <div class="satir"><div class="ad"><span class="gl">♊</span> <b>İkizler</b></div><div class="cubuk"><i style="width:97%"></i></div><div class="oran">8.46%</div><div class="oran ikinci">12 kişide 1</div></div>
+   <div class="satir"><div class="ad"><span class="gl">♌</span> <b>Aslan</b></div><div class="cubuk"><i style="width:97%"></i></div><div class="oran">8.45%</div><div class="oran ikinci">12 kişide 1</div></div>
+   <div class="satir"><div class="ad"><span class="gl">♈</span> <b>Koç</b></div><div class="cubuk"><i style="width:97%"></i></div><div class="oran">8.45%</div><div class="oran ikinci">12 kişide 1</div></div>
+   <div class="satir"><div class="ad"><span class="gl">♏</span> <b>Akrep</b></div><div class="cubuk"><i style="width:96%"></i></div><div class="oran">8.34%</div><div class="oran ikinci">12 kişide 1</div></div>
+   <div class="satir"><div class="ad"><span class="gl">♒</span> <b>Kova</b></div><div class="cubuk"><i style="width:94%"></i></div><div class="oran">8.22%</div><div class="oran ikinci">12 kişide 1</div></div>
+   <div class="satir"><div class="ad"><span class="gl">♐</span> <b>Yay</b></div><div class="cubuk"><i style="width:94%"></i></div><div class="oran">8.18%</div><div class="oran ikinci">12 kişide 1</div></div>
+   <div class="satir"><div class="ad"><span class="gl">♎</span> <b>Terazi</b></div><div class="cubuk"><i style="width:94%"></i></div><div class="oran">8.16%</div><div class="oran ikinci">12 kişide 1</div></div>
+   <div class="satir"><div class="ad"><span class="gl">♓</span> <b>Balık</b></div><div class="cubuk"><i style="width:93%"></i></div><div class="oran">8.07%</div><div class="oran ikinci">12 kişide 1</div></div>
+   <div class="satir"><div class="ad"><span class="gl">♑</span> <b>Oğlak</b></div><div class="cubuk"><i style="width:90%"></i></div><div class="oran">7.83%</div><div class="oran ikinci">13 kişide 1</div></div>
+ </div>
+ <p>İki tablo yan yana konunca şu çıkıyor: Güneş'in hangi burçta olduğu takvime bağlı ve takvim düz. Yükselen ise gökyüzünün dönme geometrisine bağlı ve o düz değil.</p>
+
+ <h2>Bu senin için ne demek?</h2>
+ <p>Yükselenin Balık ya da Koç'sa, Türkiye'de yaklaşık yirmi kişiden birisin. Aslan, Terazi ya da Akrep'se dokuz kişiden biri. Bu bir üstünlük sıralaması değil — seyreklik bir özellik değil, bir saydır. Ama işe yarayabileceği bir yer var: bir yorumun "yükselen Balık kişiler genelde şöyledir" gibi bir genelleme yaptığını duyduğunda, o genellemenin arkasında kaç kişilik bir gözlem olduğunu sorabilirsin. Seyrek görülen bir yerleşim hakkında konuşanların eline daha az örnek geçer.</p>
+ <p>İkinci bir kullanımı da var. Doğum saatini bilmiyorsan ve birisi sana "şu yükselen olmalısın" diyorsa, olasılıklar eşit değil — tahmin yaparken bu tablo işine yarayabilir.</p>
+
+ <h2>Yöntem</h2>
+ <div class="yontem">
+  <p><b>Örneklem:</b> 24.000 harita, 1950–2009 arasından yıl içinde 40 tarih × gün içinde 10 saat şeklinde örneklendi. Tarihler yıllar arasında kaydırıldı ki mevsim hizası oluşmasın.</p>
+  <p><b>Konum:</b> 41,0082°K · 28,9784°D (İstanbul). Yükselen dağılımı enleme bağlıdır. Başka enlem başka tablo verir.</p>
+  <p><b>Hesap:</b> astronomy-engine tabanlı tarayıcı içi motor, Placidus ev sistemi, gerçek (true) düğüm, saatler TZ +03. Ev başlangıçları ve açısal noktalar Swiss Ephemeris çıktısına karşı test edildi. Yedi ev sisteminde de fark ölçülebilir düzeyin altında kaldı.</p>
+  <p><b>Hata:</b> 24.000 hesabın hiçbirinde hata oluşmadı. Sayım 1 Eylül 2026'da üretildi.</p>
+  <p><b>Sınır:</b> Bu bir nüfus istatistiği değil, zamanı düzgün örnekleyen bir hesap. Gerçek doğumlar gün içine ve yıl içine tam olarak düzgün dağılmaz — sabaha karşı doğum daha sıktır, planlı sezaryen mesai saatlerine yığılır. Bu etkiler tabloyu bir miktar kaydırır. Buradaki sayım "gökyüzü ne kadar sıklıkla hangi yükseleni üretiyor" sorusunun cevabıdır.</p>
+ </div>
+
+ <div class="yollar">
+  <a class="yol" href="/nadirlik"><b>Kendi haritanı ölç</b><span>Yerleşimlerinin kaç kişide bir görüldüğünü say.</span></a>
+  <a class="yol" href="/ogren"><b>Neden böyle oluyor</b><span>Yükselenin gün içinde nasıl döndüğünü animasyonla izle.</span></a>
+  <a class="yol" href="/detayli-dogum-haritasi"><b>Haritanı aç</b><span>Evler, yöneticiler, açılar ve transitler.</span></a>
+ </div>
+</main>
+
+<footer>Sorbi ✦ <a href="/">Ana sayfa</a> · <a href="/sayim">Sayım serisi</a> · <a href="/nadirlik">Nadirlik</a></footer>
+<script src="/sorbi-geri-bildirim.js?v=1" defer></script>
+<script src="/sorbi-olcum.js?v=1" defer></script>
+</body>
+</html>
