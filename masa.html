@@ -277,6 +277,13 @@ tbody tr:last-child td{border-bottom:none}
   var ANAHTAR='sorbiMasa_v1';
   function oku(){ try{ return JSON.parse(localStorage.getItem(ANAHTAR)||'null') || {sira:1,danisanlar:[],seanslar:[]}; }catch(e){ return {sira:1,danisanlar:[],seanslar:[]}; } }
   function yaz(v){ try{ localStorage.setItem(ANAHTAR,JSON.stringify(v)); }catch(e){ alert('Tarayıcı deposuna yazılamadı. Gizli sekmede çalışmayabilir.'); } }
+  function olay(tur){
+    try{
+      var g=JSON.stringify({type:tur});
+      if(navigator.sendBeacon) navigator.sendBeacon('/api/track', new Blob([g],{type:'application/json'}));
+      else fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:g,keepalive:true}).catch(function(){});
+    }catch(e){}
+  }
   function cevap(j,ok){ return Promise.resolve({ok:ok!==false,j:j||{}}); }
 
   function api(yol,secenek){
@@ -295,7 +302,9 @@ tbody tr:last-child td{border-bottom:none}
       }
       if(yontem==='POST'){
         if(!govde.ad || !govde.ad.trim()) return cevap({error:'İsim gerekli'},false);
-        govde.id=v.sira++; v.danisanlar.push(govde); yaz(v); return cevap({id:govde.id});
+        govde.id=v.sira++; v.danisanlar.push(govde); yaz(v);
+        olay('masa_dosya');
+        return cevap({id:govde.id});
       }
     }
     if(yol.indexOf('/api/panel/danisan')===0){
@@ -318,7 +327,9 @@ tbody tr:last-child td{border-bottom:none}
     }
     if(yol.indexOf('/api/panel/seans')===0){
       if(yontem==='POST'){
-        govde.id=v.sira++; v.seanslar.push(govde); yaz(v); return cevap({id:govde.id});
+        govde.id=v.sira++; v.seanslar.push(govde); yaz(v);
+        olay('masa_seans');
+        return cevap({id:govde.id});
       }
       if(yontem==='DELETE'){
         var sid=kimlik(); v.seanslar=v.seanslar.filter(function(x){ return x.id!==sid; }); yaz(v); return cevap({ok:true});
@@ -650,7 +661,7 @@ tbody tr:last-child td{border-bottom:none}
           'Astroloji sembolik bir yorum dilidir; tıbbi, hukuki ve finansal karar yerine geçmez.</div>'+
         '</div></div>';
 
-      $('yazdirBtn').addEventListener('click',function(){ window.print(); });
+      $('yazdirBtn').addEventListener('click',function(){ olay('masa_cikti'); window.print(); });
       $('svgBtn').addEventListener('click',function(){
         var s=$('ciktiAlan').querySelector('svg'); if(!s) return;
         var blob=new Blob([new XMLSerializer().serializeToString(s)],{type:'image/svg+xml'});
@@ -766,6 +777,7 @@ tbody tr:last-child td{border-bottom:none}
     fr.readAsText(f); this.value='';
   });
 
+  try{ if(!sessionStorage.getItem('masa_acilis')){ sessionStorage.setItem('masa_acilis','1'); olay('masa_acildi'); } }catch(e){}
   tohumla();
   baslat();
 })();
