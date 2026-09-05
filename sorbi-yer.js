@@ -74,7 +74,12 @@
     });
   }
 
-  function kimlik(x) { return anahtar(x.name) + '|' + anahtar(x.admin1 || '') + '|' + (x.country_code || ''); }
+  function kimlik(x) {
+    /* TR'de aynı yer iki kaynaktan farklı admin1 ile gelebiliyor (Muğla/Türkiye ve
+       Muğla/Muğla): il adı ve koordinat aynıysa tek kayıt say. */
+    if (x.country_code === 'TR') return 'TR|' + anahtar(x.name) + '|' + Math.round(x.latitude * 20) + ',' + Math.round(x.longitude * 20);
+    return anahtar(x.name) + '|' + anahtar(x.admin1 || '') + '|' + (x.country_code || '');
+  }
 
   function harmanla(yerelListe, uzakListe) {
     var goruldu = {}, cikti = [];
