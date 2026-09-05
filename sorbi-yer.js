@@ -85,16 +85,18 @@
     return cikti.slice(0, 6);
   }
 
+  var asilFetch = window.fetch ? window.fetch.bind(window) : null;
+
   function ara(q) {
     var y = yerel(q);
-    return fetch(UC + '?name=' + encodeURIComponent(q) + '&count=10&language=tr&format=json')
+    if (!asilFetch) return Promise.resolve({ results: y });
+    return asilFetch(UC + '?name=' + encodeURIComponent(q) + '&count=10&language=tr&format=json')
       .then(function (r) { return r.json(); })
       .catch(function () { return {}; })
       .then(function (j) { return { results: harmanla(y, (j && j.results) || []) }; });
   }
 
   /* Sayfalardaki mevcut fetch çağrılarını olduğu gibi bırakıp araya giriyoruz. */
-  var asilFetch = window.fetch ? window.fetch.bind(window) : null;
   if (asilFetch) {
     window.fetch = function (girdi, secenek) {
       var url = (typeof girdi === 'string') ? girdi : (girdi && girdi.url) || '';
