@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Astrolog Masası — Sorbi</title>
+<meta name="description" content="Astrologlar için çalışma masası: danışan dosyası, seans hazırlığı, transit ve ilerletim, sinastri, danışana çıktı. Veriler tarayıcında kalır, kayıt gerekmez.">
+<link rel="canonical" href="https://sorbiapp.com/masa">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Sorbi"><meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Astrolog Masası — Sorbi">
+<meta property="og:description" content="Danışan dosyası, seans hazırlığı, sinastri ve danışana çıktı. Kayıt yok, veriler tarayıcında kalır.">
+<meta property="og:url" content="https://sorbiapp.com/masa">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0B0F14">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+ /* zemin: siteyle aynı mor-siyah; yüzeyler ona doğru ısıtıldı */
+ --bg:#0D0810; --yuzey:#15101C; --yuzey2:#1B1522;
+ --cizgi:rgba(255,255,255,.075); --cizgi2:rgba(255,255,255,.14);
+ --gold:#E3A692; --gold-br:#F2D3B8;
+ --ink:#F2EFE9; --mut:#9A93A2; --dim:#6B6472;
+ /* anlam renkleri — vurgudan ayrı, yalnız veri kodlar */
+ --sert:#C9705A; --yumusak:#7FB3A8; --kavus:#D9B26A;
+ --f-bas:'Space Grotesk',system-ui,sans-serif;
+ --f-gov:'Inter',system-ui,sans-serif;
+ --f-say:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+}
+body{font-family:var(--f-gov);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.6}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:5px}
+input,textarea,select,button{font-family:inherit}
+input,textarea,select{width:100%;font-size:.87rem;color:var(--ink);background:rgba(0,0,0,.32);border:1px solid var(--cizgi);border-radius:9px;padding:.55rem .7rem;outline:none;transition:border-color .15s;color-scheme:dark}
+input:focus,textarea:focus,select:focus{border-color:rgba(227,166,146,.5)}
+input::placeholder,textarea::placeholder{color:var(--dim)}
+label{display:block;font-family:var(--f-say);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.3rem}
+button.ana{font-size:.84rem;font-weight:600;color:#180F14;background:var(--gold-br);border:none;border-radius:9px;padding:.55rem 1.05rem;cursor:pointer;transition:background .15s}
+button.ana:hover{background:var(--gold)}
+button.ana:disabled{opacity:.45;cursor:default}
+button.yan{font-size:.8rem;font-weight:500;color:var(--mut);background:transparent;border:1px solid var(--cizgi);border-radius:9px;padding:.42rem .8rem;cursor:pointer;transition:.15s}
+button.yan:hover{color:var(--ink);border-color:var(--cizgi2)}
+.st{font-size:.78rem;color:var(--dim);min-height:1.1em}
+.st.hata{color:var(--sert)} .st.iyi{color:var(--yumusak)}
+.sayi{font-family:var(--f-say);font-variant-numeric:tabular-nums;font-size:.79rem}
+
+/* ── üst şerit ── */
+.ust{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:.85rem;padding:.55rem 1.1rem;
+ background:rgba(13,8,16,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--cizgi)}
+.ust .lg{font-family:var(--f-bas);font-weight:600;font-size:.94rem;display:flex;align-items:center;gap:.4rem}
+.ust .lg i{font-style:normal;color:var(--gold)}
+.ust .et{font-family:var(--f-say);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);border-left:1px solid var(--cizgi);padding-left:.85rem}
+.ust .sag{margin-left:auto;display:flex;gap:.45rem;align-items:center}
+@media(max-width:560px){.ust .et{display:none}}
+
+/* ── giriş ── */
+.giris{max-width:330px;margin:16vh auto;padding:0 1.2rem;text-align:center}
+.giris .mark{font-size:1.6rem;color:var(--gold);margin-bottom:.6rem}
+.giris h1{font-family:var(--f-bas);font-size:1.3rem;font-weight:600;margin-bottom:.25rem}
+.giris p{color:var(--mut);font-size:.84rem;font-weight:300;margin-bottom:1.2rem}
+.giris .sat{display:flex;gap:.5rem;margin-bottom:.5rem}
+
+/* ── iskelet ── */
+.duzen{display:grid;grid-template-columns:270px 1fr;min-height:calc(100vh - 47px)}
+@media(max-width:900px){.duzen{grid-template-columns:1fr}.kenar{border-right:none;border-bottom:1px solid var(--cizgi)}}
+.kenar{border-right:1px solid var(--cizgi);padding:.9rem .75rem;display:flex;flex-direction:column;gap:.6rem;background:rgba(0,0,0,.16)}
+.arama-sat{display:flex;gap:.4rem}
+.dlist{overflow-y:auto;max-height:calc(100vh - 180px);margin:0 -.75rem}
+.dsat{display:block;width:100%;text-align:left;background:none;border:none;border-left:2px solid transparent;
+ padding:.55rem .75rem;cursor:pointer;color:var(--ink);transition:background .13s;position:relative}
+.dsat+.dsat{box-shadow:inset 0 1px 0 var(--cizgi)}
+.dsat:hover{background:rgba(255,255,255,.035)}
+.dsat.on{background:rgba(227,166,146,.09);border-left-color:var(--gold)}
+.dsat b{font-size:.88rem;font-weight:500;display:block;line-height:1.3}
+.dsat span{font-family:var(--f-say);font-size:.7rem;color:var(--dim)}
+.icerik{padding:1.1rem 1.4rem 4rem;min-width:0}
+@media(max-width:560px){.icerik{padding:.9rem .85rem 3rem}}
+
+/* ── dosya başlığı ── */
+.dosya-bas{display:flex;align-items:flex-end;gap:1rem;flex-wrap:wrap;padding-bottom:.85rem}
+h1.dad{font-family:var(--f-bas);font-size:1.45rem;font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.dogum{font-family:var(--f-say);font-size:.75rem;color:var(--mut);margin-top:.2rem}
+.etik{display:inline-block;font-family:var(--f-say);font-size:.65rem;letter-spacing:.05em;color:var(--mut);
+ border:1px solid var(--cizgi2);border-radius:99px;padding:.05rem .45rem;margin:.35rem .25rem 0 0}
+
+/* sekmeler: alt çizgi — araç dili, pill değil */
+.sekmeler{display:flex;gap:1.3rem;border-bottom:1px solid var(--cizgi);margin-bottom:1.2rem;overflow-x:auto;scrollbar-width:none}
+.sekmeler::-webkit-scrollbar{display:none}
+.sek{font-size:.85rem;font-weight:500;color:var(--dim);background:none;border:none;padding:.55rem 0 .6rem;
+ cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s}
+.sek:hover{color:var(--mut)}
+.sek.on{color:var(--ink);border-bottom-color:var(--gold)}
+
+/* ── bölüm başlığı: kutu değil, kural çizgisi ── */
+.bol{margin-bottom:1.7rem}
+.bol-bas{display:flex;align-items:baseline;gap:.6rem;padding-bottom:.4rem;border-bottom:1px solid var(--cizgi);margin-bottom:.7rem}
+.bol-bas h2{font-family:var(--f-bas);font-size:.92rem;font-weight:600;letter-spacing:-.01em}
+.bol-bas .not{font-family:var(--f-say);font-size:.68rem;color:var(--dim);margin-left:auto;white-space:nowrap}
+.bol-ac{font-size:.78rem;color:var(--dim);font-weight:300;margin:-.35rem 0 .7rem}
+
+/* yüzey yalnız gerçekten nesne olan şeye */
+.yzy{background:var(--yuzey);border:1px solid var(--cizgi);border-radius:14px;padding:.9rem 1rem}
+
+/* ── seans özeti şeridi ── */
+.brif{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:1px;background:var(--cizgi);
+ border:1px solid var(--cizgi);border-radius:12px;overflow:hidden;margin-bottom:1.5rem}
+.brif > div{background:var(--yuzey);padding:.7rem .85rem}
+.brif dt{font-family:var(--f-say);font-size:.64rem;letter-spacing:.11em;text-transform:uppercase;color:var(--dim);margin-bottom:.2rem}
+.brif dd{font-size:.92rem;font-weight:500;line-height:1.35}
+.brif dd small{display:block;font-family:var(--f-say);font-size:.7rem;color:var(--mut);font-weight:400;margin-top:.1rem}
+
+/* ── açı satırı: şerit + orb çubuğu ── */
+.satirlar{display:flex;flex-direction:column}
+.aci{display:grid;grid-template-columns:3px 1fr auto;gap:.7rem;align-items:center;padding:.42rem 0;border-bottom:1px solid var(--cizgi)}
+.aci:last-child{border-bottom:none}
+.aci .serit{width:3px;height:19px;border-radius:2px;background:var(--dim)}
+.aci.s-sert .serit{background:var(--sert)} .aci.s-yumusak .serit{background:var(--yumusak)} .aci.s-kavus .serit{background:var(--kavus)}
+.aci .metin{font-size:.83rem;min-width:0}
+.aci .metin b{font-weight:500}
+.aci .tur{color:var(--mut)}
+.aci.s-sert .tur{color:var(--sert)} .aci.s-yumusak .tur{color:var(--yumusak)} .aci.s-kavus .tur{color:var(--kavus)}
+.aci .ev{color:var(--dim);font-size:.78rem}
+.aci .sag{display:flex;align-items:center;gap:.55rem}
+.orb-cub{width:44px;height:3px;border-radius:2px;background:rgba(255,255,255,.09);overflow:hidden}
+.orb-cub i{display:block;height:100%;background:var(--gold);border-radius:2px}
+.aci.s-sert .orb-cub i{background:var(--sert)} .aci.s-yumusak .orb-cub i{background:var(--yumusak)}
+.yon{font-family:var(--f-say);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);
+ border:1px solid var(--cizgi);border-radius:99px;padding:.02rem .38rem}
+.yon.yak{color:var(--gold);border-color:rgba(227,166,146,.35)}
+
+/* ── dignite: puan çubuğu ── */
+.dign{display:flex;flex-direction:column}
+.dsatir{display:grid;grid-template-columns:78px 112px 150px minmax(0,1fr) 34px;gap:.7rem;align-items:center;padding:.34rem 0;border-bottom:1px solid var(--cizgi)}
+.dsatir .sayi{white-space:nowrap}
+.dsatir:last-child{border-bottom:none}
+@media(max-width:640px){.dsatir{grid-template-columns:70px 104px minmax(0,1fr) 30px}.dsatir .rozetler{display:none}}
+.dsatir .ad{font-size:.83rem;font-weight:500}
+.dsatir .ad i{font-style:normal;color:var(--sert);font-size:.72rem}
+.olcek{position:relative;height:16px}
+.olcek::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--cizgi2)}
+.olcek i{position:absolute;top:4px;height:8px;border-radius:2px}
+.olcek i.arti{left:50%;background:var(--yumusak)}
+.olcek i.eksi{right:50%;background:var(--sert)}
+.dsatir .rozetler{font-size:.75rem;color:var(--mut);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dsatir .per{color:var(--dim);font-style:italic}
+.dsatir .puan{font-family:var(--f-say);font-size:.78rem;color:var(--mut);text-align:right;white-space:nowrap}
+
+/* ── tablo (talepler, çıktı) ── */
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th,td{text-align:left;padding:.4rem .5rem;border-bottom:1px solid var(--cizgi)}
+th{font-family:var(--f-say);font-size:.65rem;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);font-weight:500}
+tbody tr:last-child td{border-bottom:none}
+.kaydir{overflow-x:auto}
+.gl{color:var(--gold);font-size:.95rem}
+.bos{border:1px dashed var(--cizgi2);border-radius:12px;padding:1.5rem 1rem;text-align:center;color:var(--dim);font-size:.84rem}
+.bos.ince{padding:.9rem;font-size:.8rem}
+#cizim svg,#cizim2 svg{width:100%;height:auto;display:block}
+.ikili{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:1.6rem;align-items:start}
+.ikili > .sol{position:sticky;top:63px}
+@media(max-width:880px){.ikili > .sol{position:static}}
+@media(max-width:880px){.ikili{grid-template-columns:1fr}}
+.alanlar{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.65rem;margin-bottom:.7rem}
+.geo{position:relative}
+.geolist{position:absolute;top:100%;left:0;right:0;z-index:40;margin-top:.25rem;max-height:220px;overflow-y:auto;
+ background:#12101A;border:1px solid var(--cizgi2);border-radius:11px;box-shadow:0 18px 44px rgba(0,0,0,.6)}
+.geolist>div{font-size:.82rem;padding:.5rem .8rem;cursor:pointer}
+.geolist>div:hover{background:rgba(227,166,146,.12)}
+.onay{display:flex;align-items:center;gap:.45rem;font-size:.8rem;color:var(--mut)}
+.onay input{width:auto}
+.seans{padding:.7rem 0;border-bottom:1px solid var(--cizgi)}
+.seans .bas{display:flex;gap:.55rem;align-items:baseline;flex-wrap:wrap;font-size:.78rem;color:var(--dim)}
+.seans .bas b{font-family:var(--f-say);color:var(--gold-br);font-size:.78rem}
+.seans p{font-size:.86rem;white-space:pre-wrap;margin-top:.3rem;font-weight:300;color:var(--mut)}
+.uyari{font-size:.75rem;color:var(--dim);font-weight:300;margin-top:.5rem}
+.esli{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem}
+.esli select{max-width:260px}
+.sayac{display:flex;gap:1.3rem;font-family:var(--f-say);font-size:.72rem;color:var(--mut)}
+.sayac b{color:var(--ink);font-weight:500}
+#modRozet:empty,#gbRozet:empty{display:none}
+#gbRozet{display:inline-block;margin-left:.4rem;background:var(--gold-br);color:#180F14;font-size:.68rem;
+ font-weight:600;border-radius:99px;padding:0 .35rem;min-width:1.05rem;text-align:center}
+.gbk{border:1px solid var(--cizgi);border-radius:12px;padding:.85rem .95rem;margin-bottom:.6rem;background:var(--yuzey)}
+.gbk .ust{display:flex;gap:.55rem;align-items:baseline;flex-wrap:wrap;font-size:.75rem;color:var(--dim);margin-bottom:.45rem}
+.gbk .tur{font-family:var(--f-say);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
+ border:1px solid currentColor;border-radius:99px;padding:.05rem .4rem}
+.t-ozellik{color:var(--gold-br)} .t-hata{color:var(--sert)} .t-oneri{color:var(--yumusak)}
+.gbk .metin{font-size:.9rem;white-space:pre-wrap;font-weight:300;color:var(--ink);margin-bottom:.5rem}
+.gbk .eylem{display:flex;gap:.35rem;flex-wrap:wrap}
+.gbk.kapali{opacity:.55}
+.gb-ozet{display:flex;gap:1.4rem;flex-wrap:wrap;font-family:var(--f-say);font-size:.74rem;color:var(--mut);margin-bottom:1rem}
+.gb-ozet b{color:var(--ink);font-size:.95rem;font-family:var(--f-bas);display:block}
+#modRozet{display:inline-block;margin-left:.4rem;background:var(--sert);color:#180F14;font-size:.68rem;
+ font-weight:600;border-radius:99px;padding:0 .35rem;min-width:1.05rem;text-align:center}
+.rapor{border:1px solid var(--cizgi);border-radius:12px;padding:.85rem .95rem;margin-bottom:.7rem;background:var(--yuzey)}
+.rapor .ust{display:flex;gap:.6rem;align-items:baseline;flex-wrap:wrap;font-size:.76rem;color:var(--dim);margin-bottom:.5rem}
+.rapor .ust a{color:var(--gold-br)}
+.rapor .sebep{color:var(--sert)}
+.rapor .govde{font-size:.88rem;white-space:pre-wrap;font-weight:300;color:var(--ink);
+ border-left:2px solid var(--cizgi2);padding-left:.7rem;margin-bottom:.6rem}
+.rapor .eylemler{display:flex;gap:.4rem;flex-wrap:wrap}
+.rapor.gizli{opacity:.6}
+.mod-akis{font-size:.85rem}
+.mod-akis .sat{display:grid;grid-template-columns:1fr auto;gap:.6rem;padding:.45rem 0;border-bottom:1px solid var(--cizgi)}
+.mod-akis .sat:last-child{border-bottom:none}
+.mod-akis .kim{font-family:var(--f-say);font-size:.72rem;color:var(--dim)}
+
+/* ── danışana çıktı: fildişi ── */
+#ciktiAlan{background:#FBFAF7;color:#1A1614;border-radius:14px;padding:1.7rem 1.6rem;font-size:.88rem;max-width:720px}
+#ciktiAlan h3{font-family:var(--f-bas);font-size:1.22rem;margin-bottom:.1rem;color:#1A1614}
+#ciktiAlan .kim{font-family:var(--f-say);color:#6B635C;font-size:.76rem;margin-bottom:1.2rem}
+#ciktiAlan h4{font-family:var(--f-bas);font-size:.88rem;margin:1.3rem 0 .3rem;color:#3A322C}
+#ciktiAlan th,#ciktiAlan td{border-bottom:1px solid #E9E3DA;color:#332C27}
+#ciktiAlan th{color:#8A7F75}
+#ciktiAlan .imza{margin-top:1.5rem;padding-top:.8rem;border-top:1px solid #E9E3DA;color:#8A7F75;font-size:.73rem;line-height:1.7}
+@media print{
+  body{background:#fff}
+  .ust,.kenar,.sekmeler,.dosya-bas,.yazdirma-gizle{display:none!important}
+  .duzen{display:block}.icerik{padding:0}
+  #ciktiAlan{border-radius:0;padding:0;max-width:none}
+  #cikti svg{max-width:400px;margin:0 auto}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div id="uygulama">
+  <header class="ust">
+    <a href="/" class="lg"><i>✦</i> Sorbi</a>
+    <span class="et">Astrolog Masası</span>
+    <div class="sag">
+      <span class="et" style="opacity:.8">Veriler bu tarayıcıda kalır</span>
+      <button class="yan" id="disaBtn">Yedek al</button>
+      <button class="yan" id="iceBtn">Yedek yükle</button>
+      <input type="file" id="iceDosya" accept="application/json" hidden>
+    </div>
+  </header>
+  <div class="duzen">
+    <aside class="kenar">
+      <div class="arama-sat">
+        <input id="ara" type="search" placeholder="Danışan ara" autocomplete="off">
+        <button class="ana" id="yeniBtn" title="Yeni danışan" aria-label="Yeni danışan">+</button>
+      </div>
+      <div class="dlist" id="dlist"></div>
+    </aside>
+    <main class="icerik" id="icerik">
+      <div class="bos">Soldan bir danışan seç ya da <b>+</b> ile yeni dosya aç.</div>
+    </main>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var TOK=null, DANISANLAR=[], SECILI=null, CH=null, AKTIF='hazirlik', ES_ID=null;
+  var READY=false, LOADING=false, QUEUE=null, geoT=null, PICKED=null, araT=null;
+  var $=function(id){return document.getElementById(id);};
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+
+  function motor(cb){
+    if(READY) return cb();
+    QUEUE=cb; if(LOADING) return; LOADING=true;
+    var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=3','/sorbi-astro.js?v=3','/sorbi-dignite.js?v=1'];
+    (function next(i){
+      if(i>=srcs.length){ READY=true; LOADING=false; if(QUEUE){var f=QUEUE;QUEUE=null;f();} return; }
+      var s=document.createElement('script'); s.src=srcs[i]; s.async=false;
+      s.onload=function(){ next(i+1); };
+      s.onerror=function(){ LOADING=false; alert('Harita motoru yüklenemedi.'); };
+      document.head.appendChild(s);
+    })(0);
+  }
+
+  /* ── yerel depo: sunucu yok, veri bu tarayıcıda kalır ── */
+  var ANAHTAR='sorbiMasa_v1';
+  function oku(){ try{ return JSON.parse(localStorage.getItem(ANAHTAR)||'null') || {sira:1,danisanlar:[],seanslar:[]}; }catch(e){ return {sira:1,danisanlar:[],seanslar:[]}; } }
+  function yaz(v){ try{ localStorage.setItem(ANAHTAR,JSON.stringify(v)); }catch(e){ alert('Tarayıcı deposuna yazılamadı. Gizli sekmede çalışmayabilir.'); } }
+  function cevap(j,ok){ return Promise.resolve({ok:ok!==false,j:j||{}}); }
+
+  function api(yol,secenek){
+    secenek=secenek||{};
+    var yontem=(secenek.method||'GET').toUpperCase();
+    var govde=secenek.body?JSON.parse(secenek.body):{};
+    var v=oku();
+    var kimlik=function(){ var m=/[?&]id=(\d+)/.exec(yol); return m?+m[1]:null; };
+
+    if(yol.indexOf('/api/panel/danisanlar')===0){
+      if(yontem==='GET'){
+        var m=/[?&]q=([^&]*)/.exec(yol), q=m?decodeURIComponent(m[1]).toLocaleLowerCase('tr'):'';
+        var liste=v.danisanlar.filter(function(d){ return !d.arsiv && (!q || (d.ad||'').toLocaleLowerCase('tr').indexOf(q)>=0); })
+          .map(function(d){ return Object.assign({},d,{seans_sayisi:v.seanslar.filter(function(x){return x.danisan_id===d.id;}).length}); });
+        return cevap({danisanlar:liste});
+      }
+      if(yontem==='POST'){
+        if(!govde.ad || !govde.ad.trim()) return cevap({error:'İsim gerekli'},false);
+        govde.id=v.sira++; v.danisanlar.push(govde); yaz(v); return cevap({id:govde.id});
+      }
+    }
+    if(yol.indexOf('/api/panel/danisan')===0){
+      var id=kimlik();
+      if(yontem==='GET'){
+        var d=v.danisanlar.filter(function(x){return x.id===id;})[0];
+        if(!d) return cevap({error:'Bulunamadı'},false);
+        return cevap({danisan:d, seanslar:v.seanslar.filter(function(x){return x.danisan_id===id;})
+          .sort(function(a,b){ return (b.tarih||'').localeCompare(a.tarih||''); })});
+      }
+      if(yontem==='PUT'){
+        if(!govde.ad || !govde.ad.trim()) return cevap({error:'İsim gerekli'},false);
+        v.danisanlar=v.danisanlar.map(function(x){ return x.id===govde.id ? Object.assign({},x,govde) : x; });
+        yaz(v); return cevap({ok:true});
+      }
+      if(yontem==='DELETE'){
+        v.danisanlar=v.danisanlar.map(function(x){ return x.id===id ? Object.assign({},x,{arsiv:1}) : x; });
+        yaz(v); return cevap({ok:true});
+      }
+    }
+    if(yol.indexOf('/api/panel/seans')===0){
+      if(yontem==='POST'){
+        govde.id=v.sira++; v.seanslar.push(govde); yaz(v); return cevap({id:govde.id});
+      }
+      if(yontem==='DELETE'){
+        var sid=kimlik(); v.seanslar=v.seanslar.filter(function(x){ return x.id!==sid; }); yaz(v); return cevap({ok:true});
+      }
+    }
+    return cevap({error:'Bilinmeyen istek'},false);
+  }
+
+  /* ── ilk açılışta iki örnek dosya ── */
+  function tohumla(){
+    var v=oku(); if(v.danisanlar.length) return;
+    v.danisanlar=[
+      {id:1,ad:'Örnek — Deniz',dogum_tarih:'1991-03-14',dogum_saat:'09:20',saat_belirsiz:0,
+       yer:'İzmir, Türkiye',lat:38.4237,lon:27.1428,tz:'Europe/Istanbul',
+       etiketler:'örnek, kariyer',notlar:'Bu bir örnek dosya. Kendi dosyalarını + düğmesiyle açabilirsin.'},
+      {id:2,ad:'Örnek — Kaya',dogum_tarih:'1988-11-02',dogum_saat:'21:45',saat_belirsiz:0,
+       yer:'Ankara, Türkiye',lat:39.9208,lon:32.8541,tz:'Europe/Istanbul',
+       etiketler:'örnek, sinastri',notlar:'Sinastri sekmesinde Deniz ile karşılaştırılabilir.'}
+    ];
+    v.seanslar=[{id:3,danisan_id:1,tarih:'2026-08-18',tur:'natal',
+      ozet:'İlk görüşme — iş değişikliği zamanlaması konuşuldu.',
+      notlar:'Örnek seans kaydı. Kendi notlarını Seanslar sekmesinden tutabilirsin.'}];
+    v.sira=4; yaz(v);
+  }
+
+  function baslat(){ listele(); }
+
+  function listele(sec){
+    var q=$('ara').value.trim();
+    api('/api/panel/danisanlar'+(q?'?q='+encodeURIComponent(q):'')).then(function(r){
+      DANISANLAR=(r.j&&r.j.danisanlar)||[];
+      $('dlist').innerHTML = DANISANLAR.length ? DANISANLAR.map(function(d){
+        return '<button class="dsat'+(SECILI&&SECILI.id===d.id?' on':'')+'" data-id="'+d.id+'">'+
+          '<b>'+esc(d.ad)+'</b><span>'+(d.dogum_tarih?esc(d.dogum_tarih):'doğum bilgisi yok')+
+          (d.seans_sayisi?' · '+d.seans_sayisi+' seans':'')+'</span></button>';
+      }).join('') : '<div class="bos ince" style="margin:.6rem .75rem">Henüz danışan yok.</div>';
+      Array.prototype.forEach.call($('dlist').querySelectorAll('[data-id]'),function(b){
+        b.addEventListener('click',function(){ ac(+b.dataset.id); });
+      });
+      if(sec) ac(sec);
+    }).catch(function(){});
+  }
+  $('ara').addEventListener('input',function(){ clearTimeout(araT); araT=setTimeout(function(){listele();},250); });
+
+  function ac(id){
+    api('/api/panel/danisan?id='+id).then(function(r){
+      if(!r.ok) return;
+      SECILI=r.j.danisan; SECILI.seanslar=r.j.seanslar||[];
+      Array.prototype.forEach.call($('dlist').querySelectorAll('.dsat'),function(b){
+        b.classList.toggle('on', +b.dataset.id===id);
+      });
+      cizDosya();
+    });
+  }
+
+  function dogumMetni(d){
+    if(!d.dogum_tarih) return 'Doğum bilgisi girilmemiş';
+    return d.dogum_tarih + (d.saat_belirsiz||!d.dogum_saat ? ' · saat bilinmiyor' : ' · '+d.dogum_saat) + (d.yer?' · '+d.yer:'');
+  }
+  function haritaVar(d){ return !!(d.dogum_tarih && d.lat!==null && d.lat!==undefined); }
+
+  function cizDosya(){
+    var d=SECILI, sekme=[['hazirlik','Seans hazırlığı'],['sinastri','Sinastri'],['seanslar','Seanslar'],['cikti','Danışana çıktı']];
+    $('icerik').innerHTML=
+      '<div class="dosya-bas"><div><h1 class="dad">'+esc(d.ad)+'</h1>'+
+      '<div class="dogum">'+esc(dogumMetni(d))+'</div>'+
+      (d.etiketler?'<div>'+d.etiketler.split(',').filter(function(t){return t.trim();}).map(function(t){return '<span class="etik">'+esc(t.trim())+'</span>';}).join('')+'</div>':'')+
+      '</div><div style="margin-left:auto"><button class="yan" id="duzenleBtn">Dosyayı düzenle</button></div></div>'+
+      '<div class="sekmeler">'+sekme.map(function(s){
+        return '<button class="sek'+(AKTIF===s[0]?' on':'')+'" data-sek="'+s[0]+'">'+s[1]+'</button>';
+      }).join('')+'</div><div id="pano"></div>';
+    $('duzenleBtn').addEventListener('click',function(){ formAc(SECILI); });
+    Array.prototype.forEach.call($('icerik').querySelectorAll('.sek'),function(b){
+      b.addEventListener('click',function(){ AKTIF=b.dataset.sek; cizDosya(); });
+    });
+    ({hazirlik:hazirlik, sinastri:sinastri, seanslar:seanslar, cikti:cikti})[AKTIF]();
+  }
+
+  /* ── hesap yardımcıları ── */
+  function haritaKur(d){
+    if(!haritaVar(d)) return null;
+    var t=(d.dogum_saat||'').split(':'), g=d.dogum_tarih.split('-');
+    var belirsiz = !!d.saat_belirsiz || !d.dogum_saat;
+    var o={y:+g[0],mo:+g[1],d:+g[2],h:belirsiz?12:+t[0],mi:belirsiz?0:+t[1],
+           tz:d.tz||'Europe/Istanbul',lat:+d.lat,lon:+d.lon,house:belirsiz?'W':'P'};
+    if(o.y<1850||o.y>2069) return null;
+    var ch=SorbiAstro.chart(o); ch.belirsiz=belirsiz; return ch;
+  }
+  function progresyonKur(d,ch){
+    var g=d.dogum_tarih.split('-'), t=(d.dogum_saat||'12:00').split(':');
+    var belirsiz=!!d.saat_belirsiz||!d.dogum_saat;
+    var duvar=Date.UTC(+g[0],+g[1]-1,+g[2],belirsiz?12:+t[0],belirsiz?0:+t[1]);
+    var yas=(Date.now()-ch.utc.getTime())/(365.2422*86400000);
+    var pd=new Date(duvar+yas*86400000);
+    return { ch: SorbiAstro.chart({y:pd.getUTCFullYear(),mo:pd.getUTCMonth()+1,d:pd.getUTCDate(),
+             h:pd.getUTCHours(),mi:pd.getUTCMinutes(),tz:d.tz||'Europe/Istanbul',
+             lat:+d.lat,lon:+d.lon,house:belirsiz?'W':'P'}), yas: yas };
+  }
+  function sinif(a){ return (a===90||a===180)?'sert':((a===60||a===120)?'yumusak':'kavus'); }
+  function fmt(l){ return SorbiAstro.fmt(l); }
+
+  /* açı satırı — şerit + orb çubuğu; orb ne kadar darsa çubuk o kadar dolu */
+  function aciSatir(x, onekA, onekB, maxOrb, evGoster){
+    var s=sinif(x.as.a), dolu=Math.max(6,Math.round((1-x.abs/maxOrb)*100));
+    var yon = x.app===null||x.app===undefined ? '' :
+      '<span class="yon'+(x.app?' yak':'')+'">'+(x.app?'yaklaşıyor':'ayrılıyor')+'</span>';
+    return '<div class="aci s-'+s+'"><span class="serit"></span>'+
+      '<span class="metin"><span class="gl">'+x.a.g+'</span> <b>'+onekA+esc(x.a.n)+'</b> '+
+      '<span class="tur">'+esc(x.as.n.toLowerCase())+'</span> '+
+      '<b>'+onekB+esc(x.b.n)+'</b>'+
+      (evGoster&&x.b.house?' <span class="ev">('+x.b.house+'. ev)</span>':'')+'</span>'+
+      '<span class="sag">'+yon+'<span class="orb-cub"><i style="width:'+dolu+'%"></i></span>'+
+      '<span class="sayi">'+x.abs.toFixed(2)+'°</span></span></div>';
+  }
+
+  /* ── sekme: seans hazırlığı ── */
+  function hazirlik(){
+    var d=SECILI;
+    if(!haritaVar(d)){ $('pano').innerHTML='<div class="bos">Hazırlık için doğum tarihi ve yeri gerekli. <b>Dosyayı düzenle</b> ile ekle.</div>'; return; }
+    $('pano').innerHTML='<div class="bos">Harita hesaplanıyor…</div>';
+    motor(function(){
+      try{
+        CH=haritaKur(d);
+        if(!CH){ $('pano').innerHTML='<div class="bos">Harita hesaplanamadı — 1850–2069 aralığı destekleniyor.</div>'; return; }
+        var tumAcilar=SorbiAstro.within(CH,1,false);
+        var acilar=tumAcilar.filter(function(x){ return x.a.k!=='sno'&&x.b.k!=='sno'; });
+        var dign=window.SorbiDignite.tablo(CH);
+        var sect=window.SorbiDignite.sect(CH);
+        var tr=SorbiAstro.now({tz:d.tz||'Europe/Istanbul',lat:+d.lat,lon:+d.lon,house:'W'});
+        var transitler=SorbiAstro.cross(CH,tr,1,false).filter(function(x){
+          if(x.b.k==='pof'||x.b.k==='sno'||x.a.k==='sno') return false;
+          if(CH.belirsiz && (x.b.k==='asc'||x.b.k==='mc')) return false;
+          return x.abs<=2.5;
+        }).slice(0,14);
+        var pr=progresyonKur(d,CH);
+        var prAcilar=SorbiAstro.cross(CH,pr.ch,1,false).filter(function(x){
+          if(x.b.k==='pof'||x.a.k==='pof'||x.b.k==='sno'||x.a.k==='sno') return false;
+          if(CH.belirsiz && (x.b.k==='asc'||x.b.k==='mc')) return false;
+          return x.abs<=1.5 && ['sun','moon','mer','ven','mar'].indexOf(x.a.k)>=0;
+        }).slice(0,8);
+        var pMoon=pr.ch.pls.filter(function(p){return p.k==='moon';})[0];
+        var enDar=transitler[0];
+        var zayif=dign[dign.length-1];
+
+        var brif=
+          '<dl class="brif">'+
+            '<div><dt>Sect</dt><dd>'+(sect.gunduz?'Gündüz':'Gece')+'<small>ışık: '+sect.isik+'</small></dd></div>'+
+            '<div><dt>En dar transit</dt><dd>'+(enDar?esc(enDar.a.n)+' '+esc(enDar.as.n.toLowerCase()):'—')+
+              '<small>'+(enDar?esc(enDar.b.n)+' · '+enDar.abs.toFixed(2)+'°':'2.5° içinde yok')+'</small></dd></div>'+
+            '<div><dt>İlerlemiş Ay</dt><dd>'+fmt(pMoon.lon)+'<small>yaş '+pr.yas.toFixed(1)+'</small></dd></div>'+
+            '<div><dt>En zayıf gezegen</dt><dd>'+esc(zayif.ad)+'<small>'+(zayif.peregrin?'peregrin':zayif.etiketler.map(function(e){return e.t;}).join(', '))+' · '+(zayif.puan>0?'+':'')+zayif.puan+'</small></dd></div>'+
+          '</dl>';
+
+        var cizimSvg=window.SorbiChart.draw(CH,null,{theme:'night',aspects:tumAcilar,noHouses:CH.belirsiz});
+
+        var dignHtml='<div class="dign">'+dign.map(function(x){
+          var g=Math.min(100,Math.abs(x.puan)/9*50);
+          return '<div class="dsatir"><span class="ad">'+esc(x.ad)+(x.rx?' <i>℞</i>':'')+'</span>'+
+            '<span class="sayi">'+fmt(x.lon)+'</span>'+
+            '<span class="olcek"><i class="'+(x.puan>=0?'arti':'eksi')+'" style="width:'+g+'%"></i></span>'+
+            '<span class="rozetler">'+(x.peregrin?'<span class="per">peregrin</span>':esc(x.etiketler.map(function(e){return e.t;}).join(', ')))+'</span>'+
+            '<span class="puan">'+(x.puan>0?'+':'')+x.puan+'</span></div>';
+        }).join('')+'</div>';
+
+        $('pano').innerHTML = brif +
+          '<div class="ikili">'+
+            '<div class="sol"><div class="yzy" id="cizim">'+cizimSvg+'</div>'+
+              '<div class="bol-ac" style="margin-top:.6rem">'+esc(dogumMetni(d))+(CH.belirsiz?' — evler tam burç sistemiyle':'')+'</div></div>'+
+            '<div>'+
+              '<section class="bol"><div class="bol-bas"><h2>Bugünün transitleri</h2><span class="not">orb ≤ 2.5°</span></div>'+
+                (transitler.length?'<div class="satirlar">'+transitler.map(function(x){return aciSatir(x,'t.','n.',2.5,!CH.belirsiz);}).join('')+'</div>'
+                 :'<div class="bos ince">Bu orbta aktif transit yok.</div>')+'</section>'+
+              '<section class="bol"><div class="bol-bas"><h2>Sekonder ilerletim</h2><span class="not">orb ≤ 1.5°</span></div>'+
+                '<div class="bol-ac">İlerlemiş Güneş '+fmt(pr.ch.pls.filter(function(p){return p.k==="sun";})[0].lon)+' · Ay '+fmt(pMoon.lon)+'</div>'+
+                (prAcilar.length?'<div class="satirlar">'+prAcilar.map(function(x){return aciSatir(x,'p.','n.',1.5,false);}).join('')+'</div>'
+                 :'<div class="bos ince">1.5° içinde ilerletim açısı yok.</div>')+'</section>'+
+              '<section class="bol"><div class="bol-bas"><h2>Esansiyel dignite</h2><span class="not">−9 … +9</span></div>'+
+                '<div class="bol-ac">Yönetici +5, yücelme +4, üçlü +3, sınır +2, dekan +1; düşüş −4, zararlı −5.</div>'+dignHtml+'</section>'+
+              '<section class="bol"><div class="bol-bas"><h2>Natal açılar</h2><span class="not">'+acilar.length+' majör</span></div>'+
+                '<div class="satirlar">'+acilar.slice(0,24).map(function(x){return aciSatir(x,'','',8,false);}).join('')+'</div>'+
+                (acilar.length>24?'<div class="uyari">En dar 24 açı gösteriliyor.</div>':'')+'</section>'+
+            '</div>'+
+          '</div>';
+      }catch(e){ $('pano').innerHTML='<div class="bos">Hesaplama hatası: '+esc(e.message||e)+'</div>'; }
+    });
+  }
+
+  /* ── sekme: sinastri ── */
+  function sinastri(){
+    var d=SECILI;
+    if(!haritaVar(d)){ $('pano').innerHTML='<div class="bos">Sinastri için bu dosyanın doğum bilgisi gerekli.</div>'; return; }
+    var digerleri=DANISANLAR.filter(function(x){ return x.id!==d.id && x.dogum_tarih && x.lat!==null; });
+    var secim='<div class="esli"><select id="esSec"><option value="">Karşılaştırılacak dosyayı seç…</option>'+
+      digerleri.map(function(x){ return '<option value="'+x.id+'"'+(ES_ID===x.id?' selected':'')+'>'+esc(x.ad)+' — '+esc(x.dogum_tarih)+'</option>'; }).join('')+
+      '</select><span class="st">İç çark '+esc(d.ad)+', dış çark eş.</span></div>';
+    if(!digerleri.length){
+      $('pano').innerHTML='<div class="bos">Karşılaştırmak için doğum bilgisi girilmiş ikinci bir dosya gerekli.</div>'; return;
+    }
+    $('pano').innerHTML=secim+'<div id="esPano"><div class="bos ince">Bir dosya seç.</div></div>';
+    $('esSec').addEventListener('change',function(){ ES_ID=this.value?+this.value:null; esCiz(); });
+    if(ES_ID) esCiz();
+
+    function esCiz(){
+      if(!ES_ID){ $('esPano').innerHTML='<div class="bos ince">Bir dosya seç.</div>'; return; }
+      $('esPano').innerHTML='<div class="bos ince">Hesaplanıyor…</div>';
+      api('/api/panel/danisan?id='+ES_ID).then(function(r){
+        if(!r.ok) return;
+        var e=r.j.danisan;
+        motor(function(){
+          try{
+            var A=haritaKur(d), B=haritaKur(e);
+            if(!A||!B){ $('esPano').innerHTML='<div class="bos">Haritalardan biri hesaplanamadı.</div>'; return; }
+            var capraz=SorbiAstro.cross(A,B,1,false).filter(function(x){
+              if(x.a.k==='pof'||x.b.k==='pof'||x.a.k==='sno'||x.b.k==='sno') return false;
+              if(A.belirsiz && (x.b.k==='asc'||x.b.k==='mc')) return false;
+              if(B.belirsiz && (x.a.k==='asc'||x.a.k==='mc')) return false;
+              return true;
+            });
+            var sert=capraz.filter(function(x){return sinif(x.as.a)==='sert';}).length;
+            var yum=capraz.filter(function(x){return sinif(x.as.a)==='yumusak';}).length;
+            var kav=capraz.filter(function(x){return sinif(x.as.a)==='kavus';}).length;
+            var isiklar=capraz.filter(function(x){
+              return ['sun','moon','ven','mar','asc'].indexOf(x.a.k)>=0 && ['sun','moon','ven','mar','asc'].indexOf(x.b.k)>=0;
+            }).slice(0,10);
+            var cift=window.SorbiChart.draw(A,B,{theme:'night',aspects:capraz.slice(0,40),noHouses:A.belirsiz});
+
+            $('esPano').innerHTML=
+              '<dl class="brif">'+
+                '<div><dt>Toplam açı</dt><dd>'+capraz.length+'<small>majör, karşılıklı</small></dd></div>'+
+                '<div><dt>Sert</dt><dd style="color:var(--sert)">'+sert+'<small>kare · karşıt</small></dd></div>'+
+                '<div><dt>Yumuşak</dt><dd style="color:var(--yumusak)">'+yum+'<small>üçgen · altmışlık</small></dd></div>'+
+                '<div><dt>Kavuşum</dt><dd style="color:var(--kavus)">'+kav+'<small>birleşme noktaları</small></dd></div>'+
+              '</dl>'+
+              '<div class="ikili">'+
+                '<div class="sol"><div class="yzy" id="cizim2">'+cift+'</div>'+
+                  '<div class="bol-ac" style="margin-top:.6rem">İç: '+esc(d.ad)+' · Dış: '+esc(e.ad)+'</div></div>'+
+                '<div>'+
+                  '<section class="bol"><div class="bol-bas"><h2>Kişisel gezegenler arası</h2><span class="not">Güneş · Ay · Venüs · Mars · ASC</span></div>'+
+                    (isiklar.length?'<div class="satirlar">'+isiklar.map(function(x){
+                      return aciSatir(x, esc(e.ad.split(' ')[0])+'. ', esc(d.ad.split(' ')[0])+'. ', 8, false);
+                    }).join('')+'</div>':'<div class="bos ince">Kişisel gezegenler arasında majör açı yok.</div>')+'</section>'+
+                  '<section class="bol"><div class="bol-bas"><h2>Tüm karşılıklı açılar</h2><span class="not">orb sıralı</span></div>'+
+                    '<div class="satirlar">'+capraz.slice(0,26).map(function(x){
+                      return aciSatir(x, esc(e.ad.split(' ')[0])+'. ', esc(d.ad.split(' ')[0])+'. ', 8, false);
+                    }).join('')+'</div>'+
+                    (capraz.length>26?'<div class="uyari">En dar 26 açı gösteriliyor.</div>':'')+'</section>'+
+                '</div>'+
+              '</div>';
+          }catch(er){ $('esPano').innerHTML='<div class="bos">Hesaplama hatası: '+esc(er.message||er)+'</div>'; }
+        });
+      });
+    }
+  }
+
+  /* ── sekme: seanslar ── */
+  function seanslar(){
+    var d=SECILI;
+    $('pano').innerHTML=
+      '<div class="ikili" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr)">'+
+      '<section class="bol"><div class="bol-bas"><h2>Seans ekle</h2></div>'+
+      '<div class="alanlar">'+
+        '<div><label>Tarih</label><input id="sTarih" type="date" value="'+new Date().toISOString().slice(0,10)+'"></div>'+
+        '<div><label>Tür</label><input id="sTur" type="text" placeholder="natal / transit / horary"></div>'+
+        '<div style="grid-column:1/-1"><label>Tek cümle özet</label><input id="sOzet" type="text" maxlength="200" placeholder="Ne konuşuldu, ne karara bağlandı"></div>'+
+      '</div>'+
+      '<label>Seans notu</label><textarea id="sNot" rows="6" placeholder="Danışanın anlattıkları, haritada baktığın yerler, verilen zaman aralıkları."></textarea>'+
+      '<div style="display:flex;gap:.7rem;align-items:center;margin-top:.6rem"><button class="ana" id="sKaydet">Kaydet</button><div class="st" id="sSt"></div></div>'+
+      '<div class="uyari">Danışan notları kişisel veridir; panel dışında hiçbir uçtan yayınlanmaz.</div></section>'+
+      '<section class="bol"><div class="bol-bas"><h2>Geçmiş</h2><span class="not">'+d.seanslar.length+' kayıt</span></div>'+
+      (d.seanslar.length ? d.seanslar.map(function(s){
+        return '<div class="seans"><div class="bas"><b>'+esc(s.tarih||'')+'</b>'+
+          (s.tur?'<span class="etik" style="margin:0">'+esc(s.tur)+'</span>':'')+
+          (s.ozet?'<span>'+esc(s.ozet)+'</span>':'')+
+          '<button class="yan" style="margin-left:auto;padding:.14rem .5rem;font-size:.7rem" data-sil="'+s.id+'">sil</button></div>'+
+          (s.notlar?'<p>'+esc(s.notlar)+'</p>':'')+'</div>';
+      }).join('') : '<div class="bos ince">Henüz seans kaydı yok.</div>')+'</section></div>';
+
+    $('sKaydet').addEventListener('click',function(){
+      var st=$('sSt'); st.className='st'; st.textContent='Kaydediliyor…';
+      api('/api/panel/seans',{method:'POST',body:JSON.stringify({
+        danisan_id:d.id, tarih:$('sTarih').value, tur:$('sTur').value,
+        ozet:$('sOzet').value, notlar:$('sNot').value
+      })}).then(function(r){
+        if(!r.ok){ st.className='st hata'; st.textContent=(r.j&&r.j.error)||'Kaydedilemedi'; return; }
+        ac(d.id); listele();
+      }).catch(function(){ st.className='st hata'; st.textContent='Bağlantı hatası.'; });
+    });
+    Array.prototype.forEach.call($('pano').querySelectorAll('[data-sil]'),function(b){
+      b.addEventListener('click',function(){
+        if(!confirm('Bu seans kaydı silinsin mi?')) return;
+        api('/api/panel/seans?id='+b.dataset.sil,{method:'DELETE'}).then(function(){ ac(d.id); });
+      });
+    });
+  }
+
+  /* ── sekme: danışana çıktı ── */
+  function cikti(){
+    var d=SECILI;
+    if(!haritaVar(d)){ $('pano').innerHTML='<div class="bos">Çıktı için doğum bilgisi gerekli.</div>'; return; }
+    $('pano').innerHTML='<div class="bos">Hazırlanıyor…</div>';
+    motor(function(){
+      CH=haritaKur(d);
+      if(!CH){ $('pano').innerHTML='<div class="bos">Harita hesaplanamadı.</div>'; return; }
+      var acilar=SorbiAstro.within(CH,1,false);
+      var svg=window.SorbiChart.draw(CH,null,{theme:'paper',aspects:acilar,noHouses:CH.belirsiz,
+        plate:{name:d.ad+' — Doğum Haritası', l1:dogumMetni(d), l3:'Sorbi ✦ sorbiapp.com'}});
+      var pl=function(k){ return CH.pls.filter(function(p){return p.k===k;})[0]; };
+      var son=(d.seanslar&&d.seanslar[0])||null;
+
+      $('pano').innerHTML=
+        '<div class="yazdirma-gizle" style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem">'+
+          '<button class="ana" id="yazdirBtn">Yazdır / PDF</button>'+
+          '<button class="yan" id="svgBtn">Haritayı SVG indir</button>'+
+          '<div class="st">Yazdır penceresinde hedefi “PDF olarak kaydet” seç.</div>'+
+        '</div>'+
+        '<div id="cikti"><div id="ciktiAlan">'+
+          '<h3>'+esc(d.ad)+' — Doğum Haritası</h3>'+
+          '<div class="kim">'+esc(dogumMetni(d))+'</div>'+ svg +
+          '<h4>Üç temel yerleşim</h4><table><tbody>'+
+            '<tr><td>Güneş</td><td>'+fmt(pl('sun').lon)+(CH.belirsiz?'':' · '+pl('sun').house+'. ev')+'</td></tr>'+
+            '<tr><td>Ay</td><td>'+fmt(pl('moon').lon)+(CH.belirsiz?'':' · '+pl('moon').house+'. ev')+'</td></tr>'+
+            (CH.belirsiz?'':'<tr><td>Yükselen</td><td>'+fmt(CH.asc)+'</td></tr><tr><td>MC</td><td>'+fmt(CH.mc)+'</td></tr>')+
+          '</tbody></table>'+
+          '<h4>Haritanın en dar açıları</h4><table><tbody>'+acilar.slice(0,8).map(function(x){
+            return '<tr><td>'+esc(x.a.n)+' — '+esc(x.as.n.toLowerCase())+' — '+esc(x.b.n)+'</td><td>'+x.abs.toFixed(2)+'° orb</td></tr>';
+          }).join('')+'</tbody></table>'+
+          (son&&son.ozet?'<h4>Son seansta konuşulan</h4><p>'+esc(son.ozet)+'</p>':'')+
+          '<div class="imza">Bu sayfa Sorbi harita motoruyla hesaplandı (Swiss Ephemeris doğrulamalı). '+
+          'Astroloji sembolik bir yorum dilidir; tıbbi, hukuki ve finansal karar yerine geçmez.</div>'+
+        '</div></div>';
+
+      $('yazdirBtn').addEventListener('click',function(){ window.print(); });
+      $('svgBtn').addEventListener('click',function(){
+        var s=$('ciktiAlan').querySelector('svg'); if(!s) return;
+        var blob=new Blob([new XMLSerializer().serializeToString(s)],{type:'image/svg+xml'});
+        var a=document.createElement('a');
+        a.href=URL.createObjectURL(blob);
+        a.download=(d.ad||'harita').replace(/\s+/g,'-').toLowerCase()+'-harita.svg';
+        a.click(); setTimeout(function(){URL.revokeObjectURL(a.href);},1000);
+      });
+    });
+  }
+
+  /* ── danışan formu ── */
+  function formAc(d){
+    d=d||{};
+    PICKED = (d.lat!==null&&d.lat!==undefined) ? {lat:+d.lat,lon:+d.lon,tz:d.tz||'Europe/Istanbul',label:d.yer||''} : null;
+    $('icerik').innerHTML=
+      '<div class="dosya-bas"><div><h1 class="dad">'+(d.id?'Dosyayı düzenle':'Yeni danışan')+'</h1>'+
+      '<div class="dogum">Doğum verisi kimlik belirleyicidir — yalnız bu panelde durur.</div></div></div>'+
+      '<div style="max-width:620px">'+
+      '<div class="alanlar">'+
+        '<div style="grid-column:1/-1"><label>İsim ya da rumuz</label><input id="fAd" type="text" maxlength="80" value="'+esc(d.ad||'')+'"></div>'+
+        '<div><label>Doğum tarihi</label><input id="fTarih" type="date" value="'+esc(d.dogum_tarih||'')+'"></div>'+
+        '<div><label>Doğum saati</label><input id="fSaat" type="time" value="'+esc(d.dogum_saat||'')+'"></div>'+
+        '<div class="geo" style="grid-column:1/-1"><label>Doğum yeri</label>'+
+          '<input id="fYer" type="text" autocomplete="off" placeholder="Şehir ara" value="'+esc(d.yer||'')+'">'+
+          '<div class="geolist" id="geoList" hidden></div></div>'+
+        '<div style="grid-column:1/-1"><label>Etiketler</label><input id="fEtiket" type="text" maxlength="120" placeholder="kariyer, ilişki, yıllık okuma" value="'+esc(d.etiketler||'')+'"></div>'+
+      '</div>'+
+      '<label class="onay"><input id="fBelirsiz" type="checkbox" '+((d.saat_belirsiz||(d.id&&!d.dogum_saat))?'checked':'')+'> Doğum saati bilinmiyor (tam burç evleri kullanılır)</label>'+
+      '<div style="margin-top:.8rem"><label>Dosya notu</label><textarea id="fNot" rows="4" placeholder="Danışanın getirdiği konu, sınırlar, hassas başlıklar.">'+esc(d.notlar||'')+'</textarea></div>'+
+      '<div style="display:flex;gap:.6rem;align-items:center;margin-top:.9rem">'+
+        '<button class="ana" id="fKaydet">Kaydet</button>'+
+        '<button class="yan" id="fVazgec">Vazgeç</button>'+
+        (d.id?'<button class="yan" id="fArsiv" style="margin-left:auto;color:var(--sert)">Arşivle</button>':'')+
+      '</div><div class="st" id="fSt" style="margin-top:.45rem"></div></div>';
+
+    $('fYer').addEventListener('input',function(e){
+      clearTimeout(geoT); PICKED=null;
+      var q=e.target.value.trim(), list=$('geoList');
+      if(q.length<2){ list.hidden=true; return; }
+      geoT=setTimeout(function(){
+        fetch('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(q)+'&count=6&language=tr&format=json')
+          .then(function(r){return r.json();}).then(function(j){
+            if(!j.results||!j.results.length){ list.hidden=true; return; }
+            list.innerHTML=j.results.map(function(r,i){
+              return '<div data-i="'+i+'">'+esc(r.name)+(r.admin1?', '+esc(r.admin1):'')+' · '+esc(r.country||'')+'</div>';
+            }).join('');
+            list.hidden=false;
+            Array.prototype.forEach.call(list.children,function(el){
+              el.onclick=function(){
+                var r=j.results[+el.dataset.i];
+                $('fYer').value=r.name+(r.country?', '+r.country:'');
+                PICKED={lat:r.latitude,lon:r.longitude,tz:r.timezone||'Europe/Istanbul',label:r.name};
+                list.hidden=true;
+              };
+            });
+          }).catch(function(){ list.hidden=true; });
+      },300);
+    });
+
+    $('fVazgec').addEventListener('click',function(){ if(SECILI) cizDosya(); else $('icerik').innerHTML='<div class="bos">Soldan bir danışan seç.</div>'; });
+    if($('fArsiv')) $('fArsiv').addEventListener('click',function(){
+      if(!confirm('Bu dosya arşivlensin mi? Seans geçmişi silinmez, listede görünmez.')) return;
+      api('/api/panel/danisan?id='+d.id,{method:'DELETE'}).then(function(){ SECILI=null; $('icerik').innerHTML='<div class="bos">Dosya arşivlendi.</div>'; listele(); });
+    });
+
+    $('fKaydet').addEventListener('click',function(){
+      var st=$('fSt'); st.className='st'; st.textContent='Kaydediliyor…';
+      var govde={
+        ad:$('fAd').value, dogum_tarih:$('fTarih').value, dogum_saat:$('fSaat').value,
+        saat_belirsiz:$('fBelirsiz').checked?1:0, yer:$('fYer').value,
+        lat:PICKED?PICKED.lat:(d.lat!==undefined?d.lat:null),
+        lon:PICKED?PICKED.lon:(d.lon!==undefined?d.lon:null),
+        tz:PICKED?PICKED.tz:(d.tz||null),
+        etiketler:$('fEtiket').value, notlar:$('fNot').value
+      };
+      if(d.id){
+        govde.id=d.id;
+        api('/api/panel/danisan',{method:'PUT',body:JSON.stringify(govde)}).then(function(r){
+          if(!r.ok){ st.className='st hata'; st.textContent=(r.j&&r.j.error)||'Kaydedilemedi'; return; }
+          listele(); ac(d.id);
+        });
+      } else {
+        api('/api/panel/danisanlar',{method:'POST',body:JSON.stringify(govde)}).then(function(r){
+          if(!r.ok){ st.className='st hata'; st.textContent=(r.j&&r.j.error)||'Kaydedilemedi'; return; }
+          listele(r.j.id);
+        });
+      }
+    });
+  }
+  $('yeniBtn').addEventListener('click',function(){ SECILI=null; formAc(null); });
+
+  /* ── yedek al / yükle ── */
+  $('disaBtn').addEventListener('click',function(){
+    var b=new Blob([JSON.stringify(oku(),null,2)],{type:'application/json'});
+    var u=URL.createObjectURL(b), a=document.createElement('a');
+    a.href=u; a.download='sorbi-masa-yedek-'+new Date().toISOString().slice(0,10)+'.json';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){URL.revokeObjectURL(u);},4000);
+  });
+  $('iceBtn').addEventListener('click',function(){ $('iceDosya').click(); });
+  $('iceDosya').addEventListener('change',function(){
+    var f=this.files&&this.files[0]; if(!f) return;
+    var fr=new FileReader();
+    fr.onload=function(){
+      try{
+        var v=JSON.parse(fr.result);
+        if(!v || !Array.isArray(v.danisanlar)) throw new Error('bicim');
+        if(!confirm('Bu yedek şu anki verinin yerine geçecek. Devam edilsin mi?')) return;
+        yaz(v); SECILI=null; $('icerik').innerHTML='<div class="bos">Yedek yüklendi.</div>'; listele();
+      }catch(e){ alert('Dosya okunamadı — Sorbi Masası yedeği olmayabilir.'); }
+    };
+    fr.readAsText(f); this.value='';
+  });
+
+  tohumla();
+  baslat();
+})();
+</script>
+  <script src="/sorbi-olcum.js?v=1" defer></script>
+</body>
+</html>
