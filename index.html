@@ -162,6 +162,7 @@ footer a:hover{color:var(--ink)}
 footer .fine{text-align:center;line-height:1.85;font-weight:300}
 </style>
 <script src="/sorbi-yer.js?v=3"></script>
+<link rel="stylesheet" href="/sorbi-fonts.css?v=8">
 </head>
 <body>
 
@@ -263,7 +264,7 @@ function loadEngine(cb){
   QUEUE=cb;
   if(LOADING) return;
   LOADING=true;
-  var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=4','/sorbi-astro.js?v=4'];
+  var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=8','/sorbi-astro.js?v=4'];
   (function next(i){
     if(i>=srcs.length){ READY=true; LOADING=false; if(QUEUE){var f=QUEUE;QUEUE=null;f();} return; }
     var s=document.createElement('script');

@@ -225,6 +225,7 @@ tbody tr:last-child td{border-bottom:none}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 <script src="/sorbi-yer.js?v=3"></script>
+<link rel="stylesheet" href="/sorbi-fonts.css?v=8">
 </head>
 <body>
 
@@ -264,7 +265,7 @@ tbody tr:last-child td{border-bottom:none}
   function motor(cb){
     if(READY) return cb();
     QUEUE=cb; if(LOADING) return; LOADING=true;
-    var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=4','/sorbi-astro.js?v=4','/sorbi-dignite.js?v=2'];
+    var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=8','/sorbi-astro.js?v=4','/sorbi-dignite.js?v=2'];
     (function next(i){
       if(i>=srcs.length){ READY=true; LOADING=false; if(QUEUE){var f=QUEUE;QUEUE=null;f();} return; }
       var s=document.createElement('script'); s.src=srcs[i]; s.async=false;
