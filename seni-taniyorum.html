@@ -58,7 +58,7 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
 .nadir .nbar{margin:.65rem auto 0;width:212px;height:3px;border-radius:2px;background:var(--line2);position:relative;overflow:hidden}
 .nadir .nbar i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,var(--gold),var(--gold-br));border-radius:2px}
 .nadir details{margin-top:.55rem}
-.nadir summary{font-size:.7rem;color:var(--dim);cursor:pointer;list-style:none;text-decoration:underline;text-underline-offset:3px}
+.nadir summary{font-size:13px;color:rgba(255,255,255,.45);cursor:pointer;list-style:none;text-decoration:underline;text-underline-offset:3px}
 .nadir summary::-webkit-details-marker{display:none}
 .nadir .nnote{margin-top:.42rem;font-size:.68rem;color:var(--dim);line-height:1.5;text-align:left;
  background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;padding:.6rem .7rem}
@@ -78,10 +78,20 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
 .crown{text-align:center;opacity:0;transform:translateY(10px) scale(.97);transition:opacity .48s var(--ease),transform .48s var(--ease);margin-top:1.1rem}
 .crown.show{opacity:1;transform:none}
 .cr-eyebrow{font-family:'Inter';font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:500}
+.cr-eyebrow .cr-brand{color:var(--gold-br);font-weight:700}
 /* mühür = foil materyali */
 .cr-title{font-family:'Space Grotesk','Inter',sans-serif;font-weight:700;font-size:clamp(2.2rem,9vw,3.3rem);letter-spacing:.3px;margin:.25rem 0 .15rem;background:var(--foil);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--gold-br)}
 .cr-sub{font-family:'Space Grotesk','Inter',sans-serif;font-style:italic;font-size:1.15rem;color:var(--mut)}
-.wheel{display:block;width:230px;height:230px;margin:1.1rem auto .3rem;opacity:0;transform:scale(.94) rotate(-6deg);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.wheelwrap{width:300px;height:300px;margin:1.6rem auto 0;padding:12px;border-radius:50%;overflow:hidden;
+ background:#FBFAF7;border:1px solid rgba(255,255,255,.10);
+ box-shadow:0 0 0 8px rgba(255,255,255,.04), 0 12px 40px rgba(0,0,0,.45);
+ opacity:0;transform:scale(.94);transition:opacity .5s var(--ease),transform .5s var(--ease);display:none}
+.wheelwrap.show{opacity:1;transform:scale(1)}
+.wheelwrap .wheel,.wheelwrap svg{display:block;width:100%;height:100%;border-radius:50%}
+@media(max-width:480px){.wheelwrap{width:280px;height:280px}}
+@media(prefers-reduced-motion:reduce){.wheelwrap{transition:none}}
+.wheel{display:block;width:100%;height:100%;opacity:1;transform:none}
+.sorbiurl{display:none;margin-top:16px;text-align:center;font:400 12px 'Inter',sans-serif;letter-spacing:.08em;color:rgba(223,169,143,.75)}
 .wheel.show{opacity:1;transform:none}
 .wheel .ring{fill:none;stroke:var(--lineg2);stroke-width:1}
 .wheel .ring2{fill:none;stroke:var(--lineg);stroke-width:1}
@@ -121,7 +131,7 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
 @keyframes flashPop{0%{opacity:0}35%{opacity:1}100%{opacity:0}}
 @keyframes apRing{0%{opacity:0;box-shadow:0 0 0 130px rgba(223,169,143,0)}45%{opacity:.7;box-shadow:0 0 0 7px rgba(223,169,143,.5)}100%{opacity:0;box-shadow:0 0 0 2px rgba(223,169,143,0)}}
 /* anlam küreleri — Özün · İç Dünyan · Masken (app hero pill'leri) */
-.orbs{display:flex;justify-content:center;gap:1.25rem;margin:.9rem 0 2.2rem;flex-wrap:wrap}
+.orbs{display:flex;justify-content:center;gap:1.25rem;margin:1.5rem 0 0;flex-wrap:wrap}
 .orb{display:flex;flex-direction:column;align-items:center;gap:.35rem;opacity:0;transform:scale(.6);animation:orbPop .5s var(--ease) forwards}
 .orb .disc{width:66px;height:66px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans Symbols2','Segoe UI Symbol',sans-serif;font-size:1.7rem;color:#F6EFE1;border:1.5px solid rgba(223,169,143,.28)}
 .orb .role{font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
@@ -198,13 +208,14 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
  <div class="reveal" id="reveal">
   <div class="reading" id="reading">✦ Seni okuyorum…</div>
   <div class="crown" id="crown">
-   <div class="cr-eyebrow">Senin mührün</div>
+   <div class="cr-eyebrow"><span class="cr-brand">Sorbi</span> · Senin mührün</div>
    <div class="cr-title" id="crTitle"></div>
    <div class="cr-sub" id="crSub"></div>
   </div>
   <div class="nadir" id="nadir"></div>
-  <svg class="wheel" id="wheel" viewBox="0 0 260 260" style="display:none" aria-hidden="true"></svg>
   <div class="big3" id="big3" style="display:none"></div>
+  <div class="wheelwrap" id="wheelwrap"><svg class="wheel" id="wheel" viewBox="0 0 260 260" aria-hidden="true"></svg></div>
+  <div class="sorbiurl" id="sorbiurl">sorbiapp.com/seni-taniyorum · Sen kaçta birsin?</div>
   <div class="msg-head" id="msgHead"><span>Haritanın söyledikleri</span></div>
   <div id="lines"></div>
   <div class="react" id="react">
@@ -386,8 +397,8 @@ function sentences(ch){
 const ZGLY=['♈︎','♉︎','♊︎','♋︎','♌︎','♍︎','♎︎','♏︎','♐︎','♑︎','♒︎','♓︎'];
 const PLGLY=['☉︎','☽︎','☿︎','♀︎','♂︎','♃︎','♄︎','♅︎','♆︎','♇︎'];
 function drawWheel(ch){
- if(window.SorbiChart){ try{ return window.SorbiChart.draw(window.SorbiChart.adapt(ch),null,{theme:'night',noHouses:!!ch.noTime}); }catch(e){} }
- (function W(n){ if(window.SorbiChart){ try{ var w=document.getElementById('wheel'); if(w&&w.style.display!=='none'){ w.innerHTML=window.SorbiChart.draw(window.SorbiChart.adapt(ch),null,{theme:'night',noHouses:!!ch.noTime}); } }catch(e){} } else if(n<40) setTimeout(function(){W(n+1);},150); })(0);
+ if(window.SorbiChart){ try{ return window.SorbiChart.draw(window.SorbiChart.adapt(ch),null,{theme:'white',noHouses:!!ch.noTime}); }catch(e){} }
+ (function W(n){ if(window.SorbiChart){ try{ var w=document.getElementById('wheel'); if(w){ w.innerHTML=window.SorbiChart.draw(window.SorbiChart.adapt(ch),null,{theme:'white',noHouses:!!ch.noTime}); } }catch(e){} } else if(n<40) setTimeout(function(){W(n+1);},150); })(0);
  const cx=130,cy=130,outR=118,midR=88,cx0=Math.cos,sn=Math.sin;
  const pos=(lon,R)=>[cx-R*cx0(lon*RAD),cy-R*sn(lon*RAD)];
  let s='<circle class="ring" cx="130" cy="130" r="118"/><circle class="ring2" cx="130" cy="130" r="88"/>';
@@ -431,7 +442,7 @@ document.getElementById('go').onclick=()=>{
  let pi=0;reading.innerHTML=RM?'✦':phrases[0];
  const cyc=RM?null:setInterval(()=>{reading.style.opacity=0;setTimeout(()=>{pi++;if(pi<phrases.length){reading.innerHTML=phrases[pi];reading.style.opacity=1;}},380);},880);
  const revealAt=RM?30:880*phrases.length+250;
- const dWheel=RM?0:900,dBig=RM?0:1650,lineStart=RM?0:2100,stagger=RM?0:620,dReact=RM?0:200,dSell=RM?0:400;
+ const dBig=RM?0:900,dWheel=RM?0:1650,lineStart=RM?0:2100,stagger=RM?0:620,dReact=RM?0:200,dSell=RM?0:400;
  const arch=MOON_ADJ[mo]+' '+SUN_NOUN[su];window._sorbiArch=arch;
  setTimeout(()=>{
   if(cyc)clearInterval(cyc);
@@ -469,7 +480,12 @@ document.getElementById('go').onclick=()=>{
   if(!RM&&sh){sh.classList.add('capture');setTimeout(showCrown,360);setTimeout(()=>sh.classList.remove('capture'),840);}
   else{showCrown();}
   // 2) the natal wheel draws in
-  setTimeout(()=>{const w=document.getElementById('wheel');w.innerHTML=drawWheel(ch);w.style.display='block';requestAnimationFrame(()=>w.classList.add('show'));},dWheel);
+  setTimeout(()=>{
+   const w=document.getElementById('wheel'), wrap=document.getElementById('wheelwrap');
+   w.innerHTML=drawWheel(ch);
+   wrap.style.display='block';
+   requestAnimationFrame(()=>{wrap.classList.add('show');document.getElementById('sorbiurl').style.display='block';});
+  },dWheel);
   // 3) big three
   setTimeout(()=>{
    const b3=document.getElementById('big3');b3.className='orbs';b3.style.display='flex';
@@ -499,14 +515,13 @@ document.querySelectorAll('#react .rbtns button').forEach(b=>{b.onclick=()=>{
 function sorbiPaylasMetni(){
  const a=window._sorbiArch, p=window._sorbiPay;
  if(!a) return 'Sorbi beni birkaç cümlede fazla iyi okudu 😳 Doğum tarihini gir, seni de okusun:';
- let t=`Sorbi'ye göre mührüm: “${a}” ✦`;
- if(p&&p.uclu) t+=` Bu üçlü 100.000 kişiden yalnızca ${p.uclu.yuzbinde} kişide oluşuyor — yaklaşık ${p.uclu.biriKac.toLocaleString('tr-TR')} kişide bir.`;
- else if(p&&p.ikili) t+=` 144 mühürden biri — yaklaşık ${p.ikili.biriKac} kişide bir.`;
- return t+' Seninki ne?';
+ if(p&&p.uclu) return `Ben “${a}”yım — 100.000 kişiden ${p.uclu.yuzbinde}'i. Sen kaçta birsin?`;
+ if(p&&p.ikili) return `Ben “${a}”yım — 144 mühürden biri, yaklaşık ${p.ikili.biriKac} kişide bir. Sen kaçta birsin?`;
+ return `Ben “${a}”yım. Sen kimsin?`;
 }
 function sorbiGeriBildir(btn,söz){const e=btn.querySelector('span'),o=e.textContent;e.textContent=söz;setTimeout(()=>{e.textContent=o;},2200);}
 document.getElementById('shareBtn').onclick=async()=>{
- const url='https://sorbiapp.com/seni-taniyorum';
+ const url='https://sorbiapp.com/seni-taniyorum?s=share';
  const txt=sorbiPaylasMetni(), btn=document.getElementById('shareBtn');
  try{
   if(navigator.share){ await navigator.share({title:'Seni Tanıyorum · Sorbi',text:txt,url}); }
@@ -516,7 +531,7 @@ document.getElementById('shareBtn').onclick=async()=>{
 };
 document.getElementById('copyBtn').onclick=async()=>{
  const btn=document.getElementById('copyBtn');
- try{ await navigator.clipboard.writeText(sorbiPaylasMetni()+' https://sorbiapp.com/seni-taniyorum'); sorbiGeriBildir(btn,'Kopyalandı ✓'); }
+ try{ await navigator.clipboard.writeText(sorbiPaylasMetni()+' https://sorbiapp.com/seni-taniyorum?s=share'); sorbiGeriBildir(btn,'Kopyalandı ✓'); }
  catch(e){ sorbiGeriBildir(btn,'Kopyalanamadı'); }
 };
 </script>
