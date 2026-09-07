@@ -484,7 +484,8 @@ document.getElementById('go').onclick=()=>{
    const w=document.getElementById('wheel'), wrap=document.getElementById('wheelwrap');
    w.innerHTML=drawWheel(ch);
    wrap.style.display='block';
-   requestAnimationFrame(()=>{wrap.classList.add('show');document.getElementById('sorbiurl').style.display='block';});
+   document.getElementById('sorbiurl').style.display='block';   // rAF'a bagli degil: arka plan sekmede de gorunsun
+   requestAnimationFrame(()=>wrap.classList.add('show'));
   },dWheel);
   // 3) big three
   setTimeout(()=>{
@@ -515,9 +516,9 @@ document.querySelectorAll('#react .rbtns button').forEach(b=>{b.onclick=()=>{
 function sorbiPaylasMetni(){
  const a=window._sorbiArch, p=window._sorbiPay;
  if(!a) return 'Sorbi beni birkaç cümlede fazla iyi okudu 😳 Doğum tarihini gir, seni de okusun:';
- if(p&&p.uclu) return `Ben “${a}”yım — 100.000 kişiden ${p.uclu.yuzbinde}'i. Sen kaçta birsin?`;
- if(p&&p.ikili) return `Ben “${a}”yım — 144 mühürden biri, yaklaşık ${p.ikili.biriKac} kişide bir. Sen kaçta birsin?`;
- return `Ben “${a}”yım. Sen kimsin?`;
+ if(p&&p.uclu) return `Mührüm: “${a}” ✦ Bu üçlü yaklaşık ${p.uclu.biriKac.toLocaleString('tr-TR')} kişide bir çıkıyor. Sen kaçta birsin?`;
+ if(p&&p.ikili) return `Mührüm: “${a}” ✦ 144 mühürden biri, yaklaşık ${p.ikili.biriKac} kişide bir. Sen kaçta birsin?`;
+ return `Mührüm: “${a}” ✦ Sen kimsin?`;
 }
 function sorbiGeriBildir(btn,söz){const e=btn.querySelector('span'),o=e.textContent;e.textContent=söz;setTimeout(()=>{e.textContent=o;},2200);}
 document.getElementById('shareBtn').onclick=async()=>{
