@@ -14,6 +14,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="/astronomy.browser.min.js?v=3" defer></script>
 <script src="/sorbi-chart.js?v=8" defer></script>
+<script src="/sorbi-astro.js?v=4" defer></script>
+<script src="/sorbi-dignite.js?v=2" defer></script>
 <style>
 /* Sorbi design tokens — varak okunur, terracotta basılır */
 :root{--bg:#0B0F14;--panel:rgba(235,240,248,.03);--gold:#DFA98F;--gold-lt:#E4CF9A;--gold-br:#F2D3B8;--ink:#E8E4DA;--mut:#A9A396;--dim:#8A8578;--terra:#E3A692;--btn-ink:#F6EFE1;
@@ -246,18 +248,12 @@ document.addEventListener('click',e=>{if(!e.target.closest('.geo'))gr.classList.
 // prefill from profile
 (function(){try{var prf=JSON.parse(localStorage.getItem('sorbi_profile')||'null');var b=prf&&prf.birth;if(b&&b.date){document.getElementById('d').value=b.date;if(b.time)document.getElementById('t').value=b.time;if(b.lat){pk={lat:+b.lat,lon:+b.lon,tz:b.tz,label:b.place||''};if(b.place){pin.value=b.place;pkl.textContent=b.place;}}}}catch(e){}})();
 
-function computeLite(A,o){const utc=localToUTC(o.y,o.mo,o.d,o.h,o.mi,o.tz);const t=A.MakeTime(utc);const e=obliquity(t);const ramc=norm(A.SiderealTime(t)*15+o.lon);const asc=ascendant(ramc,e,o.lat),mc=mcLon(ramc,e);
- const PL=[['Güneş',A.Body.Sun],['Ay',A.Body.Moon],['Merkür',A.Body.Mercury],['Venüs',A.Body.Venus],['Mars',A.Body.Mars],['Jüpiter',A.Body.Jupiter],['Satürn',A.Body.Saturn],['Uranüs',A.Body.Uranus],['Neptün',A.Body.Neptune],['Plüton',A.Body.Pluto]];
- const pls=PL.map(([n,b])=>({n,lon:ecl(A,b,t)}));
- let c=new Array(13).fill(0);
- if(o.noTime){const st=signOf(asc)*30;for(let i=1;i<=12;i++)c[i]=norm(st+(i-1)*30);}
- else{c[1]=asc;c[10]=mc;c[4]=norm(mc+180);c[7]=norm(asc+180);
-  const plac=(off,fr)=>{let ra=norm(ramc+off);for(let i=0;i<60;i++){let lon=norm(Math.atan2(Math.sin(ra*RAD),Math.cos(ra*RAD)*Math.cos(e*RAD))/RAD);const dec=Math.asin(Math.sin(e*RAD)*Math.sin(lon*RAD))/RAD;const ad=Math.asin(Math.tan(o.lat*RAD)*Math.tan(dec*RAD))/RAD;ra=norm(ramc+off+fr*ad);}return norm(Math.atan2(Math.sin(ra*RAD),Math.cos(ra*RAD)*Math.cos(e*RAD))/RAD);};
-  c[11]=plac(30,1/3);c[12]=plac(60,2/3);c[2]=plac(120,2/3);c[3]=plac(150,1/3);c[5]=norm(c[11]+180);c[6]=norm(c[12]+180);c[8]=norm(c[2]+180);c[9]=norm(c[3]+180);}
- if(!o.noTime)pls.forEach(p=>p.house=houseOf(p.lon,c));
- // Mercury retrograde at birth: compare ecl lon 12h apart
- let mercRetro=false;try{const t2=A.MakeTime(new Date(utc.getTime()+432e5));let dd=norm(ecl(A,A.Body.Mercury,t2)-pls[2].lon);if(dd>180)dd-=360;mercRetro=dd<0;}catch(e){}
- return{pls,asc,noTime:o.noTime,mercRetro};}
+function computeLite(A,o){
+ // Gercek motor: sorbi-astro.js — sitedeki diger haritalarla ayni kaynak.
+ const S=window.SorbiAstro;
+ const ch=S.chart({y:o.y,mo:o.mo,d:o.d,h:o.h,mi:o.mi,tz:o.tz,lat:o.lat,lon:o.lon,house:'P'});
+ const pls=ch.pls.slice(0,10).map(p=>({n:p.n,k:p.k,lon:p.lon,rx:!!p.rx,house:o.noTime?undefined:p.house}));
+ return {pls,asc:ch.asc,mc:ch.mc,c:ch.c,day:ch.day,noTime:o.noTime,mercRetro:!!pls[2].rx,tam:ch};}
 
 function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
 function sentences(ch){
@@ -292,7 +288,37 @@ function sentences(ch){
  const mc=[0,0,0];P.forEach(p=>mc[signOf(p.lon)%3]++);const md=mc.indexOf(Math.max(...mc));
  if(mc[md]>=5)cand.push([4,MODAL[md]]);
  // chart ruler
- if(!noTime){const rp=P[RULER[as]];cand.push([4,`Yükselenin <b>${SIGNS[as]}</b>, o yüzden tüm haritanın patronu <b>${rp.n}</b> — nereye gidersen ${['parlamak','sevmek ve değer bulmak','anlamak ve konuşmak','güzellik ve yakınlık','kazanmak','büyümek ve anlam','ustalaşmak','özgürleşmek','ilham peşinde koşmak','dönüştürmek'][RULER[as]]} seni takip ediyor.`]);}
+ if(!noTime){const ri=RULER[as],rp=P[ri];
+  const pesinde=['parlamak','sevmek ve değer bulmak','anlamak ve konuşmak','güzellik ve yakınlık','kazanmak','büyümek ve anlam','ustalaşmak','özgürleşmek','ilham peşinde koşmak','dönüştürmek'][ri];
+  let rtxt=`Yükselenin <b>${SIGNS[as]}</b>, o yüzden tüm haritanın patronu <b>${rp.n}</b> — nereye gidersen ${pesinde} seni takip ediyor.`;
+  // yoneticinin esansiyel durumu: haritanin patronu guclu mu, zorda mi
+  let ronc=4;
+  try{
+   const DG=window.SorbiDignite, dk=['sun','moon','mer','ven','mar','jup','sat'][ri];
+   if(DG&&dk&&ch.day!==undefined){
+    const dg=DG.tekil(dk,rp.lon,ch.day);
+    const yer=rp.house?`<b>${cap(ORD[rp.house])} evinde</b> `:'';
+    if(dg.puan>=4){ rtxt+=` Üstelik ${rp.n} <b>${SIGNS[signOf(rp.lon)]}</b> burcunda kendi evinde gibi — ${yer}rahat çalışabilir; bu alanda kendini zorlamadan iş görebilirsin.`; ronc=8; }
+    else if(dg.puan<=-4){ rtxt+=` Ama ${rp.n} <b>${SIGNS[signOf(rp.lon)]}</b> burcunda yabancı toprakta — ${yer}aynı işi yapmak sana daha çok emek çıkarabilir. Bu gecikme yeteneksizlik değil, sadece daha uzun yol olabilir.`; ronc=9; }
+    else if(dg.peregrin){ rtxt+=` ${rp.n} hiçbir burçta özel güç almıyor (peregrin) — patronun serbest gezen biri; yönünü sen vermezsen ortam verebilir.`; ronc=6; }
+   }
+  }catch(e){}
+  cand.push([ronc,rtxt]);}
+ // sect: gunduz/gece haritasinda sect DISI kotucu daha cok zorlar — once onu goster
+ if(ch.day!==undefined){
+  const disi = ch.day ? 4 : 6;            // gunduz -> Mars, gece -> Satürn
+  const ici  = ch.day ? 6 : 4;
+  const km=P[disi], hedefler=[[0,'Güneş'],[1,'Ay'],[3,'Venüs'],[2,'Merkür']];
+  let en=null;
+  hedefler.forEach(([hi,hn])=>{
+   let dd=Math.abs(norm(km.lon-P[hi].lon)); if(dd>180)dd=360-dd;
+   const sert=[[0,8,'kavuşum'],[90,7,'kare'],[180,8,'karşıtlık']];
+   sert.forEach(([ac,orb,ad])=>{ const fark=Math.abs(dd-ac);
+    if(fark<orb && (!en||fark<en.fark)) en={fark,hn,ad,knm:km.n}; });
+  });
+  if(en) cand.push([9,`<b>${ch.day?'Gündüz':'Gece'}</b> doğmuşsun; bu haritada işi zorlaştıran taraf <b>${en.knm}</b> ve <b>${en.hn}</b> ile ${en.ad} yapıyor. Bu alan sana erken yaşta fazla ciddiyet öğretmiş olabilir — ama aynı sertlik, dayanıklılığın da kaynağı olabilir.`]);
+  else cand.push([4,`<b>${ch.day?'Gündüz':'Gece'}</b> doğmuşsun: haritanın ışığı <b>${ch.day?'Güneş':'Ay'}</b>, ve <b>${P[ici].n}</b> senin tarafında çalışıyor. Zor dönemlerde ${ch.day?'görünür olmak ve yön koymak':'geri çekilip içeriden toparlanmak'} sana daha çok yarayabilir.`]);
+ }
  // Saturn house — deepest lesson
  if(!noTime){const sh=P[6].house;cand.push([3,`Satürn <b>${cap(ORD[sh])} evinde</b>: en çok <b>${HAREA[sh]}</b> alanında kendini kanıtlaman gerekiyormuş gibi hissedersin. Bu alanda geç ama sağlam olgunlaşan bir çizgi görülebilir.`]);}
  // pick top 4 distinct by priority
@@ -320,7 +346,7 @@ function drawWheel(ch){
  return s;
 }
 document.getElementById('go').onclick=()=>{
- const A=window.Astronomy;if(!A){alert('Motor yükleniyor, birkaç saniye sonra dene.');return;}
+ const A=window.Astronomy;if(!A||!window.SorbiAstro){alert('Motor yükleniyor, birkaç saniye sonra dene.');return;}
  const dv=document.getElementById('d').value;const tv=document.getElementById('t').value;
  if(!dv){alert('Doğum tarihini gir.');return;}
  const noTime=!tv;const[y,mon,d]=dv.split('-').map(Number);const[h,mi]=(tv||'12:00').split(':').map(Number);
