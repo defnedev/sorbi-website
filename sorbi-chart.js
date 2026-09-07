@@ -101,6 +101,80 @@ var THEMES={
 };
 var THEME='white';
 
+
+/* ── MÜHÜR KİPİ ─────────────────────────────────────────────────────────────
+   Küçük boyda (≤320px) tam natal çark okunmaz hale geliyor: 12 burç + 12 ev +
+   13 gezegen + taksimat + açılar aynı anda mıcıra dönüyor. Mühür kipi bunun
+   yerine yalnız taşıyıcı iskeleti çizer: burç halkası, ufuk ekseni ve üç işaret
+   (Güneş, Ay, Yükselen). Zemin saydamdır — sayfaya yapıştırılmış bir kutu değil,
+   sayfanın üstüne kazınmış bir işaret gibi durur.                          */
+function drawMuhur(inner,opt){
+  opt=opt||{};
+  var S=320, cx=S/2, cy=S/2, o=[];
+  var M = opt.mrk || {
+    dis:'rgba(223,169,143,.55)', ic:'rgba(223,169,143,.30)', ufuk:'rgba(223,169,143,.40)',
+    isaret:'rgba(223,169,143,.85)', murekkep:'#DFA98F', zemin:'#0B0F14', cekirdek:'rgba(223,169,143,.7)'
+  };
+  /* desature element tonlari — UI kategori rengi degil, tek kalemden cikmis gibi */
+  var EL=['#C48A75','#9CA98C','#B8A98A','#8497AD'];
+  var R={ dis:150, ic:122, glif:137, isaret:112 };
+  /* saat bilinmiyorsa yukselen yoktur: ufuk ekseni ve AC vurgusu cizilmez,
+     cark Gunes burcunun basina hizalanir. */
+  var saatsiz = !!opt.noTime || inner.asc===null || inner.asc===undefined;
+  var gun0=(inner.pls||[]).filter(function(x){return x.k==='sun';})[0];
+  var orient = saatsiz ? norm(Math.floor((gun0?gun0.lon:0)/30)*30) : norm(inner.asc);
+  function P(lon,r){ var t=norm(lon-orient)*RAD; return [cx-r*Math.cos(t), cy+r*Math.sin(t)]; }
+  function line(a,b,st,w,cap){ o.push('<line x1="'+a[0].toFixed(2)+'" y1="'+a[1].toFixed(2)+'" x2="'+b[0].toFixed(2)+'" y2="'+b[1].toFixed(2)+'" stroke="'+st+'" stroke-width="'+w+'"'+(cap?' stroke-linecap="'+cap+'"':'')+'/>'); }
+  function glyph(x,y,key,size,fill,op){
+    var g=GLYPHS[key]; if(!g) return false;
+    var sc=size/g.h;
+    o.push('<g transform="translate('+x.toFixed(2)+' '+y.toFixed(2)+') scale('+sc.toFixed(4)+')"'+(op?' opacity="'+op+'"':'')+'><path d="'+g.d+'" fill="'+fill+'"/></g>');
+    return true;
+  }
+  /* 5) cekirdek: bos halka tabak gibi durur, mühürün ortasi olmali */
+  o.push('<defs><radialGradient id="mcek" cx="50%" cy="50%" r="50%">'+
+    '<stop offset="0%" stop-color="rgba(223,169,143,.07)"/>'+
+    '<stop offset="55%" stop-color="rgba(223,169,143,0)"/></radialGradient></defs>');
+  o.push('<circle cx="'+cx+'" cy="'+cy+'" r="'+R.ic+'" fill="url(#mcek)"/>');
+
+  /* 1) halka hiyerarsisi: iki tel esit degil */
+  o.push('<circle cx="'+cx+'" cy="'+cy+'" r="'+R.dis+'" fill="none" stroke="'+M.dis+'" stroke-width="1"/>');
+  o.push('<circle cx="'+cx+'" cy="'+cy+'" r="'+R.ic+'" fill="none" stroke="'+M.ic+'" stroke-width=".75"/>');
+
+  /* 4) Yukselenin dustugu burc vurgulanacak (ayri isaret degil) */
+  var acBurc = saatsiz ? -1 : Math.floor(norm(inner.asc)/30);
+  /* 6) burc siniri centikleri: 6px, .45 */
+  for(var s2=0;s2<12;s2++){
+    var a0=s2*30;
+    line(P(a0,R.dis-6),P(a0,R.dis),M.ic,.75);
+    var g=P(a0+15,R.glif);
+    var vurgu=(s2===acBurc);
+    glyph(g[0],g[1],'z'+s2, vurgu?17:15, vurgu?M.murekkep:EL[s2%4], vurgu?1:.80);
+  }
+
+  /* 2) ufuk: DC ucu halkayi gecmez, AC ucu 8px tasip ucgenle biter */
+  if(!saatsiz){
+    var acDis=P(inner.asc,R.dis+8), dcIc=P(norm(inner.asc+180),R.dis);
+    line(acDis,dcIc,M.ufuk,.75,'round');
+    var t1=P(inner.asc,R.dis+13), t2=P(inner.asc-1.9,R.dis+4), t3=P(inner.asc+1.9,R.dis+4);
+    o.push('<path d="M'+t1[0].toFixed(1)+' '+t1[1].toFixed(1)+' L'+t2[0].toFixed(1)+' '+t2[1].toFixed(1)+
+           ' L'+t3[0].toFixed(1)+' '+t3[1].toFixed(1)+' Z" fill="'+M.ufuk+'"/>');
+  }
+
+  /* 3+4) Gunes ve Ay: AYNI yaricapta, halkayi temiz kesen disk */
+  function isaret(lon,key){
+    var p=P(lon,R.isaret);
+    o.push('<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="11" fill="'+M.zemin+'" stroke="'+M.isaret+'" stroke-width="1"/>');
+    glyph(p[0],p[1],key,11,M.murekkep);
+  }
+  var pl={}; (inner.pls||[]).forEach(function(p){ pl[p.k]=p; });
+  if(pl.sun)  isaret(pl.sun.lon,'sun');
+  if(pl.moon) isaret(pl.moon.lon,'moon');
+
+  o.push('<circle cx="'+cx+'" cy="'+cy+'" r="3" fill="'+M.cekirdek+'"/>');
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+S+' '+S+'" width="100%" style="max-width:100%;height:auto;display:block">'+o.join('')+'</svg>';
+}
+
 function drawWheel(inner,outer,opt){
   opt=opt||{};
   var T=THEMES[opt.theme||THEME]||THEMES.paper;
@@ -344,6 +418,7 @@ function drawWheel(inner,outer,opt){
 
 window.SorbiChart={
   THEMES:THEMES,
+  muhur:function(inner,opts){ return drawMuhur(inner,opts||{}); },
   draw:function(inner,outer,opts){ return drawWheel(inner,outer,opts||{}); },
   adapt:adapt,
   dms:dms
