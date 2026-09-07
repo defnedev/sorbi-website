@@ -95,6 +95,7 @@ var THEMES={
   rx:'#D8825C', hnum:'rgba(169,163,150,.78)', lead:'rgba(201,169,98,.42)',
   center:'#0B0F14', centerTxt:'#F4E4BA', centerSub:'rgba(169,163,150,.75)', star:'#C9A962',
   el:['#C4634A','#7E9C63','#C9A962','#5E93A8'],
+  font:"'IBM Plex Sans','Helvetica Neue',Arial,sans-serif", serif:"'Fraunces',Georgia,serif",
   asp:{'a-maj':'rgba(228,212,176,.42)','a-hard':'rgba(198,120,98,.5)','a-soft':'rgba(122,170,160,.5)','a-min':'rgba(169,163,150,.24)'}
  }
 };

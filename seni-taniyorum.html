@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="/astronomy.browser.min.js?v=3" defer></script>
-<script src="/sorbi-chart.js?v=8" defer></script>
+<script src="/sorbi-chart.js?v=9" defer></script>
 <script src="/sorbi-astro.js?v=4" defer></script>
 <script src="/sorbi-dignite.js?v=2" defer></script>
 <script src="/sorbi-nadir.js?v=1" defer></script>
@@ -50,15 +50,22 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
 .react .rbtns button.picked{background:var(--line2);color:var(--ink);border-color:rgba(235,240,248,.28);font-weight:600}
 .rthanks{font-family:'Space Grotesk','Inter',sans-serif;font-style:italic;font-size:1.05rem;color:var(--gold-lt);margin-top:.7rem;min-height:1.2rem}
 .nadir{display:none;margin:1.15rem auto 0;max-width:430px;text-align:center;animation:fadeUp .7s both}
-.nadir .nbig{font-family:'Space Grotesk','Inter',sans-serif;font-size:1.42rem;color:var(--gold-br);letter-spacing:.4px}
-.nadir .nbig b{font-weight:700}
-.nadir .nsub{margin-top:.28rem;font-size:.78rem;color:var(--mut);line-height:1.5}
+.nadir .nbig{font-family:'Space Grotesk','Inter',sans-serif;font-size:1.14rem;line-height:1.34;color:var(--gold-br);letter-spacing:.2px;text-wrap:balance}
+.nadir .nbig b{font-weight:700;white-space:nowrap}
+.nadir .nsub{margin-top:.42rem;font-size:.79rem;color:var(--mut);line-height:1.55;text-wrap:balance}
+.nadir .nsub b{white-space:nowrap;color:var(--ink);font-weight:600}
+@media(min-width:520px){.nadir .nbig{font-size:1.34rem}}
 .nadir .nbar{margin:.65rem auto 0;width:212px;height:3px;border-radius:2px;background:var(--line2);position:relative;overflow:hidden}
 .nadir .nbar i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,var(--gold),var(--gold-br));border-radius:2px}
-.nadir .nnote{margin-top:.5rem;font-size:.68rem;color:var(--dim);line-height:1.45}
+.nadir details{margin-top:.55rem}
+.nadir summary{font-size:.7rem;color:var(--dim);cursor:pointer;list-style:none;text-decoration:underline;text-underline-offset:3px}
+.nadir summary::-webkit-details-marker{display:none}
+.nadir .nnote{margin-top:.42rem;font-size:.68rem;color:var(--dim);line-height:1.5;text-align:left;
+ background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;padding:.6rem .7rem}
 .shareRow{display:flex;gap:.55rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
-.sbtn{display:inline-flex;align-items:center;gap:.46rem;background:linear-gradient(180deg,rgba(223,169,143,.16),rgba(223,169,143,.07));
- border:1px solid var(--lineg2);color:var(--gold-br);font:600 .86rem 'Inter',sans-serif;padding:.62rem 1.05rem;border-radius:999px;
+.sbtn{display:inline-flex;align-items:center;justify-content:center;gap:.46rem;min-height:44px;
+ background:linear-gradient(180deg,rgba(223,169,143,.16),rgba(223,169,143,.07));
+ border:1px solid var(--lineg2);color:var(--gold-br);font:600 .86rem 'Inter',sans-serif;padding:.7rem 1.15rem;border-radius:999px;
  cursor:pointer;text-decoration:none;transition:transform .16s,border-color .16s,background .16s}
 .sbtn:hover{transform:translateY(-1px);border-color:var(--gold);background:linear-gradient(180deg,rgba(223,169,143,.24),rgba(223,169,143,.1))}
 .sbtn:active{transform:translateY(0)}
@@ -67,7 +74,7 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
 .sbtn.ghost:hover{border-color:var(--lineg2);color:var(--gold-br)}
 @media(prefers-reduced-motion:reduce){.nadir{animation:none}.sbtn{transition:none}}
 .share{margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--line2);font-size:.85rem;color:var(--mut)}
-.share button{background:none;border:none;color:var(--gold);font:600 .85rem 'Inter';cursor:pointer;text-decoration:underline;padding:0}
+.share button:not(.sbtn){background:none;border:none;color:var(--gold);font:600 .85rem 'Inter';cursor:pointer;text-decoration:underline;padding:0}
 .crown{text-align:center;opacity:0;transform:translateY(10px) scale(.97);transition:opacity .48s var(--ease),transform .48s var(--ease);margin-top:1.1rem}
 .crown.show{opacity:1;transform:none}
 .cr-eyebrow{font-family:'Inter';font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:500}
@@ -137,7 +144,7 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
 }
 </style>
 <script src="/sorbi-yer.js?v=3"></script>
-<link rel="stylesheet" href="/sorbi-fonts.css?v=8">
+<link rel="stylesheet" href="/sorbi-fonts.css?v=9">
 </head>
 <body>
 <style>
@@ -179,7 +186,7 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
 
  <div class="card" id="form">
   <div class="row">
-   <div><label>Doğum Tarihi</label><input type="date" id="d"></div>
+   <div><label>Doğum Tarihi</label><input type="date" id="d" min="1900-01-01"></div>
    <div><label>Saat <span style="opacity:.5">(varsa)</span></label><input type="time" id="t" value=""></div>
   </div>
   <label>Doğum Yeri</label>
@@ -269,6 +276,7 @@ const pin=document.getElementById('p'),gr=document.getElementById('gr'),pkl=docu
 pin.addEventListener('input',()=>{clearTimeout(gt);const q=pin.value.trim();if(q.length<2){gr.classList.remove('show');return;}gt=setTimeout(async()=>{try{const r=await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=6&language=tr&format=json`);const j=await r.json();const rs=j.results||[];if(!rs.length){gr.classList.remove('show');return;}gr.innerHTML=rs.map((x,i)=>`<div class="gi" data-i="${i}">${x.name}<small>${[x.admin1,x.country].filter(Boolean).join(' · ')}</small></div>`).join('');gr.classList.add('show');[...gr.querySelectorAll('.gi')].forEach(el=>{el.onclick=()=>{const x=rs[+el.dataset.i];pk={lat:x.latitude,lon:x.longitude,tz:x.timezone,label:x.name};pin.value=x.name;pkl.textContent=`${x.name} · ${x.latitude.toFixed(2)}, ${x.longitude.toFixed(2)}`;gr.classList.remove('show');};});}catch(e){}},380);});
 document.addEventListener('click',e=>{if(!e.target.closest('.geo'))gr.classList.remove('show');});
 
+(function(){try{document.getElementById('d').max=new Date().toISOString().slice(0,10);}catch(e){}})();
 // prefill from profile
 (function(){try{var prf=JSON.parse(localStorage.getItem('sorbi_profile')||'null');var b=prf&&prf.birth;if(b&&b.date){document.getElementById('d').value=b.date;if(b.time)document.getElementById('t').value=b.time;if(b.lat){pk={lat:+b.lat,lon:+b.lon,tz:b.tz,label:b.place||''};if(b.place){pin.value=b.place;pkl.textContent=b.place;}}}}catch(e){}})();
 
@@ -279,7 +287,10 @@ function computeLite(A,o){
  const pls=ch.pls.slice(0,10).map(p=>({n:p.n,k:p.k,lon:p.lon,rx:!!p.rx,house:o.noTime?undefined:p.house}));
  return {pls,asc:ch.asc,mc:ch.mc,c:ch.c,day:ch.day,noTime:o.noTime,mercRetro:!!pls[2].rx,tam:ch};}
 
-function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
+function cap(s){return s.charAt(0).toLocaleUpperCase('tr-TR')+s.slice(1);}
+// Türkçe vasıta hali: son ünlüye göre 'la / 'le
+function trIle(ad){const v=ad.toLocaleLowerCase('tr-TR').match(/[aeıioöuü]/g);const son=v?v[v.length-1]:'e';
+ return ad+(/[aıou]/.test(son)?"'la":"'le");}
 function sentences(ch){
  const P=ch.pls,noTime=ch.noTime,as=noTime?null:signOf(ch.asc);
  const su=signOf(P[0].lon),mo=signOf(P[1].lon),ve=signOf(P[3].lon),ma=signOf(P[4].lon);
@@ -340,12 +351,28 @@ function sentences(ch){
   let en=null;
   hedefler.forEach(([hi,hn])=>{
    let dd=Math.abs(norm(km.lon-P[hi].lon)); if(dd>180)dd=360-dd;
-   const sert=[[0,8,'kavuşum'],[90,7,'kare'],[180,8,'karşıtlık']];
-   sert.forEach(([ac,orb,ad])=>{ const fark=Math.abs(dd-ac);
-    if(fark<orb && (!en||fark<en.fark)) en={fark,hn,ad,knm:km.n}; });
+   [[0,8,'kavuşum'],[90,7,'kare'],[180,8,'karşıtlık']].forEach(([ac,orb,ad])=>{
+    const fark=Math.abs(dd-ac);
+    if(fark<orb && (!en||fark<en.fark)) en={fark,hi,hn,ad};
+   });
   });
-  if(en) cand.push([9,`<b>${ch.day?'Gündüz':'Gece'}</b> doğmuşsun; bu haritada işi zorlaştıran taraf <b>${en.knm}</b> ve <b>${en.hn}</b> ile ${en.ad} yapıyor. Bu alan sana erken yaşta fazla ciddiyet öğretmiş olabilir — ama aynı sertlik, dayanıklılığın da kaynağı olabilir.`]);
-  else cand.push([4,`<b>${ch.day?'Gündüz':'Gece'}</b> doğmuşsun: haritanın ışığı <b>${ch.day?'Güneş':'Ay'}</b>, ve <b>${P[ici].n}</b> senin tarafında çalışıyor. Zor dönemlerde ${ch.day?'görünür olmak ve yön koymak':'geri çekilip içeriden toparlanmak'} sana daha çok yarayabilir.`]);
+  if(en){
+   const ANLAM={
+    'Mars|Güneş':'İstediğin şeye giderken kendini fazla zorlayabilirsin; acele etmekle irade göstermek arasındaki farkı öğrenmek zaman alabilir.',
+    'Mars|Ay':'Duygun çabuk tutuşabilir; sakinleşmeden konuşmamak seni koruyabilir.',
+    'Mars|Venüs':'İstemek ile sevmek sende ayrı iki dil olabilir; arzu ile yakınlık aynı anda gelmeyebilir.',
+    'Mars|Merkür':'Sözün keskin olabilir; haklıyken bile ifaden karşındakini yaralayabilir.',
+    'Satürn|Güneş':'Kendini kanıtlama ihtiyacı erken başlamış olabilir; onay beklemeden var olmak sonradan öğrendiğin bir şey olabilir.',
+    'Satürn|Ay':'Duygunu göstermek sana pahalıya gelebilir; erken yaşta yaşından büyük sorumluluk almış olabilirsin.',
+    'Satürn|Venüs':'Sevildiğine inanmak zaman alabilir; yakınlığı hak etmen gerektiğini düşünmüş olabilirsin.',
+    'Satürn|Merkür':'Zihnin temkinli ve ağır çalışabilir; emin olmadan konuşmamak hem gücün hem frenin olabilir.'
+   };
+   const anl=ANLAM[km.n+'|'+en.hn]||'Bu ikisinin gerilimi haritanın en çok emek isteyen yeri olabilir.';
+   cand.push([9,`<b>${ch.day?'Gündüz':'Gece'}</b> doğmuşsun — bu haritada işi zorlaştıran taraf <b>${km.n}</b>. ${trIle(en.hn)} ${en.ad} yapıyor: ${anl}`]);
+  } else {
+   const IYI={ 'Jüpiter':'genişlemek, affetmek ve büyük resmi görmek', 'Venüs':'yumuşatmak, uzlaşmak ve bağ kurmak' };
+   cand.push([4,`<b>${ch.day?'Gündüz':'Gece'}</b> doğmuşsun: haritanın ışığı <b>${ch.day?'Güneş':'Ay'}</b>, ve <b>${P[ici].n}</b> senin tarafında çalışıyor. Zor dönemlerde ${ch.day?'görünür olmak ve yön koymak':'geri çekilip içeriden toparlanmak'} sana daha çok yarayabilir.`]);
+  }
  }
  // Saturn house — deepest lesson
  if(!noTime){const sh=P[6].house;cand.push([3,`Satürn <b>${cap(ORD[sh])} evinde</b>: en çok <b>${HAREA[sh]}</b> alanında kendini kanıtlaman gerekiyormuş gibi hissedersin. Bu alanda geç ama sağlam olgunlaşan bir çizgi görülebilir.`]);}
@@ -373,10 +400,18 @@ function drawWheel(ch){
  ch.pls.forEach((p,i)=>{let R=midR-14;const near=placed.filter(q=>{let dd=Math.abs(norm(p.lon-q));if(dd>180)dd=360-dd;return dd<10;}).length;R-=near*13;placed.push(p.lon);const[px,py]=pos(p.lon,R);s+=`<text class="pl" style="animation-delay:${(i*90)}ms" x="${px.toFixed(1)}" y="${py.toFixed(1)}">${PLGLY[i]}</text>`;});
  return s;
 }
+let _sorbiKosuyor=false;
 document.getElementById('go').onclick=()=>{
+ if(_sorbiKosuyor)return;                       // cift tiklama korumasi
  const A=window.Astronomy;if(!A||!window.SorbiAstro){alert('Motor yükleniyor, birkaç saniye sonra dene.');return;}
  const dv=document.getElementById('d').value;const tv=document.getElementById('t').value;
  if(!dv){alert('Doğum tarihini gir.');return;}
+ const bugun=new Date();bugun.setHours(23,59,59,999);
+ const secilen=new Date(dv+'T'+(tv||'12:00'));
+ if(isNaN(secilen)){alert('Doğum tarihini kontrol et.');return;}
+ if(secilen>bugun){alert('Doğum tarihi gelecekte olamaz.');return;}
+ if(secilen<new Date('1900-01-01')){alert('1900 öncesi için hesap yapamıyorum.');return;}
+ _sorbiKosuyor=true;
  const noTime=!tv;const[y,mon,d]=dv.split('-').map(Number);const[h,mi]=(tv||'12:00').split(':').map(Number);
  const ch=computeLite(A,{y,mo:mon,d,h,mi,lat:pk.lat,lon:pk.lon,tz:pk.tz||'Europe/Istanbul',noTime});
  // save birth to memory
@@ -418,12 +453,12 @@ document.getElementById('go').onclick=()=>{
      el.innerHTML=`<div class="nbig">Bu üçlü, <b>100.000 kişiden yalnızca ${u.yuzbinde}</b> kişide oluşuyor</div>
       <div class="nsub">${SIGNS[su]} ☉ · ${SIGNS[mo]} ☽ · ${SIGNS[as]} ↑ — yaklaşık <b>${u.biriKac.toLocaleString('tr-TR')} kişide bir</b>.<br>1728 kombinasyon içinde en nadir %${enNadirYuzde}'lik dilimde.</div>
       <div class="nbar"><i style="width:${Math.max(4,100-u.yuzdelik)}%"></i></div>
-      <div class="nnote">Gökyüzünün kendi dağılımı: 1960–2012 arası 20 dakikada bir örneklenmiş ${N.ornek.toLocaleString('tr-TR')} gök anı, İstanbul enlemi. Doğum istatistiği değil.</div>`;
+      <details><summary>Bu sayı nereden geliyor?</summary><div class="nnote">1960–2012 arası 20 dakikada bir örneklenmiş <b>${N.ornek.toLocaleString('tr-TR')}</b> gök anından hesaplandı (İstanbul enlemi). Bu, gökyüzünün kendi dağılımı — doğum istatistiği değil.</div></details>`;
      window._sorbiPay={uclu:u, ikili:ik, as:as};
     }else{
      el.innerHTML=`<div class="nbig">Bu mühür <b>144 mühürden biri</b></div>
       <div class="nsub">${SIGNS[su]} ☉ · ${SIGNS[mo]} ☽ — yaklaşık <b>${ik.biriKac} kişide bir</b>.<br>Doğum saatini bilseydin yükselenini de katıp çok daha nadir bir üçlü çıkarabilirdim.</div>
-      <div class="nnote">Gökyüzünün kendi dağılımı: ${N.ornek.toLocaleString('tr-TR')} gök anından hesaplandı. Doğum istatistiği değil.</div>`;
+      <details><summary>Bu sayı nereden geliyor?</summary><div class="nnote">1960–2012 arası 20 dakikada bir örneklenmiş <b>${N.ornek.toLocaleString('tr-TR')}</b> gök anından hesaplandı. Bu, gökyüzünün kendi dağılımı — doğum istatistiği değil.</div></details>`;
      window._sorbiPay={uclu:null, ikili:ik, as:null};
     }
     el.style.display='block';
