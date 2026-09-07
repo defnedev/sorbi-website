@@ -18,6 +18,8 @@
 <script src="/sorbi-dignite.js?v=2" defer></script>
 <script src="/sorbi-nadir.js?v=1" defer></script>
 <script src="/sorbi-sohbet.js?v=1" defer></script>
+<script src="/sorbi-karsilastir.js?v=1" defer></script>
+<script src="/sorbi-kart.js?v=1" defer></script>
 <style>
 /* Sorbi design tokens — varak okunur, terracotta basılır */
 :root{--bg:#0B0F14;--panel:rgba(235,240,248,.03);--gold:#DFA98F;--gold-lt:#E4CF9A;--gold-br:#F2D3B8;--ink:#E8E4DA;--mut:#A9A396;--dim:#8A8578;--terra:#E3A692;--btn-ink:#F6EFE1;
@@ -115,6 +117,12 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
 .rk-yuva{min-height:250px;display:flex;align-items:center;justify-content:center;border:1px dashed var(--line2);border-radius:12px;
  color:var(--dim);font-size:.72rem}
 @media(prefers-reduced-motion:reduce){.sh-cevap{animation:none}}
+.karsi{max-width:460px;margin:1.1rem auto 0;background:rgba(223,169,143,.05);border:1px solid var(--lineg);
+ border-radius:14px;padding:.95rem 1.05rem;animation:fadeUp .6s both}
+.karsi h4{margin:0 0 .55rem;font:600 .68rem 'Inter';letter-spacing:1.8px;text-transform:uppercase;color:var(--gold)}
+.karsi p{margin:0 0 .38rem;font-size:.84rem;line-height:1.55;color:var(--ink)}
+.karsi p:last-child{margin-bottom:0;color:var(--dim);font-size:.76rem;font-style:italic}
+@media(prefers-reduced-motion:reduce){.karsi{animation:none}}
 .tamharita{display:none;margin-top:20px;text-align:center}
 .tamharita a{font:600 .84rem 'Inter',sans-serif;color:var(--gold-br);text-decoration:none;border-bottom:1px solid rgba(223,169,143,.35);padding-bottom:2px}
 .tamharita a:hover{border-bottom-color:var(--gold-br)}
@@ -240,6 +248,7 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
    <div class="cr-sub" id="crSub"></div>
   </div>
   <div class="nadir" id="nadir"></div>
+  <div class="karsi" id="karsi" hidden></div>
   <div class="big3" id="big3" style="display:none"></div>
   <div class="wheelwrap" id="wheelwrap"><svg class="wheel" id="wheel" viewBox="0 0 260 260" aria-hidden="true"></svg></div>
   <div class="tamharita" id="tamharita"><a id="tamharitaLink" href="/detayli-dogum-haritasi">Tam haritayı aç →</a></div>
@@ -524,11 +533,29 @@ document.getElementById('go').onclick=()=>{
       <div class="nbar"><i style="width:${Math.max(4,100-u.yuzdelik)}%"></i></div>
       <details><summary>Bu sayı nereden geliyor?</summary><div class="nnote">1960–2012 arası 20 dakikada bir örneklenmiş <b>${N.ornek.toLocaleString('tr-TR')}</b> gök anından hesaplandı (İstanbul enlemi). Bu, gökyüzünün kendi dağılımı — doğum istatistiği değil.</div></details>`;
      window._sorbiPay={uclu:u, ikili:ik, as:as};
+     // paylasilan baglantidan gelen ucluyle karsilastir (viral dongu buradan kapaniyor)
+     try{
+      var KK=window.SorbiKarsilastir;
+      if(KK){
+       window._sorbiKendi={su:su,mo:mo,as:as};
+       var gelen=KK.paramOku(location.search);
+       if(gelen){
+        var sn=KK.karsilastir({su:su,mo:mo,as:as},gelen), mt=sn&&KK.metinKur(sn);
+        if(mt){
+         var kbox=document.getElementById('karsi');
+         kbox.innerHTML='<h4>'+mt.baslik+'</h4>'+mt.satirlar.map(function(t){return '<p>'+t+'</p>';}).join('');
+         kbox.hidden=false;
+         try{fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'karsilastirma',meta:sn.dahaNadir}),keepalive:true});}catch(e){}
+        }
+       }
+      }
+     }catch(e){}
     }else{
      el.innerHTML=`<div class="nbig">Bu mühür <b>144 mühürden biri</b></div>
       <div class="nsub">${SIGNS[su]} ☉ · ${SIGNS[mo]} ☽ — yaklaşık <b>${ik.biriKac} kişide bir</b>.<br>Doğum saatini bilseydin yükselenini de katıp çok daha nadir bir üçlü çıkarabilirdim.</div>
       <details><summary>Bu sayı nereden geliyor?</summary><div class="nnote">1960–2012 arası 20 dakikada bir örneklenmiş <b>${N.ornek.toLocaleString('tr-TR')}</b> gök anından hesaplandı. Bu, gökyüzünün kendi dağılımı — doğum istatistiği değil.</div></details>`;
      window._sorbiPay={uclu:null, ikili:ik, as:null};
+     try{ if(window.SorbiKarsilastir) window._sorbiKendi={su:su,mo:mo}; }catch(e){}
     }
     el.style.display='block';
    }
@@ -635,18 +662,60 @@ function sorbiGeriBildir(btn,söz){const e=btn.querySelector('span'),o=e.textCon
  if(f) f.onsubmit=function(e){ e.preventDefault(); sor(document.getElementById('shInput').value); };
 })();
 
-document.getElementById('shareBtn').onclick=async()=>{
- const url='https://sorbiapp.com/seni-taniyorum?s=share';
- const txt=sorbiPaylasMetni(), btn=document.getElementById('shareBtn');
+function sorbiPaylasUrl(){
+ var u='https://sorbiapp.com/seni-taniyorum?s=share';
  try{
-  if(navigator.share){ await navigator.share({title:'Seni Tanıyorum · Sorbi',text:txt,url}); }
-  else { await navigator.clipboard.writeText(txt+' '+url); sorbiGeriBildir(btn,'Kopyalandı ✓'); }
-  try{fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'muhur_paylasildi',meta:window._sorbiArch||''}),keepalive:true});}catch(e){}
+  var K=window._sorbiKendi;
+  if(K && window.SorbiKarsilastir){
+   var p=window.SorbiKarsilastir.baglantiParam(K.su,K.mo,K.as);
+   if(p) u+='&k='+p;
+  }
+ }catch(e){}
+ return u;
+}
+/* paylas: once hazir 1080x1920 kart, olmazsa metin */
+async function sorbiKartPaylas(btn){
+ var url=sorbiPaylasUrl(), txt=sorbiPaylasMetni();
+ var veri=null;
+ try{
+  var w=document.getElementById('wheel');
+  veri={ muhur:document.getElementById('crTitle').textContent,
+         altbaslik:document.getElementById('crSub').textContent,
+         ucluMetin:(document.querySelector('.nadir .nsub')||{textContent:''}).textContent.split('—')[0].trim(),
+         nadirSatir:(document.querySelector('.nadir .nbig')||{textContent:''}).textContent.replace(/^Bu üçlü,\s*/,'').replace(/\s*oluşuyor$/,''),
+         kunye:(typeof kunyeYaz==='function')?kunyeYaz():'',
+         svg:w?w.outerHTML:'', url:'sorbiapp.com/seni-taniyorum' };
+ }catch(e){}
+ if(window.SorbiKart && veri && veri.svg){
+  try{
+   var k=await window.SorbiKart.uret(veri);
+   var dosya=new File([k.blob],'sorbi-muhur.png',{type:'image/png'});
+   if(navigator.canShare && navigator.canShare({files:[dosya]})){
+    await navigator.share({files:[dosya], text:txt, url:url});
+    return 'kart';
+   }
+   await window.SorbiKart.indir(veri,'sorbi-muhur.png');
+   try{ await navigator.clipboard.writeText(txt+' '+url); }catch(e){}
+   return 'indirildi';
+  }catch(e){}
+ }
+ if(navigator.share){ await navigator.share({title:'Seni Tanıyorum · Sorbi',text:txt,url:url}); return 'metin'; }
+ await navigator.clipboard.writeText(txt+' '+url); return 'kopya';
+}
+document.getElementById('shareBtn').onclick=async()=>{
+ const url=sorbiPaylasUrl();
+ const btn=document.getElementById('shareBtn');
+ sorbiGeriBildir(btn,'Kart hazırlanıyor…');
+ try{
+  const nasil=await sorbiKartPaylas(btn);
+  if(nasil==='indirildi') sorbiGeriBildir(btn,'Kart indirildi ✓');
+  else if(nasil==='kopya') sorbiGeriBildir(btn,'Kopyalandı ✓');
+  try{fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'muhur_paylasildi',meta:nasil||''}),keepalive:true});}catch(e){}
  }catch(e){}
 };
 document.getElementById('copyBtn').onclick=async()=>{
  const btn=document.getElementById('copyBtn');
- try{ await navigator.clipboard.writeText(sorbiPaylasMetni()+' https://sorbiapp.com/seni-taniyorum?s=share'); sorbiGeriBildir(btn,'Kopyalandı ✓'); }
+ try{ await navigator.clipboard.writeText(sorbiPaylasMetni()+' '+sorbiPaylasUrl()); sorbiGeriBildir(btn,'Kopyalandı ✓'); }
  catch(e){ sorbiGeriBildir(btn,'Kopyalanamadı'); }
 };
 </script>
