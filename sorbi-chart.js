@@ -139,6 +139,7 @@ function drawMuhur(inner,opt){
 
   /* 1) halka hiyerarsisi: iki tel esit degil */
   o.push('<circle cx="'+cx+'" cy="'+cy+'" r="'+R.dis+'" fill="none" stroke="'+M.dis+'" stroke-width="1"/>');
+  o.push('<circle cx="'+cx+'" cy="'+cy+'" r="'+(R.dis-3.5)+'" fill="none" stroke="'+M.ic+'" stroke-width=".5" opacity=".7"/>');
   o.push('<circle cx="'+cx+'" cy="'+cy+'" r="'+R.ic+'" fill="none" stroke="'+M.ic+'" stroke-width=".75"/>');
 
   /* 4) Yukselenin dustugu burc vurgulanacak (ayri isaret degil) */
@@ -167,11 +168,43 @@ function drawMuhur(inner,opt){
     o.push('<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="11" fill="'+M.zemin+'" stroke="'+M.isaret+'" stroke-width="1"/>');
     glyph(p[0],p[1],key,11,M.murekkep);
   }
+  /* Ay: glif degil, dogum anindaki GERCEK evre. Her muhuru gorunur bicimde
+     birbirinden ayiran tek veri budur; ayrica astronomik olarak dogrudur. */
+  function ayEvresi(cizimLon,ayLon,gunLon){
+    var p=P(cizimLon,R.isaret), r=7.4;
+    var e=norm(ayLon-gunLon), x=Math.cos(e*RAD), buyuyor=(e<180);
+    var rx=Math.max(0.01, Math.abs(x)*r);
+    var s1=buyuyor?1:0, s2=buyuyor?(x>0?0:1):(x>0?1:0);
+    o.push('<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="11" fill="'+M.zemin+'" stroke="'+M.isaret+'" stroke-width="1"/>');
+    o.push('<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+r+'" fill="none" stroke="'+M.murekkep+'" stroke-width=".6" opacity=".45"/>');
+    o.push('<path transform="translate('+p[0].toFixed(1)+' '+p[1].toFixed(1)+')" d="M0,'+(-r)+
+      ' A'+r+','+r+' 0 0,'+s1+' 0,'+r+
+      ' A'+rx.toFixed(2)+','+r+' 0 0,'+s2+' 0,'+(-r)+' Z" fill="'+M.murekkep+'"/>');
+  }
   var pl={}; (inner.pls||[]).forEach(function(p){ pl[p.k]=p; });
-  if(pl.sun)  isaret(pl.sun.lon,'sun');
-  if(pl.moon) isaret(pl.moon.lon,'moon');
+  /* yeniay/kavusumda iki isaret ust uste biner: cizim acilarini ayir,
+     evre hesabi yine GERCEK boylamlarla yapilir. */
+  var gL=pl.sun?pl.sun.lon:null, aL=pl.moon?pl.moon.lon:null, gC=gL, aC=aL;
+  if(gL!==null && aL!==null){
+    var ayrim=Math.abs(norm(aL-gL+180)-180);
+    if(ayrim<9){ var yon=(norm(aL-gL)<180?1:-1); gC=norm(gL-yon*4.5); aC=norm(aL+yon*4.5); }
+  }
+  if(gL!==null)  isaret(gC,'sun');
+  if(aL!==null) { if(gL!==null) ayEvresi(aC,aL,gL); else isaret(aC,'moon'); }
 
   o.push('<circle cx="'+cx+'" cy="'+cy+'" r="3" fill="'+M.cekirdek+'"/>');
+  /* kunye: gercek madalyonlarda oldugu gibi alt yaya kazinir. Sus degil, veri. */
+  if(opt.kunye){
+    /* kunye halkada degil, bos merkezde: burc glifleriyle carpismasin */
+    var kr=96, sag=[cx+kr*Math.cos(25*RAD), cy+kr*Math.sin(25*RAD)],
+               sol=[cx+kr*Math.cos(155*RAD), cy+kr*Math.sin(155*RAD)];
+    /* yay SOLDAN SAGA gitmeli, yoksa harfler bas asagi cikar */
+    o.push('<defs><path id="mkunye" d="M'+sol[0].toFixed(1)+','+sol[1].toFixed(1)+
+      ' A'+kr+','+kr+' 0 0,0 '+sag[0].toFixed(1)+','+sag[1].toFixed(1)+'"/></defs>');
+    o.push('<text font-family="'+(opt.font||"'IBM Plex Sans',Inter,sans-serif")+'" font-size="7.2" letter-spacing="1.6" fill="'+M.dis+
+      '" opacity=".85"><textPath href="#mkunye" startOffset="50%" text-anchor="middle">'+
+      String(opt.kunye).replace(/[&<>]/g,'')+'</textPath></text>');
+  }
   return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+S+' '+S+'" width="100%" style="max-width:100%;height:auto;display:block">'+o.join('')+'</svg>';
 }
 

@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="/astronomy.browser.min.js?v=3" defer></script>
-<script src="/sorbi-chart.js?v=10" defer></script>
+<script src="/sorbi-chart.js?v=11" defer></script>
 <script src="/sorbi-astro.js?v=4" defer></script>
 <script src="/sorbi-dignite.js?v=2" defer></script>
 <script src="/sorbi-nadir.js?v=1" defer></script>
@@ -398,11 +398,25 @@ function sentences(ch){
 
 const ZGLY=['♈︎','♉︎','♊︎','♋︎','♌︎','♍︎','♎︎','♏︎','♐︎','♑︎','♒︎','♓︎'];
 const PLGLY=['☉︎','☽︎','☿︎','♀︎','♂︎','♃︎','♄︎','♅︎','♆︎','♇︎'];
+const AYLAR=['OCAK','ŞUBAT','MART','NİSAN','MAYIS','HAZİRAN','TEMMUZ','AĞUSTOS','EYLÜL','EKİM','KASIM','ARALIK'];
+function kunyeYaz(){
+ try{
+  const dv=document.getElementById('d').value, tv=document.getElementById('t').value;
+  if(!dv) return '';
+  const [y,mo,d]=dv.split('-').map(Number);
+  let yer=(pk&&pk.label)?String(pk.label).split(',')[0].trim():'';
+  if(yer.length>18) yer=yer.slice(0,18);
+  const par=[ d+' '+AYLAR[mo-1]+' '+y ];
+  if(tv) par.push(tv);
+  if(yer) par.push(yer.toLocaleUpperCase('tr-TR'));
+  return par.join(' · ');
+ }catch(e){ return ''; }
+}
 function drawWheel(ch){
  // 280px'te tam natal cark okunmuyor; burada MÜHÜR kipi cizilir (bkz. sorbi-chart.js drawMuhur).
- if(window.SorbiChart && window.SorbiChart.muhur){ try{ return window.SorbiChart.muhur(window.SorbiChart.adapt(ch),{noTime:!!ch.noTime}); }catch(e){} }
+ if(window.SorbiChart && window.SorbiChart.muhur){ try{ return window.SorbiChart.muhur(window.SorbiChart.adapt(ch),{noTime:!!ch.noTime,kunye:kunyeYaz()}); }catch(e){} }
  if(window.SorbiChart){ try{ return window.SorbiChart.draw(window.SorbiChart.adapt(ch),null,{theme:'white',noHouses:!!ch.noTime}); }catch(e){} }
- (function W(n){ if(window.SorbiChart){ try{ var w=document.getElementById('wheel'); if(w){ w.innerHTML=window.SorbiChart.muhur(window.SorbiChart.adapt(ch),{noTime:!!ch.noTime}); } }catch(e){} } else if(n<40) setTimeout(function(){W(n+1);},150); })(0);
+ (function W(n){ if(window.SorbiChart){ try{ var w=document.getElementById('wheel'); if(w){ w.innerHTML=window.SorbiChart.muhur(window.SorbiChart.adapt(ch),{noTime:!!ch.noTime,kunye:kunyeYaz()}); } }catch(e){} } else if(n<40) setTimeout(function(){W(n+1);},150); })(0);
  const cx=130,cy=130,outR=118,midR=88,cx0=Math.cos,sn=Math.sin;
  const pos=(lon,R)=>[cx-R*cx0(lon*RAD),cy-R*sn(lon*RAD)];
  let s='<circle class="ring" cx="130" cy="130" r="118"/><circle class="ring2" cx="130" cy="130" r="88"/>';
