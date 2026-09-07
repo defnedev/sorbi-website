@@ -16,6 +16,7 @@
 <script src="/sorbi-chart.js?v=8" defer></script>
 <script src="/sorbi-astro.js?v=4" defer></script>
 <script src="/sorbi-dignite.js?v=2" defer></script>
+<script src="/sorbi-nadir.js?v=1" defer></script>
 <style>
 /* Sorbi design tokens — varak okunur, terracotta basılır */
 :root{--bg:#0B0F14;--panel:rgba(235,240,248,.03);--gold:#DFA98F;--gold-lt:#E4CF9A;--gold-br:#F2D3B8;--ink:#E8E4DA;--mut:#A9A396;--dim:#8A8578;--terra:#E3A692;--btn-ink:#F6EFE1;
@@ -48,6 +49,23 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
 .react .rbtns button:hover{border-color:var(--lstrong);color:var(--ink)}
 .react .rbtns button.picked{background:var(--line2);color:var(--ink);border-color:rgba(235,240,248,.28);font-weight:600}
 .rthanks{font-family:'Space Grotesk','Inter',sans-serif;font-style:italic;font-size:1.05rem;color:var(--gold-lt);margin-top:.7rem;min-height:1.2rem}
+.nadir{display:none;margin:1.15rem auto 0;max-width:430px;text-align:center;animation:fadeUp .7s both}
+.nadir .nbig{font-family:'Space Grotesk','Inter',sans-serif;font-size:1.42rem;color:var(--gold-br);letter-spacing:.4px}
+.nadir .nbig b{font-weight:700}
+.nadir .nsub{margin-top:.28rem;font-size:.78rem;color:var(--mut);line-height:1.5}
+.nadir .nbar{margin:.65rem auto 0;width:212px;height:3px;border-radius:2px;background:var(--line2);position:relative;overflow:hidden}
+.nadir .nbar i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,var(--gold),var(--gold-br));border-radius:2px}
+.nadir .nnote{margin-top:.5rem;font-size:.68rem;color:var(--dim);line-height:1.45}
+.shareRow{display:flex;gap:.55rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
+.sbtn{display:inline-flex;align-items:center;gap:.46rem;background:linear-gradient(180deg,rgba(223,169,143,.16),rgba(223,169,143,.07));
+ border:1px solid var(--lineg2);color:var(--gold-br);font:600 .86rem 'Inter',sans-serif;padding:.62rem 1.05rem;border-radius:999px;
+ cursor:pointer;text-decoration:none;transition:transform .16s,border-color .16s,background .16s}
+.sbtn:hover{transform:translateY(-1px);border-color:var(--gold);background:linear-gradient(180deg,rgba(223,169,143,.24),rgba(223,169,143,.1))}
+.sbtn:active{transform:translateY(0)}
+.sbtn svg{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sbtn.ghost{background:none;border-color:var(--line2);color:var(--mut)}
+.sbtn.ghost:hover{border-color:var(--lineg2);color:var(--gold-br)}
+@media(prefers-reduced-motion:reduce){.nadir{animation:none}.sbtn{transition:none}}
 .share{margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--line2);font-size:.85rem;color:var(--mut)}
 .share button{background:none;border:none;color:var(--gold);font:600 .85rem 'Inter';cursor:pointer;text-decoration:underline;padding:0}
 .crown{text-align:center;opacity:0;transform:translateY(10px) scale(.97);transition:opacity .48s var(--ease),transform .48s var(--ease);margin-top:1.1rem}
@@ -177,6 +195,7 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
    <div class="cr-title" id="crTitle"></div>
    <div class="cr-sub" id="crSub"></div>
   </div>
+  <div class="nadir" id="nadir"></div>
   <svg class="wheel" id="wheel" viewBox="0 0 260 260" style="display:none" aria-hidden="true"></svg>
   <div class="big3" id="big3" style="display:none"></div>
   <div class="msg-head" id="msgHead"><span>Haritanın söyledikleri</span></div>
@@ -195,7 +214,12 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
    <p>Güneş, Ay ve yükselenin söyledikleri buraya kadar. Evler, açılar ve o döneme gelen transitler devreye girince okuma çok daha keskinleşebilir.</p>
    <a class="buy" href="/detayli-dogum-haritasi">Haritanın tamamını aç →</a>
    <a class="ghost" href="/nadirlik">Bu yerleşimler kaç kişide bir? →</a>
-   <div class="share" id="share">✦ Seni de bu kadar iyi okudu mu? <button id="shareBtn">Bir arkadaşına gönder</button></div>
+   <div class="share" id="share">✦ Seni de bu kadar iyi okudu mu?
+    <div class="shareRow">
+     <button class="sbtn" id="shareBtn"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.7 15.4 6.3M8.6 13.3l6.8 4.4"/></svg><span>Mührünü paylaş</span></button>
+     <button class="sbtn ghost" id="copyBtn"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Bağlantıyı kopyala</span></button>
+    </div>
+   </div>
   </div>
  </div>
 
@@ -301,11 +325,15 @@ function sentences(ch){
     if(dg.puan>=4){ rtxt+=` Üstelik ${rp.n} <b>${SIGNS[signOf(rp.lon)]}</b> burcunda kendi evinde gibi — ${yer}rahat çalışabilir; bu alanda kendini zorlamadan iş görebilirsin.`; ronc=8; }
     else if(dg.puan<=-4){ rtxt+=` Ama ${rp.n} <b>${SIGNS[signOf(rp.lon)]}</b> burcunda yabancı toprakta — ${yer}aynı işi yapmak sana daha çok emek çıkarabilir. Bu gecikme yeteneksizlik değil, sadece daha uzun yol olabilir.`; ronc=9; }
     else if(dg.peregrin){ rtxt+=` ${rp.n} hiçbir burçta özel güç almıyor (peregrin) — patronun serbest gezen biri; yönünü sen vermezsen ortam verebilir.`; ronc=6; }
+    else { const iyi=dg.etiketler.filter(e=>e.p>0).map(e=>e.t.toLowerCase()), kotu=dg.etiketler.filter(e=>e.p<0).map(e=>e.t.toLowerCase());
+     if(iyi.length&&kotu.length) rtxt+=` ${rp.n} <b>${SIGNS[signOf(rp.lon)]}</b> burcunda karışık duruyor: bir yandan ${kotu.join(' ve ')}, öte yandan ${iyi.join(' ve ')}. Dışarıdan zorlanıyormuşsun gibi görünen yerde aslında sessiz bir desteğin olabilir.`;
+     else if(iyi.length) rtxt+=` ${rp.n} <b>${SIGNS[signOf(rp.lon)]}</b> burcunda ${iyi.join(' ve ')} — sınırlı ama gerçek bir desteği var.`;
+     ronc=7; }
    }
   }catch(e){}
   cand.push([ronc,rtxt]);}
  // sect: gunduz/gece haritasinda sect DISI kotucu daha cok zorlar — once onu goster
- if(ch.day!==undefined){
+ if(ch.day!==undefined && !noTime){
   const disi = ch.day ? 4 : 6;            // gunduz -> Mars, gece -> Satürn
   const ici  = ch.day ? 6 : 4;
   const km=P[disi], hedefler=[[0,'Güneş'],[1,'Ay'],[3,'Venüs'],[2,'Merkür']];
@@ -377,6 +405,30 @@ document.getElementById('go').onclick=()=>{
   //    flaş çakar, açıldığında mühür "çekilmiş" gibi ortaya çıkar
   document.getElementById('crTitle').textContent=arch;
   document.getElementById('crSub').textContent=ARCH_SUB[su];
+  // nadirlik: gokyuzunun kendi dagilimi (sorbi-nadir.js) — uydurma degil, hesaplanmis
+  window._sorbiPay=null;
+  try{
+   const N=window.SorbiNadir;
+   if(N){
+    const el=document.getElementById('nadir');
+    const ik=N.ikili(su,mo);
+    if(!noTime){
+     const u=N.uclu(su,mo,as);
+     const enNadirYuzde=Math.max(1,u.yuzdelik);
+     el.innerHTML=`<div class="nbig">Bu üçlü <b>100.000 kişiden ${u.yuzbinde}</b>'inde oluşuyor</div>
+      <div class="nsub">${SIGNS[su]} ☉ · ${SIGNS[mo]} ☽ · ${SIGNS[as]} ↑ — yaklaşık <b>${u.biriKac.toLocaleString('tr-TR')} kişide bir</b>.<br>1728 kombinasyon içinde en nadir %${enNadirYuzde}'lik dilimde.</div>
+      <div class="nbar"><i style="width:${Math.max(4,100-u.yuzdelik)}%"></i></div>
+      <div class="nnote">Gökyüzünün kendi dağılımı: 1960–2012 arası 20 dakikada bir örneklenmiş ${N.ornek.toLocaleString('tr-TR')} gök anı, İstanbul enlemi. Doğum istatistiği değil.</div>`;
+     window._sorbiPay={uclu:u, ikili:ik, as:as};
+    }else{
+     el.innerHTML=`<div class="nbig">Bu mühür <b>144 mühürden biri</b></div>
+      <div class="nsub">${SIGNS[su]} ☉ · ${SIGNS[mo]} ☽ — yaklaşık <b>${ik.biriKac} kişide bir</b>.<br>Doğum saatini bilseydin yükselenini de katıp çok daha nadir bir üçlü çıkarabilirdim.</div>
+      <div class="nnote">Gökyüzünün kendi dağılımı: ${N.ornek.toLocaleString('tr-TR')} gök anından hesaplandı. Doğum istatistiği değil.</div>`;
+     window._sorbiPay={uclu:null, ikili:ik, as:null};
+    }
+    el.style.display='block';
+   }
+  }catch(e){}
   const sh=document.getElementById('shutter');
   const showCrown=()=>document.getElementById('crown').classList.add('show');
   if(!RM&&sh){sh.classList.add('capture');setTimeout(showCrown,360);setTimeout(()=>sh.classList.remove('capture'),840);}
@@ -409,12 +461,28 @@ document.querySelectorAll('#react .rbtns button').forEach(b=>{b.onclick=()=>{
  try{fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'seni_taniyorum_react',meta:r}),keepalive:true});}catch(e){}
 };});
 // text share (no image card — just a viral link)
+function sorbiPaylasMetni(){
+ const a=window._sorbiArch, p=window._sorbiPay;
+ if(!a) return 'Sorbi beni birkaç cümlede fazla iyi okudu 😳 Doğum tarihini gir, seni de okusun:';
+ let t=`Sorbi'ye göre mührüm: “${a}” ✦`;
+ if(p&&p.uclu) t+=` Bu üçlü 100.000 kişiden ${p.uclu.yuzbinde}'inde oluşuyor — yaklaşık ${p.uclu.biriKac.toLocaleString('tr-TR')} kişide bir.`;
+ else if(p&&p.ikili) t+=` 144 mühürden biri — yaklaşık ${p.ikili.biriKac} kişide bir.`;
+ return t+' Seninki ne?';
+}
+function sorbiGeriBildir(btn,söz){const e=btn.querySelector('span'),o=e.textContent;e.textContent=söz;setTimeout(()=>{e.textContent=o;},2200);}
 document.getElementById('shareBtn').onclick=async()=>{
  const url='https://sorbiapp.com/seni-taniyorum';
- const a=window._sorbiArch;
- const txt=(a?`Sorbi bana "${a}" dedi 😳 Sen kimsin? Doğum tarihini gir öğren:`:'Sorbi beni birkaç cümlede fazla iyi okudu 😳 Doğum tarihini gir, seni de okusun:');
- try{if(navigator.share){await navigator.share({title:'Seni Tanıyorum · Sorbi',text:txt,url});}
- else{await navigator.clipboard.writeText(txt+' '+url);document.getElementById('shareBtn').textContent='Kopyalandı ✓';}}catch(e){}
+ const txt=sorbiPaylasMetni(), btn=document.getElementById('shareBtn');
+ try{
+  if(navigator.share){ await navigator.share({title:'Seni Tanıyorum · Sorbi',text:txt,url}); }
+  else { await navigator.clipboard.writeText(txt+' '+url); sorbiGeriBildir(btn,'Kopyalandı ✓'); }
+  try{fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'muhur_paylasildi',meta:window._sorbiArch||''}),keepalive:true});}catch(e){}
+ }catch(e){}
+};
+document.getElementById('copyBtn').onclick=async()=>{
+ const btn=document.getElementById('copyBtn');
+ try{ await navigator.clipboard.writeText(sorbiPaylasMetni()+' https://sorbiapp.com/seni-taniyorum'); sorbiGeriBildir(btn,'Kopyalandı ✓'); }
+ catch(e){ sorbiGeriBildir(btn,'Kopyalanamadı'); }
 };
 </script>
 <!-- SORBI-FOOTER:START -->
