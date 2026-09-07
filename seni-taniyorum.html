@@ -415,7 +415,7 @@ document.getElementById('go').onclick=()=>{
     if(!noTime){
      const u=N.uclu(su,mo,as);
      const enNadirYuzde=Math.max(1,u.yuzdelik);
-     el.innerHTML=`<div class="nbig">Bu üçlü <b>100.000 kişiden ${u.yuzbinde}</b>'inde oluşuyor</div>
+     el.innerHTML=`<div class="nbig">Bu üçlü, <b>100.000 kişiden yalnızca ${u.yuzbinde}</b> kişide oluşuyor</div>
       <div class="nsub">${SIGNS[su]} ☉ · ${SIGNS[mo]} ☽ · ${SIGNS[as]} ↑ — yaklaşık <b>${u.biriKac.toLocaleString('tr-TR')} kişide bir</b>.<br>1728 kombinasyon içinde en nadir %${enNadirYuzde}'lik dilimde.</div>
       <div class="nbar"><i style="width:${Math.max(4,100-u.yuzdelik)}%"></i></div>
       <div class="nnote">Gökyüzünün kendi dağılımı: 1960–2012 arası 20 dakikada bir örneklenmiş ${N.ornek.toLocaleString('tr-TR')} gök anı, İstanbul enlemi. Doğum istatistiği değil.</div>`;
@@ -465,7 +465,7 @@ function sorbiPaylasMetni(){
  const a=window._sorbiArch, p=window._sorbiPay;
  if(!a) return 'Sorbi beni birkaç cümlede fazla iyi okudu 😳 Doğum tarihini gir, seni de okusun:';
  let t=`Sorbi'ye göre mührüm: “${a}” ✦`;
- if(p&&p.uclu) t+=` Bu üçlü 100.000 kişiden ${p.uclu.yuzbinde}'inde oluşuyor — yaklaşık ${p.uclu.biriKac.toLocaleString('tr-TR')} kişide bir.`;
+ if(p&&p.uclu) t+=` Bu üçlü 100.000 kişiden yalnızca ${p.uclu.yuzbinde} kişide oluşuyor — yaklaşık ${p.uclu.biriKac.toLocaleString('tr-TR')} kişide bir.`;
  else if(p&&p.ikili) t+=` 144 mühürden biri — yaklaşık ${p.ikili.biriKac} kişide bir.`;
  return t+' Seninki ne?';
 }
