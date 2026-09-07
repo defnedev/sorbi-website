@@ -243,7 +243,7 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
  <div class="reveal" id="reveal">
   <div class="reading" id="reading">✦ Seni okuyorum…</div>
   <div class="crown" id="crown">
-   <div class="cr-eyebrow"><span class="cr-brand">Sorbi</span> · Senin mührün</div>
+   <div class="cr-eyebrow"><span class="cr-brand">Sorbi</span> · Senin anın</div>
    <div class="cr-title" id="crTitle"></div>
    <div class="cr-sub" id="crSub"></div>
   </div>
@@ -285,7 +285,7 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
    <a class="ghost" href="/nadirlik">Bu yerleşimler kaç kişide bir? →</a>
    <div class="share" id="share">✦ Seni de bu kadar iyi okudu mu?
     <div class="shareRow">
-     <button class="sbtn" id="shareBtn"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.7 15.4 6.3M8.6 13.3l6.8 4.4"/></svg><span>Mührünü paylaş</span></button>
+     <button class="sbtn" id="shareBtn"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.7 15.4 6.3M8.6 13.3l6.8 4.4"/></svg><span>Anını paylaş</span></button>
      <button class="sbtn ghost" id="copyBtn"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Bağlantıyı kopyala</span></button>
     </div>
    </div>
@@ -551,7 +551,7 @@ document.getElementById('go').onclick=()=>{
       }
      }catch(e){}
     }else{
-     el.innerHTML=`<div class="nbig">Bu mühür <b>144 mühürden biri</b></div>
+     el.innerHTML=`<div class="nbig">Bu anın adı <b>144 addan biri</b></div>
       <div class="nsub">${SIGNS[su]} ☉ · ${SIGNS[mo]} ☽ — yaklaşık <b>${ik.biriKac} kişide bir</b>.<br>Doğum saatini bilseydin yükselenini de katıp çok daha nadir bir üçlü çıkarabilirdim.</div>
       <details><summary>Bu sayı nereden geliyor?</summary><div class="nnote">1960–2012 arası 20 dakikada bir örneklenmiş <b>${N.ornek.toLocaleString('tr-TR')}</b> gök anından hesaplandı. Bu, gökyüzünün kendi dağılımı — doğum istatistiği değil.</div></details>`;
      window._sorbiPay={uclu:null, ikili:ik, as:null};
@@ -611,9 +611,9 @@ document.querySelectorAll('#react .rbtns button').forEach(b=>{b.onclick=()=>{
 function sorbiPaylasMetni(){
  const a=window._sorbiArch, p=window._sorbiPay;
  if(!a) return 'Sorbi beni birkaç cümlede fazla iyi okudu 😳 Doğum tarihini gir, seni de okusun:';
- if(p&&p.uclu) return `Mührüm: “${a}” ✦ Bu üçlü yaklaşık ${p.uclu.biriKac.toLocaleString('tr-TR')} kişide bir çıkıyor. Sen kaçta birsin?`;
- if(p&&p.ikili) return `Mührüm: “${a}” ✦ 144 mühürden biri, yaklaşık ${p.ikili.biriKac} kişide bir. Sen kaçta birsin?`;
- return `Mührüm: “${a}” ✦ Sen kimsin?`;
+ if(p&&p.uclu) return `Doğduğum anın adı: “${a}” ✦ Bu üçlü yaklaşık ${p.uclu.biriKac.toLocaleString('tr-TR')} kişide bir çıkıyor. Sen kaçta birsin?`;
+ if(p&&p.ikili) return `Doğduğum anın adı: “${a}” ✦ 144 addan biri, yaklaşık ${p.ikili.biriKac} kişide bir. Sen kaçta birsin?`;
+ return `Doğduğum anın adı: “${a}” ✦ Seninkinin adı ne?`;
 }
 function sorbiGeriBildir(btn,söz){const e=btn.querySelector('span'),o=e.textContent;e.textContent=söz;setTimeout(()=>{e.textContent=o;},2200);}
 /* ---- sohbet: tek soru, sonra reklam yuvasi ---- */
@@ -683,7 +683,7 @@ async function sorbiKartPaylas(btn){
          altbaslik:document.getElementById('crSub').textContent,
          ucluMetin:(document.querySelector('.nadir .nsub')||{textContent:''}).textContent.split('—')[0].trim(),
          nadirSatir:(document.querySelector('.nadir .nbig')||{textContent:''}).textContent.replace(/^Bu üçlü,\s*/,'').replace(/\s*oluşuyor$/,''),
-         kunye:(typeof kunyeYaz==='function')?kunyeYaz():'',
+         kunye:(typeof kunyeYaz==='function')?kunyeYaz():'', damga:'Sorbi · Senin anın',
          svg:w?w.outerHTML:'', url:'sorbiapp.com/seni-taniyorum' };
  }catch(e){}
  if(window.SorbiKart && veri && veri.svg){
@@ -710,7 +710,7 @@ document.getElementById('shareBtn').onclick=async()=>{
   const nasil=await sorbiKartPaylas(btn);
   if(nasil==='indirildi') sorbiGeriBildir(btn,'Kart indirildi ✓');
   else if(nasil==='kopya') sorbiGeriBildir(btn,'Kopyalandı ✓');
-  try{fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'muhur_paylasildi',meta:nasil||''}),keepalive:true});}catch(e){}
+  try{fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'an_paylasildi',meta:nasil||''}),keepalive:true});}catch(e){}
  }catch(e){}
 };
 document.getElementById('copyBtn').onclick=async()=>{
