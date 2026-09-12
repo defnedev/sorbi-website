@@ -17,6 +17,8 @@
 <script src="/sorbi-astro.js?v=4" defer></script>
 <script src="/sorbi-dignite.js?v=2" defer></script>
 <script src="/sorbi-nadir.js?v=1" defer></script>
+<script src="/sorbi-yildiz-say.js?v=1" defer></script>
+<script src="/sorbi-yildiz.js?v=1" defer></script>
 <script src="/sorbi-sohbet.js?v=1" defer></script>
 <script src="/sorbi-karsilastir.js?v=1" defer></script>
 <script src="/sorbi-kart.js?v=1" defer></script>
@@ -65,6 +67,27 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
 .nadir summary::-webkit-details-marker{display:none}
 .nadir .nnote{margin-top:.42rem;font-size:.68rem;color:var(--dim);line-height:1.5;text-align:left;
  background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;padding:.6rem .7rem}
+
+/* nadir yerlesimler — herkeste olmayan */
+.nyer{display:none;max-width:520px;margin:1.6rem auto 0}
+.nyer .ny-head{text-align:center;font:600 .66rem 'Inter';letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem}
+.nyer .ny-alt{text-align:center;font-size:.76rem;color:var(--dim);margin:0 auto 1rem;max-width:36ch;line-height:1.5}
+.nyer .ny-k{background:rgba(255,255,255,.025);border:1px solid var(--line2);border-radius:14px;
+ padding:.85rem .95rem;margin-bottom:.6rem;animation:fadeUp .5s both}
+.nyer .ny-k.ust{background:rgba(223,169,143,.06);border-color:var(--lineg)}
+.nyer .ny-t{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap}
+.nyer .ny-b{font-family:'Space Grotesk','Inter',sans-serif;font-weight:600;font-size:.98rem;color:var(--ink);line-height:1.35}
+.nyer .ny-o{font:500 .7rem 'Inter';color:var(--gold);white-space:nowrap}
+.nyer .ny-p{margin:.42rem 0 0;font-size:.85rem;line-height:1.6;color:var(--mut)}
+.nyer .ny-n{display:inline-block;margin-top:.5rem;font:600 .68rem 'Inter';letter-spacing:.4px;color:var(--gold-br);
+ background:rgba(223,169,143,.1);border:1px solid var(--lineg);border-radius:999px;padding:.28rem .6rem}
+.nyer details{margin-top:.55rem}
+.nyer summary{font-size:12px;color:rgba(255,255,255,.42);cursor:pointer;list-style:none;text-decoration:underline;text-underline-offset:3px;min-height:24px}
+.nyer summary::-webkit-details-marker{display:none}
+.nyer .ny-kanit{margin-top:.4rem;font-size:.7rem;color:var(--dim);line-height:1.55}
+.nyer .ny-dip{text-align:center;font-size:.68rem;color:var(--dim);line-height:1.5;margin-top:.7rem}
+.nyer .ny-yok{text-align:center;font-size:.82rem;color:var(--mut);line-height:1.6}
+@media(prefers-reduced-motion:reduce){.nyer .ny-k{animation:none}}
 .shareRow{display:flex;gap:.55rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
 .sbtn{display:inline-flex;align-items:center;justify-content:center;gap:.46rem;min-height:44px;
  background:linear-gradient(180deg,rgba(223,169,143,.16),rgba(223,169,143,.07));
@@ -249,6 +272,7 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
   </div>
   <div class="nadir" id="nadir"></div>
   <div class="karsi" id="karsi" hidden></div>
+  <div class="nyer" id="nyer"></div>
   <div class="big3" id="big3" style="display:none"></div>
   <div class="wheelwrap" id="wheelwrap"><svg class="wheel" id="wheel" viewBox="0 0 260 260" aria-hidden="true"></svg></div>
   <div class="tamharita" id="tamharita"><a id="tamharitaLink" href="/detayli-dogum-haritasi">Tam haritayı aç →</a></div>
@@ -560,6 +584,52 @@ document.getElementById('go').onclick=()=>{
     el.style.display='block';
    }
   }catch(e){}
+  // nadir yerlesimler — "herkes reguluslu olmaz": haritadaki, herkeste bulunmayan yapilar
+  try{
+   const Y=window.SorbiYildiz;
+   if(Y && ch.tam){
+    const yb=Y.bul(ch.tam,{noTime:noTime});
+    const box=document.getElementById('nyer');
+    // ayni turden birden fazla varsa en nadirini goster
+    const uygun=yb.bulgular.filter(function(b){return b.tur==='asalet'||b.ppm===null||b.ppm<=125000;});
+    const gorulen={}, gezKul={}, havuz=[];
+    // sabit yildiz kavusumu ayni gezegenin derece kartindan once gelsin — daha ayirt edici
+    uygun.sort(function(a,b){ var ay=a.tur==='yildiz'?0:1, by=b.tur==='yildiz'?0:1;
+     return ay!==by ? ay-by : 0; });
+    uygun.forEach(function(b){
+     // ayni gezegen hakkinda iki kart cikmasin (Ay hem Regulus hem 29 derece gibi)
+     if(b.gez){ if(gezKul[b.gez]) return; gezKul[b.gez]=1; }
+     const t=(b.tur==='yildiz')?('yildiz|'+b.anahtar):(b.tur==='asalet'?('asalet|'+b.anahtar):b.tur);
+     if(gorulen[t]) return; gorulen[t]=b; havuz.push(b);
+    });
+    // asalet/dusus icin bir yer ayirt: en guclu isaret hangisiyse (yucelme > dusus > zarar > yonetici)
+    const asalet=havuz.filter(function(b){return b.tur==='asalet';})
+      .sort(function(a,b){return (a.oncelik||9)-(b.oncelik||9);});
+    const oteki=havuz.filter(function(b){return b.tur!=='asalet';});
+    const gos=oteki.slice(0,3);
+    if(asalet.length) gos.push(asalet[0]);
+    gos.length=Math.min(gos.length,4);
+    let hh='<div class="ny-head">Herkeste olmayan</div>'+
+     '<p class="ny-alt">Haritanda, çoğu insanda bulunmayan yapılar. Her birinin ne kadar seyrek olduğunu gökyüzünün kendi dağılımından saydım.</p>';
+    if(!gos.length){
+     hh+='<p class="ny-yok">Haritanda bu listedeki uç yapılardan biri çıkmadı. Bu bir eksiklik değil: gezegenlerin çoğu burçların ortasında ve birbirine bağlı duruyor, yani harita dengeli çalışıyor.</p>';
+    }else{
+     gos.forEach(function(b,i){
+      var n = (b.ppm===null)
+        ? (b.tur==='yildiz' ? '<span class="ny-n">1960–2012 gökyüzünde hiç oluşmadı</span>' : '')
+        : (b.yuzbinde<1 ? '<span class="ny-n">yüz binde birden az</span>'
+                        : '<span class="ny-n">yüz bin kişiden '+b.yuzbinde.toLocaleString('tr-TR')+' kişide</span>');
+      hh+='<div class="ny-k'+(i===0?' ust':'')+'" style="animation-delay:'+(i*90)+'ms">'+
+       '<div class="ny-t"><span class="ny-b">'+b.baslik+'</span><span class="ny-o">'+b.olcu+'</span></div>'+
+       '<p class="ny-p">'+b.metin+'</p>'+n+'</div>';
+     });
+     hh+='<p class="ny-dip">Oranlar 1960–2012 arası '+(yb.ornek||0).toLocaleString('tr-TR')+' gök anından sayıldı. Nadir olmak daha iyi olmak demek değil, yalnızca gökyüzünde daha az rastlanmak demek.</p>';
+     if(noTime) hh+='<p class="ny-dip">Doğum saatini bilseydin yükselenine ve MC\'ne değen yıldızları da katabilirdim.</p>';
+    }
+    box.innerHTML=hh; box.style.display='block';
+    window._sorbiYer = gos.length?gos[0]:null;
+   }
+  }catch(e){}
   const sh=document.getElementById('shutter');
   const showCrown=()=>document.getElementById('crown').classList.add('show');
   if(!RM&&sh){sh.classList.add('capture');setTimeout(showCrown,360);setTimeout(()=>sh.classList.remove('capture'),840);}
@@ -611,6 +681,11 @@ document.querySelectorAll('#react .rbtns button').forEach(b=>{b.onclick=()=>{
 function sorbiPaylasMetni(){
  const a=window._sorbiArch, p=window._sorbiPay;
  if(!a) return 'Sorbi beni birkaç cümlede fazla iyi okudu 😳 Doğum tarihini gir, seni de okusun:';
+ // en nadir yerlesim varsa kanca o: "herkeste olmaz" en paylasilabilir cumle
+ var y=window._sorbiYer;
+ if(y && y.yuzbinde && y.yuzbinde<2000){
+  return `${y.baslik} — yüz bin kişiden yalnızca ${y.yuzbinde.toLocaleString('tr-TR')} kişide. Doğduğum anın adı: “${a}”. Seninkinde ne var?`;
+ }
  if(p&&p.uclu) return `Doğduğum anın adı: “${a}” ✦ Bu üçlü yaklaşık ${p.uclu.biriKac.toLocaleString('tr-TR')} kişide bir çıkıyor. Sen kaçta birsin?`;
  if(p&&p.ikili) return `Doğduğum anın adı: “${a}” ✦ 144 addan biri, yaklaşık ${p.ikili.biriKac} kişide bir. Sen kaçta birsin?`;
  return `Doğduğum anın adı: “${a}” ✦ Seninkinin adı ne?`;
