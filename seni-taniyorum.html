@@ -68,6 +68,25 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
 .nadir .nnote{margin-top:.42rem;font-size:.68rem;color:var(--dim);line-height:1.5;text-align:left;
  background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;padding:.6rem .7rem}
 
+
+/* SADE SONUC — bir ekranda bir sey */
+body.sonuc #seo,body.sonuc .foot,body.sonuc footer.sbft,body.sonuc .top h1,body.sonuc .top .sub{display:none}
+body.sonuc .reveal{margin-top:.4rem}
+.share.ust{margin-top:.9rem;padding-top:0;border-top:none;text-align:center}
+.share.ust .shareRow{margin-top:0}
+.wheelwrap{margin-top:1.2rem}
+.big3{margin:.6rem 0 .2rem}
+.nadir{margin-top:.9rem}
+.nyer{margin-top:1.9rem}
+.nyer .ny-k{padding:.75rem .85rem;margin-bottom:.5rem}
+.nyer .ny-b{font-size:.94rem}
+.nyer .ny-p{font-size:.82rem;line-height:1.55;margin-top:.35rem}
+.nyer .ny-alt{margin-bottom:.8rem}
+.msg-head{margin:2.2rem 0 1.1rem}
+.line{font-size:1.15rem;line-height:1.5;margin:0 0 1.15rem}
+@media(min-width:520px){.line{font-size:1.3rem}}
+.sell{margin-top:1.8rem;padding:1.1rem 1rem}
+.sell p{font-size:.85rem}
 /* nadir yerlesimler — herkeste olmayan */
 .nyer{display:none;max-width:520px;margin:1.6rem auto 0}
 .nyer .ny-head{text-align:center;font:600 .66rem 'Inter';letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem}
@@ -270,13 +289,19 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
    <div class="cr-title" id="crTitle"></div>
    <div class="cr-sub" id="crSub"></div>
   </div>
+  <div class="wheelwrap" id="wheelwrap"><svg class="wheel" id="wheel" viewBox="0 0 260 260" aria-hidden="true"></svg></div>
+  <div class="big3" id="big3" style="display:none"></div>
   <div class="nadir" id="nadir"></div>
   <div class="karsi" id="karsi" hidden></div>
-  <div class="nyer" id="nyer"></div>
-  <div class="big3" id="big3" style="display:none"></div>
-  <div class="wheelwrap" id="wheelwrap"><svg class="wheel" id="wheel" viewBox="0 0 260 260" aria-hidden="true"></svg></div>
-  <div class="tamharita" id="tamharita"><a id="tamharitaLink" href="/detayli-dogum-haritasi">Tam haritayı aç →</a></div>
+  <div class="share ust" id="share">
+   <div class="shareRow">
+    <button class="sbtn" id="shareBtn"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.7 15.4 6.3M8.6 13.3l6.8 4.4"/></svg><span>Anını paylaş</span></button>
+    <button class="sbtn ghost" id="copyBtn"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Bağlantıyı kopyala</span></button>
+   </div>
+  </div>
   <div class="sorbiurl" id="sorbiurl">sorbiapp.com/seni-taniyorum · Sen kaçta birsin?</div>
+  <div class="nyer" id="nyer"></div>
+  <div class="tamharita" id="tamharita" hidden><a id="tamharitaLink" href="/detayli-dogum-haritasi">Tam haritayı aç →</a></div>
   <div class="msg-head" id="msgHead"><span>Haritanın söyledikleri</span></div>
   <div id="lines"></div>
   <div class="react" id="react">
@@ -305,14 +330,7 @@ input{width:100%;background:rgba(11,15,20,.6);border:1px solid var(--line2);bord
   <div class="sell" id="sell">
    <h3>Bu okuma haritanın yüzeyi</h3>
    <p>Güneş, Ay ve yükselenin söyledikleri buraya kadar. Evler, açılar ve o döneme gelen transitler devreye girince okuma çok daha keskinleşebilir.</p>
-   <a class="buy" href="/detayli-dogum-haritasi">Haritanın tamamını aç →</a>
-   <a class="ghost" href="/nadirlik">Bu yerleşimler kaç kişide bir? →</a>
-   <div class="share" id="share">✦ Seni de bu kadar iyi okudu mu?
-    <div class="shareRow">
-     <button class="sbtn" id="shareBtn"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.7 15.4 6.3M8.6 13.3l6.8 4.4"/></svg><span>Anını paylaş</span></button>
-     <button class="sbtn ghost" id="copyBtn"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Bağlantıyı kopyala</span></button>
-    </div>
-   </div>
+   <a class="buy" id="sellTam" href="/detayli-dogum-haritasi">Haritanın tamamını aç →</a>
   </div>
  </div>
 
@@ -521,7 +539,7 @@ document.getElementById('go').onclick=()=>{
  const su=signOf(ch.pls[0].lon),mo=signOf(ch.pls[1].lon),as=signOf(ch.asc);
  const lines=sentences(ch).slice(0,5);
  document.getElementById('form').style.display='none';
- const rev=document.getElementById('reveal');rev.style.display='block';
+ const rev=document.getElementById('reveal');rev.style.display='block';document.body.classList.add('sonuc');
  const reading=document.getElementById('reading');reading.style.display='block';
  rev.scrollIntoView({behavior:'smooth',block:'start'});
  try{fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'seni_taniyorum',meta:SIGNS[su]+'/'+SIGNS[mo]}),keepalive:true});}catch(e){}
@@ -608,7 +626,7 @@ document.getElementById('go').onclick=()=>{
     const oteki=havuz.filter(function(b){return b.tur!=='asalet';});
     const gos=oteki.slice(0,3);
     if(asalet.length) gos.push(asalet[0]);
-    gos.length=Math.min(gos.length,4);
+    gos.length=Math.min(gos.length,3);
     let hh='<div class="ny-head">Herkeste olmayan</div>'+
      '<p class="ny-alt">Haritanda, çoğu insanda bulunmayan yapılar. Her birinin ne kadar seyrek olduğunu gökyüzünün kendi dağılımından saydım.</p>';
     if(!gos.length){
@@ -647,7 +665,7 @@ document.getElementById('go').onclick=()=>{
     if(tv) q.set('t',tv);
     if(pk){ q.set('lat',(+pk.lat).toFixed(4)); q.set('lon',(+pk.lon).toFixed(4)); if(pk.tz) q.set('tz',pk.tz); if(pk.label) q.set('p',pk.label); }
     L.href='/detayli-dogum-haritasi?'+q.toString();
-    document.getElementById('tamharita').style.display='block';
+    const st=document.getElementById('sellTam'); if(st) st.href=L.href;   // tek CTA, dogum bilgisini tasir
    }catch(e){}
    requestAnimationFrame(()=>wrap.classList.add('show'));
   },dWheel);
