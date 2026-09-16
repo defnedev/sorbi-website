@@ -18,70 +18,97 @@
 body{font-family:'Inter',sans-serif;background:var(--lapis);color:var(--text);line-height:1.7}
 a{color:inherit;text-decoration:none}.wrap{max-width:760px;margin:0 auto;padding:0 20px}
 header.top{border-bottom:1px solid var(--line);padding:1rem 0}header.top .wrap{display:flex;justify-content:space-between;align-items:center}
-.brand{font-family:'Space Grotesk','Inter',sans-serif;font-size:1.3rem}.brand span{color:var(--gold)}
+.brand{font-family:Fraunces,Georgia,serif;font-size:1.3rem}.brand span{color:var(--gold)}
 .top a.cta{background:linear-gradient(135deg,#E3A692,#F2D3B8);color:#2B140C;padding:.5rem 1.1rem;border-radius:999px;font-size:.82rem;font-weight:600}
-h1{font-family:'Space Grotesk','Inter',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);text-align:center;margin:.3rem 0}
+h1{font-family:Fraunces,Georgia,serif;font-size:clamp(1.8rem,4vw,2.6rem);text-align:center;margin:.3rem 0}
 .sub{text-align:center;color:var(--muted);max-width:560px;margin:.5rem auto 0}
 .hero{padding:2.6rem 0 1rem}
-.prompt{text-align:center;font-family:'Space Grotesk','Inter',sans-serif;font-size:1.5rem;color:var(--gold);margin:1.6rem 0 .2rem}
+.prompt{text-align:center;font-family:Inter,system-ui,sans-serif;font-size:1.5rem;color:var(--gold);margin:1.6rem 0 .2rem}
 .deck{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;margin:1.2rem 0 .4rem;perspective:1400px}
 .card{width:92px;height:152px;cursor:pointer;position:relative;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
 .card:hover{transform:translateY(-6px)}
 .card.flipped{transform:rotateY(180deg)}
 .card.flipped:hover{transform:rotateY(180deg) translateY(-6px)}
 .face{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:12px;border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.5rem;overflow:hidden}
-.back{background:linear-gradient(160deg,rgba(223,169,143,0.16),rgba(11,14,21,0.96))}
+.back{background:linear-gradient(160deg,rgba(223,169,143,0.16),rgba(13,8,16,0.96))}
 .back::before{content:"";position:absolute;inset:7px;border:1px solid rgba(223,169,143,0.3);border-radius:7px}
 .back .mark{color:var(--gold);opacity:.9}
 .front{background:linear-gradient(160deg,var(--lapisLite),var(--lapis));transform:rotateY(180deg)}
-.front .roma{font-family:'Space Grotesk','Inter',sans-serif;font-size:.72rem;letter-spacing:1px;color:var(--muted)}
+.front .roma{font-family:Fraunces,Georgia,serif;font-size:.72rem;letter-spacing:1px;color:var(--muted)}
 .front .glyph{color:var(--gold);margin:.35rem 0}
-.front .name{font-family:'Space Grotesk','Inter',sans-serif;font-size:1.05rem;color:var(--text);line-height:1.2}
+.front .name{font-family:Fraunces,Georgia,serif;font-size:1.05rem;color:var(--text);line-height:1.2}
 #res{display:none;background:var(--lapisLite);border:1px solid var(--line);border-radius:16px;padding:1.6rem;margin:1.2rem 0;text-align:center}
-#res .roma{font-family:'Space Grotesk','Inter',sans-serif;font-size:.8rem;letter-spacing:2px;color:var(--gold)}
-#res .title{font-family:'Space Grotesk','Inter',sans-serif;font-size:1.7rem;color:var(--gold);margin:.15rem 0}
-#res .kw{font-family:'Space Grotesk','Inter',sans-serif;font-style:italic;font-size:1.15rem;color:var(--text)}
+#res .roma{font-family:Fraunces,Georgia,serif;font-size:.8rem;letter-spacing:2px;color:var(--gold)}
+#res .title{font-family:Fraunces,Georgia,serif;font-size:1.7rem;color:var(--gold);margin:.15rem 0}
+#res .kw{font-family:Inter,system-ui,sans-serif;font-style:italic;font-size:1.15rem;color:var(--text)}
 #res .read{color:var(--muted);margin:.9rem auto 0;max-width:520px}
 .actions{text-align:center;margin:.6rem 0 .4rem}
-.redraw{display:inline-block;background:transparent;border:1px solid var(--line);color:var(--gold);padding:.6rem 1.4rem;border-radius:999px;font-family:'Space Grotesk','Inter',sans-serif;font-size:.75rem;font-weight:600;cursor:pointer}
+.redraw{display:inline-block;background:transparent;border:1px solid var(--line);color:var(--gold);padding:.6rem 1.4rem;border-radius:999px;font-family:Inter,system-ui,sans-serif;font-size:.75rem;font-weight:600;cursor:pointer}
 .redraw:hover{background:rgba(223,169,143,0.08)}
-h2{font-family:'Space Grotesk','Inter',sans-serif;font-size:1.6rem;color:var(--gold);margin:2rem 0 .6rem}
+h2{font-family:Fraunces,Georgia,serif;font-size:1.6rem;color:var(--gold);margin:2rem 0 .6rem}
 p{color:var(--muted);margin:.6rem 0}
 .frame-note{background:var(--lapisLite);border:1px solid var(--line);border-left:3px solid var(--vermilion);border-radius:0 12px 12px 0;padding:1.1rem 1.4rem;margin:1.6rem 0}
 .frame-note b{color:var(--text)}
 .cta-box{text-align:center;background:linear-gradient(160deg,var(--lapisLite),var(--lapis));border:1px solid var(--line);border-radius:18px;padding:2rem;margin:2rem 0}
-.btn{display:inline-block;background:linear-gradient(135deg,#E3A692,#F2D3B8);color:#2B140C;padding:.8rem 1.7rem;border-radius:999px;font-family:'Space Grotesk','Inter',sans-serif;font-weight:600;font-size:.8rem;margin:.3rem}
+.btn{display:inline-block;background:linear-gradient(135deg,#E3A692,#F2D3B8);color:#2B140C;padding:.8rem 1.7rem;border-radius:999px;font-family:Inter,system-ui,sans-serif;font-weight:600;font-size:.8rem;margin:.3rem}
 .btn.v{background:linear-gradient(135deg,#E3A692,#F2D3B8);color:#2B140C}
 footer{border-top:1px solid var(--line);padding:2rem 0;text-align:center;color:var(--muted);font-size:.85rem;margin-top:2rem}
 @media(max-width:560px){.card{width:80px;height:132px}.deck{gap:.5rem}}
-@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}</style><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6653215819266638"
+@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}</style><link rel="stylesheet" href="/sorbi-fonts.css?v=10">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6653215819266638"
      crossorigin="anonymous"></script>
 </head><body>
 <!-- SORBI-NAV:START -->
 <style>
-.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;padding:.68rem 1.2rem;background:rgba(13,8,16,.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.08);font-family:'Inter',system-ui,-apple-system,sans-serif}
-.sbnav .sbnav-lg{font-weight:700;letter-spacing:.3px;color:#F2EFE9;font-size:.95rem;text-decoration:none;white-space:nowrap;flex:0 0 auto}
-.sbnav .sbnav-lg i{font-style:normal;color:#E3A692;margin-right:.3rem}
-.sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin-left:auto}
+.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.68rem 1.2rem;background:rgba(13,8,16,.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
+.sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:#F2D3B8;font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
+.sbnav .sbnav-lg i{font-style:normal;color:#E3A692;margin-right:.45rem;letter-spacing:0}
+.sbnav .sbnav-lg:hover{text-decoration:none;color:#fff}
+.sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:0 0 0 auto;padding:0;max-width:none;flex-wrap:nowrap}
 .sbnav nav::-webkit-scrollbar{display:none}
 .sbnav nav a{color:#9BA0AB;text-decoration:none;font-size:.85rem;font-weight:500;padding:.4rem .78rem;border-radius:99px;white-space:nowrap;transition:color .15s,background .15s}
-.sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.06)}
+.sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.06);text-decoration:none}
 .sbnav nav a.on{color:#F2D3B8;background:rgba(227,166,146,.13)}
-@media(max-width:560px){.sbnav{padding:.55rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem}.sbnav nav a{font-size:.79rem;padding:.34rem .55rem}}
+@media(min-width:900px){.sbnav{padding:.95rem max(2rem,calc((100% - 1200px)/2));gap:2rem;min-height:70px}.sbnav .sbnav-lg{font-size:1.3rem}.sbnav nav a{font-size:.9rem;line-height:1.5;padding:.45rem .9rem}}
+@media(max-width:560px){.sbnav{padding:.55rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem;letter-spacing:.12em}.sbnav nav a{font-size:.79rem;padding:.34rem .55rem}}
+@media(min-width:900px) and (max-width:1120px){.sbnav{gap:1rem}.sbnav .sbnav-lg{font-size:1.15rem}.sbnav nav a{font-size:.84rem;padding:.45rem .5rem}}
+@media(max-width:899px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}}
+@media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#000 78%,transparent);mask-image:linear-gradient(90deg,#000 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 78%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 78%,transparent)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%);mask-image:linear-gradient(90deg,transparent,#000 14%)}}
 </style>
 <header class="sbnav">
- <a href="/" class="sbnav-lg"><i>✦</i>Sorbi</a>
+ <a href="/" class="sbnav-lg" aria-label="Sorbi ana sayfa"><i>✦</i>SORBİ</a>
  <nav>
   <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
   <a href="/dogum-haritasi-hesaplama">Doğum Haritası</a>
-  <a href="/araclar">Araçlar</a>
+  <a href="/araclar">Gökyüzü Hesaplayıcıları</a>
   <a href="/bugun">Bugün</a>
   <a href="/burc-ozellikleri">Burçlar</a>
-  <a href="/soru-sor">Soru Sorma Yöntemi</a>
+  <a href="/nadirlik">Nadirlik</a>
+  <a href="/sayim">Sayım</a>
+  <a href="/ogren">Öğren</a>
+  <a href="/haritam" id="sorbiNavHaritam" style="display:none">Haritam</a>
  </nav>
 </header>
-<script>(function(){try{var p=location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';document.querySelectorAll('.sbnav nav a').forEach(function(a){var h=a.getAttribute('href').replace(/\.html$/,'');if(h===p||(h!=='/'&&p.indexOf(h)===0))a.classList.add('on');});}catch(e){}})();</script>
+<script>(function(){try{if(JSON.parse(localStorage.getItem('sorbi_profile')||'null')){var e=document.getElementById('sorbiNavHaritam');if(e)e.style.display='';}}catch(e){}try{var p=location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';if(/burc/.test(p))p='/burc-ozellikleri';document.querySelectorAll('.sbnav nav a').forEach(function(a){var h=a.getAttribute('href').replace(/\.html$/,'');if(h===p||(h!=='/'&&p.indexOf(h+'-')===0))a.classList.add('on');});}catch(e){}})();</script>
+<script>(function(){var n=document.querySelector('.sbnav nav');if(!n)return;function f(){n.classList.toggle('son',n.scrollLeft+n.clientWidth>=n.scrollWidth-4);n.classList.toggle('ara',n.scrollLeft>4)}n.addEventListener('scroll',f,{passive:true});window.addEventListener('resize',f);f();var a=n.querySelector('a.on');if(a&&a.offsetLeft+a.offsetWidth>n.clientWidth)n.scrollLeft=a.offsetLeft-16;f();})();</script>
 <!-- SORBI-NAV:END -->
+<!-- SORBI-TEMA:START -->
+<style>
+html{background:#0D0810}
+body{background:transparent!important}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(52% 38% at 50% -6%,rgba(227,166,146,.11),transparent 65%),
+  radial-gradient(40% 32% at 88% 12%,rgba(94,147,168,.08),transparent 70%),
+  radial-gradient(36% 30% at 8% 30%,rgba(196,116,78,.05),transparent 70%),
+  radial-gradient(1px 1px at 14% 24%,rgba(241,220,168,.5) 50%,transparent 51%),
+  radial-gradient(1px 1px at 36% 9%,rgba(242,239,233,.35) 50%,transparent 51%),
+  radial-gradient(1.4px 1.4px at 61% 27%,rgba(227,166,146,.45) 50%,transparent 51%),
+  radial-gradient(1px 1px at 82% 15%,rgba(242,239,233,.4) 50%,transparent 51%),
+  radial-gradient(1px 1px at 92% 44%,rgba(241,220,168,.3) 50%,transparent 51%),
+  radial-gradient(1px 1px at 25% 60%,rgba(242,239,233,.25) 50%,transparent 51%),
+  radial-gradient(1.2px 1.2px at 72% 70%,rgba(227,166,146,.3) 50%,transparent 51%)}
+body:has(> .sky)::before{display:none}
+</style>
+<!-- SORBI-TEMA:END -->
 
 <div class="wrap">
 <div class="hero"><h1>Günün Kartı</h1><p class="sub">Kapalı kartlardan birine dokun. Sana bugün üzerine düşünebileceğin bir tema açılsın. Bu bir kehanet değil; kendi iç sesini duymana yardımcı olan bir aynadır.</p></div>
@@ -178,8 +205,9 @@ footer{border-top:1px solid var(--line);padding:2rem 0;text-align:center;color:v
 })();
 </script><!-- SORBI-FOOTER:START -->
 <style>
+.sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:#9BA0AB;max-width:none;width:auto}
 .sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0D0810;font-family:'Inter',system-ui,sans-serif}
-.sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr 1fr;gap:2rem}
+.sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:repeat(4,1fr);text-align:left;gap:2rem}
 .sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#E3A692;margin:0 0 .8rem;font-weight:600}
 .sbft a{display:block;color:#9BA0AB;text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
 .sbft a:hover{color:#F2EFE9}
@@ -192,7 +220,22 @@ footer{border-top:1px solid var(--line);padding:2rem 0;text-align:center;color:v
 </style>
 <footer class="sbft">
  <div class="sbft-in">
-  <div class="sbft-brand"><b><i>✦</i>Sorbi</b><p>Gökyüzünü veriyle okuyan astroloji atölyesi. Hesaplamalar tarayıcında, saniyeler içinde.</p></div>
+  <div><h4>Sorbi</h4>
+   <a href="/">Ana Sayfa</a>
+   <a href="/soru-sor">Soru Sorma Yöntemi</a>
+   <a href="/gunun-karti">Günün Kartı</a>
+   <a href="/seni-taniyorum">Seni Tanıyorum</a>
+   <a href="/#uygulama">Uygulama</a>
+   <a href="/destek">Destek</a>
+  </div>
+  <div><h4>Burçlar</h4>
+   <a href="/burc-ozellikleri">Burç Özellikleri</a>
+   <a href="/gunluk-burc-yorumlari">Günlük Yorumlar</a>
+   <a href="/ates-burclari">Ateş Burçları</a>
+   <a href="/toprak-burclari">Toprak Burçları</a>
+   <a href="/hava-burclari">Hava Burçları</a>
+   <a href="/su-burclari">Su Burçları</a>
+  </div>
   <div><h4>Hesaplayıcılar</h4>
    <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
    <a href="/dogum-haritasi-hesaplama">Doğum Haritası</a>
@@ -208,22 +251,6 @@ footer{border-top:1px solid var(--line);padding:2rem 0;text-align:center;color:v
    <a href="/retro-ay-takvimi">Retro & Ay Takvimi</a>
    <a href="/astrokartografi">Astrokartografi</a>
    <a href="/yasam-donguleri">Yaşam Döngüleri</a>
-  </div>
-  <div><h4>Burçlar</h4>
-   <a href="/burc-ozellikleri">Burç Özellikleri</a>
-   <a href="/gunluk-burc-yorumlari">Günlük Yorumlar</a>
-   <a href="/ates-burclari">Ateş Burçları</a>
-   <a href="/toprak-burclari">Toprak Burçları</a>
-   <a href="/hava-burclari">Hava Burçları</a>
-   <a href="/su-burclari">Su Burçları</a>
-  </div>
-  <div><h4>Sorbi</h4>
-   <a href="/">Ana Sayfa</a>
-   <a href="/soru-sor">Soru Sorma Yöntemi</a>
-   <a href="/gunun-karti">Günün Kartı</a>
-   <a href="/seni-taniyorum">Seni Tanıyorum</a>
-   <a href="/#uygulama">Uygulama</a>
-   <a href="/destek">Destek</a>
   </div>
  </div>
  <div class="sbft-bot"><span>© 2026 Sorbi · sorbiapp.com</span><span>Astroloji içerikleri kişisel farkındalık amaçlıdır; kesin gelecek vaadi değildir.</span></div>
