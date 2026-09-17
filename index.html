@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Doğum Haritası Hesaplama — Ücretsiz, Anında | Sorbi</title>
-<meta name="description" content="Doğum tarihini, saatini ve yerini gir — doğum haritan anında hesaplanıp çizilsin. Swiss Ephemeris doğrulamalı, ücretsiz, kayıt yok. Yükselen, Güneş, Ay ve bugünkü transitlerin tek ekranda.">
+<title>Sorbi — Gerçek efemerisle astroloji: harita, sayım, nadirlik</title>
+<meta name="description" content="Sorbi: gerçek efemerisle astroloji. Haritanı anında çıkar, yerleşimlerinin ne kadar nadir olduğunu gör, Sayım serisinde astrolojinin sorularını 24.000 haritayla say. Ücretsiz, kayıt yok.">
 <link rel="canonical" href="https://sorbiapp.com/">
 <meta name="theme-color" content="#0B0F14">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sorbi">
 <meta property="og:locale" content="tr_TR">
-<meta property="og:title" content="Doğum Haritası Hesaplama — Sorbi">
-<meta property="og:description" content="Doğum bilgini gir, haritan anında çizilsin. Ücretsiz, kayıt yok.">
+<meta property="og:title" content="Sorbi — Gerçek efemerisle astroloji">
+<meta property="og:description" content="Haritanı çıkar, ne kadar nadir olduğunu gör, astrolojinin sorularını gerçek veriyle say. Ücretsiz, kayıt yok.">
 <meta property="og:url" content="https://sorbiapp.com/">
 <meta property="og:image" content="https://sorbiapp.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -19,12 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[
-{"@type":"WebSite","name":"Sorbi","url":"https://sorbiapp.com/"},
-{"@type":"WebApplication","name":"Ücretsiz Doğum Haritası Hesaplayıcı","applicationCategory":"LifestyleApplication","operatingSystem":"Web","url":"https://sorbiapp.com/","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"}},
-{"@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"Doğum haritası hesaplama ücretsiz mi?","acceptedAnswer":{"@type":"Answer","text":"Evet. Doğum tarihini, saatini ve yerini girmen yeterli — haritan tarayıcında anında hesaplanır ve çizilir. Kayıt, e-posta ya da ücret yok."}},
-{"@type":"Question","name":"Hesaplama ne kadar doğru?","acceptedAnswer":{"@type":"Answer","text":"Gezegen konumları ve ev başlangıçları Swiss Ephemeris çıktısına karşı test edildi; fark ölçülebilir düzeyin altındadır. Gördüğün derece ve dakika değerleri profesyonel astroloji yazılımlarıyla eşleşir."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Sorbi","url":"https://sorbiapp.com/","inLanguage":"tr"}</script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -138,7 +133,7 @@ input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(227,
 .path .go{display:inline-block;margin-top:.55rem;font-size:.82rem;font-weight:500;color:var(--gold-br)}
 
 /* ── uygulama ── */
-#uygulama{scroll-margin-top:70px;margin-top:3.4rem;text-align:center;background:var(--card);border:1px solid var(--stroke);border-radius:24px;padding:2.6rem 1.4rem}
+#uygulama{scroll-margin-top:90px;margin-top:2.6rem;text-align:center;background:var(--card);border:1px solid var(--stroke);border-radius:24px;padding:2.6rem 1.4rem}
 #uygulama h2{font-family:Fraunces,Georgia,serif;font-size:clamp(1.4rem,3.6vw,1.9rem);font-weight:600;letter-spacing:-.02em;margin-bottom:.45rem}
 #uygulama p{color:var(--mut);font-size:.95rem;max-width:500px;margin:0 auto 1.2rem;font-weight:300}
 .wl{display:flex;gap:.55rem;max-width:430px;margin:0 auto;flex-wrap:wrap;justify-content:center}
@@ -214,8 +209,8 @@ body:has(> .sky)::before{display:none}
 
 <div class="sky"></div>
 <div class="hero">
-  <div class="kicker"><i>✦</i> Profesyonel doğum haritası — tarayıcında</div>
-  <h1>Doğum haritanı <em>şimdi</em> çıkar</h1>
+  <div class="kicker"><i>✦</i> Gerçek efemerisle astroloji — tarayıcında</div>
+  <h1>Haritanı <em>şimdi</em> çıkar</h1>
   <p>Tarih, saat, yer — çarkın anında çizilir.</p>
   <div class="trust"><span>Ücretsiz</span><span>Kayıt yok</span><span>Swiss Ephemeris doğrulamalı</span></div>
 </div>
@@ -255,27 +250,28 @@ body:has(> .sky)::before{display:none}
   </div>
 </div>
 
-<div class="paths">
-  <a class="path" href="/detayli-dogum-haritasi"><div class="g">◎</div><h3>Harita Atölyesi</h3><p>Transit, ilerletim, sinastri — tam derinlik.</p><span class="go">Aç →</span></a>
-  <a class="path" href="/bugun"><div class="g">☉︎</div><h3>Bugünün göğü</h3><p>Gökyüzü bugün ne diyor — her gün taze.</p><span class="go">Bak →</span></a>
-  <a class="path" href="/soru-sor"><div class="g">✦</div><h3>Soru sorma yöntemi</h3><p>Bir soru haritada nasıl okunur.</p><span class="go">Öğren →</span></a>
-  <a class="path" href="/araclar"><div class="g">⊹</div><h3>Tüm araçlar</h3><p>Yükselen, Ay burcu, uyum ve fazlası.</p><span class="go">Keşfet →</span></a>
-</div>
-
 <section id="uygulama">
-  <h2>Sorbi — iOS uygulaması</h2>
-  <p>Günlük okuma, uyum ve doğru zaman cebinde — çıktığında ilk sen haber al.</p>
+  <h2>Sorbi telefonuna geliyor</h2>
+  <p>iOS ve Android. Çıktığı gün ilk sana yazalım — spam yok, sadece o haber.</p>
   <div class="wl">
     <input type="email" id="wlEmail" placeholder="e-posta adresin" autocomplete="email">
-    <button class="btn" id="wlBtn">Haber ver ✦</button>
+    <button class="btn" id="wlBtn">Beni listeye yaz ✦</button>
     <input type="text" id="wlHp" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
     <div class="st" id="wlSt"></div>
   </div>
-  <label style="display:flex;gap:.5rem;align-items:flex-start;justify-content:center;font-size:.8rem;color:var(--dim);margin-top:.7rem;line-height:1.5;max-width:440px;margin-left:auto;margin-right:auto;text-align:left">
+  <label style="display:flex;gap:.5rem;align-items:flex-start;justify-content:center;font-size:.8rem;color:var(--mut);margin-top:.7rem;line-height:1.5;max-width:440px;margin-left:auto;margin-right:auto;text-align:left">
     <input type="checkbox" id="wlKvkk" style="width:auto;margin-top:.2rem">
-    <span>E-posta adresimin duyuru göndermek için işlenmesine izin veriyorum. İstediğim zaman çıkabilirim. · <a href="/privacy" style="color:var(--gold)">KVKK</a></span>
+    <span>Sorbi'nin uygulama duyurusu ve haber e-postaları göndermesine izin veriyorum; istediğim zaman çıkabilirim. · <a href="/privacy" style="color:var(--gold)">KVKK</a></span>
   </label>
 </section>
+
+<div class="paths">
+  <a class="path" href="/seni-taniyorum"><div class="g">✦</div><h3>Seni Tanıyorum</h3><p>Haritandan sana özel, kısa ve net bir okuma.</p><span class="go">Başla →</span></a>
+  <a class="path" href="/nadirlik"><div class="g">◎</div><h3>Nadirlik</h3><p>Yerleşimlerin 24.000 harita içinde ne kadar nadir?</p><span class="go">Hesapla →</span></a>
+  <a class="path" href="/sayim"><div class="g">⊹</div><h3>Sayım</h3><p>Astrolojinin sorularını gerçek veriyle sayıyoruz.</p><span class="go">Oku →</span></a>
+  <a class="path" href="/ogren"><div class="g">☉︎</div><h3>Öğren</h3><p>Önce gökyüzünü anla, yoruma sonra geç.</p><span class="go">Öğren →</span></a>
+</div>
+
 
 
 </div>
@@ -454,12 +450,12 @@ function fillTransits(){
 $('wlBtn').onclick=async function(){
   var em=($('wlEmail').value||'').trim(), st=$('wlSt'), btn=this;
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){ st.style.color='var(--terra)'; st.textContent='Geçerli bir e-posta gir.'; return; }
-  if(!$('wlKvkk').checked){ st.style.color='var(--terra)'; st.textContent='Devam için onay kutusunu işaretle.'; return; }
+  if(!$('wlKvkk').checked){ st.style.color='#F2A08A'; st.textContent='Devam için onay kutusunu işaretle.'; return; }
   st.style.color='var(--dim)'; st.textContent='Kaydediliyor…'; btn.disabled=true;
   try{
     var r=await fetch('/api/liste',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({eposta:em,kvkk:1,kaynak:'ana-sayfa',hp:($('wlHp')||{}).value||''})});
     var j=await r.json().catch(function(){return {};});
-    if(r.ok){ st.style.color='var(--gold-lt)'; st.textContent='Listedesin — Sorbi çıkınca ilk sana yazacağız.'; try{localStorage.setItem('sorbi_wl','1');}catch(e){} }
+    if(r.ok){ st.style.color='var(--gold-lt)'; st.textContent='Listedesin — Sorbi iOS ve Android’de çıkınca ilk sana yazacağız.'; try{localStorage.setItem('sorbi_wl','1');}catch(e){} }
     else { btn.disabled=false; st.style.color='var(--terra)'; st.textContent=j.error||'Kaydedilemedi, tekrar dener misin?'; }
   }catch(e){ btn.disabled=false; st.style.color='var(--terra)'; st.textContent='Bağlantı kurulamadı.'; }
 };
