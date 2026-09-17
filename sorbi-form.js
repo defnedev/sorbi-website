@@ -17,6 +17,7 @@ var CSS=[
 '.sfwrap .sfsep{color:#5C6068;user-select:none;font-size:1rem}',
 '.sfwrap .sfic{margin-left:auto;color:#8A8F98;font-size:.85rem;opacity:.7}',
 '.sfhint{font-size:.72rem;color:#6D7280;margin-top:.3rem;letter-spacing:.3px}',
+'.sfnot{font-size:.74rem;line-height:1.45;margin-top:.35rem;letter-spacing:.2px}',
 '/* mobil: nav kaydırılabilir, sayfa yana taşmaz */',
 '.sbnav nav,.sorbi-topnav nav,.topnav nav{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;min-width:0;-webkit-overflow-scrolling:touch}',
 '.sbnav nav::-webkit-scrollbar,.sorbi-topnav nav::-webkit-scrollbar,.topnav nav::-webkit-scrollbar{display:none}',
@@ -45,7 +46,9 @@ function enhance(native,kind){
    var g=mkSeg('GG'),a=mkSeg('AA'),y=mkSeg('YYYY',1);
    segs=[g,a,y];
    wrap.appendChild(g);wrap.appendChild(sep('.'));wrap.appendChild(a);wrap.appendChild(sep('.'));wrap.appendChild(y);wrap.appendChild(ic('✦'));
-   write=function(){ if(g.value.length&&a.value.length&&y.value.length===4){var vv=y.value+'-'+pad(a.value)+'-'+pad(g.value); if(native.value!==vv){native.value=vv;fire(native);} } else if(native.value){native.value='';fire(native);} };
+   write=function(){ if(g.value.length&&a.value.length&&y.value.length===4){var vv=y.value+'-'+pad(a.value)+'-'+pad(g.value);
+     if(!gecerliGun(vv)){ not(native,'Böyle bir tarih yok — günü kontrol et.','hata'); if(native.value){native.value='';fire(native);} return; }
+     if(native.value!==vv){native.value=vv;fire(native);} tarihDenetle(native); } else if(native.value){native.value='';fire(native);} };
    read=function(){var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(native.value||'');if(m){y.value=m[1];a.value=m[2];g.value=m[3];}else{g.value=a.value=y.value='';}};
  }else{
    var h=mkSeg('SS'),mn=mkSeg('DK');
@@ -83,8 +86,60 @@ function enhance(native,kind){
 
 function fire(el){try{el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));}catch(e){}}
 
+
+function gecerliGun(v){
+  var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v||''); if(!m) return false;
+  var y=+m[1],mo=+m[2],d=+m[3]; if(mo<1||mo>12||d<1) return false;
+  var dt=new Date(Date.UTC(y,mo-1,d));
+  return dt.getUTCFullYear()===y&&dt.getUTCMonth()===mo-1&&dt.getUTCDate()===d;
+}
+
+/* ── doğum tarihi aralık uyarısı + bulunamayan yer uyarısı (2026-09-17) ── */
+function not(el,msg,tur){
+  var id='sfnot-'+(el.id||Math.random().toString(36).slice(2));
+  var box=document.getElementById(id);
+  if(!msg){ if(box) box.remove(); return; }
+  if(!box){ box=document.createElement('div'); box.id=id; box.className='sfnot'; (el.closest('.sfwrap')||el).insertAdjacentElement('afterend',box); }
+  box.textContent=msg; box.style.color = tur==='hata' ? '#F2A08A' : '#E4CF9A';
+}
+function tarihDenetle(native){
+  var v=native.value; if(!v){ not(native,''); return; }
+  var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v);
+  if(!m){ not(native,'Tarihi GG.AA.YYYY olarak tamamla.','hata'); return; }
+  var y=+m[1],mo=+m[2],d=+m[3], dt=new Date(Date.UTC(y,mo-1,d));
+  if(dt.getUTCFullYear()!==y||dt.getUTCMonth()!==mo-1||dt.getUTCDate()!==d){ not(native,'Böyle bir tarih yok — günü kontrol et.','hata'); return; }
+  var bugun=new Date();
+  if(dt.getTime() > Date.UTC(bugun.getFullYear(),bugun.getMonth(),bugun.getDate())){ not(native,'Bu tarih gelecekte. Doğum tarihini gir.','hata'); return; }
+  if(y<1900){ not(native,'1900 öncesi tarihlerde hesap güvenilir değil.','uyari'); return; }
+  not(native,'');
+}
+function yerDenetle(inp){
+  var q=(inp.value||'').trim();
+  if(q.length<2){ not(inp,''); return; }
+  if(!window.SorbiYer||!window.SorbiYer.ara){ return; }
+  var beklenen=q;
+  window.SorbiYer.ara(q).then(function(veri){
+    if((inp.value||'').trim()!==beklenen) return;
+    var r=(veri&&veri.results)||[];
+    not(inp, r.length? '' : 'Bu yeri bulamadım — hesap İstanbul’a göre yapılır. Şehri Türkçe yazmayı dene.', 'uyari');
+  }).catch(function(){});
+}
+function denetimKur(){
+  document.querySelectorAll('input[type=date]').forEach(function(n){
+    if(!/(^|-)(d|bd|cDate|fDate|tarih|date)$/i.test(n.id||'') && !/tarih|date/i.test(n.id||'')) { /* yine de doğum tarihi olabilir */ }
+    n.addEventListener('change',function(){tarihDenetle(n);});
+    n.addEventListener('blur',function(){tarihDenetle(n);});
+    if(n.value) tarihDenetle(n);
+  });
+  ['bp','p','fPlace','fYer','cPlace','cCity','yer'].forEach(function(id){
+    var inp=document.getElementById(id); if(!inp) return;
+    inp.addEventListener('blur',function(){ setTimeout(function(){ yerDenetle(inp); },250); });
+  });
+}
+
 function init(){
  injectCSS();
+ denetimKur();
  document.querySelectorAll('input[type=date]').forEach(function(n){enhance(n,'date');});
  document.querySelectorAll('input[type=time]').forEach(function(n){enhance(n,'time');});
 }

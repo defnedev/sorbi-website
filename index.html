@@ -133,7 +133,7 @@ input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(227,
 .path .go{display:inline-block;margin-top:.55rem;font-size:.82rem;font-weight:500;color:var(--gold-br)}
 
 /* ── uygulama ── */
-#uygulama{scroll-margin-top:90px;margin-top:2.6rem;text-align:center;background:var(--card);border:1px solid var(--stroke);border-radius:24px;padding:2.6rem 1.4rem}
+#uygulama{scroll-margin-top:90px;margin-top:2.6rem}
 #uygulama h2{font-family:Fraunces,Georgia,serif;font-size:clamp(1.4rem,3.6vw,1.9rem);font-weight:600;letter-spacing:-.02em;margin-bottom:.45rem}
 #uygulama p{color:var(--mut);font-size:.95rem;max-width:500px;margin:0 auto 1.2rem;font-weight:300}
 .wl{display:flex;gap:.55rem;max-width:430px;margin:0 auto;flex-wrap:wrap;justify-content:center}
@@ -250,20 +250,7 @@ body:has(> .sky)::before{display:none}
   </div>
 </div>
 
-<section id="uygulama">
-  <h2>Sorbi telefonuna geliyor</h2>
-  <p>iOS ve Android. Çıktığı gün ilk sana yazalım — spam yok, sadece o haber.</p>
-  <div class="wl">
-    <input type="email" id="wlEmail" placeholder="e-posta adresin" autocomplete="email">
-    <button class="btn" id="wlBtn">Beni listeye yaz ✦</button>
-    <input type="text" id="wlHp" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <div class="st" id="wlSt"></div>
-  </div>
-  <label style="display:flex;gap:.5rem;align-items:flex-start;justify-content:center;font-size:.8rem;color:var(--mut);margin-top:.7rem;line-height:1.5;max-width:440px;margin-left:auto;margin-right:auto;text-align:left">
-    <input type="checkbox" id="wlKvkk" style="width:auto;margin-top:.2rem">
-    <span>Sorbi'nin uygulama duyurusu ve haber e-postaları göndermesine izin veriyorum; istediğim zaman çıkabilirim. · <a href="/privacy" style="color:var(--gold)">KVKK</a></span>
-  </label>
-</section>
+<section id="uygulama"><div data-sorbi-liste="ana-sayfa"></div></section>
 
 <div class="paths">
   <a class="path" href="/seni-taniyorum"><div class="g">✦</div><h3>Seni Tanıyorum</h3><p>Haritandan sana özel, kısa ve net bir okuma.</p><span class="go">Başla →</span></a>
@@ -446,19 +433,6 @@ function fillTransits(){
 }
 ['bd','bt'].forEach(function(id){ $(id).addEventListener('change',render); });
 
-/* ── waitlist (App Store canlı olunca link ile değiştir) ── */
-$('wlBtn').onclick=async function(){
-  var em=($('wlEmail').value||'').trim(), st=$('wlSt'), btn=this;
-  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){ st.style.color='var(--terra)'; st.textContent='Geçerli bir e-posta gir.'; return; }
-  if(!$('wlKvkk').checked){ st.style.color='#F2A08A'; st.textContent='Devam için onay kutusunu işaretle.'; return; }
-  st.style.color='var(--dim)'; st.textContent='Kaydediliyor…'; btn.disabled=true;
-  try{
-    var r=await fetch('/api/liste',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({eposta:em,kvkk:1,kaynak:'ana-sayfa',hp:($('wlHp')||{}).value||''})});
-    var j=await r.json().catch(function(){return {};});
-    if(r.ok){ st.style.color='var(--gold-lt)'; st.textContent='Listedesin — Sorbi iOS ve Android’de çıkınca ilk sana yazacağız.'; try{localStorage.setItem('sorbi_wl','1');}catch(e){} }
-    else { btn.disabled=false; st.style.color='var(--terra)'; st.textContent=j.error||'Kaydedilemedi, tekrar dener misin?'; }
-  }catch(e){ btn.disabled=false; st.style.color='var(--terra)'; st.textContent='Bağlantı kurulamadı.'; }
-};
 
 /* ── girişte: şu anın haritası ── */
 function drawMoment(){
@@ -486,6 +460,7 @@ loadSaved();
 if($('bd').value && PICKED) render(); else setTimeout(drawMoment,120);
 })();
 </script>
+<script src="/sorbi-liste.js?v=2" defer></script>
 <!-- SORBI-FOOTER:START -->
 <style>
 .sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:#9BA0AB;max-width:none;width:auto}

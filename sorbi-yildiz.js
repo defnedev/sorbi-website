@@ -127,14 +127,14 @@ function bul(ch, opt){
       sayac:(SAY.bagsizGez||{})[SAYAD[k]]});
   });
 
-  /* 6 — sınır dışı dekilinasyon */
+  /* 6 — sınır dışı deklinasyon */
   sira.forEach(function(k){ if(k==='sun') return; var p=P[k];
     if(p.dec===undefined || p.dec===null) return;
     if(Math.abs(p.dec)<=23.436) return;
     B.push({tur:'oob', anahtar:'oob|'+SAYAD[k],
       baslik:ADI[k]+', Güneş\'in sınırının dışında',
-      olcu:dk(Math.abs(p.dec))+' dekilinasyon',
-      kanit:ADI[k]+' dekilinasyonu '+(p.dec>0?'+':'-')+dk(Math.abs(p.dec))+' · Güneş\'in ulaşabildiği en uç değer 23°26′ · bu gezegen o sınırın dışında',
+      olcu:dk(Math.abs(p.dec))+' deklinasyon',
+      kanit:ADI[k]+' deklinasyonu '+(p.dec>0?'+':'-')+dk(Math.abs(p.dec))+' · Güneş\'in ulaşabildiği en uç değer 23°26′ · bu gezegen o sınırın dışında',
       metin:'Sınır dışı bir gezegen kuralın dışından çalışır — bu konuda herkesin yaptığını yapmamak sana tanıdık gelebilir.',
       sayac:(SAY.oobGez||{})[SAYAD[k]]});
   });
