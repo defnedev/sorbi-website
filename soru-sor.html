@@ -491,7 +491,7 @@ function fillTransits(){
   }catch(e){ $('trBox').hidden=true; }
 }
 function fillSummary(){
-  var s=$('summary'); s.hidden=false;
+  var s=$('summary'); if(!s) return; s.hidden=false;
   var parts=['<b>'+esc($('bd').value)+'</b>'];
   if($('bt').value) parts.push('<b>'+esc($('bt').value)+'</b>'); else parts.push('saat yok');
   parts.push('<b>'+esc(($('bp').value||'').split(',')[0])+'</b>');

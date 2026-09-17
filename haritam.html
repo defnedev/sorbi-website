@@ -140,7 +140,7 @@ body:has(> .sky)::before{display:none}
   <div class="hero3">
    <a class="hot" href="/bugun"><span class="g">✦</span><span class="n">Bugün</span><span class="d">Göğün bugün sana etkisi</span></a>
    <a href="/dogum-haritasi-hesaplama"><span class="g">⊹</span><span class="n">Tam Haritam</span><span class="d">10 gezegen, evler, açılar</span></a>
-   <a href="#ask"><span class="g">✦</span><span class="n">Soru Sor</span><span class="d">Aklındaki soruyu ilet</span></a>
+   <a href="#ask"><span class="g">✦</span><span class="n">Soruna Bak</span><span class="d">Bir soru haritada nasıl okunur</span></a>
   </div>
 
   <div class="card">
@@ -227,8 +227,8 @@ function initBig3(){
  document.getElementById('app').style.display='block';
  document.getElementById('hello').textContent='Merhaba '+((PR.name||(PR.email||'').split('@')[0])||'')+' ✦';
  if(BIRTH.date){const pl=(BIRTH.place||'').split(',')[0];document.getElementById('birthMeta').textContent=BIRTH.date+(BIRTH.time?' · '+BIRTH.time:'')+(pl?' · '+pl:'');}
- document.getElementById('chips').innerHTML=CHIPS.map(c=>`<span class="chip">${c}</span>`).join('');
- document.querySelectorAll('#chips .chip').forEach(el=>el.onclick=()=>{const q=document.getElementById('q');q.value=(q.value?q.value+' ':'')+el.textContent+': ';q.focus();});
+ if(document.getElementById('chips')){document.getElementById('chips').innerHTML=CHIPS.map(c=>`<span class="chip">${c}</span>`).join('');
+ document.querySelectorAll('#chips .chip').forEach(el=>el.onclick=()=>{const q=document.getElementById('q');q.value=(q.value?q.value+' ':'')+el.textContent+': ';q.focus();});}
  document.getElementById('logout').onclick=()=>{if(confirm('Profilinden çıkılsın mı?')){localStorage.removeItem('sorbi_profile');location.href='/';}};
  initBig3(); renderList(); refreshStatuses();
  /* takvim teaser */
