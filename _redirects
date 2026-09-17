@@ -6,9 +6,8 @@
 /share/*    /#uygulama                 302
 
 # App Store Support URL alias (2026-08-03)
-/support        /destek.html   301
-/support.html   /destek.html   301
-/destek         /destek.html   301
+/support        /destek   301
+/support.html   /destek   301
 
 # Parked pages → kept pages (2026-07-21)
 /rehber       /   301
