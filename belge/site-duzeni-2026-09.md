@@ -53,9 +53,9 @@ Not: Cloudflare Pages GitHub'dan otomatik deploy etmiyor (direct upload). `main`
 
 ## Açık konular (karar bekleyen)
 
-- `/`, `/dogum-haritasi-hesaplama` ve `/natal-harita` aynı işi yapıyor — birleştirme/301 ayrıca konuşulacak.
-- Öğren sayfası mobilde yana taşıyor (502px) — mobile dokunmama kararı nedeniyle bırakıldı.
-- `/rapor-araci` sitemap'te yok ama herkese açık.
+- ~~`/`, `/dogum-haritasi-hesaplama`, `/natal-harita` üçlüsü~~ → 17 Eyl fable kararıyla çözüldü (aşağıda).
+- ~~Öğren mobil taşma~~ → 17 Eyl düzeltildi.
+- ~~`/rapor-araci` açık~~ → zaten noindex; sitemap'te yok.
 
 ## 17 Eyl 2026 — ikinci tur (fable incelemesi sonrası)
 
@@ -71,3 +71,17 @@ Test: 59 sayfa JS hatası yok; Nadirlik aynı doğum bilgisiyle eski/yeni aynı 
 **E-posta pazarlaması (avukat görüşü değil):** Profil onayı ("profilim için işlenmesine") pazarlama e-postası için kullanılamaz (KVKK amaçla sınırlılık). Uygulama duyurusu büyük olasılıkla ticari elektronik ileti (6563 sayılı Kanun) → önceden onay + İYS. Sıra: listede 50 kayıt → İYS kaydı; 100 kayıt → ücretsiz katmanlı gönderim aracı (Brevo/MailerLite). Şimdi araç seçilmeyecek.
 
 **Açık işler:** 5 yazının yeniden yazımı (natal-harita → okuma rehberi; sinastri → neyi ölçer/ölçmez; horary → soru haritası mantığı; yasam-donguleri → gerçek tarihli transit takvimi; tarot → astrolojiden ayrımı, kısa). Liste bloğunun Seni Tanıyorum ve Nadirlik sonuç ekranlarına da eklenmesi. Nadirlik (24.000 harita) ile Seni Tanıyorum (1.367.496 gök anı) yöntem metinlerinin tekleştirilmesi.
+
+## 17 Eyl 2026 — üçüncü tur (açık işlerin kapatılması)
+
+**P0 — canlı hata (9ddb43b, hemen deploy edildi):** /soru-sor'da "Harita çizilemedi: null is not an object (s.hidden)" — 4 Eyl uyum temizliğinde kaldırılan `#summary` elemanına JS yazıyordu. Tüm sayfalar profil verisiyle tarandı; aynı kökenli ikinci hata /haritam'da (`#chips` yok → büyük üçlü ve mühür yüklenmiyordu). İkisi de korumaya alındı. Haritam'daki "Aklındaki soruyu ilet" (hizmet kalıntısı) → "Soruna Bak · Bir soru haritada nasıl okunur".
+
+**Kapatılan açık işler:**
+- 5 rehber yazı yeniden yazıldı (fable; noindex korundu, uydurma anekdot/alıntı ve kehanet/hizmet dili kaldırıldı): natal-harita "Haritayı Okuma Rehberi", sinastri "Neyi Ölçer, Neyi Ölçmez", horary "Soru Haritası: Mantığı ve Sınırları", yasam-donguleri "Gerçek tarihli transit takvimi" (2026–2027 ağır gezegen olayları sitenin kendi efemeris motoruyla hesaplandı; Jüpiter→Aslan 30 Haziran 2026 ayrıca doğrulandı), tarot "Tarot Kısaca".
+- E-posta listesi: ortak bileşen `sorbi-liste.js` (`<div data-sorbi-liste="kaynak" data-bekle="#sonuc">`); Nadirlik ve Seni Tanıyorum sonuç ekranlarında, sonuç görününce açılır. Kaynak etiketleri: ana-sayfa / nadirlik / seni-taniyorum.
+- Yöntem metinleri: Nadirlik (24.000 harita, 1950–2009) ve Seni Tanıyorum (1.367.496 gök anı, 1960–2012) iki ayrı örneklem olduğu, neden ikisinin var olduğu ve oranların neden küçük farklar gösterebileceği her iki sayfada açıkça yazıldı; birbirine ve Sayım'a link.
+- AdSense hijyeni: 58 sayfanın footer'ına "Gizlilik ve KVKK" + "İletişim (destek@sorbiapp.com)"; 404 sayfasından reklam kodu kaldırıldı.
+
+**Test:** 59 sayfa eski/yeni JS hata karşılaştırması temiz; profil verisiyle tüm sayfa taraması temiz; 10 araçta hesap çıktıları aynı (farklar yalnız footer linkleri ve yeniden yazılan yazılar); liste bloğu 1440/390 px'te gizli→görünür, onaysız/onaylı akış ve gönderilen kaynak etiketi doğrulandı.
+
+**Hâlâ açık (Defne kararı / zaman):** Space Grotesk yalnız paylaşım kartı sayfalarında yüklensin (performans); günlük burç yorum sayfaları ince içerik (AdSense); Sayım yazılarına paylaş butonu; 12 burç özellikleri sayfasına Sayım verisi + Seni Tanıyorum linki; liste 25'i geçince "X kişi bekliyor" sayacı.
