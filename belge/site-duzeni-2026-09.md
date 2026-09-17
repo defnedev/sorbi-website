@@ -56,3 +56,18 @@ Not: Cloudflare Pages GitHub'dan otomatik deploy etmiyor (direct upload). `main`
 - `/`, `/dogum-haritasi-hesaplama` ve `/natal-harita` aynı işi yapıyor — birleştirme/301 ayrıca konuşulacak.
 - Öğren sayfası mobilde yana taşıyor (502px) — mobile dokunmama kararı nedeniyle bırakıldı.
 - `/rapor-araci` sitemap'te yok ama herkese açık.
+
+## 17 Eyl 2026 — ikinci tur (fable incelemesi sonrası)
+
+**Defne kararları:** iOS ve Android henüz çıkmadı → çıkış öncesi e-posta listesi toplanacak (Apple/Google'a bekleyen sayısı gösterilecek). Natal Harita, Horary, Sinastri, Yaşam Döngüleri, Tarot yazılarını biz yeniden yazacağız; Google'a kapalı (noindex) kalacaklar. Ana sayfa kararı fable'a bırakıldı.
+
+**Fable kararı (ana sayfa):** Ana sayfa keşif sayfası; "doğum haritası hesaplama" anahtar kelimesini yalnız /dogum-haritasi-hesaplama sahiplenir. 301 yok (URL kaldırmak sayılır).
+
+**Canlıya alınan (7531299):** ana sayfa title/description/H1, e-posta listesi hesaplayıcı altına + iOS/Android metni + okunur onay metni, 4 kart (Seni Tanıyorum/Nadirlik/Sayım/Öğren), sitemap'ten 6 noindex sayfa + /masa çıktı, /masa noindex, og-sayim-yildiz.png, Öğren mobil taşma, Nadirlik GG.AA.YYYY, 5 yazıda yeşil CTA → ilgili araç, sorbi-profil.js yanlış yorum.
+Test: 59 sayfa JS hatası yok; Nadirlik aynı doğum bilgisiyle eski/yeni aynı sonuç; liste formu onaysız/onaylı akış doğrulandı; canlı dosyalar repo ile birebir.
+
+**Veri (D1, 17 Eyl):** liste = 0, profiles = 0; `sayfa` olayı 4 Eyl'den beri 67. Sorun form değil, trafik/dağıtım.
+
+**E-posta pazarlaması (avukat görüşü değil):** Profil onayı ("profilim için işlenmesine") pazarlama e-postası için kullanılamaz (KVKK amaçla sınırlılık). Uygulama duyurusu büyük olasılıkla ticari elektronik ileti (6563 sayılı Kanun) → önceden onay + İYS. Sıra: listede 50 kayıt → İYS kaydı; 100 kayıt → ücretsiz katmanlı gönderim aracı (Brevo/MailerLite). Şimdi araç seçilmeyecek.
+
+**Açık işler:** 5 yazının yeniden yazımı (natal-harita → okuma rehberi; sinastri → neyi ölçer/ölçmez; horary → soru haritası mantığı; yasam-donguleri → gerçek tarihli transit takvimi; tarot → astrolojiden ayrımı, kısa). Liste bloğunun Seni Tanıyorum ve Nadirlik sonuç ekranlarına da eklenmesi. Nadirlik (24.000 harita) ile Seni Tanıyorum (1.367.496 gök anı) yöntem metinlerinin tekleştirilmesi.
