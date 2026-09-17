@@ -65,14 +65,10 @@ h1{font-family:'Space Grotesk','Inter',sans-serif;font-weight:600;font-size:clam
 @media(max-width:560px){.sbnav{padding:.55rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem}.sbnav nav a{font-size:.79rem;padding:.34rem .55rem}}
 </style>
 <header class="sbnav">
- <a href="/" class="sbnav-lg"><i>✦</i>Sorbi</a>
+ <a href="/" class="lg"><i>✦</i> Sorbi</a>
  <nav>
   <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
-  <a href="/dogum-haritasi-hesaplama">Doğum Haritası</a>
-  <a href="/araclar">Araçlar</a>
   <a href="/bugun">Bugün</a>
-  <a href="/burc-ozellikleri">Burçlar</a>
-  <a href="/soru-sor">Soru Sorma Yöntemi</a>
  </nav>
 </header>
 <script>(function(){try{var p=location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';document.querySelectorAll('.sbnav nav a').forEach(function(a){var h=a.getAttribute('href').replace(/\.html$/,'');if(h===p||(h!=='/'&&p.indexOf(h)===0))a.classList.add('on');});}catch(e){}})();</script>
@@ -97,7 +93,7 @@ h1{font-family:'Space Grotesk','Inter',sans-serif;font-weight:600;font-size:clam
   <div class="sec-h">Sana Bugün</div>
   <div id="personal"></div>
   <div class="cta">
-   <a class="buy" href="/soru-sor">Bugün bir şey mi var? Sorunu sor ✦</a>
+   <a hidden data-kapi-gizli class="buy" href="/soru-sor">Bugün bir şey mi var? Sorunu sor ✦</a>
   </div>
  </div>
 
@@ -107,7 +103,7 @@ h1{font-family:'Space Grotesk','Inter',sans-serif;font-weight:600;font-size:clam
   <a href="/dogum-haritasi-hesaplama">Ücretsiz haritamı çıkar ✦</a>
  </div>
 
- <p class="foot" id="foot">Kader değil, farkındalık. · <a href="/">sorbiapp.com</a> · <a href="/retro-ay-takvimi">Retro & ay takvimi</a></p>
+ <p class="foot" id="foot">Kader değil, farkındalık. · <a href="/">sorbiapp.com</a> · <a hidden data-kapi-gizli href="/retro-ay-takvimi">Retro & ay takvimi</a></p>
 </div>
 <script>
 const SIGNS=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
@@ -188,6 +184,7 @@ draw();
 </script>
 <!-- SORBI-FOOTER:START -->
 <style>
+[data-kapi-gizli]{display:none!important}
 .sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0D0810;font-family:'Inter',system-ui,sans-serif}
 .sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr 1fr;gap:2rem}
 .sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#E3A692;margin:0 0 .8rem;font-weight:600}
@@ -206,32 +203,12 @@ draw();
   <div><h4>Hesaplayıcılar</h4>
    <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
    <a href="/dogum-haritasi-hesaplama">Doğum Haritası</a>
-   <a href="/yukselen-burc-hesaplama">Yükselen Burç</a>
-   <a href="/ay-burcu-hesaplama">Ay Burcu</a>
-   <a href="/sinastri">Sinastri Rehberi</a>
-   <a href="/natal-harita">Natal Harita Rehberi</a>
   </div>
   <div><h4>Gökyüzü</h4>
    <a href="/bugun">Bugün Gökyüzünde</a>
-   <a href="/horary">An Haritası (Horary)</a>
-   <a href="/uygun-gun-secimi">Uygun Gün Seçimi</a>
-   <a href="/retro-ay-takvimi">Retro & Ay Takvimi</a>
-   <a href="/astrokartografi">Astrokartografi</a>
-   <a href="/yasam-donguleri">Yaşam Döngüleri</a>
-  </div>
-  <div><h4>Burçlar</h4>
-   <a href="/burc-ozellikleri">Burç Özellikleri</a>
-   <a href="/gunluk-burc-yorumlari">Günlük Yorumlar</a>
-   <a href="/ates-burclari">Ateş Burçları</a>
-   <a href="/toprak-burclari">Toprak Burçları</a>
-   <a href="/hava-burclari">Hava Burçları</a>
-   <a href="/su-burclari">Su Burçları</a>
   </div>
   <div><h4>Sorbi</h4>
    <a href="/">Ana Sayfa</a>
-   <a href="/soru-sor">Soru Sorma Yöntemi</a>
-   <a href="/gunun-karti">Günün Kartı</a>
-   <a href="/seni-taniyorum">Seni Tanıyorum</a>
    <a href="/#uygulama">Uygulama</a>
    <a href="/destek">Destek</a>
   </div>

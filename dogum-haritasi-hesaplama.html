@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="/astronomy.browser.min.js?v=3" defer></script>
-<script src="/sorbi-chart.js?v=11" defer></script>
+<script src="/sorbi-chart.js?v=12" defer></script>
 <style>
 :root{--terra:#E3A692;--btn-ink:#F6EFE1;
  --bg:#0B0F14;--panel:#161a25;--panel2:#1a1f2b;
@@ -157,11 +157,11 @@ td.pl{color:var(--ink)}
  <a href="/" class="lg">✦ Sorbi</a>
  <nav>
   <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
-  <a href="/araclar">Araçlar</a>
+  <a hidden data-kapi-gizli href="/araclar">Araçlar</a>
   <a href="/bugun">Bugün</a>
-  <a href="/burc-ozellikleri">Burçlar</a>
-  <a href="/soru-sor">Soru Sorma Yöntemi</a>
-  <a href="/haritam" id="sorbiNavHaritam" style="display:none">Haritam</a>
+  <a hidden data-kapi-gizli href="/burc-ozellikleri">Burçlar</a>
+  <a hidden data-kapi-gizli href="/soru-sor">Soru Sorma Yöntemi</a>
+  <a hidden data-kapi-gizli href="/haritam" id="sorbiNavHaritam" style="display:none">Haritam</a>
  </nav>
 </header>
 <script>(function(){try{if(JSON.parse(localStorage.getItem('sorbi_profile')||'null')){var e=document.getElementById('sorbiNavHaritam');if(e)e.style.display='';}var p=location.pathname.replace(/\/+$/,'');document.querySelectorAll('.sorbi-topnav nav a').forEach(function(a){if(a.getAttribute('href')===p)a.className='on';});}catch(e){}})();</script>
@@ -229,7 +229,7 @@ td.pl{color:var(--ink)}
     <div style="font-size:.78rem;color:var(--gold-lt);margin:.1rem 0 1rem;letter-spacing:.3px">✦ Genel yorum değil — tamamen sana özel, her sabah gökyüzüyle tazelenir</div>
         <button class="buy" id="unlockBtn">Raporun tamamını aç ✦</button>
         <div class="rdisc">Kişisel farkındalık amaçlı bir içeriktir; kehanet ya da kesin gelecek vaadi değildir.</div>
-    <a class="ghost" href="/soru-sor">Bir soru bu haritada nasıl okunur →</a>
+    <a hidden data-kapi-gizli class="ghost" href="/soru-sor">Bir soru bu haritada nasıl okunur →</a>
    </div>
    <div class="locked" id="lockedBody">
     <div class="sec"><div class="sec-h">Haritanın Üç Cümlesi</div><div id="pUc"></div></div>
@@ -245,7 +245,7 @@ td.pl{color:var(--ink)}
   <div class="share"><button onclick="shareChart()">✦ Arkadaşına gönder — o da haritasını çıkarsın</button></div>
  </div>
 
- <p class="foot">Kader değil, farkındalık. · <a href="/">sorbiapp.com</a> · <a href="/yukselen-burc-hesaplama">Yükselen</a> · <a href="/uygun-gun-secimi">Uygun gün</a> · <a href="/astrokartografi">Astrokartografi</a></p>
+ <p class="foot">Kader değil, farkındalık. · <a href="/">sorbiapp.com</a> · <a hidden data-kapi-gizli href="/yukselen-burc-hesaplama">Yükselen</a> · <a hidden data-kapi-gizli href="/uygun-gun-secimi">Uygun gün</a> · <a hidden data-kapi-gizli href="/astrokartografi">Astrokartografi</a></p>
 </div>
 
 <script>
@@ -377,7 +377,7 @@ document.getElementById('advToggle').onclick=()=>document.getElementById('advBox
 (function(){const pr=getProfile();const b=(pr&&pr.birth&&pr.birth.date)?pr.birth:loadBirth();const g=id=>document.getElementById(id);
  if(pr){const wb=document.getElementById('welcomeBar');g('wbName').textContent=pr.name||(pr.email||'').split('@')[0];wb.style.display='flex';
   document.getElementById('wbLogout').onclick=()=>{if(confirm('Profilinden çıkılsın mı? (bilgiler bu cihazdan silinir)')){localStorage.removeItem('sorbi_profile');location.reload();}};
-  const sc=document.getElementById('saveCard');if(sc)sc.innerHTML='<h3>Profilin hazır ✦</h3><p>Bu harita hesabında kayıtlı. <a href="/haritam" style="color:var(--gold)">Haritam’a git →</a> · soru sor, okumaların orada birikir.</p>';}
+  const sc=document.getElementById('saveCard');if(sc)sc.innerHTML='<h3>Profilin hazır ✦</h3><p>Bu harita hesabında kayıtlı. <a hidden data-kapi-gizli href="/haritam" style="color:var(--gold)">Haritam’a git →</a> · soru sor, okumaların orada birikir.</p>';}
  if(!b)return;
  if(b.name||(pr&&pr.name))g('cName').value=b.name||pr.name; if(b.date)g('cDate').value=b.date; if(b.time)g('cTime').value=b.time;
  if(b.noTime)g('cNoTime').checked=true; if(b.house)g('cHouse').value=b.house;
@@ -460,7 +460,7 @@ document.getElementById('gen').onclick=()=>{
  window.scrollTo({top:document.getElementById('pArsiv').offsetTop-40,behavior:'smooth'});
 };
 
-function shareChart(){const url='https://sorbiapp.com/dogum-haritasi-hesaplama';const data={title:'Ücretsiz Doğum Haritası — Sorbi',text:'Doğum haritanı ücretsiz, anında hesapla:',url};if(navigator.share){navigator.share(data).catch(()=>{});}else if(navigator.clipboard){navigator.clipboard.writeText(url);alert('Link kopyalandı ✦');}else{window.open('https://wa.me/?text='+encodeURIComponent(data.text+' '+url),'_blank');}}
+function shareChart(){const url='https://sorbiapp.com/dogum-haritasi-hesaplama';const data={title:'Ücretsiz Doğum Haritası — Sorbi',text:'Doğum haritanı ücretsiz, anında hesapla:',url};if(navigator.share){navigator.share(data).catch(()=>{});}else if(navigator.clipboard){navigator.clipboard.writeText(url);alert('Link kopyalandı ✦');}else{alert(data.text+' '+url);}}
 
 (function(){try{
  var pr=JSON.parse(localStorage.getItem('sorbi_profile')||'null');
@@ -489,6 +489,7 @@ function shareChart(){const url='https://sorbiapp.com/dogum-haritasi-hesaplama';
 </script>
 <!-- SORBI-FOOTER:START -->
 <style>
+[data-kapi-gizli]{display:none!important}
 .sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0D0810;font-family:'Inter',system-ui,sans-serif}
 .sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr 1fr;gap:2rem}
 .sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#E3A692;margin:0 0 .8rem;font-weight:600}
@@ -507,32 +508,12 @@ function shareChart(){const url='https://sorbiapp.com/dogum-haritasi-hesaplama';
   <div><h4>Hesaplayıcılar</h4>
    <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
    <a href="/dogum-haritasi-hesaplama">Doğum Haritası</a>
-   <a href="/yukselen-burc-hesaplama">Yükselen Burç</a>
-   <a href="/ay-burcu-hesaplama">Ay Burcu</a>
-   <a href="/sinastri">Sinastri Rehberi</a>
-   <a href="/natal-harita">Natal Harita Rehberi</a>
   </div>
   <div><h4>Gökyüzü</h4>
    <a href="/bugun">Bugün Gökyüzünde</a>
-   <a href="/horary">An Haritası (Horary)</a>
-   <a href="/uygun-gun-secimi">Uygun Gün Seçimi</a>
-   <a href="/retro-ay-takvimi">Retro & Ay Takvimi</a>
-   <a href="/astrokartografi">Astrokartografi</a>
-   <a href="/yasam-donguleri">Yaşam Döngüleri</a>
-  </div>
-  <div><h4>Burçlar</h4>
-   <a href="/burc-ozellikleri">Burç Özellikleri</a>
-   <a href="/gunluk-burc-yorumlari">Günlük Yorumlar</a>
-   <a href="/ates-burclari">Ateş Burçları</a>
-   <a href="/toprak-burclari">Toprak Burçları</a>
-   <a href="/hava-burclari">Hava Burçları</a>
-   <a href="/su-burclari">Su Burçları</a>
   </div>
   <div><h4>Sorbi</h4>
    <a href="/">Ana Sayfa</a>
-   <a href="/soru-sor">Soru Sorma Yöntemi</a>
-   <a href="/gunun-karti">Günün Kartı</a>
-   <a href="/seni-taniyorum">Seni Tanıyorum</a>
    <a href="/#uygulama">Uygulama</a>
    <a href="/destek">Destek</a>
   </div>

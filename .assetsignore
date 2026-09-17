@@ -1,12 +1,69 @@
-# Yayına çıkmayacak dosyalar (uyum denetimi 2026-09-04)
-# randevu-backend: ücretli danışmanlık randevu sistemi — canlıda erişilebilirdi
+# Yayina cikmayacak dosyalar - tools/kapi.py tarafindan URETILIR.
+# Elle duzenleme; acik sayfa listesi tools/ACIK.txt icinde.
 randevu-backend
 tools
+_arsiv
+admin
 *.md
 *.py
 Dockerfile
 node_modules
 .wrangler
 
-# eski randevu yonetim paneli (olu)
-admin
+# --- kapali sayfalar (56) ---
+akrep-burcu-gunluk-yorum.html
+akrep-burcu-ozellikleri.html
+araclar.html
+aslan-burcu-gunluk-yorum.html
+aslan-burcu-ozellikleri.html
+astrodefne-hizmetler-section.html
+astrokartografi.html
+ates-burclari.html
+ay-burcu-hesaplama.html
+balik-burcu-gunluk-yorum.html
+balik-burcu-ozellikleri.html
+basak-burcu-gunluk-yorum.html
+basak-burcu-ozellikleri.html
+boga-burcu-gunluk-yorum.html
+boga-burcu-ozellikleri.html
+burc-ozellikleri.html
+burc-uyumu.html
+gunluk-burc-yorumlari.html
+gunun-karti.html
+haritam.html
+hava-burclari.html
+horary.html
+ikizler-burcu-gunluk-yorum.html
+ikizler-burcu-ozellikleri.html
+karma-paketler.html
+koc-burcu-gunluk-yorum.html
+koc-burcu-ozellikleri.html
+kova-burcu-gunluk-yorum.html
+kova-burcu-ozellikleri.html
+masa.html
+nadirlik.html
+natal-harita.html
+oglak-burcu-gunluk-yorum.html
+oglak-burcu-ozellikleri.html
+ogren.html
+randevu.html
+retro-ay-takvimi.html
+sayim-yildiz.html
+sayim-yukselen.html
+sayim.html
+seni-taniyorum.html
+sinastri.html
+soru-sor.html
+su-burclari.html
+tarot.html
+terazi-burcu-gunluk-yorum.html
+terazi-burcu-ozellikleri.html
+toprak-burclari.html
+uygun-gun-secimi.html
+yasam-donguleri.html
+yay-burcu-gunluk-yorum.html
+yay-burcu-ozellikleri.html
+yengec-burcu-gunluk-yorum.html
+yengec-burcu-ozellikleri.html
+yorumlar.html
+yukselen-burc-hesaplama.html

@@ -172,11 +172,7 @@ footer .fine{text-align:center;line-height:1.85;font-weight:300}
  <a href="/" class="lg"><i>✦</i> Sorbi</a>
  <nav>
   <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
-  <a href="/araclar">Araçlar</a>
   <a href="/bugun">Bugün</a>
-  <a href="/burc-ozellikleri">Burçlar</a>
-  <a href="/soru-sor">Soru Sorma Yöntemi</a>
-  <a href="/haritam" id="sorbiNavHaritam" style="display:none">Haritam</a>
  </nav>
 </header>
 
@@ -213,7 +209,7 @@ footer .fine{text-align:center;line-height:1.85;font-weight:300}
 
     <div class="after" id="after">
       <a class="btn gold" id="goAtolye" href="/detayli-dogum-haritasi">Tüm ayrıntıyı aç — Harita Atölyesi →</a>
-      <a class="btn ghost" href="/soru-sor">Aklındaki soruyu sor</a>
+      <a hidden data-kapi-gizli class="btn ghost" href="/soru-sor">Aklındaki soruyu sor</a>
     </div>
   </div>
 
@@ -228,8 +224,8 @@ footer .fine{text-align:center;line-height:1.85;font-weight:300}
 <div class="paths">
   <a class="path" href="/detayli-dogum-haritasi"><div class="g">◎</div><h3>Harita Atölyesi</h3><p>Transit, ilerletim, sinastri — tam derinlik.</p><span class="go">Aç →</span></a>
   <a class="path" href="/bugun"><div class="g">☉︎</div><h3>Bugünün göğü</h3><p>Gökyüzü bugün ne diyor — her gün taze.</p><span class="go">Bak →</span></a>
-  <a class="path" href="/soru-sor"><div class="g">✦</div><h3>Soru sorma yöntemi</h3><p>Bir soru haritada nasıl okunur.</p><span class="go">Öğren →</span></a>
-  <a class="path" href="/araclar"><div class="g">⊹</div><h3>Tüm araçlar</h3><p>Yükselen, Ay burcu, uyum ve fazlası.</p><span class="go">Keşfet →</span></a>
+  <a hidden data-kapi-gizli class="path" href="/soru-sor"><div class="g">✦</div><h3>Soru sorma yöntemi</h3><p>Bir soru haritada nasıl okunur.</p><span class="go">Öğren →</span></a>
+  <a hidden data-kapi-gizli class="path" href="/araclar"><div class="g">⊹</div><h3>Tüm araçlar</h3><p>Yükselen, Ay burcu, uyum ve fazlası.</p><span class="go">Keşfet →</span></a>
 </div>
 
 <section id="uygulama">
@@ -266,7 +262,7 @@ function loadEngine(cb){
   QUEUE=cb;
   if(LOADING) return;
   LOADING=true;
-  var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=11','/sorbi-astro.js?v=4'];
+  var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=12','/sorbi-astro.js?v=4'];
   (function next(i){
     if(i>=srcs.length){ READY=true; LOADING=false; if(QUEUE){var f=QUEUE;QUEUE=null;f();} return; }
     var s=document.createElement('script');
@@ -462,6 +458,7 @@ if($('bd').value && PICKED) render(); else setTimeout(drawMoment,120);
 </script>
 <!-- SORBI-FOOTER:START -->
 <style>
+[data-kapi-gizli]{display:none!important}
 .sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0D0810;font-family:'Inter',system-ui,sans-serif}
 .sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr 1fr;gap:2rem}
 .sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#E3A692;margin:0 0 .8rem;font-weight:600}
@@ -480,32 +477,12 @@ if($('bd').value && PICKED) render(); else setTimeout(drawMoment,120);
   <div><h4>Hesaplayıcılar</h4>
    <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
    <a href="/dogum-haritasi-hesaplama">Doğum Haritası</a>
-   <a href="/yukselen-burc-hesaplama">Yükselen Burç</a>
-   <a href="/ay-burcu-hesaplama">Ay Burcu</a>
-   <a href="/sinastri">Sinastri Rehberi</a>
-   <a href="/natal-harita">Natal Harita Rehberi</a>
   </div>
   <div><h4>Gökyüzü</h4>
    <a href="/bugun">Bugün Gökyüzünde</a>
-   <a href="/horary">An Haritası (Horary)</a>
-   <a href="/uygun-gun-secimi">Uygun Gün Seçimi</a>
-   <a href="/retro-ay-takvimi">Retro & Ay Takvimi</a>
-   <a href="/astrokartografi">Astrokartografi</a>
-   <a href="/yasam-donguleri">Yaşam Döngüleri</a>
-  </div>
-  <div><h4>Burçlar</h4>
-   <a href="/burc-ozellikleri">Burç Özellikleri</a>
-   <a href="/gunluk-burc-yorumlari">Günlük Yorumlar</a>
-   <a href="/ates-burclari">Ateş Burçları</a>
-   <a href="/toprak-burclari">Toprak Burçları</a>
-   <a href="/hava-burclari">Hava Burçları</a>
-   <a href="/su-burclari">Su Burçları</a>
   </div>
   <div><h4>Sorbi</h4>
    <a href="/">Ana Sayfa</a>
-   <a href="/soru-sor">Soru Sorma Yöntemi</a>
-   <a href="/gunun-karti">Günün Kartı</a>
-   <a href="/seni-taniyorum">Seni Tanıyorum</a>
    <a href="/#uygulama">Uygulama</a>
    <a href="/destek">Destek</a>
   </div>

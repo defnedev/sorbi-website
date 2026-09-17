@@ -1,0 +1,39 @@
+# Sorbi site kapisi - ACIK sayfa beyaz listesi (tools/kapi.py bunu okur)
+# Bir satir = bir sayfa (uzantisiz yol). # ile yorum. Bosluk serbest.
+# Burada OLMAYAN her .html deploy disi kalir -> canlida 404.
+# Sirali acilis: test gecen sayfayi buraya ekle, `python3 tools/kapi.py` calistir, deploy et.
+#
+# --- CEKIRDEK (2026-09-14) ---
+/
+/detayli-dogum-haritasi
+/dogum-haritasi-hesaplama
+/bugun
+/destek
+#
+# --- SIRADAKILER (test edilince yorumdan cikar) ---
+# /yukselen-burc-hesaplama
+# /ay-burcu-hesaplama
+# /araclar
+# /soru-sor
+# /burc-ozellikleri
+# /burc-uyumu
+# /sinastri
+# /natal-harita
+# /horary
+# /yasam-donguleri
+# /uygun-gun-secimi
+# /retro-ay-takvimi
+# /astrokartografi
+# /gunluk-burc-yorumlari
+# /gunun-karti
+# /seni-taniyorum
+# /ates-burclari
+# /toprak-burclari
+# /hava-burclari
+# /su-burclari
+# /masa
+# /nadirlik
+# /ogren
+# /sayim
+# /sayim-yildiz
+# /sayim-yukselen

@@ -222,18 +222,36 @@ th{color:var(--dim)}
 </<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6653215819266638"
      crossorigin="anonymous"></script>
 head>
+<style>
+/* çark etkileşim katmanı */
+#wheel .sb-cark{touch-action:pan-y pinch-zoom}
+#wheel g.sb-pl{cursor:pointer;outline:none}
+#wheel g.sb-pl:focus-visible circle.sb-hit{fill:rgba(201,169,98,.10);stroke:#C9A962;stroke-width:2}
+#wheel g.sb-pl.sb-sec circle.sb-hit{fill:rgba(201,169,98,.12);stroke:rgba(201,169,98,.55);stroke-width:1.2}
+#wheel g.sb-pl.sb-sec text,#wheel g.sb-pl.sb-sec path{fill:#F4E4BA}
+.sbp{margin-top:.7rem;min-height:132px;transition:opacity .35s cubic-bezier(.2,.8,.2,1)}
+.sbp-in{border:1px solid rgba(201,169,98,.28);border-radius:10px;padding:.8rem .95rem;background:rgba(201,169,98,.04)}
+.sbp-bas{margin:0 0 .15rem;font-family:'Playfair Display',Georgia,serif;font-size:1.05rem;font-weight:600}
+.sbp-rx{color:#D36363;font-weight:700}
+.sbp-meta{font-size:.82rem;color:#8A9DB5;margin-bottom:.45rem}
+.sbp-govde{margin:0 0 .5rem;font-size:.92rem;line-height:1.55}
+.sbp-link{font-size:.88rem;font-weight:600}
+.sbp-not{margin:.55rem 0 0;font-size:.74rem;line-height:1.45;color:#5A6D85}
+.sbp-bos{margin:0;font-size:.88rem;color:#8A9DB5}
+@media(prefers-reduced-motion:reduce){.sbp{transition:none}}
+</style>
 <body>
 <div class="sky"></div>
 
 <div class="topnav"><div class="wrap row">
   <a href="/" class="brand">Sorbi ✦</a>
   <nav>
-    <a href="/araclar">Araçlar</a>
+    <a hidden data-kapi-gizli href="/araclar">Araçlar</a>
     <a href="/detayli-dogum-haritasi" aria-current="page">Detaylı Harita</a>
     <a href="/dogum-haritasi-hesaplama">Doğum Haritası</a>
     <a href="/bugun">Bugün</a>
-    <a href="/sinastri">Sinastri Rehberi</a>
-    <a href="/soru-sor">Soru Sorma Yöntemi</a>
+    <a hidden data-kapi-gizli href="/sinastri">Sinastri Rehberi</a>
+    <a hidden data-kapi-gizli href="/soru-sor">Soru Sorma Yöntemi</a>
   </nav>
 </div></div>
 
@@ -331,6 +349,7 @@ head>
   <div>
     <div class="wheelbox">
       <div id="wheel"></div>
+      <div id="carkPanel" class="sbp" aria-live="polite"><div class="sbp-in"><p class="sbp-bos">Çarktaki bir gezegene dokun — o yerleşimin okuması burada açılır.</p></div></div>
       <div class="legend" id="legend"></div>
       <div class="wheelbar">
         <button class="btn ghost sm" id="themeBtn">Gece görünümü</button>
@@ -391,7 +410,7 @@ head>
  <div class="cta">
    <h3>Haritanda takıldığın bir yer mi var?</h3>
    <p>Bu ekran haritanın iskeletini veriyor. Aklında somut bir soru varsa — bir zamanlama, bir yerleşim, bir dönem — haritanla birlikte yaz, sana özel yanıtlansın.</p>
-   <a href="/soru-sor" class="btn">Bir soru bu haritada nasıl okunur →</a>
+   <a hidden data-kapi-gizli href="/soru-sor" class="btn">Bir soru bu haritada nasıl okunur →</a>
  </div>
 </div>
 
@@ -411,7 +430,8 @@ head>
 
 <script src="/astronomy.browser.min.js?v=3"></script>
 <script src="/sorbi-eph.js?v=3"></script>
-<script src="/sorbi-chart.js?v=11"></script>
+<script src="/sorbi-chart.js?v=12"></script>
+<script src="/sorbi-cark.js?v=1" defer></script>
 <script>
 (function(){
 "use strict";
@@ -1233,7 +1253,7 @@ function renderAll(){
       '<div style="font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.55rem">✦ Haritanda dikkatimi çekenler</div>'+
       rare.slice(0,3).map(function(r){return '<div style="font-size:.87rem;line-height:1.55;margin:.38rem 0;color:var(--ink)">'+r+'</div>';}).join('')+
       '<div style="margin-top:.8rem;display:flex;align-items:center;gap:.7rem;flex-wrap:wrap">'+
-        '<a href="/soru-sor" style="display:inline-block;background:linear-gradient(135deg,#E3A692,#F2D3B8);color:#2B140C;padding:.5rem 1.05rem;border-radius:99px;font-weight:600;font-size:.8rem;text-decoration:none">Yöntemi gör ✦</a>'+
+        '<a hidden data-kapi-gizli href="/soru-sor" style="display:inline-block;background:linear-gradient(135deg,#E3A692,#F2D3B8);color:#2B140C;padding:.5rem 1.05rem;border-radius:99px;font-weight:600;font-size:.8rem;text-decoration:none">Yöntemi gör ✦</a>'+
         '<span style="font-size:.74rem;color:var(--dim)">yöntemi gör</span></div></div>' : '';
     document.getElementById('sumBox').innerHTML=
       '<div class="sum-big3">'+g3('sun','Güneş')+g3('moon','Ay')+g3('asc','Yükselen')+'</div>'+
@@ -1276,14 +1296,37 @@ function renderAll(){
   renderDecl(ch);
 
   /* çark */
-  document.getElementById('wheel').innerHTML=drawWheel(ch,out,{
-    title:CUR.title, sub:CUR.sub, aspects:asps, theme:THEME
-  });
+  /* çark — iki kademeli detay: dar ekranda derece etiketleri düşer, glif+ev büyür */
+  SB_WHEEL={ch:ch,out:out,asps:asps};
+  sbCizWheel();
   var TT=THEMES[THEME];
   document.getElementById('legend').innerHTML = out
     ? '<span><i style="background:'+TT.glyph+'"></i>'+esc(CUR.labelInner)+' (iç)</span><span><i style="background:'+TT.glyphB+'"></i>'+esc(CUR.labelOuter)+' (dış)</span>'
     : '<span><i style="background:'+TT.asp['a-maj']+'"></i>kavuşum/karşıt</span><span><i style="background:'+TT.asp['a-hard']+'"></i>sert</span><span><i style="background:'+TT.asp['a-soft']+'"></i>yumuşak</span><span>çizgi kalınlığı = orb sıkılığı</span>';
 }
+
+var SB_WHEEL=null, SB_TIER=null;
+function sbTier(){
+  var el=document.getElementById('wheel');
+  var w=(el&&el.clientWidth)||window.innerWidth||900;
+  return w<560 ? 'mobil' : null;
+}
+function sbCizWheel(){
+  if(!SB_WHEEL) return;
+  var t=sbTier(); SB_TIER=t;
+  document.getElementById('wheel').innerHTML=drawWheel(SB_WHEEL.ch,SB_WHEEL.out,{
+    title:CUR.title, sub:CUR.sub, aspects:SB_WHEEL.asps, theme:THEME,
+    interactive:true, tier:t
+  });
+  if(window.SorbiCark) window.SorbiCark.bagla('#wheel','#carkPanel',{});
+}
+(function(){
+  var z=null;
+  window.addEventListener('resize', function(){
+    clearTimeout(z);
+    z=setTimeout(function(){ if(SB_WHEEL && sbTier()!==SB_TIER) sbCizWheel(); }, 180);
+  });
+})();
 
 function triGrid(ch,asps){
   var G=ch.pts.filter(function(p){return p.k!=='pof';});
@@ -1968,6 +2011,7 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
 </style>
 <!-- SORBI-FOOTER:START -->
 <style>
+[data-kapi-gizli]{display:none!important}
 .sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0D0810;font-family:'Inter',system-ui,sans-serif}
 .sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr 1fr;gap:2rem}
 .sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#E3A692;margin:0 0 .8rem;font-weight:600}
@@ -1986,32 +2030,12 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
   <div><h4>Hesaplayıcılar</h4>
    <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
    <a href="/dogum-haritasi-hesaplama">Doğum Haritası</a>
-   <a href="/yukselen-burc-hesaplama">Yükselen Burç</a>
-   <a href="/ay-burcu-hesaplama">Ay Burcu</a>
-   <a href="/sinastri">Sinastri Rehberi</a>
-   <a href="/natal-harita">Natal Harita Rehberi</a>
   </div>
   <div><h4>Gökyüzü</h4>
    <a href="/bugun">Bugün Gökyüzünde</a>
-   <a href="/horary">An Haritası (Horary)</a>
-   <a href="/uygun-gun-secimi">Uygun Gün Seçimi</a>
-   <a href="/retro-ay-takvimi">Retro & Ay Takvimi</a>
-   <a href="/astrokartografi">Astrokartografi</a>
-   <a href="/yasam-donguleri">Yaşam Döngüleri</a>
-  </div>
-  <div><h4>Burçlar</h4>
-   <a href="/burc-ozellikleri">Burç Özellikleri</a>
-   <a href="/gunluk-burc-yorumlari">Günlük Yorumlar</a>
-   <a href="/ates-burclari">Ateş Burçları</a>
-   <a href="/toprak-burclari">Toprak Burçları</a>
-   <a href="/hava-burclari">Hava Burçları</a>
-   <a href="/su-burclari">Su Burçları</a>
   </div>
   <div><h4>Sorbi</h4>
    <a href="/">Ana Sayfa</a>
-   <a href="/soru-sor">Soru Sorma Yöntemi</a>
-   <a href="/gunun-karti">Günün Kartı</a>
-   <a href="/seni-taniyorum">Seni Tanıyorum</a>
    <a href="/#uygulama">Uygulama</a>
    <a href="/destek">Destek</a>
   </div>

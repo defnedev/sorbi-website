@@ -7,6 +7,7 @@
 "use strict";
 var RAD=Math.PI/180, DEG=180/Math.PI;
 function norm(x){return ((x%360)+360)%360;}
+var SNAME=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
 var SGLYPH=['♈︎','♉︎','♊︎','♋︎','♌︎','♍︎','♎︎','♏︎','♐︎','♑︎','♒︎','♓︎'];
 function dms(l){
   l=norm(l); var s=Math.floor(l/30), g=l-s*30;
@@ -221,11 +222,16 @@ function drawWheel(inner,outer,opt){
     hOut:235, hNum:221, asp:208
   } : {
     zo:402, tb:391, zi:355, zg:373,
-    g1:325, d1:295,
+    g1:325, d1:(opt.interactive?281:295),   /* interaktif: glif-etiket açıklığı spec'teki 40/860 orana çekilir */
     hOut:254, hNum:238, asp:221
   };
 
   function esc(v){ return String(v==null?'':v).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  var ACT = !!opt.interactive;
+  var TIER = opt.tier==='mobil';   /* dar ekran: derece etiketi düşer, glif büyür */
+  /* etkileşimli çarkta hiçbir bilgi yazısı 11px efektif altına inmesin:
+     860px'de 14.6 birim = 13.4px · 330px mobil kademede 31 birim = 11px */
+  var FMIN = TIER ? 32 : (ACT ? 14.8 : 0);   /* tiklanabilir katman */
   var noH = !!opt.noHouses;
   var orient = noH ? 0 : (inner.o.house==='W' ? norm(Math.floor(inner.asc/30)*30) : norm(inner.asc));
   function P(lon,r){ var t=norm(lon-orient)*RAD; return [cx-r*Math.cos(t), cy+r*Math.sin(t)]; }
@@ -245,10 +251,12 @@ function drawWheel(inner,outer,opt){
       '<line x1="'+(x-r*.7).toFixed(1)+'" y1="'+(y+r*.7).toFixed(1)+'" x2="'+(x+r*.7).toFixed(1)+'" y2="'+(y-r*.7).toFixed(1)+'"/></g>');
   }
   function txt(x,y,s,fill,size,extra,fam,weight,halo){
+    if(FMIN && fill!==T.star) size=Math.max(size,FMIN);
     o.push('<text x="'+x.toFixed(2)+'" y="'+y.toFixed(2)+'" fill="'+fill+'" font-size="'+size+'" text-anchor="middle" dominant-baseline="central" style="font-variant-numeric:tabular-nums;font-feature-settings:&quot;tnum&quot;" font-family="'+(fam||T.font||"Arial,Helvetica,sans-serif")+'"'+(weight?' font-weight="'+weight+'"':'')+
       (halo?' stroke="'+T.center+'" stroke-width="'+(size*.28).toFixed(1)+'" paint-order="stroke" stroke-linejoin="round"':'')+(extra||'')+'>'+s+'</text>');
   }
   function txtA(x,y,st,fill,size,anchor,weight,op){
+    if(FMIN) size=Math.max(size,FMIN);
     o.push('<text x="'+x.toFixed(2)+'" y="'+y.toFixed(2)+'" fill="'+fill+'" font-size="'+size+
       '" text-anchor="'+anchor+'" dominant-baseline="central" style="font-variant-numeric:tabular-nums;font-feature-settings:&quot;tnum&quot;"'+
       ' font-family="'+(T.font||'Arial,Helvetica,sans-serif')+'"'+(weight?' font-weight="'+weight+'"':'')+
@@ -343,7 +351,7 @@ function drawWheel(inner,outer,opt){
     var lp=P(cu,R.zo+(ana?21:19));
     var dikey=(a[1]==='MC'||a[1]==='IC');
     if(ana && T.flat && !dikey) lp=[lp[0],lp[1]-6];
-    txt(lp[0],lp[1],a[1],T.angleLbl,ana?12:10.5,null,null,700);
+    txt(lp[0],lp[1],a[1],T.angleLbl,(ana?12:10.5)*(TIER?1.5:1),null,null,700);
     if(ana && T.flat){
       var ad=dms(cu), asi=Math.floor(norm(cu)/30), fs2=8.6;
       var lp2=dikey?P(cu,R.zo+36):[lp[0],lp[1]+14];
@@ -363,7 +371,8 @@ function drawWheel(inner,outer,opt){
     var tight=1-Math.min(1,x.abs/(x.as.orb*1.4));
     var w = T.flat ? (x.as.major ? (.8+tight*.7) : .7) : (x.as.major ? (.55+tight*1.25) : (.35+tight*.4));
     var op = T.flat ? (x.as.major ? (.55+tight*.45) : .55) : (x.as.major ? (.45+tight*.5) : (.32+tight*.33));
-    o.push('<line x1="'+P(x.a.lon,R.asp)[0].toFixed(1)+'" y1="'+P(x.a.lon,R.asp)[1].toFixed(1)+
+    o.push('<line'+(ACT?' class="sb-asp" data-a="'+x.a.k+'" data-b="'+x.b.k+'" data-w="'+w.toFixed(2)+'" data-o="'+op.toFixed(2)+'"':'')+
+      ' x1="'+P(x.a.lon,R.asp)[0].toFixed(1)+'" y1="'+P(x.a.lon,R.asp)[1].toFixed(1)+
       '" x2="'+P(x.b.lon,R.asp)[0].toFixed(1)+'" y2="'+P(x.b.lon,R.asp)[1].toFixed(1)+
       '" stroke="'+T.asp[x.as.cls]+'" stroke-width="'+w.toFixed(2)+'" opacity="'+op.toFixed(2)+'"'+
       (x.as.major?'':' stroke-dasharray="3,3"')+'/>');
@@ -372,20 +381,30 @@ function drawWheel(inner,outer,opt){
   /* ── gezegen halkası ── */
   function ring(list,rg,rd,tickFrom,col,degCol,gsz){
     var items=list.slice().sort(function(a,b){return norm(a.lon-orient)-norm(b.lon-orient);});
+    /* çakışma yayılması: sıra bir kez kurulur, döngü içinde norm YOK —
+       yoksa 0° dikişinde kümelenen glifler sarmalanıp sırayı bozuyordu. */
     var disp=items.map(function(p){return norm(p.lon-orient);});
-    var MIN = outer?8.6:9.6;
+    var MIN = (TIER||ACT) ? 15.5 : (outer?8.6:9.6);
     for(var it=0;it<300;it++){
       var moved=false;
       for(var i=0;i<disp.length;i++){
         var j=(i+1)%disp.length;
-        var d=disp[j]-disp[i]; if(d<0) d+=360;
-        if(d<MIN){ var push=(MIN-d)/2; disp[i]=norm(disp[i]-push); disp[j]=norm(disp[j]+push); moved=true; }
+        var d=disp[j]-disp[i]; if(i===disp.length-1) d+=360;
+        if(d<MIN){ var push=(MIN-d)/2; disp[i]-=push; disp[j]+=push; moved=true; }
       }
       if(!moved) break;
     }
-    var fs = outer?8.2:9.4;
+    var fs = ACT ? 14.8 : (outer?8.2:9.4);
     items.forEach(function(p,i){
       var da=norm(disp[i]+orient);
+      if(ACT){
+        var xx=dms(p.lon), si0=Math.floor(norm(p.lon)/30);
+        var al=p.n+', '+SNAME[si0]+' '+xx.d+' derece '+xx.m+' dakika'+
+               (p.house?', '+p.house+'. ev':'')+(p.rx?', geri hareketli':'');
+        o.push('<g class="sb-pl" data-k="'+p.k+'" data-lon="'+p.lon.toFixed(4)+'" data-draw="'+da.toFixed(2)+'"'+
+               (p.house?' data-house="'+p.house+'"':'')+(p.rx?' data-rx="1"':'')+
+               ' role="button" tabindex="0" aria-label="'+esc(al)+'">');
+      }
       /* gösterge: gerçek dereceden kısa çentik, sonra kaydırılmış glife dirsek (referans çarkların standardı) */
       var uc=rg+gsz*0.72; var q1=P(p.lon,tickFrom), q2=P(p.lon,(tickFrom+uc)/2), q3=P(da,uc);
       o.push('<polyline points="'+q1[0].toFixed(1)+','+q1[1].toFixed(1)+' '+q2[0].toFixed(1)+','+q2[1].toFixed(1)+
@@ -393,10 +412,16 @@ function drawWheel(inner,outer,opt){
       var gp=P(da,rg);
       if(T.flat) o.push('<circle cx="'+gp[0].toFixed(1)+'" cy="'+gp[1].toFixed(1)+'" r="'+(gsz*.62).toFixed(1)+'" fill="'+T.bg+'" opacity=".92"/>');
       var rxVar = p.rx && !/^(nod|sno|lil|pof)$/.test(p.k);
-      var gcol=col, gs2=gsz*(p.maj?1:.86);
+      var gcol=col, gs2=gsz*(p.maj?1:.86)*(TIER?1.5:1);
       if(p.k==='pof') pof(gp[0],gp[1],gs2*.8,gcol);
       else if(!glyph(gp[0],gp[1],p.k,gs2,gcol,.5)) txt(gp[0],gp[1],p.g,gcol,gs2);
-      /* etiket: derece · burç glifi · dakika — astro.com / astro-seek düzeni */
+      /* etiket: derece · burç glifi · dakika — astro.com / astro-seek düzeni
+         dar ekranda düşer: 11px altına inen yazı yerine dereceyi panel gösterir */
+      if(TIER){
+        if(ACT){ o.push('<circle class="sb-hit" cx="'+gp[0].toFixed(1)+'" cy="'+gp[1].toFixed(1)+
+                 '" r="64" fill="transparent" pointer-events="all"/></g>'); }   /* 330px ekranda ~44 CSS px */
+        return;
+      }
       var lp=P(da,rd), x=dms(p.lon), si=Math.floor(norm(p.lon)/30);
       var dtxt=x.d+'°', mtxt=pad2(x.m)+'′'+(rxVar?' ':'');
       var cw=fs*0.575, gw=fs*1.15, gap=fs*0.32;
@@ -406,6 +431,10 @@ function drawWheel(inner,outer,opt){
       glyph(x0+wd+gap+gw/2, lp[1], 'z'+si, fs*1.28, T.el[si%4], 0);
       txtA(x0+wd+gap+gw+gap, lp[1], mtxt, degCol, fs*0.86, 'start', null, 1);
       if(rxVar) txtA(x0+W, lp[1], 'R', T.rx, fs*0.9, 'end', 700, 1);
+      if(ACT){
+        o.push('<circle class="sb-hit" cx="'+gp[0].toFixed(1)+'" cy="'+gp[1].toFixed(1)+
+               '" r="30" fill="transparent" pointer-events="all"/></g>');
+      }
     });
   }
 
@@ -438,14 +467,14 @@ function drawWheel(inner,outer,opt){
 
   /* ── merkez ── */
   if(!T.flat){ circ(outer?18:21,T.ringSoft,.8,T.center); txt(cx,cy,'✦',T.star,11); }
-  if(opt.title||opt.sub){
+  if(!TIER && (opt.title||opt.sub)){
     var title=esc(opt.title||''), sub=esc(opt.sub||'');
     var by=S-30;
     if(title) txt(S/2,by,title.length>44?title.slice(0,43)+'…':title,T.centerTxt,12.5,null,T.serif||'Playfair Display,Georgia,serif',600);
     if(sub) txt(S/2,by+15,sub,T.centerSub,10);
   }
 
-  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+S+' '+S+'" width="100%" style="max-width:100%;height:auto;border-radius:10px">'+o.join('')+'</svg>';
+  return '<svg xmlns="http://www.w3.org/2000/svg"'+(ACT?' class="sb-cark"':'')+' viewBox="0 0 '+S+' '+S+'" width="100%" style="max-width:100%;height:auto;border-radius:10px">'+o.join('')+'</svg>';
 }
 
 

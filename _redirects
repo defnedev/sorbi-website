@@ -5,46 +5,47 @@
 /invite/*   /?ref=:splat#uygulama      302
 /share/*    /#uygulama                 302
 
-# App Store Support URL alias (2026-08-03)
-/support        /destek.html   301
-/support.html   /destek.html   301
-/destek         /destek.html   301
+# App Store Support URL alias (2026-08-03, loop fix 2026-09-14)
+# NOT: Pages .html -> uzantisiz otomatik yonlendirir; hedef uzantisiz olmali.
+/support        /destek   301
+/support.html   /destek   301
+/destek.html    /destek   301
 
-# Parked pages → kept pages (2026-07-21)
-/rehber       /   301
-/rehber.html  /   301
-/astroloji-sozlugu       /   301
-/astroloji-sozlugu.html  /   301
-/en-uyumlu-burclar       /sinastri   301
-/en-uyumlu-burclar.html  /sinastri   301
+# Kullanim kosullari tek kanonik adreste (2026-09-14)
+/terms        https://defnedev.github.io/sorbi-legal/terms/   301
+/terms.html   https://defnedev.github.io/sorbi-legal/terms/   301
+
+# Takma adlar karara baglandi (2026-09-14)
+# Konusu tutan canli sayfa varsa 301; karsiligi olmayanlar functions/ ile 410.
+/en-uyumlu-burclar       /burc-uyumu   301
+/en-uyumlu-burclar.html  /burc-uyumu   301
 /sinastri-nedir       /sinastri   301
 /sinastri-nedir.html  /sinastri   301
-/transit-nedir       /   301
-/transit-nedir.html  /   301
-/saturn-donusu-nedir       /   301
-/saturn-donusu-nedir.html  /   301
-/merkur-retrosu-nedir       /   301
-/merkur-retrosu-nedir.html  /   301
 /dogum-haritasi-nedir       /dogum-haritasi-hesaplama   301
 /dogum-haritasi-nedir.html  /dogum-haritasi-hesaplama   301
+/yukselen-burc-nedir       /yukselen-burc-hesaplama   301
+/yukselen-burc-nedir.html  /yukselen-burc-hesaplama   301
+/ay-burcu-nedir       /ay-burcu-hesaplama   301
+/ay-burcu-nedir.html  /ay-burcu-hesaplama   301
 /gunes-burcu-nedir       /burc-ozellikleri   301
 /gunes-burcu-nedir.html  /burc-ozellikleri   301
-/ay-burcu-nedir       /burc-ozellikleri   301
-/ay-burcu-nedir.html  /burc-ozellikleri   301
-/yukselen-burc-nedir       /dogum-haritasi-hesaplama   301
-/yukselen-burc-nedir.html  /dogum-haritasi-hesaplama   301
 /burclar-ve-tarihleri       /burc-ozellikleri   301
 /burclar-ve-tarihleri.html  /burc-ozellikleri   301
+/merkur-retrosu-nedir       /retro-ay-takvimi   301
+/merkur-retrosu-nedir.html  /retro-ay-takvimi   301
+/saturn-donusu-nedir       /yasam-donguleri   301
+/saturn-donusu-nedir.html  /yasam-donguleri   301
+/transit-nedir       /bugun   301
+/transit-nedir.html  /bugun   301
 
-# Paralı-hizmet sayfaları söküldü (2026-07-30) → ana sayfa
-/randevu                      /   301
-/randevu.html                 /   301
-/karma-paketler               /   301
-/karma-paketler.html          /   301
-/astrodefne-hizmetler-section /   301
-/astrodefne-hizmetler-section.html /   301
-/yorumlar                     /   301
-/yorumlar.html                /   301
+# 410 GONE (karsiligi olan canli sayfa yok) - govde functions/<ad>.js icinde.
+# .html varyantlari uzantisiz adrese dusurulur, oradan 410 doner.
+/rehber.html                       /rehber   301
+/astroloji-sozlugu.html            /astroloji-sozlugu   301
+/randevu.html                      /randevu   301
+/karma-paketler.html               /karma-paketler   301
+/yorumlar.html                     /yorumlar   301
+/astrodefne-hizmetler-section.html /astrodefne-hizmetler-section   301
 
 # Tek kanonik gizlilik politikası (2026-08-03)
 # Yerel privacy.html app + App Store Connect ile çelişiyordu (üçüncü taraf

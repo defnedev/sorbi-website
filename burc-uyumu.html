@@ -154,7 +154,7 @@ function calc(){if(a===null||b===null)return;
 function shareIt(){const t=(a!==null&&b!==null)?`${SIGNS[a]} & ${SIGNS[b]} burç uyumumuz %${document.getElementById('score').textContent.replace('%','')} çıktı! Sen de dene:`:'Burç uyumunu hesapla:';const url='https://sorbiapp.com/burc-uyumu';
  if(navigator.share){navigator.share({title:'Burç Uyumu — Sorbi',text:t,url}).catch(()=>{});}
  else if(navigator.clipboard){navigator.clipboard.writeText(t+' '+url);alert('Link kopyalandı ✦');}
- else{window.open('https://wa.me/?text='+encodeURIComponent(t+' '+url),'_blank');}}
+ else{alert(t+' '+url);}}
 </script><!-- SORBI-FOOTER:START -->
 <style>
 .sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0D0810;font-family:'Inter',system-ui,sans-serif}
