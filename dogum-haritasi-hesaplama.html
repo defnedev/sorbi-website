@@ -105,7 +105,7 @@ td.pl{color:var(--ink)}
 .lockcard .inc{font-size:.83rem;color:var(--dim);margin:.8rem auto 1.1rem;max-width:430px}
 .lockcard .inc b{color:var(--gold-lt);font-weight:600}
 .lockcard a{display:inline-block;text-decoration:none;padding:.8rem 1.6rem;border-radius:99px;font-weight:600;font-size:.94rem;margin:.25rem}
-.lockcard a.buy{background:var(--terra);color:#F6EFE1;box-shadow:0 0 20px rgba(223,169,143,.18)}
+.lockcard a.buy,.lockcard button.buy{background:var(--terra);color:#F6EFE1;box-shadow:0 0 20px rgba(223,169,143,.18);border:none;padding:.8rem 1.6rem;border-radius:99px;font-weight:600;font-size:.94rem;margin:.25rem;cursor:pointer;font-family:'Inter'}
 .lockcard a.ghost{background:transparent;border:1px solid var(--lineg);color:var(--gold-lt)}
 .rprice{font-size:1rem;color:var(--gold-lt);margin:.2rem 0 .9rem}.rprice b{color:#F2D3B8;font-size:1.15rem}
 .rtag{display:inline-block;font-size:.62rem;letter-spacing:.5px;text-transform:uppercase;color:var(--terra);border:1px solid var(--lineg);border-radius:99px;padding:.1rem .5rem;margin-left:.35rem;vertical-align:1px}
@@ -134,6 +134,17 @@ td.pl{color:var(--ink)}
 .social .s-q span{display:block;font-family:'Inter';font-style:normal;font-size:.7rem;color:var(--dim);margin-top:.15rem;letter-spacing:.5px}
 .social a{color:var(--gold);text-decoration:none;font-size:.84rem;border-bottom:1px solid var(--lineg)}
 .share{text-align:center;margin-top:1.6rem}
+/* katlanır bölümler */
+details.kat{margin-top:1.1rem;border-top:1px solid var(--line)}
+details.kat>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:.6rem;padding:.85rem 0;font-family:'Inter';font-size:.72rem;text-transform:uppercase;letter-spacing:2.2px;color:var(--gold);font-weight:600}
+details.kat>summary::-webkit-details-marker{display:none}
+details.kat>summary::after{content:'+';margin-left:auto;font-size:1.05rem;line-height:1;color:var(--dim);font-weight:400}
+details.kat[open]>summary::after{content:'–'}
+details.kat>summary small{font-weight:400;letter-spacing:.2px;text-transform:none;color:var(--dim);font-size:.76rem}
+details.kat>.kat-b{padding-bottom:.5rem}
+details.kat .sec{margin-top:0}
+.ozet{margin-top:1.6rem}.ozet .reading{font-size:.95rem}
+.sec-h small{font-weight:400;letter-spacing:.2px;text-transform:none;color:var(--dim);font-size:.76rem}
 .share button{background:transparent;border:1px solid var(--lineg);color:var(--dim);padding:.55rem 1.3rem;border-radius:999px;cursor:pointer;font-size:.82rem;font-family:'Inter'}
 @media(max-width:520px){.grid{grid-template-columns:1fr}.bt3{grid-template-columns:1fr 1fr}}
 @media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}</style>
@@ -146,19 +157,25 @@ td.pl{color:var(--ink)}
 <body>
 <!-- SORBI-NAV:START -->
 <style>
-.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.68rem 1.2rem;background:rgba(13,8,16,.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
+.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(13,8,16,.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
 .sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:#F2D3B8;font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
 .sbnav .sbnav-lg i{font-style:normal;color:#E3A692;margin-right:.45rem;letter-spacing:0}
 .sbnav .sbnav-lg:hover{text-decoration:none;color:#fff}
-.sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:0 0 0 auto;padding:0;max-width:none;flex-wrap:nowrap}
+.sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:-4px -4px -4px auto;padding:4px;max-width:none;flex-wrap:nowrap}
 .sbnav nav::-webkit-scrollbar{display:none}
-.sbnav nav a{color:#9BA0AB;text-decoration:none;font-size:.85rem;font-weight:500;padding:.4rem .78rem;border-radius:99px;white-space:nowrap;transition:color .15s,background .15s}
-.sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.06);text-decoration:none}
-.sbnav nav a.on{color:#F2D3B8;background:rgba(227,166,146,.13)}
-@media(min-width:900px){.sbnav{padding:.95rem max(2rem,calc((100% - 1200px)/2));gap:2rem;min-height:70px}.sbnav .sbnav-lg{font-size:1.3rem}.sbnav nav a{font-size:.9rem;line-height:1.5;padding:.45rem .9rem}}
-@media(max-width:560px){.sbnav{padding:.55rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem;letter-spacing:.12em}.sbnav nav a{font-size:.79rem;padding:.34rem .55rem}}
-@media(min-width:900px) and (max-width:1120px){.sbnav{gap:1rem}.sbnav .sbnav-lg{font-size:1.15rem}.sbnav nav a{font-size:.84rem;padding:.45rem .5rem}}
-@media(max-width:899px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}}
+.sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:#9BA0AB;text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
+.sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);text-decoration:none}
+.sbnav nav a:active{transform:scale(.97)}
+.sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:#1A0F14;background:#E3A692;box-shadow:none;font-weight:600}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#1A0F14;background:#F2D3B8;box-shadow:none}
+.sbnav nav a:focus{outline:none}
+.sbnav nav a:focus-visible{outline:2px solid #F2D3B8;outline-offset:2px}
+.sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:#F2EFE9}
+@media(prefers-reduced-motion:reduce){.sbnav nav a{transition:none}.sbnav nav a:active{transform:none}}
+@media(min-width:900px){.sbnav{padding:.9rem max(2rem,calc((100% - 1200px)/2));gap:2rem;min-height:70px}.sbnav .sbnav-lg{font-size:1.3rem}.sbnav nav a{font-size:.9rem;padding:0 .95rem}}
+@media(max-width:560px){.sbnav{padding:.3rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem;letter-spacing:.12em}.sbnav nav a{font-size:.8rem;padding:0 .66rem}}
+@media(min-width:900px) and (max-width:1120px){.sbnav{gap:1rem}.sbnav .sbnav-lg{font-size:1.15rem}.sbnav nav a{font-size:.84rem;padding:0 .5rem}}
+@media(max-width:1119px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 85%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 85%,transparent)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%);mask-image:linear-gradient(90deg,transparent,#000 8%)}}
 @media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#000 78%,transparent);mask-image:linear-gradient(90deg,#000 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 78%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 78%,transparent)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%);mask-image:linear-gradient(90deg,transparent,#000 14%)}}
 </style>
 <header class="sbnav">
@@ -172,11 +189,11 @@ td.pl{color:var(--ink)}
   <a href="/nadirlik">Nadirlik</a>
   <a href="/sayim">Sayım</a>
   <a href="/ogren">Öğren</a>
-  <a href="/haritam" id="sorbiNavHaritam" style="display:none">Haritam</a>
+  <a href="/haritam" id="sorbiNavHaritam">✦ Profilim</a>
  </nav>
 </header>
-<script>(function(){try{if(JSON.parse(localStorage.getItem('sorbi_profile')||'null')){var e=document.getElementById('sorbiNavHaritam');if(e)e.style.display='';}}catch(e){}try{var p=location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';if(/burc/.test(p))p='/burc-ozellikleri';document.querySelectorAll('.sbnav nav a').forEach(function(a){var h=a.getAttribute('href').replace(/\.html$/,'');if(h===p||(h!=='/'&&p.indexOf(h+'-')===0))a.classList.add('on');});}catch(e){}})();</script>
-<script>(function(){var n=document.querySelector('.sbnav nav');if(!n)return;function f(){n.classList.toggle('son',n.scrollLeft+n.clientWidth>=n.scrollWidth-4);n.classList.toggle('ara',n.scrollLeft>4)}n.addEventListener('scroll',f,{passive:true});window.addEventListener('resize',f);f();var a=n.querySelector('a.on');if(a&&a.offsetLeft+a.offsetWidth>n.clientWidth)n.scrollLeft=a.offsetLeft-16;f();})();</script>
+<script>(function(){try{var M={'/soru-sor':'/araclar','/horary':'/araclar','/natal-harita':'/araclar','/sinastri':'/araclar','/seni-taniyorum':'/araclar','/yukselen-burc-hesaplama':'/araclar','/ay-burcu-hesaplama':'/araclar','/astrokartografi':'/araclar','/uygun-gun-secimi':'/araclar','/yasam-donguleri':'/araclar','/tarot':'/araclar','/gunun-karti':'/araclar','/retro-ay-takvimi':'/araclar','/burc-uyumu':'/araclar','/rapor-araci':'/araclar','/sayim-yildiz':'/sayim','/sayim-yukselen':'/sayim','/gunluk-burc-yorumlari':'/bugun'};var p=location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';if(M[p])p=M[p];else if(/burc/.test(p))p='/burc-ozellikleri';document.querySelectorAll('.sbnav nav a').forEach(function(a){var h=a.getAttribute('href').replace(/\.html$/,'');if(h===p||(h!=='/'&&h!=='/haritam'&&p.indexOf(h+'-')===0)){a.classList.add('on');a.setAttribute('aria-current','page');}});}catch(e){}})();</script>
+<script>(function(){var n=document.querySelector('.sbnav nav');if(!n)return;function f(){n.classList.toggle('son',n.scrollLeft+n.clientWidth>=n.scrollWidth-4);n.classList.toggle('ara',n.scrollLeft>4)}n.addEventListener('scroll',f,{passive:true});window.addEventListener('resize',f);f();var a=n.querySelector('a.on');function g(){if(a&&n.scrollWidth>n.clientWidth){var d=a.getBoundingClientRect().left-n.getBoundingClientRect().left+n.scrollLeft;n.scrollLeft=Math.max(0,Math.round(d-(n.clientWidth-a.offsetWidth)/2));}f();}g();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(g);})();</script>
 <!-- SORBI-NAV:END -->
 <!-- SORBI-TEMA:START -->
 <style>
@@ -200,7 +217,7 @@ body:has(> .sky)::before{display:none}
  <div class="welcome" id="welcomeBar"><span>Tekrar hoş geldin, <b id="wbName"></b> ✦ <span style="color:var(--dim)">haritan hazır.</span></span><a id="wbLogout">çıkış</a></div>
  <div class="top">
   <h1>Doğum Haritan</h1>
-  <p class="sub">Doğduğun anın gökyüzü — on gezegen, yükselen, on iki ev ve aralarındaki açılar. Bir kez gir, haritan hazır.</p>
+  <p class="sub">Doğduğun anın gökyüzü: on gezegen, yükselen, on iki ev, açılar. Bir kez gir.</p>
  </div>
 
  <div class="card">
@@ -211,7 +228,7 @@ body:has(> .sky)::before{display:none}
    <div class="fg full geo"><label>Doğum Yeri</label><input id="cPlace" placeholder="Şehir yaz (örn. İstanbul, İzmir, Ankara)" autocomplete="off"><div class="geo-results" id="geoResults"></div></div>
   </div>
   <div class="geo-picked" id="geoPicked">Varsayılan: İstanbul (41.01, 28.98)</div>
-  <label class="checkline"><input type="checkbox" id="cNoTime"> Doğum saatimi bilmiyorum (Yükselen ve evler hesaplanmaz)</label>
+  <label class="checkline"><input type="checkbox" id="cNoTime"> Doğum saatimi bilmiyorum (Yükselen ve evler çıkmaz)</label>
   <span class="adv-toggle" id="advToggle">Gelişmiş: koordinat / saat dilimi / ev sistemi</span>
   <div class="adv" id="advBox">
    <div class="grid" style="margin-top:.3rem">
@@ -230,44 +247,44 @@ body:has(> .sky)::before{display:none}
  <div id="result">
   <div class="arsiv" id="pArsiv"></div>
   <div class="wheelwrap"><svg id="rWheel" viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg"></svg></div>
-  <div id="pNoTimeNote" style="display:none;font-size:.82rem;color:var(--dim);background:rgba(223,169,143,.06);border:1px solid var(--line);border-radius:10px;padding:.7rem .9rem;margin-bottom:1rem">Doğum saati girilmediği için Yükselen ve evler hesaplanmadı; harita burç-temelli gösteriliyor.</div>
+  <div id="pNoTimeNote" style="display:none;font-size:.82rem;color:var(--dim);background:rgba(223,169,143,.06);border:1px solid var(--line);border-radius:10px;padding:.7rem .9rem;margin-bottom:1rem">Doğum saati yok: Yükselen ve evler hesaplanmadı, harita burç temelli.</div>
 
   <div class="sec"><div class="sec-h">Büyük Üçlü</div><div class="bt3" id="pBt3"></div></div>
 
-  <div class="teaser" id="pTeaser"></div>
+  <div class="sec ozet"><div class="sec-h">Ne anlama geliyor <small>özün · ihtiyacın · dışa yansıyan tarzın</small></div>
+   <div class="reading"><span class="lead" id="pTeaser"></span><span id="pOzet"></span></div>
+  </div>
 
-  <div class="sec"><div class="sec-h">Gezegen Konumları</div>
+  <details class="kat" id="katKonum"><summary>Gezegen Konumları <small id="katKonumN"></small></summary><div class="kat-b">
    <table id="pTable"><thead><tr><th>Gezegen</th><th>Konum</th><th id="thHouse">Ev</th></tr></thead><tbody></tbody></table>
-  </div>
+  </div></details>
 
-  <div class="savecard" id="saveCard">
-   <h3>Haritanı Kaydet</h3>
-   <p>Sorbi profiline kaydet — bir daha bilgi girme, yeni okumaların burada birikir, aldığın tam okuma hesabına tanımlanır.</p>
-   <div class="row"><input id="sfName" placeholder="Adın"><input id="sfEmail" type="email" placeholder="E-posta"><button id="sfSave">Kaydet ✦</button></div>
-   <label class="kvkk"><input type="checkbox" id="sfKvkk"><span>Doğum bilgilerimin ve e-postamın Sorbi profilim için işlenmesine izin veriyorum · <a href="/privacy" style="color:var(--gold)">KVKK</a></span></label>
-   <div class="smsg" id="sfMsg"></div>
-  </div>
-
+  <details class="kat" id="katKaydet"><summary>Haritanı Kaydet <small>bir daha bilgi girme</small></summary><div class="kat-b">
+   <div class="savecard" id="saveCard" style="margin-top:.2rem">
+    <h3>Haritanı Kaydet</h3>
+    <p>Sorbi profiline kaydet; araçlarda bilgilerin otomatik gelir, okumaların burada birikir.</p>
+    <div class="row"><input id="sfName" placeholder="Adın"><input id="sfEmail" type="email" placeholder="E-posta"><button id="sfSave">Kaydet ✦</button></div>
+    <label class="kvkk"><input type="checkbox" id="sfKvkk"><span>Doğum bilgilerimin ve e-postamın Sorbi profilim için işlenmesine izin veriyorum · <a href="/privacy" style="color:var(--gold)">KVKK</a></span></label>
+    <div class="smsg" id="sfMsg"></div>
+   </div>
+  </div></details>
 
   <div class="premium">
    <div class="lockcard">
     <div class="lk">✦</div>
     <h3>Haritan burada bitmiyor.</h3>
-    <p>Bu üç cümle sadece kapıyı araladı. Neden hep aynı yerde takıldığın, en güçlü yanının nerede saklı olduğu ve gökyüzünün <em>şu an</em> sana ne fısıldadığı — hepsi haritanda, kelime kelime seni bekliyor.</p>
-    <div class="inc">Raporda: <b>Haritanın üç cümlesi</b> · <b>baskın imzaların</b> · <b>element & nitelik dengen</b> · <b>açı defteri</b> · <b>gezegen gezegen kişisel yorum</b> · sabit yıldızlar — sade dilde, tek ekranda.</div>
-    <div style="font-size:.78rem;color:var(--gold-lt);margin:.1rem 0 1rem;letter-spacing:.3px">✦ Genel yorum değil — tamamen sana özel, her sabah gökyüzüyle tazelenir</div>
+    <p>Tam raporda: haritanın üç cümlesi, baskın imzalar, element ve nitelik dengesi, açı defteri, gezegen gezegen okuma, sabit yıldızlar.</p>
         <button class="buy" id="unlockBtn">Raporun tamamını aç ✦</button>
-        <div class="rdisc">Kişisel farkındalık amaçlı bir içeriktir; kehanet ya da kesin gelecek vaadi değildir.</div>
+        <div class="rdisc">Kişisel farkındalık amaçlı içeriktir; kehanet ya da kesin gelecek vaadi değildir.</div>
     <a class="ghost" href="/soru-sor">Bir soru bu haritada nasıl okunur →</a>
    </div>
    <div class="locked" id="lockedBody">
-    <div class="sec"><div class="sec-h">Haritanın Üç Cümlesi</div><div id="pUc"></div></div>
-    <div class="sec"><div class="sec-h">Baskın İmzalar</div><div id="pImza"></div></div>
-    <div class="sec"><div class="sec-h">Denge</div><div id="pDenge"></div></div>
-    <div class="sec"><div class="sec-h">Açı Defteri</div><div id="pAci"></div></div>
-    <div class="sec"><div class="sec-h">Harita Okuması</div><div class="reading" id="pReading"></div></div>
-    <div class="sec"><div class="sec-h">Tek Gezegen Analizi</div><div class="pl-tabs" id="plTabs"></div><div id="plReading"></div></div>
-    <div class="sec"><div class="sec-h">Teknik Ek</div><table id="pStars"><tbody></tbody></table></div>
+    <details class="kat" open><summary>Haritanın Üç Cümlesi</summary><div class="kat-b"><div id="pUc"></div></div></details>
+    <details class="kat"><summary>Baskın İmzalar</summary><div class="kat-b"><div id="pImza"></div></div></details>
+    <details class="kat"><summary>Denge <small>element · nitelik</small></summary><div class="kat-b"><div id="pDenge"></div></div></details>
+    <details class="kat"><summary>Açı Defteri <small id="katAciN"></small></summary><div class="kat-b"><div id="pAci"></div></div></details>
+    <details class="kat"><summary>Tek Gezegen Analizi</summary><div class="kat-b"><div class="pl-tabs" id="plTabs"></div><div id="plReading"></div></div></details>
+    <details class="kat"><summary>Teknik Ek <small>sabit yıldızlar</small></summary><div class="kat-b"><table id="pStars"><tbody></tbody></table></div></details>
    </div>
   </div>
 
@@ -406,7 +423,7 @@ document.getElementById('advToggle').onclick=()=>document.getElementById('advBox
 (function(){const pr=getProfile();const b=(pr&&pr.birth&&pr.birth.date)?pr.birth:loadBirth();const g=id=>document.getElementById(id);
  if(pr){const wb=document.getElementById('welcomeBar');g('wbName').textContent=pr.name||(pr.email||'').split('@')[0];wb.style.display='flex';
   document.getElementById('wbLogout').onclick=()=>{if(confirm('Profilinden çıkılsın mı? (bilgiler bu cihazdan silinir)')){localStorage.removeItem('sorbi_profile');location.reload();}};
-  const sc=document.getElementById('saveCard');if(sc)sc.innerHTML='<h3>Profilin hazır ✦</h3><p>Bu harita hesabında kayıtlı. <a href="/haritam" style="color:var(--gold)">Haritam’a git →</a> · soru sor, okumaların orada birikir.</p>';}
+  const sc=document.getElementById('saveCard');if(sc)sc.innerHTML='<h3>Profilin hazır ✦</h3><p>Bu harita hesabında kayıtlı. <a href="/haritam" style="color:var(--gold)">Haritam’a git →</a></p>';const kk=document.getElementById('katKaydet');if(kk)kk.querySelector('summary small').textContent='profilin hazır';}
  if(!b)return;
  if(b.name||(pr&&pr.name))g('cName').value=b.name||pr.name; if(b.date)g('cDate').value=b.date; if(b.time)g('cTime').value=b.time;
  if(b.noTime)g('cNoTime').checked=true; if(b.house)g('cHouse').value=b.house;
@@ -423,7 +440,7 @@ var _sfBtn=document.getElementById('sfSave');if(_sfBtn)_sfBtn.onclick=()=>{
  saveProfile({name:name||birth.name||'',email,birth,createdAt:Date.now()});
  try{fetch('/api/profile',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,name:name||birth.name||'',birth,kvkk:1}),keepalive:true});}catch(e){}
  const wb=document.getElementById('welcomeBar');document.getElementById('wbName').textContent=name||email.split('@')[0];wb.style.display='flex';
- document.getElementById('saveCard').innerHTML='<h3>Profilin hazır ✦</h3><p>Haritan kaydedildi'+(name?', '+name:'')+'. Bundan sonra yükselen, uygun gün, astrokartografi gibi araçlarda bilgilerin otomatik gelecek — bir daha girmene gerek yok.</p>';
+ document.getElementById('saveCard').innerHTML='<h3>Profilin hazır ✦</h3><p>Haritan kaydedildi'+(name?', '+name:'')+'. Araçlarda bilgilerin otomatik gelecek.</p>';
 };
 
 document.getElementById('gen').onclick=()=>{
@@ -449,6 +466,10 @@ document.getElementById('gen').onclick=()=>{
 
  const sigs=signatures(ch,noTime);
  document.getElementById('pTeaser').textContent='“'+sigs[0].head+'”';
+ {const su0=signOf(ch.pls[0].lon),mo0=signOf(ch.pls[1].lon),as0=signOf(ch.asc);
+  let oz=`Güneş ${SIGNS[su0]} — ${SUN_T[su0]}. Ay ${SIGNS[mo0]} — ${MOON_T[mo0]}.`;
+  oz+=noTime?' Yükselen için doğum saati gerekli.':` Yükselen ${SIGNS[as0]} — ${ASC_T[as0]}.`;
+  document.getElementById('pOzet').textContent=oz;}
  document.getElementById('pUc').innerHTML=sigs.slice(0,3).map((x,i)=>`<div class="uc"><div class="uc-n">0${i+1}</div><div><div class="uc-head">${x.head}</div><div class="uc-prose">${x.prose}</div></div></div>`).join('');
  document.getElementById('pImza').innerHTML=sigs.slice(0,Math.min(5,sigs.length)).map(x=>`<div class="imza"><div class="ig">${x.g}</div><div><div class="il">${x.lab}</div><div class="it">${x.head}</div></div></div>`).join('');
 
@@ -464,18 +485,16 @@ document.getElementById('gen').onclick=()=>{
  let rows=ch.pls.map(p=>`<tr><td class="pl">${PGLYPH[p.n]} ${p.n}${p.rx?' <span class="rx">℞</span>':''}</td><td>${fmtDeg(p.lon)}</td>${noTime?'':`<td>${p.house}. ev</td>`}</tr>`).join('');
  if(!noTime)rows+=`<tr><td class="pl" style="color:var(--gold-lt)">⌖ Yükselen</td><td>${fmtDeg(ch.asc)}</td><td>1. ev</td></tr><tr><td class="pl" style="color:var(--gold-lt)">⊤ MC</td><td>${fmtDeg(ch.mc)}</td><td>10. ev</td></tr>`;
  document.querySelector('#pTable tbody').innerHTML=rows;
+ document.getElementById('katKonumN').textContent=noTime?'10 gezegen · burç':'10 gezegen · Yükselen · MC · ev';
 
  const orbFmt=o=>{o=Math.abs(o);const d=Math.floor(o);let m=Math.round((o-d)*60);let dd=d;if(m===60){m=0;dd++;}return dd+'°'+String(m).padStart(2,'0')+'′';};
  const rxset=new Set(ch.pls.filter(p=>p.rx).map(p=>p.n));
  const acol={'Üçgen':'#DFA98F','Altmışlık':'#5E8C86','Kare':'#C4744E','Karşıt':'#B05A32','Kavuşum':'#DFA98F'};
  const sortedAsps=[...ch.asps].sort((a,b)=>Math.abs(a.orb)-Math.abs(b.orb));
- document.getElementById('pAci').innerHTML=`<div style="font-size:.78rem;color:var(--dim);margin-bottom:.5rem">${ch.asps.length} açı</div>`+(sortedAsps.length?sortedAsps.map(a=>{const rr=(rxset.has(a.a)||rxset.has(a.b));return `<div class="aci"><span class="ag">${PGLYPH[a.a]}</span><span class="ag" style="color:${acol[a.nm]}">${AGLYPH[a.nm]}</span><span class="ag">${PGLYPH[a.b]}</span><span class="an">${a.a} ${a.nm.toLowerCase()} ${a.b}${rr?' <span class="rx">℞</span>':''}</span><span class="ao">${orbFmt(a.orb)}</span></div>`;}).join(''):'<div style="color:var(--dim)">Belirgin major açı yok.</div>');
+ document.getElementById('katAciN').textContent=ch.asps.length+' açı';
+ document.getElementById('pAci').innerHTML=(sortedAsps.length?sortedAsps.map(a=>{const rr=(rxset.has(a.a)||rxset.has(a.b));return `<div class="aci"><span class="ag">${PGLYPH[a.a]}</span><span class="ag" style="color:${acol[a.nm]}">${AGLYPH[a.nm]}</span><span class="ag">${PGLYPH[a.b]}</span><span class="an">${a.a} ${a.nm.toLowerCase()} ${a.b}${rr?' <span class="rx">℞</span>':''}</span><span class="ao">${orbFmt(a.orb)}</span></div>`;}).join(''):'<div style="color:var(--dim)">Belirgin major açı yok.</div>');
 
- const su=signOf(ch.pls[0].lon),moS=signOf(ch.pls[1].lon),as=signOf(ch.asc);
- let read=`<span class="lead">${sigs[0].head}</span>Güneş ${SIGNS[su]} — ${SUN_T[su]}. Ay ${SIGNS[moS]} — ${MOON_T[moS]}.`;
- read+=noTime?` Yükselenin için doğum saati gerekli.`:` Yükselen ${SIGNS[as]} — ${ASC_T[as]}. Bu üçlü; özün, duygusal ihtiyaçların ve dışa yansıyan tarzın arasındaki dengeyi anlatır.`;
- read+=` ${sigs.length>1?sigs[1].prose:''}`;
- document.getElementById('pReading').innerHTML=read;
+ /* okuma: lead + üç cümle üstteki 'Ne anlama geliyor' bloğunda */
 
  const plt=document.getElementById('plTabs');
  plt.innerHTML=ch.pls.map(p=>`<button class="pl-btn" data-pl="${p.n}">${PGLYPH[p.n]} ${p.n}</button>`).join('');
@@ -489,6 +508,8 @@ document.getElementById('gen').onclick=()=>{
  window.scrollTo({top:document.getElementById('pArsiv').offsetTop-40,behavior:'smooth'});
 };
 
+window.addEventListener('beforeprint',()=>{document.querySelectorAll('details.kat').forEach(d=>{d.dataset.was=d.open?'1':'';d.open=true;});});
+window.addEventListener('afterprint',()=>{document.querySelectorAll('details.kat').forEach(d=>{d.open=d.dataset.was==='1';});});
 function shareChart(){const url='https://sorbiapp.com/dogum-haritasi-hesaplama';const data={title:'Ücretsiz Doğum Haritası — Sorbi',text:'Doğum haritanı ücretsiz, anında hesapla:',url};if(navigator.share){navigator.share(data).catch(()=>{});}else if(navigator.clipboard){navigator.clipboard.writeText(url);alert('Link kopyalandı ✦');}else{window.open('https://wa.me/?text='+encodeURIComponent(data.text+' '+url),'_blank');}}
 
 (function(){try{
@@ -538,7 +559,6 @@ function shareChart(){const url='https://sorbiapp.com/dogum-haritasi-hesaplama';
    <a href="/soru-sor">Soru Sorma Yöntemi</a>
    <a href="/gunun-karti">Günün Kartı</a>
    <a href="/seni-taniyorum">Seni Tanıyorum</a>
-   <a href="/#uygulama">Uygulama</a>
    <a href="/destek">Destek</a>
    <a href="/privacy">Gizlilik ve KVKK</a>
    <a href="mailto:destek@sorbiapp.com">İletişim</a>

@@ -84,7 +84,7 @@ input:focus,select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 
 .result{display:none;margin-top:1.3rem}
 .result.on{display:block}
 .grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr);gap:1.05rem;align-items:start}
-@media(max-width:980px){.grid{grid-template-columns:1fr}}
+@media(max-width:980px){.grid{grid-template-columns:minmax(0,1fr)}}
 .wheelbox{background:var(--panel);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:var(--radius);padding:.55rem;position:sticky;top:66px}
 #wheel{border-radius:10px;overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.38)}
 @media(max-width:980px){.wheelbox{position:static}}
@@ -224,6 +224,24 @@ header.hd p{font-size:.8rem;line-height:1.5;max-width:30ch}
 .modes button.on{background:var(--panel2);border-color:var(--line2)}
 }
 .note{color:var(--dim)}
+/* yöntem notları katlanır */
+details.ynt{margin-top:.6rem}
+details.ynt>summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:.35rem;font-size:.7rem;color:var(--dim);letter-spacing:.3px;user-select:none}
+details.ynt>summary::-webkit-details-marker{display:none}
+details.ynt>summary::before{content:'ⓘ';font-size:.8rem}
+details.ynt[open]>summary{color:var(--mut)}
+details.ynt>.note{margin-top:.35rem}
+.wheelbar details.adv{margin:0;flex-basis:100%;text-align:center}
+.wheelbar details.adv>summary{font-size:.74rem;padding:.3rem .75rem}
+.wheelbar details.adv>summary::before{content:'↧'}
+.wheelbar details.adv>.wheelbar{padding:.45rem 0 0}
+details.seo-d{margin:2rem 0 1rem}
+details.seo-d>summary{cursor:pointer;list-style:none;font-family:Fraunces,Georgia,serif;color:var(--gold-lt);font-size:1.05rem;display:flex;align-items:center;gap:.6rem}
+details.seo-d>summary::-webkit-details-marker{display:none}
+details.seo-d>summary::after{content:'+';margin-left:auto;color:var(--dim);font-family:Inter,sans-serif}
+details.seo-d[open]>summary::after{content:'–'}
+details.seo-d .seo{margin:.6rem 0 0}
+@media print{details.ynt,details.seo-d,.wheelbar details.adv{display:block}details.ynt>.note,details.seo-d>.seo{display:block}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Sorbi Harita Atölyesi — Detaylı Doğum Haritası","url":"https://sorbiapp.com/detayli-dogum-haritasi","applicationCategory":"LifestyleApplication","operatingSystem":"Web","inLanguage":"tr","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"publisher":{"@type":"Organization","name":"Sorbi","url":"https://sorbiapp.com/"}}</script>
 <script src="/sorbi-yer.js?v=3"></script>
@@ -234,19 +252,25 @@ header.hd p{font-size:.8rem;line-height:1.5;max-width:30ch}
 <body>
 <!-- SORBI-NAV:START -->
 <style>
-.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.68rem 1.2rem;background:rgba(13,8,16,.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
+.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(13,8,16,.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
 .sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:#F2D3B8;font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
 .sbnav .sbnav-lg i{font-style:normal;color:#E3A692;margin-right:.45rem;letter-spacing:0}
 .sbnav .sbnav-lg:hover{text-decoration:none;color:#fff}
-.sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:0 0 0 auto;padding:0;max-width:none;flex-wrap:nowrap}
+.sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:-4px -4px -4px auto;padding:4px;max-width:none;flex-wrap:nowrap}
 .sbnav nav::-webkit-scrollbar{display:none}
-.sbnav nav a{color:#9BA0AB;text-decoration:none;font-size:.85rem;font-weight:500;padding:.4rem .78rem;border-radius:99px;white-space:nowrap;transition:color .15s,background .15s}
-.sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.06);text-decoration:none}
-.sbnav nav a.on{color:#F2D3B8;background:rgba(227,166,146,.13)}
-@media(min-width:900px){.sbnav{padding:.95rem max(2rem,calc((100% - 1200px)/2));gap:2rem;min-height:70px}.sbnav .sbnav-lg{font-size:1.3rem}.sbnav nav a{font-size:.9rem;line-height:1.5;padding:.45rem .9rem}}
-@media(max-width:560px){.sbnav{padding:.55rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem;letter-spacing:.12em}.sbnav nav a{font-size:.79rem;padding:.34rem .55rem}}
-@media(min-width:900px) and (max-width:1120px){.sbnav{gap:1rem}.sbnav .sbnav-lg{font-size:1.15rem}.sbnav nav a{font-size:.84rem;padding:.45rem .5rem}}
-@media(max-width:899px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}}
+.sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:#9BA0AB;text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
+.sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);text-decoration:none}
+.sbnav nav a:active{transform:scale(.97)}
+.sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:#1A0F14;background:#E3A692;box-shadow:none;font-weight:600}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#1A0F14;background:#F2D3B8;box-shadow:none}
+.sbnav nav a:focus{outline:none}
+.sbnav nav a:focus-visible{outline:2px solid #F2D3B8;outline-offset:2px}
+.sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:#F2EFE9}
+@media(prefers-reduced-motion:reduce){.sbnav nav a{transition:none}.sbnav nav a:active{transform:none}}
+@media(min-width:900px){.sbnav{padding:.9rem max(2rem,calc((100% - 1200px)/2));gap:2rem;min-height:70px}.sbnav .sbnav-lg{font-size:1.3rem}.sbnav nav a{font-size:.9rem;padding:0 .95rem}}
+@media(max-width:560px){.sbnav{padding:.3rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem;letter-spacing:.12em}.sbnav nav a{font-size:.8rem;padding:0 .66rem}}
+@media(min-width:900px) and (max-width:1120px){.sbnav{gap:1rem}.sbnav .sbnav-lg{font-size:1.15rem}.sbnav nav a{font-size:.84rem;padding:0 .5rem}}
+@media(max-width:1119px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 85%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 85%,transparent)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%);mask-image:linear-gradient(90deg,transparent,#000 8%)}}
 @media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#000 78%,transparent);mask-image:linear-gradient(90deg,#000 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 78%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 78%,transparent)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%);mask-image:linear-gradient(90deg,transparent,#000 14%)}}
 </style>
 <header class="sbnav">
@@ -260,11 +284,11 @@ header.hd p{font-size:.8rem;line-height:1.5;max-width:30ch}
   <a href="/nadirlik">Nadirlik</a>
   <a href="/sayim">Sayım</a>
   <a href="/ogren">Öğren</a>
-  <a href="/haritam" id="sorbiNavHaritam" style="display:none">Haritam</a>
+  <a href="/haritam" id="sorbiNavHaritam">✦ Profilim</a>
  </nav>
 </header>
-<script>(function(){try{if(JSON.parse(localStorage.getItem('sorbi_profile')||'null')){var e=document.getElementById('sorbiNavHaritam');if(e)e.style.display='';}}catch(e){}try{var p=location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';if(/burc/.test(p))p='/burc-ozellikleri';document.querySelectorAll('.sbnav nav a').forEach(function(a){var h=a.getAttribute('href').replace(/\.html$/,'');if(h===p||(h!=='/'&&p.indexOf(h+'-')===0))a.classList.add('on');});}catch(e){}})();</script>
-<script>(function(){var n=document.querySelector('.sbnav nav');if(!n)return;function f(){n.classList.toggle('son',n.scrollLeft+n.clientWidth>=n.scrollWidth-4);n.classList.toggle('ara',n.scrollLeft>4)}n.addEventListener('scroll',f,{passive:true});window.addEventListener('resize',f);f();var a=n.querySelector('a.on');if(a&&a.offsetLeft+a.offsetWidth>n.clientWidth)n.scrollLeft=a.offsetLeft-16;f();})();</script>
+<script>(function(){try{var M={'/soru-sor':'/araclar','/horary':'/araclar','/natal-harita':'/araclar','/sinastri':'/araclar','/seni-taniyorum':'/araclar','/yukselen-burc-hesaplama':'/araclar','/ay-burcu-hesaplama':'/araclar','/astrokartografi':'/araclar','/uygun-gun-secimi':'/araclar','/yasam-donguleri':'/araclar','/tarot':'/araclar','/gunun-karti':'/araclar','/retro-ay-takvimi':'/araclar','/burc-uyumu':'/araclar','/rapor-araci':'/araclar','/sayim-yildiz':'/sayim','/sayim-yukselen':'/sayim','/gunluk-burc-yorumlari':'/bugun'};var p=location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';if(M[p])p=M[p];else if(/burc/.test(p))p='/burc-ozellikleri';document.querySelectorAll('.sbnav nav a').forEach(function(a){var h=a.getAttribute('href').replace(/\.html$/,'');if(h===p||(h!=='/'&&h!=='/haritam'&&p.indexOf(h+'-')===0)){a.classList.add('on');a.setAttribute('aria-current','page');}});}catch(e){}})();</script>
+<script>(function(){var n=document.querySelector('.sbnav nav');if(!n)return;function f(){n.classList.toggle('son',n.scrollLeft+n.clientWidth>=n.scrollWidth-4);n.classList.toggle('ara',n.scrollLeft>4)}n.addEventListener('scroll',f,{passive:true});window.addEventListener('resize',f);f();var a=n.querySelector('a.on');function g(){if(a&&n.scrollWidth>n.clientWidth){var d=a.getBoundingClientRect().left-n.getBoundingClientRect().left+n.scrollLeft;n.scrollLeft=Math.max(0,Math.round(d-(n.clientWidth-a.offsetWidth)/2));}f();}g();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(g);})();</script>
 <!-- SORBI-NAV:END -->
 <!-- SORBI-TEMA:START -->
 <style>
@@ -349,7 +373,7 @@ body:has(> .sky)::before{display:none}
     <div class="hint" style="grid-column:span 2;margin:0;align-self:center">Güneş'in natal derecesine tam döndüğü an, doğum yeri için hesaplanır.</div>
   </div>
 
-  <div class="hint">Doğum saatini bilmiyorsan 12:00 bırak — ev sistemi ve Yükselen anlamını yitirir, gezegen burçları geçerli kalır. Yer seçtiğinde enlem/boylam ve saat dilimi otomatik dolar.</div>
+  <div class="hint">Saat bilinmiyorsa 12:00 bırak: Yükselen ve evler geçersiz, gezegen burçları geçerli. Yer seçince enlem/boylam ve saat dilimi dolar.</div>
   <div id="err" class="err" hidden></div>
 </div>
 
@@ -357,7 +381,7 @@ body:has(> .sky)::before{display:none}
   <div class="libhead" style="margin-bottom:.6rem">İkinci kişi (sinastri)</div>
   <div style="margin:0 0 .7rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
     <select id="bPick" style="max-width:260px"><option value="">Kayıtlı kişiden seç…</option></select>
-    <span style="font-size:.72rem;color:var(--dim)">ya da aşağıya elle gir · kişi eklemek için haritayı açıp "Haritayı kaydet ✦"</span>
+    <span style="font-size:.72rem;color:var(--dim)">ya da elle gir · kişi eklemek için "Haritayı kaydet ✦"</span>
   </div>
   <div class="form">
     <div><label for="bName">İsim</label><input id="bName" placeholder="B kişisi" autocomplete="off"></div>
@@ -370,7 +394,7 @@ body:has(> .sky)::before{display:none}
   </div>
 </div>
 
-<details class="adv libd" style="margin:.8rem 0 0" open>
+<details class="adv libd" style="margin:.8rem 0 0">
   <summary>Haritalarım — kaydet, yükle, yeni harita ekle</summary>
   <div class="card" style="padding:.85rem 1.15rem;margin-top:.6rem"><div class="lib" id="lib"></div></div>
 </details>
@@ -382,15 +406,17 @@ body:has(> .sky)::before{display:none}
       <div id="wheel"></div>
       <div class="legend" id="legend"></div>
       <div class="wheelbar">
-        <button class="btn ghost sm" id="themeBtn">Gece görünümü</button>
         <button class="btn ghost sm" id="pdfBtn" style="border-color:rgba(227,166,146,.5);color:var(--gold-br)">✦ PDF Rapor</button>
+        <button class="btn ghost sm" id="saveBtn">Haritayı kaydet ✦</button>
+        <button class="btn ghost sm" id="themeBtn">Gece görünümü</button>
+        <details class="adv"><summary>Dışa aktar · paylaş</summary><div class="wheelbar">
         <button class="btn ghost sm" id="dlSquare">Kare PNG</button>
         <button class="btn ghost sm" id="dlStory">Story 9:16</button>
-        <button class="btn ghost sm" id="saveBtn">Haritayı kaydet ✦</button>
         <button class="btn ghost sm" id="dlJson">Veri (JSON)</button>
         <button class="btn ghost sm" id="dlCsv">Tablo (CSV)</button>
         <button class="btn ghost sm" id="shareBtn">Bağlantıyı paylaş</button>
         <button class="btn ghost sm" id="prBtn">Yazdır</button>
+        </div></details>
       </div>
       <div class="note" id="meta"></div>
     </div>
@@ -408,43 +434,43 @@ body:has(> .sky)::before{display:none}
     <div class="pane on" id="p0"><div id="sumBox"></div></div>
     <div class="pane" id="p1"><div class="subh">Gezegenler</div><div class="scroll"><table id="tPlanets"></table></div>
       <div class="scroll" id="tPlanetsB"></div>
-      <div class="note">Konum derece°dakika′saniye″ olarak burç içindedir. <b>R</b> = geri hareket. Hız günlük ekliptik hareket.</div></div>
+      <details class="ynt"><summary>Yöntem notu</summary><div class="note">Konum derece°dakika′saniye″ olarak burç içindedir. <b>R</b> = geri hareket. Hız günlük ekliptik hareket.</div></details></div>
     <div class="pane" id="p2"><div class="subh">Evler</div><div class="scroll"><table id="tHouses"></table></div>
-      <div class="note" id="houseNote"></div></div>
+      <details class="ynt"><summary>Ev sistemi notu</summary><div class="note" id="houseNote"></div></details></div>
     <div class="pane" id="p4"><div class="subh">Açı listesi</div><div class="scroll"><table id="tAspects"></table></div></div>
     <div class="pane" id="p3"><div class="subh">Açı ızgarası</div><div class="scroll" id="gridBox"></div>
-      <div class="note">Hücrede açı glifi, altında orb (derece). <span class="aapp">▲</span> yaklaşan, <span class="aapp">▽</span> ayrılan.</div></div>
+      <details class="ynt"><summary>Okuma notu</summary><div class="note">Hücrede açı glifi, altında orb (derece). <span class="aapp">▲</span> yaklaşan, <span class="aapp">▽</span> ayrılan.</div></details></div>
     <div class="pane" id="p5"><div class="subh">Dağılım</div><div id="dist"></div></div>
     <div class="pane" id="p7"><div class="subh">Açı kalıpları</div><div id="patterns"></div></div>
     <div class="pane" id="p6"><div class="subh">Esansiyel dignite</div><div class="scroll"><table id="tDign"></table></div>
-      <div class="note">Ptolemaik esansiyel dignite: yönetici +5, yücelme +4, üçlü yönetici +3, sınır +2, dekan +1; düşüş −4, zararlı −5. Hiçbirine sahip olmayan gezegen <i>peregrin</i> sayılır.</div></div>
+      <details class="ynt"><summary>Puanlama</summary><div class="note">Ptolemaik esansiyel dignite: yönetici +5, yücelme +4, üçlü yönetici +3, sınır +2, dekan +1; düşüş −4, zararlı −5. Hiçbirine sahip olmayan gezegen <i>peregrin</i> sayılır. Üçlü yöneticiler haritanın sektine (gece/gündüz) göre alınır.</div></details></div>
     <div class="pane" id="p8"><div class="subh">Sabit yıldızlar</div><div class="scroll"><table id="tStars"></table></div>
-      <div class="note">Sabit yıldız konumları presesyon ve öz hareket hesaba katılarak türetildi. Işıklar ve açısal noktalar için 1°, diğerleri için 40′ orb. Yıldız nitelikleri geleneksel literatürden aktarılmıştır.</div></div>
+      <details class="ynt"><summary>Yöntem notu</summary><div class="note">Sabit yıldız konumları presesyon ve öz hareket hesaba katılarak türetildi. Işıklar ve açısal noktalar için 1°, diğerleri için 40′ orb. Yıldız nitelikleri geleneksel literatürden aktarılmıştır.</div></details></div>
     <div class="pane" id="p10"><div class="subh">Sect — gece/gündüz</div>
       <div id="sectTop"></div>
       <div class="scroll"><table id="tSect"></table></div>
-      <div class="note" id="sectNote"></div>
+      <details class="ynt"><summary>Sekt ve hayz nasıl hesaplandı</summary><div class="note" id="sectNote"></div></details>
     </div>
     <div class="pane" id="p11"><div class="subh">Transit takvimi — 13 ay</div>
       <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-bottom:.6rem;font-size:.78rem;color:var(--mut)">
         <label style="display:flex;gap:.4rem;align-items:center;cursor:pointer"><input type="checkbox" id="calMars" style="width:auto"> Mars geçişlerini de göster</label>
       </div>
       <div id="calBox"></div>
-      <div class="note">Yavaş gezegenlerin natal noktalarına <b>tam açı</b> yaptığı tarihler. Retro nedeniyle aynı temas 2–3 kez tekrarlanır; geçiş numarası yanında yazar. ℞ = temas anında gezegen geri harekette. Yükselen/MC temasları doğum saatinin kesinliğine bağlıdır.</div></div>
+      <details class="ynt"><summary>Okuma notu</summary><div class="note">Yavaş gezegenlerin natal noktalarına <b>tam açı</b> yaptığı tarihler. Retro nedeniyle aynı temas 2–3 kez tekrarlanır; geçiş numarası yanında yazar. ℞ = temas anında gezegen geri harekette. Yükselen/MC temasları doğum saatinin kesinliğine bağlıdır.</div></details></div>
     <div class="pane" id="p9"><div class="subh">Deklinasyon & antisya</div><div class="scroll"><table id="tDecl"></table></div>
       <div class="scroll" style="margin-top:1rem"><table id="tAnti"></table></div>
-      <div class="note">Deklinasyon: gök ekvatoruna göre açı. <b>Paralel</b> aynı yönde, <b>karşıt paralel</b> ters yönde eşit deklinasyon — kavuşum ve karşıtlık gibi okunur (orb 1°). <b>Antisya</b>, Yengeç–Oğlak ekseninde ayna nokta; <b>karşı antisya</b> Koç–Terazi ekseninde.</div></div>
+      <details class="ynt"><summary>Yöntem notu</summary><div class="note">Deklinasyon: gök ekvatoruna göre açı. <b>Paralel</b> aynı yönde, <b>karşıt paralel</b> ters yönde eşit deklinasyon — kavuşum ve karşıtlık gibi okunur (orb 1°). <b>Antisya</b>, Yengeç–Oğlak ekseninde ayna nokta; <b>karşı antisya</b> Koç–Terazi ekseninde.</div></details></div>
   </div>
  </div>
 
  <div class="cta">
    <h3>Haritanda takıldığın bir yer mi var?</h3>
-   <p>Bu ekran haritanın iskeletini veriyor. Aklında somut bir soru varsa — bir zamanlama, bir yerleşim, bir dönem — haritanla birlikte yaz, sana özel yanıtlansın.</p>
+   <p>Bu ekran haritanın iskeleti. Somut bir soru varsa — zamanlama, yerleşim, dönem — yöntemi buradan izle.</p>
    <a href="/soru-sor" class="btn">Bir soru bu haritada nasıl okunur →</a>
  </div>
 </div>
 
-<div class="seo">
+<details class="seo-d"><summary>Bu ekran ne yapıyor? — yöntem ve doğruluk</summary><div class="seo">
   <h2>Bu ekran ne yapıyor?</h2>
   <p>Doğum haritası, doğduğun an gökyüzünün belirli bir yerden görünümünün iki boyutlu şemasıdır. Bu sayfa o şemayı profesyonel yazılımların verdiği ayrıntıda kuruyor ve üstüne dört katman ekliyor: <b>transit</b> (bugünün gökyüzünün haritana değdiği yerler), <b>sekonder ilerletim</b> (bir gün = bir yıl ölçeğiyle içsel gelişim çizgisi), <b>güneş dönüşü</b> (Güneş'in natal derecesine döndüğü anın haritası) ve <b>sinastri</b> (iki haritanın karşılıklı açıları).</p>
   <h2>Ev sistemi neden önemli?</h2>
@@ -453,7 +479,7 @@ body:has(> .sky)::before{display:none}
   <p>Tek tek açılar bir haritanın harfleridir; kalıplar cümleleridir. T-kare bir gerilim üçgeni, Büyük Üçgen akan bir kolaylık, Yod ayarlanması gereken bir yön, Stellium ise bir alanda yığılan ağırlıktır. Bu ekran kalıpları otomatik tespit eder ve hangi gezegenlerden kurulduğunu gösterir.</p>
   <h2>Doğruluk</h2>
   <p>Ev başlangıçları, açısal noktalar ve Vertex, Swiss Ephemeris çıktısına karşı test edildi; yedi sistemde de fark ölçülebilir düzeyin altında kaldı. Gezegen boylamları için tarayıcı içi astronomi motoru kullanılıyor; Chiron, Lilith ve Ay düğümleri için Swiss Ephemeris'ten türetilmiş sıkıştırılmış efemeris tablosu okunuyor. Sabit yıldızlar 1850–2070 aralığında öz hareket ve presesyonla birlikte hesaplanır.</p>
-</div>
+</div></details>
 
 
 </div>
@@ -1082,11 +1108,11 @@ function renderSect(ch){
     '<p>Güneş ufkun '+(R.day?'<b style="color:var(--gold-br)">üstünde</b>':'<b style="color:var(--gold-br)">altında</b>')+
     ' ('+ch.pls.filter(function(p){return p.k==='sun';})[0].house+'. ev). '+
     'Sekt ışığı <b style="color:var(--gold-br)">'+R.light.n+'</b> — '+fmtPos(R.light.lon)+', '+R.light.house+'. ev. '+
-    'Haritanın tonunu bu ışık verir.</p></div>'+
+    '</p></div>'+
     '<div class="sectcards">'+
-      '<div class="sectcard"><div class="n">✦</div><h4>Sektin hayırlısı</h4><p>'+gl(R.ben)+' <b>'+nm(R.ben)+'</b> — bu haritada iyilik getiren yan daha rahat çalışır. Sekt dışı hayırlı: '+gl(R.benOut)+' '+nm(R.benOut)+'.</p></div>'+
-      '<div class="sectcard"><div class="n">▲</div><h4>Sektin zararlısı</h4><p>'+gl(R.mal)+' <b>'+nm(R.mal)+'</b> — zorlayıcı yanı görece ılımlı işler. Sekt dışı zararlı: '+gl(R.malOut)+' <b>'+nm(R.malOut)+'</b>, bu haritada daha sert okunur.</p></div>'+
-      '<div class="sectcard"><div class="n">☿︎</div><h4>Merkür hangi takımda?</h4><p>'+(R.mercOri===null?'—':(R.mercOri?'<b>Doğulu</b> (sabah yıldızı) — Güneş\'ten önce doğuyor, gündüz takımında sayılır.':'<b>Batılı</b> (akşam yıldızı) — Güneş\'ten sonra batıyor, gece takımında sayılır.'))+'</p></div>'+
+      '<div class="sectcard"><div class="n">✦</div><h4>Sektin hayırlısı</h4><p>'+gl(R.ben)+' <b>'+nm(R.ben)+'</b> — daha rahat çalışır. Sekt dışı: '+gl(R.benOut)+' '+nm(R.benOut)+'.</p></div>'+
+      '<div class="sectcard"><div class="n">▲</div><h4>Sektin zararlısı</h4><p>'+gl(R.mal)+' <b>'+nm(R.mal)+'</b> — görece ılımlı. Sekt dışı: '+gl(R.malOut)+' <b>'+nm(R.malOut)+'</b>, daha sert okunur.</p></div>'+
+      '<div class="sectcard"><div class="n">☿︎</div><h4>Merkür</h4><p>'+(R.mercOri===null?'—':(R.mercOri?'<b>Doğulu</b> (sabah yıldızı) — gündüz takımı.':'<b>Batılı</b> (akşam yıldızı) — gece takımı.'))+'</p></div>'+
     '</div>';
   document.getElementById('sectTop').innerHTML=top;
 
@@ -1103,7 +1129,7 @@ function renderSect(ch){
   document.getElementById('tSect').innerHTML=h;
   document.getElementById('sectNote').innerHTML=
     'Sekt, bir haritanın gece mi gündüz mü doğduğuna göre gezegenlerin rolünü değiştiren Helenistik ayrımdır. '+
-    '<b>Hayz</b> üç şartın birlikte sağlanmasıdır: gezegen haritanın takımından olacak, doğru yarıkürede duracak (halb) ve kendi cinsiyetindeki burçta olacak. '+
+    '<b>Hayz</b> üç şartın birlikte sağlanmasıdır: gezegen haritanın takımından olmalı, doğru yarıkürede durmalı (halb) ve kendi cinsiyetindeki burçta olmalı. '+
     'Halb için Bonatti–Bîrûnî çizgisi kullanıldı: gündüz takımı gündüz haritasında ufkun üstünde, gece haritasında altında olduğunda uyumlu sayılır. '+
     'Eril burçlar Koç, İkizler, Aslan, Terazi, Yay, Kova; dişil burçlar Boğa, Yengeç, Başak, Akrep, Oğlak, Balık.';
 }
@@ -1199,7 +1225,7 @@ function renderAll(){
   h2+='<tr><td colspan="2" style="color:var(--gold-lt)">Vertex</td><td colspan="3" class="pos">'+fmtPos(ch.vertex)+' · '+houseOf(ch.vertex,ch.c)+'. ev</td></tr>';
   document.getElementById('tHouses').innerHTML=h2;
   var HN={P:'Placidus — zaman temelli, en yaygın sistem.',W:'Whole Sign — her burç bir ev; Helenistik gelenek.',K:'Koch — doğum yeri temelli.',E:'Eşit — Yükselen\'den itibaren 30°\'lik dilimler.',O:'Porphyry — dörtlükleri eşit üçe böler.',R:'Regiomontanus — göksel ekvator bölmesi; horary geleneği.',C:'Campanus — baş dikey (prime vertical) bölmesi.'};
-  document.getElementById('houseNote').textContent=(HN[ch.o.house]||'')+' Vertex, baş dikeyin ekliptiği batıda kestiği noktadır; kader/karşılaşma teması ile anılır.';
+  document.getElementById('houseNote').textContent=(HN[ch.o.house]||'')+' Vertex: baş dikeyin ekliptiği batıda kestiği nokta.';
 
   /* açı listesi */
   var srt=asps.slice().sort(function(a,b){ return (b.as.major?1:0)-(a.as.major?1:0) || a.abs-b.abs; });
@@ -1230,8 +1256,7 @@ function renderAll(){
     return '<div class="pat"><h4>'+x.t+'</h4><div class="members">'+x.m.map(function(p){return p.g;}).join(' ')+
       ' <span style="font-size:.75rem;letter-spacing:0;color:var(--mut)">'+x.m.map(function(p){return p.n;}).join(' · ')+'</span></div><p>'+x.d+'</p></div>';
   }).join('') : '<div class="note">Bu haritada belirgin bir açı kalıbı çıkmadı.</div>')
-  + '<div class="note">Kalıplar '+(extOn?'Chiron, Ay düğümü ve Lilith dahil':'klasik on gezegen ile Yükselen–MC üzerinden')+' hesaplandı.'+
-    (extOn?'':' Chiron, düğüm ve Lilith\u2019i de katmak için yukarıdaki <b>Kalıp noktaları</b> seçimini değiştir — genellikle daha fazla kalıp çıkar.')+'</div>';
+  + '<div class="note">Noktalar: '+(extOn?'10 gezegen + AC/MC + Chiron, düğüm, Lilith':'10 gezegen + AC/MC')+(extOn?'':' · genişletmek için Gelişmiş › <b>Kalıp noktaları</b>')+'.</div>';
 
   /* ── ÖZET ── */
   (function(){
@@ -1263,34 +1288,33 @@ function renderAll(){
       var MAJK=['sun','moon','mer','ven','mar','jup','sat','ura','nep','plu'];
       /* saniyeler içinde kesinleşen açı */
       var t0=asps.filter(function(x){return x.as.major&&x.abs<0.34&&MAJK.indexOf(x.a.k)>=0&&(MAJK.indexOf(x.b.k)>=0||x.b.k==='asc'||x.b.k==='mc');})[0];
-      if(t0) rare.push('<b>'+t0.a.n+'</b> ile <b>'+t0.b.n+'</b> arasındaki '+t0.as.n.toLowerCase()+' '+(t0.abs*60).toFixed(0)+'′ içinde — bu kadar kesin bir temas her haritada görülmez.');
+      if(t0) rare.push('<b>'+t0.a.n+'</b>–<b>'+t0.b.n+'</b> '+t0.as.n.toLowerCase()+' '+(t0.abs*60).toFixed(0)+'′ orbla — neredeyse tam açı.');
       /* retro yoğunluğu */
       var rc=ch.pls.filter(function(p){return p.rx&&MAJK.indexOf(p.k)>=0;}).length;
-      if(rc>=4) rare.push('Doğduğun an <b>'+rc+' gezegen retroda</b>ydı — içe dönük işleyen güçlü bir katman.');
+      if(rc>=4) rare.push('<b>'+rc+' gezegen retroda</b>.');
       /* sınır dışı deklinasyon */
       var ob=ch.pls.filter(function(p){return MAJK.indexOf(p.k)>=0&&p.dec!==undefined&&Math.abs(p.dec)>23.44;})[0];
-      if(ob) rare.push('<b>'+ob.n+'</b> deklinasyonda sınır dışında (out-of-bounds) — kurallara sığmayan bir ifade alanı.');
+      if(ob) rare.push('<b>'+ob.n+'</b> deklinasyonda sınır dışı (OOB).');
       /* açısız gezegen */
       var un=ch.pls.filter(function(p){ if(MAJK.indexOf(p.k)<0) return false;
         return !asps.some(function(x){return x.as.major&&(x.a.k===p.k||x.b.k===p.k);}); })[0];
-      if(un) rare.push('<b>'+un.n+'</b> majör açı yapmıyor — haritada kendi başına konuşan bir ses.');
+      if(un) rare.push('<b>'+un.n+'</b> majör açı yapmıyor.');
       /* kalıp */
-      if(pats.length&&rare.length<3) rare.push('Haritanda <b>'+pats[0].t+'</b> kalıbı var — '+pats[0].m.length+' gezegen tek bir hikâyeye bağlanıyor.');
+      if(pats.length&&rare.length<3) rare.push('<b>'+pats[0].t+'</b> kalıbı — '+pats[0].m.length+' nokta.');
     }catch(e){}
     var rareHtml = rare.length ?
-      '<div style="margin-top:1.05rem;background:rgba(227,166,146,.045);border-left:3px solid var(--gold);border-radius:0 14px 14px 0;padding:.95rem 1.15rem .9rem">'+
-      '<div style="font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.55rem">✦ Haritanda dikkatimi çekenler</div>'+
+      '<div style="margin:1.05rem 0 1.1rem;background:rgba(227,166,146,.045);border-left:3px solid var(--gold);border-radius:0 14px 14px 0;padding:.95rem 1.15rem .9rem">'+
+      '<div style="font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.55rem">✦ Dikkat çekenler</div>'+
       rare.slice(0,3).map(function(r){return '<div style="font-size:.87rem;line-height:1.55;margin:.38rem 0;color:var(--ink)">'+r+'</div>';}).join('')+
       '<div style="margin-top:.8rem;display:flex;align-items:center;gap:.7rem;flex-wrap:wrap">'+
-        '<a href="/soru-sor" style="display:inline-block;background:linear-gradient(135deg,#E3A692,#F2D3B8);color:#2B140C;padding:.5rem 1.05rem;border-radius:99px;font-weight:600;font-size:.8rem;text-decoration:none">Yöntemi gör ✦</a>'+
-        '<span style="font-size:.74rem;color:var(--dim)">yöntemi gör</span></div></div>' : '';
+        '<a href="/soru-sor" style="display:inline-block;background:linear-gradient(135deg,#E3A692,#F2D3B8);color:#2B140C;padding:.5rem 1.05rem;border-radius:99px;font-weight:600;font-size:.8rem;text-decoration:none">Yöntemi gör ✦</a></div></div>' : '';
     document.getElementById('sumBox').innerHTML=
       '<div class="sum-big3">'+g3('sun','Güneş')+g3('moon','Ay')+g3('asc','Yükselen')+'</div>'+
       '<div class="sum-chips">'+chips+'</div>'+
       rareHtml+
-      (arows?'<div class="subh" style="font-size:.85rem">En sıkı açılar</div><div class="sum-asp">'+arows+'</div>':'')+
+      (arows?'<div class="subh" style="font-size:.85rem">En sıkı 5 açı</div><div class="sum-asp">'+arows+'</div>':'')+
       (patline?'<div class="subh" style="font-size:.85rem">Açı kalıpları</div><div class="sum-chips">'+patline+'</div>':'')+
-      '<div class="sum-note">Tam tablolar için üstteki sekmeler: gezegen konumları, evler, açı ızgarası, dignite, sabit yıldızlar ve daha fazlası.</div>';
+      '<div class="sum-note">Tam tablolar üstteki sekmelerde.</div>';
   })();
 
   /* dağılım */
@@ -1402,7 +1426,7 @@ function renderDist(ch){
     bars('Yarıküre',['Üst (7–12)','Alt (1–6)','Doğu (10–3)','Batı (4–9)'],[hemS,hemN,hemE,hemW])+
     bars('Çeyrek',['1–3','4–6','7–9','10–12'],quad);
   var lead=ELEM[ec.indexOf(Math.max.apply(null,ec))], lm=MODAL[mo.indexOf(Math.max.apply(null,mo))];
-  dd+='<div class="note">Baskın element <b>'+lead+'</b>, baskın nitelik <b>'+lm+'</b>. Harita <b>'+(ch.day?'gündüz':'gece')+'</b> haritası — Güneş ufkun '+(ch.day?'üstünde':'altında')+'; üçlü yöneticiler buna göre hesaplandı.</div>';
+  dd+='<div class="note">Baskın: <b>'+lead+'</b> · <b>'+lm+'</b>.</div>';
   document.getElementById('dist').innerHTML=dd;
 }
 
@@ -1680,6 +1704,9 @@ function run(){
   }catch(e){ showErr('Hesaplama hatası: '+e.message); }
 }
 document.getElementById('goBtn').onclick=run;
+/* yazdırırken katlı notlar açılır, sonra eski hâline döner */
+window.addEventListener('beforeprint',function(){ document.querySelectorAll('details.ynt,details.seo-d').forEach(function(d){ d.dataset.was=d.open?'1':''; d.open=true; }); });
+window.addEventListener('afterprint',function(){ document.querySelectorAll('details.ynt,details.seo-d').forEach(function(d){ d.open=d.dataset.was==='1'; }); });
 ['fHouse','fNode','fOrb','fMinor','fPat'].forEach(function(id){
   document.getElementById(id).onchange=function(){ if(CUR) run(); };
 });
@@ -2037,7 +2064,6 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
    <a href="/soru-sor">Soru Sorma Yöntemi</a>
    <a href="/gunun-karti">Günün Kartı</a>
    <a href="/seni-taniyorum">Seni Tanıyorum</a>
-   <a href="/#uygulama">Uygulama</a>
    <a href="/destek">Destek</a>
    <a href="/privacy">Gizlilik ve KVKK</a>
    <a href="mailto:destek@sorbiapp.com">İletişim</a>

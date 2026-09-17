@@ -40,11 +40,12 @@ function fmtDate(d){ // YYYY-MM-DD -> GG.AA.YYYY
 function navBadge(b,n){
   var navEl=document.querySelector('.sbnav nav')||document.querySelector('.sorbi-topnav nav')||document.querySelector('.topnav nav');
   if(!navEl||document.getElementById('sbNavProf')) return;
+  var h=document.getElementById('sorbiNavHaritam');
+  if(h){ h.style.display=''; h.textContent='✦ Profilim'; h.id='sbNavProf'; return; }
   var a=document.createElement('a'); a.id='sbNavProf'; a.href='/haritam';
-  a.textContent='✦ '+(n||'Profilim');
-  a.style.cssText='color:#F2D3B8;background:rgba(227,166,146,.13);border-radius:99px;padding:.36rem .8rem;font-weight:600;white-space:nowrap;text-decoration:none';
-  navEl.insertBefore(a,navEl.firstChild);
-  var h=document.getElementById('sorbiNavHaritam'); if(h) h.style.display='none';
+  a.textContent='✦ Profilim';
+  a.style.cssText='white-space:nowrap';
+  navEl.appendChild(a);
 }
 function chip(){
   var b=birth(); if(!b) return;               // profil yoksa sessiz kal

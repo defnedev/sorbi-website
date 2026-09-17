@@ -58,19 +58,25 @@ td.pl{font-weight:600;color:var(--ink)}
 </head><body>
 <!-- SORBI-NAV:START -->
 <style>
-.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.68rem 1.2rem;background:rgba(13,8,16,.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
+.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(13,8,16,.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
 .sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:#F2D3B8;font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
 .sbnav .sbnav-lg i{font-style:normal;color:#E3A692;margin-right:.45rem;letter-spacing:0}
 .sbnav .sbnav-lg:hover{text-decoration:none;color:#fff}
-.sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:0 0 0 auto;padding:0;max-width:none;flex-wrap:nowrap}
+.sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:-4px -4px -4px auto;padding:4px;max-width:none;flex-wrap:nowrap}
 .sbnav nav::-webkit-scrollbar{display:none}
-.sbnav nav a{color:#9BA0AB;text-decoration:none;font-size:.85rem;font-weight:500;padding:.4rem .78rem;border-radius:99px;white-space:nowrap;transition:color .15s,background .15s}
-.sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.06);text-decoration:none}
-.sbnav nav a.on{color:#F2D3B8;background:rgba(227,166,146,.13)}
-@media(min-width:900px){.sbnav{padding:.95rem max(2rem,calc((100% - 1200px)/2));gap:2rem;min-height:70px}.sbnav .sbnav-lg{font-size:1.3rem}.sbnav nav a{font-size:.9rem;line-height:1.5;padding:.45rem .9rem}}
-@media(max-width:560px){.sbnav{padding:.55rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem;letter-spacing:.12em}.sbnav nav a{font-size:.79rem;padding:.34rem .55rem}}
-@media(min-width:900px) and (max-width:1120px){.sbnav{gap:1rem}.sbnav .sbnav-lg{font-size:1.15rem}.sbnav nav a{font-size:.84rem;padding:.45rem .5rem}}
-@media(max-width:899px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}}
+.sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:#9BA0AB;text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
+.sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);text-decoration:none}
+.sbnav nav a:active{transform:scale(.97)}
+.sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:#1A0F14;background:#E3A692;box-shadow:none;font-weight:600}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#1A0F14;background:#F2D3B8;box-shadow:none}
+.sbnav nav a:focus{outline:none}
+.sbnav nav a:focus-visible{outline:2px solid #F2D3B8;outline-offset:2px}
+.sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:#F2EFE9}
+@media(prefers-reduced-motion:reduce){.sbnav nav a{transition:none}.sbnav nav a:active{transform:none}}
+@media(min-width:900px){.sbnav{padding:.9rem max(2rem,calc((100% - 1200px)/2));gap:2rem;min-height:70px}.sbnav .sbnav-lg{font-size:1.3rem}.sbnav nav a{font-size:.9rem;padding:0 .95rem}}
+@media(max-width:560px){.sbnav{padding:.3rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem;letter-spacing:.12em}.sbnav nav a{font-size:.8rem;padding:0 .66rem}}
+@media(min-width:900px) and (max-width:1120px){.sbnav{gap:1rem}.sbnav .sbnav-lg{font-size:1.15rem}.sbnav nav a{font-size:.84rem;padding:0 .5rem}}
+@media(max-width:1119px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 85%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 85%,transparent)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%);mask-image:linear-gradient(90deg,transparent,#000 8%)}}
 @media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#000 78%,transparent);mask-image:linear-gradient(90deg,#000 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 78%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 78%,transparent)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%);mask-image:linear-gradient(90deg,transparent,#000 14%)}}
 .sbnav{margin:-20px -20px 20px!important}
 @media(min-width:900px){.sbnav{padding-left:calc(max(2rem,calc((100% - 1200px)/2)) + 20px);padding-right:calc(max(2rem,calc((100% - 1200px)/2)) + 20px)}}
@@ -86,11 +92,11 @@ td.pl{font-weight:600;color:var(--ink)}
   <a href="/nadirlik">Nadirlik</a>
   <a href="/sayim">Sayım</a>
   <a href="/ogren">Öğren</a>
-  <a href="/haritam" id="sorbiNavHaritam" style="display:none">Haritam</a>
+  <a href="/haritam" id="sorbiNavHaritam">✦ Profilim</a>
  </nav>
 </header>
-<script>(function(){try{if(JSON.parse(localStorage.getItem('sorbi_profile')||'null')){var e=document.getElementById('sorbiNavHaritam');if(e)e.style.display='';}}catch(e){}try{var p=location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';if(/burc/.test(p))p='/burc-ozellikleri';document.querySelectorAll('.sbnav nav a').forEach(function(a){var h=a.getAttribute('href').replace(/\.html$/,'');if(h===p||(h!=='/'&&p.indexOf(h+'-')===0))a.classList.add('on');});}catch(e){}})();</script>
-<script>(function(){var n=document.querySelector('.sbnav nav');if(!n)return;function f(){n.classList.toggle('son',n.scrollLeft+n.clientWidth>=n.scrollWidth-4);n.classList.toggle('ara',n.scrollLeft>4)}n.addEventListener('scroll',f,{passive:true});window.addEventListener('resize',f);f();var a=n.querySelector('a.on');if(a&&a.offsetLeft+a.offsetWidth>n.clientWidth)n.scrollLeft=a.offsetLeft-16;f();})();</script>
+<script>(function(){try{var M={'/soru-sor':'/araclar','/horary':'/araclar','/natal-harita':'/araclar','/sinastri':'/araclar','/seni-taniyorum':'/araclar','/yukselen-burc-hesaplama':'/araclar','/ay-burcu-hesaplama':'/araclar','/astrokartografi':'/araclar','/uygun-gun-secimi':'/araclar','/yasam-donguleri':'/araclar','/tarot':'/araclar','/gunun-karti':'/araclar','/retro-ay-takvimi':'/araclar','/burc-uyumu':'/araclar','/rapor-araci':'/araclar','/sayim-yildiz':'/sayim','/sayim-yukselen':'/sayim','/gunluk-burc-yorumlari':'/bugun'};var p=location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';if(M[p])p=M[p];else if(/burc/.test(p))p='/burc-ozellikleri';document.querySelectorAll('.sbnav nav a').forEach(function(a){var h=a.getAttribute('href').replace(/\.html$/,'');if(h===p||(h!=='/'&&h!=='/haritam'&&p.indexOf(h+'-')===0)){a.classList.add('on');a.setAttribute('aria-current','page');}});}catch(e){}})();</script>
+<script>(function(){var n=document.querySelector('.sbnav nav');if(!n)return;function f(){n.classList.toggle('son',n.scrollLeft+n.clientWidth>=n.scrollWidth-4);n.classList.toggle('ara',n.scrollLeft>4)}n.addEventListener('scroll',f,{passive:true});window.addEventListener('resize',f);f();var a=n.querySelector('a.on');function g(){if(a&&n.scrollWidth>n.clientWidth){var d=a.getBoundingClientRect().left-n.getBoundingClientRect().left+n.scrollLeft;n.scrollLeft=Math.max(0,Math.round(d-(n.clientWidth-a.offsetWidth)/2));}f();}g();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(g);})();</script>
 <!-- SORBI-NAV:END -->
 <div class="controls">
  <h2>Rapor Atölyesi</h2>
@@ -248,7 +254,6 @@ document.getElementById('gen').onclick=()=>{
    <a href="/soru-sor">Soru Sorma Yöntemi</a>
    <a href="/gunun-karti">Günün Kartı</a>
    <a href="/seni-taniyorum">Seni Tanıyorum</a>
-   <a href="/#uygulama">Uygulama</a>
    <a href="/destek">Destek</a>
    <a href="/privacy">Gizlilik ve KVKK</a>
    <a href="mailto:destek@sorbiapp.com">İletişim</a>
