@@ -65,6 +65,7 @@ input{width:100%;background:rgba(13,8,16,.6);border:1px solid var(--line2);borde
 .nadir details{margin-top:.55rem}
 .nadir summary{font-size:13px;color:rgba(255,255,255,.45);cursor:pointer;list-style:none;text-decoration:underline;text-underline-offset:3px}
 .nadir summary::-webkit-details-marker{display:none}
+.nadir .nnote a{color:var(--gold);text-decoration:underline;text-underline-offset:2px}
 .nadir .nnote{margin-top:.42rem;font-size:.68rem;color:var(--dim);line-height:1.5;text-align:left;
  background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;padding:.6rem .7rem}
 
@@ -359,6 +360,7 @@ body:has(> .sky)::before{display:none}
    <p>Güneş, Ay ve yükselenin söyledikleri buraya kadar. Evler, açılar ve o döneme gelen transitler devreye girince okuma çok daha keskinleşebilir.</p>
    <a class="buy" id="sellTam" href="/detayli-dogum-haritasi">Haritanın tamamını aç →</a>
   </div>
+  <div data-sorbi-liste="seni-taniyorum" data-bekle="#reveal"></div>
  </div>
 
  <div class="seo" id="seo">
@@ -600,7 +602,7 @@ document.getElementById('go').onclick=()=>{
      el.innerHTML=`<div class="nbig">Bu üçlü, <b>100.000 kişiden yalnızca ${u.yuzbinde}</b> kişide oluşuyor</div>
       <div class="nsub">${SIGNS[su]} ☉ · ${SIGNS[mo]} ☽ · ${SIGNS[as]} ↑ — yaklaşık <b>${u.biriKac.toLocaleString('tr-TR')} kişide bir</b>.<br>1728 kombinasyon içinde en nadir %${enNadirYuzde}'lik dilimde.</div>
       <div class="nbar"><i style="width:${Math.max(4,100-u.yuzdelik)}%"></i></div>
-      <details><summary>Bu sayı nereden geliyor?</summary><div class="nnote">1960–2012 arası 20 dakikada bir örneklenmiş <b>${N.ornek.toLocaleString('tr-TR')}</b> gök anından hesaplandı (İstanbul enlemi). Bu, gökyüzünün kendi dağılımı — doğum istatistiği değil.</div></details>`;
+      <details><summary>Bu sayı nereden geliyor?</summary><div class="nnote">1960–2012 arası 20 dakikada bir örneklenmiş <b>${N.ornek.toLocaleString('tr-TR')}</b> gök anından hesaplandı (İstanbul enlemi). Bu, gökyüzünün kendi dağılımı — doğum istatistiği değil. Tek tek yerleşimlerin sıklığı <a href="/nadirlik">Nadirlik</a>'te ayrı bir örneklemle (24.000 harita, 1950–2009) sayılır; oranlar arasında küçük farklar bundandır.</div></details>`;
      window._sorbiPay={uclu:u, ikili:ik, as:as};
      // paylasilan baglantidan gelen ucluyle karsilastir (viral dongu buradan kapaniyor)
      try{
@@ -622,7 +624,7 @@ document.getElementById('go').onclick=()=>{
     }else{
      el.innerHTML=`<div class="nbig">Bu anın adı <b>144 addan biri</b></div>
       <div class="nsub">${SIGNS[su]} ☉ · ${SIGNS[mo]} ☽ — yaklaşık <b>${ik.biriKac} kişide bir</b>.<br>Doğum saatini bilseydin yükselenini de katıp çok daha nadir bir üçlü çıkarabilirdim.</div>
-      <details><summary>Bu sayı nereden geliyor?</summary><div class="nnote">1960–2012 arası 20 dakikada bir örneklenmiş <b>${N.ornek.toLocaleString('tr-TR')}</b> gök anından hesaplandı. Bu, gökyüzünün kendi dağılımı — doğum istatistiği değil.</div></details>`;
+      <details><summary>Bu sayı nereden geliyor?</summary><div class="nnote">1960–2012 arası 20 dakikada bir örneklenmiş <b>${N.ornek.toLocaleString('tr-TR')}</b> gök anından hesaplandı. Bu, gökyüzünün kendi dağılımı — doğum istatistiği değil. Tek tek yerleşimlerin sıklığı <a href="/nadirlik">Nadirlik</a>'te ayrı bir örneklemle (24.000 harita, 1950–2009) sayılır.</div></details>`;
      window._sorbiPay={uclu:null, ikili:ik, as:null};
      try{ if(window.SorbiKarsilastir) window._sorbiKendi={su:su,mo:mo}; }catch(e){}
     }
@@ -839,6 +841,7 @@ document.getElementById('copyBtn').onclick=async()=>{
  catch(e){ sorbiGeriBildir(btn,'Kopyalanamadı'); }
 };
 </script>
+<script src="/sorbi-liste.js?v=1" defer></script>
 <!-- SORBI-FOOTER:START -->
 <style>
 .sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:#9BA0AB;max-width:none;width:auto}
@@ -863,6 +866,8 @@ document.getElementById('copyBtn').onclick=async()=>{
    <a href="/seni-taniyorum">Seni Tanıyorum</a>
    <a href="/#uygulama">Uygulama</a>
    <a href="/destek">Destek</a>
+   <a href="/privacy">Gizlilik ve KVKK</a>
+   <a href="mailto:destek@sorbiapp.com">İletişim</a>
   </div>
   <div><h4>Burçlar</h4>
    <a href="/burc-ozellikleri">Burç Özellikleri</a>
