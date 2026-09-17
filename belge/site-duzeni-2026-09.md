@@ -6,8 +6,10 @@ Kod: PR #1 (`site-duzeni` → `main`), birleşme commit'i `cadfc71`.
 ## Durum
 
 - [x] Değişiklikler GitHub `main` dalında (PR #1 birleşti)
-- [ ] **Canlıya alma (Mac):** `git checkout main && git pull && wrangler pages deploy . --project-name sorbi --branch main`
-- [ ] Deploy sonrası sorbiapp.com'da header, renk tonu ve footer göz kontrolü
+- [x] **Canlıya alındı:** 17 Eyl 2026, Mac'ten `wrangler pages deploy` (d8500ff). Canlı 59 sayfa repo ile birebir karşılaştırıldı.
+- [ ] Deploy sonrası sorbiapp.com'da header, renk tonu ve footer göz kontrolü (Defne)
+- [x] Deploy sırasında bulunan ek hata düzeltildi: `/destek` sonsuz yönlendirme döngüsündeydi (App Store Support URL `/support` açılmıyordu) → `5db285a`
+- [x] Mac'teki 15 Eyl tarihli commit edilmemiş çalışma (sayfa kapısı `tools/kapi.py` + `ACIK.txt`, nav/footer taslakları, sitemap/_redirects değişiklikleri) kaybolmasın diye `yerel-kapi-wip-2026-09-15` dalına yedeklendi; canlıya çıkmadı
 
 Not: Cloudflare Pages GitHub'dan otomatik deploy etmiyor (direct upload). `main`'e girmek siteyi değiştirmez; wrangler komutu gerekir.
 
