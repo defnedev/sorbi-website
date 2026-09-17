@@ -85,3 +85,24 @@ Test: 59 sayfa JS hatası yok; Nadirlik aynı doğum bilgisiyle eski/yeni aynı 
 **Test:** 59 sayfa eski/yeni JS hata karşılaştırması temiz; profil verisiyle tüm sayfa taraması temiz; 10 araçta hesap çıktıları aynı (farklar yalnız footer linkleri ve yeniden yazılan yazılar); liste bloğu 1440/390 px'te gizli→görünür, onaysız/onaylı akış ve gönderilen kaynak etiketi doğrulandı.
 
 **Hâlâ açık (Defne kararı / zaman):** Space Grotesk yalnız paylaşım kartı sayfalarında yüklensin (performans); günlük burç yorum sayfaları ince içerik (AdSense); Sayım yazılarına paylaş butonu; 12 burç özellikleri sayfasına Sayım verisi + Seni Tanıyorum linki; liste 25'i geçince "X kişi bekliyor" sayacı.
+
+## 17 Eyl 2026 — dördüncü tur (fable 2. denetim + düzeltmeler, canlıda: 1f70af2)
+
+**Canlıya alınan düzeltmeler:**
+- **Giriş doğrulama (sorbi-form.js, 11 araç sayfası):** gelecek tarih ("Bu tarih gelecekte"), olmayan gün (31.02 → "Böyle bir tarih yok"), 1900 öncesi uyarısı — hepsi satır içi, `alert()` yok. Bulunamayan şehir artık sessizce İstanbul'a düşmüyor: "Bu yeri bulamadım — hesap İstanbul'a göre yapılır" uyarısı çıkıyor.
+- **Liste formu (sorbi-liste.js):** onay kutusu butonun ÜSTÜNE alındı (varsayılan yol hatayla bitiyordu), gerçek `<form>` + Enter ile gönderim, kayıtlı kullanıcıya form bir daha gösterilmiyor. Ana sayfa da artık kendi kopyası yerine bu bileşeni kullanıyor (tek kaynak).
+- 6 sayfada kalan sayfa içi "✦ SORBI" etiketi kaldırıldı (üstelik Türkçe olmayan I ile yazılıydı).
+- 5 rehber birbirine bağlandı ("Diğer rehberler"); /tarot artık Günün Kartı'ndan link alıyor (önceden yetimdi).
+- sorbi-yildiz.js: "dekilinasyon" → "deklinasyon" (Seni Tanıyorum sonucunda görünüyordu).
+
+**Fable 2. denetim — kalan bulgular (yapılmadı):**
+- Yükselen hesaplayıcısı saat alanı 12:00 dolu geliyor; dokunmayan kullanıcı kesin bir yükselen alıyor → boş+zorunlu ya da "12:00 varsayıldı" şeridi (30 dk).
+- burc-uyumu burç seçici klavye/ekran okuyucuyla kullanılamıyor (tabindex/role yok), `.sg .n` ~10px, `--dim` ipucu kontrastı 3,53:1 (AA 4,5 altında) (45 dk).
+- Ana sayfada keşif kartları masaüstünde 1409px, mobilde 1637px aşağıda; kartlar hesaplayıcının hemen altına, liste bloğu sonuç görününce açılacak şekilde taşınabilir (1 s).
+- "X kişi bekliyor" için altyapı yok: `liste` tablosunda onay metni sürümü yok, sayı ucu (`GET /api/liste/sayi`) yok, doğrulama e-postası yok. Not: Apple'ın Pre-Order ve Google'ın Pre-registration sayaçları ayrı; bizim liste onların yerine geçmez.
+- Inter Google Fonts'tan render-blocking geliyor (sayfa başına 210–269 KB font); Fraunces gibi self-host edilebilir (~−100 KB, −1 RTT).
+- Hata dili tutarsız: bazı sayfalar `alert()` kullanıyor, ortak satır içi hataya çevrilebilir.
+- /destek sayfası uygulama çıkmadan App Store abonelik fiyatlarını (₺59,99/hafta) anlatıyor; footer ve sitemap'te.
+- Fable'ın "yapmayalım" dediği: Space Grotesk'i 56 sayfadan ayıklamak (ölçüm: sayfa açılışında 0 bayt iniyor, kazanç yok), 5 yazıyı yeniden elden geçirmek, günlük yorum sayfalarını şablon metinle şişirmek.
+
+**Defne'nin kararı gereken 2 soru:** (1) 5 rehber artık özgün ve doğru — Google'a açalım mı, yoksa 58 sayfanın footer'ından çıkarılsınlar mı (noindex sayfaya 58 yerden link vermek anlamsız)? (2) /destek uygulama çıkana kadar footer ve sitemap'ten çıksın mı (adres App Store için kalır)?
