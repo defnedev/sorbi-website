@@ -10,36 +10,86 @@
  <meta name="description" content="sorbiapp.com gizlilik politikası: doğum verisi tarayıcıda kalır, çerez kullanımı, Google AdSense reklam çerezleri ve kapatma yolları, KVKK haklarınız.">
  <style>
  * { margin: 0; padding: 0; box-sizing: border-box; }
- body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0B0810; color: #F2EFE9; line-height: 1.7; padding: 2rem; }
+ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.7; padding: 2rem; }
  .container { max-width: 800px; margin: 0 auto; }
- h1 { color: #E3A692; font-size: 2rem; margin-bottom: 0.5rem; }
- h2 { color: #E3A692; font-size: 1.3rem; margin: 2rem 0 0.5rem; }
- p, li { margin-bottom: 0.8rem; color: #A5A3AE; }
+ h1 { color: var(--acc); font-size: 2rem; margin-bottom: 0.5rem; }
+ h2 { color: var(--acc); font-size: 1.3rem; margin: 2rem 0 0.5rem; }
+ p, li { margin-bottom: 0.8rem; color: var(--mut); }
  ul, ol { padding-left: 1.5rem; }
- .date { color: #A5A3AE; font-size: 0.9rem; margin-bottom: 2rem; }
- a { color: #E3A692; }
+ .date { color: var(--mut); font-size: 0.9rem; margin-bottom: 2rem; }
+ a { color: var(--acc); }
  @media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}</style>
 <link rel="stylesheet" href="/sorbi-fonts.css?v=10">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6653215819266638"
      crossorigin="anonymous"></script>
+<!-- SORBI-TEMA:START -->
+<style>
+/* Altı rol, iki gökyüzü. Gece varsayılan; gündüz [data-tema="gunduz"] ile.
+   Renkler burada tanımlanır, sayfalar yalnız değişken kullanır. */
+:root{--bg:#0B0810;--bg-rgb:11,8,16;--ink:#F2EFE9;--ink-rgb:242,239,233;
+  --mut:#A5A3AE;--mut-rgb:165,163,174;--dim:#868494;--dim-rgb:134,132,148;
+  --acc:#E3A692;--acc-rgb:227,166,146;--acc-ink:#2B140C;color-scheme:dark}
+:root[data-tema="gunduz"]{--bg:#F6F3EC;--bg-rgb:246,243,236;--ink:#1A1720;--ink-rgb:26,23,32;
+  --mut:#5C5966;--mut-rgb:92,89,102;--dim:#666370;--dim-rgb:102,99,112;
+  --acc:#A85A36;--acc-rgb:168,90,54;--acc-ink:#F6F3EC;color-scheme:light}
+html{background:var(--bg)}
+body{background:transparent!important}
+#temaDugme{margin-left:.4rem;width:34px;height:34px;border-radius:50%;border:1px solid rgba(var(--ink-rgb),.14);background:none;color:var(--mut);cursor:pointer;font-size:.95rem;line-height:1;flex:none;display:inline-flex;align-items:center;justify-content:center}
+#temaDugme:hover{color:var(--ink);border-color:rgba(var(--ink-rgb),.3)}
+</style>
+<script>
+/* Gökyüzüne göre tema. İlk boyamadan önce çalışır ki sayfa titremesin.
+   Kullanıcı seçtiyse (sorbi_tema) o; seçmediyse gerçek gündoğumu/günbatımı
+   (NOAA yaklaşımı, kayıtlı doğum yeri ya da İstanbul). */
+(function(){
+ var H=document.documentElement;
+ function gunes(lat,lon,d){
+  var r=Math.PI/180, n=Math.floor((Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate())-Date.UTC(d.getUTCFullYear(),0,0))/864e5);
+  var g=2*Math.PI/365*(n-1+(d.getUTCHours()-12)/24);
+  var eq=229.18*(7.5e-5+1.868e-3*Math.cos(g)-0.032077*Math.sin(g)-0.014615*Math.cos(2*g)-0.040849*Math.sin(2*g));
+  var dec=0.006918-0.399912*Math.cos(g)+0.070257*Math.sin(g)-0.006758*Math.cos(2*g)+0.000907*Math.sin(2*g)-0.002697*Math.cos(3*g)+0.00148*Math.sin(3*g);
+  var ha=Math.acos(Math.cos(90.833*r)/(Math.cos(lat*r)*Math.cos(dec))-Math.tan(lat*r)*Math.tan(dec))/r;
+  var dogus=720-4*(lon+ha)-eq, batis=720-4*(lon-ha)-eq;   /* UTC dakika */
+  var simdi=d.getUTCHours()*60+d.getUTCMinutes();
+  return simdi>dogus&&simdi<batis?'gunduz':'gece';
+ }
+ var t=null; try{t=localStorage.getItem('sorbi_tema');}catch(e){}
+ if(t!=='gunduz'&&t!=='gece'){
+  var lat=41.0082,lon=28.9784;
+  try{var b=JSON.parse(localStorage.getItem('sorbi_birth')||'null'); if(b&&+b.lat&&+b.lon){lat=+b.lat;lon=+b.lon;}}catch(e){}
+  try{t=gunes(lat,lon,new Date());}catch(e){t='gece';}
+ }
+ if(t==='gunduz') H.setAttribute('data-tema','gunduz'); else H.removeAttribute('data-tema');
+ function meta(){var m=document.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute('content',H.getAttribute('data-tema')==='gunduz'?'#F6F3EC':'#0B0810');}
+ function dugme(){
+  var nav=document.querySelector('.sbnav'); if(!nav||document.getElementById('temaDugme')) return;
+  var b=document.createElement('button'); b.id='temaDugme'; b.type='button';
+  function yaz(){var g=H.getAttribute('data-tema')==='gunduz'; b.textContent=g?'☾':'☀'; b.setAttribute('aria-label',g?'Gece temasına geç':'Gündüz temasına geç'); b.title=b.getAttribute('aria-label');}
+  b.onclick=function(){var g=H.getAttribute('data-tema')==='gunduz'; if(g) H.removeAttribute('data-tema'); else H.setAttribute('data-tema','gunduz'); try{localStorage.setItem('sorbi_tema',g?'gece':'gunduz');}catch(e){} yaz(); meta(); if(window.SorbiChart&&window.SorbiChart.yenile) try{window.SorbiChart.yenile();}catch(e){}};
+  yaz(); nav.appendChild(b);
+ }
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){meta();dugme();}); else {meta();dugme();}
+})();
+</script>
+<!-- SORBI-TEMA:END -->
 </head>
 <body>
 <!-- SORBI-NAV:START -->
 <style>
-.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.68rem 1.2rem;background:rgba(13,8,16,.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
-.sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:#F2EFE9;font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
-.sbnav .sbnav-lg i{font-style:normal;color:#E3A692;margin-right:.45rem;letter-spacing:0}
+.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.68rem 1.2rem;background:rgba(var(--bg-rgb),.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(var(--ink-rgb),.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
+.sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:var(--ink);font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
+.sbnav .sbnav-lg i{font-style:normal;color:var(--acc);margin-right:.45rem;letter-spacing:0}
 .sbnav .sbnav-lg:hover{text-decoration:none;color:#fff}
 .sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:0 0 0 auto;padding:0;max-width:none;flex-wrap:nowrap}
 .sbnav nav::-webkit-scrollbar{display:none}
-.sbnav nav a{position:relative;color:#A5A3AE;text-decoration:none;font-size:.85rem;font-weight:500;padding:.4rem .78rem;border-radius:99px;white-space:nowrap;transition:color .15s,background .15s}
-.sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.06);text-decoration:none}
-.sbnav nav a.on{color:#F2EFE9;background:none;font-weight:600}.sbnav nav a.on::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:#E3A692}
+.sbnav nav a{position:relative;color:var(--mut);text-decoration:none;font-size:.85rem;font-weight:500;padding:.4rem .78rem;border-radius:99px;white-space:nowrap;transition:color .15s,background .15s}
+.sbnav nav a:hover{color:var(--ink);background:rgba(var(--ink-rgb),.06);text-decoration:none}
+.sbnav nav a.on{color:var(--ink);background:none;font-weight:600}.sbnav nav a.on::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:var(--acc)}
 @media(min-width:900px){.sbnav{padding:.95rem max(2rem,calc((100% - 1200px)/2));gap:2rem;min-height:70px}.sbnav .sbnav-lg{font-size:1.3rem}.sbnav nav a{font-size:.9rem;line-height:1.5;padding:.45rem .9rem}}
 @media(max-width:560px){.sbnav{padding:.55rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem;letter-spacing:.12em}.sbnav nav a{font-size:.79rem;padding:.34rem .55rem}}
 @media(min-width:900px) and (max-width:1120px){.sbnav{gap:1rem}.sbnav .sbnav-lg{font-size:1.15rem}.sbnav nav a{font-size:.84rem;padding:.45rem .5rem}}
-@media(max-width:899px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#0B0810 85%,transparent);mask-image:linear-gradient(90deg,#0B0810 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}}
-@media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#0B0810 78%,transparent);mask-image:linear-gradient(90deg,#0B0810 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:#0B0810;mask-image:#0B0810}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#0B0810 14%);mask-image:linear-gradient(90deg,transparent,#0B0810 14%)}}
+@media(max-width:899px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,var(--bg) 85%,transparent);mask-image:linear-gradient(90deg,var(--bg) 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}}
+@media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,var(--bg) 78%,transparent);mask-image:linear-gradient(90deg,var(--bg) 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:var(--bg);mask-image:var(--bg)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,var(--bg) 14%);mask-image:linear-gradient(90deg,transparent,var(--bg) 14%)}}
 .sbnav{margin:-2rem -2rem 2rem!important}
 @media(min-width:900px){.sbnav{padding-left:calc(max(2rem,calc((100% - 1200px)/2)) + 2rem);padding-right:calc(max(2rem,calc((100% - 1200px)/2)) + 2rem)}}
 </style>
@@ -117,16 +167,16 @@
 
 <!-- SORBI-FOOTER:START -->
 <style>
-.sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:#A5A3AE;max-width:none;width:auto}
-.sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0B0810;font-family:'Inter',system-ui,sans-serif}
+.sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:var(--mut);max-width:none;width:auto}
+.sbft{margin-top:3rem;border-top:1px solid rgba(var(--ink-rgb),.08);background:var(--bg);font-family:'Inter',system-ui,sans-serif}
 .sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:repeat(4,1fr);text-align:left;gap:2rem}
-.sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#E3A692;margin:0 0 .8rem;font-weight:600}
-.sbft a{display:block;color:#A5A3AE;text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
-.sbft a:hover{color:#F2EFE9}
-.sbft .sbft-brand b{font-size:1.05rem;color:#F2EFE9;font-weight:700}
-.sbft .sbft-brand b i{font-style:normal;color:#E3A692;margin-right:.3rem}
-.sbft .sbft-brand p{color:#A5A3AE;font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
-.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#A5A3AE;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin:0 0 .8rem;font-weight:600}
+.sbft a{display:block;color:var(--mut);text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
+.sbft a:hover{color:var(--ink)}
+.sbft .sbft-brand b{font-size:1.05rem;color:var(--ink);font-weight:700}
+.sbft .sbft-brand b i{font-style:normal;color:var(--acc);margin-right:.3rem}
+.sbft .sbft-brand p{color:var(--mut);font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(var(--ink-rgb),.06);color:var(--mut);font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 @media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
 @media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
 </style>

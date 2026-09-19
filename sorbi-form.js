@@ -6,17 +6,17 @@
 'use strict';
 var CSS=[
 '/* SorbiForm normalize */',
-'input[type=text],input[type=email],input[type=tel],input[type=number],input[type=search],input:not([type]),select,textarea{background:rgba(0,0,0,.35)!important;border:1px solid rgba(255,255,255,.14)!important;color:#F2EFE9!important;border-radius:12px!important;color-scheme:dark;transition:border-color .15s,box-shadow .15s}',
-'input:focus,select:focus,textarea:focus{outline:none!important;border-color:rgba(242,239,233,.55)!important;box-shadow:0 0 0 3px rgba(227,166,146,.14)!important}',
+'input[type=text],input[type=email],input[type=tel],input[type=number],input[type=search],input:not([type]),select,textarea{background:rgba(var(--bg-rgb),.35)!important;border:1px solid rgba(var(--ink-rgb),.14)!important;color:var(--ink)!important;border-radius:12px!important;color-scheme:dark;transition:border-color .15s,box-shadow .15s}',
+'input:focus,select:focus,textarea:focus{outline:none!important;border-color:rgba(var(--ink-rgb),.55)!important;box-shadow:0 0 0 3px rgba(var(--acc-rgb),.14)!important}',
 'select{padding:.7rem .85rem;font-family:inherit}',
-'.sfwrap{display:flex;align-items:center;gap:.35rem;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:.62rem .8rem;transition:border-color .15s,box-shadow .15s}',
-'.sfwrap:focus-within{border-color:rgba(242,239,233,.55);box-shadow:0 0 0 3px rgba(227,166,146,.14)}',
-'.sfwrap input.sfseg{background:none!important;border:none!important;box-shadow:none!important;padding:0!important;margin:0;color:#F2EFE9!important;font:inherit;font-size:1.02rem;font-variant-numeric:tabular-nums;text-align:center;width:2.15ch;caret-color:#E3A692}',
+'.sfwrap{display:flex;align-items:center;gap:.35rem;background:rgba(var(--bg-rgb),.35);border:1px solid rgba(var(--ink-rgb),.14);border-radius:12px;padding:.62rem .8rem;transition:border-color .15s,box-shadow .15s}',
+'.sfwrap:focus-within{border-color:rgba(var(--ink-rgb),.55);box-shadow:0 0 0 3px rgba(var(--acc-rgb),.14)}',
+'.sfwrap input.sfseg{background:none!important;border:none!important;box-shadow:none!important;padding:0!important;margin:0;color:var(--ink)!important;font:inherit;font-size:1.02rem;font-variant-numeric:tabular-nums;text-align:center;width:2.15ch;caret-color:var(--acc)}',
 '.sfwrap input.sfseg.sfy{width:4.3ch}',
-'.sfwrap input.sfseg::placeholder{color:#868494;letter-spacing:.5px}',
-'.sfwrap .sfsep{color:#868494;user-select:none;font-size:1rem}',
-'.sfwrap .sfic{margin-left:auto;color:#A5A3AE;font-size:.85rem;opacity:.7}',
-'.sfhint{font-size:.72rem;color:#868494;margin-top:.3rem;letter-spacing:.3px}',
+'.sfwrap input.sfseg::placeholder{color:var(--dim);letter-spacing:.5px}',
+'.sfwrap .sfsep{color:var(--dim);user-select:none;font-size:1rem}',
+'.sfwrap .sfic{margin-left:auto;color:var(--mut);font-size:.85rem;opacity:.7}',
+'.sfhint{font-size:.72rem;color:var(--dim);margin-top:.3rem;letter-spacing:.3px}',
 '.sfnot{font-size:.74rem;line-height:1.45;margin-top:.35rem;letter-spacing:.2px}',
 '/* mobil: nav kaydırılabilir, sayfa yana taşmaz */',
 '.sbnav nav,.sorbi-topnav nav,.topnav nav{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;min-width:0;-webkit-overflow-scrolling:touch}',
@@ -24,10 +24,10 @@ var CSS=[
 '@media(max-width:640px){html,body{overflow-x:hidden}}',
 '.form .full,.form label{min-width:0;max-width:100%}',
 '/* şehir arama listeleri (index .geolist + eski .gr) ortak dil */',
-'.geolist,.gr{background:rgba(14,15,20,.97)!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:14px!important;box-shadow:0 18px 50px rgba(0,0,0,.55)!important;backdrop-filter:blur(14px);overflow:hidden}',
-'.geolist>div,.gr .gi{padding:.62rem .9rem!important;cursor:pointer;color:#A5A3AE;transition:background .12s}',
-'.geolist>div:hover,.gr .gi:hover{background:rgba(242,239,233,.12)!important;color:#F2EFE9}',
-'.gr .gi small{color:#A5A3AE;display:block;font-size:.8rem;margin-top:.1rem}'
+'.geolist,.gr{background:rgba(var(--bg-rgb),.97)!important;border:1px solid rgba(var(--ink-rgb),.12)!important;border-radius:14px!important;box-shadow:0 18px 50px rgba(var(--bg-rgb),.55)!important;backdrop-filter:blur(14px);overflow:hidden}',
+'.geolist>div,.gr .gi{padding:.62rem .9rem!important;cursor:pointer;color:var(--mut);transition:background .12s}',
+'.geolist>div:hover,.gr .gi:hover{background:rgba(var(--ink-rgb),.12)!important;color:var(--ink)}',
+'.gr .gi small{color:var(--mut);display:block;font-size:.8rem;margin-top:.1rem}'
 ].join('\n');
 
 function injectCSS(){var s=document.createElement('style');s.id='sorbi-form-css';s.textContent=CSS;document.head.appendChild(s);}
@@ -136,7 +136,7 @@ function not(el,msg,tur){
   var box=document.getElementById(id);
   if(!msg){ if(box) box.remove(); return; }
   if(!box){ box=document.createElement('div'); box.id=id; box.className='sfnot'; notHedef(el).insertAdjacentElement('afterend',box); }
-  box.textContent=msg; box.style.color = tur==='hata' ? '#E3A692' : '#F2EFE9';
+  box.textContent=msg; box.style.color = tur==='hata' ? 'var(--acc)' : 'var(--ink)';
 }
 function tarihDenetle(native){
   var v=native.value; if(!v){ not(native,''); return; }

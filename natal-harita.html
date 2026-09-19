@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Doğum Haritası Nasıl Okunur? Harita Okuma Rehberi — Sorbi</title>
 <link rel="canonical" href="https://sorbiapp.com/natal-harita">
-<meta name="theme-color" content="#F2EFE9">
+<meta name="theme-color" content="#0B0810">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sorbi">
 <meta property="og:locale" content="tr_TR">
@@ -26,25 +26,25 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;font-size:16px;}
-body{font-family:'Inter',sans-serif;overflow-x:hidden;background:#0B0810;color:#F2EFE9;}
+body{font-family:'Inter',sans-serif;overflow-x:hidden;background:var(--bg);color:var(--ink);}
 img{max-width:100%;display:block;}
 a{text-decoration:none;color:inherit;}
 ul{list-style:none;}
 
-:root{--terra:#0B0810;--btn-ink:#2B140C;
- --dark:#0B0810;
- --dark2:#0B0810;
- --dark3:#0B0810;
- --gold:#F2EFE9;
- --gold2:rgba(242,239,233,0.12);
- --gold3:rgba(242,239,233,0.25);
- --purple:#E3A692;
- --purple2:rgba(242,239,233,0.12);
- --green:#F2EFE9;
- --text-light:#F2EFE9;
- --text-muted:rgba(246,241,231,0.6);
- --text-dim:rgba(246,241,231,0.35);
- --border-gold:rgba(242,239,233,0.22);
+:root{--terra:var(--bg);--btn-ink:var(--acc-ink);
+ --dark:var(--bg);
+ --dark2:var(--bg);
+ --dark3:var(--bg);
+ --gold:var(--ink);
+ --gold2:rgba(var(--ink-rgb),0.12);
+ --gold3:rgba(var(--ink-rgb),0.25);
+ --purple:var(--acc);
+ --purple2:rgba(var(--ink-rgb),0.12);
+ --green:var(--ink);
+ --text-light:var(--ink);
+ --text-muted:rgba(var(--ink-rgb),0.6);
+ --text-dim:rgba(var(--ink-rgb),0.35);
+ --border-gold:rgba(var(--ink-rgb),0.22);
  --radius:12px;
 }
 
@@ -56,7 +56,7 @@ nav.__eski{
  position:fixed;top:0;left:0;width:100%;z-index:1000;
  padding:1rem 2rem;
  display:flex;justify-content:space-between;align-items:center;
- background:#0B0810;
+ background:var(--bg);
  backdrop-filter:none;
  box-shadow:none;
 }
@@ -78,7 +78,7 @@ nav.__eski{
 /* HERO */
 .hero{
  min-height:100vh;
- background:#0B0810;
+ background:var(--bg);
  display:flex;flex-direction:column;
  align-items:center;justify-content:center;
  padding:8rem 1.5rem 5rem;
@@ -87,12 +87,12 @@ nav.__eski{
 }
 .hero::before{
  content:'';position:absolute;inset:0;
- background:url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='200' cy='200' r='180' stroke='rgba(242,239,233,.05)' stroke-width='1' fill='none'/%3E%3Ccircle cx='200' cy='200' r='130' stroke='rgba(242,239,233,.05)' stroke-width='1' fill='none'/%3E%3Ccircle cx='200' cy='200' r='80' stroke='rgba(242,239,233,.05)' stroke-width='1' fill='none'/%3E%3C/svg%3E") center center / 600px 600px no-repeat;
+ background:url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='200' cy='200' r='180' stroke='rgba(var(--ink-rgb),.05)' stroke-width='1' fill='none'/%3E%3Ccircle cx='200' cy='200' r='130' stroke='rgba(var(--ink-rgb),.05)' stroke-width='1' fill='none'/%3E%3Ccircle cx='200' cy='200' r='80' stroke='rgba(var(--ink-rgb),.05)' stroke-width='1' fill='none'/%3E%3C/svg%3E") center center / 600px 600px no-repeat;
  opacity:0.6;pointer-events:none;
 }
 .hero-badge{
  display:inline-flex;align-items:center;gap:0.4rem;
- background:rgba(242,239,233,.10);
+ background:rgba(var(--ink-rgb),.10);
  border:1px solid var(--border-gold);
  border-radius:999px;
  padding:0.3rem 1rem;
@@ -106,7 +106,7 @@ nav.__eski{
  margin-bottom:1rem;
  letter-spacing:-2px;
 }
-.hero h1 em{color:var(--gold);font-style:italic;}
+.hero h1 em{color:var(--ink);font-style:italic;}
 .hero-subtitle{
  font-size:1.1rem;color:var(--text-muted);
  max-width:540px;margin:0 auto 2.5rem;line-height:1.8;
@@ -150,14 +150,14 @@ nav.__eski{
  margin-top:2rem;
 }
 .card{
- background:rgba(242,239,233,.05);
- border:1px solid rgba(242,239,233,0.18);
+ background:rgba(var(--ink-rgb),.05);
+ border:1px solid rgba(var(--ink-rgb),0.18);
  border-radius:var(--radius);
  padding:1.8rem 1.5rem;
  transition:all 0.3s;
 }
 .card:hover{
- background:rgba(242,239,233,.05);
+ background:rgba(var(--ink-rgb),.05);
  border-color:var(--border-gold);
  transform:translateY(-3px);
 }
@@ -168,7 +168,7 @@ nav.__eski{
 /* DIVIDER */
 .divider{
  border:none;
- border-top:1px solid rgba(242,239,233,0.15);
+ border-top:1px solid rgba(var(--ink-rgb),0.15);
  margin:4rem 0;
 }
 
@@ -177,7 +177,7 @@ nav.__eski{
  border-left:3px solid var(--gold);
  padding:1.5rem 2rem;
  margin:2rem 0;
- background:rgba(242,239,233,.05);
+ background:rgba(var(--ink-rgb),.05);
  border-radius:0 var(--radius) var(--radius) 0;
 }
 .quote-block p{
@@ -213,7 +213,7 @@ nav.__eski{
 /* EXAMPLE */
 .example-block{
  background:var(--purple2);
- border:1px solid rgba(242,239,233,0.2);
+ border:1px solid rgba(var(--ink-rgb),0.2);
  border-radius:var(--radius);
  padding:2rem;
  margin-top:1.5rem;
@@ -227,7 +227,7 @@ nav.__eski{
 
 /* PRICING */
 .pricing-section{
- background:linear-gradient(135deg, rgba(242,239,233,.10) 0%, rgba(242,239,233,.10) 100%);
+ background:linear-gradient(135deg, rgba(var(--ink-rgb),.10) 0%, rgba(var(--ink-rgb),.10) 100%);
  border:1px solid var(--border-gold);
  border-radius:20px;
  padding:3rem 2.5rem;
@@ -254,8 +254,8 @@ nav.__eski{
 /* WA BUTTON */
 .wa-btn{
  display:inline-flex;align-items:center;gap:0.6rem;
- background:#E3A692;
- color:#2B140C;
+ background:var(--acc);
+ color:var(--acc-ink);
  padding:1rem 2.2rem;
  border-radius:999px;
  font-weight:600;font-size:0.95rem;
@@ -266,7 +266,7 @@ nav.__eski{
 
 /* FOOTER */
 footer{
- border-top:1px solid rgba(242,239,233,.10);
+ border-top:1px solid rgba(var(--ink-rgb),.10);
  padding:2.5rem 1.5rem;
  text-align:center;
 }
@@ -291,26 +291,26 @@ footer a:hover{text-decoration:underline;}
 <body>
 <!-- SORBI-NAV:START -->
 <style>
-.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(13,8,16,.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
-.sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:#F2EFE9;font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
-.sbnav .sbnav-lg i{font-style:normal;color:#E3A692;margin-right:.45rem;letter-spacing:0}
+.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(var(--bg-rgb),.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(var(--ink-rgb),.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
+.sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:var(--ink);font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
+.sbnav .sbnav-lg i{font-style:normal;color:var(--acc);margin-right:.45rem;letter-spacing:0}
 .sbnav .sbnav-lg:hover{text-decoration:none;color:#fff}
 .sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:-4px -4px -4px auto;padding:4px;max-width:none;flex-wrap:nowrap}
 .sbnav nav::-webkit-scrollbar{display:none}
-.sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:#A5A3AE;text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
-.sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);text-decoration:none}
+.sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:var(--mut);text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
+.sbnav nav a:hover{color:var(--ink);background:rgba(var(--ink-rgb),.08);box-shadow:inset 0 0 0 1px rgba(var(--ink-rgb),.14);text-decoration:none}
 .sbnav nav a:active{transform:scale(.97)}
-.sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:#F2EFE9;background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:#E3A692}
-.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#F2EFE9;background:rgba(255,255,255,.06);box-shadow:none}
+.sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:var(--ink);background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:var(--acc)}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:var(--ink);background:rgba(var(--ink-rgb),.06);box-shadow:none}
 .sbnav nav a:focus{outline:none}
-.sbnav nav a:focus-visible{outline:2px solid #E3A692;outline-offset:2px}
-.sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:#F2EFE9}
+.sbnav nav a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:var(--ink)}
 @media(prefers-reduced-motion:reduce){.sbnav nav a{transition:none}.sbnav nav a:active{transform:none}}
 @media(min-width:900px){.sbnav{padding:.9rem max(2rem,calc((100% - 1200px)/2));gap:2rem;min-height:70px}.sbnav .sbnav-lg{font-size:1.3rem}.sbnav nav a{font-size:.9rem;padding:0 .95rem}}
 @media(max-width:560px){.sbnav{padding:.3rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem;letter-spacing:.12em}.sbnav nav a{font-size:.8rem;padding:0 .66rem}}
 @media(min-width:900px) and (max-width:1120px){.sbnav{gap:1rem}.sbnav .sbnav-lg{font-size:1.15rem}.sbnav nav a{font-size:.84rem;padding:0 .5rem}}
-@media(max-width:1119px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#0B0810 85%,transparent);mask-image:linear-gradient(90deg,#0B0810 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:#0B0810;mask-image:#0B0810}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#0B0810 8%);mask-image:linear-gradient(90deg,transparent,#0B0810 8%)}}
-@media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#0B0810 78%,transparent);mask-image:linear-gradient(90deg,#0B0810 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:#0B0810;mask-image:#0B0810}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#0B0810 14%);mask-image:linear-gradient(90deg,transparent,#0B0810 14%)}}
+@media(max-width:1119px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,var(--bg) 85%,transparent);mask-image:linear-gradient(90deg,var(--bg) 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:var(--bg);mask-image:var(--bg)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,var(--bg) 8%);mask-image:linear-gradient(90deg,transparent,var(--bg) 8%)}}
+@media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,var(--bg) 78%,transparent);mask-image:linear-gradient(90deg,var(--bg) 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:var(--bg);mask-image:var(--bg)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,var(--bg) 14%);mask-image:linear-gradient(90deg,transparent,var(--bg) 14%)}}
 </style>
 <header class="sbnav">
  <a href="/" class="sbnav-lg" aria-label="Sorbi ana sayfa"><i>✦</i>SORBİ</a>
@@ -331,14 +331,53 @@ footer a:hover{text-decoration:underline;}
 <!-- SORBI-NAV:END -->
 <!-- SORBI-TEMA:START -->
 <style>
-/* Zemin düz. Gökyüzü gibi: tek koyu yüzey.
-   Önce burada 10 katman vardı — 3 renkli parıltı (mor, mavi-yeşil, terracotta,
-   üç ayrı yönden) ve 7 tane 1px "yıldız" noktası. Noktalar yıldız değil toz
-   lekesi gibi okunuyordu, üç parıltı da metnin arkasında birbiriyle yarışıyordu.
-   Bazı sayfalarda bunun ALTINDA ayrıca bir vinyet daha vardı. */
-html{background:#0B0810}
+/* Altı rol, iki gökyüzü. Gece varsayılan; gündüz [data-tema="gunduz"] ile.
+   Renkler burada tanımlanır, sayfalar yalnız değişken kullanır. */
+:root{--bg:#0B0810;--bg-rgb:11,8,16;--ink:#F2EFE9;--ink-rgb:242,239,233;
+  --mut:#A5A3AE;--mut-rgb:165,163,174;--dim:#868494;--dim-rgb:134,132,148;
+  --acc:#E3A692;--acc-rgb:227,166,146;--acc-ink:#2B140C;color-scheme:dark}
+:root[data-tema="gunduz"]{--bg:#F6F3EC;--bg-rgb:246,243,236;--ink:#1A1720;--ink-rgb:26,23,32;
+  --mut:#5C5966;--mut-rgb:92,89,102;--dim:#666370;--dim-rgb:102,99,112;
+  --acc:#A85A36;--acc-rgb:168,90,54;--acc-ink:#F6F3EC;color-scheme:light}
+html{background:var(--bg)}
 body{background:transparent!important}
+#temaDugme{margin-left:.4rem;width:34px;height:34px;border-radius:50%;border:1px solid rgba(var(--ink-rgb),.14);background:none;color:var(--mut);cursor:pointer;font-size:.95rem;line-height:1;flex:none;display:inline-flex;align-items:center;justify-content:center}
+#temaDugme:hover{color:var(--ink);border-color:rgba(var(--ink-rgb),.3)}
 </style>
+<script>
+/* Gökyüzüne göre tema. İlk boyamadan önce çalışır ki sayfa titremesin.
+   Kullanıcı seçtiyse (sorbi_tema) o; seçmediyse gerçek gündoğumu/günbatımı
+   (NOAA yaklaşımı, kayıtlı doğum yeri ya da İstanbul). */
+(function(){
+ var H=document.documentElement;
+ function gunes(lat,lon,d){
+  var r=Math.PI/180, n=Math.floor((Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate())-Date.UTC(d.getUTCFullYear(),0,0))/864e5);
+  var g=2*Math.PI/365*(n-1+(d.getUTCHours()-12)/24);
+  var eq=229.18*(7.5e-5+1.868e-3*Math.cos(g)-0.032077*Math.sin(g)-0.014615*Math.cos(2*g)-0.040849*Math.sin(2*g));
+  var dec=0.006918-0.399912*Math.cos(g)+0.070257*Math.sin(g)-0.006758*Math.cos(2*g)+0.000907*Math.sin(2*g)-0.002697*Math.cos(3*g)+0.00148*Math.sin(3*g);
+  var ha=Math.acos(Math.cos(90.833*r)/(Math.cos(lat*r)*Math.cos(dec))-Math.tan(lat*r)*Math.tan(dec))/r;
+  var dogus=720-4*(lon+ha)-eq, batis=720-4*(lon-ha)-eq;   /* UTC dakika */
+  var simdi=d.getUTCHours()*60+d.getUTCMinutes();
+  return simdi>dogus&&simdi<batis?'gunduz':'gece';
+ }
+ var t=null; try{t=localStorage.getItem('sorbi_tema');}catch(e){}
+ if(t!=='gunduz'&&t!=='gece'){
+  var lat=41.0082,lon=28.9784;
+  try{var b=JSON.parse(localStorage.getItem('sorbi_birth')||'null'); if(b&&+b.lat&&+b.lon){lat=+b.lat;lon=+b.lon;}}catch(e){}
+  try{t=gunes(lat,lon,new Date());}catch(e){t='gece';}
+ }
+ if(t==='gunduz') H.setAttribute('data-tema','gunduz'); else H.removeAttribute('data-tema');
+ function meta(){var m=document.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute('content',H.getAttribute('data-tema')==='gunduz'?'#F6F3EC':'#0B0810');}
+ function dugme(){
+  var nav=document.querySelector('.sbnav'); if(!nav||document.getElementById('temaDugme')) return;
+  var b=document.createElement('button'); b.id='temaDugme'; b.type='button';
+  function yaz(){var g=H.getAttribute('data-tema')==='gunduz'; b.textContent=g?'☾':'☀'; b.setAttribute('aria-label',g?'Gece temasına geç':'Gündüz temasına geç'); b.title=b.getAttribute('aria-label');}
+  b.onclick=function(){var g=H.getAttribute('data-tema')==='gunduz'; if(g) H.removeAttribute('data-tema'); else H.setAttribute('data-tema','gunduz'); try{localStorage.setItem('sorbi_tema',g?'gece':'gunduz');}catch(e){} yaz(); meta(); if(window.SorbiChart&&window.SorbiChart.yenile) try{window.SorbiChart.yenile();}catch(e){}};
+  yaz(); nav.appendChild(b);
+ }
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){meta();dugme();}); else {meta();dugme();}
+})();
+</script>
 <!-- SORBI-TEMA:END -->
 
 
@@ -352,10 +391,10 @@ body{background:transparent!important}
 
 <!-- SORBI-MODE-CTA -->
 <div style="max-width:760px;margin:1.6rem auto;padding:0 20px">
- <div style="background:rgba(242,239,233,.08);border:1px solid rgba(242,239,233,.3);border-radius:18px;padding:1.5rem 1.6rem;text-align:center">
+ <div style="background:rgba(var(--ink-rgb),.08);border:1px solid rgba(var(--ink-rgb),.3);border-radius:18px;padding:1.5rem 1.6rem;text-align:center">
   <div style="font-family:Fraunces,Georgia,serif;font-weight:600;font-size:1.15rem;margin-bottom:.35rem">Doğum haritanı şimdi çıkar</div>
   <p style="color:inherit;opacity:.75;font-size:.9rem;margin:0 0 1rem;max-width:52ch;margin-left:auto;margin-right:auto">Tarih, saat, yer — üç bilgiyle profesyonel natal çark, 7 ev sistemi ve tüm açılar Atölye'de.</p>
-  <a href="/detayli-dogum-haritasi?m=natal" style="display:inline-block;background:#E3A692;color:#2B140C;padding:.75rem 1.7rem;border-radius:99px;font-weight:600;font-size:.92rem;text-decoration:none">Atölye'de aç ✦</a>
+  <a href="/detayli-dogum-haritasi?m=natal" style="display:inline-block;background:var(--acc);color:var(--acc-ink);padding:.75rem 1.7rem;border-radius:99px;font-weight:600;font-size:.92rem;text-decoration:none">Atölye'de aç ✦</a>
  </div>
 </div>
 
@@ -443,16 +482,16 @@ body{background:transparent!important}
 
 <!-- SORBI-FOOTER:START -->
 <style>
-.sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:#A5A3AE;max-width:none;width:auto}
-.sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0B0810;font-family:'Inter',system-ui,sans-serif}
+.sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:var(--mut);max-width:none;width:auto}
+.sbft{margin-top:3rem;border-top:1px solid rgba(var(--ink-rgb),.08);background:var(--bg);font-family:'Inter',system-ui,sans-serif}
 .sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:repeat(4,1fr);text-align:left;gap:2rem}
-.sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#E3A692;margin:0 0 .8rem;font-weight:600}
-.sbft a{display:block;color:#A5A3AE;text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
-.sbft a:hover{color:#F2EFE9}
-.sbft .sbft-brand b{font-size:1.05rem;color:#F2EFE9;font-weight:700}
-.sbft .sbft-brand b i{font-style:normal;color:#E3A692;margin-right:.3rem}
-.sbft .sbft-brand p{color:#A5A3AE;font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
-.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#A5A3AE;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin:0 0 .8rem;font-weight:600}
+.sbft a{display:block;color:var(--mut);text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
+.sbft a:hover{color:var(--ink)}
+.sbft .sbft-brand b{font-size:1.05rem;color:var(--ink);font-weight:700}
+.sbft .sbft-brand b i{font-style:normal;color:var(--acc);margin-right:.3rem}
+.sbft .sbft-brand p{color:var(--mut);font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(var(--ink-rgb),.06);color:var(--mut);font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 @media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
 @media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
 </style>

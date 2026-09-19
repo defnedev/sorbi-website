@@ -21,12 +21,12 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
  /* zemin: siteyle aynı mor-siyah; yüzeyler ona doğru ısıtıldı */
- --bg:#0B0810; --yuzey:#0B0810; --yuzey2:#0B0810;
- --cizgi:rgba(255,255,255,.075); --cizgi2:rgba(255,255,255,.14);
- --gold:#E3A692; --gold-br:#F2EFE9;
- --ink:#F2EFE9; --mut:#A5A3AE; --dim:#868494;
+  --yuzey:var(--bg); --yuzey2:var(--bg);
+ --cizgi:rgba(var(--ink-rgb),.075); --cizgi2:rgba(var(--ink-rgb),.14);
+ --gold:var(--acc); --gold-br:var(--ink);
+   
  /* anlam renkleri — vurgudan ayrı, yalnız veri kodlar */
- --sert:#E3A692; --yumusak:#A5A3AE; --kavus:#F2EFE9;
+ --sert:var(--acc); --yumusak:var(--mut); --kavus:var(--ink);
  --f-bas:Fraunces,Georgia,serif;
  --f-gov:'Inter',system-ui,sans-serif;
  --f-say:'IBM Plex Mono',ui-monospace,Menlo,monospace;
@@ -35,11 +35,11 @@ body{font-family:var(--f-gov);background:var(--bg);color:var(--ink);-webkit-font
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:5px}
 input,textarea,select,button{font-family:inherit}
-input,textarea,select{width:100%;font-size:.87rem;color:var(--ink);background:rgba(0,0,0,.32);border:1px solid var(--cizgi);border-radius:9px;padding:.55rem .7rem;outline:none;transition:border-color .15s;color-scheme:dark}
-input:focus,textarea:focus,select:focus{border-color:rgba(242,239,233,.5)}
+input,textarea,select{width:100%;font-size:.87rem;color:var(--ink);background:rgba(var(--bg-rgb),.32);border:1px solid var(--cizgi);border-radius:9px;padding:.55rem .7rem;outline:none;transition:border-color .15s;color-scheme:dark}
+input:focus,textarea:focus,select:focus{border-color:rgba(var(--ink-rgb),.5)}
 input::placeholder,textarea::placeholder{color:var(--dim)}
 label{display:block;font-family:var(--f-say);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.3rem}
-button.ana{font-size:.84rem;font-weight:600;color:#0B0810;background:var(--gold-br);border:none;border-radius:9px;padding:.55rem 1.05rem;cursor:pointer;transition:background .15s}
+button.ana{font-size:.84rem;font-weight:600;color:var(--bg);background:var(--gold-br);border:none;border-radius:9px;padding:.55rem 1.05rem;cursor:pointer;transition:background .15s}
 button.ana:hover{background:var(--gold)}
 button.ana:disabled{opacity:.45;cursor:default}
 button.yan{font-size:.8rem;font-weight:500;color:var(--mut);background:transparent;border:1px solid var(--cizgi);border-radius:9px;padding:.42rem .8rem;cursor:pointer;transition:.15s}
@@ -50,7 +50,7 @@ button.yan:hover{color:var(--ink);border-color:var(--cizgi2)}
 
 /* ── üst şerit ── */
 .ust{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:.85rem;padding:.55rem 1.1rem;
- background:rgba(13,8,16,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--cizgi)}
+ background:rgba(var(--bg-rgb),.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--cizgi)}
 .ust .lg{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:1.05rem;letter-spacing:.16em;display:flex;align-items:center;gap:.4rem}
 .ust .lg i{font-style:normal;color:var(--gold)}
 .ust .et{font-family:var(--f-say);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);border-left:1px solid var(--cizgi);padding-left:.85rem}
@@ -67,14 +67,14 @@ button.yan:hover{color:var(--ink);border-color:var(--cizgi2)}
 /* ── iskelet ── */
 .duzen{display:grid;grid-template-columns:270px 1fr;min-height:calc(100vh - 47px)}
 @media(max-width:900px){.duzen{grid-template-columns:1fr}.kenar{border-right:none;border-bottom:1px solid var(--cizgi)}}
-.kenar{border-right:1px solid var(--cizgi);padding:.9rem .75rem;display:flex;flex-direction:column;gap:.6rem;background:rgba(0,0,0,.16)}
+.kenar{border-right:1px solid var(--cizgi);padding:.9rem .75rem;display:flex;flex-direction:column;gap:.6rem;background:rgba(var(--bg-rgb),.16)}
 .arama-sat{display:flex;gap:.4rem}
 .dlist{overflow-y:auto;max-height:calc(100vh - 180px);margin:0 -.75rem}
 .dsat{display:block;width:100%;text-align:left;background:none;border:none;border-left:2px solid transparent;
  padding:.55rem .75rem;cursor:pointer;color:var(--ink);transition:background .13s;position:relative}
 .dsat+.dsat{box-shadow:inset 0 1px 0 var(--cizgi)}
-.dsat:hover{background:rgba(255,255,255,.035)}
-.dsat.on{background:rgba(242,239,233,.09);border-left-color:var(--gold)}
+.dsat:hover{background:rgba(var(--ink-rgb),.035)}
+.dsat.on{background:rgba(var(--ink-rgb),.09);border-left-color:var(--gold)}
 .dsat b{font-size:.88rem;font-weight:500;display:block;line-height:1.3}
 .dsat span{font-family:var(--f-say);font-size:.7rem;color:var(--dim)}
 .icerik{padding:1.1rem 1.4rem 4rem;min-width:0}
@@ -125,12 +125,12 @@ h1.dad{font-family:var(--f-bas);font-size:1.45rem;font-weight:600;letter-spacing
 .aci.s-sert .tur{color:var(--sert)} .aci.s-yumusak .tur{color:var(--yumusak)} .aci.s-kavus .tur{color:var(--kavus)}
 .aci .ev{color:var(--dim);font-size:.78rem}
 .aci .sag{display:flex;align-items:center;gap:.55rem}
-.orb-cub{width:44px;height:3px;border-radius:2px;background:rgba(255,255,255,.09);overflow:hidden}
+.orb-cub{width:44px;height:3px;border-radius:2px;background:rgba(var(--ink-rgb),.09);overflow:hidden}
 .orb-cub i{display:block;height:100%;background:var(--gold);border-radius:2px}
 .aci.s-sert .orb-cub i{background:var(--sert)} .aci.s-yumusak .orb-cub i{background:var(--yumusak)}
 .yon{font-family:var(--f-say);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);
  border:1px solid var(--cizgi);border-radius:99px;padding:.02rem .38rem}
-.yon.yak{color:var(--gold);border-color:rgba(242,239,233,.35)}
+.yon.yak{color:var(--gold);border-color:rgba(var(--ink-rgb),.35)}
 
 /* ── dignite: puan çubuğu ── */
 .dign{display:flex;flex-direction:column}
@@ -166,9 +166,9 @@ tbody tr:last-child td{border-bottom:none}
 .alanlar{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.65rem;margin-bottom:.7rem}
 .geo{position:relative}
 .geolist{position:absolute;top:100%;left:0;right:0;z-index:40;margin-top:.25rem;max-height:220px;overflow-y:auto;
- background:#0B0810;border:1px solid var(--cizgi2);border-radius:11px;box-shadow:0 18px 44px rgba(0,0,0,.6)}
+ background:var(--bg);border:1px solid var(--cizgi2);border-radius:11px;box-shadow:0 18px 44px rgba(var(--bg-rgb),.6)}
 .geolist>div{font-size:.82rem;padding:.5rem .8rem;cursor:pointer}
-.geolist>div:hover{background:rgba(242,239,233,.12)}
+.geolist>div:hover{background:rgba(var(--ink-rgb),.12)}
 .onay{display:flex;align-items:center;gap:.45rem;font-size:.8rem;color:var(--mut)}
 .onay input{width:auto}
 .seans{padding:.7rem 0;border-bottom:1px solid var(--cizgi)}
@@ -181,7 +181,7 @@ tbody tr:last-child td{border-bottom:none}
 .sayac{display:flex;gap:1.3rem;font-family:var(--f-say);font-size:.72rem;color:var(--mut)}
 .sayac b{color:var(--ink);font-weight:500}
 #modRozet:empty,#gbRozet:empty{display:none}
-#gbRozet{display:inline-block;margin-left:.4rem;background:var(--gold-br);color:#0B0810;font-size:.68rem;
+#gbRozet{display:inline-block;margin-left:.4rem;background:var(--gold-br);color:var(--bg);font-size:.68rem;
  font-weight:600;border-radius:99px;padding:0 .35rem;min-width:1.05rem;text-align:center}
 .gbk{border:1px solid var(--cizgi);border-radius:12px;padding:.85rem .95rem;margin-bottom:.6rem;background:var(--yuzey)}
 .gbk .ust{display:flex;gap:.55rem;align-items:baseline;flex-wrap:wrap;font-size:.75rem;color:var(--dim);margin-bottom:.45rem}
@@ -193,7 +193,7 @@ tbody tr:last-child td{border-bottom:none}
 .gbk.kapali{opacity:.55}
 .gb-ozet{display:flex;gap:1.4rem;flex-wrap:wrap;font-family:var(--f-say);font-size:.74rem;color:var(--mut);margin-bottom:1rem}
 .gb-ozet b{color:var(--ink);font-size:.95rem;font-family:var(--f-bas);display:block}
-#modRozet{display:inline-block;margin-left:.4rem;background:var(--sert);color:#0B0810;font-size:.68rem;
+#modRozet{display:inline-block;margin-left:.4rem;background:var(--sert);color:var(--bg);font-size:.68rem;
  font-weight:600;border-radius:99px;padding:0 .35rem;min-width:1.05rem;text-align:center}
 .rapor{border:1px solid var(--cizgi);border-radius:12px;padding:.85rem .95rem;margin-bottom:.7rem;background:var(--yuzey)}
 .rapor .ust{display:flex;gap:.6rem;align-items:baseline;flex-wrap:wrap;font-size:.76rem;color:var(--dim);margin-bottom:.5rem}
@@ -209,13 +209,13 @@ tbody tr:last-child td{border-bottom:none}
 .mod-akis .kim{font-family:var(--f-say);font-size:.72rem;color:var(--dim)}
 
 /* ── danışana çıktı: fildişi ── */
-#ciktiAlan{background:#F2EFE9;color:#0B0810;border-radius:14px;padding:1.7rem 1.6rem;font-size:.88rem;max-width:720px}
-#ciktiAlan h3{font-family:var(--f-bas);font-size:1.22rem;margin-bottom:.1rem;color:#0B0810}
-#ciktiAlan .kim{font-family:var(--f-say);color:#868494;font-size:.76rem;margin-bottom:1.2rem}
-#ciktiAlan h4{font-family:var(--f-bas);font-size:.88rem;margin:1.3rem 0 .3rem;color:#0B0810}
-#ciktiAlan th,#ciktiAlan td{border-bottom:1px solid #F2EFE9;color:#2B140C}
-#ciktiAlan th{color:#868494}
-#ciktiAlan .imza{margin-top:1.5rem;padding-top:.8rem;border-top:1px solid #F2EFE9;color:#868494;font-size:.73rem;line-height:1.7}
+#ciktiAlan{background:var(--ink);color:var(--bg);border-radius:14px;padding:1.7rem 1.6rem;font-size:.88rem;max-width:720px}
+#ciktiAlan h3{font-family:var(--f-bas);font-size:1.22rem;margin-bottom:.1rem;color:var(--bg)}
+#ciktiAlan .kim{font-family:var(--f-say);color:var(--dim);font-size:.76rem;margin-bottom:1.2rem}
+#ciktiAlan h4{font-family:var(--f-bas);font-size:.88rem;margin:1.3rem 0 .3rem;color:var(--bg)}
+#ciktiAlan th,#ciktiAlan td{border-bottom:1px solid var(--ink);color:var(--acc-ink)}
+#ciktiAlan th{color:var(--dim)}
+#ciktiAlan .imza{margin-top:1.5rem;padding-top:.8rem;border-top:1px solid var(--ink);color:var(--dim);font-size:.73rem;line-height:1.7}
 @media print{
   body{background:#fff}
   .ust,.kenar,.sekmeler,.dosya-bas,.yazdirma-gizle{display:none!important}
@@ -227,6 +227,56 @@ tbody tr:last-child td{border-bottom:none}
 </style>
 <script src="/sorbi-yer.js?v=3"></script>
 <link rel="stylesheet" href="/sorbi-fonts.css?v=10">
+<!-- SORBI-TEMA:START -->
+<style>
+/* Altı rol, iki gökyüzü. Gece varsayılan; gündüz [data-tema="gunduz"] ile.
+   Renkler burada tanımlanır, sayfalar yalnız değişken kullanır. */
+:root{--bg:#0B0810;--bg-rgb:11,8,16;--ink:#F2EFE9;--ink-rgb:242,239,233;
+  --mut:#A5A3AE;--mut-rgb:165,163,174;--dim:#868494;--dim-rgb:134,132,148;
+  --acc:#E3A692;--acc-rgb:227,166,146;--acc-ink:#2B140C;color-scheme:dark}
+:root[data-tema="gunduz"]{--bg:#F6F3EC;--bg-rgb:246,243,236;--ink:#1A1720;--ink-rgb:26,23,32;
+  --mut:#5C5966;--mut-rgb:92,89,102;--dim:#666370;--dim-rgb:102,99,112;
+  --acc:#A85A36;--acc-rgb:168,90,54;--acc-ink:#F6F3EC;color-scheme:light}
+html{background:var(--bg)}
+body{background:transparent!important}
+#temaDugme{margin-left:.4rem;width:34px;height:34px;border-radius:50%;border:1px solid rgba(var(--ink-rgb),.14);background:none;color:var(--mut);cursor:pointer;font-size:.95rem;line-height:1;flex:none;display:inline-flex;align-items:center;justify-content:center}
+#temaDugme:hover{color:var(--ink);border-color:rgba(var(--ink-rgb),.3)}
+</style>
+<script>
+/* Gökyüzüne göre tema. İlk boyamadan önce çalışır ki sayfa titremesin.
+   Kullanıcı seçtiyse (sorbi_tema) o; seçmediyse gerçek gündoğumu/günbatımı
+   (NOAA yaklaşımı, kayıtlı doğum yeri ya da İstanbul). */
+(function(){
+ var H=document.documentElement;
+ function gunes(lat,lon,d){
+  var r=Math.PI/180, n=Math.floor((Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate())-Date.UTC(d.getUTCFullYear(),0,0))/864e5);
+  var g=2*Math.PI/365*(n-1+(d.getUTCHours()-12)/24);
+  var eq=229.18*(7.5e-5+1.868e-3*Math.cos(g)-0.032077*Math.sin(g)-0.014615*Math.cos(2*g)-0.040849*Math.sin(2*g));
+  var dec=0.006918-0.399912*Math.cos(g)+0.070257*Math.sin(g)-0.006758*Math.cos(2*g)+0.000907*Math.sin(2*g)-0.002697*Math.cos(3*g)+0.00148*Math.sin(3*g);
+  var ha=Math.acos(Math.cos(90.833*r)/(Math.cos(lat*r)*Math.cos(dec))-Math.tan(lat*r)*Math.tan(dec))/r;
+  var dogus=720-4*(lon+ha)-eq, batis=720-4*(lon-ha)-eq;   /* UTC dakika */
+  var simdi=d.getUTCHours()*60+d.getUTCMinutes();
+  return simdi>dogus&&simdi<batis?'gunduz':'gece';
+ }
+ var t=null; try{t=localStorage.getItem('sorbi_tema');}catch(e){}
+ if(t!=='gunduz'&&t!=='gece'){
+  var lat=41.0082,lon=28.9784;
+  try{var b=JSON.parse(localStorage.getItem('sorbi_birth')||'null'); if(b&&+b.lat&&+b.lon){lat=+b.lat;lon=+b.lon;}}catch(e){}
+  try{t=gunes(lat,lon,new Date());}catch(e){t='gece';}
+ }
+ if(t==='gunduz') H.setAttribute('data-tema','gunduz'); else H.removeAttribute('data-tema');
+ function meta(){var m=document.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute('content',H.getAttribute('data-tema')==='gunduz'?'#F6F3EC':'#0B0810');}
+ function dugme(){
+  var nav=document.querySelector('.sbnav'); if(!nav||document.getElementById('temaDugme')) return;
+  var b=document.createElement('button'); b.id='temaDugme'; b.type='button';
+  function yaz(){var g=H.getAttribute('data-tema')==='gunduz'; b.textContent=g?'☾':'☀'; b.setAttribute('aria-label',g?'Gece temasına geç':'Gündüz temasına geç'); b.title=b.getAttribute('aria-label');}
+  b.onclick=function(){var g=H.getAttribute('data-tema')==='gunduz'; if(g) H.removeAttribute('data-tema'); else H.setAttribute('data-tema','gunduz'); try{localStorage.setItem('sorbi_tema',g?'gece':'gunduz');}catch(e){} yaz(); meta(); if(window.SorbiChart&&window.SorbiChart.yenile) try{window.SorbiChart.yenile();}catch(e){}};
+  yaz(); nav.appendChild(b);
+ }
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){meta();dugme();}); else {meta();dugme();}
+})();
+</script>
+<!-- SORBI-TEMA:END -->
 </head>
 <body>
 

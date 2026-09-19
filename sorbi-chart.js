@@ -84,7 +84,7 @@ var THEMES={
   rx:'#E3A692', hnum:'rgba(11,8,16,.48)', lead:'rgba(11,8,16,.32)',
   center:'#F2EFE9', centerTxt:'#0B0810', centerSub:'rgba(11,8,16,.55)', star:'#F2EFE9',
   el:['#E3A692','#A5A3AE','#F2EFE9','#A5A3AE'],
-  asp:{'a-maj':'rgba(28,34,48,.30)','a-hard':'rgba(150,74,52,.44)','a-soft':'rgba(52,104,97,.40)','a-min':'rgba(28,34,48,.16)'}
+  asp:{'a-maj':'rgba(11,8,16,.30)','a-hard':'rgba(227,166,146,.44)','a-soft':'rgba(165,163,174,.40)','a-min':'rgba(11,8,16,.16)'}
  },
  night:{
   bg:'#0B0810', ring:'rgba(242,239,233,.5)', ringSoft:'rgba(242,239,233,.22)',
@@ -96,7 +96,7 @@ var THEMES={
   center:'#0B0810', centerTxt:'#F2EFE9', centerSub:'rgba(165,163,174,.75)', star:'#F2EFE9',
   el:['#E3A692','#A5A3AE','#F2EFE9','#A5A3AE'],
   font:"'IBM Plex Sans','Helvetica Neue',Arial,sans-serif", serif:"'Fraunces',Georgia,serif",
-  asp:{'a-maj':'rgba(228,212,176,.42)','a-hard':'rgba(198,120,98,.5)','a-soft':'rgba(122,170,160,.5)','a-min':'rgba(165,163,174,.24)'}
+  asp:{'a-maj':'rgba(242,239,233,.42)','a-hard':'rgba(227,166,146,.5)','a-soft':'rgba(165,163,174,.5)','a-min':'rgba(165,163,174,.24)'}
  }
 };
 var THEME='white';
@@ -210,7 +210,8 @@ function drawMuhur(inner,opt){
 
 function drawWheel(inner,outer,opt){
   opt=opt||{};
-  var T=THEMES[opt.theme||THEME]||THEMES.paper;
+  var sayfa=(document.documentElement.getAttribute('data-tema')==='gunduz')?'paper':'night';
+  var T=THEMES[opt.theme||sayfa]||THEMES.paper;
   var S=934, cx=S/2, cy=S/2, o=[];
 
   var R = outer ? {

@@ -3,17 +3,17 @@
    data-bekle verilirse blok, o eleman görünür olunca açılır. Kayıt /api/liste'ye gider (ayrı onay kutusu şart). */
 (function(){
 'use strict';
-var CSS='.sbl{max-width:640px;margin:2.2rem auto;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:1.8rem 1.3rem;text-align:center;font-family:Inter,system-ui,sans-serif;color:#F2EFE9}'+
+var CSS='.sbl{max-width:640px;margin:2.2rem auto;background:rgba(var(--ink-rgb),.035);border:1px solid rgba(var(--ink-rgb),.1);border-radius:20px;padding:1.8rem 1.3rem;text-align:center;font-family:Inter,system-ui,sans-serif;color:var(--ink)}'+
 '.sbl h3{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:1.35rem;margin:0 0 .4rem;letter-spacing:-.01em}'+
-'.sbl p{color:#A5A3AE;font-size:.92rem;margin:0 auto 1rem;max-width:46ch;line-height:1.55}'+
+'.sbl p{color:var(--mut);font-size:.92rem;margin:0 auto 1rem;max-width:46ch;line-height:1.55}'+
 '.sbl .sbl-form{max-width:430px;margin:0 auto}'+
 '.sbl .sbl-f{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin:.8rem auto 0}'+
-'.sbl input[type=email]{width:auto!important;margin:0!important;flex:1 1 220px;min-width:0;padding:.75rem .9rem;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.35);color:#F2EFE9;font:inherit;font-size:.95rem}'+
-'.sbl button{padding:.75rem 1.2rem;border-radius:99px;border:0;background:#E3A692;color:#2B140C;font:inherit;font-weight:600;font-size:.92rem;cursor:pointer}'+
+'.sbl input[type=email]{width:auto!important;margin:0!important;flex:1 1 220px;min-width:0;padding:.75rem .9rem;border-radius:12px;border:1px solid rgba(var(--ink-rgb),.14);background:rgba(var(--bg-rgb),.35);color:var(--ink);font:inherit;font-size:.95rem}'+
+'.sbl button{padding:.75rem 1.2rem;border-radius:99px;border:0;background:var(--acc);color:var(--acc-ink);font:inherit;font-weight:600;font-size:.92rem;cursor:pointer}'+
 '.sbl button:disabled{opacity:.6;cursor:default}'+
-'.sbl label.sbl-ok{display:flex!important;margin-top:.8rem;gap:.5rem;align-items:flex-start;justify-content:center;text-align:left!important;font-size:.78rem!important;color:#A5A3AE!important;line-height:1.5!important;max-width:430px;margin:.7rem auto 0!important;text-transform:none!important;letter-spacing:0!important;font-weight:400!important}'+
-'.sbl label.sbl-ok input{width:16px!important;height:16px!important;min-width:0!important;padding:0!important;margin:.15rem 0 0!important;flex:none!important;accent-color:#E3A692}.sbl label.sbl-ok a{color:#E3A692}'+
-'.sbl .sbl-st{min-height:1.2em;font-size:.82rem;margin-top:.6rem;color:#A5A3AE}';
+'.sbl label.sbl-ok{display:flex!important;margin-top:.8rem;gap:.5rem;align-items:flex-start;justify-content:center;text-align:left!important;font-size:.78rem!important;color:var(--mut)!important;line-height:1.5!important;max-width:430px;margin:.7rem auto 0!important;text-transform:none!important;letter-spacing:0!important;font-weight:400!important}'+
+'.sbl label.sbl-ok input{width:16px!important;height:16px!important;min-width:0!important;padding:0!important;margin:.15rem 0 0!important;flex:none!important;accent-color:var(--acc)}.sbl label.sbl-ok a{color:var(--acc)}'+
+'.sbl .sbl-st{min-height:1.2em;font-size:.82rem;margin-top:.6rem;color:var(--mut)}';
 function kur(el){
   if(el.dataset.sblKuruldu) return; el.dataset.sblKuruldu='1';
   var kaynak=(el.getAttribute('data-sorbi-liste')||'web').slice(0,40);
@@ -29,18 +29,18 @@ function kur(el){
    '<div class="sbl-st" role="status"></div>';
   var frm=el.querySelector('form'), em=el.querySelector('input[type=email]'), btn=el.querySelector('button'), hp=el.querySelector('input[type=text]'),
       ok=el.querySelector('label input'), st=el.querySelector('.sbl-st');
-  try{ if(localStorage.getItem('sorbi_wl')==='1'){ frm.style.display='none'; st.style.color='#F2EFE9'; st.textContent='Listedesin — çıkınca ilk sana yazacağız.'; } }catch(e){}
+  try{ if(localStorage.getItem('sorbi_wl')==='1'){ frm.style.display='none'; st.style.color='var(--ink)'; st.textContent='Listedesin — çıkınca ilk sana yazacağız.'; } }catch(e){}
   function gonder(){
     var v=(em.value||'').trim();
-    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){ st.style.color='#E3A692'; st.textContent='Geçerli bir e-posta gir.'; return; }
-    if(!ok.checked){ st.style.color='#E3A692'; st.textContent='Devam için onay kutusunu işaretle.'; return; }
-    st.style.color='#A5A3AE'; st.textContent='Kaydediliyor…'; btn.disabled=true;
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){ st.style.color='var(--acc)'; st.textContent='Geçerli bir e-posta gir.'; return; }
+    if(!ok.checked){ st.style.color='var(--acc)'; st.textContent='Devam için onay kutusunu işaretle.'; return; }
+    st.style.color='var(--mut)'; st.textContent='Kaydediliyor…'; btn.disabled=true;
     fetch('/api/liste',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({eposta:v,kvkk:1,kaynak:kaynak,hp:hp.value||''})})
      .then(function(r){ return r.json().catch(function(){return {};}).then(function(j){ return {r:r,j:j}; }); })
      .then(function(x){
-       if(x.r.ok){ st.style.color='#F2EFE9'; st.textContent='Listedesin — Sorbi iOS ve Android’de çıkınca ilk sana yazacağız.'; try{localStorage.setItem('sorbi_wl','1');}catch(e){} }
-       else { btn.disabled=false; st.style.color='#E3A692'; st.textContent=x.j.error||'Kaydedilemedi, tekrar dener misin?'; }
-     }).catch(function(){ btn.disabled=false; st.style.color='#E3A692'; st.textContent='Bağlantı kurulamadı.'; });
+       if(x.r.ok){ st.style.color='var(--ink)'; st.textContent='Listedesin — Sorbi iOS ve Android’de çıkınca ilk sana yazacağız.'; try{localStorage.setItem('sorbi_wl','1');}catch(e){} }
+       else { btn.disabled=false; st.style.color='var(--acc)'; st.textContent=x.j.error||'Kaydedilemedi, tekrar dener misin?'; }
+     }).catch(function(){ btn.disabled=false; st.style.color='var(--acc)'; st.textContent='Bağlantı kurulamadı.'; });
   }
   frm.addEventListener('submit',function(ev){ ev.preventDefault(); gonder(); });
 }

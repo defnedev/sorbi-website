@@ -15,9 +15,9 @@
 {"@type":"Question","name":"Burçlar arasındaki açı ne anlama gelir?","acceptedAnswer":{"@type":"Answer","text":"Her burç 30 derecelik bir dilimdir. İki burç arasındaki dilim sayısı çarpı 30, aralarındaki açıyı verir: aynı burç kavuşum (0°), iki burç ara altmışlık (60°), üç burç ara kare (90°), dört burç ara üçgen (120°), altı burç ara karşıt (180°). Bir ve beş burç aralığı otuzluk (30°) ve yüzelli (150°) adını alır ve beş büyük açının dışında kalır."}}]}</script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0B0810;--card:rgba(255,255,255,.032);--card2:rgba(255,255,255,.055);
- --stroke:rgba(255,255,255,.09);--stroke2:rgba(255,255,255,.18);
- --gold:#E3A692;--gold-br:#F2EFE9;--ink:#F2EFE9;--mut:#A5A3AE;--r:16px}
+:root{--card:rgba(var(--ink-rgb),.032);--card2:rgba(var(--ink-rgb),.055);
+ --stroke:rgba(var(--ink-rgb),.09);--stroke2:rgba(var(--ink-rgb),.18);
+ --gold:var(--acc);--gold-br:var(--ink);--r:16px}
 body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);
  line-height:1.68;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
@@ -27,7 +27,7 @@ img,canvas,table{max-width:100%}
 h1{font-family:Fraunces,Georgia,serif;font-size:clamp(1.8rem,5.4vw,2.6rem);font-weight:600;
  letter-spacing:-.025em;line-height:1.13;margin:.2rem 0 0}
 h2{font-family:Fraunces,Georgia,serif;font-size:clamp(1.22rem,3.1vw,1.6rem);font-weight:600;
- letter-spacing:-.02em;line-height:1.22;color:var(--gold);margin:0 0 .6rem}
+ letter-spacing:-.02em;line-height:1.22;color:var(--ink);margin:0 0 .6rem}
 .uy-h3{font-family:Fraunces,Georgia,serif;font-size:1.06rem;font-weight:600;letter-spacing:-.012em;
  color:var(--ink);margin:0 0 .35rem}
 .uy-top{padding:2.6rem 0 0}
@@ -35,7 +35,7 @@ h2{font-family:Fraunces,Georgia,serif;font-size:clamp(1.22rem,3.1vw,1.6rem);font
 .sub{color:var(--mut);font-size:1rem;font-weight:300;max-width:64ch;margin:.7rem 0 0}
 .uy-g{font-size:.97rem;color:var(--mut);font-weight:300;max-width:74ch;margin:.75rem 0 0;line-height:1.72}
 .uy-g b{color:var(--ink);font-weight:500}
-.uy-g a,.uy-k a{color:var(--gold-br);border-bottom:1px solid rgba(242,211,184,.3)}
+.uy-g a,.uy-k a{color:var(--gold-br);border-bottom:1px solid rgba(var(--ink-rgb),.3)}
 .uy-g a:hover,.uy-k a:hover{color:var(--ink);border-bottom-color:var(--gold-br)}
 .uy-k{font-size:.84rem;color:var(--mut);font-weight:300;line-height:1.7;margin:.8rem 0 0;max-width:78ch}
 .uy-et{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);
@@ -53,15 +53,15 @@ h2{font-family:Fraunces,Georgia,serif;font-size:clamp(1.22rem,3.1vw,1.6rem);font
  transition:background-color .16s,border-color .16s,color .16s,transform .14s}
 .uy-sg .uy-gl{font-size:1.28rem;line-height:1;color:var(--gold);transition:color .16s}
 .uy-sg .uy-ad{font-size:.82rem;line-height:1.2;letter-spacing:-.005em}
-.uy-sg:hover{border-color:rgba(242,239,233,.55);background:var(--card2);transform:translateY(-2px)}
+.uy-sg:hover{border-color:rgba(var(--ink-rgb),.55);background:var(--card2);transform:translateY(-2px)}
 .uy-sg:hover .uy-gl{color:var(--gold-br)}
-.uy-sg[aria-checked="true"]{background:var(--gold-br);border-color:var(--gold-br);color:#0B0810;font-weight:600}
-.uy-sg[aria-checked="true"] .uy-gl{color:#0B0810}
+.uy-sg[aria-checked="true"]{background:var(--gold-br);border-color:var(--gold-br);color:var(--bg);font-weight:600}
+.uy-sg[aria-checked="true"] .uy-gl{color:var(--bg)}
 .uy-vs{text-align:center;color:var(--gold);font-size:1rem;margin:.75rem 0;letter-spacing:.2em}
 /* — sonuç — */
 .res{display:none}
-.score-wrap{text-align:center;background:linear-gradient(180deg,rgba(242,239,233,.13),rgba(242,239,233,.025));
- border:1px solid rgba(242,239,233,.3);border-radius:var(--r);padding:1.6rem 1rem;margin:1.2rem 0 0}
+.score-wrap{text-align:center;background:linear-gradient(180deg,rgba(var(--ink-rgb),.13),rgba(var(--ink-rgb),.025));
+ border:1px solid rgba(var(--ink-rgb),.3);border-radius:var(--r);padding:1.6rem 1rem;margin:1.2rem 0 0}
 .pair{font-family:Fraunces,Georgia,serif;font-size:1.2rem;font-weight:600;color:var(--gold-br);letter-spacing:.02em}
 .score{font-family:Fraunces,Georgia,serif;font-size:3.6rem;font-weight:600;line-height:1;
  color:var(--ink);margin:.35rem 0 .1rem;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
@@ -71,14 +71,14 @@ h2{font-family:Fraunces,Georgia,serif;font-size:clamp(1.22rem,3.1vw,1.6rem);font
 .bar{margin:.6rem 0}
 .bar .bl{display:flex;justify-content:space-between;gap:.6rem;font-size:.86rem;color:var(--ink);margin-bottom:.28rem}
 .bar .bl span:last-child{color:var(--gold-br);font-variant-numeric:tabular-nums}
-.track{height:8px;background:rgba(255,255,255,.09);border-radius:99px;overflow:hidden}
+.track{height:8px;background:rgba(var(--ink-rgb),.09);border-radius:99px;overflow:hidden}
 .fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-br));border-radius:99px;
  width:0;transition:width .8s ease}
 .read{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);
  padding:1.1rem 1.2rem;margin:1rem 0 0;font-size:.97rem;font-weight:300;color:var(--ink);
  line-height:1.74;max-width:74ch}
 /* — hesap dökümü — */
-.uy-dl{margin:1.2rem 0 0;border-top:1px solid rgba(242,239,233,.3);border-bottom:1px solid var(--stroke)}
+.uy-dl{margin:1.2rem 0 0;border-top:1px solid rgba(var(--ink-rgb),.3);border-bottom:1px solid var(--stroke)}
 .uy-sat{display:grid;grid-template-columns:11rem minmax(0,1fr);gap:.2rem 1.2rem;
  padding:.85rem 0;border-top:1px solid var(--stroke)}
 .uy-sat:first-child{border-top:none}
@@ -94,14 +94,14 @@ h2{font-family:Fraunces,Georgia,serif;font-size:clamp(1.22rem,3.1vw,1.6rem);font
  color:var(--mut);font-weight:500;padding-bottom:.5rem}
 .uy-tb th,.uy-tb td{text-align:left;padding:.55rem .7rem .55rem 0;border-top:1px solid var(--stroke);
  vertical-align:top}
-.uy-tb thead th{border-top:none;border-bottom:1px solid rgba(242,239,233,.3);font-size:.82rem;
+.uy-tb thead th{border-top:none;border-bottom:1px solid rgba(var(--ink-rgb),.3);font-size:.82rem;
  letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:500}
 .uy-tb tbody th{color:var(--ink);font-weight:500;white-space:nowrap}
 .uy-tb td{color:var(--mut);font-weight:300;font-family:ui-monospace,Menlo,monospace;
  font-variant-numeric:tabular-nums}
 .uy-tb td b{color:var(--gold-br);font-weight:600;font-size:.95rem}
 .uy-tb td i{font-style:normal;font-family:'Inter',system-ui,sans-serif;color:var(--mut)}
-.uy-tb tr.uy-ov th,.uy-tb tr.uy-ov td{border-top:1px solid rgba(242,239,233,.45);padding-top:.7rem}
+.uy-tb tr.uy-ov th,.uy-tb tr.uy-ov td{border-top:1px solid rgba(var(--ink-rgb),.45);padding-top:.7rem}
 /* — sahne — */
 .uy-ikili{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.2rem}
 @media(max-width:860px){.uy-ikili{grid-template-columns:1fr;gap:.4rem}}
@@ -111,22 +111,22 @@ h2{font-family:Fraunces,Georgia,serif;font-size:clamp(1.22rem,3.1vw,1.6rem);font
  margin:1.3rem 0 0;list-style:none}
 .uy-yol{display:block;height:100%;background:var(--card);border:1px solid var(--stroke);
  border-radius:14px;padding:.95rem 1.05rem;transition:border-color .18s,background-color .18s}
-.uy-yol:hover{border-color:rgba(242,239,233,.5);background:var(--card2)}
+.uy-yol:hover{border-color:rgba(var(--ink-rgb),.5);background:var(--card2)}
 .uy-yol b{display:block;font-size:.94rem;font-weight:600;color:var(--ink);margin-bottom:.2rem}
 .uy-yol span{display:block;font-size:.84rem;color:var(--mut);font-weight:300;line-height:1.6}
 .cta{margin:1.5rem 0 0;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;
- background:var(--gold-br);color:#0B0810;padding:0 1.5rem;border-radius:99px;font-weight:600;
+ background:var(--gold-br);color:var(--bg);padding:0 1.5rem;border-radius:99px;font-weight:600;
  font-size:.92rem;border:none;cursor:pointer;font-family:inherit;transition:background-color .16s}
 .btn:hover{background:var(--gold)}
 .btn.ghost{background:transparent;color:var(--gold-br);box-shadow:inset 0 0 0 1px var(--gold)}
-.btn.ghost:hover{background:rgba(242,239,233,.12)}
+.btn.ghost:hover{background:rgba(var(--ink-rgb),.12)}
 #uyPayNot{font-size:.84rem;color:var(--mut)}
 .foot{font-size:.86rem;color:var(--mut);font-weight:300;line-height:1.8;margin:1.4rem 0 0;max-width:78ch}
-.foot a{color:var(--gold-br);border-bottom:1px solid rgba(242,211,184,.3)}
+.foot a{color:var(--gold-br);border-bottom:1px solid rgba(var(--ink-rgb),.3)}
 .uy-dip{font-size:.84rem;color:var(--mut);font-weight:300;line-height:1.8;margin:2.4rem 0 0;
  padding-top:1.3rem;border-top:1px solid var(--stroke);max-width:80ch}
-.uy-dip a{color:var(--mut);border-bottom:1px solid rgba(255,255,255,.2)}
+.uy-dip a{color:var(--mut);border-bottom:1px solid rgba(var(--ink-rgb),.2)}
 /* — paylaşılan bileşenlerde en küçük metni 13px'e çıkar — */
 .sbg .sbg-o,.sbg .sbg-l,.sbg .sbg-e,.sbg .sbg-z{font-size:.84rem}
 .sbo .sbo-r,.sbo-n .sbo-r,.sbo .sbo-gizli,.sbo .sbo-bilgi p{font-size:.84rem}
@@ -147,26 +147,26 @@ h2{font-family:Fraunces,Georgia,serif;font-size:clamp(1.22rem,3.1vw,1.6rem);font
 <body>
 <!-- SORBI-NAV:START -->
 <style>
-.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(13,8,16,.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
-.sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:#F2EFE9;font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
-.sbnav .sbnav-lg i{font-style:normal;color:#E3A692;margin-right:.45rem;letter-spacing:0}
+.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(var(--bg-rgb),.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(var(--ink-rgb),.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
+.sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:var(--ink);font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
+.sbnav .sbnav-lg i{font-style:normal;color:var(--acc);margin-right:.45rem;letter-spacing:0}
 .sbnav .sbnav-lg:hover{text-decoration:none;color:#fff}
 .sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:-4px -4px -4px auto;padding:4px;max-width:none;flex-wrap:nowrap}
 .sbnav nav::-webkit-scrollbar{display:none}
-.sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:#A5A3AE;text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
-.sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);text-decoration:none}
+.sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:var(--mut);text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
+.sbnav nav a:hover{color:var(--ink);background:rgba(var(--ink-rgb),.08);box-shadow:inset 0 0 0 1px rgba(var(--ink-rgb),.14);text-decoration:none}
 .sbnav nav a:active{transform:scale(.97)}
-.sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:#F2EFE9;background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:#E3A692}
-.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#F2EFE9;background:rgba(255,255,255,.06);box-shadow:none}
+.sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:var(--ink);background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:var(--acc)}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:var(--ink);background:rgba(var(--ink-rgb),.06);box-shadow:none}
 .sbnav nav a:focus{outline:none}
-.sbnav nav a:focus-visible{outline:2px solid #E3A692;outline-offset:2px}
-.sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:#F2EFE9}
+.sbnav nav a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:var(--ink)}
 @media(prefers-reduced-motion:reduce){.sbnav nav a{transition:none}.sbnav nav a:active{transform:none}}
 @media(min-width:900px){.sbnav{padding:.9rem max(2rem,calc((100% - 1200px)/2));gap:2rem;min-height:70px}.sbnav .sbnav-lg{font-size:1.3rem}.sbnav nav a{font-size:.9rem;padding:0 .95rem}}
 @media(max-width:560px){.sbnav{padding:.3rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem;letter-spacing:.12em}.sbnav nav a{font-size:.8rem;padding:0 .66rem}}
 @media(min-width:900px) and (max-width:1120px){.sbnav{gap:1rem}.sbnav .sbnav-lg{font-size:1.15rem}.sbnav nav a{font-size:.84rem;padding:0 .5rem}}
-@media(max-width:1119px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#0B0810 85%,transparent);mask-image:linear-gradient(90deg,#0B0810 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:#0B0810;mask-image:#0B0810}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#0B0810 8%);mask-image:linear-gradient(90deg,transparent,#0B0810 8%)}}
-@media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#0B0810 78%,transparent);mask-image:linear-gradient(90deg,#0B0810 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:#0B0810;mask-image:#0B0810}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#0B0810 14%);mask-image:linear-gradient(90deg,transparent,#0B0810 14%)}}
+@media(max-width:1119px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,var(--bg) 85%,transparent);mask-image:linear-gradient(90deg,var(--bg) 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:var(--bg);mask-image:var(--bg)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,var(--bg) 8%);mask-image:linear-gradient(90deg,transparent,var(--bg) 8%)}}
+@media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,var(--bg) 78%,transparent);mask-image:linear-gradient(90deg,var(--bg) 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:var(--bg);mask-image:var(--bg)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,var(--bg) 14%);mask-image:linear-gradient(90deg,transparent,var(--bg) 14%)}}
 </style>
 <header class="sbnav">
  <a href="/" class="sbnav-lg" aria-label="Sorbi ana sayfa"><i>✦</i>SORBİ</a>
@@ -187,14 +187,53 @@ h2{font-family:Fraunces,Georgia,serif;font-size:clamp(1.22rem,3.1vw,1.6rem);font
 <!-- SORBI-NAV:END -->
 <!-- SORBI-TEMA:START -->
 <style>
-/* Zemin düz. Gökyüzü gibi: tek koyu yüzey.
-   Önce burada 10 katman vardı — 3 renkli parıltı (mor, mavi-yeşil, terracotta,
-   üç ayrı yönden) ve 7 tane 1px "yıldız" noktası. Noktalar yıldız değil toz
-   lekesi gibi okunuyordu, üç parıltı da metnin arkasında birbiriyle yarışıyordu.
-   Bazı sayfalarda bunun ALTINDA ayrıca bir vinyet daha vardı. */
-html{background:#0B0810}
+/* Altı rol, iki gökyüzü. Gece varsayılan; gündüz [data-tema="gunduz"] ile.
+   Renkler burada tanımlanır, sayfalar yalnız değişken kullanır. */
+:root{--bg:#0B0810;--bg-rgb:11,8,16;--ink:#F2EFE9;--ink-rgb:242,239,233;
+  --mut:#A5A3AE;--mut-rgb:165,163,174;--dim:#868494;--dim-rgb:134,132,148;
+  --acc:#E3A692;--acc-rgb:227,166,146;--acc-ink:#2B140C;color-scheme:dark}
+:root[data-tema="gunduz"]{--bg:#F6F3EC;--bg-rgb:246,243,236;--ink:#1A1720;--ink-rgb:26,23,32;
+  --mut:#5C5966;--mut-rgb:92,89,102;--dim:#666370;--dim-rgb:102,99,112;
+  --acc:#A85A36;--acc-rgb:168,90,54;--acc-ink:#F6F3EC;color-scheme:light}
+html{background:var(--bg)}
 body{background:transparent!important}
+#temaDugme{margin-left:.4rem;width:34px;height:34px;border-radius:50%;border:1px solid rgba(var(--ink-rgb),.14);background:none;color:var(--mut);cursor:pointer;font-size:.95rem;line-height:1;flex:none;display:inline-flex;align-items:center;justify-content:center}
+#temaDugme:hover{color:var(--ink);border-color:rgba(var(--ink-rgb),.3)}
 </style>
+<script>
+/* Gökyüzüne göre tema. İlk boyamadan önce çalışır ki sayfa titremesin.
+   Kullanıcı seçtiyse (sorbi_tema) o; seçmediyse gerçek gündoğumu/günbatımı
+   (NOAA yaklaşımı, kayıtlı doğum yeri ya da İstanbul). */
+(function(){
+ var H=document.documentElement;
+ function gunes(lat,lon,d){
+  var r=Math.PI/180, n=Math.floor((Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate())-Date.UTC(d.getUTCFullYear(),0,0))/864e5);
+  var g=2*Math.PI/365*(n-1+(d.getUTCHours()-12)/24);
+  var eq=229.18*(7.5e-5+1.868e-3*Math.cos(g)-0.032077*Math.sin(g)-0.014615*Math.cos(2*g)-0.040849*Math.sin(2*g));
+  var dec=0.006918-0.399912*Math.cos(g)+0.070257*Math.sin(g)-0.006758*Math.cos(2*g)+0.000907*Math.sin(2*g)-0.002697*Math.cos(3*g)+0.00148*Math.sin(3*g);
+  var ha=Math.acos(Math.cos(90.833*r)/(Math.cos(lat*r)*Math.cos(dec))-Math.tan(lat*r)*Math.tan(dec))/r;
+  var dogus=720-4*(lon+ha)-eq, batis=720-4*(lon-ha)-eq;   /* UTC dakika */
+  var simdi=d.getUTCHours()*60+d.getUTCMinutes();
+  return simdi>dogus&&simdi<batis?'gunduz':'gece';
+ }
+ var t=null; try{t=localStorage.getItem('sorbi_tema');}catch(e){}
+ if(t!=='gunduz'&&t!=='gece'){
+  var lat=41.0082,lon=28.9784;
+  try{var b=JSON.parse(localStorage.getItem('sorbi_birth')||'null'); if(b&&+b.lat&&+b.lon){lat=+b.lat;lon=+b.lon;}}catch(e){}
+  try{t=gunes(lat,lon,new Date());}catch(e){t='gece';}
+ }
+ if(t==='gunduz') H.setAttribute('data-tema','gunduz'); else H.removeAttribute('data-tema');
+ function meta(){var m=document.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute('content',H.getAttribute('data-tema')==='gunduz'?'#F6F3EC':'#0B0810');}
+ function dugme(){
+  var nav=document.querySelector('.sbnav'); if(!nav||document.getElementById('temaDugme')) return;
+  var b=document.createElement('button'); b.id='temaDugme'; b.type='button';
+  function yaz(){var g=H.getAttribute('data-tema')==='gunduz'; b.textContent=g?'☾':'☀'; b.setAttribute('aria-label',g?'Gece temasına geç':'Gündüz temasına geç'); b.title=b.getAttribute('aria-label');}
+  b.onclick=function(){var g=H.getAttribute('data-tema')==='gunduz'; if(g) H.removeAttribute('data-tema'); else H.setAttribute('data-tema','gunduz'); try{localStorage.setItem('sorbi_tema',g?'gece':'gunduz');}catch(e){} yaz(); meta(); if(window.SorbiChart&&window.SorbiChart.yenile) try{window.SorbiChart.yenile();}catch(e){}};
+  yaz(); nav.appendChild(b);
+ }
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){meta();dugme();}); else {meta();dugme();}
+})();
+</script>
 <!-- SORBI-TEMA:END -->
 
 <div class="wrap">
@@ -327,16 +366,16 @@ body{background:transparent!important}
 <script src="/sorbi-uyum.js?v=2" defer></script>
 <!-- SORBI-FOOTER:START -->
 <style>
-.sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:#A5A3AE;max-width:none;width:auto}
-.sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0B0810;font-family:'Inter',system-ui,sans-serif}
+.sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:var(--mut);max-width:none;width:auto}
+.sbft{margin-top:3rem;border-top:1px solid rgba(var(--ink-rgb),.08);background:var(--bg);font-family:'Inter',system-ui,sans-serif}
 .sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:repeat(4,1fr);text-align:left;gap:2rem}
-.sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#E3A692;margin:0 0 .8rem;font-weight:600}
-.sbft a{display:block;color:#A5A3AE;text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
-.sbft a:hover{color:#F2EFE9}
-.sbft .sbft-brand b{font-size:1.05rem;color:#F2EFE9;font-weight:700}
-.sbft .sbft-brand b i{font-style:normal;color:#E3A692;margin-right:.3rem}
-.sbft .sbft-brand p{color:#A5A3AE;font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
-.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#A5A3AE;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin:0 0 .8rem;font-weight:600}
+.sbft a{display:block;color:var(--mut);text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
+.sbft a:hover{color:var(--ink)}
+.sbft .sbft-brand b{font-size:1.05rem;color:var(--ink);font-weight:700}
+.sbft .sbft-brand b i{font-style:normal;color:var(--acc);margin-right:.3rem}
+.sbft .sbft-brand p{color:var(--mut);font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(var(--ink-rgb),.06);color:var(--mut);font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 @media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
 @media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
 </style>

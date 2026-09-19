@@ -10,38 +10,38 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Retro Takvimi & Ay Boşlukta","applicationCategory":"LifestyleApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"url":"https://sorbiapp.com/retro-ay-takvimi","provider":{"@type":"Organization","name":"Sorbi","url":"https://sorbiapp.com/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Merkür retrosu ne zaman biter?","acceptedAnswer":{"@type":"Answer","text":"Merkür yılda 3-4 kez yaklaşık 3 hafta retro yapar. Bu sayfadaki takvim, Merkür'ün geri gitmeye başladığı ve düzeldiği tam tarihleri cihazında astronomy-engine ile anlık hesaplar."}},{"@type":"Question","name":"Ay boşlukta ne demek?","acceptedAnswer":{"@type":"Answer","text":"Ay boşlukta (void of course), Ay'ın bir burçtaki son büyük açısını tamamlayıp bir sonraki burca geçene kadar geçen süredir. Geleneksel astrolojide bu aralık yeni başlangıçlar için zayıf sayılır; rutin işler ve dinlenme için uygun kabul edilir."}},{"@type":"Question","name":"Retro dönemde ne yapmalı?","acceptedAnswer":{"@type":"Answer","text":"Retro bir ceza değil; geleneksel astrolojide gözden geçirmeye, düzeltmeye ve tamamlamaya elverişli sayılan bir dönem. Yeni sözleşme, cihaz alımı ve büyük başlangıçlar için genellikle retro sonrası tercih edilir; eski işleri kapatmak, geri dönüşler ve onarım içinse uygun kabul edilir."}}]}</script>
 <style>
-:root{--terra:#E3A692;--btn-ink:#2B140C;--bg:#0B0810;--gold:#E3A692;--gold-light:#F2EFE9;--terra:#E3A692;--terra2:#E3A692;--text:#F2EFE9;--muted:#868494;--line:rgba(242,239,233,.25);--card:#0B0810;--green:#A5A3AE;--red:#E3A692}
-*{box-sizing:border-box}body{margin:0;background:#0B0810;color:var(--text);font-family:'Inter',sans-serif;line-height:1.65}
+:root{--terra:var(--acc);--btn-ink:var(--acc-ink);--gold:var(--acc);--gold-light:var(--ink);--terra:var(--acc);--terra2:var(--acc);--text:var(--ink);--muted:var(--dim);--line:rgba(var(--ink-rgb),.25);--card:var(--bg);--green:var(--mut);--red:var(--acc)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.65}
 .wrap{max-width:680px;margin:0 auto;padding:2.2rem 1.1rem 3rem}
 .top{text-align:center;margin-bottom:1.2rem}
 .brand{font-family:Fraunces,Georgia,serif;letter-spacing:2px;color:var(--gold);font-size:.8rem;text-decoration:none}
-h1{font-family:Fraunces,Georgia,serif;font-size:clamp(1.5rem,5vw,2.15rem);margin:.5rem 0 .3rem;color:#F2EFE9}
+h1{font-family:Fraunces,Georgia,serif;font-size:clamp(1.5rem,5vw,2.15rem);margin:.5rem 0 .3rem;color:var(--ink)}
 .sub{color:var(--muted);font-size:.95rem;max-width:480px;margin:0 auto}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.2rem 1.15rem;margin-top:1.3rem}
-.now{background:linear-gradient(180deg,rgba(242,239,233,.14),rgba(242,239,233,.03))}
+.now{background:linear-gradient(180deg,rgba(var(--ink-rgb),.14),rgba(var(--ink-rgb),.03))}
 .nowgrid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:.2rem}
 @media(max-width:460px){.nowgrid{grid-template-columns:1fr}}
-.nb{background:rgba(13,8,16,.5);border:1px solid var(--line);border-radius:12px;padding:.75rem .85rem}
+.nb{background:rgba(var(--bg-rgb),.5);border:1px solid var(--line);border-radius:12px;padding:.75rem .85rem}
 .nb .k{font-size:.72rem;color:var(--gold-light);text-transform:uppercase;letter-spacing:.5px}
-.nb .v{font-family:Inter,system-ui,sans-serif;font-size:1.15rem;color:#F2EFE9;margin-top:.15rem}
+.nb .v{font-family:Inter,system-ui,sans-serif;font-size:1.15rem;color:var(--ink);margin-top:.15rem}
 .nb .d{font-size:.8rem;color:var(--muted);margin-top:.1rem}
 .sect{font-family:Fraunces,Georgia,serif;color:var(--gold-light);font-size:1.5rem;margin:1.8rem 0 .3rem;font-weight:600}
 .sectn{color:var(--muted);font-size:.85rem;margin:0 0 .5rem}
-.row{display:flex;align-items:center;gap:.6rem;padding:.7rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.row{display:flex;align-items:center;gap:.6rem;padding:.7rem 0;border-bottom:1px solid rgba(var(--ink-rgb),.05)}
 .row:last-child{border-bottom:none}
-.pl{font-family:Inter,system-ui,sans-serif;font-size:.98rem;color:#F2EFE9;min-width:78px}
-.per{flex:1;font-size:.9rem;color:#A5A3AE}
+.pl{font-family:Inter,system-ui,sans-serif;font-size:.98rem;color:var(--ink);min-width:78px}
+.per{flex:1;font-size:.9rem;color:var(--mut)}
 .chip{font-size:.7rem;font-weight:600;padding:.18rem .5rem;border-radius:99px;white-space:nowrap}
-.chip.r{background:rgba(208,138,106,.2);color:var(--red);border:1px solid rgba(208,138,106,.4)}
-.chip.d{background:rgba(127,179,122,.15);color:var(--green);border:1px solid rgba(127,179,122,.35)}
+.chip.r{background:rgba(var(--acc-rgb),.2);color:var(--red);border:1px solid rgba(var(--acc-rgb),.4)}
+.chip.d{background:rgba(var(--mut-rgb),.15);color:var(--green);border:1px solid rgba(var(--mut-rgb),.35)}
 .hi{border-left:3px solid var(--terra);padding-left:.7rem;margin-left:-.7rem}
 .lun{display:grid;grid-template-columns:1fr 1fr;gap:.4rem .9rem}
 @media(max-width:460px){.lun{grid-template-columns:1fr}}
-.lun div{font-size:.88rem;color:#A5A3AE;padding:.35rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.lun div{font-size:.88rem;color:var(--mut);padding:.35rem 0;border-bottom:1px solid rgba(var(--ink-rgb),.05)}
 .lun b{color:var(--gold-light);font-weight:600}
-.cta{margin-top:1.3rem;text-align:center}.cta a{display:inline-block;background:#E3A692;color:#2B140C;text-decoration:none;padding:.75rem 1.4rem;border-radius:99px;font-weight:600;font-size:.9rem;margin:.25rem}
+.cta{margin-top:1.3rem;text-align:center}.cta a{display:inline-block;background:var(--acc);color:var(--acc-ink);text-decoration:none;padding:.75rem 1.4rem;border-radius:99px;font-weight:600;font-size:.9rem;margin:.25rem}
 .cta a.ghost{background:transparent;border:1px solid var(--terra);color:var(--gold-light)}
-.seo{margin-top:2.2rem;color:#A5A3AE}.seo h2{font-family:Fraunces,Georgia,serif;color:var(--gold-light);font-size:1.4rem;margin:1.5rem 0 .4rem}.seo p{font-size:.92rem;color:#A5A3AE}
+.seo{margin-top:2.2rem;color:var(--mut)}.seo h2{font-family:Fraunces,Georgia,serif;color:var(--gold-light);font-size:1.4rem;margin:1.5rem 0 .4rem}.seo p{font-size:.92rem;color:var(--mut)}
 .foot{text-align:center;color:var(--muted);font-size:.78rem;margin-top:2rem}.foot a{color:var(--gold)}
 .load{color:var(--muted);font-size:.9rem;text-align:center;padding:.5rem}
 @media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}</style><link rel="stylesheet" href="/sorbi-fonts.css?v=10">
@@ -50,26 +50,26 @@ h1{font-family:Fraunces,Georgia,serif;font-size:clamp(1.5rem,5vw,2.15rem);margin
 </head><body>
 <!-- SORBI-NAV:START -->
 <style>
-.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(13,8,16,.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
-.sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:#F2EFE9;font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
-.sbnav .sbnav-lg i{font-style:normal;color:#E3A692;margin-right:.45rem;letter-spacing:0}
+.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(var(--bg-rgb),.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(var(--ink-rgb),.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
+.sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:var(--ink);font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
+.sbnav .sbnav-lg i{font-style:normal;color:var(--acc);margin-right:.45rem;letter-spacing:0}
 .sbnav .sbnav-lg:hover{text-decoration:none;color:#fff}
 .sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:-4px -4px -4px auto;padding:4px;max-width:none;flex-wrap:nowrap}
 .sbnav nav::-webkit-scrollbar{display:none}
-.sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:#A5A3AE;text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
-.sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);text-decoration:none}
+.sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:var(--mut);text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
+.sbnav nav a:hover{color:var(--ink);background:rgba(var(--ink-rgb),.08);box-shadow:inset 0 0 0 1px rgba(var(--ink-rgb),.14);text-decoration:none}
 .sbnav nav a:active{transform:scale(.97)}
-.sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:#F2EFE9;background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:#E3A692}
-.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#F2EFE9;background:rgba(255,255,255,.06);box-shadow:none}
+.sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:var(--ink);background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:var(--acc)}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:var(--ink);background:rgba(var(--ink-rgb),.06);box-shadow:none}
 .sbnav nav a:focus{outline:none}
-.sbnav nav a:focus-visible{outline:2px solid #E3A692;outline-offset:2px}
-.sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:#F2EFE9}
+.sbnav nav a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:var(--ink)}
 @media(prefers-reduced-motion:reduce){.sbnav nav a{transition:none}.sbnav nav a:active{transform:none}}
 @media(min-width:900px){.sbnav{padding:.9rem max(2rem,calc((100% - 1200px)/2));gap:2rem;min-height:70px}.sbnav .sbnav-lg{font-size:1.3rem}.sbnav nav a{font-size:.9rem;padding:0 .95rem}}
 @media(max-width:560px){.sbnav{padding:.3rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem;letter-spacing:.12em}.sbnav nav a{font-size:.8rem;padding:0 .66rem}}
 @media(min-width:900px) and (max-width:1120px){.sbnav{gap:1rem}.sbnav .sbnav-lg{font-size:1.15rem}.sbnav nav a{font-size:.84rem;padding:0 .5rem}}
-@media(max-width:1119px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#0B0810 85%,transparent);mask-image:linear-gradient(90deg,#0B0810 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:#0B0810;mask-image:#0B0810}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#0B0810 8%);mask-image:linear-gradient(90deg,transparent,#0B0810 8%)}}
-@media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#0B0810 78%,transparent);mask-image:linear-gradient(90deg,#0B0810 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:#0B0810;mask-image:#0B0810}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#0B0810 14%);mask-image:linear-gradient(90deg,transparent,#0B0810 14%)}}
+@media(max-width:1119px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,var(--bg) 85%,transparent);mask-image:linear-gradient(90deg,var(--bg) 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:var(--bg);mask-image:var(--bg)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,var(--bg) 8%);mask-image:linear-gradient(90deg,transparent,var(--bg) 8%)}}
+@media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,var(--bg) 78%,transparent);mask-image:linear-gradient(90deg,var(--bg) 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:var(--bg);mask-image:var(--bg)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,var(--bg) 14%);mask-image:linear-gradient(90deg,transparent,var(--bg) 14%)}}
 </style>
 <header class="sbnav">
  <a href="/" class="sbnav-lg" aria-label="Sorbi ana sayfa"><i>✦</i>SORBİ</a>
@@ -90,14 +90,53 @@ h1{font-family:Fraunces,Georgia,serif;font-size:clamp(1.5rem,5vw,2.15rem);margin
 <!-- SORBI-NAV:END -->
 <!-- SORBI-TEMA:START -->
 <style>
-/* Zemin düz. Gökyüzü gibi: tek koyu yüzey.
-   Önce burada 10 katman vardı — 3 renkli parıltı (mor, mavi-yeşil, terracotta,
-   üç ayrı yönden) ve 7 tane 1px "yıldız" noktası. Noktalar yıldız değil toz
-   lekesi gibi okunuyordu, üç parıltı da metnin arkasında birbiriyle yarışıyordu.
-   Bazı sayfalarda bunun ALTINDA ayrıca bir vinyet daha vardı. */
-html{background:#0B0810}
+/* Altı rol, iki gökyüzü. Gece varsayılan; gündüz [data-tema="gunduz"] ile.
+   Renkler burada tanımlanır, sayfalar yalnız değişken kullanır. */
+:root{--bg:#0B0810;--bg-rgb:11,8,16;--ink:#F2EFE9;--ink-rgb:242,239,233;
+  --mut:#A5A3AE;--mut-rgb:165,163,174;--dim:#868494;--dim-rgb:134,132,148;
+  --acc:#E3A692;--acc-rgb:227,166,146;--acc-ink:#2B140C;color-scheme:dark}
+:root[data-tema="gunduz"]{--bg:#F6F3EC;--bg-rgb:246,243,236;--ink:#1A1720;--ink-rgb:26,23,32;
+  --mut:#5C5966;--mut-rgb:92,89,102;--dim:#666370;--dim-rgb:102,99,112;
+  --acc:#A85A36;--acc-rgb:168,90,54;--acc-ink:#F6F3EC;color-scheme:light}
+html{background:var(--bg)}
 body{background:transparent!important}
+#temaDugme{margin-left:.4rem;width:34px;height:34px;border-radius:50%;border:1px solid rgba(var(--ink-rgb),.14);background:none;color:var(--mut);cursor:pointer;font-size:.95rem;line-height:1;flex:none;display:inline-flex;align-items:center;justify-content:center}
+#temaDugme:hover{color:var(--ink);border-color:rgba(var(--ink-rgb),.3)}
 </style>
+<script>
+/* Gökyüzüne göre tema. İlk boyamadan önce çalışır ki sayfa titremesin.
+   Kullanıcı seçtiyse (sorbi_tema) o; seçmediyse gerçek gündoğumu/günbatımı
+   (NOAA yaklaşımı, kayıtlı doğum yeri ya da İstanbul). */
+(function(){
+ var H=document.documentElement;
+ function gunes(lat,lon,d){
+  var r=Math.PI/180, n=Math.floor((Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate())-Date.UTC(d.getUTCFullYear(),0,0))/864e5);
+  var g=2*Math.PI/365*(n-1+(d.getUTCHours()-12)/24);
+  var eq=229.18*(7.5e-5+1.868e-3*Math.cos(g)-0.032077*Math.sin(g)-0.014615*Math.cos(2*g)-0.040849*Math.sin(2*g));
+  var dec=0.006918-0.399912*Math.cos(g)+0.070257*Math.sin(g)-0.006758*Math.cos(2*g)+0.000907*Math.sin(2*g)-0.002697*Math.cos(3*g)+0.00148*Math.sin(3*g);
+  var ha=Math.acos(Math.cos(90.833*r)/(Math.cos(lat*r)*Math.cos(dec))-Math.tan(lat*r)*Math.tan(dec))/r;
+  var dogus=720-4*(lon+ha)-eq, batis=720-4*(lon-ha)-eq;   /* UTC dakika */
+  var simdi=d.getUTCHours()*60+d.getUTCMinutes();
+  return simdi>dogus&&simdi<batis?'gunduz':'gece';
+ }
+ var t=null; try{t=localStorage.getItem('sorbi_tema');}catch(e){}
+ if(t!=='gunduz'&&t!=='gece'){
+  var lat=41.0082,lon=28.9784;
+  try{var b=JSON.parse(localStorage.getItem('sorbi_birth')||'null'); if(b&&+b.lat&&+b.lon){lat=+b.lat;lon=+b.lon;}}catch(e){}
+  try{t=gunes(lat,lon,new Date());}catch(e){t='gece';}
+ }
+ if(t==='gunduz') H.setAttribute('data-tema','gunduz'); else H.removeAttribute('data-tema');
+ function meta(){var m=document.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute('content',H.getAttribute('data-tema')==='gunduz'?'#F6F3EC':'#0B0810');}
+ function dugme(){
+  var nav=document.querySelector('.sbnav'); if(!nav||document.getElementById('temaDugme')) return;
+  var b=document.createElement('button'); b.id='temaDugme'; b.type='button';
+  function yaz(){var g=H.getAttribute('data-tema')==='gunduz'; b.textContent=g?'☾':'☀'; b.setAttribute('aria-label',g?'Gece temasına geç':'Gündüz temasına geç'); b.title=b.getAttribute('aria-label');}
+  b.onclick=function(){var g=H.getAttribute('data-tema')==='gunduz'; if(g) H.removeAttribute('data-tema'); else H.setAttribute('data-tema','gunduz'); try{localStorage.setItem('sorbi_tema',g?'gece':'gunduz');}catch(e){} yaz(); meta(); if(window.SorbiChart&&window.SorbiChart.yenile) try{window.SorbiChart.yenile();}catch(e){}};
+  yaz(); nav.appendChild(b);
+ }
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){meta();dugme();}); else {meta();dugme();}
+})();
+</script>
 <!-- SORBI-TEMA:END -->
 <style>
 @media(max-width:480px){}
@@ -263,16 +302,16 @@ function voidOfCourse(A,now,mL,ms){
 run();
 </script><!-- SORBI-FOOTER:START -->
 <style>
-.sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:#A5A3AE;max-width:none;width:auto}
-.sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0B0810;font-family:'Inter',system-ui,sans-serif}
+.sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:var(--mut);max-width:none;width:auto}
+.sbft{margin-top:3rem;border-top:1px solid rgba(var(--ink-rgb),.08);background:var(--bg);font-family:'Inter',system-ui,sans-serif}
 .sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:repeat(4,1fr);text-align:left;gap:2rem}
-.sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#E3A692;margin:0 0 .8rem;font-weight:600}
-.sbft a{display:block;color:#A5A3AE;text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
-.sbft a:hover{color:#F2EFE9}
-.sbft .sbft-brand b{font-size:1.05rem;color:#F2EFE9;font-weight:700}
-.sbft .sbft-brand b i{font-style:normal;color:#E3A692;margin-right:.3rem}
-.sbft .sbft-brand p{color:#A5A3AE;font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
-.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#A5A3AE;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin:0 0 .8rem;font-weight:600}
+.sbft a{display:block;color:var(--mut);text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
+.sbft a:hover{color:var(--ink)}
+.sbft .sbft-brand b{font-size:1.05rem;color:var(--ink);font-weight:700}
+.sbft .sbft-brand b i{font-style:normal;color:var(--acc);margin-right:.3rem}
+.sbft .sbft-brand p{color:var(--mut);font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(var(--ink-rgb),.06);color:var(--mut);font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 @media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
 @media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
 </style>

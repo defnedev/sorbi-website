@@ -39,3 +39,35 @@ Kontrast: 12 sayfada otomatik denetim, 0 hata. Paylaşım paneli ve çark çizim
 tek istisna. Ama tek bir sayfada altı ayrı ton görünüyordu — terracotta, altın,
 yeşil, mavi, beyaz, gri. "Sistem" temizdi, göz için kalabalıktı. Sahibi beş kez
 "çok renk" dedi. Altıncısında sayıyı bırakıp ekrana baktım.
+
+---
+
+## Gökyüzüne göre tema — 19 Eylül, gece
+
+Aynı altı rol, iki değer seti. Gece varsayılan; gündüz `html[data-tema="gunduz"]`.
+
+| rol | gece | gündüz | gündüz kontrast |
+|---|---|---|---|
+| zemin | `#0B0810` | `#F6F3EC` | — |
+| kâğıt/mürekkep | `#F2EFE9` | `#1A1720` | 15,96 |
+| gri | `#A5A3AE` | `#5C5966` | 6,16 |
+| soluk | `#868494` | `#666370` | 5,29 |
+| vurgu | `#E3A692` | `#A85A36` | 4,53 (metin olarak da, üstünde kâğıt olarak da) |
+| vurgu-yazı | `#2B140C` | `#F6F3EC` | 4,53 |
+
+**Seçim:** kullanıcı navdaki ☀/☾ ile seçtiyse o (`localStorage.sorbi_tema`).
+Seçmediyse gerçek gündoğumu/günbatımı: kayıtlı doğum yeri varsa oradan, yoksa
+İstanbul. NOAA yaklaşımı, satır içi, ilk boyamadan önce çalışır — sayfa titremez.
+
+**Sayfalar renk bilmez.** 61 HTML'de `<style>` ve `style=""` içindeki her literal
+`var(--rol)` oldu; `rgba(242,239,233,.08)` gibi saydamlar `rgba(var(--ink-rgb),.08)`.
+JS'ten enjekte edilen CSS de (form, geri bildirim, profil, liste, oyun, burç, uyum,
+gösteri) aynı değişkenleri kullanıyor. Yalnız canvas/SVG üreten iki dosya literal
+tutar: `sorbi-kart.js` (paylaşım kartı — daima koyu, karar) ve `sorbi-chart.js`
+(çark — `data-tema`'yı okuyup `paper`/`night` seçer).
+
+**Başlık kuralı kapatıldı:** h1/h2/h3 hiçbir yerde vurgu rengi almaz — `--gold`,
+`--terra`, `--purple` gibi 13 eski takma ad bunu delip geçiyordu (43 dosyada).
+Artık hepsi kâğıt.
+
+Kontrast: iki temada da 12 sayfa, 0 hata.

@@ -9,9 +9,9 @@
 var W=window,D=document,M=Math;
 var S='Koç Boğa İkizler Yengeç Aslan Başak Terazi Akrep Yay Oğlak Kova Balık'.split(' ');
 var SG='♈︎ ♉︎ ♊︎ ♋︎ ♌︎ ♍︎ ♎︎ ♏︎ ♐︎ ♑︎ ♒︎ ♓︎'.split(' ');
-var ELC=['#E3A692','#F2EFE9','#E3A692','#A5A3AE'];
-var C={bg:'#0B0810',ln:'rgba(255,255,255,.10)',ink:'#F2EFE9',mut:'#A5A3AE',dim:'#868494',
- gld:'#E3A692',gbr:'#F2EFE9'};
+var ELC=['var(--acc)','var(--ink)','var(--acc)','var(--mut)'];
+var C={bg:'var(--bg)',ln:'rgba(var(--ink-rgb),.10)',ink:'var(--ink)',mut:'var(--mut)',dim:'var(--dim)',
+ gld:'var(--acc)',gbr:'var(--ink)'};
 var NOK=[['sun','Güneş burcu','Güneş'],['moon','Ay burcu','Ay'],['asc','Yükselen burç','yükselen']];
 
 /* ── sayı biçimi (tr) ── */
@@ -48,7 +48,7 @@ function tipDagilim(d){
    if(!az)yz(S[i],22,ym,'11px',se?C.ink:C.mut);
    yz(az?yuz(v,T):bin(v)+'  '+yuz(v,T),G,ym,az?'9px':'11px',se?C.gbr:C.mut,'right');
   }
-  o.setLineDash([4,4]);o.strokeStyle='rgba(242,211,184,.6)';o.lineWidth=1;
+  o.setLineDash([4,4]);o.strokeStyle='rgba(var(--ink-rgb),.6)';o.lineWidth=1;
   o.beginPath();o.moveTo(ex,ust);o.lineTo(ex,alt);o.stroke();o.setLineDash([]);
   yz(az?'kesikli çizgi: eşit dağılım '+bin(esit)
      :'kesikli çizgi: on iki burca eşit dağılım',x0,(alt+Y)/2,az?'9px':'10px',C.dim);

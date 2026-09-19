@@ -302,7 +302,7 @@ function altBlokCiz(ctx,v){
      kopup gittigi icin sehadeti yaninda tasimasi gerekiyor. */
   if(v.kaynak){
     ctx.font='400 '+kayBoy+'px '+F_GOV;
-    ctx.fillStyle='rgba(138,133,120,.72)';
+    ctx.fillStyle='rgba(134,132,148,.72)';
     satirYaz(ctx,v.kaynak,W/2,altUst,1.2);
   }
   ctx.font='500 '+urlBoy+'px '+F_GOV;
@@ -534,7 +534,7 @@ function cizListe(ctx,v){
   ctx.textAlign='center'; ctx.textBaseline='top';
   if(v.dipnot){
     ctx.font='400 '+dipBoy+'px '+F_GOV;
-    ctx.fillStyle='rgba(138,133,120,.72)';
+    ctx.fillStyle='rgba(134,132,148,.72)';
     satirYaz(ctx,v.dipnot,W/2,altUst,1.2);
   }
   ctx.font='500 '+impBoy+'px '+F_GOV;
@@ -576,7 +576,7 @@ function cizListe(ctx,v){
       ctx.fillStyle=C.gold; ctx.textAlign='right';
       ctx.fillText(String(sat[i].oran||''),W-KENAR,sy);
       if(i<sat.length-1){
-        ctx.fillStyle='rgba(235,240,248,.07)';
+        ctx.fillStyle='rgba(242,239,233,.07)';
         ctx.fillRect(KENAR,sy+52,GEN,1);
       }
     }
