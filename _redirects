@@ -51,7 +51,14 @@
 # Yerel privacy.html app + App Store Connect ile çelişiyordu (üçüncü taraf
 # paylaşımı: PostHog analytics, Sentry crash reporting, Apple satın alma).
 # Sayfa arşive alındı, tüm trafik kanonik politikaya yönlendiriliyor.
+#
+# 2026-09-19 · Web tarafi ayrildi, /privacy App Store icin AYNEN DURUYOR.
+# 14 Eylul'de AdSense 63 sayfada canliya alindi. Kanonik politika reklam
+# cerezlerinden soz etmiyor ve "reklam platformlariyla paylasmaz" diyor;
+# bu, web icin AdSense yayinci sartina aykiri ve KVKK'ya gore yanlis beyan.
+# gizlilik.html (17 Eylul) web tarafini dogru anlatiyor ve icinde iOS
+# politikasina link veriyor. /gizlilik yonlendirmeleri kaldirildi ki Pages
+# sayfayi kendi adresinde servis etsin; /privacy uygulama metadata URL'si
+# olarak kanonik politikada kaliyor -- App Store Connect kopmuyor.
 /privacy        https://defnedev.github.io/sorbi-legal/privacy/   301
 /privacy.html   https://defnedev.github.io/sorbi-legal/privacy/   301
-/gizlilik       https://defnedev.github.io/sorbi-legal/privacy/   301
-/gizlilik.html  https://defnedev.github.io/sorbi-legal/privacy/   301

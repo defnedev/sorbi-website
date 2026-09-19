@@ -22,7 +22,7 @@ function kur(el){
    '<p>iOS ve Android. Çıktığı gün ilk sana yazalım — spam yok, sadece o haber.</p>'+
    '<form class="sbl-form" novalidate>'+
    '<input type="email" placeholder="e-posta adresin" autocomplete="email" enterkeyhint="go" aria-label="E-posta adresin">'+
-   '<label class="sbl-ok"><input type="checkbox"><span>Sorbi\'nin uygulama duyurusu ve haber e-postaları göndermesine izin veriyorum; istediğim zaman çıkabilirim. · <a href="/privacy">KVKK</a></span></label>'+
+   '<label class="sbl-ok"><input type="checkbox"><span>Sorbi\'nin uygulama duyurusu ve haber e-postaları göndermesine izin veriyorum; istediğim zaman çıkabilirim. · <a href="/gizlilik">KVKK</a></span></label>'+
    '<div class="sbl-f"><button type="submit">Beni listeye yaz ✦</button>'+
    '<input type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"></div>'+
    '</form>'+
