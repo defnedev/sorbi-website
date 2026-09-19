@@ -21,7 +21,7 @@
 <script src="/sorbi-yildiz.js?v=1" defer></script>
 <script src="/sorbi-sohbet.js?v=1" defer></script>
 <script src="/sorbi-karsilastir.js?v=1" defer></script>
-<script src="/sorbi-kart.js?v=1" defer></script>
+<script src="/sorbi-kart.js?v=2" defer></script>
 <style>
 /* Sorbi design tokens — varak okunur, terracotta basılır */
 :root{--bg:#0D0810;--panel:rgba(235,240,248,.03);--gold:#DFA98F;--gold-lt:#E4CF9A;--gold-br:#F2D3B8;--ink:#E8E4DA;--mut:#A9A396;--dim:#8A8578;--terra:#E3A692;--btn-ink:#F6EFE1;
@@ -124,6 +124,54 @@ body.sonuc .reveal{margin-top:.4rem}
 .sbtn.ghost{background:none;border-color:var(--line2);color:var(--mut)}
 .sbtn.ghost:hover{border-color:var(--lineg2);color:var(--gold-br)}
 @media(prefers-reduced-motion:reduce){.nadir{animation:none}.sbtn{transition:none}}
+/* ── story paylaşım paneli ── */
+.kp-ovl{position:fixed;inset:0;z-index:2100;display:flex;align-items:flex-end;justify-content:center;
+ background:rgba(6,4,9,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+ animation:kpIn .22s var(--ease) both}
+.kp-ovl[hidden]{display:none}
+@keyframes kpIn{from{opacity:0}to{opacity:1}}
+@keyframes kpUp{from{transform:translateY(22px);opacity:0}to{transform:translateY(0);opacity:1}}
+.kp-sheet{width:100%;max-width:560px;max-height:96vh;overflow-y:auto;display:flex;flex-direction:column;
+ background:linear-gradient(180deg,#120C16,#0D0810);border:1px solid var(--line2);border-bottom:0;
+ border-radius:22px 22px 0 0;padding:.9rem 0 max(.9rem,env(safe-area-inset-bottom));
+ animation:kpUp .26s var(--ease) both}
+@media(min-width:620px){.kp-ovl{align-items:center}
+ .kp-sheet{border-radius:22px;border-bottom:1px solid var(--line2)}}
+.kp-bar{width:38px;height:4px;border-radius:2px;background:var(--lstrong);margin:0 auto .7rem}
+.kp-head{display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:0 1.1rem .1rem}
+.kp-head h3{margin:0;font:600 .95rem 'Inter',system-ui,sans-serif;color:var(--ink);letter-spacing:.01em}
+.kp-head p{margin:.18rem 0 0;font-size:.72rem;color:var(--dim);line-height:1.5}
+.kp-kapa{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);background:none;
+ color:var(--mut);font-size:1.1rem;line-height:1;cursor:pointer;transition:.15s}
+.kp-kapa:hover{border-color:var(--lineg2);color:var(--gold-br)}
+.kp-kapa:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.kp-track{display:flex;gap:.7rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
+ -webkit-overflow-scrolling:touch;padding:.85rem 0 .2rem;scroll-behavior:smooth}
+.kp-track::-webkit-scrollbar{display:none}
+.kp-slot{flex:0 0 auto;scroll-snap-align:center;width:min(58vw,232px);aspect-ratio:1080/1920;
+ border-radius:14px;overflow:hidden;border:1px solid var(--line2);background:#0B0F14;
+ display:flex;align-items:center;justify-content:center;position:relative;
+ transition:transform .22s var(--ease),border-color .22s var(--ease)}
+.kp-slot:first-child{margin-left:calc(50% - min(29vw,116px))}
+.kp-slot:last-child{margin-right:calc(50% - min(29vw,116px))}
+.kp-slot.on{border-color:var(--lineg2)}
+.kp-slot:not(.on){transform:scale(.93);opacity:.55}
+.kp-slot img{width:100%;height:100%;display:block;object-fit:contain}
+.kp-yukle{color:var(--gold);font-size:1.1rem;opacity:.5;animation:kpNb 1.4s ease-in-out infinite}
+@keyframes kpNb{0%,100%{opacity:.25}50%{opacity:.7}}
+.kp-hata{font-size:.7rem;color:var(--dim);text-align:center;padding:0 .8rem;line-height:1.5}
+.kp-ad{text-align:center;font:600 .74rem 'Inter',system-ui,sans-serif;letter-spacing:.12em;
+ text-transform:uppercase;color:var(--gold);margin:.55rem 0 .1rem;min-height:1em}
+.kp-dots{display:flex;gap:.42rem;justify-content:center;padding:.45rem 0 .1rem}
+.kp-dot{width:7px;height:7px;padding:0;border-radius:50%;border:0;background:var(--lstrong);cursor:pointer;transition:.18s}
+.kp-dot.on{background:var(--gold);transform:scale(1.25)}
+.kp-dot:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.kp-alt{display:flex;gap:.55rem;justify-content:center;flex-wrap:wrap;padding:.75rem 1.1rem .1rem}
+.kp-not{text-align:center;font-size:.66rem;color:var(--dim);line-height:1.55;padding:.6rem 1.4rem 0}
+@media(prefers-reduced-motion:reduce){
+ .kp-ovl,.kp-sheet{animation:none}.kp-track{scroll-behavior:auto}
+ .kp-slot,.kp-dot{transition:none}.kp-slot:not(.on){transform:none}.kp-yukle{animation:none}}
+
 .share{margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--line2);font-size:.85rem;color:var(--mut)}
 .share button:not(.sbtn){background:none;border:none;color:var(--gold);font:600 .85rem 'Inter';cursor:pointer;text-decoration:underline;padding:0}
 .crown{text-align:center;opacity:0;transform:translateY(10px) scale(.97);transition:opacity .48s var(--ease),transform .48s var(--ease);margin-top:1.1rem}
@@ -334,7 +382,7 @@ body:has(> .sky)::before{display:none}
   <div class="karsi" id="karsi" hidden></div>
   <div class="share ust" id="share">
    <div class="shareRow">
-    <button class="sbtn" id="shareBtn"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.7 15.4 6.3M8.6 13.3l6.8 4.4"/></svg><span>Anını paylaş</span></button>
+    <button class="sbtn" id="shareBtn"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.7 15.4 6.3M8.6 13.3l6.8 4.4"/></svg><span>Story'de paylaş</span></button>
     <button class="sbtn ghost" id="copyBtn"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Bağlantıyı kopyala</span></button>
    </div>
   </div>
@@ -630,6 +678,7 @@ document.getElementById('go').onclick=()=>{
  const revealAt=RM?30:880*phrases.length+250;
  const dBig=RM?0:900,dWheel=RM?0:1650,lineStart=RM?0:2100,stagger=RM?0:620,dReact=RM?0:200,dSell=RM?0:400;
  const arch=MOON_ADJ[mo]+' '+SUN_NOUN[su];window._sorbiArch=arch;
+ window._sorbiBurc={su:su,mo:mo,as:as,noTime:noTime};
  setTimeout(()=>{
   if(cyc)clearInterval(cyc);
   reading.style.display='none';
@@ -807,7 +856,15 @@ function sorbiPaylasMetni(){
  if(p&&p.ikili) return `Doğduğum anın adı: “${a}” ✦ 144 addan biri, yaklaşık ${p.ikili.biriKac} kişide bir. Sen kaçta birsin?`;
  return `Doğduğum anın adı: “${a}” ✦ Seninkinin adı ne?`;
 }
-function sorbiGeriBildir(btn,söz){const e=btn.querySelector('span'),o=e.textContent;e.textContent=söz;setTimeout(()=>{e.textContent=o;},2200);}
+function sorbiGeriBildir(btn,söz){
+ const e=btn&&btn.querySelector('span'); if(!e) return;
+ /* asil etiketi bir kez sakla: ard arda iki cagri eskiden ara metni
+    ("Hazırlanıyor…") kalici hale getiriyordu */
+ if(e.dataset.asil===undefined) e.dataset.asil=e.textContent;
+ e.textContent=söz;
+ clearTimeout(e._zam);
+ e._zam=setTimeout(()=>{ e.textContent=e.dataset.asil; },2200);
+}
 /* ---- sohbet: tek soru, sonra reklam yuvasi ---- */
 (function(){
  var _ch=null, _soruSayisi=0;
@@ -865,43 +922,23 @@ function sorbiPaylasUrl(){
  }catch(e){}
  return u;
 }
-/* paylas: once hazir 1080x1920 kart, olmazsa metin */
+/* Kart uretimi artik tek yerde: SorbiPanel. Burasi yalniz panel hic
+   acilamadiginda (SorbiKart yuklenmedi ya da deste bos) kalan metin yolu —
+   o durumda kart zaten uretilemez, bu yuzden kart dali kaldirildi. */
 async function sorbiKartPaylas(btn){
  var url=sorbiPaylasUrl(), txt=sorbiPaylasMetni();
- var veri=null;
- try{
-  var w=document.getElementById('wheel');
-  veri={ muhur:document.getElementById('crTitle').textContent,
-         altbaslik:document.getElementById('crSub').textContent,
-         ucluMetin:(document.querySelector('.nadir .nsub')||{textContent:''}).textContent.split('—')[0].trim(),
-         nadirSatir:(document.querySelector('.nadir .nbig')||{textContent:''}).textContent.replace(/^Bu üçlü,\s*/,'').replace(/\s*oluşuyor$/,''),
-         kunye:(typeof kunyeYaz==='function')?kunyeYaz():'', damga:'Sorbi · Senin anın',
-         svg:w?w.outerHTML:'', url:'sorbiapp.com/seni-taniyorum' };
- }catch(e){}
- if(window.SorbiKart && veri && veri.svg){
-  try{
-   var k=await window.SorbiKart.uret(veri);
-   var dosya=new File([k.blob],'sorbi-muhur.png',{type:'image/png'});
-   if(navigator.canShare && navigator.canShare({files:[dosya]})){
-    await navigator.share({files:[dosya], text:txt, url:url});
-    return 'kart';
-   }
-   await window.SorbiKart.indir(veri,'sorbi-muhur.png');
-   try{ await navigator.clipboard.writeText(txt+' '+url); }catch(e){}
-   return 'indirildi';
-  }catch(e){}
- }
  if(navigator.share){ await navigator.share({title:'Seni Tanıyorum · Sorbi',text:txt,url:url}); return 'metin'; }
  await navigator.clipboard.writeText(txt+' '+url); return 'kopya';
 }
 document.getElementById('shareBtn').onclick=async()=>{
- const url=sorbiPaylasUrl();
  const btn=document.getElementById('shareBtn');
- sorbiGeriBildir(btn,'Kart hazırlanıyor…');
+ /* once kart destesi paneli; acilamazsa eski tek-kart akisi */
+ try{ if(window.SorbiPanel && window.SorbiPanel.ac(btn)) return; }
+ catch(e){ console.warn('[SorbiPanel] açılamadı, eski akışa düşülüyor:',e); }
+ sorbiGeriBildir(btn,'Paylaşılıyor…');
  try{
   const nasil=await sorbiKartPaylas(btn);
-  if(nasil==='indirildi') sorbiGeriBildir(btn,'Kart indirildi ✓');
-  else if(nasil==='kopya') sorbiGeriBildir(btn,'Kopyalandı ✓');
+  if(nasil==='kopya') sorbiGeriBildir(btn,'Kopyalandı ✓');
   try{fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'an_paylasildi',meta:nasil||''}),keepalive:true});}catch(e){}
  }catch(e){}
 };
@@ -910,8 +947,357 @@ document.getElementById('copyBtn').onclick=async()=>{
  try{ await navigator.clipboard.writeText(sorbiPaylasMetni()+' '+sorbiPaylasUrl()); sorbiGeriBildir(btn,'Kopyalandı ✓'); }
  catch(e){ sorbiGeriBildir(btn,'Kopyalanamadı'); }
 };
+/* ───────── story paylaşım paneli: tek karttan kart destesine ─────────
+   Tüm kartlar tarayıcıda üretilir (sorbi-kart.js, canvas). Sunucuya
+   hiçbir doğum verisi gitmez; /api/track yalnız hangi kartın
+   paylaşıldığını anonim sayar. */
+(function(){
+ var deste=null, uretilen={}, sec=0, acik=false, sonOdak=null;
+ var tur=0;              /* her acilis yeni tur: eski uretim zinciri kendini iptal eder */
+ var ucusta={};          /* ayni karti iki kez uretmeyi onler */
+ var ovl,track,dots,adEl;
+
+ /* Carkin ortasina kazinan kunye "8 Ekim 1996 · 16:44 · İSTANBUL" seklinde;
+    kart Instagram'a giderken saat ve sehir birlikte gitmesin. Tarihi
+    birakiyoruz: kartin dogruluk iddiasi ona dayaniyor. */
+ function svgKisaKunye(w){
+  try{
+   var c=w.cloneNode(true);
+   var tp=c.querySelectorAll('textPath');
+   for(var i=0;i<tp.length;i++){
+    var h=tp[i].getAttribute('href')||tp[i].getAttribute('xlink:href')||'';
+    if(h.indexOf('kunye')===-1) continue;
+    var ilk=String(tp[i].textContent||'').split('·')[0].trim();
+    tp[i].textContent=ilk;
+   }
+   return c.outerHTML;
+  }catch(e){ return w.outerHTML; }
+ }
+
+ function duzMetin(h){
+  if(!h) return '';
+  var d=document.createElement('div'); d.innerHTML=String(h);
+  return (d.textContent||'').replace(/\s+/g,' ').trim();
+ }
+
+ /* karttaki sayinin dayandigi orneklem — kart siteden kopup gidiyor,
+    sehadetini yaninda tasimasi gerek (sayfa da ayni seyi yaziyor) */
+ function kaynakSatiri(){
+  try{
+   var n=window.SorbiNadir && window.SorbiNadir.ornek;
+   return n ? (n.toLocaleString('tr-TR')+' gök anı · 1960–2012') : '';
+  }catch(e){ return ''; }
+ }
+
+ /* sayfada zaten duran verilerden kart destesi kurar */
+ function desteKur(){
+  var d=[], P=window._sorbiPay, Y=window._sorbiYer, B=window._sorbiBurc||{};
+  var url='sorbiapp.com/seni-taniyorum', damga='Sorbi · Senin anın';
+  var glifSat='';
+  try{
+   if(B.su!=null){
+    glifSat=SIGNS[B.su]+' ☉ · '+SIGNS[B.mo]+' ☽';
+    if(!B.noTime && B.as!=null) glifSat+=' · '+SIGNS[B.as]+' ↑';
+   }
+  }catch(e){}
+
+  /* 1 — kanca: kaçta bir */
+  if(P && (P.uclu||P.ikili)){
+   var u=P.uclu||P.ikili;
+   d.push({tur:'sayi', ad:'Kaçta bir', damga:damga, url:url,
+    etiket:P.uclu?'Bu üçlü':'Bu ikili',
+    sayi:(u.biriKac||0).toLocaleString('tr-TR'),
+    birim:'kişide bir',
+    ucluMetin:glifSat,
+    dilim:P.uclu
+      ? ('1728 kombinasyon içinde en nadir %'+Math.max(1,P.uclu.yuzdelik)+"'lik dilimde")
+      : '144 addan biri — doğum saatiyle çok daha nadirleşir',
+    kaynak:kaynakSatiri(),
+    soru:'Sen kaçta birsin?'});
+  }
+
+  /* 2 — herkeste olmayan yerleşim */
+  if(Y && Y.baslik){
+   /* sayfanin kendi kurali (yukaridaki ny-k blogu): ppm yoksa "hic olusmadi"
+      yalniz sabit yildiz bulgusunda yazilir, digerlerinde hicbir sey yazilmaz.
+      Kart da ayni susmayi uygulamali. */
+   var n = (Y.ppm===null || Y.ppm===undefined)
+     ? (Y.tur==='yildiz' ? '1960–2012 gökyüzünde hiç oluşmadı' : '')
+     : (Y.yuzbinde<1 ? 'yüz binde birden az'
+                     : 'yüz bin kişiden '+Y.yuzbinde.toLocaleString('tr-TR')+' kişide');
+   d.push({tur:'yerlesim', ad:'Herkeste olmayan', damga:damga, url:url,
+    etiket:'Herkeste olmayan',
+    baslik:duzMetin(Y.baslik), olcu:duzMetin(Y.olcu),
+    metin:duzMetin(Y.metin), nadirSatir:n,
+    kaynak:kaynakSatiri(),
+    soru:'Seninkinde ne var?'});
+  }
+
+  /* 3 — mühür (çarklı klasik kart) */
+  try{
+   var w=document.getElementById('wheel');
+   var ct=document.getElementById('crTitle');
+   if(w && ct && ct.textContent){
+    d.push({tur:'muhur', ad:'Mühür', damga:damga, url:url,
+     muhur:ct.textContent,
+     altbaslik:(document.getElementById('crSub')||{textContent:''}).textContent,
+     ucluMetin:(document.querySelector('.nadir .nsub')||{textContent:''}).textContent.split('—')[0].trim(),
+     nadirSatir:(document.querySelector('.nadir .nbig')||{textContent:''}).textContent
+                 .replace(/^Bu üçlü,\s*/,'').replace(/\s*oluşuyor$/,''),
+     svg:svgKisaKunye(w), kaynak:kaynakSatiri(), soru:'Sen kaçta birsin?'});
+   }
+  }catch(e){}
+
+  /* 4 — üçlü: sade glif kartı */
+  try{
+   if(B.su!=null && typeof SIGN_GLYPH!=='undefined'){
+    var u3=[{rol:'Özün',glif:SIGN_GLYPH[B.su],burc:SIGNS[B.su]},
+            {rol:'İç dünyan',glif:SIGN_GLYPH[B.mo],burc:SIGNS[B.mo]}];
+    if(!B.noTime && B.as!=null) u3.push({rol:'Masken',glif:SIGN_GLYPH[B.as],burc:SIGNS[B.as]});
+    d.push({tur:'uclu', ad:'Üçlü', damga:damga, url:url, uclu:u3,
+     baslik:window._sorbiArch||'', soru:'Seninkinin adı ne?'});
+   }
+  }catch(e){}
+
+  /* kanca sirasi: tam ucluden gelen sayi en guclu kart; saat yoksa sayi
+     zayif kalir (144 addan biri), o zaman nadir yerlesim one gecer.
+     sorbiPaylasMetni() de 2000'i kullaniyor ama yuzbinde===0 durumunda
+     ondan ayrisir; bugunku sayim tablolarinda 0 ureten kayit yok. */
+  if(d.length>1 && d[0].tur==='sayi' && !(P&&P.uclu)
+     && d[1] && d[1].tur==='yerlesim' && Y && Y.yuzbinde!=null && Y.yuzbinde<2000){
+   d.splice(1,0,d.shift());
+  }
+
+  return d;
+ }
+
+ function iz(olay,meta){
+  try{ fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({type:olay,meta:meta||''}),keepalive:true})['catch'](function(){}); }catch(e){}
+ }
+
+ function kartUret(i){
+  if(uretilen[i]) return Promise.resolve(uretilen[i]);
+  if(ucusta[i]) return ucusta[i];          /* erken "Paylaş" ikinci uretim baslatmasin */
+  if(!window.SorbiKart || !deste || !deste[i]) return Promise.resolve(null);
+  var benimTur=tur;
+  ucusta[i]=window.SorbiKart.uret(deste[i]).then(function(r){
+   delete ucusta[i];
+   if(benimTur!==tur) return null;         /* panel kapandi/yeniden acildi */
+   uretilen[i]=r;
+   var s=track.querySelector('.kp-slot[data-i="'+i+'"]');
+   if(s){
+    var im=new Image();
+    im.alt=deste[i].ad+' kartı';
+    im.src=r.dataUrl;
+    s.innerHTML=''; s.appendChild(im);
+   }
+   return r;
+  })['catch'](function(e){
+   delete ucusta[i];
+   console.warn('[SorbiPanel] kart üretilemedi:',e);
+   if(benimTur!==tur) return null;
+   var s2=track.querySelector('.kp-slot[data-i="'+i+'"]');
+   if(s2) s2.innerHTML='<div class="kp-hata">Bu kart oluşturulamadı</div>';
+   return null;
+  });
+  return ucusta[i];
+ }
+
+ /* kartları sırayla üret — ana iş parçacığını kilitlemesin */
+ function siraylaUret(){
+  var benimTur=tur, p=Promise.resolve();
+  deste.forEach(function(_,i){
+   p=p.then(function(){ return benimTur===tur ? kartUret(i) : null; })
+      .then(function(){ return new Promise(function(r){ setTimeout(r,0); }); });
+  });
+  return p;
+ }
+
+ function secGuncelle(i,kaydir){
+  if(!deste || !deste.length) return;
+  sec=Math.max(0,Math.min(deste.length-1,i));
+  var slotlar=track.querySelectorAll('.kp-slot');
+  for(var k=0;k<slotlar.length;k++) slotlar[k].classList.toggle('on',k===sec);
+  var dl=dots.querySelectorAll('.kp-dot');
+  for(var m=0;m<dl.length;m++){
+   dl[m].classList.toggle('on',m===sec);
+   dl[m].setAttribute('aria-current',m===sec?'true':'false');
+  }
+  adEl.textContent=deste[sec].ad||'';
+  if(kaydir && slotlar[sec]){
+   var s=slotlar[sec];
+   track.scrollTo({left:s.offsetLeft-(track.clientWidth-s.offsetWidth)/2,
+                   behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+  }
+ }
+
+ function kaydirmadanOku(){
+  var slotlar=track.querySelectorAll('.kp-slot');
+  var orta=track.scrollLeft+track.clientWidth/2, en=1e9, k=sec;
+  for(var i=0;i<slotlar.length;i++){
+   var m=slotlar[i].offsetLeft+slotlar[i].offsetWidth/2, f=Math.abs(m-orta);
+   if(f<en){ en=f; k=i; }
+  }
+  if(k!==sec) secGuncelle(k,false);
+ }
+
+ function indirBlob(blob,ad){
+  var u=URL.createObjectURL(blob), a=document.createElement('a');
+  a.href=u; a.download=ad; a.rel='noopener';
+  a.style.cssText='position:fixed;left:-9999px;opacity:0';
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){
+   try{ a.parentNode&&a.parentNode.removeChild(a); }catch(e){}
+   try{ URL.revokeObjectURL(u); }catch(e){}
+  },2000);
+ }
+
+ function geri(btn,metin){
+  try{ if(typeof sorbiGeriBildir==='function'){ sorbiGeriBildir(btn,metin); return; } }catch(e){}
+ }
+
+ function paylas(btn,zorlaIndir){
+  var k=deste&&deste[sec]; if(!k) return;
+  geri(btn,'Hazırlanıyor…');
+  kartUret(sec).then(function(r){
+   if(!r){ geri(btn,'Kart oluşturulamadı'); return; }
+   var ad='sorbi-'+k.tur+'.png';
+   var txt='', url='';
+   try{ txt=sorbiPaylasMetni(); url=sorbiPaylasUrl(); }catch(e){}
+   var dosya=null;
+   try{ dosya=new File([r.blob],ad,{type:'image/png'}); }catch(e){}
+   /* DOSYA PAYLASIRKEN url/text EKLEME. iOS'ta share sheet'e ucuncu bir
+      oge girdiginde Instagram Stories eklentisi listeden dusuyor ve
+      "Story'de paylaş" dugmesi vaadini tutmuyor. Adres zaten kartin
+      uzerinde basili, ayrica "Bağlantıyı kopyala" dugmesi duruyor.
+      Dogrulanan yuk ile paylasilan yuk ayni olmali. */
+   var yuk=dosya?{files:[dosya]}:null;
+   if(!zorlaIndir && yuk && navigator.canShare && navigator.canShare(yuk)){
+    navigator.share(yuk).then(function(){
+     iz('an_paylasildi','kart:'+k.tur);
+    })['catch'](function(e){
+     if(e && e.name==='AbortError'){ iz('an_paylasildi','vazgecti:'+k.tur); return; }
+     indirBlob(r.blob,ad); geri(btn,'İndirildi ✓'); iz('an_paylasildi','indirildi:'+k.tur);
+    });
+    return;
+   }
+   indirBlob(r.blob,ad);
+   geri(btn,'İndirildi ✓');
+   if(!zorlaIndir){
+    try{ navigator.clipboard.writeText((txt?txt+' ':'')+url)['catch'](function(){}); }catch(e){}
+   }
+   iz('an_paylasildi','indirildi:'+k.tur);
+  });
+ }
+
+ function odaklanabilirler(){
+  return [].slice.call(ovl.querySelectorAll('button,[href],input,[tabindex]:not([tabindex="-1"])'))
+   .filter(function(el){ return !el.disabled && el.offsetParent!==null; });
+ }
+
+ function tusla(e){
+  if(!acik) return;
+  if(e.key==='Escape'){ e.preventDefault(); kapa(); return; }
+  if(e.key==='ArrowRight'){ e.preventDefault(); secGuncelle(sec+1,true); return; }
+  if(e.key==='ArrowLeft'){ e.preventDefault(); secGuncelle(sec-1,true); return; }
+  if(e.key==='Tab'){
+   /* aria-modal="true" dedik; odak da panelde kalmali */
+   var o=odaklanabilirler(); if(!o.length) return;
+   var ilk=o[0], son=o[o.length-1];
+   if(e.shiftKey && (document.activeElement===ilk || !ovl.contains(document.activeElement))){
+    e.preventDefault(); son.focus();
+   }else if(!e.shiftKey && document.activeElement===son){
+    e.preventDefault(); ilk.focus();
+   }
+  }
+ }
+
+ function kapa(){
+  if(!acik) return;
+  acik=false; tur++;                 /* ucustaki uretim zincirini iptal et */
+  ovl.hidden=true;
+  document.body.style.overflow='';
+  document.removeEventListener('keydown',tusla);
+  /* 4 x 1080x1920 dataUrl + blob + decode edilmis <img>: panel kapaliyken tutma */
+  uretilen={}; ucusta={}; deste=null;
+  try{ track.innerHTML=''; }catch(e){}
+  try{ sonOdak && sonOdak.focus(); }catch(e){}
+ }
+
+ function ac(btn){
+  ovl=document.getElementById('kartPanel');
+  track=document.getElementById('kpTrack');
+  dots=document.getElementById('kpDots');
+  adEl=document.getElementById('kpAd');
+  if(!ovl||!window.SorbiKart) return false;
+  tur++; deste=desteKur(); uretilen={}; ucusta={}; sec=0;
+  if(!deste.length) return false;
+  track.innerHTML=deste.map(function(k,i){
+   return '<div class="kp-slot'+(i===0?' on':'')+'" data-i="'+i+'"><div class="kp-yukle" aria-hidden="true">✦</div></div>';
+  }).join('');
+  dots.innerHTML=deste.map(function(k,i){
+   return '<button type="button" class="kp-dot'+(i===0?' on':'')+'" data-i="'+i+'" aria-label="'+k.ad+'"></button>';
+  }).join('');
+  sonOdak=btn||document.activeElement;
+  ovl.hidden=false; acik=true;
+  document.body.style.overflow='hidden';
+  document.addEventListener('keydown',tusla);
+  secGuncelle(0,false);                 /* aria-current ve kart adi bastan dogru olsun */
+  try{ document.getElementById('kpKapa').focus(); }catch(e){}
+  iz('kart_paneli_acildi',String(deste.length));
+  siraylaUret();
+  return true;
+ }
+
+ function kur(){
+  var ovl2=document.getElementById('kartPanel');
+  if(!ovl2) return;
+  ovl2.addEventListener('click',function(e){ if(e.target===ovl2) kapa(); });
+  document.getElementById('kpKapa').onclick=kapa;
+  document.getElementById('kpDots').addEventListener('click',function(e){
+   var b=e.target.closest('.kp-dot'); if(b) secGuncelle(+b.dataset.i,true);
+  });
+  document.getElementById('kpTrack').addEventListener('click',function(e){
+   var s=e.target.closest('.kp-slot');
+   if(s && +s.dataset.i!==sec) secGuncelle(+s.dataset.i,true);
+  });
+  var z;
+  document.getElementById('kpTrack').addEventListener('scroll',function(){
+   clearTimeout(z); z=setTimeout(kaydirmadanOku,90);
+  },{passive:true});
+  document.getElementById('kpPaylas').onclick=function(){ paylas(this,false); };
+  document.getElementById('kpIndir').onclick=function(){ paylas(this,true); };
+ }
+
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',kur);
+ else kur();
+
+ window.SorbiPanel={ac:ac, kapa:kapa};
+})();
+
 </script>
 <script src="/sorbi-liste.js?v=2" defer></script>
+<div class="kp-ovl" id="kartPanel" hidden role="dialog" aria-modal="true" aria-labelledby="kpBaslik">
+ <div class="kp-sheet" role="document">
+  <div class="kp-bar" aria-hidden="true"></div>
+  <div class="kp-head">
+   <div>
+    <h3 id="kpBaslik">Story'de paylaş</h3>
+    <p>Kaydır, birini seç. Kartlar telefonunda hazırlanıyor, sunucuya gitmiyor. Paylaştığın görselde doğum tarihin görünür — saatin ve şehrin görünmez.</p>
+   </div>
+   <button class="kp-kapa" id="kpKapa" aria-label="Kapat">✕</button>
+  </div>
+  <div class="kp-track" id="kpTrack" tabindex="0" aria-label="Paylaşım kartları"></div>
+  <div class="kp-ad" id="kpAd" aria-live="polite"></div>
+  <div class="kp-dots" id="kpDots"></div>
+  <div class="kp-alt">
+   <button class="sbtn" id="kpPaylas"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.7 15.4 6.3M8.6 13.3l6.8 4.4"/></svg><span>Paylaş</span></button>
+   <button class="sbtn ghost" id="kpIndir"><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0 4-4m-4 4-4-4"/><path d="M5 19h14"/></svg><span>İndir</span></button>
+  </div>
+  <p class="kp-not">1080×1920 — Instagram ve WhatsApp story ölçüsü.</p>
+ </div>
+</div>
 <!-- SORBI-FOOTER:START -->
 <style>
 .sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:#9BA0AB;max-width:none;width:auto}

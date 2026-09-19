@@ -2,7 +2,9 @@
  *  window.SorbiKart.uret(veri)  -> Promise<{blob, dataUrl, genislik, yukseklik}>
  *  window.SorbiKart.indir(veri, dosyaAdi) -> Promise<boolean>
  *
- *  veri = { muhur, altbaslik, ucluMetin, nadirSatir, kunye, svg, url }
+ *  veri = { tur, ... }  tur: sayi | muhur | yerlesim | uclu | liste
+ *  muhur icin: { muhur, altbaslik, ucluMetin, nadirSatir, svg, url, kaynak }
+ *  liste icin: { ustEt, buyuk, alt, satirlar:[{ad,oran}], dipnot, imza }
  *  Sunucu yok, bağımlılık yok. Çıktı her zaman tam 1080×1920 PNG.
  */
 (function(){
@@ -194,7 +196,7 @@ function zeminCiz(ctx){
 }
 
 /* ───────────────────────── ana çizim ───────────────────────── */
-function ciz(ctx,v,muhurImg){
+function cizMuhur(ctx,v,muhurImg){
   zeminCiz(ctx);
   ctx.textAlign='center'; ctx.textBaseline='top';
 
@@ -278,13 +280,323 @@ function ciz(ctx,v,muhurImg){
   satirYaz(ctx,v.soru||'Sen kaçta birsin?',W/2,altUst+urlSat+16,0);
 }
 
+/* ───────────────── ortak parçalar (tüm kart tipleri) ───────────────── */
+
+/* üst damga: "SORBİ · SENİN ANIN" — çizer, bittiği y'yi döndürür */
+function damgaCiz(ctx,v){
+  ctx.textAlign='center'; ctx.textBaseline='top';
+  ctx.font='500 26px '+F_GOV;
+  ctx.fillStyle=C.gold;
+  satirYaz(ctx,trBuyuk(v.damga||'Sorbi'),W/2,132,11);
+  return 132+26;
+}
+
+/* alt blok: site adresi + soru. Bloğun ÜST y'sini döndürür (üstte kalan yer hesabı için) */
+function altBlokCiz(ctx,v){
+  var urlBoy=30, sorBoy=44, kayBoy=24;
+  var urlSat=Math.round(urlBoy*1.3), sorSat=Math.round(sorBoy*1.3);
+  var kaySat=v.kaynak?Math.round(kayBoy*1.4)+14:0;
+  var altUst=H-104-(kaySat+urlSat+16+sorSat);
+  ctx.textAlign='center'; ctx.textBaseline='top';
+  /* kaynak: karttaki sayinin hangi ornekleme dayandigi. Kart siteden
+     kopup gittigi icin sehadeti yaninda tasimasi gerekiyor. */
+  if(v.kaynak){
+    ctx.font='400 '+kayBoy+'px '+F_GOV;
+    ctx.fillStyle='rgba(138,133,120,.72)';
+    satirYaz(ctx,v.kaynak,W/2,altUst,1.2);
+  }
+  ctx.font='500 '+urlBoy+'px '+F_GOV;
+  ctx.fillStyle=C.dim;
+  satirYaz(ctx,v.url||'sorbiapp.com/seni-taniyorum',W/2,altUst+kaySat,2.4);
+  ctx.font='italic 500 '+sorBoy+'px '+F_BAS;
+  ctx.fillStyle=C.goldBr;
+  satirYaz(ctx,v.soru||'Sen kaçta birsin?',W/2,altUst+kaySat+urlSat+16,0);
+  return altUst;
+}
+
+/* küçük etiket satırı (HERKESTE OLMAYAN gibi) */
+function etiketCiz(ctx,metin,y){
+  ctx.textAlign='center'; ctx.textBaseline='top';
+  ctx.font='600 24px '+F_GOV;
+  ctx.fillStyle=C.dim;
+  satirYaz(ctx,trBuyuk(metin),W/2,y,8);
+  return 24;
+}
+
+/* ince altın çizgi */
+function cizgiCiz(ctx,y,gen){
+  var g2=gen||300;
+  var gr=ctx.createLinearGradient((W-g2)/2,0,(W+g2)/2,0);
+  gr.addColorStop(0,'rgba(223,169,143,0)');
+  gr.addColorStop(.5,'rgba(223,169,143,.55)');
+  gr.addColorStop(1,'rgba(223,169,143,0)');
+  ctx.fillStyle=gr;
+  ctx.fillRect((W-g2)/2,y,g2,1.5);
+  return 1.5;
+}
+
+/* metni altın hap içine alıp çizer, kapladığı yüksekliği döndürür */
+function hapCiz(ctx,metin,y,o){
+  var boy=o.boy||34, ls=o.ls||0.4, maxW=o.maxW||(GEN-160);
+  var ol=olc(ctx,metin,{
+    font:function(b){ return '600 '+b+'px '+F_BAS; },
+    boy:boy, min:o.min||24, adim:2, maxW:maxW, maxSatir:o.maxSatir||1, satirYuk:1.34, ls:ls
+  });
+  ctx.font='600 '+ol.boy+'px '+F_BAS;
+  var enGenis=0;
+  ol.satirlar.forEach(function(s){ enGenis=Math.max(enGenis,genislik(ctx,s,ls)); });
+  var kw=Math.min(GEN, enGenis+84), kh=ol.yukseklik+40;
+  ctx.save();
+  ctx.fillStyle='rgba(223,169,143,.05)';
+  ctx.strokeStyle='rgba(223,169,143,.30)';
+  ctx.lineWidth=1.5;
+  yuvarlakDikdortgen(ctx,(W-kw)/2,y,kw,kh,kh/2);
+  ctx.fill(); ctx.stroke();
+  ctx.restore();
+  blokCiz(ctx,ol,{font:function(b){return '600 '+b+'px '+F_BAS;},renk:C.gold,ls:ls},y+20);
+  return kh;
+}
+
+/* ───────────────── TİP: sayi — "kaçta bir" kancası ───────────────── */
+function cizSayi(ctx,v){
+  zeminCiz(ctx);
+  var ustSon=damgaCiz(ctx,v);
+  var altUst=altBlokCiz(ctx,v);
+
+  /* ortada duracak blok: etiket + dev sayı + "kişide bir" + çizgi + üçlü + dilim */
+  var parcalar=[];
+
+  parcalar.push({tip:'etiket', metin:v.etiket||'Bu üçlü', h:24, bosluk:34});
+
+  var oSayi=olc(ctx,String(v.sayi||''),{
+    font:function(b){ return '700 '+b+'px '+F_BAS; },
+    boy:196, min:96, adim:6, maxW:GEN, maxSatir:1, satirYuk:1.06
+  });
+  parcalar.push({tip:'sayi', ol:oSayi, h:oSayi.yukseklik, bosluk:6});
+
+  var oBirim=olc(ctx,v.birim||'kişide bir',{
+    font:function(b){ return 'italic 400 '+b+'px '+F_GOV; },
+    boy:48, min:32, adim:2, maxW:GEN, maxSatir:2, satirYuk:1.34
+  });
+  parcalar.push({tip:'birim', ol:oBirim, h:oBirim.yukseklik, bosluk:54});
+
+  parcalar.push({tip:'cizgi', h:2, bosluk:48});
+
+  var oUc=null;
+  if(v.ucluMetin){
+    oUc=olc(ctx,v.ucluMetin,{
+      font:function(b){ return '400 '+b+'px '+F_SEM; },
+      boy:40, min:28, adim:2, maxW:GEN, maxSatir:2, satirYuk:1.38, ls:1.2
+    });
+    parcalar.push({tip:'uclu', ol:oUc, h:oUc.yukseklik, bosluk:26});
+  }
+
+  var oDilim=null;
+  if(v.dilim){
+    oDilim=olc(ctx,v.dilim,{
+      font:function(b){ return '400 '+b+'px '+F_GOV; },
+      boy:31, min:24, adim:1, maxW:GEN-60, maxSatir:3, satirYuk:1.5
+    });
+    parcalar.push({tip:'dilim', ol:oDilim, h:oDilim.yukseklik, bosluk:0});
+  }
+
+  var toplam=0;
+  parcalar.forEach(function(p,i){ toplam+=p.h+(i<parcalar.length-1?p.bosluk:0); });
+  var y=ustSon+Math.max(70,((altUst-ustSon)-toplam)/2);
+
+  parcalar.forEach(function(p){
+    if(p.tip==='etiket')      etiketCiz(ctx,p.metin,y);
+    else if(p.tip==='sayi')   blokCiz(ctx,p.ol,{font:function(b){return '700 '+b+'px '+F_BAS;},renk:C.goldBr},y);
+    else if(p.tip==='birim')  blokCiz(ctx,p.ol,{font:function(b){return 'italic 400 '+b+'px '+F_GOV;},renk:C.mut},y);
+    else if(p.tip==='cizgi')  cizgiCiz(ctx,y,300);
+    else if(p.tip==='uclu')   blokCiz(ctx,p.ol,{font:function(b){return '400 '+b+'px '+F_SEM;},renk:C.ink,ls:1.2},y);
+    else if(p.tip==='dilim')  blokCiz(ctx,p.ol,{font:function(b){return '400 '+b+'px '+F_GOV;},renk:C.dim},y);
+    y+=p.h+p.bosluk;
+  });
+}
+
+/* ───────────────── TİP: yerlesim — "herkeste olmayan" ───────────────── */
+function cizYerlesim(ctx,v){
+  zeminCiz(ctx);
+  var ustSon=damgaCiz(ctx,v);
+  var altUst=altBlokCiz(ctx,v);
+
+  var parcalar=[];
+  parcalar.push({tip:'etiket', metin:v.etiket||'Herkeste olmayan', h:24, bosluk:40});
+
+  var oBas=olc(ctx,v.baslik||'',{
+    font:function(b){ return '700 '+b+'px '+F_BAS; },
+    boy:88, min:48, adim:3, maxW:GEN, maxSatir:2, satirYuk:1.14
+  });
+  parcalar.push({tip:'baslik', ol:oBas, h:oBas.yukseklik, bosluk:v.olcu?28:36});
+
+  if(v.olcu) parcalar.push({tip:'olcu', metin:v.olcu, h:0, bosluk:44});
+
+  if(v.metin){
+    var oMet=olc(ctx,v.metin,{
+      font:function(b){ return '400 '+b+'px '+F_GOV; },
+      boy:42, min:30, adim:2, maxW:GEN-30, maxSatir:6, satirYuk:1.52
+    });
+    parcalar.push({tip:'metin', ol:oMet, h:oMet.yukseklik, bosluk:v.nadirSatir?48:0});
+  }
+
+  if(v.nadirSatir) parcalar.push({tip:'nadir', metin:v.nadirSatir, h:0, bosluk:0});
+
+  /* hap yükseklikleri çizim anında belli; önce ölçelim */
+  parcalar.forEach(function(p){
+    if(p.tip==='olcu' || p.tip==='nadir'){
+      var ol=olc(ctx,p.metin,{
+        font:function(b){ return '600 '+b+'px '+F_BAS; },
+        boy:34, min:24, adim:2, maxW:GEN-160, maxSatir:2, satirYuk:1.34, ls:0.4
+      });
+      p.h=ol.yukseklik+40;
+    }
+  });
+
+  var toplam=0;
+  parcalar.forEach(function(p,i){ toplam+=p.h+(i<parcalar.length-1?p.bosluk:0); });
+  var y=ustSon+Math.max(70,((altUst-ustSon)-toplam)/2);
+
+  parcalar.forEach(function(p){
+    if(p.tip==='etiket')       etiketCiz(ctx,p.metin,y);
+    else if(p.tip==='baslik')  blokCiz(ctx,p.ol,{font:function(b){return '700 '+b+'px '+F_BAS;},renk:C.goldBr},y);
+    else if(p.tip==='metin')   blokCiz(ctx,p.ol,{font:function(b){return '400 '+b+'px '+F_GOV;},renk:C.mut},y);
+    else if(p.tip==='olcu' || p.tip==='nadir') hapCiz(ctx,p.metin,y,{boy:34,maxSatir:2});
+    y+=p.h+p.bosluk;
+  });
+}
+
+/* ───────────────── TİP: uclu — ☉ ☽ ↑ sade kart ───────────────── */
+function cizUclu(ctx,v){
+  zeminCiz(ctx);
+  var ustSon=damgaCiz(ctx,v);
+  var altUst=altBlokCiz(ctx,v);
+
+  var satirlar=(v.uclu||[]).filter(Boolean);
+  var satirYuk=190, aralik=0;
+  var blokYuk=satirlar.length*satirYuk;
+
+  var oBas=null, basBosluk=0;
+  if(v.baslik){
+    oBas=olc(ctx,v.baslik,{
+      font:function(b){ return 'italic 500 '+b+'px '+F_BAS; },
+      boy:56, min:34, adim:2, maxW:GEN, maxSatir:2, satirYuk:1.3
+    });
+    basBosluk=56;
+  }
+  var toplam=blokYuk+(oBas?basBosluk+oBas.yukseklik:0);
+  var y=ustSon+Math.max(70,((altUst-ustSon)-toplam)/2);
+
+  satirlar.forEach(function(s,i){
+    var cy=y+i*satirYuk;
+    /* rol etiketi */
+    ctx.textAlign='center'; ctx.textBaseline='top';
+    ctx.font='600 23px '+F_GOV;
+    ctx.fillStyle=C.dim;
+    satirYaz(ctx,trBuyuk(s.rol||''),W/2,cy,8);
+    /* glif + burç */
+    ctx.font='400 74px '+F_SEM;
+    var gw=ctx.measureText(s.glif||'').width;
+    ctx.font='700 74px '+F_BAS;
+    var bw=genislik(ctx,s.burc||'',0.6);
+    var ara=26, top=gw+ara+bw, sx=(W-top)/2;
+    ctx.textAlign='left';
+    ctx.font='400 74px '+F_SEM;
+    ctx.fillStyle=C.gold;
+    ctx.fillText(s.glif||'',sx,cy+44);
+    ctx.font='700 74px '+F_BAS;
+    ctx.fillStyle=C.ink;
+    var eski=ctx.textAlign;
+    if(LS_VAR){ harfAralik(ctx,0.6); ctx.fillText(s.burc||'',sx+gw+ara,cy+44); harfAralik(ctx,0); }
+    else ctx.fillText(s.burc||'',sx+gw+ara,cy+44);
+    ctx.textAlign=eski;
+    if(i<satirlar.length-1) cizgiCiz(ctx,cy+satirYuk-34,200);
+  });
+
+  if(oBas){
+    ctx.textAlign='center';
+    blokCiz(ctx,oBas,{font:function(b){return 'italic 500 '+b+'px '+F_BAS;},renk:C.goldBr},y+blokYuk+basBosluk);
+  }
+}
+
+/* ───────────────── TİP: liste — /nadirlik kartı ─────────────────
+   nadirlik.html'in gönderdiği şema: {ustEt, buyuk, alt, satirlar:[{ad,oran}],
+   dipnot, imza}. Bu şemayı okuyan bir çizer yoktu; kart damga + yanlış
+   adres + soru'dan ibaret çıkıyordu. */
+function cizListe(ctx,v){
+  zeminCiz(ctx);
+  var ustSon=damgaCiz(ctx,v);
+
+  /* alt blok: imza + dipnot */
+  var impBoy=28, dipBoy=24;
+  var impSat=Math.round(impBoy*1.4), dipSat=v.dipnot?Math.round(dipBoy*1.4)+12:0;
+  var altUst=H-116-(dipSat+impSat);
+  ctx.textAlign='center'; ctx.textBaseline='top';
+  if(v.dipnot){
+    ctx.font='400 '+dipBoy+'px '+F_GOV;
+    ctx.fillStyle='rgba(138,133,120,.72)';
+    satirYaz(ctx,v.dipnot,W/2,altUst,1.2);
+  }
+  ctx.font='500 '+impBoy+'px '+F_GOV;
+  ctx.fillStyle=C.dim;
+  satirYaz(ctx,v.imza||'sorbiapp.com/nadirlik',W/2,altUst+dipSat,2.2);
+
+  var sat=(v.satirlar||[]).filter(function(x){ return x && (x.ad||x.oran); });
+  var satYuk=76;
+
+  var oBuyuk=olc(ctx,String(v.buyuk||''),{
+    font:function(b){ return '700 '+b+'px '+F_BAS; },
+    boy:170, min:78, adim:5, maxW:GEN, maxSatir:2, satirYuk:1.06
+  });
+  var oAlt=v.alt?olc(ctx,v.alt,{
+    font:function(b){ return 'italic 400 '+b+'px '+F_GOV; },
+    boy:46, min:30, adim:2, maxW:GEN-20, maxSatir:3, satirYuk:1.38
+  }):null;
+
+  var toplam=24+34+oBuyuk.yukseklik+(oAlt?22+oAlt.yukseklik:0)+(sat.length?56+sat.length*satYuk:0);
+  var y=ustSon+Math.max(70,((altUst-ustSon)-toplam)/2);
+
+  etiketCiz(ctx,v.ustEt||'En nadir yanın',y);  y+=24+34;
+  blokCiz(ctx,oBuyuk,{font:function(b){return '700 '+b+'px '+F_BAS;},renk:C.goldBr},y);
+  y+=oBuyuk.yukseklik;
+  if(oAlt){ y+=22; blokCiz(ctx,oAlt,{font:function(b){return 'italic 400 '+b+'px '+F_GOV;},renk:C.ink},y); y+=oAlt.yukseklik; }
+
+  if(sat.length){
+    y+=56;
+    cizgiCiz(ctx,y-28,GEN);
+    for(var i=0;i<sat.length;i++){
+      var sy=y+i*satYuk;
+      ctx.textBaseline='top';
+      ctx.font='400 36px '+F_GOV;
+      ctx.fillStyle=C.mut; ctx.textAlign='left';
+      var ad=String(sat[i].ad||'');
+      while(ctx.measureText(ad).width>GEN-260 && ad.length>4) ad=ad.slice(0,-2);
+      ctx.fillText(ad,KENAR,sy);
+      ctx.font='600 36px '+F_BAS;
+      ctx.fillStyle=C.gold; ctx.textAlign='right';
+      ctx.fillText(String(sat[i].oran||''),W-KENAR,sy);
+      if(i<sat.length-1){
+        ctx.fillStyle='rgba(235,240,248,.07)';
+        ctx.fillRect(KENAR,sy+52,GEN,1);
+      }
+    }
+    ctx.textAlign='center';
+  }
+}
+
+var CIZERLER={muhur:cizMuhur, sayi:cizSayi, yerlesim:cizYerlesim, uclu:cizUclu, liste:cizListe};
+
 /* ───────────────────────── API ───────────────────────── */
 function uret(veri){
   var v=veri||{};
+  var tur=(v.tur && CIZERLER[v.tur]) ? v.tur
+        : (v.satirlar || v.ustEt) ? 'liste'      /* nadirlik.html'in semasi */
+        : 'muhur';
+  var svgGerek=(tur==='muhur') && !!v.svg;   /* mühür dışındaki tipler çarkı çizmez */
   var px=680;
   return Promise.all([
     fontlariBekle(),
-    v.svg ? svgYukle(svgHazirla(v.svg,px),px).catch(function(e){ console.warn('[SorbiKart]',e); return null; }) : Promise.resolve(null)
+    svgGerek ? svgYukle(svgHazirla(v.svg,px),px).catch(function(e){ console.warn('[SorbiKart]',e); return null; }) : Promise.resolve(null)
   ]).then(function(sonuc){
     var img=sonuc[1];
     var cv=document.createElement('canvas');
@@ -292,7 +604,7 @@ function uret(veri){
     var ctx=cv.getContext('2d');
     ctx.imageSmoothingEnabled=true;
     if(ctx.imageSmoothingQuality) ctx.imageSmoothingQuality='high';
-    ciz(ctx,v,img);
+    CIZERLER[tur](ctx,v,img);
     var dataUrl=cv.toDataURL('image/png');   /* kirlenmiş olsaydı burada patlardı */
     return new Promise(function(coz,hata){
       if(!cv.toBlob){ hata(new Error('toBlob desteklenmiyor')); return; }
@@ -325,6 +637,7 @@ function indir(veri,dosyaAdi){
   });
 }
 
-window.SorbiKart={ uret:uret, indir:indir, GENISLIK:W, YUKSEKLIK:H };
+window.SorbiKart={ uret:uret, indir:indir, GENISLIK:W, YUKSEKLIK:H,
+  TURLER:['sayi','muhur','yerlesim','uclu','liste'] };
 
 })();
