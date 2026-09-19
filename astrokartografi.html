@@ -12,20 +12,20 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Astrokartografi Haritası","applicationCategory":"LifestyleApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"url":"https://sorbiapp.com/astrokartografi","provider":{"@type":"Organization","name":"Sorbi","url":"https://sorbiapp.com/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Astrokartografi nedir?","acceptedAnswer":{"@type":"Answer","text":"Astrokartografi, doğum haritandaki gezegenlerin dünya üzerinde hangi bölgelerde güçlendiğini gösteren harita tekniğidir. Her gezegenin dört açısal hattı (MC, IC, Yükselen, Alçalan) dünya haritasına çizilir; bir hatta yakın yerler o gezegenin temasını yaşamına taşır."}},{"@type":"Question","name":"Nereye taşınmalıyım astrolojiye göre nasıl bulunur?","acceptedAnswer":{"@type":"Answer","text":"Aradığın temaya göre bakılır: aşk için Venüs, kariyer için Güneş veya Jüpiter, huzur için Ay hatlarına yakın şehirler öne çıkar. Bu araç tüm gezegen hatlarını haritanda gösterir."}},{"@type":"Question","name":"Astrokartografi haritası doğru mu?","acceptedAnswer":{"@type":"Answer","text":"Bu araçtaki tüm gezegen hatları, doğum anındaki gök konumlarından cihazında astronomy-engine ile anlık hesaplanır; açısal noktalar Swiss Ephemeris çıktısına karşı test edildi."}}]}</script>
 <style>
-:root{--terra:#E3A692;--btn-ink:#F6EFE1;--bg:#0D0810;--gold:#DFA98F;--gold-light:#E4CF9A;--terra:#E3A692;--terra2:#E3A692;--text:#E8E4DA;--muted:#8A8578;--line:rgba(223,169,143,.25);--card:#16111A}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#1A1320 0,var(--bg) 60%);color:var(--text);font-family:'Inter',sans-serif;line-height:1.65}
+:root{--terra:#E3A692;--btn-ink:#2B140C;--bg:#0B0810;--gold:#E3A692;--gold-light:#E4CF9A;--terra:#E3A692;--terra2:#E3A692;--text:#F2EFE9;--muted:#868494;--line:rgba(223,169,143,.25);--card:#151220}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#151220 0,var(--bg) 60%);color:var(--text);font-family:'Inter',sans-serif;line-height:1.65}
 .wrap{max-width:820px;margin:0 auto;padding:2.2rem 1.1rem 3rem}
 .top{text-align:center;margin-bottom:1.2rem}
 .brand{font-family:Fraunces,Georgia,serif;letter-spacing:2px;color:var(--gold);font-size:.8rem;text-decoration:none}
-h1{font-family:Fraunces,Georgia,serif;font-size:clamp(1.5rem,5vw,2.15rem);margin:.5rem 0 .3rem;color:#E8E4DA}
+h1{font-family:Fraunces,Georgia,serif;font-size:clamp(1.5rem,5vw,2.15rem);margin:.5rem 0 .3rem;color:#F2EFE9}
 .sub{color:var(--muted);font-size:.95rem;max-width:520px;margin:0 auto}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.2rem 1.15rem;margin-top:1.3rem}
 label{display:block;font-size:.78rem;color:var(--gold-light);text-transform:uppercase;letter-spacing:.5px;margin:.7rem 0 .3rem}
 input{width:100%;background:rgba(13,8,16,.6);border:1px solid var(--line);border-radius:10px;padding:.7rem .8rem;color:var(--text);font-size:.95rem;font-family:'Inter'}
-.geo{position:relative}.gr{position:absolute;left:0;right:0;top:100%;background:#1A1220;border:1px solid var(--line);border-radius:10px;margin-top:4px;z-index:1000;display:none;max-height:210px;overflow:auto}.gr.show{display:block}.gi{padding:.55rem .7rem;cursor:pointer;font-size:.88rem;border-bottom:1px solid rgba(255,255,255,.04)}.gi:hover{background:rgba(223,169,143,.15)}.gi small{display:block;color:var(--muted);font-size:.72rem}
+.geo{position:relative}.gr{position:absolute;left:0;right:0;top:100%;background:#151220;border:1px solid var(--line);border-radius:10px;margin-top:4px;z-index:1000;display:none;max-height:210px;overflow:auto}.gr.show{display:block}.gi{padding:.55rem .7rem;cursor:pointer;font-size:.88rem;border-bottom:1px solid rgba(255,255,255,.04)}.gi:hover{background:rgba(223,169,143,.15)}.gi small{display:block;color:var(--muted);font-size:.72rem}
 .rowf{display:flex;gap:.7rem}.rowf>div{flex:1}
 .btn{display:block;width:100%;background:#E3A692;color:#2B140C;border:none;padding:.85rem;border-radius:12px;font-size:1rem;font-weight:600;cursor:pointer;margin-top:1.1rem;font-family:'Inter'}
-#map{height:460px;border-radius:16px;margin-top:1.3rem;border:1px solid var(--line);background:#0E0A12;display:none}
+#map{height:460px;border-radius:16px;margin-top:1.3rem;border:1px solid var(--line);background:#0B0810;display:none}
 .leaflet-popup-content{font-family:'Inter',sans-serif;font-size:.86rem;line-height:1.5}
 .legend{display:none;flex-wrap:wrap;gap:.4rem;margin-top:.9rem}
 .lg{display:inline-flex;align-items:center;gap:.4rem;background:rgba(13,8,16,.5);border:1px solid var(--line);border-radius:99px;padding:.3rem .7rem;font-size:.8rem;cursor:pointer;user-select:none;opacity:1;transition:opacity .15s}
@@ -33,11 +33,11 @@ input{width:100%;background:rgba(13,8,16,.6);border:1px solid var(--line);border
 .sw{width:12px;height:12px;border-radius:50%}
 .hint{font-size:.8rem;color:var(--muted);margin-top:.7rem;text-align:center}
 .sell{background:linear-gradient(180deg,rgba(223,169,143,.16),rgba(223,169,143,.04));border:1px solid var(--line);border-radius:18px;padding:1.3rem 1.2rem;margin-top:1.5rem;text-align:center}
-.sell h3{font-family:Fraunces,Georgia,serif;color:#E8E4DA;font-size:1.35rem;margin:.1rem 0 .5rem}
+.sell h3{font-family:Fraunces,Georgia,serif;color:#F2EFE9;font-size:1.35rem;margin:.1rem 0 .5rem}
 .sell p{font-size:.9rem;color:#d8cfbf;margin:0 auto .9rem;max-width:460px}
 .sell a{display:inline-block;background:#E3A692;color:#2B140C;text-decoration:none;padding:.75rem 1.5rem;border-radius:99px;font-weight:600;font-size:.92rem;margin:.25rem}
 .sell a.ghost{background:transparent;border:1px solid var(--terra);color:var(--gold-light)}
-.seo{margin-top:2.2rem;color:#A9A396}.seo h2{font-family:Fraunces,Georgia,serif;color:var(--gold-light);font-size:1.4rem;margin:1.5rem 0 .4rem}.seo p{font-size:.92rem;color:#bdb5a6}
+.seo{margin-top:2.2rem;color:#A5A3AE}.seo h2{font-family:Fraunces,Georgia,serif;color:var(--gold-light);font-size:1.4rem;margin:1.5rem 0 .4rem}.seo p{font-size:.92rem;color:#bdb5a6}
 .foot{text-align:center;color:var(--muted);font-size:.78rem;margin-top:2rem}.foot a{color:var(--gold)}
 @media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}</style><script src="/sorbi-yer.js?v=3"></script>
 <link rel="stylesheet" href="/sorbi-fonts.css?v=10">
@@ -47,25 +47,25 @@ input{width:100%;background:rgba(13,8,16,.6);border:1px solid var(--line);border
 <!-- SORBI-NAV:START -->
 <style>
 .sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(13,8,16,.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
-.sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:#F2D3B8;font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
+.sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:#F2EFE9;font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
 .sbnav .sbnav-lg i{font-style:normal;color:#E3A692;margin-right:.45rem;letter-spacing:0}
 .sbnav .sbnav-lg:hover{text-decoration:none;color:#fff}
 .sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:-4px -4px -4px auto;padding:4px;max-width:none;flex-wrap:nowrap}
 .sbnav nav::-webkit-scrollbar{display:none}
-.sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:#9BA0AB;text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
+.sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:#A5A3AE;text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
 .sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);text-decoration:none}
 .sbnav nav a:active{transform:scale(.97)}
 .sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:#F2EFE9;background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:#E3A692}
 .sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#FFFFFF;background:rgba(255,255,255,.06);box-shadow:none}
 .sbnav nav a:focus{outline:none}
-.sbnav nav a:focus-visible{outline:2px solid #F2D3B8;outline-offset:2px}
+.sbnav nav a:focus-visible{outline:2px solid #E3A692;outline-offset:2px}
 .sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:#F2EFE9}
 @media(prefers-reduced-motion:reduce){.sbnav nav a{transition:none}.sbnav nav a:active{transform:none}}
 @media(min-width:900px){.sbnav{padding:.9rem max(2rem,calc((100% - 1200px)/2));gap:2rem;min-height:70px}.sbnav .sbnav-lg{font-size:1.3rem}.sbnav nav a{font-size:.9rem;padding:0 .95rem}}
 @media(max-width:560px){.sbnav{padding:.3rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem;letter-spacing:.12em}.sbnav nav a{font-size:.8rem;padding:0 .66rem}}
 @media(min-width:900px) and (max-width:1120px){.sbnav{gap:1rem}.sbnav .sbnav-lg{font-size:1.15rem}.sbnav nav a{font-size:.84rem;padding:0 .5rem}}
-@media(max-width:1119px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 85%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 85%,transparent)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%);mask-image:linear-gradient(90deg,transparent,#000 8%)}}
-@media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#000 78%,transparent);mask-image:linear-gradient(90deg,#000 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 78%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 78%,transparent)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%);mask-image:linear-gradient(90deg,transparent,#000 14%)}}
+@media(max-width:1119px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#0B0810 85%,transparent);mask-image:linear-gradient(90deg,#0B0810 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:#0B0810;mask-image:#0B0810}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#0B0810 8%);mask-image:linear-gradient(90deg,transparent,#0B0810 8%)}}
+@media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#0B0810 78%,transparent);mask-image:linear-gradient(90deg,#0B0810 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:#0B0810;mask-image:#0B0810}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#0B0810 14%);mask-image:linear-gradient(90deg,transparent,#0B0810 14%)}}
 </style>
 <header class="sbnav">
  <a href="/" class="sbnav-lg" aria-label="Sorbi ana sayfa"><i>✦</i>SORBİ</a>
@@ -86,7 +86,7 @@ input{width:100%;background:rgba(13,8,16,.6);border:1px solid var(--line);border
 <!-- SORBI-NAV:END -->
 <!-- SORBI-TEMA:START -->
 <style>
-html{background:#0D0810}
+html{background:#0B0810}
 body{background:transparent!important}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(52% 38% at 50% -6%,rgba(186,178,208,.055),transparent 65%),
   radial-gradient(40% 32% at 88% 12%,rgba(94,147,168,.08),transparent 70%),
@@ -140,7 +140,7 @@ body:has(> .sky)::before{display:none}
  <p class="foot">Kader değil, farkındalık. · <a href="/">sorbiapp.com</a> · <a href="/dogum-haritasi-hesaplama" style="color:var(--gold)">Doğum haritası</a> · <a href="/uygun-gun-secimi" style="color:var(--gold)">Uygun gün</a></p>
 </div>
 <script>
-const BODIES=[['Güneş','Sun','#DFA98F','kimlik, canlılık ve tanınma'],['Ay','Moon','#c9d3e0','duygular, ev, aidiyet ve huzur'],['Merkür','Mercury','#8fd0bf','iletişim, öğrenme ve ticaret'],['Venüs','Venus','#E38FB0','aşk, güzellik, para ve keyif'],['Mars','Mars','#D0553F','enerji, cesaret ve hırs'],['Jüpiter','Jupiter','#E3C06A','şans, büyüme ve bolluk'],['Satürn','Saturn','#B79A66','sorumluluk, disiplin ve olgunluk'],['Uranüs','Uranus','#6FC3D6','özgürlük, değişim ve sıçrama'],['Neptün','Neptune','#7C9AE0','hayal, ilham ve sezgi'],['Plüton','Pluto','#B06AC4','dönüşüm, güç ve yoğunluk']];
+const BODIES=[['Güneş','Sun','#E3A692','kimlik, canlılık ve tanınma'],['Ay','Moon','#c9d3e0','duygular, ev, aidiyet ve huzur'],['Merkür','Mercury','#8fd0bf','iletişim, öğrenme ve ticaret'],['Venüs','Venus','#E38FB0','aşk, güzellik, para ve keyif'],['Mars','Mars','#D0553F','enerji, cesaret ve hırs'],['Jüpiter','Jupiter','#E3C06A','şans, büyüme ve bolluk'],['Satürn','Saturn','#B79A66','sorumluluk, disiplin ve olgunluk'],['Uranüs','Uranus','#6FC3D6','özgürlük, değişim ve sıçrama'],['Neptün','Neptune','#7C9AE0','hayal, ilham ve sezgi'],['Plüton','Pluto','#B06AC4','dönüşüm, güç ve yoğunluk']];
 const ANGLE={MC:'Kariyer, tanınırlık ve dış dünyadaki yerin öne çıkar.',IC:'Ev, kök, aile ve iç huzur temaları belirginleşir.',ASC:'Kimliğin, bedenin ve kendini ifaden güçlenir.',DSC:'İlişkiler, ortaklıklar ve karşılaşmalar öne çıkar.'};
 const ANGLE_TR={MC:'MC (Tepe)',IC:'IC (Dip)',ASC:'Yükselen',DSC:'Alçalan'};
 const norm=d=>((d%360)+360)%360, RAD=Math.PI/180;
@@ -215,7 +215,7 @@ function draw(lines){
   const mk=(coords,angle,dash)=>{
    segs(coords).forEach(seg=>{
     const pl=L.polyline(seg,{color:L0.col,weight:angle==='MC'||angle==='ASC'?2.4:1.8,opacity:.85,dashArray:dash?'5,6':null});
-    pl.bindPopup('<b style="color:#111">'+L0.tr+' — '+ANGLE_TR[angle]+' hattı</b><br>'+cap(L0.mean)+'.<br><span style="color:#555">'+ANGLE[angle]+'</span>');
+    pl.bindPopup('<b style="color:#0B0810">'+L0.tr+' — '+ANGLE_TR[angle]+' hattı</b><br>'+cap(L0.mean)+'.<br><span style="color:#555">'+ANGLE[angle]+'</span>');
     pl.on('mouseover',function(){this.setStyle({weight:4,opacity:1});});
     pl.on('mouseout',function(){this.setStyle({weight:angle==='MC'||angle==='ASC'?2.4:1.8,opacity:.85});});
     g.addLayer(pl);
@@ -258,7 +258,7 @@ document.getElementById('go').onclick=()=>{
  var pl=(b.place||'').split(',')[0];
  var chip=document.createElement('div');
  chip.style.cssText='max-width:660px;margin:.3rem auto 0;padding:0 1.1rem';
- chip.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;background:rgba(223,169,143,.10);border:1px solid rgba(223,169,143,.18);border-radius:12px;padding:.55rem .9rem;font-size:.84rem;color:#A9A396"><span>✦ '+[pl,b.date,(b.time||'')].filter(Boolean).join(' · ')+'</span><a href="#" id="_sbEdit" style="color:#DFA98F;font-size:.8rem;text-decoration:underline;white-space:nowrap">değiştir</a></div>';
+ chip.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;background:rgba(223,169,143,.10);border:1px solid rgba(223,169,143,.18);border-radius:12px;padding:.55rem .9rem;font-size:.84rem;color:#A5A3AE"><span>✦ '+[pl,b.date,(b.time||'')].filter(Boolean).join(' · ')+'</span><a href="#" id="_sbEdit" style="color:#E3A692;font-size:.8rem;text-decoration:underline;white-space:nowrap">değiştir</a></div>';
  form.parentNode.insertBefore(chip,form);
  form.style.display='none';
  document.getElementById('_sbEdit').onclick=function(e){e.preventDefault();form.style.display='';chip.style.display='none';};
@@ -267,16 +267,16 @@ document.getElementById('go').onclick=()=>{
 
 </script><!-- SORBI-FOOTER:START -->
 <style>
-.sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:#9BA0AB;max-width:none;width:auto}
-.sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0D0810;font-family:'Inter',system-ui,sans-serif}
+.sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:#A5A3AE;max-width:none;width:auto}
+.sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0B0810;font-family:'Inter',system-ui,sans-serif}
 .sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:repeat(4,1fr);text-align:left;gap:2rem}
 .sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#E3A692;margin:0 0 .8rem;font-weight:600}
-.sbft a{display:block;color:#9BA0AB;text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
+.sbft a{display:block;color:#A5A3AE;text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
 .sbft a:hover{color:#F2EFE9}
 .sbft .sbft-brand b{font-size:1.05rem;color:#F2EFE9;font-weight:700}
 .sbft .sbft-brand b i{font-style:normal;color:#E3A692;margin-right:.3rem}
-.sbft .sbft-brand p{color:#9BA0AB;font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
-.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#8E949F;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.sbft .sbft-brand p{color:#A5A3AE;font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#A5A3AE;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 @media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
 @media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
 </style>

@@ -5,33 +5,33 @@
 'use strict';
 var W=window,D=document,TIP={},no=0;
 var M=Math,PI=M.PI,TAU=PI*2,rd=PI/180,mn=M.min,mx=M.max,cs=M.cos,sn=M.sin,fl=M.floor,ab=M.abs;
-var C={bg:'#0F0B13',ln:'rgba(255,255,255,.10)',l2:'rgba(255,255,255,.20)',ink:'#F2EFE9',
-mut:'#9BA0AB',dim:'#9BA0AB',gld:'#E3A692',gbr:'#F2D3B8',ter:'#C4744E',gun:'#F1DCA8',dun:'#7FB3A8'};
+var C={bg:'#0B0810',ln:'rgba(255,255,255,.10)',l2:'rgba(255,255,255,.20)',ink:'#F2EFE9',
+mut:'#A5A3AE',dim:'#A5A3AE',gld:'#E3A692',gbr:'#F2EFE9',ter:'#C4744E',gun:'#E4CF9A',dun:'#7FB3A8'};
 var S='Koç Boğa İkizler Yengeç Aslan Başak Terazi Akrep Yay Oğlak Kova Balık'.split(' ');
 var SG='♈︎ ♉︎ ♊︎ ♋︎ ♌︎ ♍︎ ♎︎ ♏︎ ♐︎ ♑︎ ♒︎ ♓︎'.split(' ');
-var EL='Ateş Toprak Hava Su'.split(' '),ELC=['#C75B39','#9E8B4E','#B58A5E','#5E8C86'];
+var EL='Ateş Toprak Hava Su'.split(' '),ELC=['#C4744E','#9E8B4E','#B58A5E','#5E8C86'];
 var NT='Öncü Sabit Değişken'.split(' ');
 var YON='Mars Venüs Merkür Ay Güneş Merkür Venüs Mars Jüpiter Satürn Satürn Jüpiter'.split(' ');
 var YMO={7:'Plüton',10:'Uranüs',11:'Neptün'};
 var AZ=!!(W.matchMedia&&W.matchMedia('(prefers-reduced-motion: reduce)').matches);
 var CSS='.sbg{background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1rem;margin:1.2rem 0}'
-+'.sbg canvas{width:100%;height:auto;display:block;border-radius:10px;background:#0F0B13}'
++'.sbg canvas{width:100%;height:auto;display:block;border-radius:10px;background:#0B0810}'
 +'.sbg-k{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.8rem}'
-+'.sbg-b{font:inherit;font-size:.84rem;font-weight:600;color:#180F14;background:#F2D3B8;border:0;border-radius:10px;padding:0 1rem;min-height:40px;cursor:pointer}'
++'.sbg-b{font:inherit;font-size:.84rem;font-weight:600;color:#151220;background:#E3A692;border:0;border-radius:10px;padding:0 1rem;min-height:40px;cursor:pointer}'
 +'.sbg-b:hover{background:#E3A692}'
-+'.sbg-b.sbg-i{background:transparent;color:#9BA0AB;border:1px solid rgba(255,255,255,.14);font-weight:500}'
++'.sbg-b.sbg-i{background:transparent;color:#A5A3AE;border:1px solid rgba(255,255,255,.14);font-weight:500}'
 +'.sbg-b.sbg-i:hover{background:rgba(255,255,255,.06);color:#F2EFE9}'
 +'.sbg-s{flex:1 1 140px;min-width:110px;min-height:40px;accent-color:#E3A692;background:transparent}'
-+'.sbg-o{font-family:ui-monospace,Menlo,monospace;font-size:.78rem;color:#9BA0AB;font-variant-numeric:tabular-nums}'
-+'.sbg-o b{color:#F2D3B8;font-weight:600}'
-+'.sbg-l{font-size:.78rem;color:#9BA0AB;white-space:nowrap}'
++'.sbg-o{font-family:ui-monospace,Menlo,monospace;font-size:.78rem;color:#A5A3AE;font-variant-numeric:tabular-nums}'
++'.sbg-o b{color:#F2EFE9;font-weight:600}'
++'.sbg-l{font-size:.78rem;color:#A5A3AE;white-space:nowrap}'
 +'.sbg-p{display:flex;gap:.5rem;align-items:center;flex:1 1 180px;min-width:0}'
 +'.sbg-p .sbg-s{flex:1 1 60px;min-width:60px}'
-+'.sbg-e{display:inline-block;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid currentColor;border-radius:99px;padding:.08rem .45rem;color:#9BA0AB}'
++'.sbg-e{display:inline-block;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid currentColor;border-radius:99px;padding:.08rem .45rem;color:#A5A3AE}'
 +'.sbg-e.g{color:#C4744E}'
-+'.sbg-z{font-size:.86rem;font-weight:300;color:#9BA0AB;line-height:1.65;margin-top:.8rem;padding-top:.8rem;border-top:1px solid rgba(255,255,255,.08);max-width:74ch}'
-+'.sbg-z b{color:#F2EFE9;font-weight:500}.sbg-z i{font-style:normal;color:#F2D3B8}'
-+'.sbg :focus-visible{outline:2px solid #F2D3B8;outline-offset:2px;border-radius:8px}'
++'.sbg-z{font-size:.86rem;font-weight:300;color:#A5A3AE;line-height:1.65;margin-top:.8rem;padding-top:.8rem;border-top:1px solid rgba(255,255,255,.08);max-width:74ch}'
++'.sbg-z b{color:#F2EFE9;font-weight:500}.sbg-z i{font-style:normal;color:#F2EFE9}'
++'.sbg :focus-visible{outline:2px solid #E3A692;outline-offset:2px;border-radius:8px}'
 +'@media(max-width:560px){.sbg-k>.sbg-s,.sbg-p{flex-basis:100%}.sbg-o{overflow-wrap:anywhere}}';
 
 /* ── ortak çizim ── */
@@ -277,7 +277,7 @@ function ciz(){
  var m=olcek(cv,sp),c={o:m.o,G:m.G,Y:m.Y,k:st.k,v:st.v,veri:st.veri},t=null;
  try{sp.ciz(c);t=sp.metin&&sp.metin(c);}catch(e){}
  if(t){if(oku)oku.innerHTML=t.o||'';
-  z.innerHTML=(t.z||'')+(AZ?' <span style="color:#9BA0AB">Azaltılmış hareket açık: tek kare gösteriliyor, kaydırıcıyla ilerletebilirsin.</span>':'');}
+  z.innerHTML=(t.z||'')+(AZ?' <span style="color:#A5A3AE">Azaltılmış hareket açık: tek kare gösteriliyor, kaydırıcıyla ilerletebilirsin.</span>':'');}
 }
 function senk(){gr.forEach(function(g){var v=g.ad==='k'?st.k:st.v[g.ad];if(+g.el.value!==v)g.el.value=v;});}
 function dur(){st.oyn=0;if(st.rid)cancelAnimationFrame(st.rid);st.rid=0;

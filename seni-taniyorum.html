@@ -6,7 +6,7 @@
 <title>Seni Tanıyorum — Doğum Haritandan Kişisel Okuma | Sorbi</title>
 <meta name="description" content="Genel burç yorumu değil. Doğduğun anı gir, harita seni birkaç cümlede okusun — dışın, için, gizli gerilimlerin. Tekinsiz derecede kişisel, ücretsiz.">
 <link rel="canonical" href="https://sorbiapp.com/seni-taniyorum">
-<meta name="theme-color" content="#0B0E15">
+<meta name="theme-color" content="#0B0810">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Sorbi">
 <meta property="og:title" content="Seni Tanıyorum — Sorbi"><meta property="og:description" content="Doğduğun anı gir, harita seni birkaç cümlede okusun. Genel burç yorumu değil, kendi haritan."><meta property="og:url" content="https://sorbiapp.com/seni-taniyorum"><meta property="og:image" content="https://sorbiapp.com/og-image.png"><meta property="og:locale" content="tr_TR">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
@@ -24,10 +24,10 @@
 <script src="/sorbi-kart.js?v=2" defer></script>
 <style>
 /* Sorbi design tokens — varak okunur, terracotta basılır */
-:root{--bg:#0D0810;--panel:rgba(235,240,248,.03);--gold:#DFA98F;--gold-lt:#E4CF9A;--gold-br:#F2D3B8;--ink:#E8E4DA;--mut:#A9A396;--dim:#8A8578;--terra:#E3A692;--btn-ink:#F6EFE1;
+:root{--bg:#0B0810;--panel:rgba(235,240,248,.03);--gold:#E3A692;--gold-lt:#E4CF9A;--gold-br:#F2EFE9;--ink:#F2EFE9;--mut:#A5A3AE;--dim:#868494;--terra:#E3A692;--btn-ink:#2B140C;
 --line:rgba(235,240,248,.06);--line2:rgba(235,240,248,.08);--lstrong:rgba(235,240,248,.14);--lineg:rgba(223,169,143,.18);--lineg2:rgba(223,169,143,.45);
---foil:linear-gradient(135deg,#8A6D2E,#DFA98F,#F2D3B8,#DFA98F,#8A6D2E);--ease:cubic-bezier(.2,.8,.2,1)}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(1100px 620px at 50% -6%,#140D17 0,var(--bg) 60%);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.62}
+--foil:linear-gradient(135deg,#8A6D2E,#E3A692,#F2EFE9,#E3A692,#8A6D2E);--ease:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1100px 620px at 50% -6%,#151220 0,var(--bg) 60%);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.62}
 .wrap{max-width:600px;margin:0 auto;padding:2.2rem 1.15rem 4rem}
 .brand{font-family:Fraunces,Georgia,serif;letter-spacing:3px;color:var(--gold);font-size:.82rem;text-decoration:none;text-transform:uppercase}
 .top{text-align:center;margin-bottom:1.4rem}
@@ -37,7 +37,7 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(1.9rem,6vw
 label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin:.75rem 0 .3rem}
 input{width:100%;background:rgba(13,8,16,.6);border:1px solid var(--line2);border-radius:12px;color:var(--ink);font-size:.95rem;font-family:'Inter';padding:.72rem .8rem;min-height:44px}
 .row{display:flex;gap:.7rem}.row>div{flex:1}
-.geo{position:relative}.gr{position:absolute;left:0;right:0;top:100%;background:#16111A;border:1px solid var(--line2);border-radius:12px;margin-top:4px;z-index:20;display:none;max-height:220px;overflow:auto}.gr.show{display:block}.gi{padding:.55rem .7rem;cursor:pointer;font-size:.88rem;border-bottom:1px solid var(--line)}.gi:hover{background:var(--line2)}.gi small{display:block;color:var(--dim);font-size:.72rem}
+.geo{position:relative}.gr{position:absolute;left:0;right:0;top:100%;background:#151220;border:1px solid var(--line2);border-radius:12px;margin-top:4px;z-index:20;display:none;max-height:220px;overflow:auto}.gr.show{display:block}.gi{padding:.55rem .7rem;cursor:pointer;font-size:.88rem;border-bottom:1px solid var(--line)}.gi:hover{background:var(--line2)}.gi small{display:block;color:var(--dim);font-size:.72rem}
 .note{font-size:.75rem;color:var(--dim);margin-top:.35rem}
 /* KURAL: dolu buton her zaman terracotta, yazı kâğıt kremi */
 .btn{display:block;width:100%;border:none;border-radius:16px;background:var(--terra);color:var(--btn-ink);font:600 16px 'Inter';padding:.95rem;min-height:52px;cursor:pointer;margin-top:1.2rem;transition:transform 90ms var(--ease),filter 90ms var(--ease)}
@@ -132,7 +132,7 @@ body.sonuc .reveal{margin-top:.4rem}
 @keyframes kpIn{from{opacity:0}to{opacity:1}}
 @keyframes kpUp{from{transform:translateY(22px);opacity:0}to{transform:translateY(0);opacity:1}}
 .kp-sheet{width:100%;max-width:560px;max-height:96vh;overflow-y:auto;display:flex;flex-direction:column;
- background:linear-gradient(180deg,#120C16,#0D0810);border:1px solid var(--line2);border-bottom:0;
+ background:#0B0810;border:1px solid var(--line2);border-bottom:0;
  border-radius:22px 22px 0 0;padding:.9rem 0 max(.9rem,env(safe-area-inset-bottom));
  animation:kpUp .26s var(--ease) both}
 @media(min-width:620px){.kp-ovl{align-items:center}
@@ -149,7 +149,7 @@ body.sonuc .reveal{margin-top:.4rem}
  -webkit-overflow-scrolling:touch;padding:.85rem 0 .2rem;scroll-behavior:smooth}
 .kp-track::-webkit-scrollbar{display:none}
 .kp-slot{flex:0 0 auto;scroll-snap-align:center;width:min(58vw,232px);aspect-ratio:1080/1920;
- border-radius:14px;overflow:hidden;border:1px solid var(--line2);background:#0B0F14;
+ border-radius:14px;overflow:hidden;border:1px solid var(--line2);background:#0B0810;
  display:flex;align-items:center;justify-content:center;position:relative;
  transition:transform .22s var(--ease),border-color .22s var(--ease)}
 .kp-slot:first-child{margin-left:calc(50% - min(29vw,116px))}
@@ -250,7 +250,7 @@ body.sonuc .reveal{margin-top:.4rem}
 .seo b{color:var(--gold)}
 /* fotoğraf anı — deklanşör (app'teki an yakalama) */
 .shutter{position:fixed;inset:0;z-index:2000;pointer-events:none;display:none}
-.shutter .blade{position:absolute;inset:0;background:#0D0810;clip-path:circle(0% at 50% 44%)}
+.shutter .blade{position:absolute;inset:0;background:#0B0810;clip-path:circle(0% at 50% 44%)}
 .shutter .ap{position:absolute;left:50%;top:44%;width:2px;height:2px;transform:translate(-50%,-50%);border-radius:50%;opacity:0}
 .shutter .flash{position:absolute;inset:0;background:radial-gradient(circle at 50% 44%,rgba(244,228,186,.95),rgba(223,169,143,.32) 42%,transparent 70%);opacity:0}
 .shutter.capture{display:block}
@@ -264,14 +264,14 @@ body.sonuc .reveal{margin-top:.4rem}
 /* anlam küreleri — Özün · İç Dünyan · Masken (app hero pill'leri) */
 .orbs{display:flex;justify-content:center;gap:1.25rem;margin:1.5rem 0 0;flex-wrap:wrap}
 .orb{display:flex;flex-direction:column;align-items:center;gap:.35rem;opacity:0;transform:scale(.6);animation:orbPop .5s var(--ease) forwards}
-.orb .disc{width:66px;height:66px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans Symbols2','Segoe UI Symbol',sans-serif;font-size:1.7rem;color:#F6EFE1;border:1.5px solid rgba(223,169,143,.28)}
+.orb .disc{width:66px;height:66px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans Symbols2','Segoe UI Symbol',sans-serif;font-size:1.7rem;color:#F2EFE9;border:1.5px solid rgba(223,169,143,.28)}
 .orb .role{font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
 .orb .sn{font-family:Inter,system-ui,sans-serif;font-weight:600;font-size:.95rem;color:var(--ink);margin-top:-.1rem}
 @keyframes orbPop{0%{opacity:0;transform:scale(.6)}60%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
 .el-fire{background:rgba(255,255,255,.04);border-color:rgba(196,116,78,.55)!important;color:#E8A56B}
-.el-earth{background:rgba(255,255,255,.04);border-color:rgba(143,179,154,.55)!important;color:#8FB39A}
+.el-earth{background:rgba(255,255,255,.04);border-color:rgba(143,179,154,.55)!important;color:#7FB3A8}
 .el-air{background:rgba(255,255,255,.04);border-color:rgba(174,198,228,.55)!important;color:#AEC6E4}
-.el-water{background:rgba(255,255,255,.04);border-color:rgba(143,194,204,.55)!important;color:#8FC2CC}
+.el-water{background:rgba(255,255,255,.04);border-color:rgba(143,194,204,.55)!important;color:#7FB3A8}
 /* evrenin mesajı ayracı */
 .msg-head{text-align:center;opacity:0;transition:opacity .5s var(--ease);margin:1.3rem 0 1.5rem}
 .msg-head.show{opacity:1}
@@ -293,25 +293,25 @@ body.sonuc .reveal{margin-top:.4rem}
 <!-- SORBI-NAV:START -->
 <style>
 .sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(13,8,16,.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
-.sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:#F2D3B8;font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
+.sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:#F2EFE9;font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
 .sbnav .sbnav-lg i{font-style:normal;color:#E3A692;margin-right:.45rem;letter-spacing:0}
 .sbnav .sbnav-lg:hover{text-decoration:none;color:#fff}
 .sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:-4px -4px -4px auto;padding:4px;max-width:none;flex-wrap:nowrap}
 .sbnav nav::-webkit-scrollbar{display:none}
-.sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:#9BA0AB;text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
+.sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:#A5A3AE;text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
 .sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);text-decoration:none}
 .sbnav nav a:active{transform:scale(.97)}
 .sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:#F2EFE9;background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:#E3A692}
 .sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#FFFFFF;background:rgba(255,255,255,.06);box-shadow:none}
 .sbnav nav a:focus{outline:none}
-.sbnav nav a:focus-visible{outline:2px solid #F2D3B8;outline-offset:2px}
+.sbnav nav a:focus-visible{outline:2px solid #E3A692;outline-offset:2px}
 .sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:#F2EFE9}
 @media(prefers-reduced-motion:reduce){.sbnav nav a{transition:none}.sbnav nav a:active{transform:none}}
 @media(min-width:900px){.sbnav{padding:.9rem max(2rem,calc((100% - 1200px)/2));gap:2rem;min-height:70px}.sbnav .sbnav-lg{font-size:1.3rem}.sbnav nav a{font-size:.9rem;padding:0 .95rem}}
 @media(max-width:560px){.sbnav{padding:.3rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem;letter-spacing:.12em}.sbnav nav a{font-size:.8rem;padding:0 .66rem}}
 @media(min-width:900px) and (max-width:1120px){.sbnav{gap:1rem}.sbnav .sbnav-lg{font-size:1.15rem}.sbnav nav a{font-size:.84rem;padding:0 .5rem}}
-@media(max-width:1119px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 85%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 85%,transparent)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%);mask-image:linear-gradient(90deg,transparent,#000 8%)}}
-@media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#000 78%,transparent);mask-image:linear-gradient(90deg,#000 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 78%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 78%,transparent)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%);mask-image:linear-gradient(90deg,transparent,#000 14%)}}
+@media(max-width:1119px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#0B0810 85%,transparent);mask-image:linear-gradient(90deg,#0B0810 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:#0B0810;mask-image:#0B0810}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#0B0810 8%);mask-image:linear-gradient(90deg,transparent,#0B0810 8%)}}
+@media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#0B0810 78%,transparent);mask-image:linear-gradient(90deg,#0B0810 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:#0B0810;mask-image:#0B0810}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#0B0810 14%);mask-image:linear-gradient(90deg,transparent,#0B0810 14%)}}
 </style>
 <header class="sbnav">
  <a href="/" class="sbnav-lg" aria-label="Sorbi ana sayfa"><i>✦</i>SORBİ</a>
@@ -332,7 +332,7 @@ body.sonuc .reveal{margin-top:.4rem}
 <!-- SORBI-NAV:END -->
 <!-- SORBI-TEMA:START -->
 <style>
-html{background:#0D0810}
+html{background:#0B0810}
 body{background:transparent!important}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(52% 38% at 50% -6%,rgba(186,178,208,.055),transparent 65%),
   radial-gradient(40% 32% at 88% 12%,rgba(94,147,168,.08),transparent 70%),
@@ -639,7 +639,7 @@ function sorbiUyar(msg,odak){
   let b=document.getElementById('sfnot-d');
   if(!msg){ if(b)b.remove(); }
   else{ if(!b){ b=document.createElement('div'); b.id='sfnot-d'; b.className='sfnot';
-        b.style.cssText='font-size:.74rem;line-height:1.45;margin-top:.35rem;color:#F2A08A';
+        b.style.cssText='font-size:.74rem;line-height:1.45;margin-top:.35rem;color:#E3A692';
         (d.nextElementSibling&&d.nextElementSibling.classList.contains('sfwrap')?d.nextElementSibling:d).insertAdjacentElement('afterend',b); }
     b.textContent=msg; }
  }
@@ -1300,16 +1300,16 @@ document.getElementById('copyBtn').onclick=async()=>{
 </div>
 <!-- SORBI-FOOTER:START -->
 <style>
-.sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:#9BA0AB;max-width:none;width:auto}
-.sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0D0810;font-family:'Inter',system-ui,sans-serif}
+.sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:#A5A3AE;max-width:none;width:auto}
+.sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0B0810;font-family:'Inter',system-ui,sans-serif}
 .sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:repeat(4,1fr);text-align:left;gap:2rem}
 .sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#E3A692;margin:0 0 .8rem;font-weight:600}
-.sbft a{display:block;color:#9BA0AB;text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
+.sbft a{display:block;color:#A5A3AE;text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
 .sbft a:hover{color:#F2EFE9}
 .sbft .sbft-brand b{font-size:1.05rem;color:#F2EFE9;font-weight:700}
 .sbft .sbft-brand b i{font-style:normal;color:#E3A692;margin-right:.3rem}
-.sbft .sbft-brand p{color:#9BA0AB;font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
-.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#8E949F;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.sbft .sbft-brand p{color:#A5A3AE;font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#A5A3AE;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 @media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
 @media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
 </style>

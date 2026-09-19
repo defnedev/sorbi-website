@@ -24,9 +24,9 @@ var TAR=['21 Mart – 19 Nisan','20 Nisan – 20 Mayıs','21 Mayıs – 20 Hazir
  '21 Haziran – 22 Temmuz','23 Temmuz – 22 Ağustos','23 Ağustos – 22 Eylül',
  '23 Eylül – 22 Ekim','23 Ekim – 21 Kasım','22 Kasım – 21 Aralık',
  '22 Aralık – 19 Ocak','20 Ocak – 18 Şubat','19 Şubat – 20 Mart'];
-var ELC=['#C75B39','#9E8B4E','#B58A5E','#5E8C86'];
-var C={bg:'#0F0B13',ln:'rgba(255,255,255,.10)',l2:'rgba(255,255,255,.20)',
- ink:'#F2EFE9',mut:'#9BA0AB',gld:'#E3A692',gbr:'#F2D3B8',dun:'#7FB3A8'};
+var ELC=['#C4744E','#9E8B4E','#B58A5E','#5E8C86'];
+var C={bg:'#0B0810',ln:'rgba(255,255,255,.10)',l2:'rgba(255,255,255,.20)',
+ ink:'#F2EFE9',mut:'#A5A3AE',gld:'#E3A692',gbr:'#F2EFE9',dun:'#7FB3A8'};
 
 /* burç uzaklığına karşılık gelen açı; adlar sitenin ortak açı tablosundaki adlar */
 var ACI=[

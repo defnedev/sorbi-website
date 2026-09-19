@@ -6,7 +6,7 @@
 <title>Soru Haritası — Sorunun Anının Haritasını Çiz ve Oku | Sorbi</title>
 <meta name="description" content="Horary (soru haritası): sorunun sorulduğu an ve yer için çizilen harita. Doğum saati gerekmez. Yükselen ve hükümdarı, konunun evi, göstergeler arası açı, Ay'ın durumu ve radikallik uyarıları — hesap tarayıcında, yorum sende.">
 <link rel="canonical" href="https://sorbiapp.com/soru-sor">
-<meta name="theme-color" content="#0B0F14">
+<meta name="theme-color" content="#0B0810">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Sorbi">
 <meta property="og:locale" content="tr_TR">
@@ -28,12 +28,12 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
- --bg:#0D0810; --panel:rgba(255,255,255,.032); --panel2:rgba(255,255,255,.055);
- --gold:#E3A692; --gold-lt:#E8CD8F; --gold-br:#F2D3B8;
- --ink:#F2EFE9; --mut:#9BA0AB; --dim:#666B76;
- --terra:#C4744E; --terra2:#B05A32; --soft:#7FB3A8;
+ --bg:#0B0810; --panel:rgba(255,255,255,.032); --panel2:rgba(255,255,255,.055);
+ --gold:#E3A692; --gold-lt:#E4CF9A; --gold-br:#F2EFE9;
+ --ink:#F2EFE9; --mut:#A5A3AE; --dim:#868494;
+ --terra:#C4744E; --terra2:#C4744E; --soft:#7FB3A8;
  --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.14); --line3:rgba(255,255,255,.22);
- --fire:#C75B39; --earth:#9E8B4E; --air:#B58A5E; --water:#5E8C86;
+ --fire:#C4744E; --earth:#9E8B4E; --air:#B58A5E; --water:#5E8C86;
  --radius:16px;
 }
 html{scroll-behavior:smooth}
@@ -61,7 +61,7 @@ svg{display:block}
 .hero .sub{color:var(--mut);font-size:1.02rem;max-width:640px;margin:0 auto}
 .hero .tags{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;margin-top:1.1rem}
 .tag{font-size:.78rem;letter-spacing:.6px;color:var(--gold-lt);border:1px solid var(--line2);border-radius:99px;padding:.3rem .75rem}
-.tag.hi{color:#20180A;background:var(--gold-br);border-color:transparent;font-weight:600}
+.tag.hi{color:#2B140C;background:var(--gold-br);border-color:transparent;font-weight:600}
 
 /* ── bölüm ── */
 section{padding:2.2rem 0}
@@ -77,10 +77,10 @@ section{padding:2.2rem 0}
 @media(max-width:420px){.fields{grid-template-columns:1fr}}
 label{display:block;font-size:.8rem;letter-spacing:.7px;text-transform:uppercase;color:var(--dim);margin-bottom:.32rem}
 label .lc{opacity:.6;text-transform:none;letter-spacing:0}
-input,textarea,select{width:100%;background:#0E121A;border:1px solid var(--line2);color:var(--ink);border-radius:11px;padding:.68rem .75rem;font-size:.95rem;font-family:inherit}
+input,textarea,select{width:100%;background:#151220;border:1px solid var(--line2);color:var(--ink);border-radius:11px;padding:.68rem .75rem;font-size:.95rem;font-family:inherit}
 textarea{min-height:84px;resize:vertical;line-height:1.55}
 input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(223,169,143,.12)}
-select option{background:#0E121A;color:var(--ink)}
+select option{background:#151220;color:var(--ink)}
 .geo{position:relative}
 .geolist{position:absolute;top:100%;left:0;right:0;z-index:60;background:var(--panel2);border:1px solid var(--line2);border-radius:11px;margin-top:4px;max-height:220px;overflow:auto}
 .geolist div{padding:.55rem .7rem;font-size:.88rem;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.04)}
@@ -89,14 +89,14 @@ select option{background:#0E121A;color:var(--ink)}
 .when{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.15rem}
 .chip{font-size:.79rem;border:1px solid var(--line2);border-radius:99px;padding:.34rem .75rem;cursor:pointer;color:var(--mut);background:none;font-family:inherit}
 .chip:hover,.chip.on{border-color:var(--gold);color:var(--gold-br);background:rgba(223,169,143,.09)}
-.btn{background:linear-gradient(135deg,#C9A254,var(--gold),var(--gold-br));color:#20180A;border:none;border-radius:99px;padding:.85rem 1.6rem;font-weight:600;font-size:.98rem;cursor:pointer;font-family:inherit;width:100%;margin-top:.9rem}
+.btn{background:#E3A692;color:#2B140C;border:none;border-radius:99px;padding:.85rem 1.6rem;font-weight:600;font-size:.98rem;cursor:pointer;font-family:inherit;width:100%;margin-top:.9rem}
 .btn:hover{filter:brightness(1.07)}
 .btn[disabled]{opacity:.55;cursor:default}
 .btn2{background:none;border:1px solid var(--line3);color:var(--gold-lt);border-radius:99px;padding:.55rem 1.1rem;font-size:.85rem;cursor:pointer;font-family:inherit}
 .btn2:hover{border-color:var(--gold)}
 
-.chartbox{background:#F7F2E8;border:1px solid var(--line2);border-radius:var(--radius);overflow:hidden;min-height:210px;display:flex;align-items:center;justify-content:center;position:relative}
-.chartbox .ph{color:#8A8578;font-size:.88rem;text-align:center;padding:2rem 1.2rem;line-height:1.7}
+.chartbox{background:#F2EFE9;border:1px solid var(--line2);border-radius:var(--radius);overflow:hidden;min-height:210px;display:flex;align-items:center;justify-content:center;position:relative}
+.chartbox .ph{color:#868494;font-size:.88rem;text-align:center;padding:2rem 1.2rem;line-height:1.7}
 .chartbox .ph b{color:#3A3F4C;display:block;font-family:Inter,system-ui,sans-serif;font-size:1.05rem;margin-bottom:.3rem}
 .spin{width:26px;height:26px;border:2px solid rgba(24,28,38,.15);border-top-color:#8A6A2A;border-radius:50%;animation:sp .8s linear infinite;margin:0 auto .7rem}
 @keyframes sp{to{transform:rotate(360deg)}}
@@ -133,7 +133,7 @@ select option{background:#0E121A;color:var(--ink)}
 .warn div.ok{background:rgba(127,179,168,.07);border-color:rgba(127,179,168,.25);color:var(--mut)}
 .warn b{color:var(--gold-br);font-weight:500}
 .pill{display:inline-block;font-size:.78rem;color:var(--gold-lt);background:rgba(223,169,143,.10);border:1px solid var(--line2);border-radius:99px;padding:.12rem .5rem;margin:.1rem .15rem 0 0;white-space:nowrap}
-.pill.neg{color:#E8A392;background:rgba(196,116,78,.1)}
+.pill.neg{color:#E3A692;background:rgba(196,116,78,.1)}
 .pill.dim{color:var(--dim)}
 .appnote{grid-column:1/-1;min-width:0;font-size:.8rem;line-height:1.55;color:var(--mut);background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;padding:.7rem .9rem;overflow-wrap:anywhere}
 .skel-note{font-size:.78rem;color:var(--dim);margin-top:.7rem;line-height:1.55}
@@ -196,25 +196,25 @@ select option{background:#0E121A;color:var(--ink)}
 <!-- SORBI-NAV:START -->
 <style>
 .sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(13,8,16,.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
-.sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:#F2D3B8;font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
+.sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:#F2EFE9;font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
 .sbnav .sbnav-lg i{font-style:normal;color:#E3A692;margin-right:.45rem;letter-spacing:0}
 .sbnav .sbnav-lg:hover{text-decoration:none;color:#fff}
 .sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:-4px -4px -4px auto;padding:4px;max-width:none;flex-wrap:nowrap}
 .sbnav nav::-webkit-scrollbar{display:none}
-.sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:#9BA0AB;text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
+.sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:#A5A3AE;text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
 .sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);text-decoration:none}
 .sbnav nav a:active{transform:scale(.97)}
 .sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:#F2EFE9;background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:#E3A692}
 .sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#FFFFFF;background:rgba(255,255,255,.06);box-shadow:none}
 .sbnav nav a:focus{outline:none}
-.sbnav nav a:focus-visible{outline:2px solid #F2D3B8;outline-offset:2px}
+.sbnav nav a:focus-visible{outline:2px solid #E3A692;outline-offset:2px}
 .sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:#F2EFE9}
 @media(prefers-reduced-motion:reduce){.sbnav nav a{transition:none}.sbnav nav a:active{transform:none}}
 @media(min-width:900px){.sbnav{padding:.9rem max(2rem,calc((100% - 1200px)/2));gap:2rem;min-height:70px}.sbnav .sbnav-lg{font-size:1.3rem}.sbnav nav a{font-size:.9rem;padding:0 .95rem}}
 @media(max-width:560px){.sbnav{padding:.3rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem;letter-spacing:.12em}.sbnav nav a{font-size:.8rem;padding:0 .66rem}}
 @media(min-width:900px) and (max-width:1120px){.sbnav{gap:1rem}.sbnav .sbnav-lg{font-size:1.15rem}.sbnav nav a{font-size:.84rem;padding:0 .5rem}}
-@media(max-width:1119px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 85%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 85%,transparent)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%);mask-image:linear-gradient(90deg,transparent,#000 8%)}}
-@media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#000 78%,transparent);mask-image:linear-gradient(90deg,#000 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 78%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 78%,transparent)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%);mask-image:linear-gradient(90deg,transparent,#000 14%)}}
+@media(max-width:1119px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#0B0810 85%,transparent);mask-image:linear-gradient(90deg,#0B0810 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:#0B0810;mask-image:#0B0810}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#0B0810 8%);mask-image:linear-gradient(90deg,transparent,#0B0810 8%)}}
+@media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,#0B0810 78%,transparent);mask-image:linear-gradient(90deg,#0B0810 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:#0B0810;mask-image:#0B0810}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,#0B0810 14%);mask-image:linear-gradient(90deg,transparent,#0B0810 14%)}}
 </style>
 <header class="sbnav">
  <a href="/" class="sbnav-lg" aria-label="Sorbi ana sayfa"><i>✦</i>SORBİ</a>
@@ -235,7 +235,7 @@ select option{background:#0E121A;color:var(--ink)}
 <!-- SORBI-NAV:END -->
 <!-- SORBI-TEMA:START -->
 <style>
-html{background:#0D0810}
+html{background:#0B0810}
 body{background:transparent!important}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(52% 38% at 50% -6%,rgba(186,178,208,.055),transparent 65%),
   radial-gradient(40% 32% at 88% 12%,rgba(94,147,168,.08),transparent 70%),
@@ -559,13 +559,13 @@ $('whenPast').onclick=function(){ WHEN='past'; this.classList.add('on'); $('when
 ['qd','qt'].forEach(function(id){ $(id).addEventListener('change',function(){ if(WHEN==='past') render(); }); });
 $('hsys').addEventListener('change',function(){ render(); });
 $('topic').addEventListener('change',function(){ if(CH) fillSkeleton(); });
-$('go').onclick=function(){ if(!QP){ $('hint').innerHTML='<span style="color:#F2A08A">Önce bulunduğun yeri seç — listeden bir şehir tıkla.</span>'; $('qp').focus(); return; } render(true); };
+$('go').onclick=function(){ if(!QP){ $('hint').innerHTML='<span style="color:#E3A692">Önce bulunduğun yeri seç — listeden bir şehir tıkla.</span>'; $('qp').focus(); return; } render(true); };
 
 /* ── an haritası ── */
 var CH=null, MOMENT=null, ASPS=null;
 function render(force){
   if(!QP) return;
-  if(WHEN==='past' && !( $('qd').value && $('qt').value )){ if(force) $('hint').innerHTML='<span style="color:#F2A08A">Soruyu sorduğun tarihi ve saati gir.</span>'; return; }
+  if(WHEN==='past' && !( $('qd').value && $('qt').value )){ if(force) $('hint').innerHTML='<span style="color:#E3A692">Soruyu sorduğun tarihi ve saati gir.</span>'; return; }
   showSpin();
   loadEngine(function(){ draw(); });
 }
@@ -798,16 +798,16 @@ if(BP&&$('bd').value) renderNatal();
 
 <!-- SORBI-FOOTER:START -->
 <style>
-.sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:#9BA0AB;max-width:none;width:auto}
-.sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0D0810;font-family:'Inter',system-ui,sans-serif}
+.sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:#A5A3AE;max-width:none;width:auto}
+.sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0B0810;font-family:'Inter',system-ui,sans-serif}
 .sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:repeat(4,1fr);text-align:left;gap:2rem}
 .sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#E3A692;margin:0 0 .8rem;font-weight:600}
-.sbft a{display:block;color:#9BA0AB;text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
+.sbft a{display:block;color:#A5A3AE;text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
 .sbft a:hover{color:#F2EFE9}
 .sbft .sbft-brand b{font-size:1.05rem;color:#F2EFE9;font-weight:700}
 .sbft .sbft-brand b i{font-style:normal;color:#E3A692;margin-right:.3rem}
-.sbft .sbft-brand p{color:#9BA0AB;font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
-.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#8E949F;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.sbft .sbft-brand p{color:#A5A3AE;font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#A5A3AE;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 @media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
 @media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
 </style>

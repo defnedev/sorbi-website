@@ -13,10 +13,10 @@ var CSS=[
 '.sfwrap:focus-within{border-color:rgba(227,166,146,.55);box-shadow:0 0 0 3px rgba(227,166,146,.14)}',
 '.sfwrap input.sfseg{background:none!important;border:none!important;box-shadow:none!important;padding:0!important;margin:0;color:#F2EFE9!important;font:inherit;font-size:1.02rem;font-variant-numeric:tabular-nums;text-align:center;width:2.15ch;caret-color:#E3A692}',
 '.sfwrap input.sfseg.sfy{width:4.3ch}',
-'.sfwrap input.sfseg::placeholder{color:#5C6068;letter-spacing:.5px}',
-'.sfwrap .sfsep{color:#5C6068;user-select:none;font-size:1rem}',
-'.sfwrap .sfic{margin-left:auto;color:#8A8F98;font-size:.85rem;opacity:.7}',
-'.sfhint{font-size:.72rem;color:#6D7280;margin-top:.3rem;letter-spacing:.3px}',
+'.sfwrap input.sfseg::placeholder{color:#868494;letter-spacing:.5px}',
+'.sfwrap .sfsep{color:#868494;user-select:none;font-size:1rem}',
+'.sfwrap .sfic{margin-left:auto;color:#A5A3AE;font-size:.85rem;opacity:.7}',
+'.sfhint{font-size:.72rem;color:#868494;margin-top:.3rem;letter-spacing:.3px}',
 '.sfnot{font-size:.74rem;line-height:1.45;margin-top:.35rem;letter-spacing:.2px}',
 '/* mobil: nav kaydırılabilir, sayfa yana taşmaz */',
 '.sbnav nav,.sorbi-topnav nav,.topnav nav{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;min-width:0;-webkit-overflow-scrolling:touch}',
@@ -25,9 +25,9 @@ var CSS=[
 '.form .full,.form label{min-width:0;max-width:100%}',
 '/* şehir arama listeleri (index .geolist + eski .gr) ortak dil */',
 '.geolist,.gr{background:rgba(14,15,20,.97)!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:14px!important;box-shadow:0 18px 50px rgba(0,0,0,.55)!important;backdrop-filter:blur(14px);overflow:hidden}',
-'.geolist>div,.gr .gi{padding:.62rem .9rem!important;cursor:pointer;color:#D6D3CC;transition:background .12s}',
+'.geolist>div,.gr .gi{padding:.62rem .9rem!important;cursor:pointer;color:#A5A3AE;transition:background .12s}',
 '.geolist>div:hover,.gr .gi:hover{background:rgba(227,166,146,.12)!important;color:#F2EFE9}',
-'.gr .gi small{color:#9BA0AB;display:block;font-size:.8rem;margin-top:.1rem}'
+'.gr .gi small{color:#A5A3AE;display:block;font-size:.8rem;margin-top:.1rem}'
 ].join('\n');
 
 function injectCSS(){var s=document.createElement('style');s.id='sorbi-form-css';s.textContent=CSS;document.head.appendChild(s);}
@@ -136,7 +136,7 @@ function not(el,msg,tur){
   var box=document.getElementById(id);
   if(!msg){ if(box) box.remove(); return; }
   if(!box){ box=document.createElement('div'); box.id=id; box.className='sfnot'; notHedef(el).insertAdjacentElement('afterend',box); }
-  box.textContent=msg; box.style.color = tur==='hata' ? '#F2A08A' : '#E4CF9A';
+  box.textContent=msg; box.style.color = tur==='hata' ? '#E3A692' : '#E4CF9A';
 }
 function tarihDenetle(native){
   var v=native.value; if(!v){ not(native,''); return; }

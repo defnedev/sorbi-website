@@ -12,7 +12,7 @@
 <meta property="og:description" content="Danışan dosyası, seans hazırlığı, sinastri ve danışana çıktı. Kayıt yok, veriler tarayıcında kalır.">
 <meta property="og:url" content="https://sorbiapp.com/masa">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0B0F14">
+<meta name="theme-color" content="#0B0810">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,12 +21,12 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
  /* zemin: siteyle aynı mor-siyah; yüzeyler ona doğru ısıtıldı */
- --bg:#0D0810; --yuzey:#15101C; --yuzey2:#1B1522;
+ --bg:#0B0810; --yuzey:#151220; --yuzey2:#151220;
  --cizgi:rgba(255,255,255,.075); --cizgi2:rgba(255,255,255,.14);
- --gold:#E3A692; --gold-br:#F2D3B8;
- --ink:#F2EFE9; --mut:#9A93A2; --dim:#6B6472;
+ --gold:#E3A692; --gold-br:#F2EFE9;
+ --ink:#F2EFE9; --mut:#A5A3AE; --dim:#868494;
  /* anlam renkleri — vurgudan ayrı, yalnız veri kodlar */
- --sert:#C9705A; --yumusak:#7FB3A8; --kavus:#D9B26A;
+ --sert:#C4744E; --yumusak:#7FB3A8; --kavus:#D9B26A;
  --f-bas:Fraunces,Georgia,serif;
  --f-gov:'Inter',system-ui,sans-serif;
  --f-say:'IBM Plex Mono',ui-monospace,Menlo,monospace;
@@ -39,7 +39,7 @@ input,textarea,select{width:100%;font-size:.87rem;color:var(--ink);background:rg
 input:focus,textarea:focus,select:focus{border-color:rgba(227,166,146,.5)}
 input::placeholder,textarea::placeholder{color:var(--dim)}
 label{display:block;font-family:var(--f-say);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.3rem}
-button.ana{font-size:.84rem;font-weight:600;color:#180F14;background:var(--gold-br);border:none;border-radius:9px;padding:.55rem 1.05rem;cursor:pointer;transition:background .15s}
+button.ana{font-size:.84rem;font-weight:600;color:#151220;background:var(--gold-br);border:none;border-radius:9px;padding:.55rem 1.05rem;cursor:pointer;transition:background .15s}
 button.ana:hover{background:var(--gold)}
 button.ana:disabled{opacity:.45;cursor:default}
 button.yan{font-size:.8rem;font-weight:500;color:var(--mut);background:transparent;border:1px solid var(--cizgi);border-radius:9px;padding:.42rem .8rem;cursor:pointer;transition:.15s}
@@ -166,7 +166,7 @@ tbody tr:last-child td{border-bottom:none}
 .alanlar{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.65rem;margin-bottom:.7rem}
 .geo{position:relative}
 .geolist{position:absolute;top:100%;left:0;right:0;z-index:40;margin-top:.25rem;max-height:220px;overflow-y:auto;
- background:#12101A;border:1px solid var(--cizgi2);border-radius:11px;box-shadow:0 18px 44px rgba(0,0,0,.6)}
+ background:#151220;border:1px solid var(--cizgi2);border-radius:11px;box-shadow:0 18px 44px rgba(0,0,0,.6)}
 .geolist>div{font-size:.82rem;padding:.5rem .8rem;cursor:pointer}
 .geolist>div:hover{background:rgba(227,166,146,.12)}
 .onay{display:flex;align-items:center;gap:.45rem;font-size:.8rem;color:var(--mut)}
@@ -181,7 +181,7 @@ tbody tr:last-child td{border-bottom:none}
 .sayac{display:flex;gap:1.3rem;font-family:var(--f-say);font-size:.72rem;color:var(--mut)}
 .sayac b{color:var(--ink);font-weight:500}
 #modRozet:empty,#gbRozet:empty{display:none}
-#gbRozet{display:inline-block;margin-left:.4rem;background:var(--gold-br);color:#180F14;font-size:.68rem;
+#gbRozet{display:inline-block;margin-left:.4rem;background:var(--gold-br);color:#151220;font-size:.68rem;
  font-weight:600;border-radius:99px;padding:0 .35rem;min-width:1.05rem;text-align:center}
 .gbk{border:1px solid var(--cizgi);border-radius:12px;padding:.85rem .95rem;margin-bottom:.6rem;background:var(--yuzey)}
 .gbk .ust{display:flex;gap:.55rem;align-items:baseline;flex-wrap:wrap;font-size:.75rem;color:var(--dim);margin-bottom:.45rem}
@@ -193,7 +193,7 @@ tbody tr:last-child td{border-bottom:none}
 .gbk.kapali{opacity:.55}
 .gb-ozet{display:flex;gap:1.4rem;flex-wrap:wrap;font-family:var(--f-say);font-size:.74rem;color:var(--mut);margin-bottom:1rem}
 .gb-ozet b{color:var(--ink);font-size:.95rem;font-family:var(--f-bas);display:block}
-#modRozet{display:inline-block;margin-left:.4rem;background:var(--sert);color:#180F14;font-size:.68rem;
+#modRozet{display:inline-block;margin-left:.4rem;background:var(--sert);color:#151220;font-size:.68rem;
  font-weight:600;border-radius:99px;padding:0 .35rem;min-width:1.05rem;text-align:center}
 .rapor{border:1px solid var(--cizgi);border-radius:12px;padding:.85rem .95rem;margin-bottom:.7rem;background:var(--yuzey)}
 .rapor .ust{display:flex;gap:.6rem;align-items:baseline;flex-wrap:wrap;font-size:.76rem;color:var(--dim);margin-bottom:.5rem}
@@ -209,13 +209,13 @@ tbody tr:last-child td{border-bottom:none}
 .mod-akis .kim{font-family:var(--f-say);font-size:.72rem;color:var(--dim)}
 
 /* ── danışana çıktı: fildişi ── */
-#ciktiAlan{background:#FBFAF7;color:#1A1614;border-radius:14px;padding:1.7rem 1.6rem;font-size:.88rem;max-width:720px}
-#ciktiAlan h3{font-family:var(--f-bas);font-size:1.22rem;margin-bottom:.1rem;color:#1A1614}
-#ciktiAlan .kim{font-family:var(--f-say);color:#6B635C;font-size:.76rem;margin-bottom:1.2rem}
+#ciktiAlan{background:#FFFFFF;color:#0B0810;border-radius:14px;padding:1.7rem 1.6rem;font-size:.88rem;max-width:720px}
+#ciktiAlan h3{font-family:var(--f-bas);font-size:1.22rem;margin-bottom:.1rem;color:#0B0810}
+#ciktiAlan .kim{font-family:var(--f-say);color:#868494;font-size:.76rem;margin-bottom:1.2rem}
 #ciktiAlan h4{font-family:var(--f-bas);font-size:.88rem;margin:1.3rem 0 .3rem;color:#3A322C}
-#ciktiAlan th,#ciktiAlan td{border-bottom:1px solid #E9E3DA;color:#332C27}
-#ciktiAlan th{color:#8A7F75}
-#ciktiAlan .imza{margin-top:1.5rem;padding-top:.8rem;border-top:1px solid #E9E3DA;color:#8A7F75;font-size:.73rem;line-height:1.7}
+#ciktiAlan th,#ciktiAlan td{border-bottom:1px solid #F2EFE9;color:#2B140C}
+#ciktiAlan th{color:#868494}
+#ciktiAlan .imza{margin-top:1.5rem;padding-top:.8rem;border-top:1px solid #F2EFE9;color:#868494;font-size:.73rem;line-height:1.7}
 @media print{
   body{background:#fff}
   .ust,.kenar,.sekmeler,.dosya-bas,.yazdirma-gizle{display:none!important}

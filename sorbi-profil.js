@@ -59,10 +59,10 @@ function chip(){
   css.textContent=[
    '#sbprofil{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;max-width:1120px;margin:.55rem auto 0;padding:.45rem .9rem;',
    'background:rgba(227,166,146,.07);border:1px solid rgba(227,166,146,.22);border-radius:99px;width:fit-content;',
-   'font:500 .78rem/1.4 Inter,system-ui,sans-serif;color:#D6D3CC}',
-   '#sbprofil b{color:#F2D3B8;font-weight:600}',
-   '#sbprofil .sbp-dot{color:#5C6068}',
-   '#sbprofil a{color:#9BA0AB;text-decoration:underline;text-underline-offset:2px;cursor:pointer}',
+   'font:500 .78rem/1.4 Inter,system-ui,sans-serif;color:#A5A3AE}',
+   '#sbprofil b{color:#F2EFE9;font-weight:600}',
+   '#sbprofil .sbp-dot{color:#868494}',
+   '#sbprofil a{color:#A5A3AE;text-decoration:underline;text-underline-offset:2px;cursor:pointer}',
    '#sbprofil a:hover{color:#F2EFE9}',
    '@media(max-width:560px){#sbprofil{font-size:.72rem;margin:.5rem .7rem 0;padding:.4rem .7rem}}'
   ].join('');
