@@ -464,7 +464,7 @@ document.getElementById('gen').onclick=()=>{
  const house=noTime?'W':document.getElementById('cHouse').value;
  const ch=compute(A,{y,mo,d,h,mi,lat,lon,tz,house});
  window._ch=ch;window._noTime=noTime;
- saveBirth({name:document.getElementById('cName').value.trim(),date:dv,time:tv,place:picked.label||document.getElementById('cPlace').value,lat:lat.toFixed(4),lon:lon.toFixed(4),tz,house,noTime});
+ saveBirth({name:document.getElementById('cName').value.trim(),date:dv,time:tv,place:picked.label||document.getElementById('cPlace').value,lat:+lat.toFixed(4),lon:+lon.toFixed(4),tz,house,noTime});
  try{wheel(ch,!noTime);}catch(e){}
 
  const dd=String(d).padStart(2,'0'),mm=String(mo).padStart(2,'0'),yy=String(y).slice(-2);

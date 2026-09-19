@@ -339,11 +339,31 @@ function dms(l){
 }
 
 /* ── dışa açılan yüzey ── */
+/* Sayısal alanları sınırda zorla sayıya çevir.
+   Neden: localStorage'daki sorbi_birth bazı sayfalarda lat/lon'u
+   pk.lat.toFixed(4) ile STRING olarak yazıyor (seni-taniyorum.html:663,
+   dogum-haritasi-hesaplama.html:467), bazılarında sayı olarak
+   (astrokartografi.html:161). Depodan okuyup doğrudan buraya veren bir
+   çağıran olursa armc hesabındaki SiderealTime*15 + o.lon dize birleştirmesine
+   düşer ve harita komple NaN olur — sessizce. Bugün yalnız çağıranların
+   tek tek +b.lat yazması kurtarıyor; o unutulduğu an kırılıyor.
+   Düzeltme burada duruyor ki bir daha unutulamasın. */
+function sayiya(o){
+  ['lat','lon','y','mo','d','h','mi'].forEach(function(k){
+    if(o[k]!==undefined && o[k]!==null && o[k]!==''){
+      var v=+o[k];
+      if(v!==v) throw new Error('SorbiAstro: '+k+' sayıya çevrilemedi: '+JSON.stringify(o[k]));
+      o[k]=v;
+    }
+  });
+  return o;
+}
+
 function chart(o){
   if(!A) A=window.Astronomy;
   if(!A) throw new Error('astronomy.browser.min.js yüklenmedi');
   if(!EPH && window.SORBI_EPH){ try{ EPH=decodeEph(window.SORBI_EPH); }catch(e){} }
-  o=Object.assign({house:'P',nodeType:'true',tz:'Europe/Istanbul'},o);
+  o=sayiya(Object.assign({house:'P',nodeType:'true',tz:'Europe/Istanbul'},o));
   return computeChart(o);
 }
 function nowChart(o){

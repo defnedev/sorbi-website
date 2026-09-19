@@ -660,7 +660,7 @@ document.getElementById('go').onclick=()=>{
  const noTime=!tv;const[y,mon,d]=dv.split('-').map(Number);const[h,mi]=(tv||'12:00').split(':').map(Number);
  const ch=computeLite(A,{y,mo:mon,d,h,mi,lat:pk.lat,lon:pk.lon,tz:pk.tz||'Europe/Istanbul',noTime});
  // save birth to memory
- try{var pr=JSON.parse(localStorage.getItem('sorbi_profile')||'null');var bo={date:dv,time:tv||'',place:pk.label,lat:pk.lat.toFixed(4),lon:pk.lon.toFixed(4),tz:pk.tz};localStorage.setItem('sorbi_birth',JSON.stringify(bo));if(!pr)pr={name:'',email:'',birth:bo,createdAt:Date.now(),readings:[]};pr.birth=bo;localStorage.setItem('sorbi_profile',JSON.stringify(pr));}catch(e){}
+ try{var pr=JSON.parse(localStorage.getItem('sorbi_profile')||'null');var bo={date:dv,time:tv||'',place:pk.label,lat:+pk.lat.toFixed(4),lon:+pk.lon.toFixed(4),tz:pk.tz};localStorage.setItem('sorbi_birth',JSON.stringify(bo));if(!pr)pr={name:'',email:'',birth:bo,createdAt:Date.now(),readings:[]};pr.birth=bo;localStorage.setItem('sorbi_profile',JSON.stringify(pr));}catch(e){}
  const su=signOf(ch.pls[0].lon),mo=signOf(ch.pls[1].lon),as=signOf(ch.asc);
  const lines=sentences(ch).slice(0,5);
  document.getElementById('form').style.display='none';
