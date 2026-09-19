@@ -42,8 +42,6 @@ h1{font-family:Fraunces,Georgia,serif;font-size:clamp(1.8rem,4vw,2.6rem);text-al
 #res .kw{font-family:Inter,system-ui,sans-serif;font-style:italic;font-size:1.15rem;color:var(--text)}
 #res .read{color:var(--muted);margin:.9rem auto 0;max-width:520px}
 .actions{text-align:center;margin:.6rem 0 .4rem}
-.redraw{display:inline-block;background:transparent;border:1px solid var(--line);color:var(--gold);padding:.6rem 1.4rem;border-radius:999px;font-family:Inter,system-ui,sans-serif;font-size:.75rem;font-weight:600;cursor:pointer}
-.redraw:hover{background:rgba(223,169,143,0.08)}
 h2{font-family:Fraunces,Georgia,serif;font-size:1.6rem;color:var(--gold);margin:2rem 0 .6rem}
 p{color:var(--muted);margin:.6rem 0}
 .frame-note{background:var(--lapisLite);border:1px solid var(--line);border-left:3px solid var(--vermilion);border-radius:0 12px 12px 0;padding:1.1rem 1.4rem;margin:1.6rem 0}
@@ -191,11 +189,12 @@ body:has(> .sky)::before{display:none}
   for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}
   h^=h>>>15;h=Math.imul(h,2246822507)>>>0;h^=h>>>13;h=Math.imul(h,3266489909)>>>0;
   return ((h^(h>>>16))>>>0)%n;}
- function __gunKarti(n){var t=new Date();
-  var bugun=__ham(t.getFullYear(),t.getMonth()+1,t.getDate(),n);
-  var d=new Date(t);d.setDate(t.getDate()-1);
-  var dun=__ham(d.getFullYear(),d.getMonth()+1,d.getDate(),n);
-  return bugun===dun?(bugun+1)%n:bugun;}
+ function __gk(y,m,d,n,derin){var b=__ham(y,m,d,n);
+  if(derin>3)return b;
+  var p=new Date(Date.UTC(y,m-1,d));p.setUTCDate(p.getUTCDate()-1);
+  var u=__gk(p.getUTCFullYear(),p.getUTCMonth()+1,p.getUTCDate(),n,derin+1);
+  return b===u?(b+1)%n:b;}
+ function __gunKarti(n){var t=new Date();return __gk(t.getFullYear(),t.getMonth()+1,t.getDate(),n,0);}
  function __bugunKey(){var t=new Date();return t.getFullYear()+'-'+(t.getMonth()+1)+'-'+t.getDate();}
  function glyphSvg(k){return '<svg class="glyphsvg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">'+(G[k]||G.star)+'</svg>';}
  function __ac(el){
