@@ -48,6 +48,20 @@ Daha koyusu iç kartta kalıyor (ilk denemem `#76747F` idi, 3.66 veriyordu).
 
 Altın gördüğün yer, hesaplanmış olan yer. Düğmede altın kullanılmaz.
 
+### Zemin düz
+Sayfa arkasında hiçbir katman yok. `html{background:#0B0810}`, tek yüzey.
+
+Önce burada üç ayrı sistem üst üste biniyordu:
+- `body::before` (57 sayfa): **10 radial gradyan** — üç renkli parıltı (mor `%5,5`,
+  mavi-yeşil `%8`, terracotta `%5`, üç ayrı yönden) + yedi adet 1px "yıldız" noktası
+- `.sky` divi (3 sayfa): aynı on katmanın kopyası
+- Bunların **altında** ayrıca bir vinyet (`radial-gradient(1100px 520px …)`, 10 sayfa)
+- Beş sayfada kendi iki-elipsli terracotta yıkaması, **%20'ye kadar**
+
+Noktalar yıldız değil toz lekesi gibi okunuyordu; üç parıltı metnin arkasında
+birbiriyle yarışıyordu. Hepsi kaldırıldı. Sitede kalan tek `radial-gradient`,
+`/seni-taniyorum`'daki deklanşör flaş animasyonu (`opacity:0`, tetiklenince çalışır).
+
 ### Grafik
 `--cool` `#7FB3A8` · artı natal çarkın kendi gezegen/element renkleri
 (50 değer, dokunulmadı — bunlar astrolojik konvansiyon, arayüz değil).
@@ -71,6 +85,7 @@ istatistik sayıları (onlar altın) · placeholder · ikincil düğme · footer
 | Arayüz rengi | ~107 | **12** |
 | Ekranda sıcak piksel | %6,97 | **%3,83** |
 | Doygun + parlak sıcak | %3,88 | **%1,93** |
+| Zemin katmanı | 10–13 | **0** |
 | Kontrast hatası (12 sayfa, otomatik denetim) | — | **0** |
 
 ## Yol boyunca bulunan iki hata

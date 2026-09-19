@@ -27,7 +27,7 @@
 :root{--bg:#0B0810;--panel:rgba(235,240,248,.03);--gold:#E3A692;--gold-lt:#E4CF9A;--gold-br:#F2EFE9;--ink:#F2EFE9;--mut:#A5A3AE;--dim:#868494;--terra:#E3A692;--btn-ink:#2B140C;
 --line:rgba(235,240,248,.06);--line2:rgba(235,240,248,.08);--lstrong:rgba(235,240,248,.14);--lineg:rgba(223,169,143,.18);--lineg2:rgba(223,169,143,.45);
 --foil:linear-gradient(135deg,#8A6D2E,#E3A692,#F2EFE9,#E3A692,#8A6D2E);--ease:cubic-bezier(.2,.8,.2,1)}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(1100px 620px at 50% -6%,#151220 0,var(--bg) 60%);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.62}
+*{box-sizing:border-box}body{margin:0;background:#0B0810;color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.62}
 .wrap{max-width:600px;margin:0 auto;padding:2.2rem 1.15rem 4rem}
 .brand{font-family:Fraunces,Georgia,serif;letter-spacing:3px;color:var(--gold);font-size:.82rem;text-decoration:none;text-transform:uppercase}
 .top{text-align:center;margin-bottom:1.4rem}
@@ -332,19 +332,13 @@ body.sonuc .reveal{margin-top:.4rem}
 <!-- SORBI-NAV:END -->
 <!-- SORBI-TEMA:START -->
 <style>
+/* Zemin düz. Gökyüzü gibi: tek koyu yüzey.
+   Önce burada 10 katman vardı — 3 renkli parıltı (mor, mavi-yeşil, terracotta,
+   üç ayrı yönden) ve 7 tane 1px "yıldız" noktası. Noktalar yıldız değil toz
+   lekesi gibi okunuyordu, üç parıltı da metnin arkasında birbiriyle yarışıyordu.
+   Bazı sayfalarda bunun ALTINDA ayrıca bir vinyet daha vardı. */
 html{background:#0B0810}
 body{background:transparent!important}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(52% 38% at 50% -6%,rgba(186,178,208,.055),transparent 65%),
-  radial-gradient(40% 32% at 88% 12%,rgba(94,147,168,.08),transparent 70%),
-  radial-gradient(36% 30% at 8% 30%,rgba(196,116,78,.05),transparent 70%),
-  radial-gradient(1px 1px at 14% 24%,rgba(241,220,168,.5) 50%,transparent 51%),
-  radial-gradient(1px 1px at 36% 9%,rgba(242,239,233,.35) 50%,transparent 51%),
-  radial-gradient(1.4px 1.4px at 61% 27%,rgba(227,166,146,.45) 50%,transparent 51%),
-  radial-gradient(1px 1px at 82% 15%,rgba(242,239,233,.4) 50%,transparent 51%),
-  radial-gradient(1px 1px at 92% 44%,rgba(241,220,168,.3) 50%,transparent 51%),
-  radial-gradient(1px 1px at 25% 60%,rgba(242,239,233,.25) 50%,transparent 51%),
-  radial-gradient(1.2px 1.2px at 72% 70%,rgba(227,166,146,.3) 50%,transparent 51%)}
-body:has(> .sky)::before{display:none}
 </style>
 <!-- SORBI-TEMA:END -->
 <style>
