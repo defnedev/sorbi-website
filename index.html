@@ -51,7 +51,7 @@ svg{display:block}
  border:1px solid var(--stroke2);border-radius:99px;padding:.38rem .9rem;margin-bottom:1.3rem;background:var(--card)}
 .hero .kicker i{font-style:normal;color:var(--gold)}
 .hero h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(2.3rem,6.4vw,3.9rem);letter-spacing:-.03em;line-height:1.06;margin-bottom:.9rem}
-.hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--gold) 10%,var(--gold-br) 50%,var(--gold) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1 em{font-style:italic;color:var(--ink)}
 .hero p{color:var(--mut);font-size:1.06rem;max-width:520px;margin:0 auto;font-weight:300}
 .trust{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-top:1.3rem}
 .trust span{font-size:.74rem;font-weight:500;color:var(--mut);border:1px solid var(--stroke);border-radius:99px;padding:.32rem .8rem;background:var(--card)}
@@ -381,7 +381,7 @@ function draw(){
     var asps=SorbiAstro.within(CH,1,false);
     var tstr=$('bt').value||'';
     $('chartbox').innerHTML=window.SorbiChart.draw(CH,null,{
-      theme:'paper', aspects:asps, noHouses:NOTIME,
+      aspects:asps, noHouses:NOTIME,
       title:(PICKED.label||''), sub:$('bd').value,
       plate:{name:'Doğum Haritası',
         l1:$('bd').value+(tstr?' · '+tstr:' · saat bilinmiyor'),
@@ -467,7 +467,7 @@ function drawMoment(){
       var dsr=now.toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});
       var tsr=now.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});
       $('chartbox').innerHTML=window.SorbiChart.draw(ch,null,{
-        theme:'paper', aspects:asps,
+        aspects:asps,
         plate:{name:'Şu Anın Gökyüzü', l1:dsr+' · '+tsr, l2:'İstanbul', l3:'Canlı — sayfa her açılışta yeniden çizer'}
       });
       $('chartbox').classList.add('rise');

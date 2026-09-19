@@ -1867,7 +1867,7 @@ document.getElementById('shareBtn').onclick=function(){
 document.getElementById('pdfBtn').onclick=function(){
   if(!CUR||!CUR.inner){ showErr('Önce bir harita aç.'); return; }
   var ch=CUR.inner, o=CUR.o;
-  var wheelSvg = window.SorbiChart ? window.SorbiChart.draw(ch,null,{theme:'paper',aspects:CUR.aspects,
+  var wheelSvg = window.SorbiChart ? window.SorbiChart.draw(ch,null,{aspects:CUR.aspects,
       plate:{name:o.name||'Gökyüzü Raporu',l1:(o.dateStr||'')+(o.timeStr?' · '+o.timeStr:''),l2:o.place||'',l3:'Sorbi ✦ sorbiapp.com'}}) : '';
   function big3(){ try{
     var su=ch.pls.filter(function(p){return p.k==='sun';})[0], mo=ch.pls.filter(function(p){return p.k==='moon';})[0];
