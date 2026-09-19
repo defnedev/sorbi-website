@@ -38,7 +38,7 @@ var CSS='.sbo{background:rgba(255,255,255,.032);border:1px solid rgba(255,255,25
 +'.sbo-r{position:relative;display:inline-flex;align-items:center;gap:.35rem;font-size:.8rem;letter-spacing:.02em;border:1px solid rgba(255,255,255,.14);border-radius:99px;padding:.3rem .6rem;color:#9BA0AB;background:transparent}'
 +'.sbo-r.ac{color:#F2D3B8;border-color:#E3A692;background:rgba(227,166,146,.09)}'
 +'.sbo-r i{font-style:normal;color:inherit}'
-+'.sbo-gizli{font-size:.76rem;color:#9BA0AB;font-weight:300;line-height:1.6;margin-top:.9rem;padding-top:.75rem;border-top:1px solid rgba(255,255,255,.07)}'
++'.sbo-gizli{font-size:.78rem;color:#9BA0AB;font-weight:300;line-height:1.6;margin-top:.9rem;padding-top:.75rem;border-top:1px solid rgba(255,255,255,.07)}'
 +'.sbo-s{background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.1rem;margin:1.4rem 0;font-family:Inter,system-ui,sans-serif;color:#F2EFE9}'
 +'.sbo-s .sbo-q{margin-top:1rem}.sbo-s .sbo-q:first-of-type{margin-top:.6rem}'
 +'.sbo-s .sbo-qb{font-size:.95rem;font-weight:500;color:#F2EFE9;margin:0 0 .55rem;max-width:74ch;line-height:1.5}'

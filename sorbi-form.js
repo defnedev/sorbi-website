@@ -27,7 +27,7 @@ var CSS=[
 '.geolist,.gr{background:rgba(14,15,20,.97)!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:14px!important;box-shadow:0 18px 50px rgba(0,0,0,.55)!important;backdrop-filter:blur(14px);overflow:hidden}',
 '.geolist>div,.gr .gi{padding:.62rem .9rem!important;cursor:pointer;color:#D6D3CC;transition:background .12s}',
 '.geolist>div:hover,.gr .gi:hover{background:rgba(227,166,146,.12)!important;color:#F2EFE9}',
-'.gr .gi small{color:#8A8F98;display:block;font-size:.75rem;margin-top:.1rem}'
+'.gr .gi small{color:#9BA0AB;display:block;font-size:.8rem;margin-top:.1rem}'
 ].join('\n');
 
 function injectCSS(){var s=document.createElement('style');s.id='sorbi-form-css';s.textContent=CSS;document.head.appendChild(s);}

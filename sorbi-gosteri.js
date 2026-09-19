@@ -24,7 +24,7 @@ var CSS='.sbg{background:rgba(255,255,255,.032);border:1px solid rgba(255,255,25
 +'.sbg-s{flex:1 1 140px;min-width:110px;min-height:40px;accent-color:#E3A692;background:transparent}'
 +'.sbg-o{font-family:ui-monospace,Menlo,monospace;font-size:.78rem;color:#9BA0AB;font-variant-numeric:tabular-nums}'
 +'.sbg-o b{color:#F2D3B8;font-weight:600}'
-+'.sbg-l{font-size:.76rem;color:#9BA0AB;white-space:nowrap}'
++'.sbg-l{font-size:.78rem;color:#9BA0AB;white-space:nowrap}'
 +'.sbg-p{display:flex;gap:.5rem;align-items:center;flex:1 1 180px;min-width:0}'
 +'.sbg-p .sbg-s{flex:1 1 60px;min-width:60px}'
 +'.sbg-e{display:inline-block;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid currentColor;border-radius:99px;padding:.08rem .45rem;color:#9BA0AB}'
