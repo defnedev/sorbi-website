@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Detaylı Doğum Haritası — Profesyonel Harita Atölyesi | Sorbi</title>
-<meta name="description" content="Doğum haritanı profesyonel hassasiyetle çalış: 7 ev sistemi, transit ve ilerletim çift çarkı, sinastri, açı kalıpları, sabit yıldızlar, deklinasyon ve dignite tablosu. Swiss Ephemeris doğrulamalı, ücretsiz.">
+<meta name="description" content="Doğum haritanı profesyonel hassasiyetle çalış: 7 ev sistemi, transit ve ilerletim çift çarkı, sinastri, açı kalıpları, sabit yıldızlar, deklinasyon ve dignite tablosu. Ev matematiği Swiss Ephemeris çıktısına karşı test edildi. Ücretsiz.">
 <link rel="canonical" href="https://sorbiapp.com/detayli-dogum-haritasi">
 <meta name="theme-color" content="#0B0F14">
 <meta property="og:type" content="website">
@@ -328,9 +328,9 @@ body:has(> .sky)::before{display:none}
 
 <div class="card" id="inputCard">
   <div class="form" id="birthRows">
-    <div><label for="fName">İsim / etiket</label><input id="fName" placeholder="örn. Amy Winehouse" autocomplete="off"></div>
-    <div><label for="fDate">Doğum tarihi</label><input id="fDate" type="date" value="1990-01-01"></div>
-    <div><label for="fTime">Saat (yerel)</label><input id="fTime" type="time" value="12:00" step="60"></div>
+    <div><label for="fName">İsim / etiket</label><input id="fName" placeholder="örn. adın" autocomplete="off"></div>
+    <div><label for="fDate">Doğum tarihi</label><input id="fDate" type="date"></div>
+    <div><label for="fTime">Saat (yerel)</label><input id="fTime" type="time" step="60"></div>
     <div class="geo"><label for="fPlace">Doğum yeri</label><input id="fPlace" placeholder="İstanbul" autocomplete="off"><div class="geolist" id="geoList" hidden></div></div>
     <div><label for="fHouse">Ev sistemi</label>
       <select id="fHouse">
@@ -346,8 +346,8 @@ body:has(> .sky)::before{display:none}
   </div>
   <details class="adv"><summary>Gelişmiş ayarlar</summary>
   <div class="form" style="margin-top:.65rem">
-    <div><label for="fLat">Enlem</label><input id="fLat" type="number" step="0.0001" value="41.0082"></div>
-    <div><label for="fLon">Boylam</label><input id="fLon" type="number" step="0.0001" value="28.9784"></div>
+    <div><label for="fLat">Enlem</label><input id="fLat" type="number" step="0.0001" value="41.0138"></div>
+    <div><label for="fLon">Boylam</label><input id="fLon" type="number" step="0.0001" value="28.9497"></div>
     <div><label for="fTz">Saat dilimi</label><input id="fTz" value="Europe/Istanbul"></div>
     <div><label for="fNode">Ay düğümü</label><select id="fNode"><option value="true">Gerçek</option><option value="mean">Ortalama</option></select></div>
     <div><label for="fOrb">Açı orbu</label><select id="fOrb"><option value="1">Standart</option><option value="0.7">Dar</option><option value="1.35">Geniş</option></select></div>
@@ -373,7 +373,7 @@ body:has(> .sky)::before{display:none}
     <div class="hint" style="grid-column:span 2;margin:0;align-self:center">Güneş'in natal derecesine tam döndüğü an, doğum yeri için hesaplanır.</div>
   </div>
 
-  <div class="hint">Saat bilinmiyorsa 12:00 bırak: Yükselen ve evler geçersiz, gezegen burçları geçerli. Yer seçince enlem/boylam ve saat dilimi dolar.</div>
+  <div class="hint">Saat bilinmiyorsa saat alanını boş bırak — 12:00 varsayılır: Yükselen ve evler geçersiz sayılır, gezegen burçları geçerli kalır. Yer seçince enlem/boylam ve saat dilimi dolar.</div>
   <div id="err" class="err" hidden></div>
 </div>
 
@@ -385,8 +385,8 @@ body:has(> .sky)::before{display:none}
   </div>
   <div class="form">
     <div><label for="bName">İsim</label><input id="bName" placeholder="B kişisi" autocomplete="off"></div>
-    <div><label for="bDate">Doğum tarihi</label><input id="bDate" type="date" value="1990-01-01"></div>
-    <div><label for="bTime">Saat</label><input id="bTime" type="time" value="12:00" step="60"></div>
+    <div><label for="bDate">Doğum tarihi</label><input id="bDate" type="date"></div>
+    <div><label for="bTime">Saat</label><input id="bTime" type="time" step="60"></div>
     <div class="geo"><label for="bPlace">Doğum yeri</label><input id="bPlace" placeholder="Ankara" autocomplete="off"><div class="geolist" id="bGeoList" hidden></div></div>
     <div><label for="bLat">Enlem</label><input id="bLat" type="number" step="0.0001" value="39.9334"></div>
     <div><label for="bLon">Boylam</label><input id="bLon" type="number" step="0.0001" value="32.8597"></div>
@@ -503,6 +503,15 @@ var SIGNS=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep'
 var SGLYPH=['♈︎','♉︎','♊︎','♋︎','♌︎','♍︎','♎︎','♏︎','♐︎','♑︎','♒︎','♓︎'];
 var ELEM=['Ateş','Toprak','Hava','Su'], ELCOL=['#C75B39','#9E8B4E','#B58A5E','#5E8C86'];
 var MODAL=['Öncü','Sabit','Değişken'];
+/* En yüksek değeri bulur; beraberlik varsa "baskın" demez, beraberliği söyler.
+   indexOf ilk maksimumu seçtiği için 4/4 gibi dağılımlarda sessizce Ateş'e düşüyordu. */
+function domOf(vals,names){
+  var mx=Math.max.apply(null,vals), win=[];
+  for(var i=0;i<vals.length;i++) if(vals[i]===mx) win.push(names[i]);
+  return {mx:mx, tie:win.length>1, names:win, join:win.join(' ve ')};
+}
+/* Element/nitelik sayimi hangi noktalar uzerinden yapiliyor */
+var SAYIM_NOTU='Sayılan noktalar: 10 gezegen (Güneş–Plüton) + Chiron, Kuzey Ay Düğümü ve Lilith — 13 nokta. Şans Noktası, Güney Ay Düğümü, Yükselen ve MC bu sayıma girmiyor.';
 
 var BODIES=[
  {k:'sun', n:'Güneş',  g:'☉︎', b:'Sun',     maj:1},
@@ -584,7 +593,7 @@ var STARNAT={
  'Regulus':'kraliyet yıldızı; liderlik ve görünürlükle anılır',
  'Antares':'kraliyet yıldızı; cesaret ve keskinlikle anılır',
  'Fomalhaut':'kraliyet yıldızı; idealizm ve ilhamla anılır',
- 'Spica':'geleneksel olarak en şanslı sayılan yıldız; yetenek ve zarafet',
+ 'Spica':'geleneksel olarak en uğurlu sayılan yıldız; yetenek ve zarafet',
  'Arcturus':'yeni yollar açmak, öncülük',
  'Sirius':'ün ve tutku; en parlak yıldız',
  'Betelgeuse':'başarı ve kalıcı iz',
@@ -1271,8 +1280,12 @@ function renderAll(){
     var SR=null; try{ SR=sectReport(ch); }catch(e){}
     var chips='<span class="sum-chip"><b>'+(ch.day?'Gündüz':'Gece')+'</b> haritası</span>'+
       (SR?'<span class="sum-chip">Sekt ışığı <b>'+SR.light.n+'</b></span>':'')+
-      '<span class="sum-chip">Baskın element <b>'+ELEM[ec.indexOf(Math.max.apply(null,ec))]+'</b></span>'+
-      '<span class="sum-chip">Baskın nitelik <b>'+MODAL[mo.indexOf(Math.max.apply(null,mo))]+'</b></span>'+
+      (function(){var d=domOf(ec,ELEM);return '<span class="sum-chip">'+(d.tie
+         ? 'Element: <b>'+d.join+'</b> eşit ağırlıkta'
+         : 'Baskın element <b>'+d.names[0]+'</b>')+'</span>';})()+
+      (function(){var d=domOf(mo,MODAL);return '<span class="sum-chip">'+(d.tie
+         ? 'Nitelik: <b>'+d.join+'</b> eşit ağırlıkta'
+         : 'Baskın nitelik <b>'+d.names[0]+'</b>')+'</span>';})()+
       '<span class="sum-chip">'+({P:'Placidus',W:'Whole Sign',K:'Koch',E:'Eşit',O:'Porphyry',R:'Regiomontanus',C:'Campanus'}[ch.o.house]||'')+'</span>';
     var top=asps.filter(function(x){return ['pof','sno'].indexOf(x.a.k)<0&&['pof','sno'].indexOf(x.b.k)<0&&x.as.major;}).slice(0,5);
     var arows=top.map(function(x){
@@ -1314,6 +1327,7 @@ function renderAll(){
       rareHtml+
       (arows?'<div class="subh" style="font-size:.85rem">En sıkı 5 açı</div><div class="sum-asp">'+arows+'</div>':'')+
       (patline?'<div class="subh" style="font-size:.85rem">Açı kalıpları</div><div class="sum-chips">'+patline+'</div>':'')+
+      '<div class="sum-note">'+SAYIM_NOTU+'</div>'+
       '<div class="sum-note">Tam tablolar üstteki sekmelerde.</div>';
   })();
 
@@ -1425,8 +1439,13 @@ function renderDist(ch){
   var dd=bars('Element',ELEM,ec,ELCOL)+bars('Nitelik',MODAL,mo)+
     bars('Yarıküre',['Üst (7–12)','Alt (1–6)','Doğu (10–3)','Batı (4–9)'],[hemS,hemN,hemE,hemW])+
     bars('Çeyrek',['1–3','4–6','7–9','10–12'],quad);
-  var lead=ELEM[ec.indexOf(Math.max.apply(null,ec))], lm=MODAL[mo.indexOf(Math.max.apply(null,mo))];
-  dd+='<div class="note">Baskın: <b>'+lead+'</b> · <b>'+lm+'</b>.</div>';
+  var de=domOf(ec,ELEM), dm=domOf(mo,MODAL);
+  dd+='<div class="note">'+
+      (de.tie ? 'Element: <b>'+de.join+'</b> eşit ağırlıkta — tek bir baskın element çıkmıyor.'
+              : 'Baskın element: <b>'+de.names[0]+'</b>.')+' '+
+      (dm.tie ? 'Nitelik: <b>'+dm.join+'</b> eşit ağırlıkta.'
+              : 'Baskın nitelik: <b>'+dm.names[0]+'</b>.')+'</div>';
+  dd+='<div class="note">'+SAYIM_NOTU.replace('13 nokta',cnt+' nokta')+'</div>';
   document.getElementById('dist').innerHTML=dd;
 }
 
@@ -1618,10 +1637,12 @@ document.getElementById('modes').onclick=function(e){
 
 /* ═════════ ÇALIŞTIR ═════════ */
 function showErr(m){ var e=document.getElementById('err'); e.textContent=m||''; e.hidden=!m; }
-function readOpts(pre){
+function readOpts(pre,dateOptional){
   var dv=document.getElementById(pre+'Date').value;
   var tv=document.getElementById(pre+'Time').value||'12:00';
-  if(!dv) throw new Error('Doğum tarihi gerekli.');
+  /* An haritası modunda doğum tarihi kullanılmaz; alan boş gelir, yer verisi için
+     nötr bir tarih konur ve sonuç zaten aşağıda anın tarihiyle yeniden kurulur. */
+  if(!dv){ if(!dateOptional) throw new Error('Doğum tarihi gerekli.'); dv='2000-01-01'; }
   var dp=dv.split('-'), tp=tv.split(':');
   return {
     y:+dp[0], mo:+dp[1], d:+dp[2], h:+tp[0], mi:+tp[1],
@@ -1641,7 +1662,9 @@ function run(){
   showErr('');
   try{
     if(!A) return showErr('Astronomi motoru yüklenemedi. Sayfayı yenile.');
-    var o=readOpts('f');
+    if(!document.getElementById('fDate').value && MODE!=='moment')
+      return showErr('Doğum tarihini gir — tarih girilmeden harita kurulmaz.');
+    var o=readOpts('f', MODE==='moment');
     if(isNaN(o.lat)||isNaN(o.lon)) return showErr('Enlem ve boylam gerekli — yer alanından bir şehir seç.');
     if(Math.abs(o.lat)>=66 && ['P','K'].indexOf(o.house)>=0) return showErr('Bu enlemde Placidus/Koch bozulur — Whole Sign ya da Eşit sistemi seç.');
     if(o.y<1850||o.y>2069) return showErr('Bu ekran 1850–2069 aralığını destekliyor.');
@@ -1678,6 +1701,7 @@ function run(){
       outer=solarReturn(natal,yr);
       li='Natal'; lo='Güneş dönüşü'; sub=yr+' güneş dönüşü';
     } else if(MODE==='synastry'){
+      if(!document.getElementById('bDate').value) return showErr('İkinci kişinin doğum tarihini gir.');
       var bo=readOpts('b');
       if(isNaN(bo.lat)||isNaN(bo.lon)) return showErr('İkinci kişi için enlem/boylam gerekli.');
       if(bo.y<1850||bo.y>2069) return showErr('İkinci kişi 1850–2069 aralığında olmalı.');
@@ -1957,7 +1981,13 @@ function boot(){
   libRender();
   try{
     var b=JSON.parse(localStorage.getItem('sorbi_birth')||'null');
-    if(b){
+    if(!(b&&b.date)){
+      var pr=JSON.parse(localStorage.getItem('sorbi_profile')||'null');
+      if(pr&&pr.birth&&pr.birth.date) b=pr.birth;
+    }
+    if(b&&b.date){
+      var _nm=b.name; try{ var _p2=JSON.parse(localStorage.getItem('sorbi_profile')||'null'); if(!_nm&&_p2&&_p2.name)_nm=_p2.name; }catch(e2){}
+      if(_nm) document.getElementById('fName').value=_nm;
       if(b.date) document.getElementById('fDate').value=b.date;
       if(b.time) document.getElementById('fTime').value=b.time;
       if(b.lat) document.getElementById('fLat').value=b.lat;
@@ -2096,7 +2126,7 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
  <div class="sbft-bot"><span>© 2026 Sorbi · sorbiapp.com</span><span>Astroloji içerikleri kişisel farkındalık amaçlıdır; kesin gelecek vaadi değildir.</span></div>
 </footer>
 <!-- SORBI-FOOTER:END -->
-<script src="/sorbi-form.js?v=3" defer></script>
+<script src="/sorbi-form.js?v=4" defer></script>
 <script src="/sorbi-profil.js?v=3" defer></script>
   <script src="/sorbi-olcum.js?v=1" defer></script>
 </body>

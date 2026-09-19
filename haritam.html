@@ -23,10 +23,10 @@
 h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(1.6rem,5vw,2.2rem);margin:.5rem 0 .2rem;color:#E8E4DA}
 .sub{color:var(--dim);font-size:.95rem}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1.3rem 1.2rem;margin-top:1.3rem}
-.sec-h{font-family:'Inter';font-size:.72rem;text-transform:uppercase;letter-spacing:2.2px;color:var(--gold);font-weight:600;margin-bottom:.9rem;display:flex;align-items:center;gap:.6rem}
+.sec-h{font-family:'Inter';font-size:.8rem;text-transform:uppercase;letter-spacing:2.2px;color:var(--gold);font-weight:600;margin-bottom:.9rem;display:flex;align-items:center;gap:.6rem}
 .sec-h::after{content:'';flex:1;height:1px;background:var(--lineg)}
 .muhur{text-align:center;margin:.2rem 0 .4rem}
-.muhur .e{font-size:.64rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.muhur .e{font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
 .muhur .t{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(1.6rem,7vw,2.2rem);background:linear-gradient(135deg,#8A6D2E,#DFA98F,#F2D3B8,#DFA98F,#8A6D2E);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#F2D3B8;margin:.1rem 0}
 .hero3{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:1.3rem}
 .hero3 a{background:var(--panel);border:1px solid var(--lineg);border-radius:16px;padding:1.15rem .7rem;text-align:center;text-decoration:none;transition:border-color .15s,transform .1s;display:flex;flex-direction:column;align-items:center;gap:.35rem}
@@ -34,12 +34,12 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(1.6rem,5vw
 .hero3 a.hot{background:linear-gradient(180deg,rgba(196,116,78,.16),rgba(22,17,26,.4));border-color:var(--lineg2)}
 .hero3 .g{font-family:'Noto Sans Symbols2','Segoe UI Symbol',sans-serif;font-size:1.7rem;color:var(--gold)}
 .hero3 .n{font-family:Inter,system-ui,sans-serif;font-size:1rem;color:var(--ink)}
-.hero3 .d{font-size:.68rem;color:var(--dim);line-height:1.35}
+.hero3 .d{font-size:.8rem;color:var(--dim);line-height:1.35}
 @media(max-width:480px){.hero3{grid-template-columns:1fr;gap:.55rem}.hero3 a{flex-direction:row;text-align:left;justify-content:flex-start;gap:.7rem;padding:.85rem 1rem}}
 .bt3{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
 .bt3 .c{background:rgba(223,169,143,.05);border:1px solid var(--lineg);border-radius:14px;padding:1rem .6rem;text-align:center}
 .bt3 .g{font-family:'Noto Sans Symbols2','Segoe UI Symbol',sans-serif;font-size:1.7rem;color:var(--gold)}
-.bt3 .r{font-size:.66rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin:.35rem 0 .15rem}
+.bt3 .r{font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin:.35rem 0 .15rem}
 .bt3 .s{font-family:Inter,system-ui,sans-serif;font-size:1.05rem;color:#E8E4DA}
 .meta{font-size:.82rem;color:var(--dim);text-align:center;margin-top:.8rem}
 .ask h3{font-family:Fraunces,Georgia,serif;color:#E8E4DA;font-size:1.3rem;margin:.1rem 0 .4rem;text-align:center}
@@ -50,7 +50,7 @@ textarea{min-height:90px;resize:vertical}
 .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem}
 .chip{background:rgba(223,169,143,.08);border:1px solid var(--line);color:var(--mut);border-radius:99px;padding:.4rem .8rem;font-size:.82rem;cursor:pointer}
 .chip:hover{border-color:var(--lineg2);color:var(--gold-lt)}
-.kvkk{font-size:.72rem;color:var(--dim);margin:.7rem 0 0;line-height:1.5}
+.kvkk{font-size:.8rem;color:var(--dim);margin:.7rem 0 0;line-height:1.5}
 .kvkk input{width:auto;margin-right:.4rem;vertical-align:-1px}
 .btn{display:block;width:100%;border:none;border-radius:12px;background:var(--terra);color:#F6EFE1;font:600 15px 'Inter';padding:.9rem;cursor:pointer;margin-top:1rem}
 .msg{font-size:.85rem;color:var(--gold-lt);margin-top:.7rem;text-align:center;min-height:1em}
@@ -62,8 +62,6 @@ textarea{min-height:90px;resize:vertical}
 .logout{color:var(--dim);font-size:.78rem;cursor:pointer;text-decoration:underline}
 @media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}</style>
 <link rel="stylesheet" href="/sorbi-fonts.css?v=10">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6653215819266638"
-     crossorigin="anonymous"></script>
 </head>
 <body>
 <!-- SORBI-NAV:START -->
@@ -125,6 +123,19 @@ body:has(> .sky)::before{display:none}
 <!-- SORBI-TEMA:END -->
 <style>
 @media(max-width:480px){}
+/* ── İlerlemen kartı (sorbi-oyun.js verisi) ── */
+#ilerlemeKart .ilk-ust{display:flex;align-items:baseline;justify-content:space-between;gap:.8rem;flex-wrap:wrap}
+#ilerlemeKart .ilk-sv b{font-family:Fraunces,Georgia,serif;font-size:1.15rem;color:#F2D3B8;font-weight:600}
+#ilerlemeKart .ilk-sv span{font-size:.8rem;color:var(--dim);margin-left:.4rem}
+#ilerlemeKart .ilk-sy{font-size:.86rem;color:var(--mut);font-variant-numeric:tabular-nums}
+#ilerlemeKart .ilk-bar{height:6px;border-radius:99px;background:rgba(255,255,255,.08);margin:.75rem 0 .5rem;overflow:hidden}
+#ilerlemeKart .ilk-bar i{display:block;height:100%;background:#E3A692;border-radius:99px}
+#ilerlemeKart .ilk-not{font-size:.82rem;color:var(--dim);margin:0;line-height:1.55}
+#ilerlemeKart .ilk-n{display:flex;gap:.4rem;flex-wrap:wrap;margin:.95rem 0 0}
+#ilerlemeKart .ilk-adim{font-size:.88rem;color:var(--mut);margin:.95rem 0 0;line-height:1.6}
+#ilerlemeKart .ilk-adim b{color:#F2EFE9;font-weight:600}
+#ilerlemeKart .ilk-adim a{color:#F2D3B8;text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:40px;padding-right:.2rem}
+#ilerlemeKart .ilk-gizli{font-size:.8rem;color:var(--dim);line-height:1.6;margin:.95rem 0 0;padding-top:.8rem;border-top:1px solid rgba(255,255,255,.07)}
 </style>
 
 
@@ -134,6 +145,7 @@ body:has(> .sky)::before{display:none}
   <h1>Haritam</h1>
   <p class="sub" style="max-width:420px;margin:.6rem auto 0">Burası senin evin — ama önce seni tanımam lazım. Doğduğun anı ver, bir kez; her şey burada toplansın.</p>
   <a href="/seni-taniyorum">Beni tanı ✦</a>
+  <p class="sub" style="max-width:480px;margin:1.3rem auto 0;font-size:.86rem;line-height:1.7">Doğum tarihin, saatin ve yerin girildiğinde burada Güneş–Ay–Yükselen özetin, günün gökyüzü bağlantıları ve kayıtlı haritaların bir arada görünür. Bilgiler yalnız bu tarayıcıda tutulur; hesap açılmaz. Aşağıdaki ilerleme kartı profil olmadan da çalışır.</p>
  </div>
 
  <div id="app" style="display:none">
@@ -168,7 +180,26 @@ body:has(> .sky)::before{display:none}
   </div>
 
 
-  <p class="foot"><span class="logout" id="logout">profilden çık</span> · <a href="/">sorbiapp.com</a></p>
+  <div class="card" id="ilerlemeKart" style="display:none">
+   <div class="sec-h">İlerlemen</div>
+   <div class="ilk-ust">
+    <div class="ilk-sv"><b id="ilkSvAd">Başlangıç</b><span id="ilkSvNo"></span></div>
+    <div class="ilk-sy" id="ilkSayi"></div>
+   </div>
+   <div class="ilk-bar"><i id="ilkBar" style="width:0%"></i></div>
+   <p class="ilk-not" id="ilkNot"></p>
+   <div class="ilk-n">
+    <span data-sorbi-nisan="retro"></span>
+    <span data-sorbi-nisan="yukselen"></span>
+    <span data-sorbi-nisan="uc-ders"></span>
+    <span data-sorbi-nisan="uc-element"></span>
+    <span data-sorbi-nisan="seri-3"></span>
+   </div>
+   <p class="ilk-adim" id="ilkAdim"></p>
+   <p class="ilk-gizli" id="ilkGizli">İlerlemen yalnız bu tarayıcıda, kendi cihazında tutuluyor: hesap açılmıyor, sunucuya hiçbir veri gönderilmiyor, çerez kullanılmıyor.</p>
+  </div>
+
+  <p class="foot"><span id="logoutWrap" style="display:none"><span class="logout" id="logout">profilden çık</span> · </span><a href="/">sorbiapp.com</a></p>
  </div>
 </div>
 <script>
@@ -231,6 +262,7 @@ function initBig3(){
  if(!PR){document.getElementById('noProfile').style.display='block';return;}
  BIRTH=PR.birth||{};
  document.getElementById('app').style.display='block';
+ document.getElementById('logoutWrap').style.display='inline';
  document.getElementById('hello').textContent='Merhaba '+((PR.name||(PR.email||'').split('@')[0])||'')+' ✦';
  if(BIRTH.date){const pl=(BIRTH.place||'').split(',')[0];document.getElementById('birthMeta').textContent=BIRTH.date+(BIRTH.time?' · '+BIRTH.time:'')+(pl?' · '+pl:'');}
  if(document.getElementById('chips')){document.getElementById('chips').innerHTML=CHIPS.map(c=>`<span class="chip">${c}</span>`).join('');
@@ -264,6 +296,39 @@ function initBig3(){
  }catch(e){}
 })();
 
+/* ── İlerlemen kartı: oyunlaştırmanın tek evi. Profilden bağımsız çalışır;
+      veri localStorage'da (sorbi-oyun.js), sunucuya hiçbir şey gitmez. ── */
+function sorbiIlerlemeKarti(){
+ var O=window.SorbiOyun;if(!O)return;
+ var k=document.getElementById('ilerlemeKart');if(!k)return;
+ try{
+  var sv=O.seviye(),sr=(O.seriDurum&&O.seriDurum())||{},bl=O.bolumler(),sn=O.sonraki();
+  document.getElementById('ilkSvAd').textContent=sv.ad;
+  document.getElementById('ilkSvNo').textContent='seviye '+sv.no+' / 5';
+  document.getElementById('ilkSayi').textContent=sv.xp+' puan · seri '+(sr.n||0)+' gün'
+   +((sr.en||0)>(sr.n||0)?' (en uzun '+sr.en+')':'');
+  document.getElementById('ilkBar').style.width=Math.round((sv.oran||0)*100)+'%';
+  document.getElementById('ilkNot').textContent=sv.sonraki
+   ? 'Sonraki seviyeye '+(sv.sonraki-sv.xp)+' puan kalmış görünüyor.'
+   : 'En üst seviyedesin — bölümleri dilediğin zaman tekrar gözden geçirebilirsin.';
+  var bit=0,top=0;bl.forEach(function(b){bit+=b.bit;top+=b.toplam;});
+  var ad=document.getElementById('ilkAdim');
+  if(sn){
+   ad.innerHTML='Sıradaki adım: <b>'+sn.ad+'</b> — '+sn.bit+' / '+sn.toplam
+    +' bölüm bitmiş görünüyor. <a href="'+sn.url+'">Devam et →</a>';
+  }else{
+   ad.innerHTML='Üç bölümün de tamamlanmış görünüyor ('+bit+' / '+top
+    +'). <a href="/ogren">Dersleri tekrar aç →</a>';
+  }
+  if(O.destek&&!O.destek())
+   document.getElementById('ilkGizli').textContent=
+    'Bu tarayıcıda yerel depolama kapalı olduğu için ilerleme sayfa kapanınca korunmuyor. '
+    +'İlerleme hiçbir durumda sunucuya gönderilmiyor.';
+  k.style.display='block';
+ }catch(e){}
+}
+document.addEventListener('DOMContentLoaded',sorbiIlerlemeKarti);
+if(document.readyState!=='loading')sorbiIlerlemeKarti();
 </script>
 <!-- SORBI-FOOTER:START -->
 <style>
@@ -319,6 +384,7 @@ function initBig3(){
  <div class="sbft-bot"><span>© 2026 Sorbi · sorbiapp.com</span><span>Astroloji içerikleri kişisel farkındalık amaçlıdır; kesin gelecek vaadi değildir.</span></div>
 </footer>
 <!-- SORBI-FOOTER:END -->
+<script src="/sorbi-oyun.js?v=2" defer></script>
 <script src="/sorbi-profil.js?v=3" defer></script>
   <script src="/sorbi-olcum.js?v=1" defer></script>
 </body>

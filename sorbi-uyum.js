@@ -154,7 +154,7 @@ function tipCark(){
    +' burç = '+A.de+'°</b> — '+A.ar+'. Bu açının adı <i>'+A.ad+'</i>'
    +(A.buyuk?' ve beş büyük açıdan biri.':' ; beş büyük açının dışında kalan küçük bir açı.')
    +' Sayfadaki üç ölçünün tabanı bu mesafeden geliyor: <b>'+h.m.base+'</b>.'
-   +' Burç ortası dereceler kullanıldığı için açı tam sayıdır; gerçek haritada gezegenin derecesi bu değeri kaydırır.'};
+   +' Burç ortası dereceler kullanıldığı için açı tam sayıdır; bir kişinin haritasında gezegenin derecesi bu değeri kaydırır.'};
  }};
 }
 
@@ -284,13 +284,13 @@ function veriYaz(a,b){
  var ayni=(a===b),ort=ayni?pa*pa:2*pa*pb;
  el.hidden=false;
  el.innerHTML='<h2>Ölçülmüş Veri</h2>'
- +'<p class="uy-g">24.000 gerçek haritada Güneş’i <b>'+esc(S[a])+'</b> burcunda olan <b>'+bin(A)
- +'</b> harita var (%'+vir(pa*100)+'). '+(ayni?'Aynı burç seçildiği için tek pay kullanılıyor.'
- :'Güneş’i <b>'+esc(S[b])+'</b> burcunda olan <b>'+bin(B)+'</b> harita var (%'+vir(pb*100)+').')+'</p>'
+ +'<p class="uy-g">Örneklenen 24.000 gök anında Güneş’i <b>'+esc(S[a])+'</b> burcunda olan <b>'+bin(A)
+ +'</b> an var (%'+vir(pa*100)+'). '+(ayni?'Aynı burç seçildiği için tek pay kullanılıyor.'
+ :'Güneş’i <b>'+esc(S[b])+'</b> burcunda olan <b>'+bin(B)+'</b> an var (%'+vir(pb*100)+').')+'</p>'
  +'<p class="uy-g">Bu örneklemden birbirinden bağımsız iki kişi seçilseydi ikisinin Güneş burcu bu ikili olurdu: '
  +(ayni?'%'+vir(pa*100)+' × %'+vir(pa*100):'2 × %'+vir(pa*100)+' × %'+vir(pb*100))
  +' = <b>%'+vir(ort*100,2)+'</b>.</p>'
- +'<p class="uy-k">Örneklemde çiftler ölçülmedi: veri dosyası tek tek haritaların burç dağılımını tutuyor. '
+ +'<p class="uy-k">Örneklemde çiftler ölçülmedi: veri dosyası tek tek anların burç dağılımını tutuyor. '
  +'Yukarıdaki iki sayı doğrudan ölçüm, üçüncü satır ise bu iki paydan türetilmiş bir hesap — '
  +'gözlenmiş bir çift sıklığı değil.</p>';
 }

@@ -41,20 +41,22 @@ function pad(v){return ('0'+v).slice(-2);}
 function enhance(native,kind){
  if(native.dataset.sf)return; native.dataset.sf='1';
  var wrap=document.createElement('div');wrap.className='sfwrap';
- var segs,write,read;
+ var segs,write,read,kendi=false;
+ /* segmentlerden native'e yazarken read() geri tetiklenmesin */
+ function nset(v){ kendi=true; try{ native.value=v; } finally{ kendi=false; } }
  if(kind==='date'){
    var g=mkSeg('GG'),a=mkSeg('AA'),y=mkSeg('YYYY',1);
    segs=[g,a,y];
    wrap.appendChild(g);wrap.appendChild(sep('.'));wrap.appendChild(a);wrap.appendChild(sep('.'));wrap.appendChild(y);wrap.appendChild(ic('✦'));
    write=function(){ if(g.value.length&&a.value.length&&y.value.length===4){var vv=y.value+'-'+pad(a.value)+'-'+pad(g.value);
-     if(!gecerliGun(vv)){ not(native,'Böyle bir tarih yok — günü kontrol et.','hata'); if(native.value){native.value='';fire(native);} return; }
-     if(native.value!==vv){native.value=vv;fire(native);} tarihDenetle(native); } else if(native.value){native.value='';fire(native);} };
+     if(!gecerliGun(vv)){ not(native,'Böyle bir tarih yok — günü kontrol et.','hata'); if(native.value){nset('');fire(native);} return; }
+     if(native.value!==vv){nset(vv);fire(native);} tarihDenetle(native); } else if(native.value){nset('');fire(native);} };
    read=function(){var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(native.value||'');if(m){y.value=m[1];a.value=m[2];g.value=m[3];}else{g.value=a.value=y.value='';}};
  }else{
    var h=mkSeg('SS'),mn=mkSeg('DK');
    segs=[h,mn];
    wrap.appendChild(h);wrap.appendChild(sep(':'));wrap.appendChild(mn);wrap.appendChild(ic('◷'));
-   write=function(){ if(h.value.length&&mn.value.length){var vv=pad(h.value)+':'+pad(mn.value); if(native.value!==vv){native.value=vv;fire(native);} } };
+   write=function(){ if(h.value.length&&mn.value.length){var vv=pad(h.value)+':'+pad(mn.value); if(native.value!==vv){nset(vv);fire(native);} } };
    read=function(){var m=/^(\d{2}):(\d{2})/.exec(native.value||'');if(m){h.value=m[1];mn.value=m[2];}else{h.value=mn.value='';}};
  }
  var lims={GG:31,AA:12,SS:23,DK:59,YYYY:2100};
@@ -77,12 +79,40 @@ function enhance(native,kind){
  native.style.display='none';
  native.parentNode.insertBefore(wrap,native.nextSibling);
  read();
- // programatik doldurmayı yakala (deep-link autofill vs.)
- var last=native.value;
- setInterval(function(){ if(native.value!==last){last=native.value;read();} },350);
- // segment yazınca last'i de güncelle
- native.addEventListener('change',function(){last=native.value;});
+ /* Programatik doldurmayı (profil ön dolumu, deep-link) zamanlayıcısız yakala:
+    value ayarlayıcısını sarmalıyoruz; yalnız DIŞARIDAN gelen atamada segmentleri tazeliyoruz.
+    Eskiden her alan için 350ms'lik, hiç temizlenmeyen bir setInterval kuruluyordu. */
+ var yakalandi=false;
+ try{
+   var dsc=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value');
+   if(dsc&&dsc.get&&dsc.set){
+     Object.defineProperty(native,'value',{
+       configurable:true,enumerable:true,
+       get:function(){return dsc.get.call(this);},
+       set:function(v){ dsc.set.call(this,v); if(!kendi) read(); }
+     });
+     yakalandi=true;
+   }
+ }catch(e){}
+ if(!yakalandi) izle(native,read);   // düşüş yolu: tek ortak, duraklatılabilir döngü
 }
+
+/* ── düşüş yolu: alan başına değil, sayfa başına TEK döngü; sekme gizlenince durur ── */
+var IZLENEN=[],izleT=null;
+function izleDon(){ for(var i=0;i<IZLENEN.length;i++){ var w=IZLENEN[i]; if(w.el.value!==w.son){ w.son=w.el.value; w.fn(); } } }
+function izleAyar(){
+  if(document.hidden||!IZLENEN.length){ if(izleT){clearInterval(izleT);izleT=null;} return; }
+  if(!izleT) izleT=setInterval(izleDon,350);
+}
+function izle(el,fn){
+  var w={el:el,son:el.value,fn:fn};
+  IZLENEN.push(w);
+  el.addEventListener('input',function(){w.son=el.value;});
+  el.addEventListener('change',function(){w.son=el.value;});
+  izleAyar();
+}
+document.addEventListener('visibilitychange',izleAyar);
+window.addEventListener('pagehide',function(){ if(izleT){clearInterval(izleT);izleT=null;} });
 
 function fire(el){try{el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));}catch(e){}}
 
@@ -95,11 +125,17 @@ function gecerliGun(v){
 }
 
 /* ── doğum tarihi aralık uyarısı + bulunamayan yer uyarısı (2026-09-17) ── */
+function notHedef(el){ /* native input gizliyse uyarı görünür .sfwrap'in altına gitsin */
+  var w=el.closest&&el.closest('.sfwrap'); if(w) return w;
+  var n=el.nextElementSibling;
+  if(n&&n.classList&&n.classList.contains('sfwrap')) return n;
+  return el;
+}
 function not(el,msg,tur){
   var id='sfnot-'+(el.id||Math.random().toString(36).slice(2));
   var box=document.getElementById(id);
   if(!msg){ if(box) box.remove(); return; }
-  if(!box){ box=document.createElement('div'); box.id=id; box.className='sfnot'; (el.closest('.sfwrap')||el).insertAdjacentElement('afterend',box); }
+  if(!box){ box=document.createElement('div'); box.id=id; box.className='sfnot'; notHedef(el).insertAdjacentElement('afterend',box); }
   box.textContent=msg; box.style.color = tur==='hata' ? '#F2A08A' : '#E4CF9A';
 }
 function tarihDenetle(native){
@@ -113,16 +149,34 @@ function tarihDenetle(native){
   if(y<1900){ not(native,'1900 öncesi tarihlerde hesap güvenilir değil.','uyari'); return; }
   not(native,'');
 }
+var YER_UYARI='Bu yeri bulamadım — hesap İstanbul’a göre yapılır. Şehri Türkçe yazmayı dene.';
+function yerAdaylari(q){ /* "İstanbul, Türkiye" / "İstanbul · Türkiye" -> ["İstanbul, Türkiye","İstanbul"] */
+  var t=String(q||'').trim(), liste=[t];
+  var ilk=t.split(/[,·]/)[0].trim();
+  if(ilk&&ilk!==t) liste.push(ilk);
+  return liste;
+}
 function yerDenetle(inp){
   var q=(inp.value||'').trim();
   if(q.length<2){ not(inp,''); return; }
+  if(inp.dataset.sfSecim==='1'){ not(inp,''); return; }   // listeden seçildi: yer zaten doğrulanmış
   if(!window.SorbiYer||!window.SorbiYer.ara){ return; }
-  var beklenen=q;
-  window.SorbiYer.ara(q).then(function(veri){
+  var beklenen=q, adaylar=yerAdaylari(q), i=0;
+  (function dene(){
     if((inp.value||'').trim()!==beklenen) return;
-    var r=(veri&&veri.results)||[];
-    not(inp, r.length? '' : 'Bu yeri bulamadım — hesap İstanbul’a göre yapılır. Şehri Türkçe yazmayı dene.', 'uyari');
-  }).catch(function(){});
+    if(i>=adaylar.length){ not(inp,YER_UYARI,'uyari'); return; }   // gerçekten bulunamadı
+    window.SorbiYer.ara(adaylar[i++]).then(function(veri){
+      if((inp.value||'').trim()!==beklenen) return;
+      if(((veri&&veri.results)||[]).length){ not(inp,''); return; }
+      dene();
+    }).catch(function(){ dene(); });
+  })();
+}
+function yerSecimi(t){ /* öneri listesinden tıklanan satır -> ilgili alanı doğrulanmış say */
+  var kap=t.closest('.geo')||t.closest('.gr,.geolist,.geo-results');
+  var inp=kap&&kap.querySelector('input');
+  if(!inp){ var l=t.closest('.gr,.geolist,.geo-results'); if(l&&l.parentNode&&l.parentNode.querySelector) inp=l.parentNode.querySelector('input'); }
+  if(inp){ inp.dataset.sfSecim='1'; not(inp,''); }
 }
 function denetimKur(){
   document.querySelectorAll('input[type=date]').forEach(function(n){
@@ -133,8 +187,13 @@ function denetimKur(){
   });
   ['bp','p','fPlace','fYer','cPlace','cCity','yer'].forEach(function(id){
     var inp=document.getElementById(id); if(!inp) return;
+    inp.addEventListener('input',function(){ delete inp.dataset.sfSecim; });   // elle değişti: yeniden denetle
     inp.addEventListener('blur',function(){ setTimeout(function(){ yerDenetle(inp); },250); });
   });
+  document.addEventListener('click',function(e){
+    var t=e.target&&e.target.closest?e.target.closest('.geolist>div,.geo-results>div,.gr .gi'):null;
+    if(t) yerSecimi(t);
+  },true);
 }
 
 function init(){
@@ -144,5 +203,5 @@ function init(){
  document.querySelectorAll('input[type=time]').forEach(function(n){enhance(n,'time');});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-window.SorbiForm={enhance:enhance};
+window.SorbiForm={enhance:enhance,not:not};
 })();

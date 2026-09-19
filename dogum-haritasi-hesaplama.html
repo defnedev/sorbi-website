@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ücretsiz Doğum Haritası Hesaplama — Sorbi Astroloji</title>
-<meta name="description" content="Doğum tarihini, saatini ve yerini gir; doğum haritanı (natal harita) anında hesapla. 10 gezegen, yükselen, 12 ev, açılar ve harita çemberi — Swiss Ephemeris hassasiyetinde, ücretsiz.">
-<meta name="keywords" content="doğum haritası hesaplama, natal harita, ücretsiz doğum haritası, yükselen burç, gezegen konumları, astroloji haritası, harita çemberi">
+<meta name="description" content="Doğum tarihini, saatini ve yerini gir; doğum haritanı (natal harita) anında hesapla. 10 gezegen, yükselen, 12 ev, açılar ve harita çemberi — ev başlangıçları ve açısal noktaları Swiss Ephemeris çıktısına karşı doğrulanmış, ücretsiz.">
 <link rel="canonical" href="https://sorbiapp.com/dogum-haritasi-hesaplama">
 <meta name="theme-color" content="#0D0810">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Sorbi">
@@ -77,6 +76,7 @@ input:focus,select:focus{outline:none;border-color:var(--lineg2)}
 .bar .bf{height:100%;border-radius:99px}
 .bar .bv{font-size:.76rem;color:var(--dim);min-width:20px;text-align:right}
 .dsub{font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin:1rem 0 .5rem}
+.dnote{font-size:.76rem;line-height:1.5;color:var(--dim);margin-top:.9rem;padding-top:.7rem;border-top:1px solid var(--line2)}
 table{width:100%;border-collapse:collapse;font-size:.88rem}
 th{font-size:.66rem;text-transform:uppercase;letter-spacing:1px;color:var(--dim);text-align:left;padding:.5rem .4rem;border-bottom:1px solid var(--lineg);font-weight:600}
 td{padding:.5rem .4rem;border-bottom:1px solid var(--line2);color:var(--mut)}
@@ -227,13 +227,13 @@ body:has(> .sky)::before{display:none}
    <div class="fg"><label>Doğum Saati</label><input type="time" id="cTime" value="12:00"></div>
    <div class="fg full geo"><label>Doğum Yeri</label><input id="cPlace" placeholder="Şehir yaz (örn. İstanbul, İzmir, Ankara)" autocomplete="off"><div class="geo-results" id="geoResults"></div></div>
   </div>
-  <div class="geo-picked" id="geoPicked">Varsayılan: İstanbul (41.01, 28.98)</div>
+  <div class="geo-picked" id="geoPicked">Varsayılan: İstanbul (41.0138, 28.9497)</div>
   <label class="checkline"><input type="checkbox" id="cNoTime"> Doğum saatimi bilmiyorum (Yükselen ve evler çıkmaz)</label>
   <span class="adv-toggle" id="advToggle">Gelişmiş: koordinat / saat dilimi / ev sistemi</span>
   <div class="adv" id="advBox">
    <div class="grid" style="margin-top:.3rem">
-    <div class="fg"><label>Enlem</label><input type="number" step="0.0001" id="cLat" value="41.0082"></div>
-    <div class="fg"><label>Boylam</label><input type="number" step="0.0001" id="cLon" value="28.9784"></div>
+    <div class="fg"><label>Enlem</label><input type="number" step="0.0001" id="cLat" value="41.0138"></div>
+    <div class="fg"><label>Boylam</label><input type="number" step="0.0001" id="cLon" value="28.9497"></div>
     <div class="fg"><label>Saat Dilimi</label><input id="cTz" value="Europe/Istanbul"></div>
     <div class="fg"><label>Ev Sistemi</label><select id="cHouse"><option value="P">Placidus</option><option value="W">Whole Sign</option></select></div>
    </div>
@@ -295,9 +295,14 @@ body:has(> .sky)::before{display:none}
 </div>
 
 <script>
-/* ═══ ENGINE (doğrulanmış — Swiss Ephemeris ile birebir) ═══ */
+/* ═══ ENGINE ═══
+   Gezegen boylamları tarayıcı içi astronomi motoruyla (astronomy-engine) hesaplanıyor.
+   Ev başlangıçları ve açısal noktalar Swiss Ephemeris çıktısına karşı doğrulandı. */
 const SIGNS=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
 const SIGN3=['Koç','Boğ','İki','Yen','Asl','Baş','Ter','Akr','Yay','Oğl','Kov','Bal'];
+/* Türkçe ek tabloları — burç adlarının son sesine göre (ünlü/ünsüz uyumu + yumuşama) */
+const SIGN_LOC=["Koç'ta","Boğa'da","İkizler'de","Yengeç'te","Aslan'da","Başak'ta","Terazi'de","Akrep'te","Yay'da","Oğlak'ta","Kova'da","Balık'ta"];
+const SIGN_DAT=["Koç'a","Boğa'ya","İkizler'e","Yengeç'e","Aslan'a","Başak'a","Terazi'ye","Akrep'e","Yay'a","Oğlak'a","Kova'ya","Balık'a"];
 const norm=d=>((d%360)+360)%360,RAD=Math.PI/180;
 const signOf=l=>Math.floor(norm(l)/30);
 function fmtDeg(l){l=norm(l);const s=signOf(l);const g=l-s*30;const d=Math.floor(g);let m=Math.round((g-d)*60);let dd=d;if(m===60){m=0;dd++;}return dd+'°'+String(m).padStart(2,'0')+' '+SIGNS[s];}
@@ -322,6 +327,8 @@ const HOUSE_AREA={1:'kimlik, beden, dışa yansıyan sen',2:'para, değerler, sa
 const ORD=['','birinci','ikinci','üçüncü','dördüncü','beşinci','altıncı','yedinci','sekizinci','dokuzuncu','onuncu','on birinci','on ikinci'];
 const HOUSE_HEAD={1:'Kendini kendinden kuruyorsun.',2:'Güvenini sahip olduklarında arıyorsun.',3:'Zihninle ve kelimelerle varsın.',4:'Kökün ve yuvan seni tutuyor.',5:'Yaratarak ve severek var oluyorsun.',6:'Emekle ve düzenle anlam buluyorsun.',7:'Kendini ilişkide kuruyorsun.',8:'Derinlikte ve dönüşümde yaşıyorsun.',9:'Anlam ararken büyüyorsun.',10:'Kendini dünyada bir işle kanıtlıyorsun.',11:'Geleceği ve toplulukları kuruyorsun.',12:'Görünmeyen, içe dönük bir dünyada besleniyorsun.'};
 const ELEM=['Ateş','Toprak','Hava','Su'],ELCOL=['#C75B39','#9E8B4E','#B58A5E','#5E8C86'];
+/* Element/nitelik sayımı hangi noktalar üzerinden yapılıyor — okuyucuya yazılır */
+const SAYIM_NOTU='Sayılan noktalar: on gezegen — Güneş, Ay, Merkür, Venüs, Mars, Jüpiter, Satürn, Uranüs, Neptün, Plüton. Yükselen, MC, ev başlangıçları, Chiron, Ay düğümleri ve Lilith bu sayıma girmiyor.';
 const MODAL=['Öncü','Sabit','Değişken'];
 const ELINE=['harekete geçmek, başlatmak ve tutuşmak senin doğan.','somut, dokunulabilir ve kalıcı olan seni besliyor.','fikir, iletişim ve bağ kurmak senin alanın.','hissetmek, sezmek ve derinleşmek senin dilin.'];
 const RULER=[4,3,2,1,0,2,3,4,5,6,6,5];
@@ -350,8 +357,12 @@ function signatures(ch,noTime){
  if(bs){const s=+bs[0],n=+bs[1];list.push({pri:7,g:'◈',lab:`${SIGNS[s]} yığılması`,head:`${SIGNS[s]} senin baskın rengin.`,prose:`${n} gezegenin ${SIGNS[s]} burcunda toplanmış — ister istemez hayata oradan bakıyorsun, bu ton her şeye siniyor.`});}
  const miss=ec.indexOf(0);
  if(miss>=0)list.push({pri:8,g:'○',lab:`${ELEM[miss]} eksik`,head:`${ELEM[miss]} elementi olmayan bir harita.`,prose:`on gezegenin hiçbiri ${ELEM[miss].toLowerCase()} burçlarında değil. ilk bakışta eksik gibi görünen bu aslında bir yöntem — o alanı bilinçle, sonradan kurman gerekiyor.`});
- const dom=ec.indexOf(Math.max(...ec));if(ec[dom]>=5)list.push({pri:6,g:'◆',lab:`${ELEM[dom]} baskın`,head:`${ELEM[dom]} senin baskın elementin.`,prose:`gezegenlerinin çoğu ${ELEM[dom].toLowerCase()} burçlarında — ${ELINE[dom]}`});
- if(!noTime){const rs=signOf(ch.asc);const rp=P[RULER[rs]];list.push({pri:5,g:PGLYPH[rp.n],lab:`Yönetici ${rp.n}`,head:`Harita yöneticin ${rp.n}, ${SIGNS[signOf(rp.lon)]}'de${rp.house?' '+ORD[rp.house]+' evde':''}.`,prose:`yükselenin ${SIGNS[rs]}, o yüzden bütün haritanın tonunu ${rp.n} veriyor — nereye baksan onun rengi düşüyor.`});}
+ const emx=Math.max(...ec);const domIx=[];ec.forEach((v,i)=>{if(v===emx)domIx.push(i);});
+ if(emx>=5){
+  if(domIx.length===1){const dom=domIx[0];list.push({pri:6,g:'◆',lab:`${ELEM[dom]} baskın`,head:`${ELEM[dom]} senin baskın elementin.`,prose:`gezegenlerinin çoğu ${ELEM[dom].toLowerCase()} burçlarında — ${ELINE[dom]}`});}
+  else{const nm=domIx.map(i=>ELEM[i]);list.push({pri:6,g:'◆',lab:`${nm.join(' ve ')} eşit`,head:`${nm.join(' ve ')} eşit ağırlıkta görünüyor.`,prose:`on gezegenin ${emx}'i ${nm[0].toLowerCase()}, ${emx}'i ${nm[1].toLowerCase()} burçlarında — tek bir baskın element çıkmıyor; bu iki ton birlikte okunabilir.`});}
+ }
+ if(!noTime){const rs=signOf(ch.asc);const rp=P[RULER[rs]];list.push({pri:5,g:PGLYPH[rp.n],lab:`Yönetici ${rp.n}`,head:`Harita yöneticin ${rp.n}, ${SIGN_LOC[signOf(rp.lon)]}${rp.house?' '+ORD[rp.house]+' evde':''}.`,prose:`yükselenin ${SIGNS[rs]}, o yüzden bütün haritanın tonunu ${rp.n} veriyor — nereye baksan onun rengi düşüyor.`});}
  const su=signOf(P[0].lon),mo=signOf(P[1].lon);
  list.push({pri:3,g:'☉︎',lab:`Güneş ${SIGN3[su]} · Ay ${SIGN3[mo]}`,head:`Özün ${SIGNS[su]}, kalbin ${SIGNS[mo]}.`,prose:`dışarıda ${SUN_T[su]}; içeride ise ${MOON_T[mo]}.`});
  return list.sort((a,b)=>b.pri-a.pri);
@@ -411,7 +422,7 @@ function getProfile(){try{return JSON.parse(localStorage.getItem('sorbi_profile'
 function saveProfile(p){try{localStorage.setItem('sorbi_profile',JSON.stringify(p));}catch(e){}}
 
 /* ── Geocoding ── */
-let picked={lat:41.0082,lon:28.9784,tz:'Europe/Istanbul',label:'İstanbul'};
+let picked={lat:41.0138,lon:28.9497,tz:'Europe/Istanbul',label:'İstanbul'};
 let geoTimer=null;
 const placeInput=document.getElementById('cPlace'),geoBox=document.getElementById('geoResults'),pickedEl=document.getElementById('geoPicked');
 placeInput.addEventListener('input',()=>{clearTimeout(geoTimer);const q=placeInput.value.trim();if(q.length<2){geoBox.classList.remove('show');return;}geoTimer=setTimeout(()=>doGeocode(q),380);});
@@ -477,8 +488,9 @@ document.getElementById('gen').onclick=()=>{
  document.getElementById('pBt3').innerHTML=b3.map(([r,l])=>{const s=signOf(l),g=norm(l)-s*30;return `<div class="c"><div class="g">${r==='Yükselen'?'⌖':PGLYPH[r]}</div><div class="r">${r}</div><div class="s">${SIGNS[s]}</div><div class="d">${Math.floor(g)}°${String(Math.round((g-Math.floor(g))*60)).padStart(2,'0')}</div></div>`;}).join('');
 
  const{ec,mo:mc}=elemCounts(ch);const emax=Math.max(...ec)||1,mmax=Math.max(...mc)||1;
- let dh='';ec.forEach((v,i)=>{dh+=`<div class="bar"><span class="bn">${ELEM[i]}</span><span class="bt"><span class="bf" style="width:${v/emax*100}%;background:${ELCOL[i]}"></span></span><span class="bv">${v}</span></div>`;});
+ let dh='<div class="dsub" style="margin-top:0">Element</div>';ec.forEach((v,i)=>{dh+=`<div class="bar"><span class="bn">${ELEM[i]}</span><span class="bt"><span class="bf" style="width:${v/emax*100}%;background:${ELCOL[i]}"></span></span><span class="bv">${v}</span></div>`;});
  dh+='<div class="dsub">Nitelik</div>';mc.forEach((v,i)=>{dh+=`<div class="bar"><span class="bn">${MODAL[i]}</span><span class="bt"><span class="bf" style="width:${v/mmax*100}%;background:#DFA98F"></span></span><span class="bv">${v}</span></div>`;});
+ dh+=`<div class="dnote">${SAYIM_NOTU}</div>`;
  document.getElementById('pDenge').innerHTML=dh;
 
  document.getElementById('thHouse').style.display=noTime?'none':'';
@@ -492,7 +504,9 @@ document.getElementById('gen').onclick=()=>{
  const acol={'Üçgen':'#DFA98F','Altmışlık':'#5E8C86','Kare':'#C4744E','Karşıt':'#B05A32','Kavuşum':'#DFA98F'};
  const sortedAsps=[...ch.asps].sort((a,b)=>Math.abs(a.orb)-Math.abs(b.orb));
  document.getElementById('katAciN').textContent=ch.asps.length+' açı';
- document.getElementById('pAci').innerHTML=(sortedAsps.length?sortedAsps.map(a=>{const rr=(rxset.has(a.a)||rxset.has(a.b));return `<div class="aci"><span class="ag">${PGLYPH[a.a]}</span><span class="ag" style="color:${acol[a.nm]}">${AGLYPH[a.nm]}</span><span class="ag">${PGLYPH[a.b]}</span><span class="an">${a.a} ${a.nm.toLowerCase()} ${a.b}${rr?' <span class="rx">℞</span>':''}</span><span class="ao">${orbFmt(a.orb)}</span></div>`;}).join(''):'<div style="color:var(--dim)">Belirgin major açı yok.</div>');
+ /* ℞ her gezegenin KENDİ adının yanında durur — yalnız o gezegen geri hareketteyse */
+ const rxm=n=>rxset.has(n)?' <span class="rx">℞</span>':'';
+ document.getElementById('pAci').innerHTML=(sortedAsps.length?sortedAsps.map(a=>`<div class="aci"><span class="ag">${PGLYPH[a.a]}</span><span class="ag" style="color:${acol[a.nm]}">${AGLYPH[a.nm]}</span><span class="ag">${PGLYPH[a.b]}</span><span class="an">${a.a}${rxm(a.a)} ${a.nm.toLowerCase()} ${a.b}${rxm(a.b)}</span><span class="ao">${orbFmt(a.orb)}</span></div>`).join(''):'<div style="color:var(--dim)">Belirgin major açı yok.</div>');
 
  /* okuma: lead + üç cümle üstteki 'Ne anlama geliyor' bloğunda */
 
@@ -591,7 +605,7 @@ function shareChart(){const url='https://sorbiapp.com/dogum-haritasi-hesaplama';
  <div class="sbft-bot"><span>© 2026 Sorbi · sorbiapp.com</span><span>Astroloji içerikleri kişisel farkındalık amaçlıdır; kesin gelecek vaadi değildir.</span></div>
 </footer>
 <!-- SORBI-FOOTER:END -->
-<script src="/sorbi-form.js?v=3" defer></script>
+<script src="/sorbi-form.js?v=4" defer></script>
 <script src="/sorbi-profil.js?v=3" defer></script>
   <script src="/sorbi-olcum.js?v=1" defer></script>
 </body>

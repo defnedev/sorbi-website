@@ -2,13 +2,22 @@
  * Sıfır sunucu maliyeti: her şey localStorage (önek sorbi_oyun_). Hesap yok, istek yok, çerez yok.
  * Bildirimli: <div data-sorbi-sinav="id">, <div data-sorbi-ilerleme="bolum">, <span data-sorbi-nisan="ad">
  * API: SorbiOyun.kur(kok) .durum() .tamamla(id,puan) .isaretle(anahtar) .seviye() .seri()
- *      .nisanlar() .sinavSonuc(id) .sifirla() .destek()
+ *      .nisanlar() .sinavSonuc(id) .bolumler() .sonraki() .sifirla() .destek()
  * Nişanlar öğrenmeye dayalıdır: şansa değil, kullanıcının yaptığı işe bağlanır. Dil olasılık kipindedir.
  */
 (function(){
 'use strict';
 var W=window,D=document,ON='sorbi_oyun_',AN=ON+'v1',no=0;
-var SV=[[0,'Başlangıç'],[40,'Gözlemci'],[100,'Okuyan'],[180,'Çözen'],[300,'Ustalaşan']];
+/* Eşikler sitede toplanabilen puana göre ölçüldü: 18 sınav eksiksiz doğru yanıtlandığında
+ * 335 puan birikiyor (12×18 burç + 22 + 22 + 20+15+20+20). En üst seviye 240'ta kalıyor;
+ * böylece yalnız sınavlarla da ulaşılabilir. Eşikler yalnız düştüğü için kayıtlı puanlar bozulmaz. */
+var SV=[[0,'Başlangıç'],[30,'Gözlemci'],[80,'Okuyan'],[150,'Çözen'],[240,'Ustalaşan']];
+/* bölümler: "sıradaki adım" için; her bölüm kendi tamamlanma anahtarlarıyla sayılır */
+var BOLUM=[
+ {ad:'Öğren dersleri',url:'/ogren',top:4,ek:'ogren'},
+ {ad:'On iki burç',url:'/burc-ozellikleri',top:12,ek:'burc-'},
+ {ad:'Burç uyumu',url:'/burc-uyumu',top:5,ek:'uyum'}
+];
 var NISAN=[
  {ad:'retro',b:'Retroyu çözdün',a:'Retro dersinin sorularını eksiksiz doğru yanıtlayınca açılır.',
   ko:function(s){return tam(s,'ogren-1');}},
@@ -126,6 +135,20 @@ function nisanListe(){
  return NISAN.map(function(N){
   return {ad:N.ad,baslik:N.b,aciklama:N.a,acik:!!s.nisan[N.ad],tarih:s.nisan[N.ad]||''};
  });
+}
+
+/* ── bölümler: hangi bölüm ne kadar bitti, sıradaki adım hangisi ── */
+function bolumListe(){
+ var s=oku(),t=s.tamam||{};
+ return BOLUM.map(function(B){
+  var bit=Math.min(B.top,say(t,B.ek));
+  return {ad:B.ad,url:B.url,bit:bit,toplam:B.top,bitti:bit>=B.top};
+ });
+}
+function sonrakiAdim(){
+ var l=bolumListe();
+ for(var i=0;i<l.length;i++)if(!l[i].bitti)return l[i];
+ return null;
 }
 
 /* ── dışa açık işlemler ── */
@@ -286,6 +309,7 @@ W.SorbiOyun={
  seri:function(){var s=oku();seriIc(s);return kaydet(s).seri;},
  seriDurum:function(){return oku().seri;},
  nisanlar:nisanListe,
+ bolumler:bolumListe,sonraki:sonrakiAdim,
  sinavSonuc:function(id){return (oku().sinav||{})[id]||null;},
  sifirla:sifirla,yenile:yenile
 };

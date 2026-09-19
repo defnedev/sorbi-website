@@ -1,5 +1,5 @@
 /*! sorbi-burc.js — Burçlar bölümünün etkileşim katmanı. Sunucusuz, dış bağımlılık yok.
- * 1) SorbiGosteri'ye "burc-dagilimi" tipini ekler (24.000 gerçek haritanın burç dağılımı).
+ * 1) SorbiGosteri'ye "burc-dagilimi" tipini ekler (24.000 gök anının burç dağılımı).
  * 2) Hub'da element/nitelik süzgeci, burç seçici ve seçilen burcu canlı gösterimlere bağlar.
  * 3) Burç sayfalarında "okudum" işaretlemesini SorbiOyun'a yazar; hub ilerlemesine sayılır.
  * Veri: /nadirlik-veri.json (sayfa başına tek istek, SorbiGosteri'nin data-kaynak'ı ile).
@@ -20,11 +20,11 @@ function bin(n){var s=String(M.round(n)),o='',i=s.length;
 function vir(x,b){var s=(+x).toFixed(b==null?1:b);return s.replace('.',',');}
 function yuz(v,t){return vir(v/t*100)+'%';}
 
-/* ── 24.000 haritada burç dağılımı ── */
+/* ── 24.000 gök anında burç dağılımı ── */
 function tipDagilim(d){
  var b0=S.indexOf(d.burc);
  return{
- etiket:'24.000 gerçek haritada burç dağılımı: Güneş, Ay ve yükselen için on iki burç.',
+ etiket:'24.000 gök anında burç dağılımı: Güneş, Ay ve yükselen için on iki burç.',
  en:1000,boy:function(G){return G<520?1.02:.52;},adet:3,hiz:2200,kare:0,durak:0,
  kay:[{ad:'k',min:0,max:2,etiket:'Nokta seç: Güneş burcu, Ay burcu, yükselen burç'}],
  ciz:function(c){
@@ -37,7 +37,7 @@ function tipDagilim(d){
   var x0=LW,x1=G-RW,gen=M.max(30,x1-x0),h=(alt-ust)/12,mx=0,i,v;
   for(i=0;i<12;i++)mx=M.max(mx,A[i]);
   var esit=T/12,ex=x0+esit/mx*gen;
-  yz(az?NOK[k][1]:NOK[k][1]+' · '+bin(T)+' gerçek haritada',0,ust/2,az?'11px':'13px',C.ink);
+  yz(az?NOK[k][1]:NOK[k][1]+' · '+bin(T)+' gök anında',0,ust/2,az?'11px':'13px',C.ink);
   if(!az)yz('eşit dağılım '+bin(esit),G,ust/2,'11px',C.dim,'right');
   for(i=0;i<12;i++){
    v=A[i];var y=ust+h*i,ym=y+h/2,bw=M.max(1,v/mx*gen),se=i===b0;
@@ -60,11 +60,11 @@ function tipDagilim(d){
   for(i=1;i<12;i++){if(A[i]>A[en])en=i;if(A[i]<A[az])az=i;}
   var kat=vir(A[en]/A[az],2),me=b0>=0?A[b0]:0,fk=b0>=0?me-T/12:0;
   return{o:NOK[k][1]+' · en sık <b>'+S[en]+'</b> '+yuz(A[en],T)+' · en seyrek <b>'+S[az]+'</b> '+yuz(A[az],T),
-  z:'<b>'+bin(T)+' gerçek harita</b> içinde '+NOK[k][2]+' dağılımı: en sık <i>'+S[en]+'</i> ('
-   +bin(A[en])+' harita, '+yuz(A[en],T)+'), en seyrek <i>'+S[az]+'</i> ('+bin(A[az])+' harita, '+yuz(A[az],T)
+  z:'<b>'+bin(T)+' gök anı</b> içinde '+NOK[k][2]+' dağılımı: en sık <i>'+S[en]+'</i> ('
+   +bin(A[en])+' an, '+yuz(A[en],T)+'), en seyrek <i>'+S[az]+'</i> ('+bin(A[az])+' an, '+yuz(A[az],T)
    +'). En sık ile en seyrek arasında <b>'+kat+' kat</b> fark var.'
-   +(b0>=0?' '+S[b0]+' burcunda '+bin(me)+' harita ('+yuz(me,T)+') — eşit dağılımın '
-     +(fk>=0?bin(M.abs(fk))+' harita üstünde':bin(M.abs(fk))+' harita altında')+'.':'')
+   +(b0>=0?' '+S[b0]+' burcunda '+bin(me)+' an ('+yuz(me,T)+') — eşit dağılımın '
+     +(fk>=0?bin(M.abs(fk))+' an üstünde':bin(M.abs(fk))+' an altında')+'.':'')
    +' Sayılar bu örneklemin kendisidir; genel bir nüfus oranı olarak değil, ölçülmüş bir dağılım olarak okunabilir.'};
  }};
 }
@@ -100,8 +100,8 @@ function hub(){
    panel.innerHTML='<p class="bk-etiket">Çarkta seçili burç</p>'
     +'<p class="bk-ozet"><b>'+s.glif+' '+s.ad+'</b> — '+s.tarih+' · '+s.el+' elementi, '+s.nit
     +' niteliği · yöneticisi '+s.yon+'. '+s.ozet+'</p>'
-    +'<p class="bk-g">24.000 gerçek haritada Güneş’i '+s.ad+' burcunda olan '+s.say
-    +' harita var ('+s.oran+').</p>'
+    +'<p class="bk-g">24.000 gök anında Güneş’i '+s.ad+' burcunda olan '+s.say
+    +' an var ('+s.oran+').</p>'
     +'<p><a class="bk-bag" href="/'+s.slug+'-burcu-ozellikleri">'+s.ad
     +' burcu özellikleri <span aria-hidden="true">→</span></a></p>';
   }

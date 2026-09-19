@@ -10,7 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="/astronomy.browser.min.js?v=3" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Astrokartografi Haritası","applicationCategory":"LifestyleApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"url":"https://sorbiapp.com/astrokartografi","provider":{"@type":"Organization","name":"Sorbi","url":"https://sorbiapp.com/"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Astrokartografi nedir?","acceptedAnswer":{"@type":"Answer","text":"Astrokartografi, doğum haritandaki gezegenlerin dünya üzerinde hangi bölgelerde güçlendiğini gösteren harita tekniğidir. Her gezegenin dört açısal hattı (MC, IC, Yükselen, Alçalan) dünya haritasına çizilir; bir hatta yakın yerler o gezegenin temasını yaşamına taşır."}},{"@type":"Question","name":"Nereye taşınmalıyım astrolojiye göre nasıl bulunur?","acceptedAnswer":{"@type":"Answer","text":"Aradığın temaya göre bakılır: aşk için Venüs, kariyer için Güneş veya Jüpiter, huzur için Ay hatlarına yakın şehirler öne çıkar. Bu araç tüm gezegen hatlarını haritanda gösterir."}},{"@type":"Question","name":"Astrokartografi haritası doğru mu?","acceptedAnswer":{"@type":"Answer","text":"Bu araçtaki tüm gezegen hatları, doğum anındaki gerçek gök konumlarından Swiss Ephemeris hassasiyetinde, cihazında anlık hesaplanır."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Astrokartografi nedir?","acceptedAnswer":{"@type":"Answer","text":"Astrokartografi, doğum haritandaki gezegenlerin dünya üzerinde hangi bölgelerde güçlendiğini gösteren harita tekniğidir. Her gezegenin dört açısal hattı (MC, IC, Yükselen, Alçalan) dünya haritasına çizilir; bir hatta yakın yerler o gezegenin temasını yaşamına taşır."}},{"@type":"Question","name":"Nereye taşınmalıyım astrolojiye göre nasıl bulunur?","acceptedAnswer":{"@type":"Answer","text":"Aradığın temaya göre bakılır: aşk için Venüs, kariyer için Güneş veya Jüpiter, huzur için Ay hatlarına yakın şehirler öne çıkar. Bu araç tüm gezegen hatlarını haritanda gösterir."}},{"@type":"Question","name":"Astrokartografi haritası doğru mu?","acceptedAnswer":{"@type":"Answer","text":"Bu araçtaki tüm gezegen hatları, doğum anındaki gök konumlarından cihazında astronomy-engine ile anlık hesaplanır; açısal noktalar Swiss Ephemeris çıktısına karşı test edildi."}}]}</script>
 <style>
 :root{--terra:#E3A692;--btn-ink:#F6EFE1;--bg:#0D0810;--gold:#DFA98F;--gold-light:#E4CF9A;--terra:#E3A692;--terra2:#E3A692;--text:#E8E4DA;--muted:#8A8578;--line:rgba(223,169,143,.25);--card:#16111A}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#1A1320 0,var(--bg) 60%);color:var(--text);font-family:'Inter',sans-serif;line-height:1.65}
@@ -135,7 +135,7 @@ body:has(> .sky)::before{display:none}
   <h2>Nereye taşınmalıyım?</h2>
   <p>Cevap ne aradığına bağlı. Aşk ve çekim için <b>Venüs</b>, kariyer ve görünürlük için <b>Güneş</b> ya da <b>Jüpiter</b>, şans ve bolluk için <b>Jüpiter</b>, huzur ve aidiyet için <b>Ay</b> hatlarına yakın şehirler öne çıkar. <b>Satürn</b> hatları ise zorlayıcı ama olgunlaştırıcıdır. Haritanda bu hatların tam olarak nereden geçtiğini yukarıda görebilirsin.</p>
   <h2>Bu harita ne kadar doğru?</h2>
-  <p>Tüm gezegen hatları, doğum anındaki gerçek gök konumlarından (RA, deklinasyon ve yıldız zamanı) Swiss Ephemeris hassasiyetinde, cihazında anlık hesaplanır. Doğru sonuç için doğum saatini olabildiğince net gir.</p>
+  <p>Tüm gezegen hatları, doğum anındaki gök konumlarından (RA, deklinasyon ve yıldız zamanı) cihazında astronomy-engine ile anlık hesaplanır; açısal noktalar Swiss Ephemeris çıktısına karşı test edildi. Doğru sonuç için doğum saatini olabildiğince net gir.</p>
  </div>
  <p class="foot">Kader değil, farkındalık. · <a href="/">sorbiapp.com</a> · <a href="/dogum-haritasi-hesaplama" style="color:var(--gold)">Doğum haritası</a> · <a href="/uygun-gun-secimi" style="color:var(--gold)">Uygun gün</a></p>
 </div>
@@ -319,7 +319,7 @@ document.getElementById('go').onclick=()=>{
  <div class="sbft-bot"><span>© 2026 Sorbi · sorbiapp.com</span><span>Astroloji içerikleri kişisel farkındalık amaçlıdır; kesin gelecek vaadi değildir.</span></div>
 </footer>
 <!-- SORBI-FOOTER:END -->
-<script src="/sorbi-form.js?v=3" defer></script>
+<script src="/sorbi-form.js?v=4" defer></script>
 <script src="/sorbi-profil.js?v=3" defer></script>
   <script src="/sorbi-olcum.js?v=1" defer></script>
 </body></html>

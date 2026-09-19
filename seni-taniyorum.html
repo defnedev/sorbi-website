@@ -302,7 +302,7 @@ body:has(> .sky)::before{display:none}
 <div class="wrap">
  <div class="top">
   <h1>Seni tanıyorum.</h1>
-  <p class="sub">Genel burç yorumu değil. Doğduğun anı ver — dışını, içini, kimseye söylemediğin gerilimini birkaç cümlede okuyayım.</p>
+  <p class="sub">Genel burç yorumu değil. Doğduğun anı ver — haritandaki gerçek yerleşimlerden (Güneş, Ay, yükselen, açılar, element dağılımı) birkaç cümle çıkarayım ve neye baktığımı göstereyim.</p>
  </div>
 
  <div class="card" id="form">
@@ -339,11 +339,11 @@ body:has(> .sky)::before{display:none}
   <div class="msg-head" id="msgHead"><span>Haritanın söyledikleri</span></div>
   <div id="lines"></div>
   <div class="react" id="react">
-   <span class="rq">Ne kadar denk geldi?</span>
+   <span class="rq">Bu okuma işine yaradı mı?</span>
    <div class="rbtns">
-    <button data-r="tam">Tam ben 😳</button>
-    <button data-r="cogu">Çoğu doğru</button>
-    <button data-r="emin">Emin değilim</button>
+    <button data-r="tam">Yararlı oldu</button>
+    <button data-r="cogu">Kısmen</button>
+    <button data-r="emin">Yeterince açık değil</button>
    </div>
    <div class="rthanks" id="rthanks"></div>
   </div>
@@ -416,8 +416,30 @@ pin.addEventListener('input',()=>{clearTimeout(gt);const q=pin.value.trim();if(q
 document.addEventListener('click',e=>{if(!e.target.closest('.geo'))gr.classList.remove('show');});
 
 (function(){try{document.getElementById('d').max=new Date().toISOString().slice(0,10);}catch(e){}})();
-// prefill from profile
-(function(){try{var prf=JSON.parse(localStorage.getItem('sorbi_profile')||'null');var b=prf&&prf.birth;if(b&&b.date){document.getElementById('d').value=b.date;if(b.time)document.getElementById('t').value=b.time;if(b.lat){pk={lat:+b.lat,lon:+b.lon,tz:b.tz,label:b.place||''};if(b.place){pin.value=b.place;pkl.textContent=b.place;}}}}catch(e){}})();
+// Ön dolum: sorbi_birth VE sorbi_profile birlikte okunur.
+// Natal hesaplayici yalniz sorbi_birth yaziyor; sorbi_profile'i defer ile yuklenen
+// sorbi-profil.js uretiyor — yalniz sorbi_profile okunursa ilk ziyarette form bos kaliyordu.
+(function(){
+ function oku(k){try{return JSON.parse(localStorage.getItem(k)||'null');}catch(e){return null;}}
+ function dogum(){
+  var b=oku('sorbi_birth'); if(b&&b.date) return b;
+  var p=oku('sorbi_profile'); if(p&&p.birth&&p.birth.date) return p.birth;
+  return null;
+ }
+ function doldur(){
+  var b=dogum(); if(!b||!b.date) return false;
+  var d=document.getElementById('d'); if(!d) return false;
+  if(!d.value) d.value=b.date;
+  var t=document.getElementById('t'); if(t&&!t.value&&b.time) t.value=b.time;
+  if(b.lat){ pk={lat:+b.lat,lon:+b.lon,tz:b.tz,label:b.place||''};
+   if(b.place&&!pin.value){ pin.value=b.place; pkl.textContent=b.place; } }
+  return true;
+ }
+ if(!doldur()){ // kayit sonradan olusursa (SorbiProfil jeton bakimi) bir kez daha dene
+  document.addEventListener('DOMContentLoaded',doldur);
+  window.addEventListener('load',doldur);
+ }
+})();
 
 function computeLite(A,o){
  // Gercek motor: sorbi-astro.js — sitedeki diger haritalarla ayni kaynak.
@@ -556,16 +578,31 @@ function drawWheel(ch){
  return s;
 }
 let _sorbiKosuyor=false;
+// Satir ici uyari — sorbi-form.js'in not() kalibi; alert kullanilmaz.
+function sorbiUyar(msg,odak){
+ const d=document.getElementById('d');
+ if(window.SorbiForm&&window.SorbiForm.not){ window.SorbiForm.not(d,msg,'hata'); }
+ else{
+  let b=document.getElementById('sfnot-d');
+  if(!msg){ if(b)b.remove(); }
+  else{ if(!b){ b=document.createElement('div'); b.id='sfnot-d'; b.className='sfnot';
+        b.style.cssText='font-size:.74rem;line-height:1.45;margin-top:.35rem;color:#F2A08A';
+        (d.nextElementSibling&&d.nextElementSibling.classList.contains('sfwrap')?d.nextElementSibling:d).insertAdjacentElement('afterend',b); }
+    b.textContent=msg; }
+ }
+ if(msg&&odak){ try{ (document.querySelector('.sfwrap input.sfseg')||d).focus(); }catch(e){} }
+}
 document.getElementById('go').onclick=()=>{
  if(_sorbiKosuyor)return;                       // cift tiklama korumasi
- const A=window.Astronomy;if(!A||!window.SorbiAstro){alert('Motor yükleniyor, birkaç saniye sonra dene.');return;}
+ const A=window.Astronomy;if(!A||!window.SorbiAstro){sorbiUyar('Motor henüz yüklenmedi — birkaç saniye sonra yeniden dene.');return;}
  const dv=document.getElementById('d').value;const tv=document.getElementById('t').value;
- if(!dv){alert('Doğum tarihini gir.');return;}
+ if(!dv){sorbiUyar('Doğum tarihini gir — gün, ay ve yıl gerekli.',1);return;}
  const bugun=new Date();bugun.setHours(23,59,59,999);
  const secilen=new Date(dv+'T'+(tv||'12:00'));
- if(isNaN(secilen)){alert('Doğum tarihini kontrol et.');return;}
- if(secilen>bugun){alert('Doğum tarihi gelecekte olamaz.');return;}
- if(secilen<new Date('1900-01-01')){alert('1900 öncesi için hesap yapamıyorum.');return;}
+ if(isNaN(secilen)){sorbiUyar('Tarihi okuyamadım — GG.AA.YYYY olarak kontrol et.',1);return;}
+ if(secilen>bugun){sorbiUyar('Bu tarih gelecekte. Doğum tarihini gir.',1);return;}
+ if(secilen<new Date('1900-01-01')){sorbiUyar('1900 öncesi tarihlerde hesap yapamıyorum.',1);return;}
+ sorbiUyar('');
  _sorbiKosuyor=true;
  const noTime=!tv;const[y,mon,d]=dv.split('-').map(Number);const[h,mi]=(tv||'12:00').split(':').map(Number);
  const ch=computeLite(A,{y,mo:mon,d,h,mi,lat:pk.lat,lon:pk.lon,tz:pk.tz||'Europe/Istanbul',noTime});
@@ -726,14 +763,14 @@ document.getElementById('go').onclick=()=>{
 // reaction buttons
 document.querySelectorAll('#react .rbtns button').forEach(b=>{b.onclick=()=>{
  document.querySelectorAll('#react .rbtns button').forEach(x=>x.classList.remove('picked'));b.classList.add('picked');
- const r=b.dataset.r;const msg={tam:'Bunlar sadece üç yerleşim ✦ Evler ve açılar devreye girince okuma daha da netleşebilir.',cogu:'Denk gelmeyen kısım çoğu zaman evlerde ve açılarda saklıdır ✦',emin:'Doğum saatin tam değilse okuma yüzeyde kalabilir — saatini bulursan yükselen ve evler netleşir.'}[r];
+ const r=b.dataset.r;const msg={tam:'Bu okuma üç yerleşimden çıktı ✦ Evler ve açılar devreye girince ayrıntı artabilir.',cogu:'Eksik kalan kısım çoğunlukla evlerde ve açılarda duruyor ✦ Geri bildirim için teşekkürler.',emin:'Doğum saatin tam değilse okuma yüzeyde kalabilir — saatini bulursan yükselen ve evler netleşir.'}[r];
  document.getElementById('rthanks').textContent=msg;
  try{fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'seni_taniyorum_react',meta:r}),keepalive:true});}catch(e){}
 };});
 // text share (no image card — just a viral link)
 function sorbiPaylasMetni(){
  const a=window._sorbiArch, p=window._sorbiPay;
- if(!a) return 'Sorbi beni birkaç cümlede fazla iyi okudu 😳 Doğum tarihini gir, seni de okusun:';
+ if(!a) return 'Sorbi, doğum anımdaki yerleşimlerden birkaç cümle çıkardı. Doğum tarihini gir, seninkine de baksın:';
  // en nadir yerlesim varsa kanca o: "herkeste olmaz" en paylasilabilir cumle
  var y=window._sorbiYer;
  if(y && y.yuzbinde && y.yuzbinde<2000){
@@ -902,7 +939,7 @@ document.getElementById('copyBtn').onclick=async()=>{
  <div class="sbft-bot"><span>© 2026 Sorbi · sorbiapp.com</span><span>Astroloji içerikleri kişisel farkındalık amaçlıdır; kesin gelecek vaadi değildir.</span></div>
 </footer>
 <!-- SORBI-FOOTER:END -->
-<script src="/sorbi-form.js?v=3" defer></script>
+<script src="/sorbi-form.js?v=4" defer></script>
 <script src="/sorbi-profil.js?v=3" defer></script>
   <script src="/sorbi-olcum.js?v=1" defer></script>
 </body>

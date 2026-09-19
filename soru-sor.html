@@ -23,7 +23,7 @@
 {"@type":"Question","name":"Soru haritası (horary) nedir?","acceptedAnswer":{"@type":"Answer","text":"Horary, bir sorunun sorulduğu an ve yer için çizilen haritadır. Doğum haritasından farkı, doğum bilgisine değil sorunun anına dayanmasıdır. Yükselen ve hükümdarı soranı, konunun evi ve hükümdarı sorulan şeyi temsil eder; ikisi arasındaki açı, Ay'ın durumu ve radikallik uyarıları geleneksel kurallarla okunur."}},
 {"@type":"Question","name":"Doğum saatimi bilmem gerekiyor mu?","acceptedAnswer":{"@type":"Answer","text":"Hayır. Soru haritası için doğum tarihi ve saati gerekmez; gereken tek şey sorunun sorulduğu an ve bulunduğun konum. Bu, horary'yi doğum haritasından ayıran temel özelliktir. İstersen an haritasını kendi doğum haritanla ikinci bir katman olarak karşılaştırabilirsin."}},
 {"@type":"Question","name":"Sayfa kesin bir cevap veriyor mu?","acceptedAnswer":{"@type":"Answer","text":"Hayır. Sayfa yalnızca hesaplanabilen kısmı gösterir: yükselen derecesi, hükümdarlar, açı ve orb, Ay'ın burcu, evi ve boşlukta olup olmadığı. Bunların ne anlama gelebileceği geleneksel kural olarak yanına yazılır; sonuç bir yorumdur ve kararı sen verirsin."}},
-{"@type":"Question","name":"Hesaplamalar ne kadar doğru?","acceptedAnswer":{"@type":"Answer","text":"Gezegen konumları ve ev başlangıçları Swiss Ephemeris çıktısına karşı test edildi; yedi ev sisteminde de fark ölçülebilir düzeyin altında kaldı. Aynı anı Harita Atölyesi'nin an haritası kipinde de görebilirsin."}},
+{"@type":"Question","name":"Hesaplamalar ne kadar doğru?","acceptedAnswer":{"@type":"Answer","text":"Gezegen boylamları tarayıcı içi astronomy-engine ile hesaplanır; ev başlangıçları ve açısal noktalar Swiss Ephemeris çıktısına karşı test edildi ve yedi ev sisteminde de fark ölçülebilir düzeyin altında kaldı. Aynı anı Harita Atölyesi'nin an haritası kipinde de görebilirsin."}},
 {"@type":"Question","name":"Sorbi kişiye özel okuma yapıyor mu?","acceptedAnswer":{"@type":"Answer","text":"Hayır. Sorbi bir hesaplama ve bilgi paylaşımı aracıdır; astroloji hizmeti satmaz, danışmanlık vermez ve aracılık etmez. Sayfadaki iskelet, soru haritasını kendin okuyabilmen içindir."}}]}</script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -60,7 +60,7 @@ svg{display:block}
 .hero h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(1.9rem,5.2vw,2.9rem);letter-spacing:-.4px;margin-bottom:.6rem}
 .hero .sub{color:var(--mut);font-size:1.02rem;max-width:640px;margin:0 auto}
 .hero .tags{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;margin-top:1.1rem}
-.tag{font-size:.78rem;letter-spacing:.6px;text-transform:uppercase;color:var(--gold-lt);border:1px solid var(--line2);border-radius:99px;padding:.3rem .75rem}
+.tag{font-size:.78rem;letter-spacing:.6px;color:var(--gold-lt);border:1px solid var(--line2);border-radius:99px;padding:.3rem .75rem}
 .tag.hi{color:#20180A;background:var(--gold-br);border-color:transparent;font-weight:600}
 
 /* ── bölüm ── */
@@ -260,10 +260,10 @@ body:has(> .sky)::before{display:none}
   <h1>Sorunun Anının Haritası</h1>
   <p class="sub">Soru haritası doğum anına değil, sorunun sorulduğu ana ve yere göre çizilir. Sorunu yaz, konumunu seç — o anın haritası burada çıksın; yükseleni, hükümdarları ve Ay'ı geleneksel kurallarla kendin oku.</p>
   <div class="tags">
-    <span class="tag hi">Doğum saati gerekmez</span>
-    <span class="tag">Sorunun anı + yeri</span>
-    <span class="tag">Swiss Ephemeris doğrulamalı</span>
-    <span class="tag">Tarayıcında hesaplanır</span>
+    <span class="tag hi">DOĞUM SAATİ GEREKMEZ</span>
+    <span class="tag">SORUNUN ANI + YERİ</span>
+    <span class="tag">EV BAŞLANGIÇLARI: SWISS EPHEMERIS TESTLİ</span>
+    <span class="tag">TARAYICINDA ASTRONOMY-ENGINE</span>
   </div>
 </div>
 
@@ -456,7 +456,7 @@ body:has(> .sky)::before{display:none}
   <h2>Sayfa neyi hesaplar, neyi hesaplamaz?</h2>
   <p>Hesaplanan: anın Yükseleni ve derecesi, Yükselen burcunun hükümdarı, seçtiğin konunun evi ve o evin hükümdarı, iki hükümdar arasındaki açı ve orbu (uygulanan mı ayrılan mı), Ay'ın burcu, evi, boşlukta olup olmadığı ve sıradaki açısı, Satürn'ün 1. ya da 7. evde olup olmadığı. Hesaplanmayan: cevabın kendisi. Her satırın yanındaki "geleneksel kural" o sayının Lilly geleneğinde nasıl ele alındığını söyler; olasılık dilinde yazılır ve yorum sana kalır.</p>
   <h2>Hesaplamalar ne kadar güvenilir?</h2>
-  <p>Sayfadaki harita, gezegen konumlarını tarayıcı içi bir astronomi motoruyla hesaplar; ev başlangıçları ve açısal noktalar Swiss Ephemeris çıktısına karşı test edilmiş, yedi ev sisteminde de fark ölçülebilir düzeyin altında kalmıştır. Burada gördüğün derece ve dakika değerleri, profesyonel astroloji yazılımlarının verdikleriyle eşleşir.</p>
+  <p>Sayfadaki harita, gezegen konumlarını tarayıcı içi astronomy-engine motoruyla hesaplar; ev başlangıçları ve açısal noktalar Swiss Ephemeris çıktısına karşı test edilmiş, yedi ev sisteminde de fark ölçülebilir düzeyin altında kalmıştır. Burada gördüğün derece ve dakika değerleri, profesyonel astroloji yazılımlarının verdikleriyle eşleşir.</p>
 </section>
 
 
@@ -850,7 +850,7 @@ if(BP&&$('bd').value) renderNatal();
  <div class="sbft-bot"><span>© 2026 Sorbi · sorbiapp.com</span><span>Astroloji içerikleri kişisel farkındalık amaçlıdır; kesin gelecek vaadi değildir.</span></div>
 </footer>
 <!-- SORBI-FOOTER:END -->
-<script src="/sorbi-form.js?v=3" defer></script>
+<script src="/sorbi-form.js?v=4" defer></script>
 <script src="/sorbi-profil.js?v=3" defer></script>
   <script src="/sorbi-olcum.js?v=1" defer></script>
 </body>

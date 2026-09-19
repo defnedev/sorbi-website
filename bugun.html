@@ -143,6 +143,12 @@ body:has(> .sky)::before{display:none}
 </div>
 <script>
 const SIGNS=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
+/* Turkce ek tablolari — burc adlarinin son hecesi hep ayni sesli/sessiz uyumunu vermiyor,
+   bu yuzden 12 burc icin ekler elle sabitlendi (Oglak'ta, Kova'ya, Terazi'de...). */
+const EK_BULUNMA=["'ta","'da","'de","'te","'da","'ta","'de","'te","'da","'ta","'da","'ta"]; // -de hali
+const EK_YONELME=["'a","'ya","'e","'e","'a","'a","'ye","'e","'a","'a","'ya","'a"];          // -e hali
+const burcDe=i=>SIGNS[i]+EK_BULUNMA[i];
+const burcE=i=>SIGNS[i]+EK_YONELME[i];
 const norm=d=>((d%360)+360)%360,RAD=Math.PI/180;
 const signOf=l=>Math.floor(norm(l)/30);
 function tzOffMin(date,tz){if(tz!==undefined&&tz!==null&&tz!==''&&isFinite(tz))return (+tz)*60;try{const p=new Intl.DateTimeFormat('en-US',{timeZone:tz,hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(date).reduce((a,x)=>(a[x.type]=x.value,a),{});const h=p.hour==='24'?0:+p.hour;return(Date.UTC(+p.year,+p.month-1,+p.day,h,+p.minute,+p.second)-date.getTime())/60000;}catch(e){return 180;}}
@@ -188,7 +194,7 @@ function draw(){
   const isVoid=(last!=null&&nowMs>=last&&ing&&nowMs<ing);
   const f=ms2=>new Date(ms2).toLocaleTimeString('tr-TR',{timeZone:'Europe/Istanbul',hour:'2-digit',minute:'2-digit'});
   const vd=document.getElementById('voc');vd.style.display='block';
-  vd.innerHTML=isVoid?`🌙 <b style="color:var(--terra)">Ay şu an boşlukta</b> — ${SIGNS[(ms+1)%12]}'a geçene dek (${ing?f(ing):''}). Yeni iş başlatma, imza ve kritik kararları ertele.`:`Ay ${SIGNS[ms]}'de, ${MOODS[ms]} bir gün. ${ing?SIGNS[(ms+1)%12]+"'a geçiş: "+f(ing):''}`;
+  vd.innerHTML=isVoid?`<b style="color:var(--terra)">Ay şu an boşlukta</b> — ${burcE((ms+1)%12)} geçene dek (${ing?f(ing):''}). Yeni iş başlatmayı, imzayı ve kritik kararları ertelemek işine yarayabilir.`:`Ay ${burcDe(ms)}, ${MOODS[ms]} bir gün. ${ing?burcE((ms+1)%12)+" geçiş: "+f(ing):''}`;
  }catch(e){}
 
  // personal
@@ -206,7 +212,7 @@ function draw(){
   hits.sort((a,b)=>a.orb-b.orb);
   const pc=document.getElementById('personalCard');pc.style.display='block';
   if(!hits.length){
-   document.getElementById('personal').innerHTML=`<div class="lead">Bugün gök seninle sakin.</div><p>Haritana değen belirgin bir transit yok — akışına güvenebileceğin, kendine dönebileceğin bir gün. Ay ${SIGNS[ms]}'de, ${MOODS[ms]} bir enerji taşıyor.</p>`;
+   document.getElementById('personal').innerHTML=`<div class="lead">Bugün gök seninle sakin.</div><p>Haritana değen belirgin bir transit yok — akışına güvenebileceğin, kendine dönebileceğin bir gün. Ay ${burcDe(ms)}, ${MOODS[ms]} bir enerji taşıyor.</p>`;
   }else{
    const top=hits[0];const theme=TTHEME[top.t]||top.t;const nat2=NPT[top.n]||top.n;
    let h=`<div class="lead">${['Güçlü bir gün.','Akış günü.','Dikkat günü.'][top.ang===0?0:(top.ang===60||top.ang===120?1:2)]}</div>`;

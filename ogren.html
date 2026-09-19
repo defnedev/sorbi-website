@@ -145,7 +145,7 @@ body:has(> .sky)::before{display:none}
 <section class="top">
   <div class="kicker">✦ Astroloji okuryazarlığı</div>
   <h1>Önce <em>gökyüzünü</em> anla, yoruma sonra geç</h1>
-  <p>Astrolojiye inanmak zorunda değilsin. Ama retro'nun ne olduğunu, Merkür'ün neden hep Güneş'in yanında durduğunu ve yükselenin neden doğum saatine bağlı olduğunu bilmek, gökyüzüne bakmanın kendisi. Aşağıdaki üç animasyonun hiçbiri temsili değil — üçü de gerçek efemeris verisiyle, Swiss Ephemeris'e karşı doğrulanmış hesaplarla çiziliyor.</p>
+  <p>Astrolojiye inanmak zorunda değilsin. Ama retro'nun ne olduğunu, Merkür'ün neden hep Güneş'in yanında durduğunu ve yükselenin neden doğum saatine bağlı olduğunu bilmek, gökyüzüne bakmanın kendisi. Aşağıdaki üç animasyonun hiçbiri temsili değil — üçü de gerçek efemeris verisiyle çiziliyor: hesap astronomy-engine ile yapılır, ev başlangıçları ve açısal noktalar Swiss Ephemeris çıktısına karşı test edildi.</p>
 </section>
 
 <section class="ders">
@@ -196,7 +196,7 @@ body:has(> .sky)::before{display:none}
   <div data-sorbi-gosteri="yukselen-halkasi" data-kaynak="/ogren-veri.json" data-yol="yukselen"
        data-kare="36" data-yer="20 Mart 2026 · İstanbul"></div>
   <div class="cikarim">Doğum saatini dört saat yanlış hatırlamak, yükseleni iki burç kaydırır. Haritanın evleri de onunla birlikte kayar — bu yüzden saat sorulur.</div>
-  <p style="margin-top:1.1rem">Bir de yan etkisi var: burçlar ufuktan <b>eşit sürede doğmuyor.</b> Türkiye enleminde Aslan yükselen, Balık yükselenden 2,2 kat daha sık görülür. Bunu 24.000 gerçek harita üzerinde saydık — <a href="/sayim-yukselen" style="color:var(--gold-br)">tablonun tamamı burada</a>.</p>
+  <p style="margin-top:1.1rem">Bir de yan etkisi var: burçlar ufuktan <b>eşit sürede doğmuyor.</b> Türkiye enleminde Aslan yükselen, Balık yükselenden 2,2 kat daha sık görülür. Bunu gökyüzünden örneklenmiş 24.000 gök anında saydık — <a href="/sayim-yukselen" style="color:var(--gold-br)">tablonun tamamı burada</a>.</p>
 
   <div data-sorbi-sinav="ogren-3" data-ad="Ders 03 · kendini dene" data-puan="20">
     <div data-soru="Yükselen burç ortalama ne kadar sürede değişir?">
@@ -250,13 +250,13 @@ body:has(> .sky)::before{display:none}
   </div>
 </div>
 
-<p class="dipnot">Bu sayfadaki üç animasyon da temsili çizim değil. Gezegen konumları astronomy-engine ile hesaplandı ve Swiss Ephemeris çıktısına karşı doğrulandı: retro verisi 5 Eylül 2026'dan başlayan 120 günün günlük konumları, açı grafiği 2026–2027 arası iki yılın iki günde bir örneklenmiş değerleri, yükselen halkası 20 Mart 2026'da İstanbul için on dakikada bir hesaplanmış. Kaynak veriyi <a href="/ogren-veri.json" style="color:var(--mut)">ogren-veri.json</a> dosyasında görebilirsin. Ders 04'teki çark, ızgara ve açı gösterimi efemeris kullanmaz; burçlar kuşağının saf geometrisiyle çizilir, açı ve orb sınırları sitenin ortak açı tablosundan gelir. Sınav ve ilerleme kaydı yalnız kendi tarayıcında tutulur.<br><br>
+<p class="dipnot">Bu sayfadaki üç animasyon da temsili çizim değil. Gezegen konumları astronomy-engine ile hesaplandı; ev başlangıçları ve açısal noktalar Swiss Ephemeris çıktısına karşı test edildi. Retro verisi 5 Eylül 2026'dan başlayan 120 günün günlük konumları, açı grafiği 2026–2027 arası iki yılın iki günde bir örneklenmiş değerleri, yükselen halkası ise 20 Mart 2026'da İstanbul için on dakikada bir hesaplandı. Kaynak veriyi <a href="/ogren-veri.json" style="color:var(--mut)">ogren-veri.json</a> dosyasında görebilirsin. Ders 04'teki çark, ızgara ve açı gösterimi efemeris kullanmaz; burçlar kuşağının saf geometrisiyle çizilir, açı ve orb sınırları sitenin ortak açı tablosundan gelir. Sınav ve ilerleme kaydı yalnız kendi tarayıcında tutulur.<br><br>
 Astroloji sembolik bir yorum dilidir. Bu sayfa yorumu değil, altındaki gökyüzü mekaniğini anlatır — ikisini ayırmak okuryazarlığın kendisidir.</p>
 
 </div>
-<script src="/sorbi-astro.js?v=1" defer></script>
-<script src="/sorbi-gosteri.js?v=1" defer></script>
-<script src="/sorbi-oyun.js?v=1" defer></script>
+<script src="/sorbi-astro.js?v=4" defer></script>
+<script src="/sorbi-gosteri.js?v=2" defer></script>
+<script src="/sorbi-oyun.js?v=2" defer></script>
 <script src="/sorbi-geri-bildirim.js?v=1" defer></script>
   <script src="/sorbi-olcum.js?v=1" defer></script>
 <!-- SORBI-FOOTER:START -->

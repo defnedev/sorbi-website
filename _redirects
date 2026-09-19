@@ -1,9 +1,9 @@
 # Universal-link fallback (Cloudflare Pages).
 # App yüklüyse iOS/Android linki uygulamada açar (.well-known AASA/assetlinks).
-# Yüklü değilse tarayıcı bu yollara düşer → 404 yerine ana sayfa + app bölümü.
-/ref/*      /?ref=:splat#uygulama      302
-/invite/*   /?ref=:splat#uygulama      302
-/share/*    /#uygulama                 302
+# Yüklü değilse tarayıcı bu yollara düşer → 404 yerine ana sayfa.
+/ref/*      /?ref=:splat              302
+/invite/*   /?ref=:splat              302
+/share/*    /                         302
 
 # App Store Support URL alias (2026-08-03)
 /support        /destek   301
