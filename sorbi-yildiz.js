@@ -19,24 +19,24 @@ function konum(l){var s=Math.floor(norm(l)/30), d=norm(l)%30, dd=Math.floor(d), 
 
 /* ── sabit yıldızlar: ad, J2000 ekliptik boylam, ekliptik enlem, tema ── */
 var YIL=[
- ['Algol',56.17,22.4,'yoğunluk','Algol yoğunlukla anılır — bir konuya kilitlenip kolay bırakmamak sana tanıdık gelebilir.'],
- ['Alcyone',60.00,4.1,'keskin görüş','Alcyone görmekle anılır — kimsenin fark etmediği ayrıntıyı yakalamak seni yorabilir de, işine de yarayabilir.'],
- ['Aldebaran',69.78,-5.5,'dürüstlük','Aldebaran dürüstlükle anılır — doğruyu söylemenin bedelini ödemek sana tanıdık gelebilir.'],
- ['Rigel',76.83,-31.1,'yol gösterme','Rigel öğretmekle anılır — birine bir şeyi anlatırken rahatladığını fark edebilirsin.'],
- ['Betelgeuse',88.75,-16.0,'dayanıklılık','Betelgeuse dayanmakla anılır — uzun süren işleri bitirmek senin alanın olabilir.'],
- ['Sirius',104.08,-39.6,'görünürlük','Sirius görünmekle anılır — istemediğin anda bile fark edilmek sana tanıdık gelebilir.'],
- ['Castor',110.23,10.1,'söz','Castor sözle anılır — yazmak ya da konuşmak senin en rahat aracın olabilir.'],
- ['Pollux',113.22,6.7,'kararlılık','Pollux kararlılıkla anılır — bir kez karar verdikten sonra geri dönmemek sana tanıdık gelebilir.'],
- ['Procyon',115.78,-16.0,'hız','Procyon hızla anılır — çabuk yükselen işlerde sabırlı kalmak gerekebilir.'],
- ['Regulus',149.83,0.5,'göz önünde olmak','Regulus görünürlükle anılır — kalabalıkta fark edilmek ve bunun sorumluluğunu taşımak sana tanıdık gelebilir.'],
- ['Spica',203.83,-2.1,'yetenek','Spica yetenekle anılır — yaptığın işin karşılığını beklemediğin yerden almak sana tanıdık gelebilir.'],
- ['Arcturus',204.23,30.7,'yol açmak','Arcturus yeni yol açmakla anılır — hazır yoldan gitmemek seni yorabilir de, ayırt edici de olabilir.'],
- ['Antares',249.77,-4.6,'cesaret','Antares cesaretle anılır — sonuna kadar gitmek sana tanıdık gelebilir, durmayı bilmek işine yarayabilir.'],
- ['Vega',285.32,61.7,'estetik','Vega estetikle anılır — bir şeyin güzel durmasını önemsemek senin için doğal olabilir.'],
- ['Altair',301.78,29.3,'cüret','Altair cürete anılır — riski önce alıp sonra düşünmek sana tanıdık gelebilir.'],
- ['Deneb Algedi',323.55,-2.6,'sorumluluk','Deneb Algedi adaletle anılır — hakemlik yapmak zorunda kalmak sana tanıdık gelebilir.'],
- ['Fomalhaut',333.87,-21.1,'hayal','Fomalhaut hayalle anılır — kafandaki resmi gerçeğe çevirmek senin uğraşın olabilir.'],
- ['Achernar',345.32,-59.4,'risk','Achernar riskle anılır — kalabalıktan ayrılan kararlar almak sana tanıdık gelebilir.']
+ ['Algol',56.17,22.4,'yoğunluk','Algol yoğunlukla anılır.'],
+ ['Alcyone',60.00,4.1,'keskin görüş','Alcyone görmekle anılır.'],
+ ['Aldebaran',69.78,-5.5,'dürüstlük','Aldebaran dürüstlükle anılır.'],
+ ['Rigel',76.83,-31.1,'yol gösterme','Rigel öğretmekle anılır.'],
+ ['Betelgeuse',88.75,-16.0,'dayanıklılık','Betelgeuse dayanmakla anılır.'],
+ ['Sirius',104.08,-39.6,'görünürlük','Sirius görünmekle anılır.'],
+ ['Castor',110.23,10.1,'söz','Castor sözle anılır.'],
+ ['Pollux',113.22,6.7,'kararlılık','Pollux kararlılıkla anılır.'],
+ ['Procyon',115.78,-16.0,'hız','Procyon hızla anılır.'],
+ ['Regulus',149.83,0.5,'göz önünde olmak','Regulus görünürlükle anılır.'],
+ ['Spica',203.83,-2.1,'yetenek','Spica yetenekle anılır.'],
+ ['Arcturus',204.23,30.7,'yol açmak','Arcturus yeni yol açmakla anılır.'],
+ ['Antares',249.77,-4.6,'cesaret','Antares cesaretle anılır.'],
+ ['Vega',285.32,61.7,'estetik','Vega estetikle anılır.'],
+ ['Altair',301.78,29.3,'cüret','Altair cürete anılır.'],
+ ['Deneb Algedi',323.55,-2.6,'sorumluluk','Deneb Algedi adaletle anılır.'],
+ ['Fomalhaut',333.87,-21.1,'hayal','Fomalhaut hayalle anılır.'],
+ ['Achernar',345.32,-59.4,'risk','Achernar riskle anılır.']
 ];
 var YKEY={}; YIL.forEach(function(s){YKEY[s[0]]=s;});
 
@@ -86,7 +86,7 @@ function bul(ch, opt){
       baslik:ADI[k]+', '+BURC[Math.floor(norm(p.lon)/30)]+' burcunun son derecesinde',
       olcu:konum(p.lon),
       kanit:ADI[k]+' '+konum(p.lon)+' · burcun 29. derecesi, bir sonraki burca 1°\'den az kalmış',
-      metin:'Burcun son derecesi geçiş yeridir — bu konuda hem eski hem yeni tarafı tanımak sana tanıdık gelebilir.',
+      metin:'Burcun son derecesi geçiş yeridir.',
       gez:k, sayac:(SAY.sonBur||{})[SAYAD[k]+'|'+Math.floor(norm(p.lon)/30)]});
   });
 
@@ -96,7 +96,7 @@ function bul(ch, opt){
       baslik:ADI[k]+', '+BURC[Math.floor(norm(p.lon)/30)]+' burcunun ilk derecesinde',
       olcu:konum(p.lon),
       kanit:ADI[k]+' '+konum(p.lon)+' · burcun 0. derecesi, burca yeni girmiş',
-      metin:'Burcun ilk derecesi ham haldir — bu konuda her seferinde sıfırdan başlıyormuş gibi hissetmek sana tanıdık gelebilir.',
+      metin:'Burcun ilk derecesi ham haldir.',
       gez:k, sayac:(SAY.ilkBur||{})[SAYAD[k]+'|'+Math.floor(norm(p.lon)/30)]});
   });
 
@@ -108,7 +108,7 @@ function bul(ch, opt){
         baslik:BURC[b]+' burcunda '+({4:'dört',5:'beş',6:'altı',7:'yedi'}[g.length]||g.length)+' gezegen',
         olcu:g.map(function(k){return ADI[k];}).join(', '),
         kanit:g.map(function(k){return ADI[k]+' '+konum(P[k].lon);}).join(' · '),
-        metin:'Bir burçta bu kadar gezegen toplanınca ağırlık tek yere biner — hayatının bu alanına diğerlerinden çok daha fazla enerji vermek sana tanıdık gelebilir.',
+        metin:'Bir burçta bu kadar gezegen toplanınca ağırlık tek yere biner.',
         sayac:say});
     });
   })();
@@ -123,7 +123,7 @@ function bul(ch, opt){
       baslik:ADI[k]+', haritanın geri kalanına bağlı değil',
       olcu:'büyük açı yok',
       kanit:ADI[k]+' '+konum(p.lon)+' · diğer dokuz gezegenin hiçbiriyle kavuşum, altmışlık, kare, üçgen veya karşıtlık kurmuyor',
-      metin:'Bağsız gezegen kendi başına çalışır — bu tarafının hayatının geri kalanıyla konuşmadığını, ayrı bir odada durduğunu hissetmek sana tanıdık gelebilir.',
+      metin:'Bağsız gezegen kendi başına çalışır.',
       sayac:(SAY.bagsizGez||{})[SAYAD[k]]});
   });
 
@@ -135,7 +135,7 @@ function bul(ch, opt){
       baslik:ADI[k]+', Güneş\'in sınırının dışında',
       olcu:dk(Math.abs(p.dec))+' deklinasyon',
       kanit:ADI[k]+' deklinasyonu '+(p.dec>0?'+':'-')+dk(Math.abs(p.dec))+' · Güneş\'in ulaşabildiği en uç değer 23°26′ · bu gezegen o sınırın dışında',
-      metin:'Sınır dışı bir gezegen kuralın dışından çalışır — bu konuda herkesin yaptığını yapmamak sana tanıdık gelebilir.',
+      metin:'Sınır dışı bir gezegen kuralın dışından çalışır.',
       sayac:(SAY.oobGez||{})[SAYAD[k]]});
   });
 
@@ -148,7 +148,7 @@ function bul(ch, opt){
         olcu:dk(f)+' sapma',
         kanit:ADI[sira[i]]+' '+konum(P[sira[i]].lon)+' · '+ADI[sira[j]]+' '+konum(P[sira[j]].lon)
              +' · aradaki açı '+dk(a)+', tam '+ACILAR[q][0]+'°\'den '+dk(f)+' sapıyor',
-        metin:'Açı tam olduğunda iki gezegen tek parça gibi çalışır — bu ikisini birbirinden ayırmak sana zor gelebilir.',
+        metin:'Açı tam olduğunda iki gezegen tek parça gibi çalışır.',
         sayac:(SAY.tamAci||{})[String(ACILAR[q][0])]});
     }
   }
@@ -159,10 +159,10 @@ function bul(ch, opt){
     var D=window.SorbiDignite; if(!D||!D.tekil) return;
     var KLS=['sun','moon','mer','ven','mar','jup','sat'];
     var TANIM={
-     'Yönetici':{ad:'kendi burcunda',metin:'Kendi burcundaki gezegen kendi evinde gibi çalışır — bu alanda kimseye sormadan karar vermek sana doğal gelebilir.'},
-     'Yücelme':{ad:'yüceldiği burçta',metin:'Yüceldiği burçtaki gezegen olduğundan büyük görünür — bu alanda beklediğinden fazla yer kaplaman sana tanıdık gelebilir.'},
-     'Düşüş':{ad:'düştüğü burçta',metin:'Düştüğü burçtaki gezegen kendini küçük görür — bu alanda hak ettiğini istemek sana zor gelebilir. Kötü bir yerleşim değil, çalışmayı öğrenmen gereken bir yerleşim.'},
-     'Zarar':{ad:'zarar gördüğü burçta',metin:'Zarar gördüğü burçtaki gezegen kendi diliyle konuşamaz — bu alanda anlatmak istediğin şeyin yanlış anlaşılması sana tanıdık gelebilir.'}
+     'Yönetici':{ad:'kendi burcunda',metin:'Kendi burcundaki gezegen kendi evinde gibi çalışır.'},
+     'Yücelme':{ad:'yüceldiği burçta',metin:'Yüceldiği burçtaki gezegen olduğundan büyük görünür.'},
+     'Düşüş':{ad:'düştüğü burçta',metin:'Düştüğü burçtaki gezegen kendini küçük görür.'},
+     'Zarar':{ad:'zarar gördüğü burçta',metin:'Zarar gördüğü burçtaki gezegen kendi diliyle konuşamaz.'}
     };
     var OZEL={"sun":{"Yönetici":"Güneş kendi burcunda — kim olduğunu anlatmak için çabalaman gerekmeyebilir, odaya girdiğinde zaten belli oluyor.","Yücelme":"Güneş yüceldiği burçta — bir işi ilk başlatan sen olmak sana doğal gelebilir, sıranı beklemek zor gelebilir.","Düşüş":"Güneş düştüğü burçta — kendini anlatırken karşındakine göre ayar yapmak ve kendi istediğini en sona bırakmak sana tanıdık gelebilir.","Zarar":"Güneş zarar gördüğü burçta — \"ben\" demenin bencillik sayılacağını düşünmek, kalabalığın içinde erimek sana tanıdık gelebilir."},"moon":{"Yönetici":"Ay kendi burcunda — neye ihtiyacın olduğunu bilmek ve bunu kendine sağlamak sana doğal gelebilir.","Yücelme":"Ay yüceldiği burçta — huzurun somut şeylerden gelebilir: aynı fincan, aynı yürüyüş, tanıdık bir mutfak.","Düşüş":"Ay düştüğü burçta — rahatlamak için önce güvende olduğundan emin olman gerekebilir, bu da rahatlamayı geciktirebilir.","Zarar":"Ay zarar gördüğü burçta — ihtiyaç duymayı zayıflık saymak, yardım istemek yerine tek başına halletmek sana tanıdık gelebilir."},"mer":{"Yönetici":"Merkür kendi burcunda — anlatmak ve anlamak senin doğal aracın olabilir.","Yücelme":"Merkür yüceldiği burçta — ayrıntıyı görmek ve düzeltmek sana kolay gelebilir, hatayı hep bulmanın yorucu tarafı da olabilir.","Düşüş":"Merkür düştüğü burçta — hissettiğini kelimeye çevirmek zaman alabilir, sustuğunda anlaşılmadığını düşünmek sana tanıdık gelebilir.","Zarar":"Merkür zarar gördüğü burçta — büyük resmi görüp ayrıntıyı atlamak, sonra o ayrıntının geri gelmesi sana tanıdık gelebilir."},"ven":{"Yönetici":"Venüs kendi burcunda — neyi sevdiğini bilmek ve o şeyin yanında durmak sana doğal gelebilir.","Yücelme":"Venüs yüceldiği burçta — sevmek sana kolay gelebilir, nerede duracağını bilmek zor gelebilir.","Düşüş":"Venüs düştüğü burçta — sevgiyi hak edilmesi gereken bir şey gibi görmek ve kusur aramak sana tanıdık gelebilir.","Zarar":"Venüs zarar gördüğü burçta — yakınlığı yumuşaklıkla değil yoğunlukla kurmak sana tanıdık gelebilir."},"mar":{"Yönetici":"Mars kendi burcunda — istediğini almak için harekete geçmek sana doğal gelebilir.","Yücelme":"Mars yüceldiği burçta — uzun soluklu iş çıkarmak ve dayanmak senin alanın olabilir.","Düşüş":"Mars düştüğü burçta — öfkeni doğrudan göstermek yerine içine atmak, sonra beklenmedik bir anda taşmak sana tanıdık gelebilir.","Zarar":"Mars zarar gördüğü burçta — çatışmayı ertelemek, kırmamak için istediğini söylememek sana tanıdık gelebilir."},"jup":{"Yönetici":"Jüpiter kendi burcunda — inandığın şeyi büyütmek sana doğal gelebilir.","Yücelme":"Jüpiter yüceldiği burçta — cömertliğin önce yakınlarına dönük olabilir, evin kalabalıklaşabilir.","Düşüş":"Jüpiter düştüğü burçta — iyimser olmayı gerçekçi olmamak saymak ve kendine az yer açmak sana tanıdık gelebilir.","Zarar":"Jüpiter zarar gördüğü burçta — büyük resme inanmak için önce bütün ayrıntıların tutmasını beklemek sana tanıdık gelebilir."},"sat":{"Yönetici":"Satürn kendi burcunda — sorumluluk almak ve sınır koymak sana doğal gelebilir.","Yücelme":"Satürn yüceldiği burçta — adil olmayı önemsemek, kimin ne kadar taşıdığını hesaplamak sana tanıdık gelebilir.","Düşüş":"Satürn düştüğü burçta — kendi başına başlamak zor gelebilir, izin bekler gibi hissetmek sana tanıdık gelebilir.","Zarar":"Satürn zarar gördüğü burçta — yakınlık kurarken ölçüp biçmek ve sevgiyi de bir görev gibi taşımak sana tanıdık gelebilir."}};
     var SIRA={'Yücelme':0,'Düşüş':1,'Zarar':2,'Yönetici':3};
@@ -185,9 +185,17 @@ function bul(ch, opt){
   /* nadirlik + sıralama */
   B.forEach(function(b){ b.ppm=ppm(b.sayac); b.biriKac=kacta(b.ppm);
     b.yuzbinde = b.ppm===null?null:Math.round(b.ppm/10); });
+  /* Nadirlik eşiği. 20 kişide birden sık görülen bir yerleşim nadir değildir;
+     ölçülen sayım bunu söylüyorsa sayfa da öyle demelidir. Eşiği geçenler
+     elenir ve kaç tanesinin elendiği dönüşte bildirilir. */
+  var ESIK = 50000;
+  var elenen = 0;
+  B = B.filter(function(b){
+    if(b.ppm!==null && b.ppm>ESIK){ elenen++; return false; }
+    return true; });
   B.sort(function(x,y){
     if(x.ppm===null) return 1; if(y.ppm===null) return -1; return x.ppm-y.ppm; });
-  return {bulgular:B, ornek:SAY.n||0, saatsiz:saatsiz};
+  return {bulgular:B, ornek:SAY.n||0, saatsiz:saatsiz, esik:ESIK, elenen:elenen};
 }
 
 function ozet(b){
