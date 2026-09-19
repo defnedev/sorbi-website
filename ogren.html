@@ -18,7 +18,7 @@
 {"@type":"LearningResource","name":"Astroloji Okuryazarlığı","url":"https://sorbiapp.com/ogren",
  "educationalLevel":"beginner","inLanguage":"tr",
  "learningResourceType":"interactive animation",
- "teaches":["Gezegen geri hareketi (retro)","Merkür'ün Güneş'ten uzaklaşma sınırı","Yükselen burcun gün içinde değişimi"],
+ "teaches":["Gezegen geri hareketi (retro)","Merkür'ün Güneş'ten uzaklaşma sınırı","Yükselen burcun gün içinde değişimi","Burçların element ve nitelik yapısı","Büyük açılar ve orb"],
  "description":"Gerçek efemeris verisiyle çalışan animasyonlarla temel astroloji kavramları."},
 {"@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Retro ne demek, gezegen gerçekten geri mi gidiyor?","acceptedAnswer":{"@type":"Answer","text":"Hayır. Gezegen yörüngesinde aynı yönde ilerlemeye devam eder. Dünya ile o gezegenin hızları farklı olduğu için, Dünya'dan bakıldığında gezegen bir süre gökyüzünde geri gidiyormuş gibi görünür. Buna görünür geri hareket denir."}},
@@ -32,7 +32,7 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0D0810;--card:rgba(255,255,255,.032);--card2:rgba(255,255,255,.05);
  --stroke:rgba(255,255,255,.08);--stroke2:rgba(255,255,255,.14);
- --gold:#E3A692;--gold-br:#F2D3B8;--ink:#F2EFE9;--mut:#9BA0AB;--dim:#7A8090;
+ --gold:#E3A692;--gold-br:#F2D3B8;--ink:#F2EFE9;--mut:#9BA0AB;--dim:#9BA0AB;
  --soft:#7FB3A8;--terra:#C4744E;--r:16px}
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);
  -webkit-font-smoothing:antialiased;line-height:1.65;overflow-x:hidden}
@@ -47,7 +47,7 @@ h1 em{font-style:italic;color:var(--gold-br)}
 .top p{color:var(--mut);font-size:.97rem;font-weight:300;max-width:72ch;margin-top:.8rem}
 .ders{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--stroke)}
 .ders:first-of-type{border-top:none}
-.ders .no{font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.12em;color:var(--gold);margin-bottom:.5rem}
+.ders .no{font-family:ui-monospace,Menlo,monospace;font-size:.8rem;letter-spacing:.12em;color:var(--gold);margin-bottom:.5rem}
 h2{font-family:Fraunces,Georgia,serif;font-size:clamp(1.25rem,3.4vw,1.6rem);font-weight:600;
  letter-spacing:-.02em;line-height:1.2;margin-bottom:.5rem}
 .ders p{font-size:.97rem;color:var(--mut);font-weight:300;max-width:76ch;margin-bottom:.9rem}
@@ -120,7 +120,7 @@ input[type=range]{flex:1 1 140px;min-width:120px;accent-color:var(--gold);backgr
   <a href="/haritam" id="sorbiNavHaritam">✦ Profilim</a>
  </nav>
 </header>
-<script>(function(){try{var M={'/soru-sor':'/araclar','/horary':'/araclar','/natal-harita':'/araclar','/sinastri':'/araclar','/seni-taniyorum':'/araclar','/yukselen-burc-hesaplama':'/araclar','/ay-burcu-hesaplama':'/araclar','/astrokartografi':'/araclar','/uygun-gun-secimi':'/araclar','/yasam-donguleri':'/araclar','/tarot':'/araclar','/gunun-karti':'/araclar','/retro-ay-takvimi':'/araclar','/burc-uyumu':'/araclar','/rapor-araci':'/araclar','/sayim-yildiz':'/sayim','/sayim-yukselen':'/sayim','/gunluk-burc-yorumlari':'/bugun'};var p=location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';if(M[p])p=M[p];else if(/burc/.test(p))p='/burc-ozellikleri';document.querySelectorAll('.sbnav nav a').forEach(function(a){var h=a.getAttribute('href').replace(/\.html$/,'');if(h===p||(h!=='/'&&h!=='/haritam'&&p.indexOf(h+'-')===0)){a.classList.add('on');a.setAttribute('aria-current','page');}});}catch(e){}})();</script>
+<script>(function(){try{var M={'/soru-sor':'/araclar','/horary':'/araclar','/natal-harita':'/araclar','/sinastri':'/araclar','/seni-taniyorum':'/araclar','/yukselen-burc-hesaplama':'/araclar','/ay-burcu-hesaplama':'/araclar','/astrokartografi':'/araclar','/uygun-gun-secimi':'/araclar','/yasam-donguleri':'/araclar','/tarot':'/araclar','/gunun-karti':'/araclar','/retro-ay-takvimi':'/araclar','/burc-uyumu':'/burc-ozellikleri','/rapor-araci':'/araclar','/sayim-yildiz':'/sayim','/sayim-yukselen':'/sayim','/gunluk-burc-yorumlari':'/bugun'};var p=location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';if(M[p])p=M[p];else if(/burc/.test(p))p='/burc-ozellikleri';document.querySelectorAll('.sbnav nav a').forEach(function(a){var h=a.getAttribute('href').replace(/\.html$/,'');if(h===p||(h!=='/'&&h!=='/haritam'&&p.indexOf(h+'-')===0)){a.classList.add('on');a.setAttribute('aria-current','page');}});}catch(e){}})();</script>
 <script>(function(){var n=document.querySelector('.sbnav nav');if(!n)return;function f(){n.classList.toggle('son',n.scrollLeft+n.clientWidth>=n.scrollWidth-4);n.classList.toggle('ara',n.scrollLeft>4)}n.addEventListener('scroll',f,{passive:true});window.addEventListener('resize',f);f();var a=n.querySelector('a.on');function g(){if(a&&n.scrollWidth>n.clientWidth){var d=a.getBoundingClientRect().left-n.getBoundingClientRect().left+n.scrollLeft;n.scrollLeft=Math.max(0,Math.round(d-(n.clientWidth-a.offsetWidth)/2));}f();}g();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(g);})();</script>
 <!-- SORBI-NAV:END -->
 <!-- SORBI-TEMA:START -->
@@ -153,15 +153,22 @@ body:has(> .sky)::before{display:none}
   <h2>Retro: gezegen geri gitmiyor, biz onu geçiyoruz</h2>
   <p>Merkür retrosu deyince akla gezegenin durup geri döndüğü gelir. <b>Öyle bir şey olmuyor.</b> Merkür yörüngesinde hep aynı yönde, hiç yavaşlamadan ilerliyor. Geri giden bir şey yok — <b>bakış açımız</b> değişiyor.</p>
   <p>Solda tepeden bakıyorsun: Güneş ortada, Dünya dışta, Merkür içte. İkisi de aynı yönde dönüyor ama Merkür çok daha hızlı. Sağda ise Dünya'dan bakıldığında Merkür'ün burçlar kuşağında nereye düştüğünü görüyorsun. İki gezegen birbirini geçerken, o sağdaki iz bir süre <b>geri sarıyor</b>.</p>
-  <div class="sahne">
-    <canvas id="cRetro" width="1200" height="560" aria-label="Merkür retrosu animasyonu: solda yörüngeler, sağda burçlar kuşağındaki iz"></canvas>
-    <div class="kontrol">
-      <button class="oyn" id="bRetro" type="button">Oynat</button>
-      <input type="range" id="sRetro" min="0" max="119" value="50" aria-label="Gün">
-      <span class="oku" id="oRetro"></span>
+  <div data-sorbi-gosteri="retro-dongusu" data-kaynak="/ogren-veri.json" data-yol="retro"
+       data-kare="50" data-oto="1"></div>
+  <div class="cikarim">Sonbahar 2026'da Merkür 25 Ekim ile 13 Kasım arasında geri hareketli görünüyor. Yörüngesinde tek bir gün bile geri gitmiyor.</div>
+
+  <div data-sorbi-sinav="ogren-1" data-ad="Ders 01 · kendini dene" data-puan="20">
+    <div data-soru="Merkür geri hareketli görünürken yörüngesinde ne yapıyor?">
+      <button data-neden="Yörüngede duraksama ya da yön değiştirme yok; Merkür hızını ve yönünü korur.">Duruyor ve yön değiştiriyor</button>
+      <button data-dogru data-neden="Geri görünen şey, Dünya ile Merkür'ün yörünge hızları farklı olduğu için bakış açımızın değişmesi.">Aynı yönde ilerlemeye devam ediyor</button>
+      <button data-neden="Yörünge değişmiyor; değişen, Dünya'dan bakıldığında gezegenin burçlar kuşağındaki izi.">Yörüngesinden çıkıp geriye kayıyor</button>
+    </div>
+    <div data-soru="Görünür geri hareket neden ortaya çıkıyor?">
+      <button data-dogru data-neden="Dünya ile Merkür farklı hızlarda dönüyor; iki gezegen birbirini geçerken gökyüzündeki iz bir süre geri sarıyor.">Dünya ile gezegenin yörünge hızları farklı olduğu için</button>
+      <button data-neden="Güneş'in çekimi gezegeni bu ölçekte yavaşlatıp durdurmuyor.">Gezegen Güneş'in çekimiyle yavaşladığı için</button>
+      <button data-neden="Gezegenin ekseni ile gökyüzündeki boylamı arasında böyle bir bağ yok.">Gezegenin ekseni değiştiği için</button>
     </div>
   </div>
-  <div class="cikarim">Sonbahar 2026'da Merkür 25 Ekim ile 13 Kasım arasında geri hareketli görünüyor. Yörüngesinde tek bir gün bile geri gitmiyor.</div>
 </section>
 
 <section class="ders">
@@ -169,11 +176,16 @@ body:has(> .sky)::before{display:none}
   <h2>Merkür neden hep Güneş'in yanında?</h2>
   <p>Doğum haritanda Merkür ya Güneş'inle aynı burçta, ya da hemen komşusunda. Hiç Güneş'e karşıt bir Merkür görmedin — göremezsin de. Sebebi astrolojik değil, geometrik: <b>Merkür'ün yörüngesi Dünya'nınkinin içinde kalıyor.</b> İçeriden bakan biri, dışarıdaki bir noktadan çok fazla ayrılamaz.</p>
   <p>Aşağıda iki yıl boyunca Merkür ile Güneş arasındaki açı farkı çizili. Çizgi hiçbir zaman şu bandın dışına çıkmıyor:</p>
-  <div class="sahne">
-    <canvas id="cUzak" width="1200" height="380" aria-label="Merkür ile Güneş arasındaki açı farkının iki yıllık grafiği"></canvas>
-    <div class="kontrol"><span class="oku" id="oUzak"></span></div>
-  </div>
+  <div data-sorbi-gosteri="uzaklik-grafigi" data-kaynak="/ogren-veri.json" data-yol="uzaklik"></div>
   <div class="cikarim">İki yıllık veride en büyük ayrılık <b>27,8°</b>. Bu yüzden Merkür yalnızca Güneş'in burcunda, bir önceki ya da bir sonraki burçta bulunabilir — başka ihtimal yok.</div>
+
+  <div data-sorbi-sinav="ogren-2" data-ad="Ders 02 · kendini dene" data-puan="15">
+    <div data-soru="Doğum haritasında Merkür hangi burçlarda bulunabilir?">
+      <button data-dogru data-neden="İki yıllık veride en büyük ayrılık 27,8°; bu da en fazla bir komşu burca denk gelir.">Güneş'in burcunda, bir öncekinde ya da bir sonrakinde</button>
+      <button data-neden="27,8°lik sınır 180°lik bir karşıtlığa izin vermez.">Güneş'e karşıt burçta da bulunabilir</button>
+      <button data-neden="Merkür'ün yörüngesi Dünya'nınkinin içinde kaldığı için ayrılık geometrik olarak sınırlı.">Herhangi bir burçta</button>
+    </div>
+  </div>
 </section>
 
 <section class="ders">
@@ -181,17 +193,53 @@ body:has(> .sky)::before{display:none}
   <h2>Yükselen neden doğum saatini soruyor?</h2>
   <p>Güneş burcun bir ayda değişir, Ay burcun iki buçuk günde. Yükselen ise <b>ortalama iki saatte bir</b> değişir — çünkü yükselen gökyüzünde bir gezegen değil, senin doğduğun anda <b>ufukta yükselmekte olan burç</b>. Dünya kendi ekseninde döndüğü için on iki burcun hepsi bir gün içinde sırayla ufuktan geçer.</p>
   <p>Aşağıdaki halka 20 Mart 2026'da İstanbul'da bir günü gösteriyor. İbre saat ilerledikçe dönüyor ve yükselen burç değişiyor.</p>
-  <div class="sahne">
-    <canvas id="cYuk" width="1000" height="520" aria-label="Bir gün boyunca yükselen burcun değişimini gösteren halka"></canvas>
-    <div class="kontrol">
-      <button class="oyn" id="bYuk" type="button">Oynat</button>
-      <input type="range" id="sYuk" min="0" max="143" value="36" aria-label="Saat">
-      <span class="oku" id="oYuk"></span>
-    </div>
-  </div>
+  <div data-sorbi-gosteri="yukselen-halkasi" data-kaynak="/ogren-veri.json" data-yol="yukselen"
+       data-kare="36" data-yer="20 Mart 2026 · İstanbul"></div>
   <div class="cikarim">Doğum saatini dört saat yanlış hatırlamak, yükseleni iki burç kaydırır. Haritanın evleri de onunla birlikte kayar — bu yüzden saat sorulur.</div>
   <p style="margin-top:1.1rem">Bir de yan etkisi var: burçlar ufuktan <b>eşit sürede doğmuyor.</b> Türkiye enleminde Aslan yükselen, Balık yükselenden 2,2 kat daha sık görülür. Bunu 24.000 gerçek harita üzerinde saydık — <a href="/sayim-yukselen" style="color:var(--gold-br)">tablonun tamamı burada</a>.</p>
+
+  <div data-sorbi-sinav="ogren-3" data-ad="Ders 03 · kendini dene" data-puan="20">
+    <div data-soru="Yükselen burç ortalama ne kadar sürede değişir?">
+      <button data-neden="Bir ay, Güneş burcunun ritmi.">Bir ayda</button>
+      <button data-neden="İki buçuk gün, Ay burcunun ritmi.">İki buçuk günde</button>
+      <button data-dogru data-neden="Dünya bir günde kendi ekseninde bir tur döndüğü için on iki burç sırayla ufuktan geçer: 24 saat bölü 12 yaklaşık iki saat.">Yaklaşık iki saatte</button>
+    </div>
+    <div data-soru="Doğum saatini dört saat yanlış hatırlamak neyi değiştirir?">
+      <button data-dogru data-neden="Yükselen ortalama iki saatte bir değiştiği için dört saat yaklaşık iki burca denk gelir; evler de yükselenle birlikte kayar.">Yükselen yaklaşık iki burç kayar, evler de onunla kayar</button>
+      <button data-neden="Yükselen saate bağlı olduğu için dört saatlik hata haritanın açılarını ve evlerini kaydırır.">Hiçbir şey değişmez</button>
+      <button data-neden="Güneş burcu bir ayda değişir; dört saat onu değiştirmez.">Güneş burcu değişir</button>
+    </div>
+  </div>
 </section>
+
+<section class="ders">
+  <div class="no">DERS 04</div>
+  <h2>Burçların iskeleti: element, nitelik, açı</h2>
+  <p>On iki burç rastgele bir liste değil. Her burç bir <b>element</b> (ateş, toprak, hava, su) ve bir <b>nitelik</b> (öncü, sabit, değişken) taşır. Element dört burçta bir, nitelik üç burçta bir tekrar eder — bu yüzden her element–nitelik kesişimine tam olarak bir burç düşer. Aşağıdaki çarkta dilim rengi elementi, kenardaki çentik sayısı niteliği gösteriyor; ortadaki etiket o burcun geleneksel yöneticisini veriyor.</p>
+  <div data-sorbi-gosteri="zodyak-carki" data-burc="Akrep"></div>
+  <p>Aynı bilgi ızgara olarak da okunur: dört satır element, üç kolon nitelik. On iki kutu, on iki burç — boş ya da çift dolu kutu yok.</p>
+  <div data-sorbi-gosteri="element-nitelik" data-burc="Akrep"></div>
+  <div class="cikarim">Aynı elementten burçlar arasında 120°, aynı nitelikten burçlar arasında 90° fark vardır. Astrolojinin "üçgen" ve "kare" dediği şey önce bu geometridir.</div>
+  <p>Açı, iki gezegenin burçlar kuşağındaki boylamları arasındaki fark. <b>Orb</b> ise tam açıdan sapma payı: 90°'ye 2° kalmışsa kare sayılır, 12° kalmışsa sayılmaz. Aşağıda iki gezegeni kaydırıcıyla döndürüp açının ne zaman kurulduğunu görebilirsin — sınıflandırma ve orb sınırları sayfaya ayrıca bir şey yüklemeden, sitenin <a href="/araclar" style="color:var(--gold-br)">hesaplayıcılarının kullandığı</a> açı tablosundan okunuyor.</p>
+  <div data-sorbi-gosteri="aci-gosterimi" data-a="Mars" data-b="Venüs" data-a-boylam="30"></div>
+  <div class="cikarim">Beş büyük açı ve temel orbları: kavuşum 0° (8°), altmışlık 60° (5°), kare 90° (7°), üçgen 120° (7°), karşıt 180° (8°). Orb dışına düşen fark, açı sayılmaz.</div>
+
+  <div data-sorbi-sinav="ogren-4" data-ad="Ders 04 · kendini dene" data-puan="20">
+    <div data-soru="Aynı elementten iki komşu burç arasında kaç derece fark vardır?">
+      <button data-dogru data-neden="Element her dört burçta bir tekrar eder: 4 × 30° = 120°, yani üçgen.">120° — üçgen</button>
+      <button data-neden="90°, aynı nitelikteki burçlar arasındaki farktır.">90° — kare</button>
+      <button data-neden="60° iki burç aralığıdır; element dört burçta bir tekrar eder.">60° — altmışlık</button>
+    </div>
+    <div data-soru="Kare açı kaç derecedir ve temel orbu kaçtır?">
+      <button data-neden="Kare 90°, temel orbu ise 7°. 3° orb küçük açılarda kullanılır.">90°, 3° orb</button>
+      <button data-dogru data-neden="Sitenin açı tablosunda kare 90° ve temel orb 7°; iki gezegen 83°–97° arasındaysa kare sayılır.">90°, 7° orb</button>
+      <button data-neden="120° üçgendir, kare değil.">120°, 7° orb</button>
+    </div>
+  </div>
+</section>
+
+
+<div data-sorbi-ilerleme="ogren" data-onek="ogren" data-toplam="4" data-ad="Öğren ilerlemen"></div>
 
 <div class="kapanis">
   <h2>Buradan sonra</h2>
@@ -202,216 +250,13 @@ body:has(> .sky)::before{display:none}
   </div>
 </div>
 
-<p class="dipnot">Bu sayfadaki üç animasyon da temsili çizim değil. Gezegen konumları astronomy-engine ile hesaplandı ve Swiss Ephemeris çıktısına karşı doğrulandı: retro verisi 5 Eylül 2026'dan başlayan 120 günün günlük konumları, açı grafiği 2026–2027 arası iki yılın iki günde bir örneklenmiş değerleri, yükselen halkası 20 Mart 2026'da İstanbul için on dakikada bir hesaplanmış. Kaynak veriyi <a href="/ogren-veri.json" style="color:var(--mut)">ogren-veri.json</a> dosyasında görebilirsin.<br><br>
+<p class="dipnot">Bu sayfadaki üç animasyon da temsili çizim değil. Gezegen konumları astronomy-engine ile hesaplandı ve Swiss Ephemeris çıktısına karşı doğrulandı: retro verisi 5 Eylül 2026'dan başlayan 120 günün günlük konumları, açı grafiği 2026–2027 arası iki yılın iki günde bir örneklenmiş değerleri, yükselen halkası 20 Mart 2026'da İstanbul için on dakikada bir hesaplanmış. Kaynak veriyi <a href="/ogren-veri.json" style="color:var(--mut)">ogren-veri.json</a> dosyasında görebilirsin. Ders 04'teki çark, ızgara ve açı gösterimi efemeris kullanmaz; burçlar kuşağının saf geometrisiyle çizilir, açı ve orb sınırları sitenin ortak açı tablosundan gelir. Sınav ve ilerleme kaydı yalnız kendi tarayıcında tutulur.<br><br>
 Astroloji sembolik bir yorum dilidir. Bu sayfa yorumu değil, altındaki gökyüzü mekaniğini anlatır — ikisini ayırmak okuryazarlığın kendisidir.</p>
 
 </div>
-<script>
-(function(){
-  'use strict';
-  var $=function(i){return document.getElementById(i);};
-  var S=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
-  var SG=['♈︎','♉︎','♊︎','♋︎','♌︎','♍︎','♎︎','♏︎','♐︎','♑︎','♒︎','♓︎'];
-  var C={bg:'#0F0B13',cizgi:'rgba(255,255,255,.10)',cizgi2:'rgba(255,255,255,.20)',
-         ink:'#F2EFE9',mut:'#9BA0AB',dim:'#7A8090',gold:'#E3A692',goldBr:'#F2D3B8',
-         terra:'#C4744E',soft:'#7FB3A8',gunes:'#F1DCA8',dunya:'#7FB3A8',merkur:'#E3A692'};
-  var AZ=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var VERI=null;
-
-  function olcek(cv){
-    var o=cv.getContext('2d'), dpr=Math.min(window.devicePixelRatio||1,2);
-    var g=cv.clientWidth||cv.width, y=cv.height*(g/cv.width);
-    if(cv.dataset.g!==String(g)){
-      cv.dataset.g=String(g);
-      cv.width=Math.round(g*dpr); cv.height=Math.round(y*dpr);
-      cv.style.height=y+'px';
-    }
-    o.setTransform(dpr,0,0,dpr,0,0);
-    return {o:o, G:g, Y:y};
-  }
-  function zemin(o,G,Y){ o.fillStyle=C.bg; o.fillRect(0,0,G,Y); }
-  function yazi(o,m,x,y,b,r,h){ o.fillStyle=r||C.mut; o.font=(b||'11px')+" ui-monospace,Menlo,monospace";
-    o.textAlign=h||'left'; o.textBaseline='middle'; o.fillText(m,x,y); }
-
-  /* ───────── DERS 1: retro ───────── */
-  var r1={i:50, oyn:false, id:null};
-  function cizRetro(){
-    var cv=$('cRetro'); if(!cv||!VERI) return;
-    var s=olcek(cv), o=s.o, G=s.G, Y=s.Y;
-    zemin(o,G,Y);
-    var K=VERI.retro.kareler, k=K[r1.i];
-    var solG=Math.min(G*0.46,Y*0.95), cx=solG/2+12, cy=Y/2, br=Math.min(solG,Y)/2-26;
-    var AU=br/1.15;
-
-    /* yörüngeler */
-    o.strokeStyle=C.cizgi; o.lineWidth=1;
-    [0.387,1.0].forEach(function(a){ o.beginPath(); o.arc(cx,cy,a*AU,0,Math.PI*2); o.stroke(); });
-    /* güneş */
-    o.fillStyle=C.gunes; o.beginPath(); o.arc(cx,cy,6,0,Math.PI*2); o.fill();
-    yazi(o,'Güneş',cx,cy+18,'10px',C.dim,'center');
-
-    var mx=cx+k.mx*AU, my=cy-k.my*AU, ex=cx+k.ex*AU, ey=cy-k.ey*AU;
-    /* bakış çizgisi: Dünya'dan Merkür'e ve ötesine */
-    var dx=mx-ex, dy=my-ey, u=Math.hypot(dx,dy)||1;
-    o.strokeStyle=k.geri?'rgba(196,116,78,.55)':'rgba(227,166,146,.4)';
-    o.setLineDash([3,3]); o.lineWidth=1;
-    o.beginPath(); o.moveTo(ex,ey); o.lineTo(ex+dx/u*br*2.2, ey+dy/u*br*2.2); o.stroke();
-    o.setLineDash([]);
-
-    o.fillStyle=C.dunya; o.beginPath(); o.arc(ex,ey,5,0,Math.PI*2); o.fill();
-    yazi(o,'Dünya',ex,ey-14,'10px',C.dunya,'center');
-    o.fillStyle=k.geri?C.terra:C.merkur; o.beginPath(); o.arc(mx,my,4.5,0,Math.PI*2); o.fill();
-    yazi(o,'Merkür',mx,my-13,'10px',k.geri?C.terra:C.merkur,'center');
-
-    /* sağ: burçlar kuşağında iz */
-    var sx=solG+34, sg=G-sx-14, sy=28, sh=Y-70;
-    if(sg>60){
-      var lonlar=K.map(function(x){return x.lon;});
-      var min=Math.min.apply(null,lonlar), max=Math.max.apply(null,lonlar);
-      var pad=6; min-=pad; max+=pad;
-      var X=function(lon){ return sx+(lon-min)/(max-min)*sg; };
-      var Yg=function(i){ return sy+i/(K.length-1)*sh; };
-
-      /* burç şeritleri */
-      for(var b=Math.floor(min/30);b<=Math.floor(max/30);b++){
-        var x0=X(b*30), x1=X(b*30+30);
-        if(b%2===0){ o.fillStyle='rgba(255,255,255,.022)'; o.fillRect(Math.max(sx,x0),sy,Math.min(x1,sx+sg)-Math.max(sx,x0),sh); }
-        var orta=(Math.max(sx,x0)+Math.min(x1,sx+sg))/2;
-        if(orta>sx&&orta<sx+sg){ yazi(o,SG[((b%12)+12)%12]+' '+S[((b%12)+12)%12],orta,sy-12,'10px',C.dim,'center'); }
-      }
-      /* iz */
-      o.lineWidth=2; o.beginPath();
-      K.forEach(function(x,i){ i?o.lineTo(X(x.lon),Yg(i)):o.moveTo(X(x.lon),Yg(i)); });
-      o.strokeStyle='rgba(227,166,146,.28)'; o.stroke();
-      /* geri kısım vurgulu */
-      o.beginPath(); var basla=true;
-      K.forEach(function(x,i){ if(x.geri){ if(basla){o.moveTo(X(x.lon),Yg(i));basla=false;} else o.lineTo(X(x.lon),Yg(i)); } });
-      o.strokeStyle=C.terra; o.lineWidth=2.5; o.stroke();
-      /* bugünkü nokta */
-      o.fillStyle=k.geri?C.terra:C.goldBr;
-      o.beginPath(); o.arc(X(k.lon),Yg(r1.i),4.5,0,Math.PI*2); o.fill();
-      o.strokeStyle=k.geri?'rgba(196,116,78,.3)':'rgba(242,211,184,.25)'; o.lineWidth=1;
-      o.beginPath(); o.moveTo(sx,Yg(r1.i)); o.lineTo(sx+sg,Yg(r1.i)); o.stroke();
-      yazi(o,'zaman ↓',sx-4,sy+sh/2,'10px',C.dim,'right');
-      yazi(o,'Dünya’dan görünen boylam →',sx+sg/2,Y-16,'10px',C.dim,'center');
-    }
-    $('oRetro').innerHTML=k.t+' &nbsp;·&nbsp; <b>'+k.lon.toFixed(1)+'°</b> '+
-      S[Math.floor(k.lon/30)%12]+' &nbsp; <span class="rozet'+(k.geri?' geri':'')+'">'+
-      (k.geri?'geri hareketli':'ileri')+'</span>';
-    $('sRetro').value=r1.i;
-  }
-  function retroAdim(){ r1.i=(r1.i+1)%VERI.retro.kareler.length; cizRetro(); }
-
-  /* ───────── DERS 2: uzaklık grafiği ───────── */
-  function cizUzak(){
-    var cv=$('cUzak'); if(!cv||!VERI) return;
-    var s=olcek(cv), o=s.o, G=s.G, Y=s.Y;
-    zemin(o,G,Y);
-    var K=VERI.uzaklik.kareler, sol=62, sag=G-16, ust=22, alt=Y-30, g=sag-sol, h=alt-ust;
-    var enB=Math.max.apply(null,K.map(Math.abs));
-    var lim=32;
-    var Yv=function(v){ return ust+h/2-(v/lim)*(h/2); };
-    /* sınır bandı — sayfanın asıl mesajı bu, çizgiden baskın olmalı */
-    o.fillStyle='rgba(227,166,146,.13)';
-    o.fillRect(sol,Yv(enB),g,Yv(-enB)-Yv(enB));
-    o.strokeStyle='rgba(227,166,146,.75)'; o.setLineDash([5,4]); o.lineWidth=1.5;
-    [enB,-enB].forEach(function(v){ o.beginPath(); o.moveTo(sol,Yv(v)); o.lineTo(sag,Yv(v)); o.stroke(); });
-    o.setLineDash([]);
-    /* sıfır ekseni */
-    o.strokeStyle=C.cizgi2; o.beginPath(); o.moveTo(sol,Yv(0)); o.lineTo(sag,Yv(0)); o.stroke();
-    /* eksen etiketleri */
-    [30,enB,0,-enB,-30].forEach(function(v){
-      if(Math.abs(Math.abs(v)-enB)<0.01){ yazi(o,(v>0?'+':'')+v.toFixed(1)+'°',sol-8,Yv(v),'11px',C.goldBr,'right'); }
-      else if(v===0){ yazi(o,'Güneş',sol-6,Yv(0),'10px',C.mut,'right'); }
-      else { yazi(o,(v>0?'+':'')+v+'°',sol-6,Yv(v),'10px',C.dim,'right'); }
-    });
-    /* çizgi */
-    o.beginPath();
-    K.forEach(function(v,i){ var x=sol+i/(K.length-1)*g; i?o.lineTo(x,Yv(v)):o.moveTo(x,Yv(v)); });
-    o.strokeStyle='rgba(242,211,184,.85)'; o.lineWidth=1.4; o.stroke();
-    yazi(o,'2026',sol,Y-14,'10px',C.dim,'left');
-    yazi(o,'2027',sag,Y-14,'10px',C.dim,'right');
-    yazi(o,'Merkür Güneş’in doğusunda',sag-6,ust+10,'10px',C.dim,'right');
-    yazi(o,'Merkür Güneş’in batısında',sag-6,alt-8,'10px',C.dim,'right');
-    yazi(o,'bu bandın dışına çıkamaz',sol+10,Yv(0)-10,'11px','rgba(227,166,146,.75)','left');
-    $('oUzak').innerHTML='İki yılda en büyük ayrılık: <b>'+enB.toFixed(1)+'°</b> — bandın dışına hiç çıkmıyor';
-  }
-
-  /* ───────── DERS 3: yükselen halkası ───────── */
-  var r3={i:36, oyn:false, id:null};
-  function cizYuk(){
-    var cv=$('cYuk'); if(!cv||!VERI) return;
-    var s=olcek(cv), o=s.o, G=s.G, Y=s.Y;
-    zemin(o,G,Y);
-    var K=VERI.yukselen.kareler, k=K[r3.i];
-    var cx=G/2, cy=Y/2+8, R=Math.min(G*0.62,Y)/2-38;
-    /* burç halkası */
-    for(var b=0;b<12;b++){
-      var a0=(b*30-90)*Math.PI/180, a1=((b+1)*30-90)*Math.PI/180;
-      o.beginPath(); o.arc(cx,cy,R,a0,a1); o.arc(cx,cy,R-26,a1,a0,true); o.closePath();
-      o.fillStyle=b%2?'rgba(255,255,255,.028)':'rgba(255,255,255,.055)'; o.fill();
-      o.strokeStyle=C.cizgi; o.lineWidth=1; o.stroke();
-      var am=((b*30+15)-90)*Math.PI/180;
-      var aktif=b===Math.floor(k.asc/30);
-      yazi(o,SG[b],cx+Math.cos(am)*(R-13),cy+Math.sin(am)*(R-13),aktif?'15px':'13px',
-           aktif?C.goldBr:C.dim,'center');
-    }
-    /* ufuk çizgisi */
-    o.strokeStyle=C.cizgi2; o.lineWidth=1;
-    o.beginPath(); o.moveTo(cx-R-14,cy); o.lineTo(cx+R+14,cy); o.stroke();
-    yazi(o,'ufuk',cx+R+18,cy,'10px',C.dim,'left');
-    /* yükselen ibresi */
-    var ang=(k.asc-90)*Math.PI/180;
-    o.strokeStyle=C.goldBr; o.lineWidth=2;
-    o.beginPath(); o.moveTo(cx,cy); o.lineTo(cx+Math.cos(ang)*(R-4),cy+Math.sin(ang)*(R-4)); o.stroke();
-    o.fillStyle=C.goldBr; o.beginPath();
-    o.arc(cx+Math.cos(ang)*(R-4),cy+Math.sin(ang)*(R-4),4,0,Math.PI*2); o.fill();
-    o.fillStyle=C.gold; o.beginPath(); o.arc(cx,cy,4,0,Math.PI*2); o.fill();
-    /* saat */
-    var sa=Math.floor(k.dk/60), dk=k.dk%60;
-    yazi(o,('0'+sa).slice(-2)+':'+('0'+dk).slice(-2),cx,cy-R-22,'16px',C.ink,'center');
-    yazi(o,'20 Mart 2026 · İstanbul',cx,cy+R+24,'10px',C.dim,'center');
-    $('oYuk').innerHTML=('0'+sa).slice(-2)+':'+('0'+dk).slice(-2)+
-      ' &nbsp;·&nbsp; yükselen <b>'+S[Math.floor(k.asc/30)]+'</b> '+(k.asc%30).toFixed(0)+'°';
-    $('sYuk').value=r3.i;
-  }
-  function yukAdim(){ r3.i=(r3.i+1)%VERI.yukselen.kareler.length; cizYuk(); }
-
-  /* ───────── kontroller ───────── */
-  function baglaOynat(dugme, durum, adim, hiz){
-    $(dugme).addEventListener('click',function(){
-      durum.oyn=!durum.oyn;
-      this.textContent=durum.oyn?'Durdur':'Oynat';
-      if(durum.oyn){ durum.id=setInterval(adim,hiz); } else { clearInterval(durum.id); }
-    });
-  }
-  function yukle(){
-    fetch('/ogren-veri.json').then(function(r){return r.json();}).then(function(j){
-      VERI=j; cizRetro(); cizUzak(); cizYuk();
-      if(!AZ){ /* okuryazarlık sayfası: animasyon kendiliğinden başlasın ama durdurulabilsin */
-        r1.oyn=true; $('bRetro').textContent='Durdur'; r1.id=setInterval(retroAdim,110);
-      }
-    }).catch(function(){
-      ['cRetro','cUzak','cYuk'].forEach(function(id){
-        var cv=$(id); if(!cv) return; var s=olcek(cv); zemin(s.o,s.G,s.Y);
-        yazi(s.o,'Veri yüklenemedi',s.G/2,s.Y/2,'12px',C.dim,'center');
-      });
-    });
-  }
-  $('sRetro').addEventListener('input',function(){
-    r1.i=+this.value; if(r1.oyn){ clearInterval(r1.id); r1.oyn=false; $('bRetro').textContent='Oynat'; }
-    cizRetro();
-  });
-  $('sYuk').addEventListener('input',function(){
-    r3.i=+this.value; if(r3.oyn){ clearInterval(r3.id); r3.oyn=false; $('bYuk').textContent='Oynat'; }
-    cizYuk();
-  });
-  baglaOynat('bRetro',r1,retroAdim,110);
-  baglaOynat('bYuk',r3,yukAdim,70);
-  window.addEventListener('resize',function(){ cizRetro(); cizUzak(); cizYuk(); });
-  yukle();
-})();
-</script>
+<script src="/sorbi-astro.js?v=1" defer></script>
+<script src="/sorbi-gosteri.js?v=1" defer></script>
+<script src="/sorbi-oyun.js?v=1" defer></script>
 <script src="/sorbi-geri-bildirim.js?v=1" defer></script>
   <script src="/sorbi-olcum.js?v=1" defer></script>
 <!-- SORBI-FOOTER:START -->
@@ -425,7 +270,7 @@ Astroloji sembolik bir yorum dilidir. Bu sayfa yorumu değil, altındaki gökyü
 .sbft .sbft-brand b{font-size:1.05rem;color:#F2EFE9;font-weight:700}
 .sbft .sbft-brand b i{font-style:normal;color:#E3A692;margin-right:.3rem}
 .sbft .sbft-brand p{color:#9BA0AB;font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
-.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#6D7280;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#8E949F;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 @media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
 @media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
 </style>

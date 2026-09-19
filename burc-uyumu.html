@@ -4,44 +4,143 @@
 <meta name="description" content="Burç uyumu hesaplama: senin burcun ve onun burcu ile aşk, iletişim ve uzun vade uyumunuzu anında öğren. Ücretsiz, eğlenceli ve astrolojik olarak sağlam.">
 <link rel="canonical" href="https://sorbiapp.com/burc-uyumu">
 <meta property="og:title" content="Burç Uyumu Hesaplama — Sorbi"><meta property="og:description" content="İki burcun aşk & ilişki uyumunu anında hesapla."><meta property="og:type" content="website"><meta property="og:url" content="https://sorbiapp.com/burc-uyumu"><meta property="og:image" content="https://sorbiapp.com/og-image.png"><meta property="og:locale" content="tr_TR">
+<meta name="theme-color" content="#0D0810">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Burç Uyumu Hesaplama","applicationCategory":"LifestyleApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"url":"https://sorbiapp.com/burc-uyumu","provider":{"@type":"Organization","name":"Sorbi","url":"https://sorbiapp.com/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Burç uyumu hesaplama nasıl çalışır?","acceptedAnswer":{"@type":"Answer","text":"Bu sayfadaki hesap iki Güneş burcunun zodyaktaki uzaklığını ve element ilişkisini kullanır. Uzaklık taban puanı verir: aynı burç 82, iki burç ara 86, üç burç ara 62, dört burç ara 92, tam karşı uç 78. Element ilişkisi bu tabanı birkaç puan yukarı ya da aşağı çeker. Bütün girdi bu kadar olduğu için 144 burç kombinasyonu yedi farklı sonuca düşer; aynı uzaklıktaki her çift aynı yüzdeyi verir."}},
+{"@type":"Question","name":"Güneş burcu uyumu iki kişinin ilişkisini gösterir mi?","acceptedAnswer":{"@type":"Answer","text":"Tek başına göstermeyebilir. Güneş burcu doğum tarihinden gelir ve haritanın yalnızca bir parçasıdır. İki kişinin gerçek karşılaştırması için iki doğum haritasının birlikte okunması gerekir; buna sinastri denir. Güneş burcu karşılaştırması bir eğilim taramasıdır, bir ilişki hükmü değil."}},
+{"@type":"Question","name":"Aynı burçtan iki kişi uyumlu olur mu?","acceptedAnswer":{"@type":"Answer","text":"Aynı burçtan iki kişi birbirini kolay okuyabilir, çünkü aynı element ve aynı niteliği paylaşırlar. Aynı nedenle zorlandıkları yerler de ortak olabilir. Bu hesapta aynı burç 82 taban puanıyla başlar ve genel sonuç 87 çıkar; yine de iki kişinin Ay, yükselen ve diğer yerleşimleri tabloyu bütünüyle değiştirebilir."}},
+{"@type":"Question","name":"Burçlar arasındaki açı ne anlama gelir?","acceptedAnswer":{"@type":"Answer","text":"Her burç 30 derecelik bir dilimdir. İki burç arasındaki dilim sayısı çarpı 30, aralarındaki açıyı verir: aynı burç kavuşum (0°), iki burç ara altmışlık (60°), üç burç ara kare (90°), dört burç ara üçgen (120°), altı burç ara karşıt (180°). Bir ve beş burç aralığı otuzluk (30°) ve yüzelli (150°) adını alır ve beş büyük açının dışında kalır."}}]}</script>
 <style>
-:root{--terra:#E3A692;--btn-ink:#F6EFE1;--bg:#0D0810;--bg2:#1A1220;--gold:#DFA98F;--gold-light:#E4CF9A;--terra:#E3A692;--terra2:#E3A692;--text:#E8E4DA;--muted:#9A93842;--muted:#8A8578;--line:rgba(223,169,143,.25);--card:#16111A}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#1A1320 0,var(--bg) 60%);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6}
-.wrap{max-width:680px;margin:0 auto;padding:2.2rem 1.1rem 4rem}
-.top{text-align:center;margin-bottom:1.4rem}
-.brand{font-family:Fraunces,Georgia,serif;letter-spacing:2px;color:var(--gold);font-size:.8rem}
-h1{font-family:Fraunces,Georgia,serif;font-size:clamp(1.7rem,6vw,2.4rem);margin:.5rem 0 .3rem;color:#E8E4DA}
-.sub{color:var(--muted);font-size:.95rem;max-width:440px;margin:0 auto}
-.pick{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.1rem;margin-top:1.4rem}
-.pl{font-size:.8rem;color:var(--gold-light);text-transform:uppercase;letter-spacing:1px;margin:.2rem 0 .6rem;text-align:center}
-.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.4rem}
-.sg{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:.55rem .2rem;cursor:pointer;text-align:center;transition:.15s;color:var(--text)}
-.sg:hover{border-color:var(--terra);background:rgba(223,169,143,.12)}
-.sg.on{background:var(--terra2);border-color:var(--terra2);color:#E8E4DA}
-.sg .g{font-size:1.25rem;font-family:'Noto Sans Symbols2','Segoe UI Symbol',sans-serif;display:block}
-.sg .n{font-size:.62rem;margin-top:2px;opacity:.85}
-.vs{text-align:center;color:var(--terra);font-family:Inter,system-ui,sans-serif;font-style:italic;font-size:1.1rem;margin:.7rem 0}
-.res{margin-top:1.5rem;display:none}
-.score-wrap{text-align:center;background:linear-gradient(180deg,rgba(223,169,143,.14),rgba(223,169,143,.03));border:1px solid var(--line);border-radius:18px;padding:1.5rem 1rem}
-.pair{font-family:Inter,system-ui,sans-serif;font-size:1.2rem;color:var(--gold-light);font-style:italic}
-.score{font-family:Inter,system-ui,sans-serif;font-size:3.6rem;line-height:1;color:#E8E4DA;margin:.3rem 0}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0D0810;--card:rgba(255,255,255,.032);--card2:rgba(255,255,255,.055);
+ --stroke:rgba(255,255,255,.09);--stroke2:rgba(255,255,255,.18);
+ --gold:#E3A692;--gold-br:#F2D3B8;--ink:#F2EFE9;--mut:#9BA0AB;--r:16px}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);
+ line-height:1.68;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img,canvas,table{max-width:100%}
+:focus-visible{outline:2px solid var(--gold-br);outline-offset:2px;border-radius:8px}
+.wrap{max-width:900px;margin:0 auto;padding:0 1.2rem 4rem}
+h1{font-family:Fraunces,Georgia,serif;font-size:clamp(1.8rem,5.4vw,2.6rem);font-weight:600;
+ letter-spacing:-.025em;line-height:1.13;margin:.2rem 0 0}
+h2{font-family:Fraunces,Georgia,serif;font-size:clamp(1.22rem,3.1vw,1.6rem);font-weight:600;
+ letter-spacing:-.02em;line-height:1.22;color:var(--gold);margin:0 0 .6rem}
+.uy-h3{font-family:Fraunces,Georgia,serif;font-size:1.06rem;font-weight:600;letter-spacing:-.012em;
+ color:var(--ink);margin:0 0 .35rem}
+.uy-top{padding:2.6rem 0 0}
+.uy-kicker{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.55rem}
+.sub{color:var(--mut);font-size:1rem;font-weight:300;max-width:64ch;margin:.7rem 0 0}
+.uy-g{font-size:.97rem;color:var(--mut);font-weight:300;max-width:74ch;margin:.75rem 0 0;line-height:1.72}
+.uy-g b{color:var(--ink);font-weight:500}
+.uy-g a,.uy-k a{color:var(--gold-br);border-bottom:1px solid rgba(242,211,184,.3)}
+.uy-g a:hover,.uy-k a:hover{color:var(--ink);border-bottom-color:var(--gold-br)}
+.uy-k{font-size:.84rem;color:var(--mut);font-weight:300;line-height:1.7;margin:.8rem 0 0;max-width:78ch}
+.uy-et{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);
+ font-weight:500;margin:0 0 .5rem}
+.uy-blok{margin:2.6rem 0 0;padding-top:2rem;border-top:1px solid var(--stroke)}
+.uy-cik{border-left:2px solid var(--gold);padding:.2rem 0 .2rem 1.05rem;margin:1.35rem 0 0;
+ font-size:.97rem;color:var(--ink);max-width:72ch;font-weight:300;line-height:1.7}
+.uy-cik b{font-weight:600;color:var(--gold-br)}
+/* — seçici — */
+.uy-pick{margin:1.2rem 0 0}
+.uy-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.45rem}
+.uy-sg{font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;
+ gap:.16rem;min-height:64px;padding:.5rem .18rem;background:var(--card);border:1px solid var(--stroke);
+ border-radius:12px;color:var(--ink);cursor:pointer;text-align:center;
+ transition:background-color .16s,border-color .16s,color .16s,transform .14s}
+.uy-sg .uy-gl{font-size:1.28rem;line-height:1;color:var(--gold);transition:color .16s}
+.uy-sg .uy-ad{font-size:.82rem;line-height:1.2;letter-spacing:-.005em}
+.uy-sg:hover{border-color:rgba(227,166,146,.55);background:var(--card2);transform:translateY(-2px)}
+.uy-sg:hover .uy-gl{color:var(--gold-br)}
+.uy-sg[aria-checked="true"]{background:var(--gold-br);border-color:var(--gold-br);color:#1A0F14;font-weight:600}
+.uy-sg[aria-checked="true"] .uy-gl{color:#1A0F14}
+.uy-vs{text-align:center;color:var(--gold);font-size:1rem;margin:.75rem 0;letter-spacing:.2em}
+/* — sonuç — */
+.res{display:none}
+.score-wrap{text-align:center;background:linear-gradient(180deg,rgba(227,166,146,.13),rgba(227,166,146,.025));
+ border:1px solid rgba(227,166,146,.3);border-radius:var(--r);padding:1.6rem 1rem;margin:1.2rem 0 0}
+.pair{font-family:Fraunces,Georgia,serif;font-size:1.2rem;font-weight:600;color:var(--gold-br);letter-spacing:.02em}
+.score{font-family:Fraunces,Georgia,serif;font-size:3.6rem;font-weight:600;line-height:1;
+ color:var(--ink);margin:.35rem 0 .1rem;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 .score small{font-size:1.4rem;color:var(--gold)}
-.bars{margin:1.2rem 0 0}
-.bar{margin:.55rem 0}
-.bar .bl{display:flex;justify-content:space-between;font-size:.82rem;color:var(--text);margin-bottom:.25rem}
-.track{height:8px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}
-.fill{height:100%;background:linear-gradient(90deg,var(--terra2),var(--gold));border-radius:99px;width:0;transition:width .8s ease}
-.read{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.1rem 1.2rem;margin-top:1rem;font-size:.96rem;color:#e6ddcd}
-.cta{margin-top:1.2rem;text-align:center}
-.btn{display:inline-block;background:linear-gradient(135deg,#E3A692,#F2D3B8);color:#2B140C;text-decoration:none;padding:.8rem 1.6rem;border-radius:99px;font-weight:600;font-size:.92rem;border:none;cursor:pointer;font-family:'Inter'}
-.btn.ghost{background:transparent;border:1px solid var(--terra);color:var(--gold-light);margin-left:.4rem}
-.foot{text-align:center;color:var(--muted);font-size:.78rem;margin-top:2rem}
-.foot a{color:var(--gold)}
-@media(max-width:420px){.grid{grid-template-columns:repeat(4,1fr)}.sg .n{font-size:.58rem}}
-@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}</style><link rel="stylesheet" href="/sorbi-fonts.css?v=10">
+#tag{color:var(--gold-br);font-size:.95rem;letter-spacing:.04em}
+.bars{margin:1.4rem auto 0;max-width:34rem;text-align:left}
+.bar{margin:.6rem 0}
+.bar .bl{display:flex;justify-content:space-between;gap:.6rem;font-size:.86rem;color:var(--ink);margin-bottom:.28rem}
+.bar .bl span:last-child{color:var(--gold-br);font-variant-numeric:tabular-nums}
+.track{height:8px;background:rgba(255,255,255,.09);border-radius:99px;overflow:hidden}
+.fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-br));border-radius:99px;
+ width:0;transition:width .8s ease}
+.read{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);
+ padding:1.1rem 1.2rem;margin:1rem 0 0;font-size:.97rem;font-weight:300;color:var(--ink);
+ line-height:1.74;max-width:74ch}
+/* — hesap dökümü — */
+.uy-dl{margin:1.2rem 0 0;border-top:1px solid rgba(227,166,146,.3);border-bottom:1px solid var(--stroke)}
+.uy-sat{display:grid;grid-template-columns:11rem minmax(0,1fr);gap:.2rem 1.2rem;
+ padding:.85rem 0;border-top:1px solid var(--stroke)}
+.uy-sat:first-child{border-top:none}
+.uy-sat dt{font-size:.82rem;letter-spacing:.11em;text-transform:uppercase;color:var(--mut);font-weight:500}
+.uy-sat dd{margin:0;font-size:.98rem;color:var(--ink);font-weight:500;min-width:0}
+.uy-sat dd small{display:block;font-size:.85rem;color:var(--mut);font-weight:300;line-height:1.68;margin-top:.22rem}
+.uy-sat dd small b{color:var(--ink);font-weight:500}
+.uy-sat dd small i{font-style:normal;color:var(--gold-br)}
+@media(max-width:620px){.uy-sat{grid-template-columns:1fr;gap:.25rem}}
+.uy-tw{margin:1.4rem 0 0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.uy-tb{border-collapse:collapse;width:100%;min-width:19rem;font-size:.86rem}
+.uy-tb caption{text-align:left;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;
+ color:var(--mut);font-weight:500;padding-bottom:.5rem}
+.uy-tb th,.uy-tb td{text-align:left;padding:.55rem .7rem .55rem 0;border-top:1px solid var(--stroke);
+ vertical-align:top}
+.uy-tb thead th{border-top:none;border-bottom:1px solid rgba(227,166,146,.3);font-size:.82rem;
+ letter-spacing:.1em;text-transform:uppercase;color:var(--mut);font-weight:500}
+.uy-tb tbody th{color:var(--ink);font-weight:500;white-space:nowrap}
+.uy-tb td{color:var(--mut);font-weight:300;font-family:ui-monospace,Menlo,monospace;
+ font-variant-numeric:tabular-nums}
+.uy-tb td b{color:var(--gold-br);font-weight:600;font-size:.95rem}
+.uy-tb td i{font-style:normal;font-family:'Inter',system-ui,sans-serif;color:var(--mut)}
+.uy-tb tr.uy-ov th,.uy-tb tr.uy-ov td{border-top:1px solid rgba(227,166,146,.45);padding-top:.7rem}
+/* — sahne — */
+.uy-ikili{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.2rem}
+@media(max-width:860px){.uy-ikili{grid-template-columns:1fr;gap:.4rem}}
+.uy-sahne{min-width:0}
+/* — yollar / CTA — */
+.uy-yollar{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:.65rem;
+ margin:1.3rem 0 0;list-style:none}
+.uy-yol{display:block;height:100%;background:var(--card);border:1px solid var(--stroke);
+ border-radius:14px;padding:.95rem 1.05rem;transition:border-color .18s,background-color .18s}
+.uy-yol:hover{border-color:rgba(227,166,146,.5);background:var(--card2)}
+.uy-yol b{display:block;font-size:.94rem;font-weight:600;color:var(--ink);margin-bottom:.2rem}
+.uy-yol span{display:block;font-size:.84rem;color:var(--mut);font-weight:300;line-height:1.6}
+.cta{margin:1.5rem 0 0;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;
+ background:var(--gold-br);color:#1A0F14;padding:0 1.5rem;border-radius:99px;font-weight:600;
+ font-size:.92rem;border:none;cursor:pointer;font-family:inherit;transition:background-color .16s}
+.btn:hover{background:var(--gold)}
+.btn.ghost{background:transparent;color:var(--gold-br);box-shadow:inset 0 0 0 1px var(--gold)}
+.btn.ghost:hover{background:rgba(227,166,146,.12)}
+#uyPayNot{font-size:.84rem;color:var(--mut)}
+.foot{font-size:.86rem;color:var(--mut);font-weight:300;line-height:1.8;margin:1.4rem 0 0;max-width:78ch}
+.foot a{color:var(--gold-br);border-bottom:1px solid rgba(242,211,184,.3)}
+.uy-dip{font-size:.84rem;color:var(--mut);font-weight:300;line-height:1.8;margin:2.4rem 0 0;
+ padding-top:1.3rem;border-top:1px solid var(--stroke);max-width:80ch}
+.uy-dip a{color:var(--mut);border-bottom:1px solid rgba(255,255,255,.2)}
+/* — paylaşılan bileşenlerde en küçük metni 13px'e çıkar — */
+.sbg .sbg-o,.sbg .sbg-l,.sbg .sbg-e,.sbg .sbg-z{font-size:.84rem}
+.sbo .sbo-r,.sbo-n .sbo-r,.sbo .sbo-gizli,.sbo .sbo-bilgi p{font-size:.84rem}
+.sbo .sbo-r{padding:.34rem .7rem}
+.sbo .sbo-halka span{font-size:.86rem}
+/* uyum-carki'de animasyon yok; modulun genel azaltilmis-hareket notu bu widget icin gecersiz */
+#uyCark .sbg-z span{display:none}
+.sbo-s .sbo-nd,.sbo-s .sbo-son{font-size:.88rem}
+@media(max-width:560px){.uy-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:359px){.uy-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;
+ animation-iteration-count:1!important;transition-duration:.001ms!important}
+ .uy-sg:hover{transform:none}}
+</style><link rel="stylesheet" href="/sorbi-fonts.css?v=10">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6653215819266638"
      crossorigin="anonymous"></script>
 </head>
@@ -83,7 +182,7 @@ h1{font-family:Fraunces,Georgia,serif;font-size:clamp(1.7rem,6vw,2.4rem);margin:
   <a href="/haritam" id="sorbiNavHaritam">✦ Profilim</a>
  </nav>
 </header>
-<script>(function(){try{var M={'/soru-sor':'/araclar','/horary':'/araclar','/natal-harita':'/araclar','/sinastri':'/araclar','/seni-taniyorum':'/araclar','/yukselen-burc-hesaplama':'/araclar','/ay-burcu-hesaplama':'/araclar','/astrokartografi':'/araclar','/uygun-gun-secimi':'/araclar','/yasam-donguleri':'/araclar','/tarot':'/araclar','/gunun-karti':'/araclar','/retro-ay-takvimi':'/araclar','/burc-uyumu':'/araclar','/rapor-araci':'/araclar','/sayim-yildiz':'/sayim','/sayim-yukselen':'/sayim','/gunluk-burc-yorumlari':'/bugun'};var p=location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';if(M[p])p=M[p];else if(/burc/.test(p))p='/burc-ozellikleri';document.querySelectorAll('.sbnav nav a').forEach(function(a){var h=a.getAttribute('href').replace(/\.html$/,'');if(h===p||(h!=='/'&&h!=='/haritam'&&p.indexOf(h+'-')===0)){a.classList.add('on');a.setAttribute('aria-current','page');}});}catch(e){}})();</script>
+<script>(function(){try{var M={'/soru-sor':'/araclar','/horary':'/araclar','/natal-harita':'/araclar','/sinastri':'/araclar','/seni-taniyorum':'/araclar','/yukselen-burc-hesaplama':'/araclar','/ay-burcu-hesaplama':'/araclar','/astrokartografi':'/araclar','/uygun-gun-secimi':'/araclar','/yasam-donguleri':'/araclar','/tarot':'/araclar','/gunun-karti':'/araclar','/retro-ay-takvimi':'/araclar','/burc-uyumu':'/burc-ozellikleri','/rapor-araci':'/araclar','/sayim-yildiz':'/sayim','/sayim-yukselen':'/sayim','/gunluk-burc-yorumlari':'/bugun'};var p=location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';if(M[p])p=M[p];else if(/burc/.test(p))p='/burc-ozellikleri';document.querySelectorAll('.sbnav nav a').forEach(function(a){var h=a.getAttribute('href').replace(/\.html$/,'');if(h===p||(h!=='/'&&h!=='/haritam'&&p.indexOf(h+'-')===0)){a.classList.add('on');a.setAttribute('aria-current','page');}});}catch(e){}})();</script>
 <script>(function(){var n=document.querySelector('.sbnav nav');if(!n)return;function f(){n.classList.toggle('son',n.scrollLeft+n.clientWidth>=n.scrollWidth-4);n.classList.toggle('ara',n.scrollLeft>4)}n.addEventListener('scroll',f,{passive:true});window.addEventListener('resize',f);f();var a=n.querySelector('a.on');function g(){if(a&&n.scrollWidth>n.clientWidth){var d=a.getBoundingClientRect().left-n.getBoundingClientRect().left+n.scrollLeft;n.scrollLeft=Math.max(0,Math.round(d-(n.clientWidth-a.offsetWidth)/2));}f();}g();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(g);})();</script>
 <!-- SORBI-NAV:END -->
 <!-- SORBI-TEMA:START -->
@@ -103,91 +202,136 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;ba
 body:has(> .sky)::before{display:none}
 </style>
 <!-- SORBI-TEMA:END -->
-<style>
-@media(max-width:480px){}
-</style>
-
 
 <div class="wrap">
- <div class="top">
+<section class="uy-top">
+  <p class="uy-kicker">✦ Güneş burcu taraması</p>
   <h1>Burç Uyumu</h1>
   <p class="sub">Senin burcun ve onun burcu — aşk, iletişim ve uzun vadede ne kadar uyumlusunuz? Anında öğren.</p>
- </div>
+  <p class="uy-g">Hesap iki Güneş burcunun zodyaktaki uzaklığına ve element ilişkisine bakar. Çıkan yüzdeyi bir kutunun içinde bırakmıyoruz: her satırın hangi sayıdan geldiğini aynı sayfada, açık aritmetikle gösteriyoruz.</p>
+</section>
 
- <div class="pick">
-  <div class="pl">Senin burcun</div>
-  <div class="grid" id="g1"></div>
-  <div class="vs">✦ ile ✦</div>
-  <div class="pl">Onun burcu</div>
-  <div class="grid" id="g2"></div>
- </div>
-
- <div class="res" id="res">
-  <div class="score-wrap">
-   <div class="pair" id="pair"></div>
-   <div class="score" id="score">—<small>%</small></div>
-   <div id="tag" style="color:var(--gold-light);font-size:.95rem"></div>
-   <div class="bars">
-    <div class="bar"><div class="bl"><span>❤️ Aşk & Çekim</span><span id="v-ask"></span></div><div class="track"><div class="fill" id="f-ask"></div></div></div>
-    <div class="bar"><div class="bl"><span>💬 İletişim</span><span id="v-ile"></span></div><div class="track"><div class="fill" id="f-ile"></div></div></div>
-    <div class="bar"><div class="bl"><span>♾️ Uzun Vade</span><span id="v-uzu"></span></div><div class="track"><div class="fill" id="f-uzu"></div></div></div>
-   </div>
+<section class="uy-blok" id="uySecim" style="border-top:none;padding-top:1.4rem">
+  <h2>İki Burç Seç</h2>
+  <p class="uy-g">İki şeritten birer burç seç. Dokunarak, fareyle ya da yalnızca klavyeyle seçebilirsin: şeride sekmeyle gir, ok tuşlarıyla gez, Enter ya da boşlukla onayla. Seçim değiştiğinde aşağıdaki çark, açı gösterimi ve hesap dökümü birlikte yenilenir.</p>
+  <div class="uy-pick">
+    <p class="uy-et" id="uyLblA">Senin burcun</p>
+    <div class="uy-grid" id="uySecA" aria-labelledby="uyLblA"></div>
+    <p class="uy-vs" aria-hidden="true">✦ ile ✦</p>
+    <p class="uy-et" id="uyLblB">Onun burcu</p>
+    <div class="uy-grid" id="uySecB" aria-labelledby="uyLblB"></div>
   </div>
-  <div class="read" id="read"></div>
-  <div class="cta">
-   <a class="btn" href="/dogum-haritasi-hesaplama">Ücretsiz doğum haritanı çıkar →</a>
-   <button class="btn ghost" onclick="shareIt()">Paylaş</button>
-  </div>
-  <p class="foot">Bu hızlı uyum güneş burçlarına dayanır — asıl derinlik iki doğum haritasının birleşiminde (sinastri). <a href="/dogum-haritasi-hesaplama">Ücretsiz haritanı çıkar →</a> · <a href="/retro-ay-takvimi">Retro &amp; ay takvimi</a></p>
- </div>
+  <p class="uy-k" id="uySecOzet" role="status" aria-live="polite">İki burç seçildiğinde sonuç açılır.</p>
+  <noscript><p class="uy-k">Bu araç tarayıcının içinde çalışır; seçim yapmak için JavaScript gerekiyor. On iki burcun element, nitelik ve yönetici tablosunu <a href="/burc-ozellikleri">Burç Özellikleri</a> sayfasında JavaScript olmadan da okuyabilirsin.</p></noscript>
+</section>
 
- <p class="foot">Kader değil, farkındalık. · <a href="/">sorbiapp.com</a></p>
+<div class="res" id="res">
+  <section class="uy-blok">
+    <h2>Tarama Sonucu</h2>
+    <div class="score-wrap">
+      <div class="pair" id="pair"></div>
+      <div class="score" id="score">—<small>%</small></div>
+      <div id="tag"></div>
+      <div class="bars">
+        <div class="bar"><div class="bl"><span>Aşk &amp; çekim</span><span id="v-ask"></span></div><div class="track"><div class="fill" id="f-ask"></div></div></div>
+        <div class="bar"><div class="bl"><span>İletişim</span><span id="v-ile"></span></div><div class="track"><div class="fill" id="f-ile"></div></div></div>
+        <div class="bar"><div class="bl"><span>Uzun vade</span><span id="v-uzu"></span></div><div class="track"><div class="fill" id="f-uzu"></div></div></div>
+      </div>
+    </div>
+    <div class="read" id="read"></div>
+    <p class="uy-k">Bu üç ölçü bir eğilim taramasıdır; iki kişinin ilişkisi hakkında bir hüküm değil. Yüzdenin nasıl çıktığını hemen aşağıda satır satır görebilirsin.</p>
+  </section>
+
+  <section class="uy-blok" id="uyNeden" aria-live="polite"></section>
 </div>
-<script>
-const SIGNS=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
-const ZG=['♈︎','♉︎','♊︎','♋︎','♌︎','♍︎','♎︎','♏︎','♐︎','♑︎','♒︎','♓︎'];const VS='︎';
-const ELN=['Ateş','Toprak','Hava','Su'];
-let a=null,b=null;
-function grid(el,which){el.innerHTML=SIGNS.map((s,i)=>`<div class="sg" data-i="${i}"><span class="g">${ZG[i]}${VS}</span><span class="n">${s}</span></div>`).join('');
- el.querySelectorAll('.sg').forEach(x=>x.onclick=()=>{el.querySelectorAll('.sg').forEach(y=>y.classList.remove('on'));x.classList.add('on');const i=+x.dataset.i;if(which===1)a=i;else b=i;calc();});}
-grid(document.getElementById('g1'),1);grid(document.getElementById('g2'),2);
 
-function meta(a,b){const d=((b-a)%12+12)%12;const dd=Math.min(d,12-d);
- if(dd===0)return{base:82,t:'same'};if(dd===4)return{base:92,t:'trine'};if(dd===2)return{base:86,t:'sextile'};
- if(dd===6)return{base:78,t:'opp'};if(dd===3)return{base:62,t:'square'};if(dd===1)return{base:55,t:'semi'};return{base:52,t:'quin'};}
-function clamp(n){return Math.max(38,Math.min(97,Math.round(n)));}
-const READS={
- same:(A,B)=>`Aynı burçtan ikiniz — ${A} & ${B}. Birbirinizi ayna gibi okuyorsunuz, aynı dili konuşuyorsunuz! Fakat güçlü yanlar kadar zaaflar da ortak, biri frene basmazsa ikiniz aynı çukura düşebilirsiniz.`,
- trine:(A,B)=>`${A} ve ${B} aynı elementten (${ELN[a%4]}) — aranızda doğal, akışkan bir uyum var. Konuşmadan anlaşır, aynı frekansta titrersiniz. İlişkilerin en rahatı bu, fakat rahatlık tembelliğe dönmesin!`,
- sextile:(A,B)=>`${A} ile ${B} birbirini besleyen elementlerden — biri kıvılcım, diğeri onu büyütüyor. Kolay bir yakınlık, tatlı bir çekim, dengeli enerji. Sağlam ve keyifli ilişkilerin habercisi.`,
- opp:(A,B)=>`${A} ve ${B} zodyağın tam karşı uçları — zıt kutuplar birbirini deli gibi çeker! Biri diğerinin eksiğini tamamlıyor. Manyetik bir bağ, fakat dengeyi kurmayı öğrenmezseniz gerginlik de o kadar büyük olur.`,
- square:(A,B)=>`${A} ve ${B} arasında elektrik yüksek, sürtüşme de! Farklı yönlere çeken güçlü bir enerji. Tutkulu, hareketli, asla sıkılmayan bir ilişki, fakat ego savaşına dikkat — birlikte büyümek isteyen çiftler için altın.`,
- semi:(A,B)=>`${A} ve ${B} yan yana burçlar — başta çok farklı diller konuşuyorsunuz. "Bu nereden çıktı" dediğiniz anlar olur, ama anlamak için emek verirseniz beklenmedik bir öğretmenlik saklı burada.`,
- quin:(A,B)=>`${A} ve ${B} arası sürekli ayar isteyen bir bağ. Ortak nokta bulmak çaba ister, fakat farklılıklarınıza saygı duyarsanız sizi büyüten, olgunlaştıran bir ilişki olur.`
-};
-const TAGS={same:'İkiz Ruhlar',trine:'Doğal Akış',sextile:'Tatlı Uyum',opp:'Zıt Çekim',square:'Tutkulu Gerilim',semi:'Emek İster',quin:'Ayar Gerektiren'};
-function elCompat(a,b){const ea=a%4,eb=b%4;if(ea===eb)return true;const s=[ea,eb].sort().join('');return s==='02'||s==='13';}
-function calc(){if(a===null||b===null)return;
- const m=meta(a,b);const comp=elCompat(a,b);
- const ask=clamp(m.base+(m.t==='opp'?10:m.t==='square'?7:m.t==='trine'?3:0)+(comp?2:-2));
- const ile=clamp(m.base+(comp?5:-4)+(m.t==='sextile'?4:0)-(m.t==='square'?3:0));
- const uzu=clamp(m.base+((m.t==='trine'||m.t==='same')?6:0)-((m.t==='square'||m.t==='quin'||m.t==='semi')?6:0)+(comp?2:0));
- const ov=Math.round((ask+ile+uzu)/3);
- document.getElementById('res').style.display='block';
- document.getElementById('pair').textContent=`${SIGNS[a]} ✦ ${SIGNS[b]}`;
- document.getElementById('score').innerHTML=`${ov}<small>%</small>`;
- document.getElementById('tag').textContent=TAGS[m.t];
- const set=(vid,fid,val)=>{document.getElementById(vid).textContent='%'+val;setTimeout(()=>document.getElementById(fid).style.width=val+'%',50);};
- set('v-ask','f-ask',ask);set('v-ile','f-ile',ile);set('v-uzu','f-uzu',uzu);
- document.getElementById('read').textContent=READS[m.t](SIGNS[a],SIGNS[b]);
- try{fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'uyum_hesaplandi',meta:SIGNS[a]+'-'+SIGNS[b]}),keepalive:true});}catch(e){}
- document.getElementById('res').scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-function shareIt(){const t=(a!==null&&b!==null)?`${SIGNS[a]} & ${SIGNS[b]} burç uyumumuz %${document.getElementById('score').textContent.replace('%','')} çıktı! Sen de dene:`:'Burç uyumunu hesapla:';const url='https://sorbiapp.com/burc-uyumu';
- if(navigator.share){navigator.share({title:'Burç Uyumu — Sorbi',text:t,url}).catch(()=>{});}
- else if(navigator.clipboard){navigator.clipboard.writeText(t+' '+url);alert('Link kopyalandı ✦');}
- else{window.open('https://wa.me/?text='+encodeURIComponent(t+' '+url),'_blank');}}
-</script><!-- SORBI-FOOTER:START -->
+<section class="uy-blok">
+  <h2>Gökyüzü Geometrisi</h2>
+  <p class="uy-g">Her burç zodyakta 30 derecelik bir dilim. İki burç arasındaki dilim sayısı, aralarındaki açıyı verir — astrolojinin <b>kavuşum, altmışlık, kare, üçgen, karşıt</b> dediği şey önce bu geometridir. Çarkta dilim rengi elementi, kenardaki çentik sayısı niteliği gösteriyor: bir çentik öncü, iki sabit, üç değişken.</p>
+  <div class="uy-ikili">
+    <div class="uy-sahne">
+      <p class="uy-et">Zodyak çarkı · iki burç birlikte</p>
+      <div id="uyCark" data-sorbi-gosteri="uyum-carki"></div>
+    </div>
+    <div class="uy-sahne" id="uyAciKap" hidden>
+      <p class="uy-et">Açı laboratuvarı</p>
+      <div id="uyAci" data-sorbi-gosteri="aci-gosterimi" data-a="Burç A" data-b="Burç B" data-a-boylam="15"></div>
+      <p class="uy-k">İki nokta seçtiğin burçların orta derecesine kurulur. Kaydırıcılarla dereceyi kendin değiştirip açının ne zaman kurulup ne zaman bozulduğunu görebilirsin. Açı adları ve orb sınırları sitenin ortak açı tablosundan okunuyor.</p>
+    </div>
+  </div>
+  <div class="uy-cik">Beş büyük açı ve temel orbları: kavuşum 0° (8°), altmışlık 60° (5°), kare 90° (7°), üçgen 120° (7°), karşıt 180° (8°). Burç ortası dereceler kullanıldığı için buradaki açılar tam sayıdır; gerçek bir haritada gezegenin derecesi bu değeri kaydırır ve orb dışına düşen fark açı sayılmaz. <b>Otuzluk (30°)</b> ve <b>yüzelli (150°)</b> beş büyük açının dışında kalır.</div>
+</section>
+
+<section class="uy-blok" id="uyVeri" hidden></section>
+
+<section class="uy-blok">
+  <h2>Açıları Öğren</h2>
+  <p class="uy-g">Bu sayfa bir hesap makinesinden fazlası olabilir: kaç çift denediğin, kaç ayrı açı ilişkisi gördüğün ve sınav sonucun bu tarayıcıda tutulur. Hesap açılmıyor, sunucuya hiçbir veri gönderilmiyor, çerez kullanılmıyor.</p>
+  <div data-sorbi-ilerleme="uyum" data-toplam="12" data-ad="Uyum keşfin"></div>
+  <p class="uy-et" id="uyNisanEt">Bu sayfanın nişanları</p>
+  <div class="sbo-n" id="uyNisan" role="list" aria-labelledby="uyNisanEt"></div>
+  <p class="uy-k">Yukarıdaki kartın içindeki nişanlar sitenin ortak öğrenme nişanları; buradakiler yalnız bu sayfada açılır. Hiçbiri şansa bağlı değil: hepsi yaptığın işe bakıyor.</p>
+  <div data-sorbi-sinav="uyum-acilar" data-ad="Açı ilişkileri · kendini dene" data-puan="22">
+    <div data-soru="Aynı elementten iki burç arasında zodyakta kaç derece vardır?">
+      <button data-dogru data-neden="Element dört burçta bir tekrar eder: 4 × 30° = 120°, yani üçgen.">120° — üçgen</button>
+      <button data-neden="90°, aynı nitelikten burçlar arasındaki farktır; element dört burçta bir tekrar eder.">90° — kare</button>
+      <button data-neden="60° iki burç aralığıdır ve element döngüsüne denk gelmez.">60° — altmışlık</button>
+    </div>
+    <div data-soru="İki öncü burç arasında (örneğin Koç ile Terazi) hangi açı oluşur?">
+      <button data-neden="60° iki burç aralığıdır ve farklı nitelikteki burçları eşler.">60° altmışlık</button>
+      <button data-dogru data-neden="Nitelik üç burçta bir tekrar eder; öncü burçlar 0°, 90°, 180° ve 270°'de durur. Aralarında ya kare ya karşıt oluşur.">90° kare ya da 180° karşıt</button>
+      <button data-neden="120° aynı elementi eşler; nitelik üç burçta bir tekrar ettiği için üçgen aynı niteliğe denk gelmez.">120° üçgen</button>
+    </div>
+    <div data-soru="Bu sayfadaki uyum yüzdesi neye dayanıyor?">
+      <button data-neden="Bu tarama yalnız iki Güneş burcunu kullanır; saat ve yer doğum haritası hesabına girer.">İki kişinin doğum saatine ve doğum yerine</button>
+      <button data-neden="Hesaba yalnız iki burç girer; ad ya da gün numarası kullanılmaz.">Kişilerin adlarına ve doğum günü sayılarına</button>
+      <button data-dogru data-neden="Taban puan burçlar arası uzaklıktan, düzeltmeler element ilişkisinden gelir. Bütün girdi bu kadar olduğu için 144 kombinasyon yedi farklı sonuca düşer.">İki burcun zodyaktaki uzaklığına ve element ilişkisine</button>
+    </div>
+    <div data-soru="İki doğum haritasının birbirine göre okunmasına ne denir?">
+      <button data-neden="Transit, gökyüzündeki güncel konumların tek bir haritaya göre okunmasıdır.">Transit</button>
+      <button data-dogru data-neden="Sinastri iki haritanın gezegenlerini ve evlerini birbirine göre okur; Güneş burcu karşılaştırması bunun çok küçük bir parçasıdır.">Sinastri</button>
+      <button data-neden="Horary, bir sorunun sorulduğu anın haritasıdır; iki kişinin karşılaştırması değildir.">Horary</button>
+    </div>
+  </div>
+</section>
+
+<section class="uy-blok" id="uySinir">
+  <h2>Bu Tarama Neyi Göstermez</h2>
+  <p class="uy-g">Güneş burcu doğum tarihinden gelir ve haritanın yalnızca bir parçasıdır. Bu yüzden iki Güneş burcunu karşılaştırmak bir <b>eğilim taraması</b>dır: aynı uzaklıktaki bütün çiftler aynı sonucu verdiği için sayı kişilere değil, geometriye aittir. İki kişinin gerçek karşılaştırması iki doğum haritasının birlikte okunmasıyla yapılır; buna <b>sinastri</b> denir. Ay, yükselen, Venüs ve Mars yerleşimleri ile iki harita arasındaki açılar tabloyu bütünüyle değiştirebilir.</p>
+  <p class="uy-g">Bu sayfa bir ilişkinin yürüyüp yürümeyeceğine dair bir şey söylemez ve söylemeyi amaçlamaz. Astroloji sembolik bir yorum dilidir; buradaki yüzde, o dilin geometrik iskeletinin özetidir.</p>
+  <ul class="uy-yollar">
+    <li><a class="uy-yol" href="/sinastri"><b>Sinastri Rehberi</b><span>İki haritanın karşılaştırması nasıl okunur, hangi yerleşimlere bakılır.</span></a></li>
+    <li><a class="uy-yol" href="/dogum-haritasi-hesaplama"><b>Doğum Haritası</b><span>Kendi haritanı ücretsiz çıkar; Güneş’in yanına Ay ve yükseleni de koy.</span></a></li>
+    <li><a class="uy-yol" href="/burc-ozellikleri"><b>Burç Özellikleri</b><span>On iki burcun element, nitelik ve yönetici tablosu.</span></a></li>
+    <li><a class="uy-yol" href="/ogren"><b>Astroloji Okuryazarlığı</b><span>Açı, orb ve yükselen gerçek gökyüzü verisiyle.</span></a></li>
+  </ul>
+  <div class="cta">
+    <a class="btn" href="/dogum-haritasi-hesaplama">Ücretsiz doğum haritanı çıkar →</a>
+    <button class="btn ghost" type="button" id="uyPaylas">Paylaş</button>
+    <span id="uyPayNot" role="status" aria-live="polite"></span>
+  </div>
+  <p class="foot">Bu hızlı uyum güneş burçlarına dayanır — asıl derinlik iki doğum haritasının birleşiminde (sinastri). <a href="/dogum-haritasi-hesaplama">Ücretsiz haritanı çıkar →</a> · <a href="/sinastri">Sinastri rehberi</a> · <a href="/retro-ay-takvimi">Retro &amp; ay takvimi</a></p>
+</section>
+
+<section class="uy-blok">
+  <h2>Sık Sorulanlar</h2>
+  <div class="uy-dl">
+    <div class="uy-sat"><dt>Nasıl çalışır</dt><dd>Burç uyumu hesaplama nasıl çalışır?<small>İki Güneş burcunun zodyaktaki uzaklığı taban puanı verir: aynı burç 82, iki burç ara 86, üç burç ara 62, dört burç ara 92, beş burç ara 52, tam karşı uç 78, yan yana 55. Element ilişkisi bu tabanı birkaç puan yukarı ya da aşağı çeker. Bütün girdi bu kadar olduğu için 144 burç kombinasyonu yedi farklı sonuca düşer.</small></dd></div>
+    <div class="uy-sat"><dt>Sınırı</dt><dd>Güneş burcu uyumu iki kişinin ilişkisini gösterir mi?<small>Tek başına göstermeyebilir. Güneş burcu haritanın bir parçasıdır; iki kişinin karşılaştırması için iki doğum haritasının birlikte okunması gerekir. Buna sinastri denir ve <a href="/sinastri">ayrı bir sayfada</a> anlatılıyor.</small></dd></div>
+    <div class="uy-sat"><dt>Aynı burç</dt><dd>Aynı burçtan iki kişi uyumlu olur mu?<small>Aynı burçtan iki kişi aynı element ve aynı niteliği paylaştığı için birbirini kolay okuyabilir; aynı nedenle zorlandıkları yerler de ortak olabilir. Bu hesapta aynı burç 82 taban puanıyla başlar, genel sonuç 87 çıkar. Yine de iki kişinin Ay ve yükselen yerleşimleri tabloyu bütünüyle değiştirebilir.</small></dd></div>
+    <div class="uy-sat"><dt>Açılar</dt><dd>Burçlar arasındaki açı ne anlama gelir?<small>Her burç 30 derecelik bir dilim. Dilim sayısı çarpı 30, aradaki açıyı verir: aynı burç kavuşum (0°), iki burç ara altmışlık (60°), üç burç ara kare (90°), dört burç ara üçgen (120°), altı burç ara karşıt (180°). Bir ve beş burç aralığı otuzluk (30°) ve yüzelli (150°) adını alır; ikisi de beş büyük açının dışında kalır.</small></dd></div>
+  </div>
+</section>
+
+<p class="uy-dip">Bu sayfadaki çark ve açı gösterimi efemeris kullanmaz; burçlar kuşağının saf geometrisiyle çizilir ve açı adları ile orb sınırları sitenin ortak açı tablosundan gelir. Ölçülmüş veri şeridindeki paylar 1950–2009 doğum tarihleri için Türkiye enleminde hesaplanmış <b>24.000 gerçek haritanın</b> sayımından okunuyor; kaynak dosyayı <a href="/nadirlik-veri.json">nadirlik-veri.json</a> içinde görebilirsin. O dosya tek tek haritaların burç dağılımını tutar, çiftleri ölçmez — bu yüzden ikili oranı gözlem değil, iki paydan türetilmiş bir hesap olarak veriliyor. Sınav, nişan ve ilerleme kaydı yalnız kendi tarayıcında tutulur.</p>
+
+<p class="foot">Kader değil, farkındalık. · <a href="/">sorbiapp.com</a></p>
+</div>
+<script src="/sorbi-astro.js?v=1" defer></script>
+<script src="/sorbi-gosteri.js?v=1" defer></script>
+<script src="/sorbi-oyun.js?v=1" defer></script>
+<script src="/sorbi-uyum.js?v=1" defer></script>
+<!-- SORBI-FOOTER:START -->
 <style>
 .sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:#9BA0AB;max-width:none;width:auto}
 .sbft{margin-top:3rem;border-top:1px solid rgba(255,255,255,.08);background:#0D0810;font-family:'Inter',system-ui,sans-serif}
@@ -198,7 +342,7 @@ function shareIt(){const t=(a!==null&&b!==null)?`${SIGNS[a]} & ${SIGNS[b]} burç
 .sbft .sbft-brand b{font-size:1.05rem;color:#F2EFE9;font-weight:700}
 .sbft .sbft-brand b i{font-style:normal;color:#E3A692;margin-right:.3rem}
 .sbft .sbft-brand p{color:#9BA0AB;font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
-.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#6D7280;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(255,255,255,.06);color:#8E949F;font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 @media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
 @media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
 </style>
