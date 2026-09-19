@@ -53,6 +53,42 @@ function acilar(P){
  return out;
 }
 
+/* ── üç cümle: sembol değil, an. Yorum yok, gökyüzünde ne vardı ── */
+var BURC_TA='Koç\u2019ta Boğa\u2019da İkizler\u2019de Yengeç\u2019te Aslan\u2019da Başak\u2019ta Terazi\u2019de Akrep\u2019te Yay\u2019da Oğlak\u2019ta Kova\u2019da Balık\u2019ta'.split(' ');
+function konum(d){ /* d: ASC'den ekliptik uzaklık; 0–180 ufkun altı */
+ if(d<20||d>=340)return 'tam ufuktaydı, doğuda';
+ if(d<70)return 'ufkun az altındaydı, doğuda';
+ if(d<110)return 'ayaklarının altındaydı, gece yarısı noktasında';
+ if(d<160)return 'ufkun altındaydı, batıda';
+ if(d<200)return 'tam ufuktaydı, batıda';
+ if(d<250)return 'batıya doğru alçalıyordu';
+ if(d<290)return 'tam tependeydi';
+ return 'doğudan yükseliyordu';
+}
+function anlat(H,saatYok){
+ var P=H.P,su=P.sun,ay=P.moon,c=[],ad={mer:'Merkür',ven:'Venüs',mar:'Mars',jup:'Jüpiter',sat:'Satürn',sun:'Güneş',moon:'Ay'};
+ var faz=M.abs(kisa(su.lon,ay.lon))<15?'yeni aydı':M.abs(kisa(su.lon,ay.lon))>165?'dolunaydı':nrm(ay.lon-su.lon)<180?'büyüyordu':'küçülüyordu';
+ if(saatYok){
+  var bs=BURC_TA[M.floor(nrm(su.lon)/30)];
+  c.push('Saatini bilmediğimiz için ufuk yok; ama Güneş '+bs+(/a$/.test(bs)?'ydı':'ydi')+'.');
+  c.push('Ay '+BURC_TA[M.floor(nrm(ay.lon)/30)]+'; '+faz+'.');
+ }else{
+  var ds=nrm(su.lon-H.asc),da=nrm(ay.lon-H.asc);
+  c.push('Güneş '+konum(ds)+'. '+(ds>=180?'Gündüz doğmuşsun.':'Gece doğmuşsun.'));
+  c.push('Ay '+konum(da)+'; '+faz+'.');
+ }
+ var rx=['mer','ven','mar'].filter(function(k){return P[k]&&P[k].rx;}).map(function(k){return ad[k];});
+ if(rx.length)c.push(rx.join(' ve ')+' o gün geri gidiyordu.');
+ else{
+  var ks=Object.keys(P),en=null;
+  for(var i=0;i<ks.length;i++)for(var j=i+1;j<ks.length;j++){var d=M.abs(kisa(P[ks[i]].lon,P[ks[j]].lon));
+   if(d<3&&(!en||d<en.d))en={a:ks[i],b:ks[j],d:d,t:'yan yana duruyordu'};
+   if(M.abs(d-180)<3&&(!en||M.abs(d-180)<en.d))en={a:ks[i],b:ks[j],d:M.abs(d-180),t:'tam karşı karşıyaydı'};}
+  c.push(en?(P[en.a].n+' ile '+P[en.b].n+' '+en.t+'.'):'Gezegenler o gün gökyüzüne dağılmıştı, hiçbiri yan yana değildi.');
+ }
+ return c;
+}
+
 /* ── çizim ── */
 function ciz(cv,H,o){
  var dpr=M.min(W.devicePixelRatio||1,2),G=cv.clientWidth||600;
@@ -123,8 +159,9 @@ function kur(el,o){
  var cv=el.querySelector('.gk-c'),tEl=el.querySelector('.gk-t'),fEl=el.querySelector('.gk-f'),
      ciz_=el.querySelector('.gk-cizgi'),tut=ciz_.querySelector('b'),geri=el.querySelector('.gk-simdi');
  var ST={H:null,now:null,rid:0,ofs:0,dogum:false};
+ if(o.cizgi===false){ciz_.hidden=true;}
  function goster(H){ST.H=H;ciz(cv,H,o);tEl.textContent=metin(H,o);var f=ST.dogum?'doğduğun an':fark(H.t-Date.now());fEl.textContent=f;
-  geri.hidden=(f==='şimdi');tut.style.left=(50+ST.ofs*50)+'%';}
+  geri.hidden=(f==='şimdi')||o.cizgi===false;tut.style.left=(50+ST.ofs*50)+'%';}
  function suzul(A,B,sure,cb){ /* iki harita arası yumuşak geçiş */
   if(ST.rid)cancelAnimationFrame(ST.rid);
   if(AZ){goster(B);cb&&cb();return;}
@@ -157,7 +194,8 @@ function kur(el,o){
   git:function(d,yer,cb){ /* doğum anına uç */
    var hedef=harita(d,yer?{lat:yer.lat,lon:yer.lon,tz:yer.tz||o.tz,yer:yer.yer}:o);
    var A=ST.H||ST.now;ST.ofs=0;ciz_.hidden=true;ST.dogum=true;
-   suzul(A,hedef,1800,function(){tEl.textContent=metin(hedef,yer||o);cb&&cb();});},
+   suzul(A,hedef,1800,function(){tEl.textContent=metin(hedef,yer||o);cb&&cb(hedef);});},
+  anlat:function(H,saatYok){return anlat(H,saatYok);},
   simdi:function(){ciz_.hidden=false;geri.click();},
   yeniden:function(){if(ST.H)ciz(cv,ST.H,o);}
  };

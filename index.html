@@ -63,6 +63,15 @@ svg{display:block}
 .hero .ok{margin-top:1.6rem;font-size:.78rem;color:var(--dim);letter-spacing:.06em}
 @media(prefers-reduced-motion:no-preference){.hero .ok{animation:gkOk 2.4s ease-in-out infinite}}
 @keyframes gkOk{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+.gk-iki{display:grid;grid-template-columns:1fr;justify-items:center;gap:1.6rem;width:100%}
+.gk-iki.acik{grid-template-columns:1fr 1fr;max-width:1040px;margin:0 auto;align-items:start}
+.gk-kol{width:100%;display:flex;flex-direction:column;align-items:center}
+.gk-kol[hidden],.gk-bas[hidden],.gk-anlat[hidden]{display:none}
+.gk-bas{font-family:ui-monospace,Menlo,monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:1.4rem 0 -.6rem}
+.gk-iki.acik .gk{width:min(92vw,460px)}
+.gk-anlat{max-width:52ch;margin:1.8rem auto 0;font-size:1.02rem;line-height:1.7;color:var(--ink);font-weight:300}
+.gk-anlat p{margin:.2rem 0}
+@media(max-width:880px){.gk-iki.acik{grid-template-columns:1fr}.gk-iki.acik #gkSimdiKol .gk{width:min(64vw,300px)}}
 .chartwrap[hidden]{display:none}
 .hero .kicker{display:inline-flex;align-items:center;gap:.45rem;font-size:.78rem;font-weight:500;color:var(--mut);
  border:1px solid var(--stroke2);border-radius:99px;padding:.38rem .9rem;margin-bottom:1.3rem;background:var(--card)}
@@ -250,7 +259,11 @@ body{background:transparent!important}
 <div class="hero">
     <h1>Doğduğun an <em>kaç kişide bir</em>?</h1>
   <p>Şu an gökyüzü böyle. Tarihini yaz, senin anına gidelim.</p>
-  <div class="gk" id="gokyuzu" aria-live="off"></div>
+  <div class="gk-iki" id="gkIki">
+    <div class="gk-kol"><div class="gk-bas" hidden>doğduğun an</div><div class="gk" id="gokyuzu" aria-live="off"></div></div>
+    <div class="gk-kol" id="gkSimdiKol" hidden><div class="gk-bas">şimdi</div><div class="gk" id="gokSimdi"></div></div>
+  </div>
+  <div class="gk-anlat" id="gkAnlat" hidden></div>
   <div class="ok">↓ tarihini yaz</div>
 </div>
 
@@ -315,7 +328,7 @@ function loadEngine(cb){
   QUEUE.push(cb);
   if(LOADING) return;
   LOADING=true;
-  var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=12','/sorbi-astro.js?v=4','/sorbi-gokyuzu.js?v=1'];
+  var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=12','/sorbi-astro.js?v=4','/sorbi-gokyuzu.js?v=2'];
   (function next(i){
     if(i>=srcs.length){ READY=true; LOADING=false; var q=QUEUE;QUEUE=[];q.forEach(function(f){f();}); return; }
     var s=document.createElement('script');
@@ -393,9 +406,16 @@ function draw(){
     if(o.y<1850||o.y>2069){ showPh('1850–2069 aralığı destekleniyor.'); return; }
     CH=SorbiAstro.chart(o);
     CH.o.house=NOTIME?'W':'P';
-    if(GOK_ILK){ GOK_ILK=false; } /* kayıtlı doğumla açılışta gökyüzü şimdide kalır */
-    else if(GOK){ GOK.git(new Date(o.y,o.mo-1,o.d,o.h,o.mi),{lat:o.lat,lon:o.lon,tz:o.tz,yer:PICKED.label||''});
-      try{document.querySelector('.hero .ok').hidden=true;$('gokyuzu').scrollIntoView({behavior:'smooth',block:'center'});}catch(e){} }
+    if(GOK){ var saatYok=NOTIME;
+      GOK.git(new Date(o.y,o.mo-1,o.d,o.h,o.mi),{lat:o.lat,lon:o.lon,tz:o.tz,yer:PICKED.label||''},function(H){
+        try{ var A=$('gkAnlat'); A.innerHTML=GOK.anlat(H,saatYok).map(function(c){return '<p>'+c+'</p>';}).join(''); A.hidden=false; }catch(e){}
+      });
+      try{
+        document.querySelector('.hero .ok').hidden=true; document.querySelector('.hero > p').textContent='Doğduğun an ve şimdi, aynı halkada. Kim nereden nereye gelmiş, bak.';
+        $('gkIki').classList.add('acik'); document.querySelector('#gokyuzu').previousElementSibling.hidden=false;
+        var K=$('gkSimdiKol'); if(K.hidden){ K.hidden=false; if(!GOK2) GOK2=window.SorbiGokyuzu.kur($('gokSimdi'),{lat:o.lat,lon:o.lon,tz:o.tz,yer:PICKED.label||'',cizgi:false}); }
+        if(!GOK_ILK) $('gokyuzu').scrollIntoView({behavior:'smooth',block:'center'}); GOK_ILK=false;
+      }catch(e){} }
     var asps=SorbiAstro.within(CH,1,false);
     var tstr=$('bt').value||'';
     $('chartbox').innerHTML=window.SorbiChart.draw(CH,null,{
@@ -474,7 +494,7 @@ function fillTransits(){
 
 
 /* ── girişte: şu anın gökyüzü, hareket halinde ── */
-var GOK=null, GOK_ILK=false;
+var GOK=null, GOK2=null, GOK_ILK=false;
 function gokKur(){
   loadEngine(function(){
     try{
