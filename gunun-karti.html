@@ -118,6 +118,7 @@ body:has(> .sky)::before{display:none}
 <div class="wrap">
 <div class="hero"><h1>Günün Kartı</h1><p class="sub">Kapalı kartlardan birine dokun. Sana bugün üzerine düşünebileceğin bir tema açılsın. Bu bir kehanet değil; kendi iç sesini duymana yardımcı olan bir aynadır.</p></div>
 <div class="prompt">Bir Kart Seç</div>
+<style>#deck.kilitli .card:not(.flipped){opacity:.35;pointer-events:none}</style>
 <div class="deck" id="deck">
  <div class="card" onclick="drawCard(this)"><div class="face back"><span class="mark" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l1.9 6.3L20 10l-6.1 1.7L12 18l-1.9-6.3L4 10l6.1-1.7z"/></svg></span></div><div class="face front"></div></div>
  <div class="card" onclick="drawCard(this)"><div class="face back"><span class="mark" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l1.9 6.3L20 10l-6.1 1.7L12 18l-1.9-6.3L4 10l6.1-1.7z"/></svg></span></div><div class="face front"></div></div>
@@ -128,7 +129,7 @@ body:has(> .sky)::before{display:none}
  <div class="card" onclick="drawCard(this)"><div class="face back"><span class="mark" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l1.9 6.3L20 10l-6.1 1.7L12 18l-1.9-6.3L4 10l6.1-1.7z"/></svg></span></div><div class="face front"></div></div>
 </div>
 <div id="res"></div>
-<div class="actions"><button class="redraw" onclick="resetDeck()">&#10022; Yeniden çek</button></div>
+<div class="actions"><p id="gunNot" style="display:none;color:#8A9BBF;font-size:.88rem;margin:0">Bugünün kartı bu. Yarın değişir.</p></div>
 
 <div class="frame-note"><b>Bu bir yansıma aracıdır, kehanet değil.</b> Tarot'u geleceği söylemek için değil, kendini dinlemek için bir ayna gibi kullanırız. Kartın sözü, zaten içinde bildiğin bir şeyi yüzeye çıkarmak içindir — kararı hep sen verirsin.</div>
 
@@ -186,28 +187,39 @@ body:has(> .sky)::before{display:none}
  {ad:'Yeniden Doğuş',roma:'XX',glyph:'sun',kw:'Çağrıya kulak ver',msg:'Bugün için düşün: geçmişi dürüstçe değerlendirip yeni bir sayfaya geçme zamanı olabilir. İçinden gelen o "artık" çağrısını duy. Kendini affetmek, ileri gitmenin en hafifletici adımıdır.'},
  {ad:'Dünya',roma:'XXI',glyph:'world',kw:'Bütünlük ve tamamlanma',msg:'Sana bir hatırlatma: kat ettiğin yolu görmek de bir başarıdır. Bugün bir döngünün tamamlandığını fark et ve emeğinle barış. Bir şeyi bitirdiğinde, yeni bir bütünlüğe adım atarsın.'}
  ];
- window.__usedRound=[]; window.__lastPicked=-1;
+ function __ham(y,m,d,n){var s=y+'-'+m+'-'+d,h=2166136261>>>0;
+  for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}
+  h^=h>>>15;h=Math.imul(h,2246822507)>>>0;h^=h>>>13;h=Math.imul(h,3266489909)>>>0;
+  return ((h^(h>>>16))>>>0)%n;}
+ function __gunKarti(n){var t=new Date();
+  var bugun=__ham(t.getFullYear(),t.getMonth()+1,t.getDate(),n);
+  var d=new Date(t);d.setDate(t.getDate()-1);
+  var dun=__ham(d.getFullYear(),d.getMonth()+1,d.getDate(),n);
+  return bugun===dun?(bugun+1)%n:bugun;}
+ function __bugunKey(){var t=new Date();return t.getFullYear()+'-'+(t.getMonth()+1)+'-'+t.getDate();}
  function glyphSvg(k){return '<svg class="glyphsvg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">'+(G[k]||G.star)+'</svg>';}
- window.drawCard=function(el){
+ function __ac(el){
  if(el.classList.contains('flipped'))return;
- var all=MAJOR.map(function(_,i){return i;});
- var pool=all.filter(function(i){return __usedRound.indexOf(i)===-1 && i!==__lastPicked;});
- if(pool.length===0)pool=all.filter(function(i){return i!==__lastPicked;});
- var idx=pool[Math.floor(Math.random()*pool.length)];
- __usedRound.push(idx);__lastPicked=idx;
+ var idx=__gunKarti(MAJOR.length);
  var c=MAJOR[idx];
  el.querySelector('.front').innerHTML='<div class="roma">'+c.roma+'</div><div class="glyph">'+glyphSvg(c.glyph)+'</div><div class="name">'+c.ad+'</div>';
  el.classList.add('flipped');
  var r=document.getElementById('res');
  r.innerHTML='<div class="roma">'+c.roma+'</div><div class="title">'+c.ad+'</div><div class="kw">'+c.kw+'</div><div class="read">'+c.msg+'</div>';
  r.style.display='block';
- };
- window.resetDeck=function(){
- __usedRound=[];
- var cards=document.querySelectorAll('#deck .card');
- for(var i=0;i<cards.length;i++){cards[i].classList.remove('flipped');cards[i].querySelector('.front').innerHTML='';}
- var r=document.getElementById('res');r.style.display='none';r.innerHTML='';
- };
+ var deck=document.getElementById('deck');
+ if(deck)deck.classList.add('kilitli');
+ var not=document.getElementById('gunNot');
+ if(not)not.style.display='block';
+ try{localStorage.setItem('sorbi.gunkart',__bugunKey());}catch(e){}
+ }
+ window.drawCard=function(el){__ac(el);};
+ try{
+  if(localStorage.getItem('sorbi.gunkart')===__bugunKey()){
+   var ilk=document.querySelector('#deck .card');
+   if(ilk)__ac(ilk);
+  }
+ }catch(e){}
 })();
 </script><!-- SORBI-FOOTER:START -->
 <style>
