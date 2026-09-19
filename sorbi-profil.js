@@ -2,8 +2,9 @@
    İlk hesaplamada kaydedilen doğum bilgisi (sorbi_birth / sorbi_profile) her araçta
    otomatik kullanılır; bu modül bunu GÖRÜNÜR kılar: nav altına profil çipi basar,
    "değiştir" ve "çıkış" verir. Kayıtlı kişiler = Haritalarım kitaplığı (sorbi_charts).
-   Veri cihazda (localStorage) tutulur. İstisna: kullanıcı /dogum-haritasi-hesaplama
-   profil kartında KVKK onayı verip e-postasını kaydederse /api/profile'a e-posta+doğum bilgisi gider. */
+   Veri cihazda (localStorage) tutulur ve orada kalır; sunucuya gönderilen bir
+   kopyası yoktur. (2026-09-19'a kadar bir istisna vardı: profil kartı e-posta ve
+   doğum bilgisini /api/profile'a yolluyordu. O uç da, o çağrı da kaldırıldı.) */
 (function(){
 'use strict';
 

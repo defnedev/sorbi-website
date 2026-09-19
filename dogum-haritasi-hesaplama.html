@@ -264,7 +264,7 @@ body:has(> .sky)::before{display:none}
     <h3>Haritanı Kaydet</h3>
     <p>Sorbi profiline kaydet; araçlarda bilgilerin otomatik gelir, okumaların burada birikir.</p>
     <div class="row"><input id="sfName" placeholder="Adın"><input id="sfEmail" type="email" placeholder="E-posta"><button id="sfSave">Kaydet ✦</button></div>
-    <label class="kvkk"><input type="checkbox" id="sfKvkk"><span>Doğum bilgilerimin ve e-postamın Sorbi profilim için işlenmesine izin veriyorum · <a href="/gizlilik" style="color:var(--gold)">KVKK</a></span></label>
+    <p class="kvkk" style="margin:.4rem 0 0"><span>Bu bilgiler yalnız bu tarayıcıda saklanır, bize gönderilmez. · <a href="/gizlilik" style="color:var(--gold)">Gizlilik</a></span></p>
     <div class="smsg" id="sfMsg"></div>
    </div>
   </div></details>
@@ -445,11 +445,9 @@ document.getElementById('advToggle').onclick=()=>document.getElementById('advBox
 /* Sorbi profili oluştur (hesap MVP) */
 var _sfBtn=document.getElementById('sfSave');if(_sfBtn)_sfBtn.onclick=()=>{
  const name=document.getElementById('sfName').value.trim();const email=document.getElementById('sfEmail').value.trim();const msg=document.getElementById('sfMsg');
- if(!document.getElementById('sfKvkk').checked){msg.style.color='var(--terra)';msg.textContent='Devam için KVKK onayı gerekli.';return;}
  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg.style.color='var(--terra)';msg.textContent='Geçerli bir e-posta gir.';return;}
  const birth=loadBirth()||{};
  saveProfile({name:name||birth.name||'',email,birth,createdAt:Date.now()});
- try{fetch('/api/profile',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,name:name||birth.name||'',birth,kvkk:1}),keepalive:true});}catch(e){}
  const wb=document.getElementById('welcomeBar');document.getElementById('wbName').textContent=name||email.split('@')[0];wb.style.display='flex';
  document.getElementById('saveCard').innerHTML='<h3>Profilin hazır ✦</h3><p>Haritan kaydedildi'+(name?', '+name:'')+'. Araçlarda bilgilerin otomatik gelecek.</p>';
 };

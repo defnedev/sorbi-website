@@ -1,12 +1,8 @@
-# Yayına çıkmayacak dosyalar (uyum denetimi 2026-09-04)
-# randevu-backend: ücretli danışmanlık randevu sistemi — canlıda erişilebilirdi
-randevu-backend
+# Yayına çıkmayacak dosyalar
+# (randevu-backend ve admin 2026-09-19'da tamamen silindi, git geçmişinde duruyor)
 tools
 *.md
 *.py
 Dockerfile
 node_modules
 .wrangler
-
-# eski randevu yonetim paneli (olu)
-admin
