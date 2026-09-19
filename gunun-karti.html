@@ -13,7 +13,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Günün Kartı — Ücretsiz Tarot Kartı Seç","applicationCategory":"LifestyleApplication","operatingSystem":"Web","inLanguage":"tr","url":"https://sorbiapp.com/gunun-karti","description":"Kapalı tarot kartlarından birine dokun, bugün üzerine düşünebileceğin yansıtıcı bir tema açılsın. Bir yansıma aracıdır, kehanet değildir.","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"}}</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--terra:#E3A692;--btn-ink:#2B140C;--lapis:#0B0810;--lapisLite:#151220;--gold:#E3A692;--vermilion:#E3A692;--text:#F2EFE9;--muted:#A5A3AE;--line:rgba(223,169,143,0.28)}
+:root{--terra:#E3A692;--btn-ink:#2B140C;--lapis:#0B0810;--lapisLite:#0B0810;--gold:#E3A692;--vermilion:#E3A692;--text:#F2EFE9;--muted:#A5A3AE;--line:rgba(242,239,233,0.28)}
 body{font-family:'Inter',sans-serif;background:var(--lapis);color:var(--text);line-height:1.7}
 a{color:inherit;text-decoration:none}.wrap{max-width:760px;margin:0 auto;padding:0 20px}
 header.top{border-bottom:1px solid var(--line);padding:1rem 0}header.top .wrap{display:flex;justify-content:space-between;align-items:center}
@@ -29,8 +29,8 @@ h1{font-family:Fraunces,Georgia,serif;font-size:clamp(1.8rem,4vw,2.6rem);text-al
 .card.flipped{transform:rotateY(180deg)}
 .card.flipped:hover{transform:rotateY(180deg) translateY(-6px)}
 .face{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:12px;border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.5rem;overflow:hidden}
-.back{background:linear-gradient(160deg,rgba(223,169,143,0.16),rgba(13,8,16,0.96))}
-.back::before{content:"";position:absolute;inset:7px;border:1px solid rgba(223,169,143,0.3);border-radius:7px}
+.back{background:linear-gradient(160deg,rgba(242,239,233,0.16),rgba(13,8,16,0.96))}
+.back::before{content:"";position:absolute;inset:7px;border:1px solid rgba(242,239,233,0.3);border-radius:7px}
 .back .mark{color:var(--gold);opacity:.9}
 .front{background:linear-gradient(160deg,var(--lapisLite),var(--lapis));transform:rotateY(180deg)}
 .front .roma{font-family:Fraunces,Georgia,serif;font-size:.72rem;letter-spacing:1px;color:var(--muted)}
@@ -67,7 +67,7 @@ footer{border-top:1px solid var(--line);padding:2rem 0;text-align:center;color:v
 .sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);text-decoration:none}
 .sbnav nav a:active{transform:scale(.97)}
 .sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:#F2EFE9;background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:#E3A692}
-.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#FFFFFF;background:rgba(255,255,255,.06);box-shadow:none}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#F2EFE9;background:rgba(255,255,255,.06);box-shadow:none}
 .sbnav nav a:focus{outline:none}
 .sbnav nav a:focus-visible{outline:2px solid #E3A692;outline-offset:2px}
 .sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:#F2EFE9}
@@ -121,7 +121,7 @@ body{background:transparent!important}
  <div class="card" onclick="drawCard(this)"><div class="face back"><span class="mark" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l1.9 6.3L20 10l-6.1 1.7L12 18l-1.9-6.3L4 10l6.1-1.7z"/></svg></span></div><div class="face front"></div></div>
 </div>
 <div id="res"></div>
-<div class="actions"><p id="gunNot" style="display:none;color:#5E93A8;font-size:.88rem;margin:0">Bugünün kartı bu. Yarın değişir.</p></div>
+<div class="actions"><p id="gunNot" style="display:none;color:#A5A3AE;font-size:.88rem;margin:0">Bugünün kartı bu. Yarın değişir.</p></div>
 
 <div class="frame-note"><b>Bu bir yansıma aracıdır, kehanet değil.</b> Tarot'u geleceği söylemek için değil, kendini dinlemek için bir ayna gibi kullanırız. Kartın sözü, zaten içinde bildiğin bir şeyi yüzeye çıkarmak içindir — kararı hep sen verirsin.</div>
 

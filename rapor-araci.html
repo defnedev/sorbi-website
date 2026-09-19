@@ -6,10 +6,10 @@
 <script src="/sorbi-chart.js?v=11" defer></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--terra:#E3A692;--btn-ink:#2B140C;--ink:#0B0810;--paper:#F2EFE9;--card:#fff;--gold:#C4744E;--gold2:#C4744E;--accent:#C4744E;--tx:#1F1B2C;--tx2:#868494;--line:#A5A3AE}
-body{font-family:'Inter',sans-serif;background:#1F1B2C;color:var(--tx);line-height:1.6;padding:20px}
-.controls{max-width:900px;margin:0 auto 22px;background:#151220;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:22px;color:#F2EFE9}
-.controls h2{font-family:'Playfair Display';color:#C4744E;margin-bottom:4px}
+:root{--terra:#E3A692;--btn-ink:#2B140C;--ink:#0B0810;--paper:#F2EFE9;--card:#fff;--gold:#E3A692;--gold2:#E3A692;--accent:#E3A692;--tx:#0B0810;--tx2:#868494;--line:#A5A3AE}
+body{font-family:'Inter',sans-serif;background:#0B0810;color:var(--tx);line-height:1.6;padding:20px}
+.controls{max-width:900px;margin:0 auto 22px;background:#0B0810;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:22px;color:#F2EFE9}
+.controls h2{font-family:'Playfair Display';color:#E3A692;margin-bottom:4px}
 .controls .sub{font-size:.85rem;color:#868494;margin-bottom:16px}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .grid .full{grid-column:1/-1}
@@ -17,7 +17,7 @@ label{display:block;font-size:.72rem;letter-spacing:.4px;color:#A5A3AE;margin-bo
 input,select{width:100%;padding:9px 11px;background:#0B0810;border:1px solid rgba(255,255,255,.14);border-radius:8px;color:#F2EFE9;font-size:.9rem;font-family:'Inter'}
 .btns{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
 button{padding:11px 22px;border-radius:999px;border:none;font-weight:600;cursor:pointer;font-family:'Inter';font-size:.9rem}
-.b1{background:#C4744E;color:#2B140C}.b2{background:transparent;color:#F2EFE9;border:1px solid rgba(255,255,255,.2)}
+.b1{background:#E3A692;color:#2B140C}.b2{background:transparent;color:#F2EFE9;border:1px solid rgba(255,255,255,.2)}
 /* PAGE (A4) */
 .page{max-width:820px;margin:0 auto;background:var(--paper);color:var(--tx);border-radius:6px;padding:52px 56px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
 .rp-head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid var(--gold);padding-bottom:18px;margin-bottom:26px}
@@ -66,7 +66,7 @@ td.pl{font-weight:600;color:var(--ink)}
 .sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);text-decoration:none}
 .sbnav nav a:active{transform:scale(.97)}
 .sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:#F2EFE9;background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:#E3A692}
-.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#FFFFFF;background:rgba(255,255,255,.06);box-shadow:none}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#F2EFE9;background:rgba(255,255,255,.06);box-shadow:none}
 .sbnav nav a:focus{outline:none}
 .sbnav nav a:focus-visible{outline:2px solid #E3A692;outline-offset:2px}
 .sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:#F2EFE9}
@@ -219,7 +219,7 @@ document.getElementById('gen').onclick=()=>{
  const b3=[['Güneş',ch.pls[0].lon],['Ay',ch.pls[1].lon],['Yükselen',ch.asc]];
  document.getElementById('pBt3').innerHTML=b3.map(([r,l])=>{const s=signOf(l),g=norm(l)-s*30;return `<div class="c"><div class="r">${r}</div><div class="s">${SIGNS[s]}</div><div class="d">${Math.floor(g)}°${String(Math.round((g-Math.floor(g))*60)).padStart(2,'0')}</div></div>`;}).join('');
  let rows=ch.pls.map(p=>`<tr><td class="pl">${p.n}${p.rx?' <span class="rx">R</span>':''}</td><td>${fmtDeg(p.lon)}</td><td>${p.house}</td></tr>`).join('');
- rows+=`<tr><td class="pl" style="color:#C4744E">Yükselen (ASC)</td><td>${fmtDeg(ch.asc)}</td><td>1</td></tr><tr><td class="pl" style="color:#C4744E">Tepe Noktası (MC)</td><td>${fmtDeg(ch.mc)}</td><td>10</td></tr>`;
+ rows+=`<tr><td class="pl" style="color:#E3A692">Yükselen (ASC)</td><td>${fmtDeg(ch.asc)}</td><td>1</td></tr><tr><td class="pl" style="color:#E3A692">Tepe Noktası (MC)</td><td>${fmtDeg(ch.mc)}</td><td>10</td></tr>`;
  document.querySelector('#pTable tbody').innerHTML=rows;
  wheel(ch);
  document.querySelector('#pAsp tbody').innerHTML=ch.asps.length?ch.asps.map(a=>`<tr><td class="pl" style="text-align:left">${a.a}</td><td>${a.nm}</td><td class="pl" style="text-align:right">${a.b}</td><td style="color:#868494">orb ${Math.abs(a.orb).toFixed(1)}°</td></tr>`).join(''):'<tr><td>Belirgin major açı bulunamadı.</td></tr>';

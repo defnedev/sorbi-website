@@ -31,20 +31,20 @@ img{max-width:100%;display:block;}
 a{text-decoration:none;color:inherit;}
 ul{list-style:none;}
 
-:root{--terra:#1F1B2C;--btn-ink:#2B140C;
+:root{--terra:#0B0810;--btn-ink:#2B140C;
  --dark:#0B0810;
  --dark2:#0B0810;
- --dark3:#151220;
- --gold:#E4CF9A;
- --gold2:rgba(223,169,143,0.12);
- --gold3:rgba(223,169,143,0.25);
- --purple:#C4744E;
- --purple2:rgba(223,169,143,0.12);
- --green:#25D366;
+ --dark3:#0B0810;
+ --gold:#F2EFE9;
+ --gold2:rgba(242,239,233,0.12);
+ --gold3:rgba(242,239,233,0.25);
+ --purple:#E3A692;
+ --purple2:rgba(242,239,233,0.12);
+ --green:#F2EFE9;
  --text-light:#F2EFE9;
  --text-muted:rgba(246,241,231,0.6);
  --text-dim:rgba(246,241,231,0.35);
- --border-gold:rgba(223,169,143,0.22);
+ --border-gold:rgba(242,239,233,0.22);
  --radius:12px;
 }
 
@@ -87,12 +87,12 @@ nav.__eski{
 }
 .hero::before{
  content:'';position:absolute;inset:0;
- background:url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='200' cy='200' r='180' stroke='rgba(223,169,143,.05)' stroke-width='1' fill='none'/%3E%3Ccircle cx='200' cy='200' r='130' stroke='rgba(223,169,143,.05)' stroke-width='1' fill='none'/%3E%3Ccircle cx='200' cy='200' r='80' stroke='rgba(223,169,143,.05)' stroke-width='1' fill='none'/%3E%3C/svg%3E") center center / 600px 600px no-repeat;
+ background:url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='200' cy='200' r='180' stroke='rgba(242,239,233,.05)' stroke-width='1' fill='none'/%3E%3Ccircle cx='200' cy='200' r='130' stroke='rgba(242,239,233,.05)' stroke-width='1' fill='none'/%3E%3Ccircle cx='200' cy='200' r='80' stroke='rgba(242,239,233,.05)' stroke-width='1' fill='none'/%3E%3C/svg%3E") center center / 600px 600px no-repeat;
  opacity:0.6;pointer-events:none;
 }
 .hero-badge{
  display:inline-flex;align-items:center;gap:0.4rem;
- background:rgba(223,169,143,.10);
+ background:rgba(242,239,233,.10);
  border:1px solid var(--border-gold);
  border-radius:999px;
  padding:0.3rem 1rem;
@@ -150,14 +150,14 @@ nav.__eski{
  margin-top:2rem;
 }
 .card{
- background:rgba(223,169,143,.05);
- border:1px solid rgba(223,169,143,0.18);
+ background:rgba(242,239,233,.05);
+ border:1px solid rgba(242,239,233,0.18);
  border-radius:var(--radius);
  padding:1.8rem 1.5rem;
  transition:all 0.3s;
 }
 .card:hover{
- background:rgba(223,169,143,.05);
+ background:rgba(242,239,233,.05);
  border-color:var(--border-gold);
  transform:translateY(-3px);
 }
@@ -168,7 +168,7 @@ nav.__eski{
 /* DIVIDER */
 .divider{
  border:none;
- border-top:1px solid rgba(223,169,143,0.15);
+ border-top:1px solid rgba(242,239,233,0.15);
  margin:4rem 0;
 }
 
@@ -177,7 +177,7 @@ nav.__eski{
  border-left:3px solid var(--gold);
  padding:1.5rem 2rem;
  margin:2rem 0;
- background:rgba(223,169,143,.05);
+ background:rgba(242,239,233,.05);
  border-radius:0 var(--radius) var(--radius) 0;
 }
 .quote-block p{
@@ -213,7 +213,7 @@ nav.__eski{
 /* EXAMPLE */
 .example-block{
  background:var(--purple2);
- border:1px solid rgba(223,169,143,0.2);
+ border:1px solid rgba(242,239,233,0.2);
  border-radius:var(--radius);
  padding:2rem;
  margin-top:1.5rem;
@@ -227,7 +227,7 @@ nav.__eski{
 
 /* PRICING */
 .pricing-section{
- background:linear-gradient(135deg, rgba(223,169,143,.10) 0%, rgba(223,169,143,.10) 100%);
+ background:linear-gradient(135deg, rgba(242,239,233,.10) 0%, rgba(242,239,233,.10) 100%);
  border:1px solid var(--border-gold);
  border-radius:20px;
  padding:3rem 2.5rem;
@@ -266,7 +266,7 @@ nav.__eski{
 
 /* FOOTER */
 footer{
- border-top:1px solid rgba(223,169,143,.10);
+ border-top:1px solid rgba(242,239,233,.10);
  padding:2.5rem 1.5rem;
  text-align:center;
 }
@@ -301,7 +301,7 @@ footer a:hover{text-decoration:underline;}
 .sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);text-decoration:none}
 .sbnav nav a:active{transform:scale(.97)}
 .sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:#F2EFE9;background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:#E3A692}
-.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#FFFFFF;background:rgba(255,255,255,.06);box-shadow:none}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#F2EFE9;background:rgba(255,255,255,.06);box-shadow:none}
 .sbnav nav a:focus{outline:none}
 .sbnav nav a:focus-visible{outline:2px solid #E3A692;outline-offset:2px}
 .sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:#F2EFE9}
@@ -352,7 +352,7 @@ body{background:transparent!important}
 
 <!-- SORBI-MODE-CTA -->
 <div style="max-width:760px;margin:1.6rem auto;padding:0 20px">
- <div style="background:rgba(227,166,146,.08);border:1px solid rgba(227,166,146,.3);border-radius:18px;padding:1.5rem 1.6rem;text-align:center">
+ <div style="background:rgba(242,239,233,.08);border:1px solid rgba(242,239,233,.3);border-radius:18px;padding:1.5rem 1.6rem;text-align:center">
   <div style="font-family:Fraunces,Georgia,serif;font-weight:600;font-size:1.15rem;margin-bottom:.35rem">Doğum haritanı şimdi çıkar</div>
   <p style="color:inherit;opacity:.75;font-size:.9rem;margin:0 0 1rem;max-width:52ch;margin-left:auto;margin-right:auto">Tarih, saat, yer — üç bilgiyle profesyonel natal çark, 7 ev sistemi ve tüm açılar Atölye'de.</p>
   <a href="/detayli-dogum-haritasi?m=natal" style="display:inline-block;background:#E3A692;color:#2B140C;padding:.75rem 1.7rem;border-radius:99px;font-weight:600;font-size:.92rem;text-decoration:none">Atölye'de aç ✦</a>

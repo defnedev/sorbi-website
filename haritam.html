@@ -15,7 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="/astronomy.browser.min.js?v=3" defer></script>
 <style>
-:root{--terra:#E3A692;--btn-ink:#2B140C;--bg:#0B0810;--panel:#151220;--gold:#E3A692;--gold-lt:#E4CF9A;--gold-dk:#C4744E;--ink:#F2EFE9;--mut:#A5A3AE;--dim:#868494;--terra:#E3A692;--terra2:#E3A692;--line:rgba(223,169,143,.16);--lineg:rgba(223,169,143,.28);--lineg2:rgba(223,169,143,.42)}
+:root{--terra:#E3A692;--btn-ink:#2B140C;--bg:#0B0810;--panel:#0B0810;--gold:#E3A692;--gold-lt:#F2EFE9;--gold-dk:#E3A692;--ink:#F2EFE9;--mut:#A5A3AE;--dim:#868494;--terra:#E3A692;--terra2:#E3A692;--line:rgba(242,239,233,.16);--lineg:rgba(242,239,233,.28);--lineg2:rgba(242,239,233,.42)}
 *{box-sizing:border-box}body{margin:0;background:#0B0810;color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.62}
 .wrap{max-width:680px;margin:0 auto;padding:2rem 1.15rem 4rem}
 .brand{font-family:Fraunces,Georgia,serif;letter-spacing:3px;color:var(--gold);font-size:.82rem;text-decoration:none;text-transform:uppercase}
@@ -27,7 +27,7 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(1.6rem,5vw
 .sec-h::after{content:'';flex:1;height:1px;background:var(--lineg)}
 .muhur{text-align:center;margin:.2rem 0 .4rem}
 .muhur .e{font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
-.muhur .t{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(1.6rem,7vw,2.2rem);background:linear-gradient(135deg,#E4CF9A,#E3A692,#E3A692,#E3A692,#E4CF9A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#F2EFE9;margin:.1rem 0}
+.muhur .t{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(1.6rem,7vw,2.2rem);background:linear-gradient(135deg,#F2EFE9,#E3A692,#E3A692,#E3A692,#F2EFE9);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#F2EFE9;margin:.1rem 0}
 .hero3{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin-top:1.3rem}
 .hero3 a{background:var(--panel);border:1px solid var(--lineg);border-radius:16px;padding:1.15rem .7rem;text-align:center;text-decoration:none;transition:border-color .15s,transform .1s;display:flex;flex-direction:column;align-items:center;gap:.35rem}
 .hero3 a:hover{border-color:var(--lineg2);transform:translateY(-1px)}
@@ -37,7 +37,7 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(1.6rem,5vw
 .hero3 .d{font-size:.8rem;color:var(--dim);line-height:1.35}
 @media(max-width:480px){.hero3{grid-template-columns:1fr;gap:.55rem}.hero3 a{flex-direction:row;text-align:left;justify-content:flex-start;gap:.7rem;padding:.85rem 1rem}}
 .bt3{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
-.bt3 .c{background:rgba(223,169,143,.05);border:1px solid var(--lineg);border-radius:14px;padding:1rem .6rem;text-align:center}
+.bt3 .c{background:rgba(242,239,233,.05);border:1px solid var(--lineg);border-radius:14px;padding:1rem .6rem;text-align:center}
 .bt3 .g{font-family:'Noto Sans Symbols2','Segoe UI Symbol',sans-serif;font-size:1.7rem;color:var(--gold)}
 .bt3 .r{font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin:.35rem 0 .15rem}
 .bt3 .s{font-family:Inter,system-ui,sans-serif;font-size:1.05rem;color:#F2EFE9}
@@ -48,7 +48,7 @@ label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:1px
 textarea,input{width:100%;background:rgba(13,8,16,.7);border:1px solid var(--line);border-radius:10px;padding:.7rem .8rem;color:var(--ink);font-size:.94rem;font-family:'Inter'}
 textarea{min-height:90px;resize:vertical}
 .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem}
-.chip{background:rgba(223,169,143,.10);border:1px solid var(--line);color:var(--mut);border-radius:99px;padding:.4rem .8rem;font-size:.82rem;cursor:pointer}
+.chip{background:rgba(242,239,233,.10);border:1px solid var(--line);color:var(--mut);border-radius:99px;padding:.4rem .8rem;font-size:.82rem;cursor:pointer}
 .chip:hover{border-color:var(--lineg2);color:var(--gold-lt)}
 .kvkk{font-size:.8rem;color:var(--dim);margin:.7rem 0 0;line-height:1.5}
 .kvkk input{width:auto;margin-right:.4rem;vertical-align:-1px}
@@ -76,7 +76,7 @@ textarea{min-height:90px;resize:vertical}
 .sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);text-decoration:none}
 .sbnav nav a:active{transform:scale(.97)}
 .sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:#F2EFE9;background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:#E3A692}
-.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#FFFFFF;background:rgba(255,255,255,.06);box-shadow:none}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#F2EFE9;background:rgba(255,255,255,.06);box-shadow:none}
 .sbnav nav a:focus{outline:none}
 .sbnav nav a:focus-visible{outline:2px solid #E3A692;outline-offset:2px}
 .sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:#F2EFE9}
@@ -221,7 +221,7 @@ function renderList(){
  c.style.display='block';
  document.getElementById('readingsList').innerHTML=rs.slice().reverse().map(x=>{
   const d=x.at?new Date(x.at).toLocaleDateString('tr-TR',{day:'numeric',month:'short'}):'';
-  return `<div style="display:flex;justify-content:space-between;gap:.6rem;align-items:center;padding:.6rem 0;border-bottom:1px solid rgba(223,169,143,.10);font-size:.88rem"><span style="color:#A5A3AE;flex:1">${(x.q||'').slice(0,72)}${(x.q||'').length>72?'…':''}<span style="color:#868494;font-size:.72rem"> · ${d}</span></span><span style="color:#E3A692;font-size:.75rem;white-space:nowrap">${statusTr(x.status)}</span></div>`;
+  return `<div style="display:flex;justify-content:space-between;gap:.6rem;align-items:center;padding:.6rem 0;border-bottom:1px solid rgba(242,239,233,.10);font-size:.88rem"><span style="color:#A5A3AE;flex:1">${(x.q||'').slice(0,72)}${(x.q||'').length>72?'…':''}<span style="color:#868494;font-size:.72rem"> · ${d}</span></span><span style="color:#E3A692;font-size:.75rem;white-space:nowrap">${statusTr(x.status)}</span></div>`;
  }).join('');
 }
 function refreshStatuses(){
@@ -266,7 +266,7 @@ function initBig3(){
  /* takvim teaser */
  try{
    var tt=document.createElement('div');
-   tt.innerHTML='<div style="margin-top:1.4rem;background:rgba(227,166,146,.07);border:1px solid rgba(227,166,146,.28);border-radius:14px;padding:.9rem 1.05rem;font-size:.88rem;color:#F2EFE9">✦ Önümüzdeki <b>13 ayın</b> gökyüzü senin haritana tarih tarih işlendi — Atölye\'deki <b>Takvim</b> sekmesinde. <a href="/detayli-dogum-haritasi" style="color:#F2EFE9;text-decoration:underline;text-underline-offset:3px">Aç →</a></div>';
+   tt.innerHTML='<div style="margin-top:1.4rem;background:rgba(242,239,233,.07);border:1px solid rgba(242,239,233,.28);border-radius:14px;padding:.9rem 1.05rem;font-size:.88rem;color:#F2EFE9">✦ Önümüzdeki <b>13 ayın</b> gökyüzü senin haritana tarih tarih işlendi — Atölye\'deki <b>Takvim</b> sekmesinde. <a href="/detayli-dogum-haritasi" style="color:#F2EFE9;text-decoration:underline;text-underline-offset:3px">Aç →</a></div>';
    document.getElementById('app').appendChild(tt);
  }catch(e){}
  /* kayıtlı haritalar */
@@ -282,9 +282,9 @@ function initBig3(){
             '&lat='+encodeURIComponent(c.lat)+'&lon='+encodeURIComponent(c.lon)+'&tz='+encodeURIComponent(c.tz||'Europe/Istanbul')+
             (c.place?'&p='+encodeURIComponent(c.place):'')+(c.name?'&n='+encodeURIComponent(c.name):'');
       var nm=String(c.name||'İsimsiz').replace(/[<>&"]/g,'');
-      return '<a href="'+q+'" style="display:inline-block;background:rgba(255,255,255,.045);border:1px solid rgba(227,166,146,.28);border-radius:99px;padding:.5rem 1rem;color:#F2EFE9;text-decoration:none;font-size:.85rem"><b style="color:#F2EFE9">'+nm+'</b> · '+c.date+'</a>';
+      return '<a href="'+q+'" style="display:inline-block;background:rgba(255,255,255,.045);border:1px solid rgba(242,239,233,.28);border-radius:99px;padding:.5rem 1rem;color:#F2EFE9;text-decoration:none;font-size:.85rem"><b style="color:#F2EFE9">'+nm+'</b> · '+c.date+'</a>';
     }).join('')+
-    '<a href="/detayli-dogum-haritasi" style="display:inline-block;border:1px dashed rgba(227,166,146,.4);border-radius:99px;padding:.5rem 1rem;color:#E3A692;text-decoration:none;font-size:.85rem">＋ yeni harita</a></div>';
+    '<a href="/detayli-dogum-haritasi" style="display:inline-block;border:1px dashed rgba(242,239,233,.4);border-radius:99px;padding:.5rem 1rem;color:#E3A692;text-decoration:none;font-size:.85rem">＋ yeni harita</a></div>';
    var app=document.getElementById('app'); app.appendChild(sec);
   }
  }catch(e){}

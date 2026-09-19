@@ -10,7 +10,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Uygun Gün Seçimi","applicationCategory":"LifestyleApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"url":"https://sorbiapp.com/uygun-gun-secimi","provider":{"@type":"Organization","name":"Sorbi","url":"https://sorbiapp.com/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Evlilik için uygun tarih nasıl seçilir?","acceptedAnswer":{"@type":"Answer","text":"Elektional astrolojide evlilik için Ay'ın artan evrede, uyumlu bir burçta ve boşlukta olmadığı; Venüs'ün güçlü olduğu bir gün seçilir. Bu araç bu ölçütleri anlık hesaplayarak sana en uygun günleri sıralar."}},{"@type":"Question","name":"Uğurlu gün ne demek?","acceptedAnswer":{"@type":"Answer","text":"Uğurlu gün, yapmak istediğin işin doğasına gökyüzünün destek verdiği gündür. Astrolojide bu, Ay'ın evresi ve burcu, günün gezegen yöneticisi ve retro durumlarına bakılarak belirlenir — batıl değil, klasik elektional yöntemdir."}},{"@type":"Question","name":"Ay boşlukta iş başlatmak neden sakıncalı?","acceptedAnswer":{"@type":"Answer","text":"Ay boşluktayken (void of course) başlatılan işler genellikle beklenen sonuca ulaşmaz. Bu yüzden imza, nikah veya yeni bir başlangıcı boşluk penceresinin dışına almak önerilir."}}]}</script>
 <style>
-:root{--terra:#E3A692;--btn-ink:#2B140C;--bg:#0B0810;--gold:#E3A692;--gold-light:#E4CF9A;--terra:#E3A692;--terra2:#E3A692;--text:#F2EFE9;--muted:#868494;--line:rgba(223,169,143,.25);--card:#151220;--green:#8A9A6A;--yellow:#E4CF9A;--red:#E3A692}
+:root{--terra:#E3A692;--btn-ink:#2B140C;--bg:#0B0810;--gold:#E3A692;--gold-light:#F2EFE9;--terra:#E3A692;--terra2:#E3A692;--text:#F2EFE9;--muted:#868494;--line:rgba(242,239,233,.25);--card:#0B0810;--green:#A5A3AE;--yellow:#F2EFE9;--red:#E3A692}
 *{box-sizing:border-box}body{margin:0;background:#0B0810;color:var(--text);font-family:'Inter',sans-serif;line-height:1.65}
 .wrap{max-width:680px;margin:0 auto;padding:2.2rem 1.1rem 3rem}
 .top{text-align:center;margin-bottom:1.2rem}
@@ -33,7 +33,7 @@ select,input{width:100%;background:rgba(13,8,16,.6);border:1px solid var(--line)
 .pill{font-size:.72rem;font-weight:700;padding:.2rem .55rem;border-radius:99px;min-width:42px;text-align:center}
 .pill.g{background:rgba(127,179,122,.18);color:var(--green)}.pill.y{background:rgba(217,178,106,.16);color:var(--yellow)}.pill.r{background:rgba(208,138,106,.16);color:var(--red)}
 .voc{background:rgba(208,138,106,.08);border:1px solid rgba(208,138,106,.25);border-radius:12px;padding:.7rem .9rem;margin-top:.8rem;font-size:.83rem;color:#A5A3AE}
-.sell{background:linear-gradient(180deg,rgba(223,169,143,.16),rgba(223,169,143,.04));border:1px solid var(--line);border-radius:18px;padding:1.3rem 1.2rem;margin-top:1.5rem;text-align:center}
+.sell{background:linear-gradient(180deg,rgba(242,239,233,.16),rgba(242,239,233,.04));border:1px solid var(--line);border-radius:18px;padding:1.3rem 1.2rem;margin-top:1.5rem;text-align:center}
 .sell h3{font-family:Fraunces,Georgia,serif;color:#F2EFE9;font-size:1.35rem;margin:.1rem 0 .5rem}
 .sell p{font-size:.9rem;color:#A5A3AE;margin:0 auto .9rem;max-width:440px}
 .sell a{display:inline-block;background:#E3A692;color:#2B140C;text-decoration:none;padding:.75rem 1.5rem;border-radius:99px;font-weight:600;font-size:.92rem;margin:.25rem}
@@ -57,7 +57,7 @@ select,input{width:100%;background:rgba(13,8,16,.6);border:1px solid var(--line)
 .sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);text-decoration:none}
 .sbnav nav a:active{transform:scale(.97)}
 .sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:#F2EFE9;background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:#E3A692}
-.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#FFFFFF;background:rgba(255,255,255,.06);box-shadow:none}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#F2EFE9;background:rgba(255,255,255,.06);box-shadow:none}
 .sbnav nav a:focus{outline:none}
 .sbnav nav a:focus-visible{outline:2px solid #E3A692;outline-offset:2px}
 .sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:#F2EFE9}
@@ -247,7 +247,7 @@ function run(){
  document.getElementById('start').value=iso;
  document.getElementById('go').onclick=run;
 })();
-</script><script>(function(){try{var pr=JSON.parse(localStorage.getItem("sorbi_profile")||"null");if(!pr)return;var w=document.createElement("div");w.style.cssText="max-width:680px;margin:0 auto;padding:.6rem 1.1rem 0";w.innerHTML='<div style="background:rgba(223,169,143,.10);border:1px solid rgba(223,169,143,.2);border-radius:12px;padding:.55rem .95rem;font-size:.84rem;color:#A5A3AE;">Tekrar hoş geldin, <b style="color:#E4CF9A">'+((pr.name||(pr.email||"").split("@")[0])||"")+'</b> ✦</div>';if(document.body)document.body.insertBefore(w,document.body.firstChild);}catch(e){}})();</script>
+</script><script>(function(){try{var pr=JSON.parse(localStorage.getItem("sorbi_profile")||"null");if(!pr)return;var w=document.createElement("div");w.style.cssText="max-width:680px;margin:0 auto;padding:.6rem 1.1rem 0";w.innerHTML='<div style="background:rgba(242,239,233,.10);border:1px solid rgba(242,239,233,.2);border-radius:12px;padding:.55rem .95rem;font-size:.84rem;color:#A5A3AE;">Tekrar hoş geldin, <b style="color:#F2EFE9">'+((pr.name||(pr.email||"").split("@")[0])||"")+'</b> ✦</div>';if(document.body)document.body.insertBefore(w,document.body.firstChild);}catch(e){}})();</script>
 <!-- SORBI-FOOTER:START -->
 <style>
 .sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:#A5A3AE;max-width:none;width:auto}

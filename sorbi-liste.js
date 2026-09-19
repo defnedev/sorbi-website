@@ -29,7 +29,7 @@ function kur(el){
    '<div class="sbl-st" role="status"></div>';
   var frm=el.querySelector('form'), em=el.querySelector('input[type=email]'), btn=el.querySelector('button'), hp=el.querySelector('input[type=text]'),
       ok=el.querySelector('label input'), st=el.querySelector('.sbl-st');
-  try{ if(localStorage.getItem('sorbi_wl')==='1'){ frm.style.display='none'; st.style.color='#E4CF9A'; st.textContent='Listedesin — çıkınca ilk sana yazacağız.'; } }catch(e){}
+  try{ if(localStorage.getItem('sorbi_wl')==='1'){ frm.style.display='none'; st.style.color='#F2EFE9'; st.textContent='Listedesin — çıkınca ilk sana yazacağız.'; } }catch(e){}
   function gonder(){
     var v=(em.value||'').trim();
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){ st.style.color='#E3A692'; st.textContent='Geçerli bir e-posta gir.'; return; }
@@ -38,7 +38,7 @@ function kur(el){
     fetch('/api/liste',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({eposta:v,kvkk:1,kaynak:kaynak,hp:hp.value||''})})
      .then(function(r){ return r.json().catch(function(){return {};}).then(function(j){ return {r:r,j:j}; }); })
      .then(function(x){
-       if(x.r.ok){ st.style.color='#E4CF9A'; st.textContent='Listedesin — Sorbi iOS ve Android’de çıkınca ilk sana yazacağız.'; try{localStorage.setItem('sorbi_wl','1');}catch(e){} }
+       if(x.r.ok){ st.style.color='#F2EFE9'; st.textContent='Listedesin — Sorbi iOS ve Android’de çıkınca ilk sana yazacağız.'; try{localStorage.setItem('sorbi_wl','1');}catch(e){} }
        else { btn.disabled=false; st.style.color='#E3A692'; st.textContent=x.j.error||'Kaydedilemedi, tekrar dener misin?'; }
      }).catch(function(){ btn.disabled=false; st.style.color='#E3A692'; st.textContent='Bağlantı kurulamadı.'; });
   }

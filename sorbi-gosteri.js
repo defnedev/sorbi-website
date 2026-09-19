@@ -6,10 +6,10 @@
 var W=window,D=document,TIP={},no=0;
 var M=Math,PI=M.PI,TAU=PI*2,rd=PI/180,mn=M.min,mx=M.max,cs=M.cos,sn=M.sin,fl=M.floor,ab=M.abs;
 var C={bg:'#0B0810',ln:'rgba(255,255,255,.10)',l2:'rgba(255,255,255,.20)',ink:'#F2EFE9',
-mut:'#A5A3AE',dim:'#A5A3AE',gld:'#E3A692',gbr:'#F2EFE9',ter:'#C4744E',gun:'#E4CF9A',dun:'#7FB3A8'};
+mut:'#A5A3AE',dim:'#A5A3AE',gld:'#E3A692',gbr:'#F2EFE9',ter:'#E3A692',gun:'#F2EFE9',dun:'#A5A3AE'};
 var S='Koç Boğa İkizler Yengeç Aslan Başak Terazi Akrep Yay Oğlak Kova Balık'.split(' ');
 var SG='♈︎ ♉︎ ♊︎ ♋︎ ♌︎ ♍︎ ♎︎ ♏︎ ♐︎ ♑︎ ♒︎ ♓︎'.split(' ');
-var EL='Ateş Toprak Hava Su'.split(' '),ELC=['#C4744E','#E4CF9A','#C4744E','#7FB3A8'];
+var EL='Ateş Toprak Hava Su'.split(' '),ELC=['#E3A692','#F2EFE9','#E3A692','#A5A3AE'];
 var NT='Öncü Sabit Değişken'.split(' ');
 var YON='Mars Venüs Merkür Ay Güneş Merkür Venüs Mars Jüpiter Satürn Satürn Jüpiter'.split(' ');
 var YMO={7:'Plüton',10:'Uranüs',11:'Neptün'};
@@ -17,7 +17,7 @@ var AZ=!!(W.matchMedia&&W.matchMedia('(prefers-reduced-motion: reduce)').matches
 var CSS='.sbg{background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1rem;margin:1.2rem 0}'
 +'.sbg canvas{width:100%;height:auto;display:block;border-radius:10px;background:#0B0810}'
 +'.sbg-k{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.8rem}'
-+'.sbg-b{font:inherit;font-size:.84rem;font-weight:600;color:#151220;background:#E3A692;border:0;border-radius:10px;padding:0 1rem;min-height:40px;cursor:pointer}'
++'.sbg-b{font:inherit;font-size:.84rem;font-weight:600;color:#0B0810;background:#E3A692;border:0;border-radius:10px;padding:0 1rem;min-height:40px;cursor:pointer}'
 +'.sbg-b:hover{background:#E3A692}'
 +'.sbg-b.sbg-i{background:transparent;color:#A5A3AE;border:1px solid rgba(255,255,255,.14);font-weight:500}'
 +'.sbg-b.sbg-i:hover{background:rgba(255,255,255,.06);color:#F2EFE9}'
@@ -28,7 +28,7 @@ var CSS='.sbg{background:rgba(255,255,255,.032);border:1px solid rgba(255,255,25
 +'.sbg-p{display:flex;gap:.5rem;align-items:center;flex:1 1 180px;min-width:0}'
 +'.sbg-p .sbg-s{flex:1 1 60px;min-width:60px}'
 +'.sbg-e{display:inline-block;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid currentColor;border-radius:99px;padding:.08rem .45rem;color:#A5A3AE}'
-+'.sbg-e.g{color:#C4744E}'
++'.sbg-e.g{color:#E3A692}'
 +'.sbg-z{font-size:.86rem;font-weight:300;color:#A5A3AE;line-height:1.65;margin-top:.8rem;padding-top:.8rem;border-top:1px solid rgba(255,255,255,.08);max-width:74ch}'
 +'.sbg-z b{color:#F2EFE9;font-weight:500}.sbg-z i{font-style:normal;color:#F2EFE9}'
 +'.sbg :focus-visible{outline:2px solid #E3A692;outline-offset:2px;border-radius:8px}'
@@ -161,7 +161,7 @@ ciz:function(c){var o=c.o,G=c.G,Y=c.Y,K=(c.veri||{}).kareler;
  var px=cx+k.mx*AU,py=cy-k.my*AU,ex=cx+k.ex*AU,ey=cy-k.ey*AU;
  var dx=px-ex,dy=py-ey,u=M.hypot(dx,dy)||1;
  o.setLineDash([3,3]);
- cz(o,ex,ey,ex+dx/u*br*2.2,ey+dy/u*br*2.2,k.geri?'rgba(196,116,78,.55)':'rgba(227,166,146,.4)',1);
+ cz(o,ex,ey,ex+dx/u*br*2.2,ey+dy/u*br*2.2,k.geri?'rgba(242,239,233,.55)':'rgba(227,166,146,.4)',1);
  o.setLineDash([]);
  dt(o,ex,ey,5,C.dun);yz(o,'Dünya',ex,ey-14,'10px',C.dun,'center');
  dt(o,px,py,4.5,k.geri?C.ter:C.gld);
@@ -177,7 +177,7 @@ ciz:function(c){var o=c.o,G=c.G,Y=c.Y,K=(c.veri||{}).kareler;
  pl(o,K.length,X,Yg,'rgba(227,166,146,.28)',2);
  pl(o,K.length,X,Yg,C.ter,2.5,function(i){return K[i].geri;});
  dt(o,X(mn(c.k,K.length-1)),Yg(c.k),4.5,k.geri?C.ter:C.gbr);
- cz(o,sx,Yg(c.k),sx+sg,Yg(c.k),k.geri?'rgba(196,116,78,.3)':'rgba(242,211,184,.25)',1);
+ cz(o,sx,Yg(c.k),sx+sg,Yg(c.k),k.geri?'rgba(242,239,233,.3)':'rgba(242,211,184,.25)',1);
  yz(o,'zaman ↓',sx-4,sy+sh/2,'10px',C.dim,'right');
  yz(o,'Dünya’dan görünen boylam →',sx+sg/2,Y-16,'10px',C.dim,'center');
 },

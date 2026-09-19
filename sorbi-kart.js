@@ -14,7 +14,7 @@ var W = 1080, H = 1920;
 
 /* seni-taniyorum.html :root ile birebir */
 var C = {
-  bg:'#0B0810', isik:'#151220',
+  bg:'#0B0810', isik:'#0B0810',
   gold:'#E3A692', goldBr:'#F2EFE9',
   ink:'#F2EFE9', mut:'#A5A3AE', dim:'#868494'
 };
@@ -181,13 +181,13 @@ function svgYukle(s,px){
 function zeminCiz(ctx){
   ctx.fillStyle=C.bg;
   ctx.fillRect(0,0,W,H);
-  /* radial-gradient(1100px 620px at 50% -6%, #151220 0, #0B0810 60%) — kart ölçeğinde */
+  /* radial-gradient(1100px 620px at 50% -6%, #0B0810 0, #0B0810 60%) — kart ölçeğinde */
   ctx.save();
   ctx.translate(W/2, -0.06*H);
   ctx.scale(1, 620/1100);
   var r=W*1.38;
   var g=ctx.createRadialGradient(0,0,0,0,0,r);
-  g.addColorStop(0,   '#151220');
+  g.addColorStop(0,   '#0B0810');
   g.addColorStop(0.6, C.bg);
   g.addColorStop(1,   C.bg);
   ctx.fillStyle=g;
@@ -235,8 +235,8 @@ function cizMuhur(ctx,v,muhurImg){
     oNad.satirlar.forEach(function(s){ enGenis=Math.max(enGenis,genislik(ctx,s,0.4)); });
     var kw=Math.min(GEN, enGenis+96), kh=oNad.yukseklik+44;
     ctx.save();
-    ctx.fillStyle='rgba(223,169,143,.05)';
-    ctx.strokeStyle='rgba(223,169,143,.30)';
+    ctx.fillStyle='rgba(242,239,233,.05)';
+    ctx.strokeStyle='rgba(242,239,233,.30)';
     ctx.lineWidth=1.5;
     yuvarlakDikdortgen(ctx,(W-kw)/2,y,kw,kh,kh/2);
     ctx.fill(); ctx.stroke();
@@ -327,9 +327,9 @@ function etiketCiz(ctx,metin,y){
 function cizgiCiz(ctx,y,gen){
   var g2=gen||300;
   var gr=ctx.createLinearGradient((W-g2)/2,0,(W+g2)/2,0);
-  gr.addColorStop(0,'rgba(223,169,143,0)');
-  gr.addColorStop(.5,'rgba(223,169,143,.55)');
-  gr.addColorStop(1,'rgba(223,169,143,0)');
+  gr.addColorStop(0,'rgba(242,239,233,0)');
+  gr.addColorStop(.5,'rgba(242,239,233,.55)');
+  gr.addColorStop(1,'rgba(242,239,233,0)');
   ctx.fillStyle=gr;
   ctx.fillRect((W-g2)/2,y,g2,1.5);
   return 1.5;
@@ -347,8 +347,8 @@ function hapCiz(ctx,metin,y,o){
   ol.satirlar.forEach(function(s){ enGenis=Math.max(enGenis,genislik(ctx,s,ls)); });
   var kw=Math.min(GEN, enGenis+84), kh=ol.yukseklik+40;
   ctx.save();
-  ctx.fillStyle='rgba(223,169,143,.05)';
-  ctx.strokeStyle='rgba(223,169,143,.30)';
+  ctx.fillStyle='rgba(242,239,233,.05)';
+  ctx.strokeStyle='rgba(242,239,233,.30)';
   ctx.lineWidth=1.5;
   yuvarlakDikdortgen(ctx,(W-kw)/2,y,kw,kh,kh/2);
   ctx.fill(); ctx.stroke();

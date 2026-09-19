@@ -23,7 +23,7 @@ function pad2(n){ return String(n).padStart(2,'0'); }
 
 var SIGNS=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
 var SGLYPH=['♈︎','♉︎','♊︎','♋︎','♌︎','♍︎','♎︎','♏︎','♐︎','♑︎','♒︎','♓︎'];
-var ELEM=['Ateş','Toprak','Hava','Su'], ELCOL=['#C4744E','#E4CF9A','#C4744E','#7FB3A8'];
+var ELEM=['Ateş','Toprak','Hava','Su'], ELCOL=['#E3A692','#F2EFE9','#E3A692','#A5A3AE'];
 var MODAL=['Öncü','Sabit','Değişken'];
 
 var BODIES=[
