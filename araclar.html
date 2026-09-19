@@ -146,20 +146,44 @@ body:has(> .sky)::before{display:none}
   <div class="grp-h">Kişisel cevap</div>
   <div class="cards">
    <a class="tool hot" href="/soru-sor"><span class="g">✦</span><span><span class="n">Soru Sorma Yöntemi</span><span class="d">Aklındaki soruya haritana göre kişisel cevap.</span></span></a>
-   
+   <a class="tool" href="/horary"><span class="g">◈</span><span><span class="n">Soru Haritası (Horary)</span><span class="d">Doğum saatin gerekmez — harita sorunun sorulduğu ana çizilir.</span></span></a>
+  </div>
+ </div>
+
+ <div class="grp">
+  <div class="grp-h">İki harita</div>
+  <div class="cards">
+   <a class="tool" href="/sinastri"><span class="g">⚭</span><span><span class="n">Sinastri</span><span class="d">İki doğum haritasını üst üste koymak — burç uyumundan farkı ne.</span></span></a>
+  </div>
+ </div>
+
+ <div class="grp">
+  <div class="grp-h">Günlük çekiliş</div>
+  <div class="cards">
+   <a class="tool" href="/gunun-karti"><span class="g">✷</span><span><span class="n">Günün Kartı</span><span class="d">Her gün tek kart. Bugünün kartı bu; yarın değişir.</span></span></a>
+   <a class="tool" href="/tarot"><span class="g">◇</span><span><span class="n">Tarot</span><span class="d">Kısaca ne olduğu, ne olmadığı.</span></span></a>
+  </div>
+ </div>
+
+ <div class="grp">
+  <div class="grp-h">Navda ayrıca duruyor</div>
+  <div class="cards">
+   <a class="tool" href="/detayli-dogum-haritasi"><span class="g">⊛</span><span><span class="n">Harita Atölyesi</span><span class="d">Yukarıdaki Doğum Haritası'nın derin hali: 7 ev sistemi, transit ve ilerletim çift çarkı, sabit yıldızlar, dignite tablosu.</span></span></a>
+   <a class="tool" href="/nadirlik"><span class="g">◐</span><span><span class="n">Nadirlik</span><span class="d">Haritandaki her yerleşimin kaç kişide bir görüldüğü — sayıldı, tahmin edilmedi.</span></span></a>
+   <a class="tool" href="/sayim"><span class="g">∎</span><span><span class="n">Sayım</span><span class="d">Astrolojide çok konuşulan, hiç sayılmayan soruların gerçek efemerisle cevabı.</span></span></a>
   </div>
  </div>
 
  <div class="cta">
-  <h3>Hepsi tek profilde birikir</h3>
-  <p>Bir kez doğum bilgini gir; tüm araçlar seni tanısın, okumaların hesabında toplansın.</p>
+  <h3>Bir kez gir, hepsi seni tanısın</h3>
+  <p>Bir kez doğum bilgini gir; tüm araçlar seni tanısın. Hesap açılmaz, bilgin bu tarayıcıda kalır.</p>
   <a href="/dogum-haritasi-hesaplama">Haritamı çıkar ✦</a>
  </div>
 
  <p class="foot">Kader değil, farkındalık. · <a href="/">sorbiapp.com</a></p>
 </div>
 <script>
-(function(){try{var pr=JSON.parse(localStorage.getItem('sorbi_profile')||'null');if(!pr)return;var w=document.getElementById('welcome');w.style.display='block';w.innerHTML='Merhaba <b>'+((pr.name||(pr.email||'').split('@')[0])||'')+'</b> ✦ <a href="/bugun">Bugünün →</a> · <a href="/haritam">Haritam</a>';}catch(e){}})();
+(function(){try{var pr=JSON.parse(localStorage.getItem('sorbi_profile')||'null');if(!pr)return;var w=document.getElementById('welcome');w.style.display='block';w.innerHTML='Merhaba <b>'+((pr.name||(pr.email||'').split('@')[0])||'')+'</b> ✦ <a href="/bugun">Bugünün →</a> · <a href="/haritam" id="sorbiNavHaritam">✦ Profilim</a>';}catch(e){}})();
 </script>
 <!-- SORBI-FOOTER:START -->
 <style>
