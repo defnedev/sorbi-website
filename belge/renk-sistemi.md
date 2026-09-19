@@ -7,7 +7,7 @@
 | `#0B0810` | zemin | sayfa **ve** kart — kart kenarla ayrılır, renkle değil |
 | `#F2EFE9` | kâğıt | başlık, gövde, sayı, çark çizgisi, ikon — parlak olan her şey |
 | `#A5A3AE` | gri | ikincil yazı, çip, rozet, element etiketi, çark elementi |
-| `#868494` | soluk | üçüncül yazı, placeholder, dipnot |
+| `#807E8B` | soluk | üçüncül yazı, placeholder, dipnot |
 | `#E3A692` | vurgu | **yalnız** birincil düğme ve aktif nav çizgisi |
 | `#2B140C` | vurgu-yazı | vurgu dolgusunun üstündeki metin |
 
@@ -51,13 +51,17 @@ Aynı altı rol, iki değer seti. Gece varsayılan; gündüz `html[data-tema="gu
 | zemin | `#0B0810` | `#F6F3EC` | — |
 | kâğıt/mürekkep | `#F2EFE9` | `#1A1720` | 15,96 |
 | gri | `#A5A3AE` | `#5C5966` | 6,16 |
-| soluk | `#868494` | `#666370` | 5,29 |
+| soluk | `#807E8B` | `#666370` | 4,99 |
 | vurgu | `#E3A692` | `#A85A36` | 4,53 (metin olarak da, üstünde kâğıt olarak da) |
 | vurgu-yazı | `#2B140C` | `#F6F3EC` | 4,53 |
 
-**Seçim:** kullanıcı navdaki ☀/☾ ile seçtiyse o (`localStorage.sorbi_tema`).
-Seçmediyse gerçek gündoğumu/günbatımı: kayıtlı doğum yeri varsa oradan, yoksa
-İstanbul. NOAA yaklaşımı, satır içi, ilk boyamadan önce çalışır — sayfa titremez.
+**Seçim:** varsayılan gece. Kullanıcı navdaki ☀/☾ ile seçtiyse o (`localStorage.sorbi_tema`).
+Gündoğumuna göre otomatik tema 19 Eylül'de kapatıldı (kurucu: gündüz yalın kaldı);
+NOAA hesabı satır içi blokta duruyor, tek satırla geri açılır.
+
+**19 Eylül ton denetimi (Fable):** zemin ve vurgu kalıyor. `--dim` #868494 → #807E8B
+(üç gri kademesi ekranda iki okunuyordu; yeni değer zeminde 4,99:1, kart üstünde 4,58:1).
+Footer başlıkları vurgudan çıktı (başlık asla vurgu kuralı).
 
 **Sayfalar renk bilmez.** 61 HTML'de `<style>` ve `style=""` içindeki her literal
 `var(--rol)` oldu; `rgba(242,239,233,.08)` gibi saydamlar `rgba(var(--ink-rgb),.08)`.

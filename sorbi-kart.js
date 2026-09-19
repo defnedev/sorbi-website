@@ -16,7 +16,7 @@ var W = 1080, H = 1920;
 var C = {
   bg:'#0B0810', isik:'#0B0810',
   gold:'#E3A692', goldBr:'#F2EFE9',
-  ink:'#F2EFE9', mut:'#A5A3AE', dim:'#868494'
+  ink:'#F2EFE9', mut:'#A5A3AE', dim:'#807E8B'
 };
 
 /* Space Grotesk / Inter yoksa sırayla düşülecek yığın */

@@ -232,7 +232,7 @@ tbody tr:last-child td{border-bottom:none}
 /* Altı rol, iki gökyüzü. Gece varsayılan; gündüz [data-tema="gunduz"] ile.
    Renkler burada tanımlanır, sayfalar yalnız değişken kullanır. */
 :root{--bg:#0B0810;--bg-rgb:11,8,16;--ink:#F2EFE9;--ink-rgb:242,239,233;
-  --mut:#A5A3AE;--mut-rgb:165,163,174;--dim:#868494;--dim-rgb:134,132,148;
+  --mut:#A5A3AE;--mut-rgb:165,163,174;--dim:#807E8B;--dim-rgb:128,126,139;
   --acc:#E3A692;--acc-rgb:227,166,146;--acc-ink:#2B140C;color-scheme:dark}
 :root[data-tema="gunduz"]{--bg:#F6F3EC;--bg-rgb:246,243,236;--ink:#1A1720;--ink-rgb:26,23,32;
   --mut:#5C5966;--mut-rgb:92,89,102;--dim:#666370;--dim-rgb:102,99,112;
@@ -262,7 +262,7 @@ body{background:transparent!important}
  if(t!=='gunduz'&&t!=='gece'){
   var lat=41.0082,lon=28.9784;
   try{var b=JSON.parse(localStorage.getItem('sorbi_birth')||'null'); if(b&&+b.lat&&+b.lon){lat=+b.lat;lon=+b.lon;}}catch(e){}
-  try{t=gunes(lat,lon,new Date());}catch(e){t='gece';}
+  t='gece'; /* gündüz teması yalın kaldı; şimdilik yalnız düğmeyle, gökyüzüne göre değil */
  }
  if(t==='gunduz') H.setAttribute('data-tema','gunduz'); else H.removeAttribute('data-tema');
  function meta(){var m=document.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute('content',H.getAttribute('data-tema')==='gunduz'?'#F6F3EC':'#0B0810');}
