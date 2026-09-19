@@ -9,6 +9,17 @@
  */
 (function(){
 'use strict';
+/* canvas fillStyle CSS degiskeni okuyamaz; boyama aninda cozulur.
+   Boylece canvas da gunduz/gece temasini takip eder. */
+var __rc={};
+function tk(ad){
+  var t=document.documentElement.getAttribute('data-tema')||'gece', k=t+'|'+ad;
+  if(__rc[k]) return __rc[k];
+  var v=getComputedStyle(document.documentElement).getPropertyValue(ad).trim();
+  return (__rc[k]=v||'#F2EFE9');
+}
+function tkr(ad,a){ return 'rgba('+tk(ad+'-rgb')+','+a+')'; }
+
 var W=window,D=document,M=Math;
 var PI=M.PI,TAU=PI*2,rd=PI/180,mn=M.min,mx=M.max,cs=M.cos,sn=M.sin;
 
@@ -24,9 +35,9 @@ var TAR=['21 Mart – 19 Nisan','20 Nisan – 20 Mayıs','21 Mayıs – 20 Hazir
  '21 Haziran – 22 Temmuz','23 Temmuz – 22 Ağustos','23 Ağustos – 22 Eylül',
  '23 Eylül – 22 Ekim','23 Ekim – 21 Kasım','22 Kasım – 21 Aralık',
  '22 Aralık – 19 Ocak','20 Ocak – 18 Şubat','19 Şubat – 20 Mart'];
-var ELC=['var(--acc)','var(--ink)','var(--acc)','var(--mut)'];
-var C={bg:'var(--bg)',ln:'rgba(var(--ink-rgb),.10)',l2:'rgba(var(--ink-rgb),.20)',
- ink:'var(--ink)',mut:'var(--mut)',gld:'var(--acc)',gbr:'var(--ink)',dun:'var(--mut)'};
+var ELC=[tk('--acc'),tk('--ink'),tk('--acc'),tk('--mut')];
+var C={bg:tk('--bg'),ln:tkr('--ink',.10),l2:tkr('--ink',.20),
+ ink:tk('--ink'),mut:tk('--mut'),gld:tk('--acc'),gbr:tk('--ink'),dun:tk('--mut')};
 
 /* burç uzaklığına karşılık gelen açı; adlar sitenin ortak açı tablosundaki adlar */
 var ACI=[
@@ -124,9 +135,9 @@ function tipCark(){
   var A=ACI[M.min(((b-a)%12+12)%12,12-(((b-a)%12+12)%12))];
   var pa=(a*30+15-90)*rd,pb=(b*30+15-90)*rd,rr=ic*.93;
   if(a!==b){
-   o.strokeStyle='rgba(var(--ink-rgb),.85)';o.lineWidth=2;
+   o.strokeStyle=tkr('--ink',.85);o.lineWidth=2;
    o.beginPath();o.moveTo(cx+cs(pa)*rr,cy+sn(pa)*rr);o.lineTo(cx+cs(pb)*rr,cy+sn(pb)*rr);o.stroke();
-   o.strokeStyle='rgba(var(--ink-rgb),.45)';o.lineWidth=1.5;
+   o.strokeStyle=tkr('--ink',.45);o.lineWidth=1.5;
    o.beginPath();o.arc(cx,cy,ic*.74,mn(pa,pb),mx(pa,pb),(mx(pa,pb)-mn(pa,pb))>PI);o.stroke();
   }
   dt(o,cx+cs(pa)*rr,cy+sn(pa)*rr,5,C.gld);
@@ -134,7 +145,7 @@ function tipCark(){
   /* orta madalyon: kirişin üstünü temizler, metni okunur tutar */
   var mr=mn(ic*.62,g?96:74);
   o.fillStyle=C.bg;o.beginPath();o.arc(cx,cy,mr,0,TAU);o.fill();
-  o.strokeStyle='rgba(var(--ink-rgb),.12)';o.lineWidth=1;o.stroke();
+  o.strokeStyle=tkr('--ink',.12);o.lineWidth=1;o.stroke();
   yz(o,SG[a]+'  ✦  '+SG[b],cx,cy-(g?40:30),g?'19px':'15px',C.gbr,'center');
   yz(o,A.de+'°',cx,cy-(g?12:8),g?'26px':'21px',C.ink,'center');
   yz(o,A.ad+(A.buyuk?'':' · küçük açı'),cx,cy+(g?14:14),g?'13px':'11px',C.gbr,'center');

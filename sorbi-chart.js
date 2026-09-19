@@ -212,7 +212,7 @@ function drawWheel(inner,outer,opt){
   opt=opt||{};
   /* Çark sayfanın TERSİ: gece sayfada kâğıt, gündüz sayfada gece.
      Çark bir nesne, metin değil; zıt zeminde basılı bir kart gibi durur. */
-  var sayfa=(document.documentElement.getAttribute('data-tema')==='gunduz')?'night':'paper';
+  var sayfa=(document.documentElement.getAttribute('data-tema')==='gunduz')?'paper':'night';
   var T=THEMES[opt.theme||sayfa]||THEMES.paper;
   var S=934, cx=S/2, cy=S/2, o=[];
 

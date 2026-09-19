@@ -46,11 +46,28 @@ svg{display:block}
 /* ── nav ── */
 
 /* ── hero ── */
-.hero{text-align:center;padding:4rem 0 1.8rem}
+.hero{text-align:center;padding:2.2rem 0 1rem;min-height:calc(100svh - 64px);display:flex;flex-direction:column;justify-content:center}
+.gk{position:relative;width:min(92vw,560px);margin:1.4rem auto 0;user-select:none}
+.gk-c{display:block;width:100%;aspect-ratio:1/1;border-radius:50%}
+.gk-oku{display:flex;justify-content:space-between;gap:1rem;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78rem;color:var(--mut);margin-top:.9rem;letter-spacing:.02em}
+.gk-oku .gk-f{color:var(--dim)}
+.gk-cizgi{position:relative;height:28px;margin-top:.5rem;cursor:ew-resize;touch-action:none;outline:none}
+.gk-cizgi i{position:absolute;left:0;right:0;top:13px;height:1px;background:rgba(var(--ink-rgb),.18)}
+.gk-cizgi::before,.gk-cizgi::after{position:absolute;top:16px;font-size:.66rem;color:var(--dim);font-family:ui-monospace,Menlo,monospace}
+.gk-cizgi::before{content:'bir yıl önce';left:0}.gk-cizgi::after{content:'bir yıl sonra';right:0}
+.gk-cizgi b{position:absolute;top:8px;width:11px;height:11px;margin-left:-6px;border-radius:50%;background:var(--ink);transition:left .05s linear}
+.gk-cizgi:focus-visible b{box-shadow:0 0 0 3px rgba(var(--ink-rgb),.25)}
+.gk-simdi{display:inline-block;margin:.6rem auto 0;background:none;border:1px solid rgba(var(--ink-rgb),.25);color:var(--mut);border-radius:99px;padding:.3rem .9rem;font:inherit;font-size:.78rem;cursor:pointer}
+.gk-simdi:hover{color:var(--ink);border-color:var(--ink)}
+.gk-simdi[hidden],.hero .ok[hidden]{display:none}
+.hero .ok{margin-top:1.6rem;font-size:.78rem;color:var(--dim);letter-spacing:.06em}
+@media(prefers-reduced-motion:no-preference){.hero .ok{animation:gkOk 2.4s ease-in-out infinite}}
+@keyframes gkOk{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+.chartwrap[hidden]{display:none}
 .hero .kicker{display:inline-flex;align-items:center;gap:.45rem;font-size:.78rem;font-weight:500;color:var(--mut);
  border:1px solid var(--stroke2);border-radius:99px;padding:.38rem .9rem;margin-bottom:1.3rem;background:var(--card)}
 .hero .kicker i{font-style:normal;color:var(--gold)}
-.hero h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(2.3rem,6.4vw,3.9rem);letter-spacing:-.03em;line-height:1.06;margin-bottom:.9rem}
+.hero h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(2rem,5.4vw,3.4rem);letter-spacing:-.03em;line-height:1.06;margin-bottom:.7rem}
 .hero h1 em{font-style:italic;color:var(--ink)}
 .hero p{color:var(--mut);font-size:1.06rem;max-width:520px;margin:0 auto;font-weight:300}
 .trust{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-top:1.3rem}
@@ -58,7 +75,7 @@ svg{display:block}
 .trust span::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin-right:.45rem;vertical-align:2px}
 
 /* ── hesaplayıcı ── */
-.calc{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:1.4rem;align-items:start;margin-top:2rem}
+.calc{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:1.4rem;align-items:start;margin-top:3rem}
 @media(max-width:880px){.calc{grid-template-columns:1fr}}
 .card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);padding:1.35rem;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .fields{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
@@ -232,8 +249,10 @@ body{background:transparent!important}
 
 <div class="hero">
     <h1>Doğduğun an <em>kaç kişide bir</em>?</h1>
-  <p>Tarihini yaz, saatini biliyorsan onu da. Gökyüzü o an neredeydi görelim, sonra kaç kişide bir olduğunu sayalım.</p>
-  </div>
+  <p>Şu an gökyüzü böyle. Tarihini yaz, senin anına gidelim.</p>
+  <div class="gk" id="gokyuzu" aria-live="off"></div>
+  <div class="ok">↓ tarihini yaz</div>
+</div>
 
 <div class="calc">
   <div>
@@ -262,10 +281,8 @@ body{background:transparent!important}
     </div>
   </div>
 
-  <div class="chartwrap">
-    <div class="chartbox" id="chartbox">
-      <div class="ph"><b>Şu anın gökyüzü çiziliyor…</b></div>
-    </div>
+  <div class="chartwrap" id="chartwrap" hidden>
+    <div class="chartbox" id="chartbox"></div>
     <div class="datastrip" id="datastrip"></div>
   </div>
 </div>
@@ -292,15 +309,15 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp
 try{ if(JSON.parse(localStorage.getItem('sorbi_profile')||'null')){ $('sorbiNavHaritam').style.display=''; } }catch(e){}
 
 /* ── motor tembel yükleme ── */
-var LOADING=false, READY=false, QUEUE=null;
+var LOADING=false, READY=false, QUEUE=[];
 function loadEngine(cb){
   if(READY) return cb();
-  QUEUE=cb;
+  QUEUE.push(cb);
   if(LOADING) return;
   LOADING=true;
-  var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=11','/sorbi-astro.js?v=4'];
+  var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=12','/sorbi-astro.js?v=4','/sorbi-gokyuzu.js?v=1'];
   (function next(i){
-    if(i>=srcs.length){ READY=true; LOADING=false; if(QUEUE){var f=QUEUE;QUEUE=null;f();} return; }
+    if(i>=srcs.length){ READY=true; LOADING=false; var q=QUEUE;QUEUE=[];q.forEach(function(f){f();}); return; }
     var s=document.createElement('script');
     s.src=srcs[i]; s.async=false;
     s.onload=function(){ next(i+1); };
@@ -309,7 +326,7 @@ function loadEngine(cb){
   })(0);
 }
 function showPh(html){ $('chartbox').innerHTML='<div class="ph">'+html+'</div>'; }
-function showSpin(){ $('chartbox').innerHTML='<div class="ph"><div class="spin"></div>Haritan hesaplanıyor…</div>'; }
+function showSpin(){ $('chartwrap').hidden=false; $('chartbox').innerHTML='<div class="ph"><div class="spin"></div>Haritan hesaplanıyor…</div>'; }
 
 /* ── yer arama ── */
 var DEF={lat:41.0082,lon:28.9784,tz:'Europe/Istanbul',label:'İstanbul'};
@@ -376,6 +393,9 @@ function draw(){
     if(o.y<1850||o.y>2069){ showPh('1850–2069 aralığı destekleniyor.'); return; }
     CH=SorbiAstro.chart(o);
     CH.o.house=NOTIME?'W':'P';
+    if(GOK_ILK){ GOK_ILK=false; } /* kayıtlı doğumla açılışta gökyüzü şimdide kalır */
+    else if(GOK){ GOK.git(new Date(o.y,o.mo-1,o.d,o.h,o.mi),{lat:o.lat,lon:o.lon,tz:o.tz,yer:PICKED.label||''});
+      try{document.querySelector('.hero .ok').hidden=true;$('gokyuzu').scrollIntoView({behavior:'smooth',block:'center'});}catch(e){} }
     var asps=SorbiAstro.within(CH,1,false);
     var tstr=$('bt').value||'';
     $('chartbox').innerHTML=window.SorbiChart.draw(CH,null,{
@@ -453,30 +473,22 @@ function fillTransits(){
 ['bd','bt'].forEach(function(id){ $(id).addEventListener('change',render); });
 
 
-/* ── girişte: şu anın haritası ── */
-function drawMoment(){
+/* ── girişte: şu anın gökyüzü, hareket halinde ── */
+var GOK=null, GOK_ILK=false;
+function gokKur(){
   loadEngine(function(){
     try{
-      if($('bd').value && PICKED) return; // kullanıcı kendi haritasını çizdiyse dokunma
-      var tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'Europe/Istanbul';
-      var ch=SorbiAstro.now({tz:tz,lat:41.0082,lon:28.9784,house:'P'});
-      var asps=SorbiAstro.within(ch,1,false);
-      var now=new Date();
-      var dsr=now.toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});
-      var tsr=now.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});
-      $('chartbox').innerHTML=window.SorbiChart.draw(ch,null,{
-        aspects:asps,
-        plate:{name:'Şu Anın Gökyüzü', l1:dsr+' · '+tsr, l2:'İstanbul', l3:'Canlı — sayfa her açılışta yeniden çizer'}
-      });
-      $('chartbox').classList.add('rise');
-      var d2=$('datastrip'); d2.classList.add('on');
-      d2.innerHTML='<span><b>Şu anın gökyüzü</b> — bilgini gir, bu çark seninkine dönüşsün ✦</span>';
+      if(GOK||!window.SorbiGokyuzu) return;
+      var yer={lat:41.0082,lon:28.9784,tz:'Europe/Istanbul',yer:'İstanbul'};
+      if(PICKED&&PICKED.lat){ yer={lat:PICKED.lat,lon:PICKED.lon,tz:PICKED.tz||yer.tz,yer:PICKED.label||''}; }
+      GOK=window.SorbiGokyuzu.kur($('gokyuzu'),yer);
     }catch(e){}
   });
 }
 
 loadSaved();
-if($('bd').value && PICKED) render(); else setTimeout(drawMoment,120);
+gokKur();
+if($('bd').value && PICKED){ GOK_ILK=true; render(); }
 })();
 </script>
 <!-- SORBI-FOOTER:START -->

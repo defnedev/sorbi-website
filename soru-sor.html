@@ -507,7 +507,7 @@ function loadEngine(cb){
   QUEUE.push(cb);
   if(LOADING) return;
   LOADING=true;
-  var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=11','/sorbi-astro.js?v=4'];
+  var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=12','/sorbi-astro.js?v=4'];
   (function next(i){
     if(i>=srcs.length){ READY=true; LOADING=false; var q=QUEUE; QUEUE=[]; q.forEach(function(f){ f(); }); return; }
     var s=document.createElement('script');

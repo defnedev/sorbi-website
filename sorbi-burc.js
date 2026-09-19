@@ -6,12 +6,23 @@
  */
 (function(){
 'use strict';
+/* canvas fillStyle CSS degiskeni okuyamaz; boyama aninda cozulur.
+   Boylece canvas da gunduz/gece temasini takip eder. */
+var __rc={};
+function tk(ad){
+  var t=document.documentElement.getAttribute('data-tema')||'gece', k=t+'|'+ad;
+  if(__rc[k]) return __rc[k];
+  var v=getComputedStyle(document.documentElement).getPropertyValue(ad).trim();
+  return (__rc[k]=v||'#F2EFE9');
+}
+function tkr(ad,a){ return 'rgba('+tk(ad+'-rgb')+','+a+')'; }
+
 var W=window,D=document,M=Math;
 var S='Koç Boğa İkizler Yengeç Aslan Başak Terazi Akrep Yay Oğlak Kova Balık'.split(' ');
 var SG='♈︎ ♉︎ ♊︎ ♋︎ ♌︎ ♍︎ ♎︎ ♏︎ ♐︎ ♑︎ ♒︎ ♓︎'.split(' ');
-var ELC=['var(--acc)','var(--ink)','var(--acc)','var(--mut)'];
-var C={bg:'var(--bg)',ln:'rgba(var(--ink-rgb),.10)',ink:'var(--ink)',mut:'var(--mut)',dim:'var(--dim)',
- gld:'var(--acc)',gbr:'var(--ink)'};
+var ELC=[tk('--acc'),tk('--ink'),tk('--acc'),tk('--mut')];
+var C={bg:tk('--bg'),ln:tkr('--ink',.10),ink:tk('--ink'),mut:tk('--mut'),dim:tk('--dim'),
+ gld:tk('--acc'),gbr:tk('--ink')};
 var NOK=[['sun','Güneş burcu','Güneş'],['moon','Ay burcu','Ay'],['asc','Yükselen burç','yükselen']];
 
 /* ── sayı biçimi (tr) ── */
@@ -48,7 +59,7 @@ function tipDagilim(d){
    if(!az)yz(S[i],22,ym,'11px',se?C.ink:C.mut);
    yz(az?yuz(v,T):bin(v)+'  '+yuz(v,T),G,ym,az?'9px':'11px',se?C.gbr:C.mut,'right');
   }
-  o.setLineDash([4,4]);o.strokeStyle='rgba(var(--ink-rgb),.6)';o.lineWidth=1;
+  o.setLineDash([4,4]);o.strokeStyle=tkr('--ink',.6);o.lineWidth=1;
   o.beginPath();o.moveTo(ex,ust);o.lineTo(ex,alt);o.stroke();o.setLineDash([]);
   yz(az?'kesikli çizgi: eşit dağılım '+bin(esit)
      :'kesikli çizgi: on iki burca eşit dağılım',x0,(alt+Y)/2,az?'9px':'10px',C.dim);
