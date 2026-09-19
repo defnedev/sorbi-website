@@ -9,7 +9,7 @@ var C={bg:'#0B0810',ln:'rgba(255,255,255,.10)',l2:'rgba(255,255,255,.20)',ink:'#
 mut:'#A5A3AE',dim:'#A5A3AE',gld:'#E3A692',gbr:'#F2EFE9',ter:'#C4744E',gun:'#E4CF9A',dun:'#7FB3A8'};
 var S='Koç Boğa İkizler Yengeç Aslan Başak Terazi Akrep Yay Oğlak Kova Balık'.split(' ');
 var SG='♈︎ ♉︎ ♊︎ ♋︎ ♌︎ ♍︎ ♎︎ ♏︎ ♐︎ ♑︎ ♒︎ ♓︎'.split(' ');
-var EL='Ateş Toprak Hava Su'.split(' '),ELC=['#C4744E','#9E8B4E','#B58A5E','#5E8C86'];
+var EL='Ateş Toprak Hava Su'.split(' '),ELC=['#C4744E','#E4CF9A','#C4744E','#7FB3A8'];
 var NT='Öncü Sabit Değişken'.split(' ');
 var YON='Mars Venüs Merkür Ay Güneş Merkür Venüs Mars Jüpiter Satürn Satürn Jüpiter'.split(' ');
 var YMO={7:'Plüton',10:'Uranüs',11:'Neptün'};

@@ -14,7 +14,7 @@ var W = 1080, H = 1920;
 
 /* seni-taniyorum.html :root ile birebir */
 var C = {
-  bg:'#0B0810', isik:'#10151d',
+  bg:'#0B0810', isik:'#151220',
   gold:'#E3A692', goldBr:'#F2EFE9',
   ink:'#F2EFE9', mut:'#A5A3AE', dim:'#868494'
 };
@@ -181,13 +181,13 @@ function svgYukle(s,px){
 function zeminCiz(ctx){
   ctx.fillStyle=C.bg;
   ctx.fillRect(0,0,W,H);
-  /* radial-gradient(1100px 620px at 50% -6%, #10151d 0, #0B0810 60%) — kart ölçeğinde */
+  /* radial-gradient(1100px 620px at 50% -6%, #151220 0, #0B0810 60%) — kart ölçeğinde */
   ctx.save();
   ctx.translate(W/2, -0.06*H);
   ctx.scale(1, 620/1100);
   var r=W*1.38;
   var g=ctx.createRadialGradient(0,0,0,0,0,r);
-  g.addColorStop(0,   '#10151d');
+  g.addColorStop(0,   '#151220');
   g.addColorStop(0.6, C.bg);
   g.addColorStop(1,   C.bg);
   ctx.fillStyle=g;

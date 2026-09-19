@@ -9,7 +9,7 @@
 var W=window,D=document,M=Math;
 var S='Koç Boğa İkizler Yengeç Aslan Başak Terazi Akrep Yay Oğlak Kova Balık'.split(' ');
 var SG='♈︎ ♉︎ ♊︎ ♋︎ ♌︎ ♍︎ ♎︎ ♏︎ ♐︎ ♑︎ ♒︎ ♓︎'.split(' ');
-var ELC=['#C4744E','#9E8B4E','#B58A5E','#5E8C86'];
+var ELC=['#C4744E','#E4CF9A','#C4744E','#7FB3A8'];
 var C={bg:'#0B0810',ln:'rgba(255,255,255,.10)',ink:'#F2EFE9',mut:'#A5A3AE',dim:'#868494',
  gld:'#E3A692',gbr:'#F2EFE9'};
 var NOK=[['sun','Güneş burcu','Güneş'],['moon','Ay burcu','Ay'],['asc','Yükselen burç','yükselen']];

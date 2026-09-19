@@ -61,17 +61,17 @@ var GLYPHS={"z0":{"d":"M3.5 36.3L-3.5 36.3L-3.5 -12.6Q-3.5 -21 -7.5 -25.6Q-11.6 
 var THEMES={
  white:{
   bg:'#FFFFFF', ring:'#0B0810', ringSoft:'#F2EFE9',
-  band:0, bandAks:0, tick:'#3A3A3A', tickMinor:'#A5A3AE',
+  band:0, bandAks:0, tick:'#1F1B2C', tickMinor:'#A5A3AE',
   hair:'#A5A3AE', hairFine:'#F2EFE9', kagit:'#FFFFFF',
   cusp:'#A5A3AE', angle:'#0B0810', angleLbl:'#0B0810',
-  glyph:'#0B0810', glyphB:'#2456A6', deg:'#0B0810', degB:'#2456A6',
-  rx:'#C8322B', hnum:'#868494', lead:'#868494',
+  glyph:'#0B0810', glyphB:'#5E93A8', deg:'#0B0810', degB:'#5E93A8',
+  rx:'#C4744E', hnum:'#868494', lead:'#868494',
   center:'#FFFFFF', centerTxt:'#0B0810', centerSub:'#868494', star:'#0B0810',
-  el:['#B8362A','#2F7A3A','#A87A12','#2B63A8'],
+  el:['#C4744E','#8A9A6A','#E4CF9A','#5E93A8'],
   wedge:['#F2EFE9','#F2EFE9','#F2EFE9','#FFFFFF'],
-  edge:['#E3A692','#A9CDAF','#E4CF9A','#A9C1E3'],
+  edge:['#E3A692','#7FB3A8','#E4CF9A','#5E93A8'],
   sect:['#FFFFFF','#FFFFFF'],
-  asp:{'a-maj':'#D98A22','a-hard':'#C8442E','a-soft':'#2E5EA8','a-min':'#4E9A63'},
+  asp:{'a-maj':'#E4CF9A','a-hard':'#C4744E','a-soft':'#5E93A8','a-min':'#8A9A6A'},
   font:"'IBM Plex Sans','Helvetica Neue',Arial,sans-serif", serif:"'Fraunces',Georgia,serif",
   flat:1
  },
@@ -80,10 +80,10 @@ var THEMES={
   band:0, bandAks:0, tick:'rgba(24,28,38,.34)', tickMinor:'rgba(24,28,38,.11)',
   hair:'rgba(24,28,38,.20)', hairFine:'rgba(24,28,38,.10)', kagit:'#F2EFE9',
   cusp:'rgba(24,28,38,.15)', angle:'rgba(27,33,48,.72)', angleLbl:'#1F1B2C',
-  glyph:'#151220', glyphB:'#1F5E58', deg:'rgba(23,28,40,.66)', degB:'rgba(31,94,88,.75)',
-  rx:'#A8412A', hnum:'rgba(23,28,40,.48)', lead:'rgba(24,28,38,.32)',
-  center:'#F2EFE9', centerTxt:'#1F1B2C', centerSub:'rgba(23,28,40,.55)', star:'#9A7A2A',
-  el:['#B0442A','#4F6B3A','#A0801F','#2F6B86'],
+  glyph:'#151220', glyphB:'#7FB3A8', deg:'rgba(23,28,40,.66)', degB:'rgba(31,94,88,.75)',
+  rx:'#C4744E', hnum:'rgba(23,28,40,.48)', lead:'rgba(24,28,38,.32)',
+  center:'#F2EFE9', centerTxt:'#1F1B2C', centerSub:'rgba(23,28,40,.55)', star:'#E4CF9A',
+  el:['#C4744E','#8A9A6A','#E4CF9A','#5E93A8'],
   asp:{'a-maj':'rgba(28,34,48,.30)','a-hard':'rgba(150,74,52,.44)','a-soft':'rgba(52,104,97,.40)','a-min':'rgba(28,34,48,.16)'}
  },
  night:{
@@ -93,8 +93,8 @@ var THEMES={
   cusp:'rgba(201,169,98,.26)', angle:'rgba(244,228,186,.68)', angleLbl:'#E4CF9A',
   glyph:'#E4CF9A', glyphB:'#7FB3A8', deg:'rgba(232,228,218,.7)', degB:'rgba(143,208,194,.8)',
   rx:'#C4744E', hnum:'rgba(169,163,150,.78)', lead:'rgba(201,169,98,.42)',
-  center:'#0B0810', centerTxt:'#E4CF9A', centerSub:'rgba(169,163,150,.75)', star:'#C9A962',
-  el:['#C4744E','#7E9C63','#C9A962','#5E93A8'],
+  center:'#0B0810', centerTxt:'#E4CF9A', centerSub:'rgba(169,163,150,.75)', star:'#E4CF9A',
+  el:['#C4744E','#8A9A6A','#E4CF9A','#5E93A8'],
   font:"'IBM Plex Sans','Helvetica Neue',Arial,sans-serif", serif:"'Fraunces',Georgia,serif",
   asp:{'a-maj':'rgba(228,212,176,.42)','a-hard':'rgba(198,120,98,.5)','a-soft':'rgba(122,170,160,.5)','a-min':'rgba(169,163,150,.24)'}
  }
@@ -116,7 +116,7 @@ function drawMuhur(inner,opt){
     isaret:'rgba(223,169,143,.85)', murekkep:'#E3A692', zemin:'#0B0810', cekirdek:'rgba(223,169,143,.7)'
   };
   /* desature element tonlari — UI kategori rengi degil, tek kalemden cikmis gibi */
-  var EL=['#E3A692','#9CA98C','#B8A98A','#A5A3AE'];
+  var EL=['#E3A692','#8A9A6A','#E4CF9A','#A5A3AE'];
   var R={ dis:150, ic:122, glif:137, isaret:112 };
   /* saat bilinmiyorsa yukselen yoktur: ufuk ekseni ve AC vurgusu cizilmez,
      cark Gunes burcunun basina hizalanir. */
@@ -277,11 +277,11 @@ function drawWheel(inner,outer,opt){
     /* ufkun ÜSTÜ: AC'den MC yönüne giden yarım daire */
     o.push('<path d="M'+a1[0].toFixed(1)+' '+a1[1].toFixed(1)+
       ' A'+R.zi+' '+R.zi+' 0 0 1 '+a2[0].toFixed(1)+' '+a2[1].toFixed(1)+' Z" fill="'+
-      (T.sect?T.sect[0]:(T===THEMES.paper?'#C9A34A':'#C9A962'))+'" opacity="'+(T.sect?1:(T===THEMES.paper?.075:.06))+'"/>');
+      (T.sect?T.sect[0]:(T===THEMES.paper?'#E4CF9A':'#E4CF9A'))+'" opacity="'+(T.sect?1:(T===THEMES.paper?.075:.06))+'"/>');
     /* ufkun ALTI */
     o.push('<path d="M'+a1[0].toFixed(1)+' '+a1[1].toFixed(1)+
       ' A'+R.zi+' '+R.zi+' 0 0 0 '+a2[0].toFixed(1)+' '+a2[1].toFixed(1)+' Z" fill="'+
-      (T.sect?T.sect[1]:(T===THEMES.paper?'#2F4B6B':'#5E93A8'))+'" opacity="'+(T.sect?1:.07)+'"/>');
+      (T.sect?T.sect[1]:(T===THEMES.paper?'#5E93A8':'#5E93A8'))+'" opacity="'+(T.sect?1:.07)+'"/>');
     if(!T.sect) line(a1,a2,T.angle,1.4,null,'round');
   }
 

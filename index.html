@@ -77,8 +77,8 @@ input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(227,
 .chartbox{background:#F2EFE9;border-radius:20px;overflow:hidden;min-height:240px;display:flex;align-items:center;justify-content:center;
  border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 80px rgba(0,0,0,.55),0 4px 16px rgba(0,0,0,.4)}
 .chartbox .ph{color:#868494;font-size:.9rem;text-align:center;padding:2.4rem 1.4rem;line-height:1.7}
-.chartbox .ph b{color:#3A3F4C;display:block;font-family:Inter,system-ui,sans-serif;font-weight:600;font-size:1.05rem;margin-bottom:.35rem}
-.spin{width:26px;height:26px;border:2px solid rgba(24,28,38,.15);border-top-color:#8A6A2A;border-radius:50%;animation:sp .8s linear infinite;margin:0 auto .7rem}
+.chartbox .ph b{color:#1F1B2C;display:block;font-family:Inter,system-ui,sans-serif;font-weight:600;font-size:1.05rem;margin-bottom:.35rem}
+.spin{width:26px;height:26px;border:2px solid rgba(24,28,38,.15);border-top-color:#E4CF9A;border-radius:50%;animation:sp .8s linear infinite;margin:0 auto .7rem}
 @keyframes sp{to{transform:rotate(360deg)}}
 .datastrip{display:none;justify-content:center;gap:.5rem;flex-wrap:wrap;margin-top:1rem}
 .datastrip.on{display:flex}
@@ -376,7 +376,7 @@ function draw(){
   }catch(e){ showPh('Harita çizilemedi: '+esc(e.message)); }
 }
 function pl(k){ return CH.pls.filter(function(p){return p.k===k;})[0]; }
-var ELC=['#C4744E','#7E9C63','#E3A692','#5E93A8'];
+var ELC=['#C4744E','#8A9A6A','#E3A692','#5E93A8'];
 function big3html(lon){
   var x=SorbiAstro.dms(lon);
   return '<span class="sg" style="color:'+ELC[x.s%4]+'">'+SorbiAstro.SGLYPH[x.s]+'</span>'+x.d+'° '+SorbiAstro.SIGNS[x.s]+' '+String(x.m).padStart(2,'0')+'′';

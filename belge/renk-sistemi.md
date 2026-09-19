@@ -62,9 +62,24 @@ Noktalar yıldız değil toz lekesi gibi okunuyordu; üç parıltı metnin arkas
 birbiriyle yarışıyordu. Hepsi kaldırıldı. Sitede kalan tek `radial-gradient`,
 `/seni-taniyorum`'daki deklanşör flaş animasyonu (`opacity:0`, tetiklenince çalışır).
 
-### Grafik
-`--cool` `#7FB3A8` · artı natal çarkın kendi gezegen/element renkleri
-(50 değer, dokunulmadı — bunlar astrolojik konvansiyon, arayüz değil).
+### Çark — dört element, başka yok
+| | | |
+|---|---|---|
+| ateş   | `#C4744E` | = `--acc-dk` |
+| toprak | `#8A9A6A` | yeni |
+| hava   | `#E4CF9A` | = `--gold` |
+| su     | `#5E93A8` | yeni |
+
+Açılar: sert → ateş, yumuşak → su, ana → altın, küçük → `--mut`. Retro → `--acc-dk`.
+Çarkın üç teması (beyaz/kâğıt/koyu) aynı dört rengi kullanır; yalnız saydamlık değişir.
+Astrokartografi'deki on gezegen hattı da bu dörde iner: ışıklar altın, kişisel
+gezegenler vurgu, sosyal gezegenler toprak, dış gezegenler su.
+
+### Tek istisna
+`#25D366` — WhatsApp marka rengi, paylaşım düğmesi. Başka marka rengi yok.
+
+**TOPLAM: 15.** Site genelinde, JS dahil, başka hex yok. Yeni bir hex eklemek
+bu belgeye eklemeyi gerektirir.
 
 ## Kurallar
 
@@ -81,8 +96,8 @@ istatistik sayıları (onlar altın) · placeholder · ikincil düğme · footer
 
 | | önce | sonra |
 |---|---|---|
-| Benzersiz hex | 157 | **62** (50'si natal çark grafiği) |
-| Arayüz rengi | ~107 | **12** |
+| Benzersiz hex | 157 | **15** |
+| Arayüz rengi | ~107 | **12** + çark 2 + WhatsApp 1 |
 | Ekranda sıcak piksel | %6,97 | **%3,83** |
 | Doygun + parlak sıcak | %3,88 | **%1,93** |
 | Zemin katmanı | 10–13 | **0** |
