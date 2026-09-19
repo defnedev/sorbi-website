@@ -33,7 +33,7 @@
 html{scroll-behavior:smooth}
 /* aurora zemin */
 .sky{position:fixed;inset:0;pointer-events:none;z-index:-1;background:
- radial-gradient(52% 38% at 50% -6%,rgba(227,166,146,.10),transparent 65%),
+ radial-gradient(52% 38% at 50% -6%,rgba(186,178,208,.055),transparent 65%),
  radial-gradient(40% 32% at 88% 12%,rgba(94,147,168,.07),transparent 70%),
  radial-gradient(1px 1px at 14% 24%,rgba(241,220,168,.45) 50%,transparent 51%),
  radial-gradient(1px 1px at 36% 9%,rgba(242,239,233,.3) 50%,transparent 51%),
@@ -53,7 +53,7 @@ svg{display:block}
 .topnav nav{display:flex;gap:.15rem;overflow-x:auto;scrollbar-width:none}
 .topnav nav::-webkit-scrollbar{display:none}
 .topnav nav a{color:var(--mut);font-size:.82rem;padding:.35rem .65rem;border-radius:99px;white-space:nowrap}
-.topnav nav a:hover,.topnav nav a[aria-current]{color:var(--ink);background:rgba(223,169,143,.1)}
+.topnav nav a:hover,.topnav nav a[aria-current]{color:var(--ink);background:rgba(223,169,143,.10)}
 
 header.hd{padding:2.2rem 0 1.2rem;text-align:center}
 header.hd h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(1.7rem,4.6vw,2.5rem);letter-spacing:-.3px;margin-bottom:.5rem}
@@ -261,8 +261,8 @@ details.seo-d .seo{margin:.6rem 0 0}
 .sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:#9BA0AB;text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
 .sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);text-decoration:none}
 .sbnav nav a:active{transform:scale(.97)}
-.sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:#1A0F14;background:#E3A692;box-shadow:none;font-weight:600}
-.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#1A0F14;background:#F2D3B8;box-shadow:none}
+.sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:#F2EFE9;background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:#E3A692}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#FFFFFF;background:rgba(255,255,255,.06);box-shadow:none}
 .sbnav nav a:focus{outline:none}
 .sbnav nav a:focus-visible{outline:2px solid #F2D3B8;outline-offset:2px}
 .sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:#F2EFE9}
@@ -294,7 +294,7 @@ details.seo-d .seo{margin:.6rem 0 0}
 <style>
 html{background:#0D0810}
 body{background:transparent!important}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(52% 38% at 50% -6%,rgba(227,166,146,.11),transparent 65%),
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(52% 38% at 50% -6%,rgba(186,178,208,.055),transparent 65%),
   radial-gradient(40% 32% at 88% 12%,rgba(94,147,168,.08),transparent 70%),
   radial-gradient(36% 30% at 8% 30%,rgba(196,116,78,.05),transparent 70%),
   radial-gradient(1px 1px at 14% 24%,rgba(241,220,168,.5) 50%,transparent 51%),
@@ -1320,7 +1320,7 @@ function renderAll(){
       '<div style="font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.55rem">✦ Dikkat çekenler</div>'+
       rare.slice(0,3).map(function(r){return '<div style="font-size:.87rem;line-height:1.55;margin:.38rem 0;color:var(--ink)">'+r+'</div>';}).join('')+
       '<div style="margin-top:.8rem;display:flex;align-items:center;gap:.7rem;flex-wrap:wrap">'+
-        '<a href="/soru-sor" style="display:inline-block;background:linear-gradient(135deg,#E3A692,#F2D3B8);color:#2B140C;padding:.5rem 1.05rem;border-radius:99px;font-weight:600;font-size:.8rem;text-decoration:none">Yöntemi gör ✦</a></div></div>' : '';
+        '<a href="/soru-sor" style="display:inline-block;background:#E3A692;color:#2B140C;padding:.5rem 1.05rem;border-radius:99px;font-weight:600;font-size:.8rem;text-decoration:none">Yöntemi gör ✦</a></div></div>' : '';
     document.getElementById('sumBox').innerHTML=
       '<div class="sum-big3">'+g3('sun','Güneş')+g3('moon','Ay')+g3('asc','Yükselen')+'</div>'+
       '<div class="sum-chips">'+chips+'</div>'+

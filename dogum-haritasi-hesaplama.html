@@ -20,7 +20,7 @@
  --gold:#DFA98F;--gold-lt:#E4CF9A;--gold-dk:#B05A32;
  --ink:#E8E4DA;--mut:#A9A396;--dim:#8A8578;
  --terra:#E3A692;--terra2:#E3A692;
- --line:rgba(223,169,143,.16);--line2:rgba(223,169,143,.1);--lineg:rgba(223,169,143,.28);--lineg2:rgba(223,169,143,.42);
+ --line:rgba(223,169,143,.16);--line2:rgba(223,169,143,.10);--lineg:rgba(223,169,143,.28);--lineg2:rgba(223,169,143,.42);
  --fire:#C75B39;--earth:#9E8B4E;--air:#B58A5E;--water:#5E8C86;
 }
 *{box-sizing:border-box}
@@ -72,7 +72,7 @@ input:focus,select:focus{outline:none;border-color:var(--lineg2)}
 .imza .it{font-size:.86rem;color:var(--dim)}
 .bar{display:flex;align-items:center;gap:.7rem;margin-bottom:.55rem}
 .bar .bn{font-size:.8rem;color:var(--mut);min-width:74px}
-.bar .bt{flex:1;height:8px;background:rgba(223,169,143,.1);border-radius:99px;overflow:hidden}
+.bar .bt{flex:1;height:8px;background:rgba(223,169,143,.10);border-radius:99px;overflow:hidden}
 .bar .bf{height:100%;border-radius:99px}
 .bar .bv{font-size:.76rem;color:var(--dim);min-width:20px;text-align:right}
 .dsub{font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin:1rem 0 .5rem}
@@ -89,7 +89,7 @@ td.pl{color:var(--ink)}
 .reading{font-size:.98rem;color:var(--mut);line-height:1.75}
 .reading .lead{font-family:Fraunces,Georgia,serif;font-style:italic;font-size:1.35rem;color:var(--gold-lt);display:block;margin-bottom:.5rem;line-height:1.3}
 .pl-tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.9rem}
-.pl-btn{background:rgba(223,169,143,.06);border:1px solid var(--line);color:var(--mut);border-radius:99px;padding:.4rem .7rem;font-size:.8rem;cursor:pointer;font-family:'Inter'}
+.pl-btn{background:rgba(223,169,143,.05);border:1px solid var(--line);color:var(--mut);border-radius:99px;padding:.4rem .7rem;font-size:.8rem;cursor:pointer;font-family:'Inter'}
 .pl-btn.on{background:rgba(223,169,143,.16);border-color:var(--lineg2);color:var(--gold-lt)}
 .pl-head{font-family:Fraunces,Georgia,serif;font-size:1.1rem;color:#E8E4DA;margin-bottom:.4rem}
 .pl-gov{color:var(--gold-lt);font-style:italic;font-family:Inter,system-ui,sans-serif;font-size:1.15rem;margin:.2rem 0 .5rem}
@@ -116,10 +116,10 @@ td.pl{color:var(--ink)}
 .rdisc{font-size:.72rem;color:var(--dim);max-width:420px;margin:1rem auto .4rem;line-height:1.5}
 .locked{position:relative;margin-top:1.2rem;filter:blur(6px);opacity:.55;pointer-events:none;user-select:none;max-height:560px;overflow:hidden;-webkit-mask-image:linear-gradient(#000 42%,transparent 96%);mask-image:linear-gradient(#000 42%,transparent 96%)}
 .foot{text-align:center;color:var(--dim);font-size:.78rem;margin-top:2.4rem}.foot a{color:var(--gold)}
-.welcome{display:none;align-items:center;justify-content:space-between;gap:.6rem;background:rgba(223,169,143,.08);border:1px solid var(--line);border-radius:12px;padding:.55rem .9rem;margin-bottom:1rem;font-size:.85rem;color:var(--mut)}
+.welcome{display:none;align-items:center;justify-content:space-between;gap:.6rem;background:rgba(223,169,143,.10);border:1px solid var(--line);border-radius:12px;padding:.55rem .9rem;margin-bottom:1rem;font-size:.85rem;color:var(--mut)}
 .welcome b{color:var(--gold-lt)}
 .welcome a{color:var(--dim);font-size:.78rem;cursor:pointer;text-decoration:underline}
-.savecard{background:rgba(223,169,143,.06);border:1px solid var(--lineg);border-radius:16px;padding:1.2rem;margin-top:1.6rem;text-align:center}
+.savecard{background:rgba(223,169,143,.05);border:1px solid var(--lineg);border-radius:16px;padding:1.2rem;margin-top:1.6rem;text-align:center}
 .savecard h3{font-family:Fraunces,Georgia,serif;color:#E8E4DA;font-size:1.15rem;margin:0 0 .35rem}
 .savecard p{font-size:.86rem;color:var(--mut);margin:0 auto .8rem;max-width:430px}
 .savecard .row{display:flex;gap:.5rem;max-width:450px;margin:0 auto;flex-wrap:wrap}
@@ -166,8 +166,8 @@ details.kat .sec{margin-top:0}
 .sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:#9BA0AB;text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
 .sbnav nav a:hover{color:#F2EFE9;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);text-decoration:none}
 .sbnav nav a:active{transform:scale(.97)}
-.sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:#1A0F14;background:#E3A692;box-shadow:none;font-weight:600}
-.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#1A0F14;background:#F2D3B8;box-shadow:none}
+.sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:#F2EFE9;background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:#E3A692}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:#FFFFFF;background:rgba(255,255,255,.06);box-shadow:none}
 .sbnav nav a:focus{outline:none}
 .sbnav nav a:focus-visible{outline:2px solid #F2D3B8;outline-offset:2px}
 .sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:#F2EFE9}
@@ -199,7 +199,7 @@ details.kat .sec{margin-top:0}
 <style>
 html{background:#0D0810}
 body{background:transparent!important}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(52% 38% at 50% -6%,rgba(227,166,146,.11),transparent 65%),
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(52% 38% at 50% -6%,rgba(186,178,208,.055),transparent 65%),
   radial-gradient(40% 32% at 88% 12%,rgba(94,147,168,.08),transparent 70%),
   radial-gradient(36% 30% at 8% 30%,rgba(196,116,78,.05),transparent 70%),
   radial-gradient(1px 1px at 14% 24%,rgba(241,220,168,.5) 50%,transparent 51%),
@@ -247,7 +247,7 @@ body:has(> .sky)::before{display:none}
  <div id="result">
   <div class="arsiv" id="pArsiv"></div>
   <div class="wheelwrap"><svg id="rWheel" viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg"></svg></div>
-  <div id="pNoTimeNote" style="display:none;font-size:.82rem;color:var(--dim);background:rgba(223,169,143,.06);border:1px solid var(--line);border-radius:10px;padding:.7rem .9rem;margin-bottom:1rem">Doğum saati yok: Yükselen ve evler hesaplanmadı, harita burç temelli.</div>
+  <div id="pNoTimeNote" style="display:none;font-size:.82rem;color:var(--dim);background:rgba(223,169,143,.05);border:1px solid var(--line);border-radius:10px;padding:.7rem .9rem;margin-bottom:1rem">Doğum saati yok: Yükselen ve evler hesaplanmadı, harita burç temelli.</div>
 
   <div class="sec"><div class="sec-h">Büyük Üçlü</div><div class="bt3" id="pBt3"></div></div>
 
@@ -533,7 +533,7 @@ function shareChart(){const url='https://sorbiapp.com/dogum-haritasi-hesaplama';
  var wb=document.getElementById('welcomeBar');if(wb)wb.style.display='none';
  var pl=(b.place||'').split(',')[0];
  var chip=document.createElement('div');chip.style.cssText='max-width:560px;margin:0 auto 1rem;';
- chip.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;background:rgba(223,169,143,.08);border:1px solid rgba(223,169,143,.18);border-radius:12px;padding:.55rem .9rem;font-size:.84rem;color:#A9A396"><span>✦ '+[pl,b.date,(b.time||'')].filter(Boolean).join(' · ')+'</span><a href="#" id="_sbEdit" style="color:#DFA98F;font-size:.8rem;text-decoration:underline;white-space:nowrap">değiştir</a></div>';
+ chip.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem;background:rgba(223,169,143,.10);border:1px solid rgba(223,169,143,.18);border-radius:12px;padding:.55rem .9rem;font-size:.84rem;color:#A9A396"><span>✦ '+[pl,b.date,(b.time||'')].filter(Boolean).join(' · ')+'</span><a href="#" id="_sbEdit" style="color:#DFA98F;font-size:.8rem;text-decoration:underline;white-space:nowrap">değiştir</a></div>';
  form.parentNode.insertBefore(chip,form);form.style.display='none';
  document.getElementById('_sbEdit').onclick=function(e){e.preventDefault();form.style.display='';chip.style.display='none';};
  function _fill(){var g=function(i){return document.getElementById(i)};if(g('cDate'))g('cDate').value=b.date;if(g('cTime')&&b.time)g('cTime').value=b.time;if(g('cLat'))g('cLat').value=b.lat;if(g('cLon'))g('cLon').value=b.lon;if(g('cTz'))g('cTz').value=b.tz;if(g('cPlace')&&b.place)g('cPlace').value=b.place;if(b.noTime&&g('cNoTime'))g('cNoTime').checked=true;}
