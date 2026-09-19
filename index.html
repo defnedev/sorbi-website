@@ -86,7 +86,7 @@ input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(var(
 .datastrip b{color:var(--ink);font-weight:500}
 
 /* ── büyük üçlü ── */
-.big3{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:.85rem}
+.big3[hidden]{display:none}.big3{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:.85rem}
 .b3{background:var(--card);border:1px solid var(--stroke);border-radius:14px;padding:.8rem .5rem;text-align:center;transition:.18s}
 .b3:hover{border-color:var(--stroke2);background:var(--card2)}
 .b3 .g{font-size:1.2rem;color:var(--gold);line-height:1.2}
@@ -231,11 +231,9 @@ body{background:transparent!important}
 
 
 <div class="hero">
-  <div class="kicker"><i>✦</i> Gerçek efemerisle astroloji — tarayıcında</div>
-  <h1>Haritanı <em>şimdi</em> çıkar</h1>
-  <p>Tarih, saat, yer — çarkın anında çizilir.</p>
-  <div class="trust"><span>Ücretsiz</span><span>Kayıt yok</span><span>Ev matematiği doğrulanmış</span></div>
-</div>
+    <h1>Doğduğun an <em>kaç kişide bir</em>?</h1>
+  <p>Tarihini yaz, saatini biliyorsan onu da. Gökyüzü o an neredeydi görelim, sonra kaç kişide bir olduğunu sayalım.</p>
+  </div>
 
 <div class="calc">
   <div>
@@ -245,7 +243,7 @@ body{background:transparent!important}
         <div><label for="bt">Doğum saati <span style="opacity:.55;text-transform:none;letter-spacing:0">(biliyorsan)</span></label><input type="time" id="bt" step="60"></div>
         <div class="full geo"><label for="bp">Doğum yeri</label><input id="bp" placeholder="Şehir yaz (örn. İstanbul)" autocomplete="off"><div class="geolist" id="geoList" hidden></div></div>
       </div>
-      <div class="hint">Yer yazmazsan İstanbul varsayılır. Saati bilmiyorsan boş bırak — bilgin cihazında kalır.</div>
+      <div class="hint">Yer yazmazsan İstanbul sayılır. Saati bilmiyorsan boş bırak, yükselen çıkmaz ama gerisi çıkar. Kayıt yok, bilgin telefonunda kalır.</div>
     </div>
 
     <div class="big3" id="big3" hidden>
@@ -259,14 +257,14 @@ body{background:transparent!important}
     </div>
 
     <div class="after" id="after">
-      <a class="btn gold" id="goAtolye" href="/detayli-dogum-haritasi">Tüm ayrıntıyı aç — Harita Atölyesi →</a>
+      <a class="btn gold" id="goAtolye" href="/detayli-dogum-haritasi">Harita Atölyesi'ne geç</a>
       <a class="btn ghost" href="/soru-sor">Aklındaki soruyu sor</a>
     </div>
   </div>
 
   <div class="chartwrap">
     <div class="chartbox" id="chartbox">
-      <div class="ph"><b>Gökyüzü yükleniyor…</b>Şu anın haritası çiziliyor.</div>
+      <div class="ph"><b>Şu anın gökyüzü çiziliyor…</b></div>
     </div>
     <div class="datastrip" id="datastrip"></div>
   </div>
@@ -274,10 +272,10 @@ body{background:transparent!important}
 
 
 <div class="paths">
-  <a class="path" href="/seni-taniyorum"><div class="g">✦</div><h3>Seni Tanıyorum</h3><p>Haritandan sana özel, kısa ve net bir okuma.</p><span class="go">Başla →</span></a>
-  <a class="path" href="/nadirlik"><div class="g">◎</div><h3>Nadirlik</h3><p>Yerleşimlerin 24.000 gök anı içinde ne kadar nadir?</p><span class="go">Hesapla →</span></a>
-  <a class="path" href="/sayim"><div class="g">⊹</div><h3>Sayım</h3><p>Astrolojinin sorularını gerçek veriyle sayıyoruz.</p><span class="go">Oku →</span></a>
-  <a class="path" href="/ogren"><div class="g">☉︎</div><h3>Öğren</h3><p>Önce gökyüzünü anla, yoruma sonra geç.</p><span class="go">Öğren →</span></a>
+  <a class="path" href="/seni-taniyorum"><div class="g">✦</div><h3>Seni Tanıyorum</h3><p>Doğduğun anı yaz, birkaç cümle çıksın. Neye bakıldığını da gör.</p><span class="go">Başla →</span></a>
+  <a class="path" href="/nadirlik"><div class="g">◎</div><h3>Nadirlik</h3><p>Haritandaki her şey kaç kişide bir? 24.000 anda sayıldı.</p><span class="go">Hesapla →</span></a>
+  <a class="path" href="/sayim"><div class="g">⊹</div><h3>Sayım</h3><p>Herkesin merak ettiği ama kimsenin oturup saymadığı sorular, sonuçlarıyla.</p><span class="go">Oku →</span></a>
+  <a class="path" href="/ogren"><div class="g">☉︎</div><h3>Öğren</h3><p>Retro ne, yükselen neden saate bağlı, hepsi kısa kısa.</p><span class="go">Öğren →</span></a>
 </div>
 
 
