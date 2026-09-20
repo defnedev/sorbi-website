@@ -178,7 +178,7 @@ body{background:transparent!important}
 <section class="top">
   <div class="kicker">✦ Astroloji okuryazarlığı</div>
   <h1>Önce <em>gökyüzünü</em> anla, yoruma sonra geç</h1>
-  <p>Astrolojiye inanmak zorunda değilsin. Ama retro'nun ne olduğunu, Merkür'ün neden hep Güneş'in yanında durduğunu ve yükselenin neden doğum saatine bağlı olduğunu bilmek, gökyüzüne bakmanın kendisi. Aşağıdaki üç animasyonun hiçbiri temsili değil — üçü de gerçek efemeris verisiyle çiziliyor: hesap astronomy-engine ile yapılır, ev başlangıçları ve açısal noktalar Swiss Ephemeris çıktısına karşı test edildi.</p>
+  <p>Astrolojiye inanmak zorunda değilsin. Ama retro'nun ne olduğunu, Merkür'ün neden hep Güneş'in yanında durduğunu ve <span data-anlat="yukselen">yükselenin neden doğum saatine bağlı</span> olduğunu bilmek, gökyüzüne bakmanın kendisi. Aşağıdaki üç animasyonun hiçbiri temsili değil — üçü de gerçek efemeris verisiyle çiziliyor: hesap astronomy-engine ile yapılır, ev başlangıçları ve açısal noktalar Swiss Ephemeris çıktısına karşı test edildi.</p>
 </section>
 
 <section class="ders">
@@ -271,6 +271,24 @@ body{background:transparent!important}
   </div>
 </section>
 
+
+
+<section class="ders" id="haritanda">
+  <div class="no">HARİTANDA</div>
+  <h2>Bu kelimeler senin haritanda ne demek?</h2>
+  <p>Yukarısı gökyüzünün mekaniğiydi. Burası aynı kelimelerin senin doğduğun andaki karşılığı. Her kart üç şey söyler: kelime ne demek, senin haritanda nerede, halkada hangi noktaya denk geliyor. Yorum yok, yalnız ne olduğu.</p>
+  <div id="anlatListe"><p style="color:var(--dim);font-size:.9rem">Hesaplanıyor…</p></div>
+</section>
+
+<script>
+(function(){
+ var el=document.getElementById('anlatListe');if(!el)return;
+ function yukle(l,cb){var i=0;(function n(){if(i>=l.length)return cb();var s=document.createElement('script');s.src=l[i++];s.async=false;s.onload=n;s.onerror=function(){el.innerHTML='<p style="color:var(--dim)">Hesaplanamadı.</p>';};document.head.appendChild(s);})();}
+ function kur(){yukle(['/astronomy.browser.min.js?v=3','/sorbi-astro.js?v=4','/sorbi-anlat.js?v=1'],function(){
+   if(window.SorbiAnlat){window.SorbiAnlat.kur(el);window.SorbiAnlat.baglaLinkler(document);}});}
+ if('IntersectionObserver' in window){var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){io.disconnect();kur();}},{rootMargin:'300px'});io.observe(el);}else kur();
+})();
+</script>
 
 <div data-sorbi-ilerleme="ogren" data-onek="ogren" data-toplam="4" data-ad="Öğren ilerlemen"></div>
 
