@@ -1,13 +1,15 @@
 <!doctype html><html lang="tr"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Yükselen Tahmini — Doğum Saatin Yoksa | Sorbi</title>
-<meta name="description" content="Doğum saatini bilmiyorsan yükselenini birlikte tahmin edelim: doğduğun günün pencereleri, aile hafızası ve hayatındaki birkaç tarih. Kesin saat değil, dürüst bir tahmin.">
+<title>Doğum Saatimi Bilmiyorum, Yükselenim Ne? Yükselen Tahmini | Sorbi</title>
+<meta name="description" content="Doğum saatini bilmiyorsan yükselenini tahmin et: doğduğun günün yükselen pencereleri, ailenin hatırladığı, hayatındaki tarihler, partnerlerinin burcu ve yüz şeklin. Kesin saat değil, dürüst bir tahmin; ücretsiz, kayıt yok.">
 <link rel="canonical" href="https://sorbiapp.com/yukselen-tahmini">
-<meta property="og:title" content="Yükselen Tahmini — Sorbi"><meta property="og:description" content="Saatin yoksa yükselenini birlikte tahmin edelim."><meta property="og:type" content="website"><meta property="og:url" content="https://sorbiapp.com/yukselen-tahmini"><meta property="og:image" content="https://sorbiapp.com/og-image.png"><meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Doğum saatimi bilmiyorum, yükselenim ne? — Sorbi"><meta property="og:description" content="Saatin yoksa yükselenini birlikte tahmin edelim: pencereler, aile hafızası, tarihler, yüz şekli."><meta property="og:type" content="website"><meta property="og:url" content="https://sorbiapp.com/yukselen-tahmini"><meta property="og:image" content="https://sorbiapp.com/og-image.png"><meta property="og:locale" content="tr_TR">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="/astronomy.browser.min.js?v=3" defer></script>
 <script src="/sorbi-astro.js?v=4" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Doğum saatimi bilmiyorum, yükselenimi öğrenebilir miyim?","acceptedAnswer":{"@type":"Answer","text":"Kesin olarak değil, ama daraltabilirsin. Doğduğun gün yükselen 12-13 kez değişir; ailenin hatırladığı zaman dilimi, hayatındaki tarihli olaylar ve birkaç ipucu adayları azaltır. Sonuç bir burç ve bir saat aralığıdır, dakika değil."}},{"@type":"Question","name":"Doğum saatimi nereden bulabilirim?","acceptedAnswer":{"@type":"Answer","text":"Önce anne, baba ya da doğumda bulunan yakınlar. Sonra doğum yapılan hastanenin arşivi ve e-Devlet üzerinden alınan doğum kayıt örneği; bazı kayıtlarda saat yazar. Eski tip nüfus cüzdanında saat yoktur."}},{"@type":"Question","name":"Rektifikasyon nedir, bu sayfa onu mu yapıyor?","acceptedAnswer":{"@type":"Answer","text":"Rektifikasyon, yaşam olaylarından doğum saatini geriye doğru derece derece hesaplama işidir; uzun ve tartışmalıdır. Bu sayfa daha mütevazı bir sürümünü yapar: solar ark ve transitlerle adayları puanlar, burç ve saat penceresi verir, güveni açıkça söyler."}}]}</script>
+
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Yükselen Tahmini","applicationCategory":"LifestyleApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"url":"https://sorbiapp.com/yukselen-tahmini","provider":{"@type":"Organization","name":"Sorbi","url":"https://sorbiapp.com/"}}</script>
 <style>
 :root{--terra:var(--acc);--btn-ink:var(--acc-ink);--gold:var(--acc);--gold-light:var(--ink);--terra:var(--acc);--terra2:var(--acc);--text:var(--ink);--muted:var(--dim);--line:rgba(var(--ink-rgb),.25);--card:var(--bg)}
@@ -134,8 +136,9 @@ body{background:transparent!important}
 
 <style>
 .adim{display:none}.adim.on{display:block}
-.sec{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:.5rem;margin-top:.4rem}
-.sec button{background:none;border:1px solid var(--line);border-radius:10px;padding:.7rem .5rem;color:var(--ink);font:inherit;font-size:.9rem;cursor:pointer}
+.sec{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:.5rem;margin-top:.4rem}
+.sec button{background:none;border:1px solid var(--line);border-radius:10px;padding:.65rem .4rem;color:var(--ink);font:inherit;font-size:.88rem;cursor:pointer;line-height:1.25}
+.sec button small{color:var(--dim);font-size:.72rem}
 .sec button.on{border-color:var(--ink);background:rgba(var(--ink-rgb),.06)}
 .soru{border-top:1px solid rgba(var(--ink-rgb),.08);padding:1rem 0 .4rem;margin-top:.6rem}
 .soru p{margin:0 0 .5rem;color:var(--ink);font-size:.95rem}
@@ -143,22 +146,29 @@ body{background:transparent!important}
 .soru input[type=month]{width:auto;min-width:150px}
 .soru label.k{display:inline-flex;align-items:center;gap:.35rem;text-transform:none;letter-spacing:0;font-size:.85rem;color:var(--mut);margin:0}
 .soru label.k input{width:auto}
+.ipucu{margin-top:1.2rem;padding-top:1rem;border-top:1px dashed rgba(var(--ink-rgb),.14)}
+.ipucu h3{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:1.05rem;color:var(--ink);margin:0 0 .2rem}
+.ipucu .note{margin-bottom:.4rem}
 .pencere{font-family:ui-monospace,Menlo,monospace;font-size:.86rem;color:var(--mut);margin:.2rem 0}
 .gizli{color:var(--dim);font-size:.82rem}
 .res{display:block}
+.neden{text-align:left;margin-top:1rem;border-top:1px solid rgba(var(--ink-rgb),.1);padding-top:.8rem}
+.neden p{margin:.3rem 0;font-size:.92rem;color:var(--mut)}
+.neden b{color:var(--ink);font-weight:500}
 .ikinci{color:var(--mut);font-size:.9rem;margin-top:.8rem}
 .ghostbtn{background:none;border:1px solid var(--line);color:var(--ink);border-radius:12px;padding:.75rem;width:100%;font:inherit;cursor:pointer;margin-top:.6rem}
+.bekle{display:none;text-align:center;color:var(--mut);font-size:.9rem;padding:1rem}
 </style>
 <div class="wrap">
  <div class="top"><h1>Saatini bilmiyorsan</h1>
- <p class="sub">Yükseleni kesin bilemeyiz ama daraltabiliriz. Önce doğduğun gün, sonra ailenin hatırladığı, sonra hayatından birkaç tarih. On dakika.</p></div>
+ <p class="sub">Yükseleni kesin bilemeyiz ama daraltabiliriz. Önce doğduğun gün, sonra ailenin hatırladığı, sonra hayatından birkaç tarih ve birkaç ipucu. On dakika.</p></div>
 
  <div class="card adim on" id="a1">
   <label>Doğum tarihi</label><input type="date" id="d">
   <label>Doğum yeri</label><div class="geo"><input id="p" placeholder="Şehir yaz (örn. İstanbul)" autocomplete="off"><div class="gr" id="gr"></div></div>
   <div id="pk" class="note">Varsayılan: İstanbul</div>
   <label>Ailen ne hatırlıyor?</label>
-  <p class="note" style="margin-top:0">Anneye sormak on soruya bedel. Hastane kaydı, nüfus cüzdanının arkası, kimin ne dediği… "Sabah ezanında" bile işe yarar.</p>
+  <p class="note" style="margin-top:0">Anneye sormak on soruya bedel. Hastane kaydı, e-Devlet'teki doğum kayıt örneği, kimin ne dediği… "Sabah ezanında" bile işe yarar.</p>
   <div class="sec" id="dilim">
    <button type="button" data-d="sabah">Sabah<br><small>05–11</small></button>
    <button type="button" data-d="oglen">Gündüz<br><small>11–17</small></button>
@@ -175,7 +185,26 @@ body{background:transparent!important}
   <div id="pencereler"></div>
   <p class="gizli" id="adayNot"></p>
   <div id="sorular"></div>
+  <div class="ipucu" id="ipuclari">
+   <h3>Birkaç ipucu daha</h3>
+   <p class="note">Bunlar tek başına karar vermez, eşitliği bozar. Boş bırakabilirsin.</p>
+   <label>Uzun ilişkilerindeki kişilerin Güneş burcu (en fazla üç)</label>
+   <div class="sec" id="partner"></div>
+   <label>Yüz şeklin</label>
+   <div class="sec" id="yuz">
+    <button type="button" data-v="yuvarlak">Yuvarlak</button><button type="button" data-v="oval">Oval</button><button type="button" data-v="uzun">Uzun</button><button type="button" data-v="koseli">Köşeli</button>
+   </div>
+   <label>Yapın</label>
+   <div class="sec" id="yapi">
+    <button type="button" data-v="ince">İnce</button><button type="button" data-v="orta">Orta</button><button type="button" data-v="dolgun">Dolgun</button><button type="button" data-v="atletik">Atletik</button>
+   </div>
+   <label>Boyun, ailene göre</label>
+   <div class="sec" id="boy">
+    <button type="button" data-v="uzun">Uzun</button><button type="button" data-v="orta">Orta</button><button type="button" data-v="kisa">Kısa</button>
+   </div>
+  </div>
   <button class="btn" id="go2">Tahmin et</button>
+  <div class="bekle" id="bekle">Adaylar puanlanıyor…</div>
   <p class="note">Cevaplar telefonunda kalır, hiçbir yere gitmez. Hatırlamıyorsan boş bırak; tahmin edilmiş cevap yanlış cevaptan kötüdür.</p>
  </div>
 
@@ -184,16 +213,19 @@ body{background:transparent!important}
   <div class="rsign" id="rs"></div>
   <div class="pencere" id="rp"></div>
   <div class="rtext" id="rt"></div>
+  <div class="neden" id="rn"></div>
   <div class="ikinci" id="ri"></div>
   <button class="btn" id="kabul" hidden>Bu saatle devam et</button>
   <button class="ghostbtn" id="tekrar">Baştan</button>
  </div>
 
  <div class="seo">
-  <h2>Bu bir rektifikasyon değil</h2>
-  <p>Gerçek rektifikasyon derece derece çalışır, aylar sürer ve yine de tartışmalıdır. Burada yaptığımız daha mütevazı: doğduğun günün yükselen pencerelerini çıkarıp, ailenin hatırladığıyla ve Jüpiter ile Satürn'ün hayatındaki büyük tarihlere denk gelip gelmediğiyle daraltmak. Sonuç bir burç ve bir saat aralığı; dakika değil, derece değil.</p>
+  <h2>Doğum saatimi nereden bulurum?</h2>
+  <p>Sırayla: doğumda bulunan yakınlar; doğum yapılan hastanenin arşivi (çoğu hastane yıllarca saklar); e-Devlet'ten alınan doğum kayıt örneği, bazı kayıtlarda saat yazar. Eski tip nüfus cüzdanında saat yoktur. Aile "akşam yemeğinden sonra" gibi bir şey bile hatırlıyorsa yukarıdaki dilim sorusu onu kullanır.</p>
+  <h2>Bu sayfa ne yapıyor, ne yapmıyor?</h2>
+  <p>Doğduğun günün yükselen pencerelerini çıkarıyor, sonra her adayı hayatındaki tarihlerle puanlıyor: o tarihte solar ark ile ilerletilmiş bir gezegen adayın yükselenine ya da tepe noktasına değiyor mu, yavaş gezegenler o açılardan geçiyor mu, Jüpiter ve Satürn ilgili evde mi. Partner burcu ve yüz şekli yalnız eşitlik bozar. Sonuç bir burç ve bir saat penceresi; dakika değil, derece değil. Adaylar ayrılmıyorsa bunu söylüyor, uydurmuyor.</p>
   <h2>Tahminle çıkan haritaya nasıl bakılır?</h2>
-  <p>Yükselen burcu üstüne kurulan her şey (evler, yöneticiler) bu tahmin kadar güvenilirdir. Güneş, Ay ve gezegenlerin burçları ile aralarındaki açılar saatten bağımsızdır; onlar zaten kesindi. Tahminli haritada ev yorumlarını tek cümle, gezegen yorumlarını tam oku.</p>
+  <p>Yükselen üstüne kurulan her şey (evler, yöneticiler) bu tahmin kadar güvenilirdir. Güneş, Ay ve gezegenlerin burçları ile aralarındaki açılar saatten bağımsızdır; onlar zaten kesindi. Tahminli haritada ev yorumlarını tek cümle, gezegen yorumlarını tam oku.</p>
  </div>
 </div>
 <script>
@@ -201,7 +233,17 @@ body{background:transparent!important}
 'use strict';
 var $=function(i){return document.getElementById(i);};
 var BURC='Koç Boğa İkizler Yengeç Aslan Başak Terazi Akrep Yay Oğlak Kova Balık'.split(' ');
-var pk=null,dilim='yok',ADAY=[],SORU=[];
+var AD={sun:'Güneş',moon:'Ay',mer:'Merkür',ven:'Venüs',mar:'Mars',jup:'Jüpiter',sat:'Satürn',ura:'Uranüs',nep:'Neptün',plu:'Plüton'};
+var ACI_AD={asc:'yükselene',mc:'tepe noktasına',dsc:'batı ufkuna',ic:'dip noktasına'};
+var SORU_AD={ev:'ev',uzak:'uzak taşınma',iliski:'ilişki',is:'iş',cocuk:'çocuk',ebeveyn:'ebeveyn',beden:'beden'};
+var pk=null,dilim='yok',GRID=[],ADAY=[],SORU=[],IP={partner:[],yuz:null,yapi:null,boy:null};
+function nrm(x){return ((x%360)+360)%360;}
+function fark(a,b){var d=Math.abs(nrm(a-b));return d>180?360-d:d;}
+function burc(l){return Math.floor(nrm(l)/30);}
+/* klasik fizyonomi: yalnız eşitlik bozucu, çeyrek puan */
+var FIZ={yuz:{yuvarlak:[1,3,11],oval:[2,4,5,6,10],uzun:[0,2,8,9,10],koseli:[0,7,9]},
+         yapi:{ince:[2,5,9,10],orta:[3,5,6,7,11],dolgun:[1,3,11],atletik:[0,4,7,8]},
+         boy:{uzun:[2,8,10],orta:[0,4,5,6,7],kisa:[1,3,9,11]}};
 /* yer */
 var pin=$('p'),gr=$('gr'),pkl=$('pk'),gt=0;
 pin.addEventListener('input',function(){clearTimeout(gt);var q=pin.value.trim();if(q.length<2){gr.classList.remove('show');return;}
@@ -211,62 +253,107 @@ pin.addEventListener('input',function(){clearTimeout(gt);var q=pin.value.trim();
   Array.prototype.forEach.call(gr.querySelectorAll('.gi'),function(el){el.onclick=function(){var x=rs[+el.dataset.i];pk={lat:x.latitude,lon:x.longitude,tz:x.timezone,label:x.name};pin.value=x.name;pkl.textContent=x.name+' · '+x.latitude.toFixed(2)+', '+x.longitude.toFixed(2);gr.classList.remove('show');};});
  }).catch(function(){});},380);});
 document.addEventListener('click',function(e){if(!gr.contains(e.target)&&e.target!==pin)gr.classList.remove('show');});
-Array.prototype.forEach.call($('dilim').querySelectorAll('button'),function(b){b.onclick=function(){Array.prototype.forEach.call($('dilim').querySelectorAll('button'),function(x){x.classList.remove('on');});b.classList.add('on');dilim=b.dataset.d;};});
+function tekSec(kok,cb){Array.prototype.forEach.call(kok.querySelectorAll('button'),function(b){b.onclick=function(){var on=b.classList.contains('on');Array.prototype.forEach.call(kok.querySelectorAll('button'),function(x){x.classList.remove('on');});if(!on)b.classList.add('on');cb(on?null:(b.dataset.v||b.dataset.d));};});}
+tekSec($('dilim'),function(v){dilim=v||'yok';if(!v)$('dilim').querySelector('[data-d=yok]').classList.add('on');});
+tekSec($('yuz'),function(v){IP.yuz=v;});tekSec($('yapi'),function(v){IP.yapi=v;});tekSec($('boy'),function(v){IP.boy=v;});
+$('partner').innerHTML=BURC.map(function(b,i){return '<button type="button" data-i="'+i+'">'+b+'</button>';}).join('');
+Array.prototype.forEach.call($('partner').querySelectorAll('button'),function(b){b.onclick=function(){var i=+b.dataset.i,k=IP.partner.indexOf(i);
+ if(k>=0){IP.partner.splice(k,1);b.classList.remove('on');}else if(IP.partner.length<3){IP.partner.push(i);b.classList.add('on');}};});
 function git(n){[1,2,3].forEach(function(i){$('a'+i).classList.toggle('on',i===n);});window.scrollTo({top:0,behavior:'smooth'});}
 function pad(n){return (n<10?'0':'')+n;}
 function sa(m){return pad(Math.floor(m/60)%24)+':'+pad(m%60);}
 function dilimde(m){var h=(m/60)%24;if(dilim==='sabah')return h>=5&&h<11;if(dilim==='oglen')return h>=11&&h<17;if(dilim==='aksam')return h>=17&&h<23;if(dilim==='gece')return h>=23||h<5;return true;}
-/* 1 → pencereler: günü 4 dakikada bir tara, yükselen burcu değişince pencere kapanır */
+/* 1 → günü 4 dakikada bir tara; her adayın ASC/MC/gezegenleri saklanır */
 $('go1').onclick=function(){
  var d=$('d').value;if(!d){alert('Önce doğum tarihini yaz.');return;}
  var y=pk||{lat:41.0082,lon:28.9784,tz:'Europe/Istanbul',label:'İstanbul'};var p=d.split('-');
  var A=window.SorbiAstro;if(!A){alert('Motor yükleniyor, bir saniye sonra tekrar dene.');return;}
- var pen=[],son=-1,bas=0;
- for(var m=0;m<=1440;m+=4){var mm=Math.min(m,1439);var ch=A.chart({y:+p[0],mo:+p[1],d:+p[2],h:Math.floor(mm/60),mi:mm%60,tz:y.tz,lat:y.lat,lon:y.lon,house:'W'});
-  var s=Math.floor(((ch.asc%360)+360)%360/30);if(s!==son){if(son>=0)pen.push({s:son,a:bas,b:mm});son=s;bas=mm;}}
- pen.push({s:son,a:bas,b:1440});
- /* gece yarısı bölünmüş aynı burcu birleştirme yok; saat penceresi olarak ayrı kalsın */
+ GRID=[];
+ for(var m=0;m<1440;m+=4){var ch=A.chart({y:+p[0],mo:+p[1],d:+p[2],h:Math.floor(m/60),mi:m%60,tz:y.tz,lat:y.lat,lon:y.lon,house:'W'});
+  var P={};ch.pls.forEach(function(x){if(AD[x.k])P[x.k]=x.lon;});
+  GRID.push({m:m,asc:ch.asc,mc:ch.mc,s:burc(ch.asc),P:P,puan:0,neden:[]});}
+ var pen=[],son=-1,bas=0;GRID.forEach(function(g){if(g.s!==son){if(son>=0)pen.push({s:son,a:bas,b:g.m});son=g.s;bas=g.m;}});pen.push({s:son,a:bas,b:1440});
  ADAY=pen.filter(function(w){for(var t=w.a;t<w.b;t+=4)if(dilimde(t))return true;return false;});
  ADAY.forEach(function(w){w.sure=w.b-w.a;});
  var yas=(new Date()-new Date(+p[0],+p[1]-1,+p[2]))/(365.25*864e5);
  $('pencereOzet').textContent=(new Date(+p[0],+p[1]-1,+p[2])).toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'})+' · '+y.label+' · o gün yükselen '+pen.length+' kez değişti'+(dilim!=='yok'?', senin dilimine '+ADAY.length+' pencere düşüyor':'')+'.';
  $('pencereler').innerHTML=ADAY.map(function(w){return '<div class="pencere">'+sa(w.a)+' – '+sa(w.b)+' <span class="gizli">· '+Math.round(w.sure/60*10)/10+' saat</span></div>';}).join('');
  $('adayNot').textContent='Burç adlarını şimdilik saklıyoruz; cevaplar önce, isim sonra.';
- if(ADAY.length===1){sonuc(ADAY[0],null,0,0,y,p);git(3);return;}
- if(yas<18+10){ $('sorular').innerHTML='<p class="note">Sorular 18 yaşından sonraki tarihlere bakar; bunun için yaş yetersiz. Pencereler yukarıda, aileye sormak en iyisi.</p>';$('go2').hidden=true;git(2);return;}
- $('go2').hidden=false;
- var ilk=Math.max(+p[0]+18,new Date().getFullYear()-15),sonY=new Date().getFullYear();
- SORU=[{ev:4,ad:'ev',m:'Taşındın mı, ev ya da aile düzenin köklü değişti mi?'},
-       {ev:7,ad:'iliski',m:'Evlilik, birlikte yaşama ya da ayrılık oldu mu?'},
-       {ev:10,ad:'is',m:'İşe giriş, çıkış, terfi ya da yön değişimi oldu mu?'},
-       {ev:1,ad:'beden',m:'Bedeninle ilgili büyük bir dönem: ameliyat, doğum, uzun hastalık ya da baştan aşağı yenilenme?'}];
- $('sorular').innerHTML='<p class="note" style="margin-top:1rem">'+ilk+' ile '+sonY+' arasında, yalnız tarihini gerçekten hatırladıkların:</p>'+SORU.map(function(q){return '<div class="soru"><p>'+q.m+'</p><div class="sat"><input type="month" id="q-'+q.ad+'" min="'+ilk+'-01" max="'+sonY+'-12"><label class="k"><input type="checkbox" id="h-'+q.ad+'"> olmadı ya da hatırlamıyorum</label></div></div>';}).join('');
- SORU.forEach(function(q){$('h-'+q.ad).onchange=function(){$('q-'+q.ad).disabled=this.checked;};});
- window.__yp={y:y,p:p};git(2);
+ window.__yp={y:y,p:p};
+ if(ADAY.length===1){sonuc([ADAY[0]],0,y,p);git(3);return;}
+ if(yas<28){ $('sorular').innerHTML='<p class="note" style="margin-top:1rem">Tarih soruları 18 yaşından sonrasına bakar; bunun için yaş yetersiz. Aşağıdaki ipuçları ve aile hafızasıyla ilerliyoruz.</p>';SORU=[];}
+ else{
+  var ilk=Math.max(+p[0]+18,new Date().getFullYear()-15),sonY=new Date().getFullYear();
+  SORU=[{ev:[4],ad:'ev',m:'Taşındın mı, ev ya da aile düzenin köklü değişti mi?',g:['moon','sat','ura','plu'],a:['ic','asc']},
+        {ev:[9,4],ad:'uzak',m:'Başka bir şehre ya da ülkeye taşındın mı?',g:['jup','ura','sat'],a:['ic','asc','mc']},
+        {ev:[7],ad:'iliski',m:'Evlilik, birlikte yaşama ya da ayrılık oldu mu?',g:['ven','mar','sat','jup'],a:['dsc','asc']},
+        {ev:[10],ad:'is',m:'İşe giriş, çıkış, terfi ya da yön değişimi oldu mu?',g:['sun','jup','sat','ura'],a:['mc','ic']},
+        {ev:[5],ad:'cocuk',m:'Çocuğun oldu mu?',g:['jup','ven','moon'],a:['asc','ic','dsc']},
+        {ev:[4,10],ad:'ebeveyn',m:'Anne ya da babanı kaybettin mi?',g:['sat','plu','sun','moon'],a:['ic','mc']},
+        {ev:[1],ad:'beden',m:'Bedeninle ilgili büyük bir dönem: ameliyat, doğum, uzun hastalık ya da baştan aşağı yenilenme?',g:['mar','sat','plu','ura'],a:['asc','mc']}];
+  $('sorular').innerHTML='<p class="note" style="margin-top:1rem">'+ilk+' ile '+sonY+' arasında, yalnız tarihini gerçekten hatırladıkların. Ne kadar çok tarih, o kadar keskin.</p>'+SORU.map(function(q){return '<div class="soru"><p>'+q.m+'</p><div class="sat"><input type="month" id="q-'+q.ad+'" min="'+ilk+'-01" max="'+sonY+'-12"><label class="k"><input type="checkbox" id="h-'+q.ad+'"> olmadı ya da hatırlamıyorum</label></div></div>';}).join('');
+  SORU.forEach(function(q){$('h-'+q.ad).onchange=function(){$('q-'+q.ad).disabled=this.checked;};});
+ }
+ git(2);
 };
-/* 2 → puanla: her aday için olay ayında Satürn/Jüpiter ilgili tam-burç evde mi */
+/* 2 → puanla */
 $('go2').onclick=function(){
  var A=window.SorbiAstro,y=window.__yp.y,p=window.__yp.p,olay=[];
- SORU.forEach(function(q){var v=$('q-'+q.ad).value;if(v&&!$('h-'+q.ad).checked){var m=v.split('-');olay.push({ev:q.ev,y:+m[0],mo:+m[1]});}});
- if(olay.length<2){alert('En az iki tarih gerek; yoksa tahmin uydurma olur.');return;}
- olay.forEach(function(o){var ch=A.chart({y:o.y,mo:o.mo,d:15,h:12,mi:0,tz:'Europe/Istanbul',lat:41,lon:29,house:'W'});
-  ch.pls.forEach(function(x){if(x.k==='sat')o.sat=Math.floor(((x.lon%360)+360)%360/30);if(x.k==='jup')o.jup=Math.floor(((x.lon%360)+360)%360/30);});});
- ADAY.forEach(function(w){w.puan=0;olay.forEach(function(o){var evB=(w.s+o.ev-1)%12;if(o.sat===evB)w.puan++;if(o.jup===evB)w.puan++;});});
- var sir=ADAY.slice().sort(function(a,b){return b.puan-a.puan||b.sure-a.sure;});
- sonuc(sir[0],sir[1],sir[0].puan-(sir[1]?sir[1].puan:0),olay.length,y,p);git(3);
+ SORU.forEach(function(q){var v=$('q-'+q.ad).value;if(v&&!$('h-'+q.ad).checked){var m=v.split('-');olay.push({q:q,y:+m[0],mo:+m[1]});}});
+ var ipVar=IP.partner.length||IP.yuz||IP.yapi||IP.boy;
+ if(olay.length<2&&!ipVar){alert('En az iki tarih ya da birkaç ipucu gerek; yoksa tahmin uydurma olur.');return;}
+ $('bekle').style.display='block';$('go2').disabled=true;
+ setTimeout(function(){
+  var dogum=new Date(+p[0],+p[1]-1,+p[2],12,0);
+  olay.forEach(function(o){
+   var t=A.chart({y:o.y,mo:o.mo,d:15,h:12,mi:0,tz:'Europe/Istanbul',lat:41,lon:29,house:'W'});o.T={};t.pls.forEach(function(x){if(AD[x.k])o.T[x.k]=x.lon;});
+   var yas=(new Date(o.y,o.mo-1,15)-dogum)/(365.25*864e5);o.yas=yas;
+   var pd=new Date(dogum.getTime()+yas*864e5);   /* solar ark: bir gün = bir yıl */
+   var pc=A.chart({y:pd.getFullYear(),mo:pd.getMonth()+1,d:pd.getDate(),h:pd.getHours(),mi:pd.getMinutes(),tz:y.tz,lat:y.lat,lon:y.lon,house:'W'});
+   pc.pls.forEach(function(x){if(x.k==='sun')o.progSun=x.lon;});
+   o.ay=['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'][o.mo-1]+' '+o.y;
+  });
+  GRID.forEach(function(g){g.puan=0;g.neden=[];g.ip=0;g.f=0;
+   if(!dilimde(g.m))return;
+   var ang={asc:g.asc,mc:g.mc,dsc:nrm(g.asc+180),ic:nrm(g.mc+180)};
+   olay.forEach(function(o){
+    var ark=nrm(o.progSun-g.P.sun),enIyi=null;
+    /* solar ark: yalnız olayın kendi gezegenleri, 0.75° orb; rastgele isabeti azaltmak için */
+    o.q.g.forEach(function(k){o.q.a.forEach(function(an){var d=fark(nrm(g.P[k]+ark),ang[an]);if(d<=.75&&(!enIyi||d<enIyi.d))enIyi={k:k,an:an,d:d};});});
+    if(enIyi){var w=1-enIyi.d/1.5;g.puan+=w;g.neden.push({o:o,t:'ilerletilmiş '+AD[enIyi.k]+' '+ACI_AD[enIyi.an]+' geldi',w:w});}
+    ['sat','ura','nep','plu'].forEach(function(k){o.q.a.forEach(function(an){var d=fark(o.T[k],ang[an]);if(d<=1){var w2=.5*(1-d/2);g.puan+=w2;g.neden.push({o:o,t:AD[k]+' '+ACI_AD[an]+' değiyordu',w:w2});}});});
+    o.q.ev.forEach(function(ev){var evB=(g.s+ev-1)%12;if(burc(o.T.sat)===evB){g.puan+=.6;g.neden.push({o:o,t:'Satürn '+ev+'. evdeydi',w:.6});}if(burc(o.T.jup)===evB){g.puan+=.6;g.neden.push({o:o,t:'Jüpiter '+ev+'. evdeydi',w:.6});}});
+   });
+   var ip=0;IP.partner.forEach(function(b){if(b===g.s||b===(g.s+6)%12)ip+=.5;});ip=Math.min(ip,1);
+   var f=0;['yuz','yapi','boy'].forEach(function(k){if(IP[k]&&FIZ[k][IP[k]].indexOf(g.s)>=0)f+=.25;});f=Math.min(f,.5);
+   g.puan+=ip+f;g.ip=ip;g.f=f;
+  });
+  ADAY.forEach(function(w){var ic=GRID.filter(function(g){return g.m>=w.a&&g.m<w.b&&dilimde(g.m);});
+   var en=ic.reduce(function(a,b){return b.puan>a.puan?b:a;},ic[0]);w.puan=en.puan;w.en=en;
+   var b=ic.filter(function(g){return g.puan>=en.puan-.5;});w.bant=[b[0].m,b[b.length-1].m+4];});
+  var sir=ADAY.slice().sort(function(a,b){return b.puan-a.puan||b.sure-a.sure;});
+  sonuc(sir,olay.length,y,p);$('bekle').style.display='none';$('go2').disabled=false;git(3);
+ },30);
 };
-function sonuc(w,w2,fark,n,y,p){
- var kabul=$('kabul');
+function sonuc(sir,n,y,p){
+ var w=sir[0],w2=sir[1],kabul=$('kabul'),fark_=w2?w.puan-w2.puan:9;
+ $('rn').innerHTML='';
  if(!w2){ $('rlab').textContent='Tek pencere';$('rs').textContent='Yükselen '+BURC[w.s];$('rp').textContent=sa(w.a)+' – '+sa(w.b);
   $('rt').textContent='Ailenin hatırladığı dilimde o gün yalnız bir yükselen var. Soru sormaya gerek kalmadı.';$('ri').textContent='';kabul.hidden=false;}
- else if(fark<2){ $('rlab').textContent='Ayırt edilemedi';$('rs').textContent='Henüz söyleyemeyiz';$('rp').textContent='';
-  $('rt').textContent='Verdiğin '+n+' tarih adayları birbirinden ayırmadı; bu, yöntemin sınırı. Uydurmaktansa söylememeyi seçiyoruz. Pencereler geçerli, aileye bir kez daha sormak ya da bir tarih daha hatırlamak yeter.';
+ else if(fark_<1.2||w.puan<2){ $('rlab').textContent='Ayırt edilemedi';$('rs').textContent='Henüz söyleyemeyiz';$('rp').textContent='';
+  $('rt').textContent=(n?'Verdiğin '+n+' tarih':'İpuçları')+' adayları birbirinden ayırmadı; bu, yöntemin sınırı. Uydurmaktansa söylememeyi seçiyoruz. Pencereler geçerli; bir tarih daha hatırlamak ya da aileye bir kez daha sormak çoğu zaman yeter.';
   $('ri').textContent='En yakın iki aday: '+sa(w.a)+'–'+sa(w.b)+' ve '+sa(w2.a)+'–'+sa(w2.b)+'.';kabul.hidden=true;}
- else{ $('rlab').textContent='Tahmin · güven '+(fark>=3?'orta':'zayıf');$('rs').textContent='Yükselen '+BURC[w.s]+' olabilir';$('rp').textContent=sa(w.a)+' – '+sa(w.b);
-  $('rt').textContent='Verdiğin '+n+' tarihten '+w.puan+' tanesi bu pencereyle örtüştü. Bu bir tahmin; sonraki yıllarda Jüpiter ve Satürn bu burçtan geçerken hayatın ne diyor, ona bak. Uyuyorsa kalır, uymuyorsa ikinci adaya geçilir.';
-  $('ri').textContent='İkinci aday: yükselen '+BURC[w2.s]+', '+sa(w2.a)+'–'+sa(w2.b)+' ('+w2.puan+' örtüşme).';kabul.hidden=false;}
- kabul.onclick=function(){var orta=Math.floor((w.a+w.b)/2);var t=sa(orta);
-  try{localStorage.setItem('sorbi_birth',JSON.stringify({date:$('d').value,time:t,place:y.label,lat:y.lat,lon:y.lon,tz:y.tz,tahmin:true,pencere:[sa(w.a),sa(w.b)]}));}catch(e){}
+ else{ var guven=fark_>=2.5?'orta':'zayıf';
+  $('rlab').textContent='Tahmin · güven '+guven;$('rs').textContent='Yükselen '+BURC[w.s]+' olabilir';
+  $('rp').textContent=sa(w.bant[0])+' – '+sa(w.bant[1])+'  ·  pencere '+sa(w.a)+' – '+sa(w.b);
+  $('rt').textContent='Bu bir tahmin. Sonraki yıllarda Jüpiter ve Satürn bu burçtan geçerken hayatın ne diyor, ona bak; uyuyorsa kalır, uymuyorsa ikinci adaya geçilir.';
+  var N=w.en.neden.slice().sort(function(a,b){return b.w-a.w;}).slice(0,4);
+  var h=N.map(function(x){return '<p><b>'+x.o.ay+', '+SORU_AD[x.o.q.ad]+':</b> '+x.t+'.</p>';}).join('');
+  if(w.en.ip)h+='<p><b>Partner burcu:</b> bu yükselenle örtüştü.</p>';if(w.en.f)h+='<p><b>Yüz ve yapı:</b> klasik tarife uydu (küçük ağırlık).</p>';
+  $('rn').innerHTML=h?'<p class="gizli">Bu pencereyi ne işaret etti:</p>'+h:'';
+  $('ri').textContent='İkinci aday: yükselen '+BURC[w2.s]+', '+sa(w2.a)+'–'+sa(w2.b)+' (puan '+w2.puan.toFixed(1)+' / '+w.puan.toFixed(1)+').';kabul.hidden=false;}
+ kabul.onclick=function(){var b=w.bant||[w.a,w.b];var orta=Math.floor((b[0]+b[1])/2);var t=sa(orta);
+  try{localStorage.setItem('sorbi_birth',JSON.stringify({date:$('d').value,time:t,place:y.label,lat:y.lat,lon:y.lon,tz:y.tz,tahmin:true,pencere:[sa(b[0]),sa(b[1])]}));}catch(e){}
   location.href='/';};
 }
 $('tekrar').onclick=function(){git(1);};
