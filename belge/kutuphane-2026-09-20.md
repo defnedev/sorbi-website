@@ -73,11 +73,12 @@ Katalog kurulurken bilinen oranlarla karşılaştırıldı:
 
 | Özellik | Kütüphane | Beklenen | Kaynak |
 |---|---|---|---|
-| Merkür geri | %19,4 | %19,1 | Sayım 03 |
-| Dolunay evresi | %12,5 | %12,5 | 45°/360° |
-| Üç gezegen aynı burçta | %44,0 | %43,3 | Sayım 04 |
+| Merkür geri | %19,2 | %19,1 | Sayım 03 |
+| Dolunay evresi | %12,3 | %12,5 | 45°/360° |
+| Üç gezegen aynı burçta | %43,3 | %43,3 | Sayım 04 |
 | Güneş Koç'ta | %8,3 | %8,3 | 1/12 |
-| Ay boşlukta | %22,5 | %15–25 | Literatür |
+| 29. derecede en az bir gezegen | %20,8 | %21,0 | 1−(29/30)⁷ |
+| Ay boşlukta | %22,1 | %15–25 | Literatür |
 
 İki detektör ilk sürümde yanlıştı ve düzeltildi: **Ay boşlukta** (burçtan çıkana dek tam
 olacak açı var mı diye bakmıyordu; şimdi göreli hızla hesaplıyor) ve **açı sayısı
@@ -106,14 +107,18 @@ node tools/ozellik-say.mjs 1950 2009 2 6
 
 ## 6. Örneklem ve sınırları
 
-- **1950–2009, iki günde bir, günde altı saat** → yaklaşık 66.000 harita.
+- **1930–2025, her gün, günde altı saat** → **210.384 harita.** İlk sürüm 1950–2009
+  aralığında 67.050 haritaydı; örneklem üç kat büyütüldü ve yıl aralığı 96 yıla çıkarıldı.
+  Sebep: 60 yıl Uranüs'ün bir turunu (84 yıl) bile kapatmıyordu; şimdi kapatıyor.
+- Sayım iki çekirdekte paralel koşar: `ozellik-say.mjs` parça üretir,
+  `ozellik-birlestir.mjs` birleştirir. Toplam süre yaklaşık bir saat.
 - Ev ve açısal noktalar **İstanbul enlemi** (41,01°K) ile hesaplandı. Gezegen burçları
   enlemden bağımsızdır; evler değildir.
 - Bu bir **gökyüzü dağılımıdır, doğum istatistiği değildir.** Doğumlar gün ve mevsim
   içinde eşit dağılmaz.
 - Yavaş gezegenler (Uranüs, Neptün, Plüton) için burç sayıları kuşak yerleşimidir,
   kişisel seyreklik değildir. Kitapçıkta bu ayrım açıkça yazılır.
-- 66.000 örneklemde bir kez bile görülmeyen özellikler "bu örneklemde görülmedi" diye
+- Örneklemde bir kez bile görülmeyen özellikler "bu örneklemde görülmedi" diye
   raporlanır; sıfır yazılmaz.
 
 ---
@@ -129,6 +134,18 @@ node tools/ozellik-say.mjs 1950 2009 2 6
 | **Atölye ve kurs** | Ders materyali: "bu ne kadar yaygın" sorusunun cevabı hazır |
 
 ---
+
+## 7.5 Örneklem büyütmenin getirdiği
+
+67.050 → 210.384 haritaya çıkınca:
+
+- **1.728 olası Güneş–Ay–Yükselen üçlüsünün tamamı görüldü.** Küçük örneklemde on tanesi
+  hiç çıkmamıştı; artık hepsinin sayısı var.
+- 29. derece oranı %17,5'ten %20,8'e oturdu (kuramsal değer %21,0). Küçük örneklemde
+  yavaş gezegenlerin derece dağılımı pürüzlüydü.
+- Katalogda en az bir kez görülen özellik 433'ten **441**'e çıktı.
+- En seyrek sayılar keskinleşti: altı gezegen aynı burçta **1.582 kişide bir**,
+  Satürn cazimi **589'da bir**, Güneş–Ay karşılıklı kabul **139'da bir**.
 
 ## 8. Sırada ne var (katalog büyütme)
 

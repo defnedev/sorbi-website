@@ -2,8 +2,12 @@
    Katalogdaki HER özelliğin örneklemde kaç kez gerçekleştiğini sayar.
    Çıktı: ozellik-veri.json  { n, yil, bas, adim, say:{id:adet}, uclu:{kod:adet} }
 
-   Çalıştırma (repo kökünde):  node tools/ozellik-say.mjs [yilBas] [yilSon] [gunAdim] [saatAdet]
+   Çalıştırma (repo kökünde):  node tools/ozellik-say.mjs [yilBas] [yilSon] [gunAdim] [saatAdet] [ciktiDosyasi]
    Varsayılan: 1950 2009 2 6  → ~65.000 harita, ~15 dk.
+   Büyük sayım paralel çalıştırılır ve tools/ozellik-birlestir.mjs ile birleştirilir:
+     node tools/ozellik-say.mjs 1930 1977 1 6 parca-1.json &
+     node tools/ozellik-say.mjs 1978 2025 1 6 parca-2.json &
+     node tools/ozellik-birlestir.mjs parca-1.json parca-2.json
 
    Kural: sayı elle yazılmaz. Katalog büyüyünce bu dosya yeniden çalıştırılır.
 */
@@ -15,7 +19,8 @@ for (const f of ['astronomy.browser.min.js', 'sorbi-astro.js', 'sorbi-ozellik.js
   vm.runInContext(fs.readFileSync(f, 'utf8'), ctx, { filename: f });
 const A = ctx.window.SorbiAstro, OZ = ctx.window.SorbiOzellik;
 
-const [, , a1, a2, a3, a4] = process.argv;
+const [, , a1, a2, a3, a4, a5] = process.argv;
+const CIKTI = a5 || 'ozellik-veri.json';
 const YIL_BAS = +(a1 || 1950), YIL_SON = +(a2 || 2009);
 const GUN_ADIM = +(a3 || 2), SAAT_ADET = +(a4 || 6);
 const LAT = 41.0082, LON = 28.9784, TZ = 'Europe/Istanbul';
@@ -60,7 +65,7 @@ const out = {
   katalog: OZ.OZ.length,
   say, uclu
 };
-fs.writeFileSync('ozellik-veri.json', JSON.stringify(out));
+fs.writeFileSync(CIKTI, JSON.stringify(out));
 
 /* özet */
 const ent = Object.entries(say).sort((a, b) => a[1] - b[1]);
