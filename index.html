@@ -90,6 +90,12 @@ svg{display:block}
 /* ── hesaplayıcı ── */
 .calc{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:1.4rem;align-items:start;margin-top:3rem}
 @media(max-width:880px){.calc{grid-template-columns:1fr}}
+/* /#dogum-haritasi capasi sticky .sbnav altinda kalmasin.
+   Nav yuksekligi .sbnav kuralindan: padding .55rem x2 + nav a min-height 40px = 57.6px;
+   >=900px .sbnav min-height:70px; <=560px padding .3rem x2 + 40px = 49.6px. */
+#dogum-haritasi{scroll-margin-top:58px}
+@media(min-width:900px){#dogum-haritasi{scroll-margin-top:70px}}
+@media(max-width:560px){#dogum-haritasi{scroll-margin-top:50px}}
 .card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--r);padding:1.35rem;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .fields{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
 .fields .full{grid-column:1/-1}
@@ -272,7 +278,7 @@ body{background:transparent!important}
   <div class="ok">↓ tarihini yaz</div>
 </div>
 
-<div class="calc">
+<div class="calc" id="dogum-haritasi">
   <div>
     <div class="card">
       <div class="fields">
