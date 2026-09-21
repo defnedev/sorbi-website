@@ -8,3 +8,4 @@ _to_delete/
 # Claude tarafindan sohbete gonderilen gorseller (repo icerigi degil)
 Claude outputs/
 _gecici-site.tgz
+.DS_Store
