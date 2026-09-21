@@ -172,6 +172,116 @@ if (OV) {
   }
 }
 
+/* ═══ 4 · sayfa metinlerindeki istasyon / retro tarihleri ═══
+   NEDEN: bir retro aralığı elle ya da "gün farkı" yöntemiyle yazıldığında
+   bir gün kayabilir (ilk geri GÖRÜLEN gün ≠ istasyon günü). Aşağıdaki iddialar
+   sayfa metninden okunur ve motorla — hız işaretinin sıfırı kestiği anı ikiye
+   bölerek dakika hassasiyetinde bularak — karşılaştırılır. Bir günden büyük
+   sapma hatadır. Sapma eşiği bir gün: yerel saat sınırında oynayan bir
+   istasyon (ör. 00:10) yazılı tarihi meşru olarak bir gün kaydırabilir.
+   Yeni bir tarih cümlesi yazılınca buraya bir satır eklenir; motorla
+   doğrulanmayan tarih siteye girmez. */
+const AYLAR = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+const GEZ = { mer: 'Mercury', ven: 'Venus', mar: 'Mars', jup: 'Jupiter',
+  sat: 'Saturn', ura: 'Uranus', nep: 'Neptune', plu: 'Pluto' };
+
+/* Bir gezegenin görünür boylam hızı (°/gün) — sayfalardaki yöntemle aynı:
+   jeosentrik ekliptik boylamın merkezi farkı. */
+const Ast = ctx.window.Astronomy;
+const nrm = (d) => ((d % 360) + 360) % 360;
+function boylam(body, ms) {
+  const tt = Ast.MakeTime(new Date(ms));
+  return nrm(Ast.SphereFromVector(Ast.RotateVector(Ast.Rotation_EQJ_ECT(tt), Ast.GeoVector(body, tt, true))).lon);
+}
+function hiz(body, ms) {
+  let d = boylam(body, ms + 3600000) - boylam(body, ms - 3600000);
+  if (d > 180) d -= 360; if (d < -180) d += 360;
+  return d;
+}
+/* İşaret değişimini ikiye bölerek dakikanın altına indir. */
+function istasyon(body, lo, hi) {
+  const s0 = Math.sign(hiz(body, lo));
+  for (let i = 0; i < 40; i++) { const m = (lo + hi) / 2;
+    if (Math.sign(hiz(body, m)) === s0) lo = m; else hi = m; }
+  return new Date((lo + hi) / 2);
+}
+/* [bas, son] penceresinde (UTC ms) gezegenin istasyonlarını sırayla bulur. */
+function istasyonlar(gezKod, bas, son) {
+  const body = Ast.Body[GEZ[gezKod]], G = 86400000, out = [];
+  let onceMs = bas, onceH = hiz(body, bas);
+  for (let t = bas + G; t <= son; t += G) {
+    const v = hiz(body, t);
+    if (Math.sign(v) !== Math.sign(onceH))
+      out.push({ yon: onceH > 0 ? 'R' : 'D', an: istasyon(body, onceMs, t) });
+    onceH = v; onceMs = t;
+  }
+  return out;
+}
+/* Yerel takvim gününü 'g Ay' biçiminde yazar (metinle aynı dil). */
+function yerelGun(dt, tz) {
+  const p = new Intl.DateTimeFormat('tr-TR', { timeZone: tz, day: 'numeric', month: 'numeric', year: 'numeric' })
+    .formatToParts(dt).reduce((a, x) => (a[x.type] = x.value, a), {});
+  return { gun: +p.day, ay: +p.month, yil: +p.year, metin: +p.day + ' ' + AYLAR[+p.month - 1] };
+}
+const gunFark = (a, b) => Math.abs(Date.UTC(a.yil, a.ay - 1, a.gun) - Date.UTC(b.yil, b.ay - 1, b.gun)) / 86400000;
+
+/* Denetlenecek iddialar. desen: iki tarihi yakalayan regex (R-istasyonu, D-istasyonu).
+   pencere: istasyonların arandığı yerel tarih aralığı. */
+const TARIH_IDDIA = [
+  { dosya: 'ogren.html', gezegen: 'mer', tz: 'Europe/Istanbul',
+    pencere: ['2026-09-15', '2026-12-01'],
+    desen: /Merkür\s+(\d{1,2}\s+[A-Za-zÇĞİÖŞÜçğıöşü]+)\s+ile\s+(\d{1,2}\s+[A-Za-zÇĞİÖŞÜçğıöşü]+)\s+arasında geri hareketli/ }
+];
+
+let iddiaSay = 0;
+for (const it of TARIH_IDDIA) {
+  let metin;
+  try { metin = fs.readFileSync(it.dosya, 'utf8'); }
+  catch (e) { hatalar.push(it.dosya + ': okunamadı — ' + e.message); continue; }
+  const m = metin.match(it.desen);
+  if (!m) { hatalar.push(it.dosya + ': retro tarihi cümlesi bulunamadı — desen güncellenmeli'); continue; }
+  const [b1, b2] = it.pencere.map((s) => { const [y, mo, d] = s.split('-').map(Number);
+    return Date.UTC(y, mo - 1, d) - 3 * 3600000; });   /* yerel gün başı ≈ UTC−3 (Europe/Istanbul) */
+  const ist = istasyonlar(it.gezegen, b1, b2);
+  const R = ist.find((x) => x.yon === 'R'), Dd = ist.find((x) => x.yon === 'D');
+  if (!R || !Dd) { hatalar.push(it.dosya + ': pencerede R ve D istasyonu birlikte bulunamadı'); continue; }
+  for (const [yazan, an, ad] of [[m[1], R.an, 'retro başlangıcı'], [m[2], Dd.an, 'direkt dönüş']]) {
+    const [g, ayAd] = yazan.trim().split(/\s+/);
+    const ai = AYLAR.findIndex((x) => x.toLocaleLowerCase('tr') === ayAd.toLocaleLowerCase('tr'));
+    if (ai < 0) { hatalar.push(it.dosya + ': "' + yazan + '" ay adı çözülemedi'); continue; }
+    const motor = yerelGun(an, it.tz);
+    const fark = gunFark({ gun: +g, ay: ai + 1, yil: motor.yil }, motor);
+    iddiaSay++;
+    const bulgu = it.dosya + ': ' + ad + ' "' + yazan + '" ≠ motor "'
+      + motor.metin + '" (' + an.toISOString() + ' UTC, sapma ' + fark + ' gün)';
+    /* >1 gün kesin hata; tam 1 gün ise yerel gün sınırına yakın bir istasyon
+       olabilir — uyarı verilir, elle bakılır (eski "25 Ekim" hatası buydu). */
+    if (fark > 1) hatalar.push(bulgu); else if (fark === 1) uyarilar.push(bulgu);
+  }
+}
+
+/* ogren-veri.json retro bölümünün ilk/son geri günü de istasyonlarla tutmalı. */
+if (D && D.retro && D.retro.kareler) {
+  const g = D.retro.kareler.filter((k) => k.geri);
+  if (g.length) {
+    const tz = (D.meta || {}).tz || 'Europe/Istanbul';
+    const [y0, m0, d0] = D.retro.kareler[0].t.split('-').map(Number);
+    const bas = Date.UTC(y0, m0 - 1, d0) - 3 * 3600000;
+    const ist = istasyonlar('mer', bas, bas + D.retro.kareler.length * 86400000);
+    const R = ist.find((x) => x.yon === 'R'), Dd = ist.find((x) => x.yon === 'D');
+    if (R && Dd) {
+      const [ig, im] = [g[0].t, g[g.length - 1].t].map((t) => { const [a, b, c] = t.split('-').map(Number);
+        return { yil: a, ay: b, gun: c }; });
+      const fr = gunFark(ig, yerelGun(R.an, tz)), fd = gunFark(im, yerelGun(Dd.an, tz));
+      iddiaSay += 2;
+      if (fr > 1) hatalar.push('ogren-veri.json: ilk geri gün ' + g[0].t + ' ≠ R-istasyonu '
+        + R.an.toISOString() + ' (sapma ' + fr + ' gün)');
+      if (fd > 1) hatalar.push('ogren-veri.json: son geri gün ' + g[g.length - 1].t + ' ≠ D-istasyonu '
+        + Dd.an.toISOString() + ' (sapma ' + fd + ' gün)');
+    } else hatalar.push('ogren-veri.json: retro penceresinde iki istasyon birden bulunamadı');
+  }
+}
+
 /* ═══ özet ═══ */
 if (hatalar.length) {
   console.error('KIRIK · ' + hatalar.length + ' bulgu:');
@@ -181,4 +291,4 @@ if (hatalar.length) {
 for (const u of uyarilar) console.error('not: ' + u);
 console.log('temiz · ogren-veri.json ' + ogrenKare + ' kare motorla ' + ESIK
   + '° içinde · sayim-veri.json ve ozellik-veri.json yapısal ve kuramsal kontrollerden geçti ('
-  + PUAN_ESIK + ' puan eşik)');
+  + PUAN_ESIK + ' puan eşik) · ' + iddiaSay + ' istasyon/retro tarihi motorla 1 gün içinde');

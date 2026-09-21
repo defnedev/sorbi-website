@@ -732,7 +732,7 @@ document.getElementById('go').onclick=()=>{
      el.innerHTML=`<div class="nbig">Bu üçlü, <b>100.000 kişiden yalnızca ${u.yuzbinde}</b> kişide oluşuyor</div>
       <div class="nsub">${SIGNS[su]} ☉ · ${SIGNS[mo]} ☽ · ${SIGNS[as]} ↑ — yaklaşık <b>${u.biriKac.toLocaleString('tr-TR')} kişide bir</b>.<br>1728 kombinasyon içinde en nadir %${enNadirYuzde}'lik dilimde.</div>
       <div class="nbar"><i style="width:${Math.max(4,100-u.yuzdelik)}%"></i></div>
-      <details><summary>Bu sayı nereden geliyor?</summary><div class="nnote">1960–2012 arası 20 dakikada bir örneklenmiş <b>${N.ornek.toLocaleString('tr-TR')}</b> gök anından hesaplandı (İstanbul enlemi). Bu, gökyüzünün kendi dağılımı — doğum istatistiği değil. Tek tek yerleşimlerin sıklığı <a href="/nadirlik">Nadirlik</a>'te ayrı bir örneklemle (24.000 harita, 1950–2009) sayılır; oranlar arasında küçük farklar bundandır.</div></details>`;
+      <details><summary>Bu sayı nereden geliyor?</summary><div class="nnote">1960–2012 arası 20 dakikada bir örneklenmiş <b>${N.ornek.toLocaleString('tr-TR')}</b> gök anından hesaplandı (İstanbul enlemi). Bu, gökyüzünün kendi dağılımı — doğum istatistiği değil. Tek tek yerleşimlerin sıklığı <a href="/nadirlik">Nadirlik</a>'te ayrı bir örneklemle (210.384 harita, 1930–2025) sayılır; oranlar arasında küçük farklar bundandır.</div></details>`;
      window._sorbiPay={uclu:u, ikili:ik, as:as};
      // paylasilan baglantidan gelen ucluyle karsilastir (viral dongu buradan kapaniyor)
      try{
@@ -754,7 +754,7 @@ document.getElementById('go').onclick=()=>{
     }else{
      el.innerHTML=`<div class="nbig">Bu anın adı <b>144 addan biri</b></div>
       <div class="nsub">${SIGNS[su]} ☉ · ${SIGNS[mo]} ☽ — yaklaşık <b>${ik.biriKac} kişide bir</b>.<br>Doğum saatini bilseydin yükselenini de katıp çok daha nadir bir üçlü çıkarabilirdim.</div>
-      <details><summary>Bu sayı nereden geliyor?</summary><div class="nnote">1960–2012 arası 20 dakikada bir örneklenmiş <b>${N.ornek.toLocaleString('tr-TR')}</b> gök anından hesaplandı. Bu, gökyüzünün kendi dağılımı — doğum istatistiği değil. Tek tek yerleşimlerin sıklığı <a href="/nadirlik">Nadirlik</a>'te ayrı bir örneklemle (24.000 harita, 1950–2009) sayılır.</div></details>`;
+      <details><summary>Bu sayı nereden geliyor?</summary><div class="nnote">1960–2012 arası 20 dakikada bir örneklenmiş <b>${N.ornek.toLocaleString('tr-TR')}</b> gök anından hesaplandı. Bu, gökyüzünün kendi dağılımı — doğum istatistiği değil. Tek tek yerleşimlerin sıklığı <a href="/nadirlik">Nadirlik</a>'te ayrı bir örneklemle (210.384 harita, 1930–2025) sayılır.</div></details>`;
      window._sorbiPay={uclu:null, ikili:ik, as:null};
      try{ if(window.SorbiKarsilastir) window._sorbiKendi={su:su,mo:mo}; }catch(e){}
     }
@@ -1350,7 +1350,7 @@ document.getElementById('copyBtn').onclick=async()=>{
  <div class="sbft-in">
   <div><h4>Sorbi</h4>
    <a href="/">Ana Sayfa</a>
-   <a href="/soru-sor">Soru Sorma Yöntemi</a>
+   <a href="/soru-sor">Soru Haritası</a>
    <a href="/gunun-karti">Günün Kartı</a>
    <a href="/seni-taniyorum">Seni Tanıyorum</a>
    
@@ -1376,7 +1376,7 @@ document.getElementById('copyBtn').onclick=async()=>{
   </div>
   <div><h4>Gökyüzü</h4>
    <a href="/bugun">Bugün Gökyüzünde</a>
-   <a href="/horary">An Haritası (Horary)</a>
+   <a href="/horary">Soru Haritası Rehberi</a>
    <a href="/uygun-gun-secimi">Uygun Gün Seçimi</a>
    <a href="/retro-ay-takvimi">Retro & Ay Takvimi</a>
    <a href="/astrokartografi">Astrokartografi</a>

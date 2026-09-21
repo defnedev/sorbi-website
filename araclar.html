@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ücretsiz Astroloji Araçları — Harita, Yükselen | Sorbi</title>
-<meta name="description" content="Sorbi'nin tüm ücretsiz astroloji araçları tek yerde: doğum haritası, yükselen ve ay burcu, astrokartografi, burç uyumu, uygun gün, retro takvimi, günlük transit ve haritana göre soru sor.">
+<meta name="description" content="Sorbi'nin ücretsiz astroloji araçları tek yerde: doğum haritası, yükselen burç, ay burcu, burç uyumu ve sinastri, soru haritası (horary), günlük gökyüzü ve retro takvimi.">
 <link rel="canonical" href="https://sorbiapp.com/araclar">
 <meta name="theme-color" content="#0B0810">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Sorbi">
-<meta property="og:title" content="Ücretsiz Astroloji Araçları — Sorbi"><meta property="og:description" content="Doğum haritası, yükselen, uygun gün, astrokartografi ve daha fazlası — hepsi tek yerde."><meta property="og:url" content="https://sorbiapp.com/araclar"><meta property="og:image" content="https://sorbiapp.com/og-image.png"><meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Ücretsiz Astroloji Araçları — Sorbi"><meta property="og:description" content="Doğum haritası, yükselen ve Ay burcu, uyum, soru haritası — hepsi tek yerde."><meta property="og:url" content="https://sorbiapp.com/araclar"><meta property="og:image" content="https://sorbiapp.com/og-image.png"><meta property="og:locale" content="tr_TR">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -139,79 +139,38 @@ body{background:transparent!important}
 <div class="wrap">
  <div class="top">
   <h1>Gökyüzü Hesaplayıcıları</h1>
-  <p class="sub">Doğum haritası, yükselen ve Ay burcu, burç uyumu, retro takvimi ve fazlası — gerçek efemerisle hesaplanır, ücretsiz ve kayıt gerektirmez.</p>
+  <p class="sub">Doğum haritası, yükselen ve Ay burcu, uyum, soru haritası. Ücretsiz, kayıt gerekmez, hesap tarayıcında yapılır.</p>
   <div class="welcome" id="welcome"></div>
  </div>
 
- <a class="tool hot" href="/seni-taniyorum" style="grid-template-columns:none;margin-top:1.6rem;background:rgba(var(--ink-rgb),.035);border-color:var(--lineg2);padding:1.15rem 1.2rem">
-  <span class="g" style="font-size:1.7rem">✦</span>
-  <span><span class="n" style="font-size:1.15rem">Seni Tanıyorum <span style="font-size:.62rem;letter-spacing:1.5px;color:var(--terra);vertical-align:middle;border:1px solid var(--lineg2);border-radius:99px;padding:.1rem .45rem;margin-left:.3rem">YENİ</span></span><span class="d">Doğduğun anı ver — genel burç yorumu değil, seni birkaç cümlede tekinsiz derecede kişisel okuyayım. 30 saniye, ücretsiz.</span></span>
- </a>
-
- <div class="grp">
-  <div class="grp-h">Her gün buraya bak</div>
-  <div class="cards">
-   <a class="tool hot" href="/bugun"><span class="g">✦</span><span><span class="n">Bugün</span><span class="d">Bugünkü gökyüzü + senin haritana etkisi. Her gün taze, kişisel.</span></span></a>
-   <a class="tool" href="/retro-ay-takvimi"><span class="g">℞</span><span><span class="n">Retro & Ay Takvimi</span><span class="d">Merkür retro, ay boşlukta, yeniay-dolunay — canlı.</span></span></a>
-   <a class="tool" href="/gunluk-burc-yorumlari"><span class="g">☉︎</span><span><span class="n">Günlük Burç Yorumu</span><span class="d">12 burç için bugünün yorumu.</span></span></a>
-  </div>
- </div>
-
- <div class="grp">
-  <div class="grp-h">Kendini tanı</div>
-  <div class="cards">
-   <a class="tool hot" href="/dogum-haritasi-hesaplama"><span class="g">⊹</span><span><span class="n">Doğum Haritası</span><span class="d">10 gezegen, evler, açılar + kişisel okuma. Ev matematiği Swiss Ephemeris çıktısına karşı test edildi.</span></span></a>
-   <a class="tool" href="/yukselen-burc-hesaplama"><span class="g">⌖</span><span><span class="n">Yükselen Burç</span><span class="d">Dışa yansıyan sen — doğum saatinle.</span></span></a>
-   <a class="tool" href="/yukselen-tahmini"><span class="g">?</span><span><span class="n">Yükselen Tahmini</span><span class="d">Saatin yoksa: pencereler, aile hafızası, birkaç tarih.</span></span></a>
-   <a class="tool" href="/ay-burcu-hesaplama"><span class="g">☽︎</span><span><span class="n">Ay Burcu</span><span class="d">Duygusal dünyanın haritası.</span></span></a>
-   <a class="tool" href="/astrokartografi"><span class="g">✵</span><span><span class="n">Astrokartografi</span><span class="d">Gezegen hatların dünya haritasında — nerede ne seni bekliyor.</span></span></a>
-  </div>
- </div>
-
- <div class="grp">
-  <div class="grp-h">İlişki & zamanlama</div>
-  <div class="cards">
-   <a class="tool" href="/burc-uyumu"><span class="g">♡</span><span><span class="n">Burç Uyumu</span><span class="d">İki burç ne kadar uyumlu — anında.</span></span></a>
-   <a class="tool" href="/uygun-gun-secimi"><span class="g">◐</span><span><span class="n">Uygun Gün Seçimi</span><span class="d">Evlilik, imza, başlangıç için gökyüzünün desteklediği gün.</span></span></a>
-  </div>
- </div>
-
- <div class="grp">
-  <div class="grp-h">Kişisel cevap</div>
-  <div class="cards">
-   <a class="tool hot" href="/soru-sor"><span class="g">✦</span><span><span class="n">Soru Sorma Yöntemi</span><span class="d">Aklındaki soruya haritana göre kişisel cevap.</span></span></a>
-   <a class="tool" href="/horary"><span class="g">◈</span><span><span class="n">Soru Haritası (Horary)</span><span class="d">Doğum saatin gerekmez — harita sorunun sorulduğu ana çizilir.</span></span></a>
-  </div>
- </div>
-
- <div class="grp">
-  <div class="grp-h">İki harita</div>
-  <div class="cards">
-   <a class="tool" href="/sinastri"><span class="g">⚭</span><span><span class="n">Sinastri</span><span class="d">İki doğum haritasını üst üste koymak — burç uyumundan farkı ne.</span></span></a>
-  </div>
- </div>
-
- <div class="grp">
-  <div class="grp-h">Günlük çekiliş</div>
-  <div class="cards">
-   <a class="tool" href="/gunun-karti"><span class="g">✷</span><span><span class="n">Günün Kartı</span><span class="d">Her gün tek kart. Bugünün kartı bu; yarın değişir.</span></span></a>
-   <a class="tool" href="/tarot"><span class="g">◇</span><span><span class="n">Tarot</span><span class="d">Kısaca ne olduğu, ne olmadığı.</span></span></a>
-  </div>
- </div>
-
- <div class="grp">
-  <div class="grp-h">Navda ayrıca duruyor</div>
-  <div class="cards">
-   <a class="tool" href="/detayli-dogum-haritasi"><span class="g">⊛</span><span><span class="n">Harita Atölyesi</span><span class="d">Yukarıdaki Doğum Haritası'nın derin hali: 7 ev sistemi, transit ve ilerletim çift çarkı, sabit yıldızlar, dignite tablosu.</span></span></a>
-   <a class="tool" href="/nadirlik"><span class="g">◐</span><span><span class="n">Nadirlik</span><span class="d">Haritandaki her yerleşimin kaç kişide bir görüldüğü — sayıldı, tahmin edilmedi.</span></span></a>
-   <a class="tool" href="/sayim"><span class="g">∎</span><span><span class="n">Sayım</span><span class="d">Astrolojide çok konuşulan, hiç sayılmayan soruların gerçek efemerisle cevabı.</span></span></a>
-  </div>
- </div>
-
- <div class="cta">
+ <div class="cta" style="margin-top:1.6rem">
   <h3>Bir kez gir, hepsi seni tanısın</h3>
-  <p>Bir kez doğum bilgini gir; tüm araçlar seni tanısın. Hesap açılmaz, bilgin bu tarayıcıda kalır.</p>
+  <p>Bir kez doğum bilgini gir; buradaki tüm araçlar seni tanısın. Hesap açılmaz, bilgin bu tarayıcıda kalır.</p>
   <a href="/dogum-haritasi-hesaplama">Haritamı çıkar ✦</a>
+ </div>
+
+ <div class="grp">
+  <div class="grp-h">Her gün</div>
+  <div class="cards">
+   <a class="tool hot" href="/bugun"><span class="g">✦</span><span><span class="n">Bugün</span><span class="d">Bugünkü gökyüzü, senin haritana etkisi ve 12 burcun günlük yorumu — bir arada.</span></span></a>
+   <a class="tool" href="/retro-ay-takvimi"><span class="g">℞</span><span><span class="n">Retro &amp; Ay Takvimi</span><span class="d">Merkür retro, ay boşlukta, yeniay-dolunay — canlı.</span></span></a>
+   <a class="tool" href="/gunun-karti"><span class="g">✷</span><span><span class="n">Günün Kartı</span><span class="d">Her gün tek kart. Bugünün kartı bu; yarın değişir.</span></span></a>
+  </div>
+ </div>
+
+ <div class="grp">
+  <div class="grp-h">Kendin</div>
+  <div class="cards">
+   <a class="tool hot" href="/seni-taniyorum" style="grid-column:1/-1;padding:1.15rem 1.2rem">
+    <span class="g" style="font-size:1.7rem">✦</span>
+    <span><span class="n" style="font-size:1.15rem">Seni Tanıyorum <span style="font-size:.62rem;letter-spacing:1.5px;color:var(--terra);vertical-align:middle;border:1px solid var(--lineg2);border-radius:99px;padding:.1rem .45rem;margin-left:.3rem">YENİ</span></span><span class="d">Doğduğun anı ver — genel burç yorumu değil, seni birkaç cümlede okuyayım. 30 saniye, ücretsiz.</span></span>
+   </a>
+   <a class="tool hot" href="/dogum-haritasi-hesaplama"><span class="g">⊹</span><span><span class="n">Doğum Haritası</span><span class="d">10 gezegen, evler, açılar ve kişisel okuma. Daha derini için aynı haritanın uzman görünümü: Harita Atölyesi.</span></span></a>
+   <a class="tool" href="/yukselen-burc-hesaplama"><span class="g">⌖</span><span><span class="n">Yükselen Burç</span><span class="d">Dışa yansıyan sen. Doğum saatin yoksa tahmin adımı da burada.</span></span></a>
+   <a class="tool" href="/ay-burcu-hesaplama"><span class="g">☽︎</span><span><span class="n">Ay Burcu</span><span class="d">Duygusal dünyanın haritası.</span></span></a>
+   <a class="tool" href="/burc-uyumu"><span class="g">♡</span><span><span class="n">Uyum</span><span class="d">İki burç anında; iki doğum haritasını üst üste koyan sinastri okuması da aynı yerde.</span></span></a>
+   <a class="tool" href="/soru-sor"><span class="g">◈</span><span><span class="n">Soru Haritası <span style="color:var(--dim);font-size:.82rem">(horary)</span></span><span class="d">Doğum saatin gerekmez — harita sorunun sorulduğu ana çizilir. Nasıl okunduğu rehberde anlatılır.</span></span></a>
+  </div>
  </div>
 
  <p class="foot">Kader değil, farkındalık. · <a href="/">sorbiapp.com</a></p>
@@ -238,7 +197,7 @@ body{background:transparent!important}
  <div class="sbft-in">
   <div><h4>Sorbi</h4>
    <a href="/">Ana Sayfa</a>
-   <a href="/soru-sor">Soru Sorma Yöntemi</a>
+   <a href="/soru-sor">Soru Haritası</a>
    <a href="/gunun-karti">Günün Kartı</a>
    <a href="/seni-taniyorum">Seni Tanıyorum</a>
    
@@ -264,7 +223,7 @@ body{background:transparent!important}
   </div>
   <div><h4>Gökyüzü</h4>
    <a href="/bugun">Bugün Gökyüzünde</a>
-   <a href="/horary">An Haritası (Horary)</a>
+   <a href="/horary">Soru Haritası Rehberi</a>
    <a href="/uygun-gun-secimi">Uygun Gün Seçimi</a>
    <a href="/retro-ay-takvimi">Retro & Ay Takvimi</a>
    <a href="/astrokartografi">Astrokartografi</a>

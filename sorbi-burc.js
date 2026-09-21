@@ -1,8 +1,10 @@
 /*! sorbi-burc.js — Burçlar bölümünün etkileşim katmanı. Sunucusuz, dış bağımlılık yok.
- * 1) SorbiGosteri'ye "burc-dagilimi" tipini ekler (24.000 gök anının burç dağılımı).
- * 2) Hub'da element/nitelik süzgeci, burç seçici ve seçilen burcu canlı gösterimlere bağlar.
+ * 1) SorbiGosteri'ye "burc-dagilimi" tipini ekler (Güneş/Ay/yükselen burç dağılımı).
+ * 2) Hub'da burç kartlarını ve okundu işaretlerini yönetir.
  * 3) Burç sayfalarında "okudum" işaretlemesini SorbiOyun'a yazar; hub ilerlemesine sayılır.
- * Veri: /nadirlik-veri.json (sayfa başına tek istek, SorbiGosteri'nin data-kaynak'ı ile).
+ * 4) Sayfadaki [data-sayim] yuvalarını doldurur; örneklem rakamı sayfaya elle yazılmaz.
+ * Veri: SorbiSayim servisi (sorbi-sayim.js). Sayfa hangi dosyada hangi alan var bilmez;
+ * örneklem büyüdüğünde ne bu dosya ne de sayfalar değişir — yalnız künye başka basar.
  */
 (function(){
 'use strict';
@@ -31,15 +33,64 @@ function bin(n){var s=String(M.round(n)),o='',i=s.length;
 function vir(x,b){var s=(+x).toFixed(b==null?1:b);return s.replace('.',',');}
 function yuz(v,t){return vir(v/t*100)+'%';}
 
-/* ── 24.000 gök anında burç dağılımı ── */
+/* ── Türkçe belirtme eki (-ı/-i/-u/-ü, sesliden sonra kaynaştırma -y-) ──
+   Özel ad olduğu için kesme işaretiyle yazılır ve ünsüz yumuşaması UYGULANMAZ:
+   "Koç’u" (Koc’u değil), "Oğlak’ı". Son SESLİ harf kalınlık/yuvarlaklık
+   uyumunu belirler; kelime sesliyle bitiyorsa araya y girer. */
+var SESLI='aeıioöuüAEIİOÖUÜ';
+var UYUM={a:'ı','ı':'ı',o:'u',u:'u',e:'i','i':'i','ö':'ü','ü':'ü'};
+function kucult(h){
+ if(h==='I')return 'ı'; if(h==='İ')return 'i';
+ return h.toLocaleLowerCase('tr');
+}
+/* Ayrılma hali (-dan/-den/-tan/-ten): sert ünsüzden sonra t, sonra kalın/ince uyumu. */
+var SERT='fstkçşhp';
+function ekAyrilma(ad){
+ if(!ad)return '';
+ var son=null,i,h;
+ for(i=ad.length-1;i>=0;i--){h=ad.charAt(i);if(SESLI.indexOf(h)>=0){son=kucult(h);break;}}
+ var ince=('eiöü'.indexOf(son)>=0);
+ var d=(SERT.indexOf(kucult(ad.charAt(ad.length-1)))>=0)?'t':'d';
+ return ad+d+(ince?'en':'an');
+}
+function ekBelirtme(ad){
+ if(!ad)return '';
+ var son=null,i,h;
+ for(i=ad.length-1;i>=0;i--){h=ad.charAt(i);if(SESLI.indexOf(h)>=0){son=kucult(h);break;}}
+ var e=UYUM[son]||'ı';
+ var sonHarf=ad.charAt(ad.length-1);
+ return ad+'’'+(SESLI.indexOf(sonHarf)>=0?'y':'')+e;
+}
+
+/* ── sayım servisi: üç dağılım tek seferde ────────────────────────────
+   Servis çağrıları tembeldir; ikinci çağrıda ağ isteği yoktur. */
+var NOKID={sun:'burc.sun',moon:'burc.moon',asc:'asc'};
+var dagUcus=null;
+function dagilimlar(){
+ if(dagUcus)return dagUcus;
+ if(!W.SorbiSayim)return (dagUcus=Promise.reject(new Error('SorbiSayim yok')));
+ dagUcus=Promise.all([W.SorbiSayim.dagilim(NOKID.sun),
+                      W.SorbiSayim.dagilim(NOKID.moon),
+                      W.SorbiSayim.dagilim(NOKID.asc)]).then(function(r){
+  function diz(D){var a=new Array(12);for(var i=0;i<12;i++)a[i]=0;
+   D.satirlar.forEach(function(s){var i=+s.anahtar;if(i>=0&&i<12)a[i]=s.sayi;});return a;}
+  return {k:r[0].kunye,t:r[0].kunye.n,
+          b:{sun:diz(r[0]),moon:diz(r[1]),asc:diz(r[2])}};
+ });
+ return dagUcus;
+}
+
+/* ── örneklemde burç dağılımı (veri: SorbiSayim) ── */
 function tipDagilim(d){
  var b0=S.indexOf(d.burc);
  return{
- etiket:'24.000 gök anında burç dağılımı: Güneş, Ay ve yükselen için on iki burç.',
+ etiket:'Örneklemde burç dağılımı: Güneş, Ay ve yükselen için on iki burç.',
+ veriGetir:function(){return dagilimlar();},
  en:1000,boy:function(G){return G<520?1.02:.52;},adet:3,hiz:2200,kare:0,durak:0,
  kay:[{ad:'k',min:0,max:2,etiket:'Nokta seç: Güneş burcu, Ay burcu, yükselen burç'}],
  ciz:function(c){
   var o=c.o,G=c.G,Y=c.Y,k=c.k%3,V=c.veri||{},B=V.b||{},T=+V.t||0,A=B[NOK[k][0]];
+  var BR=(V.k&&V.k.birim)||'kayıt';
   o.fillStyle=C.bg;o.fillRect(0,0,G,Y);
   function yz(m,x,y,f,r,h){o.fillStyle=r;o.font=f+' ui-monospace,Menlo,monospace';
    o.textAlign=h||'left';o.textBaseline='middle';o.fillText(m,x,y);}
@@ -48,7 +99,7 @@ function tipDagilim(d){
   var x0=LW,x1=G-RW,gen=M.max(30,x1-x0),h=(alt-ust)/12,mx=0,i,v;
   for(i=0;i<12;i++)mx=M.max(mx,A[i]);
   var esit=T/12,ex=x0+esit/mx*gen;
-  yz(az?NOK[k][1]:NOK[k][1]+' · '+bin(T)+' gök anında',0,ust/2,az?'11px':'13px',C.ink);
+  yz(az?NOK[k][1]:NOK[k][1]+' · '+bin(T)+' '+BR+' içinde',0,ust/2,az?'11px':'13px',C.ink);
   if(!az)yz('eşit dağılım '+bin(esit),G,ust/2,'11px',C.dim,'right');
   for(i=0;i<12;i++){
    v=A[i];var y=ust+h*i,ym=y+h/2,bw=M.max(1,v/mx*gen),se=i===b0;
@@ -66,16 +117,17 @@ function tipDagilim(d){
  },
  metin:function(c){
   var k=c.k%3,V=c.veri||{},B=V.b||{},T=+V.t||0,A=B[NOK[k][0]];
+  var BR=(V.k&&V.k.birim)||'kayıt';
   if(!A||!A.length||!T)return{o:'Veri yüklenemedi',z:''};
   var en=0,az=0,i;
   for(i=1;i<12;i++){if(A[i]>A[en])en=i;if(A[i]<A[az])az=i;}
   var kat=vir(A[en]/A[az],2),me=b0>=0?A[b0]:0,fk=b0>=0?me-T/12:0;
   return{o:NOK[k][1]+' · en sık <b>'+S[en]+'</b> '+yuz(A[en],T)+' · en seyrek <b>'+S[az]+'</b> '+yuz(A[az],T),
-  z:'<b>'+bin(T)+' gök anı</b> içinde '+NOK[k][2]+' dağılımı: en sık <i>'+S[en]+'</i> ('
-   +bin(A[en])+' an, '+yuz(A[en],T)+'), en seyrek <i>'+S[az]+'</i> ('+bin(A[az])+' an, '+yuz(A[az],T)
+  z:'<b>'+bin(T)+' '+BR+'</b> içinde '+NOK[k][2]+' dağılımı: en sık <i>'+S[en]+'</i> ('
+   +bin(A[en])+' '+BR+', '+yuz(A[en],T)+'), en seyrek <i>'+S[az]+'</i> ('+bin(A[az])+' '+BR+', '+yuz(A[az],T)
    +'). En sık ile en seyrek arasında <b>'+kat+' kat</b> fark var.'
-   +(b0>=0?' '+S[b0]+' burcunda '+bin(me)+' an ('+yuz(me,T)+') — eşit dağılımın '
-     +(fk>=0?bin(M.abs(fk))+' an üstünde':bin(M.abs(fk))+' an altında')+'.':'')
+   +(b0>=0?' '+S[b0]+' burcunda '+bin(me)+' '+BR+' ('+yuz(me,T)+') — eşit dağılımın '
+     +(fk>=0?bin(M.abs(fk))+' '+BR+' üstünde':bin(M.abs(fk))+' '+BR+' altında')+'.':'')
    +' Sayılar bu örneklemin kendisidir; genel bir nüfus oranı olarak değil, ölçülmüş bir dağılım olarak okunabilir.'};
  }};
 }
@@ -90,61 +142,11 @@ function surukle(el,i){
  return true;
 }
 
-/* ── hub ── */
+/* ── hub: yalnız 12 kartlık dizin ── */
 function hub(){
  var kok=D.getElementById('bkKesif');if(!kok)return;
- var izg=D.getElementById('bkIzgara'),say=D.getElementById('bkSayac');
- var panel=D.getElementById('bkSecili'),tuner=D.getElementById('bkTuner');
- var carki=D.getElementById('bkCark'),izgara=D.getElementById('bkEln');
- var kartlar=izg?[].slice.call(izg.children):[];
- var suz={el:'',nit:''},secili=-1;
-
- function veri(li){var s=li.dataset;return s;}
- function secil(i,odak){
-  if(i<0||i>11||i===secili)return;
-  secili=i;
-  var li=kartlar.filter(function(x){return +x.dataset.i===i;})[0];
-  if(tuner)[].forEach.call(tuner.querySelectorAll('button'),function(b){
-   b.setAttribute('aria-pressed',+b.dataset.i===i?'true':'false');});
-  surukle(carki,i);surukle(izgara,i);
-  if(panel&&li){var s=li.dataset;
-   panel.innerHTML='<p class="bk-etiket">Çarkta seçili burç</p>'
-    +'<p class="bk-ozet"><b>'+s.glif+' '+s.ad+'</b> — '+s.tarih+' · '+s.el+' elementi, '+s.nit
-    +' niteliği · yöneticisi '+s.yon+'. '+s.ozet+'</p>'
-    +'<p class="bk-g">24.000 gök anında Güneş’i '+s.ad+' burcunda olan '+s.say
-    +' an var ('+s.oran+').</p>'
-    +'<p><a class="bk-bag" href="/'+s.slug+'-burcu-ozellikleri">'+s.ad
-    +' burcu özellikleri <span aria-hidden="true">→</span></a></p>';
-  }
-  if(odak&&li){var g=li.querySelector('a');if(g)g.focus();}
- }
- function suzgecUygula(){
-  var n=0;
-  kartlar.forEach(function(li){
-   var ok=(!suz.el||li.dataset.el===suz.el)&&(!suz.nit||li.dataset.nit===suz.nit);
-   li.hidden=!ok;if(ok)n++;
-  });
-  if(say)say.textContent=n===12?'On iki burcun tamamı gösteriliyor.'
-   :(n+' burç gösteriliyor'+(suz.el?' · '+suz.el:'')+(suz.nit?' · '+suz.nit:'')+'.');
- }
- [].forEach.call(kok.querySelectorAll('.bk-f'),function(b){
-  b.addEventListener('click',function(){
-   var t=b.dataset.tur;suz[t]=b.dataset.deger||'';
-   [].forEach.call(kok.querySelectorAll('.bk-f[data-tur="'+t+'"]'),function(o){
-    o.setAttribute('aria-pressed',o===b?'true':'false');});
-   suzgecUygula();
-  });
- });
- if(tuner)[].forEach.call(tuner.querySelectorAll('button'),function(b){
-  b.addEventListener('click',function(){secil(+b.dataset.i);});
- });
- kartlar.forEach(function(li){
-  var i=+li.dataset.i;
-  li.addEventListener('pointerenter',function(){secil(i);});
-  li.addEventListener('focusin',function(){secil(i);});
- });
- suzgecUygula();
- isaretleriBoya(kartlar);
+ var izg=D.getElementById('bkIzgara');
+ isaretleriBoya(izg?[].slice.call(izg.children):[]);
 }
 
 /* ── okunan burçları ızgarada göster ── */
@@ -196,12 +198,54 @@ function isaretDugmesi(){
   if(t[id]){b.setAttribute('aria-pressed','true');b.disabled=true;
    b.textContent='✦ '+ad+' okundu olarak işaretli';}
   else{b.setAttribute('aria-pressed','false');
-   b.textContent=ad+'’u okudum olarak işaretle';}
+   b.textContent=ekBelirtme(ad)+' okudum olarak işaretle';}
  }
  b.addEventListener('click',function(){
   W.SorbiOyun.tamamla(id,12);W.SorbiOyun.isaretle('okundu:'+slug);boya();
  });
  boya();
+}
+
+/* ── [data-sayim] yuvaları: örneklem rakamı sayfaya elle yazılmaz ──
+   Her yuva servisin künyesinden ya da dağılım satırlarından doldurulur. */
+function yaz(ad,html,kok){
+ var L=(kok||D).querySelectorAll('[data-sayim="'+ad+'"]');
+ for(var i=0;i<L.length;i++)L[i].innerHTML=html;
+ return L.length;
+}
+function sira(A,i){var n=1,j;for(j=0;j<12;j++)if(A[j]>A[i])n++;return n;}
+function uclar(A){var en=0,az=0,i;for(i=1;i<12;i++){if(A[i]>A[en])en=i;if(A[i]<A[az])az=i;}
+ return{en:en,az:az,kat:A[az]?A[en]/A[az]:0};}
+function metinDoldur(){
+ if(!D.querySelector('[data-sayim]'))return;
+ dagilimlar().then(function(V){
+  var K=V.k,T=V.t,B=V.b,BR=K.birim,N=K.nMetin;
+  yaz('orneklem',N+' '+BR);
+  yaz('kunye',K.yil+' aralığından örneklenmiş <b>'+N+' '+BR+'</b>, '+K.yer.split('—')[0].trim()+' için hesaplandı');
+  yaz('yontem',K.yontem);
+  var g=uclar(B.sun);
+  yaz('burc-aralik','on iki burcun payı '+yuz(B.sun[g.az],T)+' ile '+yuz(B.sun[g.en],T)
+   +' arasında, birbirine çok yakın.');
+  [].forEach.call(D.querySelectorAll('[data-sayim="burc-ozet"],[data-sayim="burc-karsilastir"]'),function(el){
+   var i=S.indexOf(el.getAttribute('data-burc'));if(i<0)return;
+   var esit=T/12,fk=B.sun[i]-esit;
+   if(el.getAttribute('data-sayim')==='burc-ozet'){
+    el.innerHTML='Güneş’i '+S[i]+' burcunda olan <b>'+bin(B.sun[i])+' '+BR+'</b> var: '
+     +N+' '+BR+' içinde <b>'+yuz(B.sun[i],T)+'</b>. Eşit dağılımda her burca '+bin(esit)+' '+BR
+     +' düşerdi; '+S[i]+' bu çizginin <b>'+bin(M.abs(fk))+' '+BR+(fk>=0?' üstünde':' altında')
+     +'</b> kalıyor ve on iki burç arasında sıklık bakımından <b>'+sira(B.sun,i)+'. sırada</b>. '
+     +'Örneklemde kabaca her <b>'+bin(Math.round(T/B.sun[i]))+' '+ekAyrilma(BR)+' biri</b> bu Güneş burcunu taşıyor.';
+   }else{
+    var a=uclar(B.moon),y=uclar(B.asc);
+    el.innerHTML='Aynı burç Ay’da '+bin(B.moon[i])+' '+BR+' ('+yuz(B.moon[i],T)+', '+sira(B.moon,i)
+     +'. sıra), yükselende '+bin(B.asc[i])+' '+BR+' ('+yuz(B.asc[i],T)+', '+sira(B.asc,i)+'. sıra). '
+     +'Güneş ve Ay dağılımları neredeyse düz: Güneş’te en sık <b>'+S[g.en]+'</b> ile en seyrek <b>'+S[g.az]
+     +'</b> arasında yalnızca <b>'+vir(g.kat,2)+' kat</b>, Ay’da '+vir(a.kat,2)+' kat fark var. '
+     +'Yükselende fark <b>'+vir(y.kat,2)+' kata</b> çıkıyor — çünkü burçlar ufuktan eşit sürede doğmaz, '
+     +'yükselenin dağılımı enleme bağlı olarak eğrilir.';
+   }
+  });
+ },function(){yaz('orneklem','sayım yüklenemedi');});
 }
 
 /* ── kurulum ── */
@@ -213,7 +257,7 @@ function kur(){
   });
   W.SorbiGosteri.kur();
  }
- hub();isaretDugmesi();ilerlemeDuzelt();
+ hub();isaretDugmesi();ilerlemeDuzelt();metinDoldur();
 }
 if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',kur);else kur();
 })();

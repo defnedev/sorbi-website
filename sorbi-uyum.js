@@ -3,7 +3,7 @@
  * 2) Erişilebilir iki burç seçici (role=radiogroup, ok tuşları, Home/End, Enter/Boşluk).
  * 3) Puanı DEĞİŞTİRMEDEN açıklar: taban puan, element düzeltmesi, açı düzeltmesi, sınırlama.
  * 4) Oyunlaştırma: denenen çift sayısı, görülen açı ilişkileri, nişanlar — hepsi SorbiOyun üzerinden.
- * 5) /nadirlik-veri.json'dan iki Güneş burcunun ölçülmüş payını okur; çift sayımı veride yoktur,
+ * 5) SorbiSayim servisinden iki Güneş burcunun ölçülmüş payını okur; çift sayımı veride yoktur,
  *    bu yüzden yalnız iki paydan türetilen hesap, türetildiği söylenerek gösterilir.
  * Puanlama kodu burc-uyumu.html'in eski sürümünden birebir taşınmıştır; aynı çift aynı sonucu verir.
  */
@@ -279,29 +279,41 @@ function ciftIsle(a,b){
  ILE();nisanBoya();
 }
 
-/* ══ 5 · ÖLÇÜLMÜŞ VERİ (nadirlik-veri.json) ═══════════════════════════════ */
+/* ══ 5 · ÖLÇÜLMÜŞ VERİ (SorbiSayim servisi) ═══════════════════════════════
+   Sayfa hangi dosyada hangi alan var bilmez: servise 'burc.sun' dağılımını sorar,
+   künyeyi de cevapla birlikte alır. Örneklem büyürse burada hiçbir şey değişmez. */
 var VERI=null,VERI_DURUM=0; /* 0 bekliyor · 1 hazır · 2 yok */
 function veriCek(sonra){
- if(!W.fetch){VERI_DURUM=2;sonra();return;}
- W.fetch('/nadirlik-veri.json').then(function(r){return r.json();}).then(function(j){
-  if(j&&j.b&&j.b.sun&&j.b.sun.length===12&&+j.t>0){VERI=j;VERI_DURUM=1;}else VERI_DURUM=2;
+ if(!W.SorbiSayim){VERI_DURUM=2;sonra();return;}
+ W.SorbiSayim.dagilim('burc.sun').then(function(D){
+  var a=new Array(12),i;for(i=0;i<12;i++)a[i]=0;
+  D.satirlar.forEach(function(r){var k=+r.anahtar;if(k>=0&&k<12)a[k]=r.sayi;});
+  if(D.kunye&&+D.kunye.n>0){VERI={kunye:D.kunye,sun:a};VERI_DURUM=1;kunyeBas(D.kunye);}else VERI_DURUM=2;
   sonra();
  },function(){VERI_DURUM=2;sonra();});
+}
+/* Sayfadaki [data-sayim] yuvaları: örneklem rakamı sayfaya elle yazılmaz. */
+function kunyeBas(K){
+ var L=D.querySelectorAll('[data-sayim="uy-kunye"]');
+ for(var i=0;i<L.length;i++)L[i].textContent=K.yil+' aralığından örneklenmiş '
+  +W.SorbiSayim.bin(K.n)+' '+K.birim+' tek tek sayılarak';
 }
 function veriYaz(a,b){
  var el=D.getElementById('uyVeri');if(!el)return;
  if(VERI_DURUM!==1||a==null||b==null){el.hidden=true;return;}
- var T=+VERI.t,A=VERI.b.sun[a],B=VERI.b.sun[b],pa=A/T,pb=B/T;
+ var K=VERI.kunye,T=+K.n,A=VERI.sun[a],B=VERI.sun[b],pa=A/T,pb=B/T;
  var ayni=(a===b),ort=ayni?pa*pa:2*pa*pb;
  el.hidden=false;
  el.innerHTML='<h2>Ölçülmüş Veri</h2>'
- +'<p class="uy-g">Örneklenen 24.000 gök anında Güneş’i <b>'+esc(S[a])+'</b> burcunda olan <b>'+bin(A)
- +'</b> an var (%'+vir(pa*100)+'). '+(ayni?'Aynı burç seçildiği için tek pay kullanılıyor.'
- :'Güneş’i <b>'+esc(S[b])+'</b> burcunda olan <b>'+bin(B)+'</b> an var (%'+vir(pb*100)+').')+'</p>'
+ +'<p class="uy-g">Örneklenen '+esc(W.SorbiSayim.bin(K.n))+' '+esc(K.birim)+' içinde Güneş’i <b>'+esc(S[a])
+ +'</b> burcunda olan <b>'+bin(A)+'</b> '+esc(K.birim)+' var (%'+vir(pa*100)+'). '
+ +(ayni?'Aynı burç seçildiği için tek pay kullanılıyor.'
+ :'Güneş’i <b>'+esc(S[b])+'</b> burcunda olan <b>'+bin(B)+'</b> '+esc(K.birim)+' var (%'+vir(pb*100)+').')+'</p>'
  +'<p class="uy-g">Bu örneklemden birbirinden bağımsız iki kişi seçilseydi ikisinin Güneş burcu bu ikili olurdu: '
  +(ayni?'%'+vir(pa*100)+' × %'+vir(pa*100):'2 × %'+vir(pa*100)+' × %'+vir(pb*100))
  +' = <b>%'+vir(ort*100,2)+'</b>.</p>'
- +'<p class="uy-k">Örneklemde çiftler ölçülmedi: veri dosyası tek tek anların burç dağılımını tutuyor. '
+ +'<p class="uy-k">Örneklemde çiftler ölçülmedi: sayım tek tek kayıtların burç dağılımını tutuyor ('
+ +esc(K.yil)+'). '
  +'Yukarıdaki iki sayı doğrudan ölçüm, üçüncü satır ise bu iki paydan türetilmiş bir hesap — '
  +'gözlenmiş bir çift sıklığı değil.</p>';
 }

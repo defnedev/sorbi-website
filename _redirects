@@ -62,3 +62,14 @@
 # olarak kanonik politikada kaliyor -- App Store Connect kopmuyor.
 /privacy        https://defnedev.github.io/sorbi-legal/privacy/   301
 /privacy.html   https://defnedev.github.io/sorbi-legal/privacy/   301
+
+# Rapor Aracı söküldü (2026-09-21) → Harita Atölyesi
+# Sayfa yayına çıkmıştı ve dışarıdan kaydedilmiş/paylaşılmış olabilir; site
+# içinde hiçbir bağlantısı ve sitemap kaydı yoktu. Söküldü çünkü vaadini
+# tutmuyordu: "PDF olarak Yazdır" düğmesi window.print() idi, yorum kutuları
+# (contenteditable) hiçbir yere kaydedilmiyordu, Ev sistemi kutusunda Whole
+# Sign seçilse bile çark her zaman Placidus çiziliyordu (SC.adapt(ch,{house:'P'})),
+# ve sayfa harita motorunun dördüncü kopyasını taşıyordu. Aynı işi eksiksiz
+# yapan sayfa Harita Atölyesi.
+/rapor-araci        /detayli-dogum-haritasi   301
+/rapor-araci.html   /detayli-dogum-haritasi   301

@@ -323,7 +323,12 @@ function hazirla(v){
  if(btn)btn.disabled=!(sp.adet>1);
  senk();ciz();if(el.dataset.oto==='1')basla();}
 var kn=el.dataset.kaynak;
-if(kn){ciz();fetch(kn).then(function(r){return r.json();}).then(function(j){
+/* Tip kendi verisini bir servisten getirebilir (veriGetir); yoksa data-kaynak'tan
+   JSON çekilir. Servis yolu, sayfanın dosya adı bilmesini gereksiz kılar. */
+if(typeof sp.veriGetir==='function'){ciz();
+ try{Promise.resolve(sp.veriGetir(el)).then(hazirla,function(){hazirla(null);});}
+ catch(e){hazirla(null);}}
+else if(kn){ciz();fetch(kn).then(function(r){return r.json();}).then(function(j){
  hazirla(el.dataset.yol?j[el.dataset.yol]:j);},function(){hazirla(null);});}
 else hazirla(null);
 W.addEventListener('resize',ciz);
