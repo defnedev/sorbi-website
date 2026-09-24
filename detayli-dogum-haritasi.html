@@ -22,11 +22,11 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --panel:rgba(var(--ink-rgb),.032); --panel2:rgba(var(--ink-rgb),.055);
+  --panel:rgba(var(--ink-rgb),.07); --panel2:rgba(var(--ink-rgb),.11);
  --gold:var(--acc); --gold-lt:var(--ink); --gold-br:var(--ink);
    
  --terra:var(--acc); --terra2:var(--acc); --soft:var(--mut);
- --line:rgba(var(--ink-rgb),.08); --line2:rgba(var(--ink-rgb),.14); --line3:rgba(var(--ink-rgb),.22);
+ --line:rgba(var(--ink-rgb),.14); --line2:rgba(var(--ink-rgb),.14); --line3:rgba(var(--ink-rgb),.22);
  --fire:var(--acc); --earth:var(--ink); --air:var(--acc); --water:var(--mut);
  --radius:16px;
 }
@@ -64,14 +64,14 @@ input:focus,select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 
 .hint{font-size:.72rem;color:var(--dim);margin-top:.5rem;line-height:1.55}
 .geo{position:relative}
 .geolist{position:absolute;top:100%;left:0;right:0;z-index:40;background:var(--panel2);border:1px solid var(--line2);border-radius:10px;margin-top:4px;max-height:230px;overflow:auto}
-.geolist div{padding:.55rem .7rem;font-size:.85rem;cursor:pointer;border-bottom:1px solid rgba(var(--ink-rgb),.04)}
+.geolist div{padding:.55rem .7rem;font-size:.85rem;cursor:pointer;border-bottom:1px solid rgba(var(--ink-rgb),.08)}
 .geolist div:hover{background:rgba(var(--ink-rgb),.12)}
 .err{color:var(--terra);font-size:.85rem;margin-top:.6rem}
 
 /* mod çubuğu */
 .modes{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.8rem}
 .modes button{background:none;border:1px solid var(--line2);color:var(--mut);font-family:inherit;font-size:.83rem;padding:.45rem .95rem;border-radius:99px;cursor:pointer}
-.modes button.on{background:rgba(var(--ink-rgb),.08);border-color:var(--gold);color:var(--gold-br)}
+.modes button.on{background:rgba(var(--ink-rgb),.14);border-color:var(--gold);color:var(--gold-br)}
 
 .result{display:none;margin-top:1.3rem}
 .result.on{display:block}
@@ -110,8 +110,8 @@ input:focus,select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 
 
 table{width:100%;border-collapse:collapse;font-size:.82rem;font-variant-numeric:tabular-nums}
 th{text-align:left;font-weight:500;font-size:.66rem;letter-spacing:.7px;text-transform:uppercase;color:var(--dim);padding:.48rem .42rem;border-bottom:1px solid var(--line2)}
-td{padding:.42rem .42rem;border-bottom:1px solid rgba(var(--ink-rgb),.045)}
-tr:hover td{background:rgba(var(--ink-rgb),.05)}
+td{padding:.42rem .42rem;border-bottom:1px solid rgba(var(--ink-rgb),.085)}
+tr:hover td{background:rgba(var(--ink-rgb),.11)}
 .gl{font-size:1.05rem;color:var(--gold-br);width:1.6rem}
 .rx{color:var(--terra);font-size:.78rem}
 .pos{white-space:nowrap}
@@ -120,23 +120,47 @@ tr:hover td{background:rgba(var(--ink-rgb),.05)}
 .scroll{overflow-x:auto}
 
 .agrid{border-collapse:collapse;font-size:.7rem;margin:0 auto}
-.agrid td,.agrid th{border:1px solid rgba(var(--ink-rgb),.08);width:31px;height:31px;text-align:center;padding:0}
-.agrid th{background:rgba(var(--ink-rgb),.04);color:var(--gold-br);font-size:.95rem}
+.agrid td,.agrid th{border:1px solid rgba(var(--ink-rgb),.14);width:31px;height:31px;text-align:center;padding:0}
+.agrid th{background:rgba(var(--ink-rgb),.08);color:var(--gold-br);font-size:.95rem}
 .agrid td .ob{font-size:.54rem;color:var(--dim);line-height:1}
+/* ── açı ızgarası · A · Odak: alt üçgen matris, köşegende gezegen ── */
+.izg-bas{font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--dim);margin:0 0 .45rem;display:flex;gap:.6rem;align-items:baseline;flex-wrap:wrap}
+.izg-bas small{letter-spacing:0;text-transform:none;font-size:.74rem;font-weight:300}
+.izg-kap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid rgba(var(--ink-rgb),.1);border-radius:12px;max-width:100%;overscroll-behavior-x:contain}
+.izgara{border-collapse:collapse;font-family:Inter,sans-serif;--h:33px;margin:0}
+.izgara td{width:var(--h);min-width:var(--h);height:var(--h);text-align:center;vertical-align:middle;padding:0;border:1px solid rgba(var(--ink-rgb),.13);font-size:.92rem;line-height:1;cursor:default;transition:opacity .15s,background .15s}
+.izgara td.bos{border-color:transparent;background:transparent}
+.izgara td.gz{background:rgba(var(--ink-rgb),.13);color:var(--ink);font-weight:600;font-size:.86rem;border-color:rgba(var(--ink-rgb),.14);cursor:pointer}
+.izgara td.gz.kis{color:var(--gold-br)}
+.izgara td.gz:hover,.izgara td.gz.on{background:rgba(var(--ink-rgb),.18)}
+.izgara td.gz.on{outline:2px solid var(--gold);outline-offset:-2px}
+.izgara td.h{cursor:pointer}
+.izgara td.h .g{display:block;font-weight:600;font-size:1rem;padding-top:2px}
+.izgara td.h .o{display:block;font-size:.56rem;line-height:1;color:var(--mut);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.izgara td.kav .g{color:var(--c-kav)}.izgara td.kar .g{color:var(--c-kar)}.izgara td.kare .g{color:var(--c-kare)}
+.izgara td.ucg .g{color:var(--c-ucg)}.izgara td.alt .g{color:var(--c-alt)}.izgara td.min .g{color:var(--c-min);font-weight:500;font-size:.8rem}
+.izgara td.kar .g{font-weight:800}
+.izgara.odak td.h:not(.yan){opacity:.3}
+.izgara td.yan{background:rgba(var(--ink-rgb),.10)}
+.izgara td.h:hover,.izgara td.hov{background:rgba(var(--ink-rgb),.1);opacity:1}
+.izgara td.sec{background:rgba(var(--gold-rgb,201,169,98),.18);outline:2px solid var(--gold);outline-offset:-2px;opacity:1}
+.izgara td.h:focus-visible,.izgara td.gz:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+@media(max-width:600px){.izgara{--h:30px}.izgara td.h .g{font-size:.92rem}}
+@media(prefers-reduced-motion:reduce){.izgara td{transition:none}}
 .a-maj{color:var(--gold-br)}.a-hard{color:var(--terra)}.a-soft{color:var(--soft)}.a-min{color:var(--dim)}
 .aapp{font-size:.5rem;color:var(--gold)}
 
 .bars{display:grid;gap:.45rem}
 .bar{display:grid;grid-template-columns:82px 1fr 32px;gap:.55rem;align-items:center;font-size:.79rem}
-.bar .t{height:8px;background:rgba(var(--ink-rgb),.06);border-radius:99px;overflow:hidden}
+.bar .t{height:8px;background:rgba(var(--ink-rgb),.10);border-radius:99px;overflow:hidden}
 .bar .t i{display:block;height:100%;border-radius:99px}
 
-.pat{border:1px solid var(--line2);border-radius:12px;padding:.75rem .85rem;margin-bottom:.6rem;background:rgba(var(--ink-rgb),.03)}
+.pat{border:1px solid var(--line2);border-radius:12px;padding:.75rem .85rem;margin-bottom:.6rem;background:rgba(var(--ink-rgb),.065)}
 .pat h4{font-family:Fraunces,Georgia,serif;font-size:1rem;color:var(--gold-br);margin-bottom:.2rem}
 .pat .members{font-size:.95rem;color:var(--ink);letter-spacing:2px;margin:.25rem 0}
 .pat p{font-size:.79rem;color:var(--mut);line-height:1.6}
 .sectcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.6rem;margin-bottom:1rem}
-.sectcard{background:rgba(var(--ink-rgb),.055);border:1px solid var(--line2);border-radius:13px;padding:.85rem .95rem}
+.sectcard{background:rgba(var(--ink-rgb),.11);border:1px solid var(--line2);border-radius:13px;padding:.85rem .95rem}
 .sectcard .n{font-size:1.25rem;color:var(--gold);line-height:1}
 .sectcard h4{font-size:.9rem;margin:.35rem 0 .3rem;color:var(--gold-br);font-weight:600}
 .sectcard p{font-size:.81rem;color:var(--mut);line-height:1.6}
@@ -244,17 +268,17 @@ details.seo-d .seo{margin:.6rem 0 0}
 <body>
 <!-- SORBI-NAV:START -->
 <style>
-.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(var(--bg-rgb),.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(var(--ink-rgb),.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
+.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(var(--bg-rgb),.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(var(--ink-rgb),.14);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
 .sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:var(--ink);font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
 .sbnav .sbnav-lg i{font-style:normal;color:var(--acc);margin-right:.45rem;letter-spacing:0}
 .sbnav .sbnav-lg:hover{text-decoration:none;color:#fff}
 .sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:-4px -4px -4px auto;padding:4px;max-width:none;flex-wrap:nowrap}
 .sbnav nav::-webkit-scrollbar{display:none}
 .sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:var(--mut);text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
-.sbnav nav a:hover{color:var(--ink);background:rgba(var(--ink-rgb),.08);box-shadow:inset 0 0 0 1px rgba(var(--ink-rgb),.14);text-decoration:none}
+.sbnav nav a:hover{color:var(--ink);background:rgba(var(--ink-rgb),.14);box-shadow:inset 0 0 0 1px rgba(var(--ink-rgb),.14);text-decoration:none}
 .sbnav nav a:active{transform:scale(.97)}
 .sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:var(--ink);background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:var(--acc)}
-.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:var(--ink);background:rgba(var(--ink-rgb),.06);box-shadow:none}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:var(--ink);background:rgba(var(--ink-rgb),.10);box-shadow:none}
 .sbnav nav a:focus{outline:none}
 .sbnav nav a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 .sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:var(--ink)}
@@ -291,11 +315,24 @@ details.seo-d .seo{margin:.6rem 0 0}
   --acc:#E3A692;--acc-rgb:227,166,146;--acc-ink:#2B140C;color-scheme:dark}
 :root[data-tema="gunduz"]{--bg:#F6F3EC;--bg-rgb:246,243,236;--ink:#1A1720;--ink-rgb:26,23,32;
   --mut:#5C5966;--mut-rgb:92,89,102;--dim:#666370;--dim-rgb:102,99,112;
-  --acc:#A85A36;--acc-rgb:168,90,54;--acc-ink:#F6F3EC;color-scheme:light}
+  --acc:#803A1A;--acc-rgb:128,58,26;--acc-ink:#F6F3EC;color-scheme:light}
 html{background:var(--bg)}
 body{background:transparent!important}
 #temaDugme{margin-left:.4rem;width:34px;height:34px;border-radius:50%;border:1px solid rgba(var(--ink-rgb),.14);background:none;color:var(--mut);cursor:pointer;font-size:.95rem;line-height:1;flex:none;display:inline-flex;align-items:center;justify-content:center}
 #temaDugme:hover{color:var(--ink);border-color:rgba(var(--ink-rgb),.3)}
+/* Katman zanaatı: gölge görülmez, hissedilir. Mürekkep zemin gölgeyi yuttuğu için
+   kart kenar çizgisi ve iç parlamayla ayrışır — ağır gölge yok.
+   Kart yüzeyi üstten hafif aydınlanır, üst kenarda 1px ışık, altta zemine dikiş. */
+/* Kart yuzeyi yukselince --dim kart ustunde AA'nin altina dusuyor (4,40);
+   kart kapsaminda en sonuk metin rolu --mut kademesine cikar. */
+.card,.bk-kart,.bk-yol,.yol,.tablo,.b3,.tr,.sbg,.cta,.sectcard,.question-card,.how-step,.savecard,.uy-yol,
+.tool,.form,.lim,.ex-q,.pane,.modes,.adv,.adim,.nb,.per,.note,.ipucu,.hint{--dim:var(--mut);--muted:var(--mut)}
+.card,.bk-kart,.bk-yol,.yol,.tablo,.b3,.tr,.sbg,.cta,.sectcard,.question-card,.how-step,.savecard,.uy-yol{
+  background-image:linear-gradient(180deg,rgba(var(--ink-rgb),.035),rgba(var(--ink-rgb),0));
+  box-shadow:inset 0 1px 0 rgba(var(--ink-rgb),.14),0 1px 0 rgba(var(--bg-rgb),.55)}
+/* Girdi alanı kartın içinde bir kademe çukur dursun. */
+input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color]),textarea,select{
+  box-shadow:inset 0 1px 2px rgba(var(--bg-rgb),.45)}
 </style>
 <script>
 /* Gökyüzüne göre tema. İlk boyamadan önce çalışır ki sayfa titremesin.
@@ -451,7 +488,7 @@ body{background:transparent!important}
     <div class="tabs" id="tabs">
       <button class="on" data-p="p0">Özet</button>
       <button data-p="p1,p2">Gezegenler · Evler</button>
-      <button data-p="p4,p3">Açılar</button>
+      <button data-p="p12,p4,p3">Açılar</button>
       <button data-p="p5,p7,p6,p10">Analiz</button>
       <button data-p="p8,p9">Uzman</button>
       <button data-p="p11">Takvim</button>
@@ -462,6 +499,10 @@ body{background:transparent!important}
       <details class="ynt"><summary>Yöntem notu</summary><div class="note">Konum derece°dakika′saniye″ olarak burç içindedir. <b>R</b> = geri hareket. Hız günlük ekliptik hareket.</div></details></div>
     <div class="pane" id="p2"><div class="subh">Evler</div><div class="scroll"><table id="tHouses"></table></div>
       <details class="ynt"><summary>Ev sistemi notu</summary><div class="note" id="houseNote"></div></details></div>
+    <div class="pane" id="p12"><div class="subh">Açı ızgarası</div>
+      <div class="izg-bas">A · Odak <small>köşegendeki gezegene dokun: haritada yalnız onun açıları yanar · hücreye dokun: tek açı</small></div>
+      <div class="izg-kap" id="izgKap"><table class="izgara" id="izg" aria-label="Açı ızgarası"></table></div>
+      <details class="ynt"><summary>Okuma notu</summary><div class="note">Hücrede açı glifi, altında orb. Renk ve desen haritadakiyle aynı dili konuşur: ☍ karşıt · □ kare · △ üçgen · ✶ altmışlık · ☌ kavuşum. Seçim iki yönlüdür — haritadan seçince ızgara, ızgaradan seçince harita yanar.</div></details></div>
     <div class="pane" id="p4"><div class="subh">Açı listesi</div><div class="scroll"><table id="tAspects"></table></div></div>
     <div class="pane" id="p3"><div class="subh">Açı ızgarası</div><div class="scroll" id="gridBox"></div>
       <details class="ynt"><summary>Okuma notu</summary><div class="note">Hücrede açı glifi, altında orb (derece). <span class="aapp">▲</span> yaklaşan, <span class="aapp">▽</span> ayrılan.</div></details></div>
@@ -1391,6 +1432,9 @@ function renderAll(){
   document.getElementById('wheel').innerHTML=drawWheel(ch,out,{
     title:CUR.title, sub:CUR.sub, aspects:asps, theme:THEME
   });
+  /* ızgara çarktan sonra kurulur: kaynağı çarkın çizdiği açı kümesidir */
+  if(window.SorbiChart && SorbiChart.bagla) try{ SorbiChart.bagla(); }catch(e){}
+  odakIzgara(ch,out,asps);
   var TT=THEMES[THEME];
   document.getElementById('legend').innerHTML = out
     ? '<span><i style="background:'+TT.glyph+'"></i>'+esc(CUR.labelInner)+' (iç)</span><span><i style="background:'+TT.glyphB+'"></i>'+esc(CUR.labelOuter)+' (dış)</span>'
@@ -1440,6 +1484,94 @@ function cell(f,pa,pb){
     '<div class="'+f.as.cls+'">'+agl(f.as.a,15)+'</div>'+
     '<div class="ob">'+f.abs.toFixed(1)+(f.app===null?'':'<span class="aapp">'+(f.app?'▲':'▽')+'</span>')+'</div></td>';
 }
+
+/* ══ AÇI IZGARASI · A · Odak ═══════════════════════════════════════════════
+   Alt üçgen matris; köşegende gezegen glifi, hücrede açı glifi + orb.
+   Hücreye dokun → haritada o çizgi yanar, diğerleri söner. İki yönlü:
+   haritadaki seçim de ızgaraya düşer. Mobilde kendi kabında yatay kayar. */
+var IZG_TIP={0:'kav',180:'kar',90:'kare',120:'ucg',60:'alt'};
+var IZG_GLIF={0:'\u260C',180:'\u260D',90:'\u25A1',120:'\u25B3',60:'\u2736',
+  150:'\u26BB',30:'\u26BA',45:'\u2220',135:'\u26BC',72:'Q'};
+var IZG_KIS={sun:1,moon:1,mer:1,ven:1,mar:1,asc:1,mc:1};
+function carkSvg(){ var w=document.getElementById('wheel'); return w?w.querySelector('svg.sorbi-cark'):null; }
+function odakIzgara(ch,out,asps){
+  var kap=document.getElementById('izgKap'), tb=document.getElementById('izg');
+  if(!kap||!tb) return;
+  if(out){ tb.innerHTML='<tr><td class="bos" style="width:auto;min-width:0;padding:.7rem 1rem;font-size:.8rem;color:var(--mut)">Çift çark kipinde ızgara için alttaki karşılıklı açı tablosuna bak.</td></tr>'; return; }
+  /* renkler haritayla tek kaynaktan: THEMES[...].aci */
+  try{
+    var PAL=window.SorbiChart.THEMES[THEME].aci.s;
+    for(var pk in PAL) kap.style.setProperty('--c-'+pk,PAL[pk]);
+  }catch(e){}
+  var G=ch.pts.filter(function(p){ return p.k!=='pof'; });
+  /* ızgara haritanın ÇİZDİĞİ açılardan kurulur: minör kapalıyken ızgarada da
+     karşılığı olmayan hücre çıkmasın, seçim iki yönlü kalsın. */
+  var idx={}, svg0=carkSvg();
+  if(svg0){
+    Array.prototype.forEach.call(svg0.querySelectorAll('.ak'),function(g){
+      var v={id:g.getAttribute('data-id'), tip:g.getAttribute('data-tip'), gl:g.getAttribute('data-g'),
+             abs:g.getAttribute('data-abs'), a:g.getAttribute('data-a'), b:g.getAttribute('data-b'),
+             ad:g.getAttribute('data-ad'), ak:g.getAttribute('data-ak'), bk:g.getAttribute('data-bk')};
+      idx[v.ak+'-'+v.bk]=v; idx[v.bk+'-'+v.ak]=v;
+    });
+  } else {
+    asps.forEach(function(x){
+      if(x.a.k==='pof'||x.b.k==='pof') return;
+      var v={id:x.a.k+'-'+x.b.k, tip:IZG_TIP[x.as.a]||'min', gl:IZG_GLIF[x.as.a]||'·',
+             abs:x.abs.toFixed(1), a:x.a.n, b:x.b.n, ad:String(x.as.n).toLowerCase(), ak:x.a.k, bk:x.b.k};
+      idx[v.ak+'-'+v.bk]=v; idx[v.bk+'-'+v.ak]=v;
+    });
+  }
+  var h='';
+  for(var r=0;r<G.length;r++){
+    h+='<tr>';
+    for(var c=0;c<r;c++){
+      var x=idx[G[r].k+'-'+G[c].k];
+      if(x){
+        h+='<td class="h '+x.tip+'" data-id="'+x.id+'" data-abs="'+x.abs+'" tabindex="0" role="button"'+
+           ' aria-label="'+esc(x.a)+' '+esc(x.ad)+' '+esc(x.b)+', orb '+String(x.abs).replace('.',',')+' derece">'+
+           '<span class="g">'+x.gl+'</span><span class="o">'+String(x.abs).replace('.',',')+'°</span></td>';
+      } else h+='<td></td>';
+    }
+    h+='<td class="gz'+(IZG_KIS[G[r].k]?' kis':'')+'" data-k="'+G[r].k+'" tabindex="0" role="button"'+
+       ' aria-label="'+esc(G[r].n)+': açılarını göster" title="'+esc(G[r].n)+'">'+G[r].g+'</td>';
+    for(var k2=r+1;k2<G.length;k2++) h+='<td class="bos"></td>';
+    h+='</tr>';
+  }
+  tb.innerHTML=h;
+  izgaraTazele();
+}
+function izgaraTazele(){
+  var tb=document.getElementById('izg'), svg=carkSvg();
+  if(!tb||!svg) return;
+  var odak=svg.__odak||null, sec=svg.__sec||null;
+  var yanan={}; Array.prototype.forEach.call(svg.querySelectorAll('.ak.yan'),function(g){ yanan[g.getAttribute('data-id')]=1; });
+  Array.prototype.forEach.call(tb.querySelectorAll('td.h'),function(td){
+    var id=td.getAttribute('data-id');
+    td.classList.toggle('yan',!!yanan[id]);
+    td.classList.toggle('sec',sec===id);
+  });
+  Array.prototype.forEach.call(tb.querySelectorAll('td.gz'),function(td){
+    td.classList.toggle('on',td.getAttribute('data-k')===odak);
+  });
+  tb.classList.toggle('odak',!!odak||!!sec);
+}
+(function(){
+  var tb=document.getElementById('izg'); if(!tb) return;
+  function ele(t){ return t&&t.closest?t.closest('td'):null; }
+  tb.addEventListener('click',function(e){
+    var td=ele(e.target), svg=carkSvg(); if(!td||!svg||!window.SorbiChart) return;
+    if(td.classList.contains('h')) SorbiChart.secAci(svg,td.getAttribute('data-id'));
+    else if(td.classList.contains('gz')) SorbiChart.odakla(svg,td.getAttribute('data-k'));
+  });
+  tb.addEventListener('keydown',function(e){
+    if(e.key!=='Enter'&&e.key!==' ') return;
+    var td=ele(e.target); if(!td) return; e.preventDefault(); td.click();
+  });
+  tb.addEventListener('mouseover',function(e){ var td=ele(e.target); if(td&&td.classList.contains('h')) td.classList.add('hov'); });
+  tb.addEventListener('mouseout',function(e){ var td=ele(e.target); if(td) td.classList.remove('hov'); });
+  document.addEventListener('sorbi-aci',izgaraTazele);
+})();
 
 function renderDist(ch){
   var ec=[0,0,0,0], mo=[0,0,0], hemN=0,hemS=0,hemE=0,hemW=0, quad=[0,0,0,0], cnt=0;
@@ -2100,7 +2232,7 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
 <!-- SORBI-FOOTER:START -->
 <style>
 .sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:var(--mut);max-width:none;width:auto}
-.sbft{margin-top:3rem;border-top:1px solid rgba(var(--ink-rgb),.08);background:var(--bg);font-family:'Inter',system-ui,sans-serif}
+.sbft{margin-top:3rem;border-top:1px solid rgba(var(--ink-rgb),.14);background:var(--bg);font-family:'Inter',system-ui,sans-serif}
 .sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:repeat(4,1fr);text-align:left;gap:2rem}
 .sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin:0 0 .8rem;font-weight:600}
 .sbft a{display:block;color:var(--mut);text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
@@ -2108,7 +2240,7 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
 .sbft .sbft-brand b{font-size:1.05rem;color:var(--ink);font-weight:700}
 .sbft .sbft-brand b i{font-style:normal;color:var(--acc);margin-right:.3rem}
 .sbft .sbft-brand p{color:var(--mut);font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
-.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(var(--ink-rgb),.06);color:var(--mut);font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(var(--ink-rgb),.10);color:var(--mut);font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 @media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
 @media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
 </style>

@@ -99,6 +99,67 @@ var THEMES={
   asp:{'a-maj':'rgba(242,239,233,.42)','a-hard':'rgba(227,166,146,.5)','a-soft':'rgba(165,163,174,.5)','a-min':'rgba(165,163,174,.24)'}
  }
 };
+/* ── açı paleti: iki mod, tek kaynak ──────────────────────────────────────
+   S = sistem renkleri (varsayılan) · K = kapalı palet (acc / ink / mut).
+   Renkler sabit hex olarak çizime gömülmez; THEMES üstünden okunur ki
+   bir tema değişince açı dili de onunla değişsin. */
+var ACI_SISTEM={kav:'#C9A962', kar:'#CE4F4F', kare:'#DC7676', ucg:'#4E9C7B', alt:'#7FBFA0', min:'#A5A3AE'};
+function aciPalet(acc,ink,mut){
+  return { s:ACI_SISTEM, k:{kav:acc, kar:acc, kare:acc, ucg:ink, alt:ink, min:mut} };
+}
+THEMES.white.aci = aciPalet('#E3A692','#0B0810','#A5A3AE');
+THEMES.paper.aci = aciPalet('#E3A692','#0B0810','#A5A3AE');
+THEMES.night.aci = aciPalet('#E3A692','#F2EFE9','#A5A3AE');
+THEMES.white.vurgu = THEMES.paper.vurgu = 'rgba(11,8,16,.06)';
+THEMES.night.vurgu = 'rgba(242,239,233,.07)';
+
+/* çarkın kendi içine gömülen biçem: açı dili, etiket hiyerarşisi, mobil katman */
+function aciCSS(T,PAL){
+  var fnt=T.font||"Inter,'Helvetica Neue',Arial,sans-serif";
+  var c='';
+  c+='.sorbi-cark .ak{transition:opacity .15s}';
+  c+='.sorbi-cark .ak .v{fill:none;stroke:var(--c);stroke-width:var(--w);stroke-opacity:var(--a,1)}';
+  c+='.sorbi-cark .ak .n{fill:none;stroke:'+T.bg+';stroke-width:var(--n)}';
+  c+='.sorbi-cark .ak-alt .v{stroke-dasharray:9,6}';
+  c+='.sorbi-cark .ak-min .v{stroke-dasharray:2,4}';
+  c+='.sorbi-cark .ak .gd{fill:'+T.bg+';stroke:var(--c);stroke-width:1.4}';
+  c+='.sorbi-cark .ak .gg{fill:var(--c);font-weight:600;pointer-events:none;font-family:'+fnt+'}';
+  c+='.sorbi-cark .ak .h{cursor:pointer}';
+  c+='.sorbi-cark .ak.sonuk .v{stroke-opacity:.09}';
+  c+='.sorbi-cark .ak.sonuk .n,.sorbi-cark .ak.sonuk .gd,.sorbi-cark .ak.sonuk .gg{display:none}';
+  c+='.sorbi-cark .ak.glifsiz .gd,.sorbi-cark .ak.glifsiz .gg{display:none}';
+  c+='.sorbi-cark .ak.sec .v,.sorbi-cark .ak.hov .v{filter:drop-shadow(0 0 3px var(--c))}';
+  c+='.sorbi-cark .ak.sec .gd,.sorbi-cark .ak.hov .gd{stroke-width:2.4}';
+  for(var k in PAL) c+='.sorbi-cark .ak-'+k+'{--c:'+PAL[k]+'}';
+  c+='.sorbi-cark .gobek{fill:'+T.bg+';stroke:'+T.ringSoft+';stroke-width:.8}';
+  c+='.sorbi-cark .pz{cursor:pointer}';
+  c+='.sorbi-cark .pz:hover,.sorbi-cark .pz.on{fill:'+(T.vurgu||'rgba(0,0,0,.05)')+'}';
+  c+='.sorbi-cark .dg,.sorbi-cark .dk,.sorbi-cark .dgC,.sorbi-cark .rxl,.sorbi-cark .hn{font-family:'+fnt+';font-variant-numeric:tabular-nums}';
+  c+='.sorbi-cark .dg{fill:'+T.deg+';font-size:11.5px;font-weight:500}';
+  c+='.sorbi-cark .dk{fill:'+T.degB+';font-size:9.2px;font-weight:400}';
+  c+='.sorbi-cark .dgC{fill:'+T.deg+';font-size:16px;font-weight:500}';
+  c+='.sorbi-cark .rxl{fill:'+T.rx+';font-size:8.3px;font-weight:700}';
+  c+='.sorbi-cark .hn{fill:'+T.hnum+';font-size:10.5px;font-weight:400}';
+  c+='.sorbi-cark .lbC{display:none}';
+  c+='@media(max-width:600px){.sorbi-cark .lbF{display:none}.sorbi-cark .lbC{display:block}';
+  c+='.sorbi-cark .hn{font-size:12px}.sorbi-cark .ak .gg{font-size:20px}.sorbi-cark .ak .gd{r:13px}}';
+  c+='@media(prefers-reduced-motion:reduce){.sorbi-cark .ak{transition:none}';
+  c+='.sorbi-cark .ak.sec .v,.sorbi-cark .ak.hov .v{filter:none}}';
+  return '<style>'+c+'</style>';
+}
+
+/* açı türü · glif · desen — beş majör, beş görünüm */
+var ACI_TIP={0:'kav',180:'kar',90:'kare',120:'ucg',60:'alt'};
+var ACI_GLIF={0:'\u260C',180:'\u260D',90:'\u25A1',120:'\u25B3',60:'\u2736',
+              150:'\u26BB',30:'\u26BA',45:'\u2220',135:'\u26BC',72:'Q'};
+var ACI_AD={kav:'kavuşum',kar:'karşıt',kare:'kare',ucg:'üçgen',alt:'altmışlık',min:'minör'};
+/* orb YALNIZ kalınlığa yazılır: 1,8 → 3,2 birim. Tür ağırlığı hiyerarşiyi kurar:
+   karşıt kalın · üçgen orta · kare ince · altmışlık kesik · kavuşum köprü. */
+var ACI_KALIN={kar:1, kav:.95, ucg:.86, alt:.8, kare:.74, min:.62};
+/* opaklık sabit tabanın altına inmez */
+var ACI_ALFA={kar:.66, kare:.66, kav:.66, ucg:.5, alt:.5, min:.55};
+var KISISEL={sun:1,moon:1,mer:1,ven:1,mar:1,asc:1,mc:1};
+
 var THEME='white';
 
 
@@ -214,19 +275,25 @@ function drawWheel(inner,outer,opt){
      Çark bir nesne, metin değil; zıt zeminde basılı bir kart gibi durur. */
   var sayfa=(document.documentElement.getAttribute('data-tema')==='gunduz')?'paper':'night';
   var T=THEMES[opt.theme||sayfa]||THEMES.paper;
-  var S=934, cx=S/2, cy=S/2, o=[];
-
+  var S=800, cx=S/2, cy=S/2, o=[];
+  /* halka oranları (dış yarıçap 372): burç bandı %9 · gezegen halkası %26 ·
+     ev halkası %8 · iç açı alanı %57. viewBox 16 birim taşırılır ki
+     eksen etiketleri (AC/MC) kesilmesin. */
   var R = outer ? {
-    zo:402, tb:391, zi:357, zg:374,
-    g1:333, d1:311,
-    div:294,
-    g2:275, d2:254,
-    hOut:235, hNum:221, asp:208
+    zo:372, tb:362, zi:330, zg:346,
+    g1:308, d1:288,
+    div:272,
+    g2:254, d2:235,
+    hOut:217, hNum:205, asp:192
   } : {
-    zo:402, tb:391, zi:355, zg:373,
-    g1:325, d1:295,
-    hOut:254, hNum:238, asp:221
+    zo:372, tb:363, zi:338, zg:350.5,
+    g1:306, d1:270,
+    hOut:240, hNum:222, asp:212
   };
+  var yeniHalka=!outer;           /* tek çark: A · Odak dili */
+  var renkMod=(opt.aciRenk==='k')?'k':'s';      /* varsayılan: S · sistem renkleri */
+  var PAL=(T.aci||THEMES.night.aci)[renkMod];
+  var kutular=[];                  /* etiket kutuları — ev numarası çakışma çözümü için */
 
   function esc(v){ return String(v==null?'':v).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   var noH = !!opt.noHouses;
@@ -268,7 +335,8 @@ function drawWheel(inner,outer,opt){
   o.push('<defs><radialGradient id="bgg" cx="50%" cy="46%" r="62%">'+
     '<stop offset="0%" stop-color="'+(T===THEMES.paper?'#F2EFE9':'#0B0810')+'"/>'+
     '<stop offset="100%" stop-color="'+T.bg+'"/></radialGradient></defs>');
-  o.push('<rect width="'+S+'" height="'+S+'" fill="'+T.bg+'"/>');
+  var altBant=(opt.title||opt.sub)?58:0;   /* künye şeridi için viewBox altına pay */
+  o.push('<rect x="-16" y="-16" width="'+(S+32)+'" height="'+(S+32+altBant)+'" fill="'+T.bg+'"/>');
   if(!T.flat) circ(444,null,0,'url(#bgg)');
   o.push('<defs><radialGradient id="icv" cx="50%" cy="50%" r="50%">'+
     '<stop offset="42%" stop-color="'+T.kagit+'" stop-opacity="0"/>'+
@@ -291,7 +359,7 @@ function drawWheel(inner,outer,opt){
   /* ── burç kuşağı: dış taksimat halkası + burç bandı ── */
   /* derece taksimatı: 1° kısa, 5° orta, 10° uzun — çarkı süs değil alet yapan şey bu */
   for(var dg=0;dg<360;dg++){
-    var uz = (dg%10===0) ? 14 : (dg%5===0 ? 8 : 4);
+    var uz = (dg%10===0) ? 9 : (dg%5===0 ? 6 : 3);
     line(P(dg,R.tb),P(dg,R.tb+uz), dg%10===0?T.tick:T.tickMinor, dg%10===0?.75:.5);
   }
   circ(R.zo,T.ring,1.1);
@@ -303,7 +371,7 @@ function drawWheel(inner,outer,opt){
     if(T.edge) arc(R.zi+.6,R.zi+2.2,a0+.3,a0+29.7,T.edge[s2%4],1);
     line(P(a0,R.zi),P(a0,R.zo),T.ring,.8);
     var g=P(a0+15,R.zg);
-    glyph(g[0],g[1],'z'+s2,outer?19:21,col,0);
+    glyph(g[0],g[1],'z'+s2,outer?15:16,col,0);
   }
   if(T.wedge){ circ(R.zi,T.ring,.9); circ(R.tb,T.hair,.7); }
 
@@ -318,13 +386,14 @@ function drawWheel(inner,outer,opt){
     return false;
   }
   var evNo = (opt.evNo!==false) && !noH;
+  var evNoSonra = evNo && yeniHalka;   /* yeni halkada ev numarası etiketlerden sonra */
   if(!noH){
     circ(R.hOut,T.hair,.7);
     for(var h=1;h<=12;h++){
       var cu=inner.c[h];
       /* cusp çizgisi: burç bandının içinden açı çemberine kadar — referans çarklarda böyle */
       if(!acisalMi(cu)) line(P(cu,R.zi),P(cu,R.asp), T.cusp, .8);
-      if(evNo){
+      if(evNo && !evNoSonra){
         var nxt=inner.c[h===12?1:h+1], midA=norm(cu+norm(nxt-cu)/2);
         var np=P(midA,R.hNum);
         txt(np[0],np[1],String(h),T.hnum,outer?10:12,null,null,null);
@@ -358,19 +427,130 @@ function drawWheel(inner,outer,opt){
   });
   circ(R.asp,T.ring,.9);
 
-  /* ── açı çizgileri: orba göre kalınlık ── */
+  /* ── gezegen yerleşimi: komşu glifler MIN dereceden yakınsa itilir.
+     Kavuşum köprüsü gösterim açısını istediği için açı katmanından önce kurulur. */
+  function yerlesim(list,MIN){
+    var items=list.slice().sort(function(a,b){return norm(a.lon-orient)-norm(b.lon-orient);});
+    var disp=items.map(function(p){return norm(p.lon-orient);});
+    for(var it=0;it<400;it++){
+      var moved=false;
+      for(var i=0;i<disp.length;i++){
+        var j=(i+1)%disp.length, d=disp[j]-disp[i]; if(d<0) d+=360;
+        if(d<MIN-.001){ var push=(MIN-d)/2; disp[i]=norm(disp[i]-push); disp[j]=norm(disp[j]+push); moved=true; }
+      }
+      if(!moved) break;
+    }
+    return {items:items,disp:disp};
+  }
+  var YER=null, gosterim={};
+  if(yeniHalka){
+    YER=yerlesim(inner.pls.filter(function(p){return p.k!=='pof';}),11);
+    YER.items.forEach(function(p,i){ gosterim[p.k]=norm(YER.disp[i]+orient); });
+    gosterim.asc=inner.asc;
+    if(inner.mc!==null && inner.mc!==undefined) gosterim.mc=inner.mc;
+  }
+
+  /* ══ AÇI KATMANI — A · Odak ═══════════════════════════════════════════════
+     Beş majör, beş görünüm: karşıt düz kalın · kare düz ince · üçgen düz orta ·
+     altmışlık kesik · kavuşum halkada köprü yayı. Minörler noktalı, varsayılan
+     kapalı. Kirişler kuadratik bezier; kontrol noktası merkeze %25 çekilir
+     (%45 denendi, çiçeğe döndü). Orb yalnız kalınlığa yazılır.
+     Varsayılan gösterim sakin: yalnız kişisel gezegen içeren en sıkı altı açı
+     yanar, geri kalanı taban katmanında ve glifsiz durur. */
+  var minorAc = !!opt.minor;
+  var sakin = (opt.sakin===undefined) ? yeniHalka : !!opt.sakin;
+  var sakinN = opt.sakinN || 6;
+  var aciListe=[];
   (opt.aspects||[]).forEach(function(x){
+    if(!x||!x.a||!x.b||!x.as) return;
     if(x.a.k==='pof'||x.b.k==='pof') return;
     if(outer && !x.as.major) return;
-    if(x.as.a===0) return; /* kavuşum: astro.com/astro-seek çizgi çizmez */
-    var tight=1-Math.min(1,x.abs/(x.as.orb*1.4));
-    var w = T.flat ? (x.as.major ? (.8+tight*.7) : .7) : (x.as.major ? (.55+tight*1.25) : (.35+tight*.4));
-    var op = T.flat ? (x.as.major ? (.55+tight*.45) : .55) : (x.as.major ? (.45+tight*.5) : (.32+tight*.33));
-    o.push('<line x1="'+P(x.a.lon,R.asp)[0].toFixed(1)+'" y1="'+P(x.a.lon,R.asp)[1].toFixed(1)+
-      '" x2="'+P(x.b.lon,R.asp)[0].toFixed(1)+'" y2="'+P(x.b.lon,R.asp)[1].toFixed(1)+
-      '" stroke="'+T.asp[x.as.cls]+'" stroke-width="'+w.toFixed(2)+'" opacity="'+op.toFixed(2)+'"'+
-      (x.as.major?'':' stroke-dasharray="3,3"')+'/>');
+    var tip=ACI_TIP[x.as.a]||'min';
+    if(tip==='min' && !minorAc) return;
+    var orb=x.as.orb||6, mut=Math.max(0,1-Math.min(1,x.abs/orb));
+    aciListe.push({
+      id:x.a.k+'-'+x.b.k, ak:x.a.k, bk:x.b.k, an:x.a.n, bn:x.b.n,
+      alon:x.a.lon, blon:x.b.lon, tip:tip, g:ACI_GLIF[x.as.a]||'·',
+      ad:(tip==='min'? (x.as.n||ACI_AD.min) : ACI_AD[tip]),
+      abs:x.abs, mut:mut, major:x.as.major?1:0,
+      kis:(KISISEL[x.a.k]||KISISEL[x.b.k])?1:0,
+      /* G. Düğüm açısı K. Düğüm açısının aynasıdır — sakin seçimde sayılmaz */
+      ayna:(x.a.k==='sno'||x.b.k==='sno')?1:0,
+      siki:(x.abs<=orb*.4)?1:0, app:x.app
+    });
   });
+  /* sakin açılış: kişisel gezegen içeren, aynası olmayan en sıkı N açı */
+  var yanan={};
+  if(sakin){
+    aciListe.filter(function(x){ return x.kis && !x.ayna; })
+      .sort(function(p,q){ return p.abs-q.abs; })
+      .slice(0,sakinN).forEach(function(x){ yanan[x.id]=1; });
+  }
+  /* gevşek önce, sıkı sonra: sıkı açı üstte kalsın */
+  aciListe.sort(function(p,q){ return (q.major-p.major)||(q.abs-p.abs); });
+
+  function qpt(p,c,q,t){ var u=1-t; return [u*u*p[0]+2*u*t*c[0]+t*t*q[0], u*u*p[1]+2*u*t*c[1]+t*t*q[1]]; }
+  /* kontrol noktası merkeze %25 çekilir (%45 denendi, çiçek gibi oldu);
+     çift çarkta kirişler düz kalır, yoksa iki halka arası okunmaz. */
+  var egri = yeniHalka ? .25 : 0;
+  var GR=10.5, GF=16, konan=[];
+  function disk(x,y,g,r,fs){
+    return '<circle class="gd" cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r+'"/>'+
+           '<text class="gg" x="'+x.toFixed(1)+'" y="'+(y+.5).toFixed(1)+'" font-size="'+fs+
+           '" text-anchor="middle" dominant-baseline="central">'+g+'</text>';
+  }
+  /* kavuşum: kiriş değil, gezegen halkasının dış kenarında iki glifi saran köprü yayı */
+  function kopru(x,r,dr,fs){
+    var a0=gosterim[x.ak], a1=gosterim[x.bk];
+    if(a0===undefined||a1===undefined) return '';
+    var d=norm(a1-a0), bas=a0, son=a1;
+    if(d>180){ bas=a1; son=a0; d=360-d; }
+    var pd=3.4, p0=P(bas-pd,r), p1=P(son+pd,r), m=P(bas+d/2,r);
+    var yay='M'+p0[0].toFixed(1)+' '+p0[1].toFixed(1)+' A'+r+' '+r+' 0 0 0 '+p1[0].toFixed(1)+' '+p1[1].toFixed(1);
+    return '<path class="h" d="'+yay+'" fill="none" stroke="transparent" stroke-width="18"/>'+
+           '<path class="n" d="'+yay+'" fill="none"/>'+
+           '<path class="v" d="'+yay+'" fill="none" stroke-linecap="round"/>'+disk(m[0],m[1],'\u260C',dr,fs);
+  }
+  o.push('<g class="sorbi-aci">');
+  aciListe.forEach(function(x){
+    var yan = !!yanan[x.id];
+    /* çift çarkta açı sayısı ikiye katlanır: aynı dil, daha ince kalem */
+    var kal = (1.8 + x.mut*1.4) * ACI_KALIN[x.tip] * (yeniHalka?1:.68);   /* 1,8 → 3,2 birim */
+    var alf = Math.min(1, ACI_ALFA[x.tip] + x.mut*(1-ACI_ALFA[x.tip])*.45);
+    /* sakin kip dışında glif yalnız sıkı orbda: kalabalıkta disk yığılmasın */
+    var glifsiz = (!sakin && !x.siki) ? ' glifsiz' : '';
+    var ust = '<g class="ak ak-'+x.tip+(yan?' yan':(sakin?' sonuk':''))+glifsiz+'" style="--a:'+alf.toFixed(2)+';--w:'+kal.toFixed(2)+';--n:'+(kal+3).toFixed(2)+'"'+
+      ' data-vars="'+(yan?1:0)+'"'+
+      ' data-id="'+x.id+'" data-ak="'+x.ak+'" data-bk="'+x.bk+'" data-tip="'+x.tip+'"'+
+      ' data-abs="'+x.abs.toFixed(1)+'" data-kis="'+x.kis+'" data-ayna="'+x.ayna+'"'+
+      ' data-siki="'+x.siki+'" data-major="'+x.major+'" data-g="'+x.g+'"'+
+      ' data-a="'+esc(x.an)+'" data-b="'+esc(x.bn)+'" data-ad="'+esc(x.ad)+'"'+
+      ' data-app="'+(x.app===true?'y':(x.app===false?'a':''))+'">';
+    if(x.tip==='kav' && yeniHalka){ o.push(ust+kopru(x, R.zi-7, GR*.85, GF*.85)+'</g>'); return; }
+    var pa=P(x.alon,R.asp), pb=P(x.blon,R.asp);
+    var mid=[(pa[0]+pb[0])/2,(pa[1]+pb[1])/2];
+    /* kontrol noktası merkeze %25 çekilir */
+    var ct=[mid[0]+(cx-mid[0])*egri, mid[1]+(cy-mid[1])*egri];
+    var d='M'+pa[0].toFixed(1)+' '+pa[1].toFixed(1)+' Q'+ct[0].toFixed(1)+' '+ct[1].toFixed(1)+' '+pb[0].toFixed(1)+' '+pb[1].toFixed(1);
+    /* glif çizginin ortasında; çakışan diskler çizgi boyunca kaydırılır */
+    var yer=null, TT=[.5,.42,.58,.34,.66,.27,.73,.2,.8];
+    for(var ti=0;ti<TT.length;ti++){
+      var q=qpt(pa,ct,pb,TT[ti]);
+      if(Math.hypot(q[0]-cx,q[1]-cy)<GR+18) continue;
+      var carp=false;
+      for(var ki=0;ki<konan.length;ki++){ if(Math.hypot(konan[ki][0]-q[0],konan[ki][1]-q[1])<GR*2+1){ carp=true; break; } }
+      if(!carp){ yer=q; break; }
+    }
+    if(!yer) yer=qpt(pa,ct,pb,.5);
+    konan.push(yer);
+    o.push(ust+'<path class="h" d="'+d+'" fill="none" stroke="transparent" stroke-width="14"/>'+
+      '<path class="n" d="'+d+'" fill="none"/>'+
+      '<path class="v" d="'+d+'" fill="none" stroke-linecap="round"/>'+
+      disk(yer[0],yer[1],x.g,GR,GF)+'</g>');
+  });
+  o.push('</g>');
+  /* merkez göbeği: kirişlerin düğümünü örter */
+  if(yeniHalka) o.push('<circle class="gobek" cx="'+cx+'" cy="'+cy+'" r="15"/>');
 
   /* ── gezegen halkası ── */
   function ring(list,rg,rd,tickFrom,col,degCol,gsz){
@@ -412,12 +592,82 @@ function drawWheel(inner,outer,opt){
     });
   }
 
+  /* tek çark: etiket hiyerarşisi (derece 11,5/500 · dakika 9,2/400) CSS'te,
+     böylece ≤600px'te dakika düşer ve kısa etiket devreye girer. */
+  function gezegenHalkasi(){
+    o.push('<g class="gez">');
+    YER.items.forEach(function(p,i){
+      var da=norm(YER.disp[i]+orient);
+      var q1=P(p.lon,R.zi), q2=P(p.lon,R.zi-9), q3=P(da,R.g1+15);
+      o.push('<polyline class="ld" points="'+q1[0].toFixed(1)+','+q1[1].toFixed(1)+' '+q2[0].toFixed(1)+','+q2[1].toFixed(1)+
+             ' '+q3[0].toFixed(1)+','+q3[1].toFixed(1)+'" fill="none" stroke="'+T.lead+'" stroke-width=".7" stroke-linejoin="round" stroke-linecap="round"/>');
+      var gp=P(da,R.g1), ana=!/^(nod|sno|lil|chi)$/.test(p.k);
+      if(!glyph(gp[0],gp[1],p.k,ana?27:23,ana?T.glyph:T.glyphB,.4)) txt(gp[0],gp[1],p.g,T.glyph,ana?27:23);
+      var x=dms(p.lon), rx=p.rx && !/^(nod|sno|lil)$/.test(p.k);
+      var fsL=11.5;
+      var halfW=(((x.d+'°').length*fsL*.58)+fsL*.25+fsL*1.1+fsL*.25+(pad2(x.m)+'′').length*fsL*.8*.56+(rx?fsL*.25+fsL*.7:0))/2, halfH=6.5;
+      var tA=norm(da-orient)*RAD, sep=13.5+halfW*Math.abs(Math.cos(tA))+halfH*Math.abs(Math.sin(tA))+4;
+      var rl=R.g1-sep, lp=P(da,rl);
+      for(var ki=0;ki<kutular.length;ki++){
+        var q=kutular[ki];
+        if(Math.abs(q.x-lp[0])<q.w+halfW+2 && Math.abs(q.y-lp[1])<q.h+halfH+1){ rl-=15; lp=P(da,rl); break; }
+      }
+      kutular.push({x:lp[0],y:lp[1],w:halfW,h:halfH});
+      /* tam etiket */
+      var dtxt=x.d+'°', mtxt=pad2(x.m)+'′';
+      var wd=dtxt.length*fsL*.58, gw=fsL*1.1, wm=mtxt.length*fsL*.8*.56, wr=rx?fsL*.7:0, gap=fsL*.25;
+      var W=wd+gap+gw+gap+wm+(rx?gap+wr:0), x0=lp[0]-W/2;
+      o.push('<g class="lbF">');
+      o.push('<text class="dg" x="'+x0.toFixed(1)+'" y="'+lp[1].toFixed(1)+'" text-anchor="start" dominant-baseline="central">'+dtxt+'</text>');
+      glyph(x0+wd+gap+gw/2, lp[1], 'z'+x.s, fsL*1.15, T.el[x.s%4], 0);
+      o.push('<text class="dk" x="'+(x0+wd+gap+gw+gap).toFixed(1)+'" y="'+lp[1].toFixed(1)+'" text-anchor="start" dominant-baseline="central">'+mtxt+'</text>');
+      if(rx) o.push('<text class="rxl" x="'+(x0+W).toFixed(1)+'" y="'+lp[1].toFixed(1)+'" text-anchor="end" dominant-baseline="central">R</text>');
+      o.push('</g>');
+      /* kısa etiket (≤600px): derece + burç, dakika yok */
+      var fsC=16, wdC=dtxt.length*fsC*.58, gwC=fsC*1.05, gapC=fsC*.15, WC=wdC+gapC+gwC, xc=lp[0]-WC/2;
+      o.push('<g class="lbC">');
+      o.push('<text class="dgC" x="'+xc.toFixed(1)+'" y="'+lp[1].toFixed(1)+'" text-anchor="start" dominant-baseline="central">'+dtxt+'</text>');
+      glyph(xc+wdC+gapC+gwC/2, lp[1], 'z'+x.s, fsC*1.1, T.el[x.s%4], 0);
+      if(rx) o.push('<text class="rxl" x="'+(xc+WC+3).toFixed(1)+'" y="'+lp[1].toFixed(1)+'" text-anchor="start" dominant-baseline="central">R</text>');
+      o.push('</g>');
+    });
+    /* ev numaraları: etiketlerden sonra, kutularla çakışırsa ev içinde kaydırılır */
+    if(evNoSonra){
+      for(var h2=1;h2<=12;h2++){
+        var cu2=inner.c[h2], nx2=inner.c[h2===12?1:h2+1], gen=norm(nx2-cu2), md=norm(cu2+gen/2), yer2=null;
+        var kay=[0,6,-6,10,-10,14,-14];
+        for(var ai=0;ai<kay.length;ai++){
+          if(Math.abs(kay[ai])>gen/2-4) continue;
+          var np2=P(norm(md+kay[ai]),R.hNum), carp=false;
+          for(var kj=0;kj<kutular.length;kj++){ var qq=kutular[kj];
+            if(Math.abs(qq.x-np2[0])<qq.w+10 && Math.abs(qq.y-np2[1])<qq.h+8){ carp=true; break; } }
+          if(!carp){ yer2=np2; break; }
+        }
+        if(!yer2) yer2=P(md,R.hNum-8);
+        o.push('<text class="hn" x="'+yer2[0].toFixed(1)+'" y="'+yer2[1].toFixed(1)+'" text-anchor="middle" dominant-baseline="central">'+h2+'</text>');
+      }
+    }
+    /* dokunma dilimleri: ev halkasından burç bandına — hedef ≥44px yükseklik */
+    YER.items.forEach(function(p,i){
+      var j=(i+1)%YER.items.length, k=(i-1+YER.items.length)%YER.items.length;
+      var dn=YER.disp[j]-YER.disp[i]; if(dn<0) dn+=360;
+      var dp=YER.disp[i]-YER.disp[k]; if(dp<0) dp+=360;
+      var a0=norm(YER.disp[i]-Math.min(dp/2,9)+orient), a1=norm(YER.disp[i]+Math.min(dn/2,9)+orient);
+      var r0=R.asp+2, r1=R.zo, p0=P(a0,r1), p1=P(a1,r1), p2=P(a1,r0), p3=P(a0,r0);
+      o.push('<path class="pz" data-k="'+p.k+'" data-n="'+esc(p.n)+'" role="button" tabindex="0" aria-label="'+esc(p.n)+': açılarını göster" d="M'+
+        p0[0].toFixed(1)+' '+p0[1].toFixed(1)+' A'+r1+' '+r1+' 0 0 0 '+p1[0].toFixed(1)+' '+p1[1].toFixed(1)+
+        ' L'+p2[0].toFixed(1)+' '+p2[1].toFixed(1)+' A'+r0+' '+r0+' 0 0 1 '+p3[0].toFixed(1)+' '+p3[1].toFixed(1)+
+        ' Z" fill="transparent"><title>'+esc(p.n)+'</title></path>');
+    });
+    o.push('</g>');
+  }
+
   if(outer){
     circ(R.div,T.ring,.9);
     ring(outer.pls,R.g1,R.d1,R.zi,T.glyphB,T.degB,18);
     ring(inner.pls,R.g2,R.d2,R.div,T.glyph,T.deg,18.5);
   } else {
-    ring(inner.pls,R.g1,R.d1,R.zi,T.glyph,T.deg,21);
+    gezegenHalkasi();
   }
 
   /* ── veri plakası (opsiyonel, sol üst köşe) ── */
@@ -436,27 +686,197 @@ function drawWheel(inner,outer,opt){
         (r[4]?' font-weight="'+r[4]+'"':'')+'>'+r[0]+'</text>');
     });
     /* sağ alt imza */
-    o.push('<text x="'+(S-18)+'" y="'+(S-16)+'" fill="'+ps+'" font-size="9" text-anchor="end" font-family="Inter,sans-serif">sorbiapp.com ✦</text>');
+    o.push('<text x="'+(S-18)+'" y="'+(S-6)+'" fill="'+ps+'" font-size="9" text-anchor="end" font-family="Inter,sans-serif">sorbiapp.com ✦</text>');
   }
 
   /* ── merkez ── */
   if(!T.flat){ circ(outer?18:21,T.ringSoft,.8,T.center); txt(cx,cy,'✦',T.star,11); }
   if(opt.title||opt.sub){
     var title=esc(opt.title||''), sub=esc(opt.sub||'');
-    var by=S-30;
+    /* başlık halkanın altındaki künye şeridinde durur; çember yarıçapı büyüdüğü
+       için eski S-30 satırı halkanın içine düşüyordu. */
+    var by=S+30;
     if(title) txt(S/2,by,title.length>44?title.slice(0,43)+'…':title,T.centerTxt,12.5,null,T.serif||'Playfair Display,Georgia,serif',600);
     if(sub) txt(S/2,by+15,sub,T.centerSub,10);
   }
 
-  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+S+' '+S+'" width="100%" style="max-width:100%;height:auto;border-radius:10px">'+o.join('')+'</svg>';
+  return '<svg xmlns="http://www.w3.org/2000/svg" class="sorbi-cark'+(sakin?' sakin':'')+'"'+
+    ' viewBox="-16 -16 '+(S+32)+' '+(S+32+altBant)+'" width="100%"'+
+    ' data-aci-renk="'+renkMod+'" data-etk="'+(opt.etkilesim===false?'0':'1')+'"'+
+    ' style="max-width:100%;height:auto;border-radius:10px">'+aciCSS(T,PAL)+o.join('')+'</svg>';
 }
 
+
+/* ══ ETKİLEŞİM ════════════════════════════════════════════════════════════════
+   Haritanın ana hareketi: gezegene dokun → yalnız onun açıları yanar, glifleriyle.
+   Tekrar dokun ya da "bırak" → eski hale döner. Açı çizgisine dokununca şerit
+   okunur bir cümle yazar. "Hepsini göster" kalabalığı isteyene açar.
+   Çağıran sayfalarda kod değişikliği gerekmez: çizim sayfaya girince kendi bağlanır. */
+var SERIT_CSS =
+ '.sorbi-serit{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;min-height:2.6rem;'+
+ 'margin:.5rem 0 0;padding:.35rem .7rem;border:1px solid rgba(128,128,128,.28);border-radius:10px;'+
+ 'font-family:Inter,system-ui,sans-serif;font-size:.84rem;line-height:1.35;color:var(--mut,#807E8B);background:rgba(128,128,128,.07)}'+
+ '.sorbi-serit b{color:var(--ink,inherit);font-weight:500}'+
+ '.sorbi-serit .gl{font-size:1.12rem;line-height:1;font-weight:600}'+
+ '.sorbi-serit .orb{font-variant-numeric:tabular-nums;color:var(--ink,inherit)}'+
+ '.sorbi-serit .lst{display:flex;flex-wrap:wrap;gap:.2rem .65rem}'+
+ '.sorbi-serit .sb{font:inherit;font-size:.76rem;color:var(--mut,#807E8B);background:none;'+
+ 'border:1px solid rgba(128,128,128,.32);border-radius:99px;padding:.3rem .75rem;cursor:pointer;min-height:44px}'+
+ '.sorbi-serit .sb:hover{color:var(--ink,inherit)}'+
+ '.sorbi-serit .sb[aria-pressed="true"]{color:var(--ink,inherit);border-color:rgba(128,128,128,.6);font-weight:600}'+
+ '.sorbi-serit .sb[hidden]{display:none}'+
+ '.sorbi-serit .sag{margin-left:auto;display:flex;gap:.4rem}';
+
+function cssKur(){
+  if(!document.head || document.getElementById('sorbi-cark-css')) return;
+  var st=document.createElement('style'); st.id='sorbi-cark-css'; st.textContent=SERIT_CSS;
+  document.head.appendChild(st);
+}
+function vir(n){ return String(n).replace('.',','); }
+function gESC(v){ return String(v==null?'':v).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+function seritli(el){ return el && el.classList && el.classList.contains('sorbi-serit'); }
+/* Şerit çizimin yanına değil, akışın içine girer: kap flex/grid ise çizimin
+   KABININ ardına, düz blok akışıysa çizimin hemen ardına. Kaplar sayfadan
+   sayfaya değiştiği için yerleşim bozulmasın diye bakılır. */
+function seritBul(svg){
+  if(svg.__serit && svg.__serit.isConnected) return svg.__serit;
+  var kap=svg.parentNode; if(!kap||!kap.nodeType||kap.nodeType!==1) return null;
+  var d1=svg.nextElementSibling;
+  if(seritli(d1)){ svg.__serit=d1; d1.__svg=svg; return d1; }
+  var dsp='block';
+  try{ dsp=getComputedStyle(kap).display; }catch(e){}
+  var akis=/^(flex|grid|inline-flex|inline-grid)$/.test(dsp);
+  var hedefKap = akis ? kap.parentNode : kap, once = akis ? kap.nextSibling : svg.nextSibling;
+  if(akis && seritli(kap.nextElementSibling)){ svg.__serit=kap.nextElementSibling; kap.nextElementSibling.__svg=svg; return kap.nextElementSibling; }
+  if(!hedefKap) return null;
+  var d=document.createElement('div');
+  d.className='sorbi-serit'; d.setAttribute('aria-live','polite');
+  d.innerHTML='<span class="msj"></span><span class="sag">'+
+    '<button type="button" class="sb" data-ac="hepsi" aria-pressed="false">Hepsini göster</button>'+
+    '<button type="button" class="sb" data-ac="birak" hidden>Seçimi bırak</button></span>';
+  hedefKap.insertBefore(d, once);
+  d.__svg=svg; svg.__serit=d;
+  return d;
+}
+function aciBilgi(g){
+  return {id:g.getAttribute('data-id'), a:g.getAttribute('data-a'), b:g.getAttribute('data-b'),
+    tip:g.getAttribute('data-tip'), gl:g.getAttribute('data-g'), ad:g.getAttribute('data-ad'),
+    abs:g.getAttribute('data-abs'), app:g.getAttribute('data-app'),
+    ak:g.getAttribute('data-ak'), bk:g.getAttribute('data-bk')};
+}
+function tekSatir(x){
+  return '<b>'+gESC(x.a)+'</b> <span class="gl">'+gESC(x.gl)+'</span> <b>'+gESC(x.b)+'</b> · '+
+    '<span class="orb">'+vir(x.abs)+'°</span> · '+gESC(x.ad)+
+    (x.app==='y'?' · yaklaşan':(x.app==='a'?' · ayrılan':''));
+}
+function durum(svg){
+  /* açısı olmayan çizimde şerit çıkmaz: okunacak bir şey yok */
+  var gl=svg.querySelectorAll('.ak');
+  if(!gl.length) return;
+  var sr=seritBul(svg); if(!sr) return;
+  var sakin=svg.classList.contains('sakin');
+  var odak=svg.__odak||null, sec=svg.__sec||null, hepsi=!!svg.__hepsi;
+  var i, g, yan, say=0, secX=null, odakL=[];
+  for(i=0;i<gl.length;i++){
+    g=gl[i];
+    if(sec) yan=(g.getAttribute('data-id')===sec);
+    else if(odak) yan=(g.getAttribute('data-ak')===odak||g.getAttribute('data-bk')===odak);
+    else if(hepsi) yan=true;
+    else if(sakin) yan=(g.getAttribute('data-vars')==='1');
+    else yan=true;
+    g.classList.toggle('yan',yan);
+    g.classList.toggle('sonuk',!yan && (sakin||!!odak||!!sec));
+    g.classList.toggle('glifsiz', yan && !odak && !sec && g.getAttribute('data-siki')!=='1' && (hepsi||!sakin));
+    if(yan) say++;
+    if(sec && yan) secX=aciBilgi(g);
+    if(odak && yan) odakL.push(aciBilgi(g));
+  }
+  var pz=svg.querySelectorAll('.pz');
+  for(i=0;i<pz.length;i++) pz[i].classList.toggle('on', pz[i].getAttribute('data-k')===odak);
+  var msj=sr.querySelector('.msj'), bir=sr.querySelector('[data-ac="birak"]'), hep=sr.querySelector('[data-ac="hepsi"]');
+  if(hep) hep.setAttribute('aria-pressed', String(!!hepsi));
+  if(secX){
+    msj.innerHTML=tekSatir(secX);
+    bir.hidden=false; bir.textContent='Seçimi bırak';
+  } else if(odak){
+    odakL.sort(function(p,q){ return (+p.abs)-(+q.abs); });
+    var ad=''; for(i=0;i<pz.length;i++) if(pz[i].getAttribute('data-k')===odak) ad=pz[i].getAttribute('data-n');
+    var h='<b>'+gESC(ad)+'</b> · '+(odakL.length? odakL.length+' açı:' : 'yanan açısı yok')+' <span class="lst">';
+    odakL.forEach(function(x){
+      var o2=(x.ak===odak)?x.b:x.a;
+      h+='<span><span class="gl">'+gESC(x.gl)+'</span> <b>'+gESC(o2)+'</b> <span class="orb">'+vir(x.abs)+'°</span></span>';
+    });
+    msj.innerHTML=h+'</span>';
+    bir.hidden=false; bir.textContent='Odağı bırak';
+  } else {
+    msj.textContent = pz.length
+      ? (sakin ? 'Gezegene dokun: yalnız onun açıları yanar. Çizgiye dokun: tek açı.'
+               : 'Bir gezegene ya da açı çizgisine dokun.')
+      : 'Bir açı çizgisine dokun.';
+    bir.hidden=true;
+  }
+  /* ızgara gibi dış eşlere haber ver */
+  try{ svg.dispatchEvent(new CustomEvent('sorbi-aci',{bubbles:true,detail:{odak:odak,sec:sec,hepsi:hepsi}})); }catch(e){}
+}
+function odakla(svg,k){ svg.__odak=(k&&k!==svg.__odak)?k:null; if(svg.__odak) svg.__sec=null; durum(svg); }
+function secAci(svg,id){ svg.__sec=(id&&id!==svg.__sec)?id:null; if(svg.__sec) svg.__odak=null; durum(svg); }
+
+function carkMi(el){ var s2=el&&el.closest?el.closest('svg.sorbi-cark'):null; return (s2&&s2.getAttribute('data-etk')!=='0')?s2:null; }
+function tikla(e){
+  var t=e.target;
+  var sb=t.closest?t.closest('.sorbi-serit .sb'):null;
+  if(sb){
+    var kap=sb.closest('.sorbi-serit'), svg=kap&&kap.__svg;
+    if(!svg||!svg.classList||!svg.classList.contains('sorbi-cark')) return;
+    if(sb.getAttribute('data-ac')==='hepsi'){ svg.__hepsi=!svg.__hepsi; svg.__odak=null; svg.__sec=null; }
+    else { svg.__sec=null; svg.__odak=null; }
+    durum(svg); return;
+  }
+  var svg2=carkMi(t); if(!svg2) return;
+  var pz=t.closest('.pz');
+  if(pz){ odakla(svg2,pz.getAttribute('data-k')); return; }
+  var ak=t.closest('.ak');
+  if(ak) secAci(svg2,ak.getAttribute('data-id'));
+}
+function ustune(e,on){
+  var t=e.target, svg=carkMi(t); if(!svg) return;
+  var ak=t.closest('.ak'); if(!ak) return;
+  ak.classList.toggle('hov',on);
+}
+function kur(){
+  cssKur();
+  var l=document.querySelectorAll('svg.sorbi-cark[data-etk="1"]');
+  for(var i=0;i<l.length;i++){ if(!l[i].__kuruldu){ l[i].__kuruldu=1; durum(l[i]); } }
+}
+if(typeof document!=='undefined' && document.addEventListener){
+  document.addEventListener('click',tikla,false);
+  document.addEventListener('mouseover',function(e){ustune(e,true);},true);
+  document.addEventListener('mouseout',function(e){ustune(e,false);},true);
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Enter' && e.key!==' ') return;
+    var t=e.target, svg=carkMi(t); if(!svg) return;
+    var pz=t.closest?t.closest('.pz'):null;
+    if(pz){ e.preventDefault(); odakla(svg,pz.getAttribute('data-k')); }
+  },true);
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',kur);
+  else kur();
+  if(window.MutationObserver){
+    var kurT=null;
+    var mo=new MutationObserver(function(){ if(kurT) return; kurT=setTimeout(function(){ kurT=null; kur(); },60); });
+    var basla=function(){ if(document.body) mo.observe(document.body,{childList:true,subtree:true}); };
+    if(document.body) basla(); else document.addEventListener('DOMContentLoaded',basla);
+  }
+}
 
 window.SorbiChart={
   THEMES:THEMES,
   muhur:function(inner,opts){ return drawMuhur(inner,opts||{}); },
   draw:function(inner,outer,opts){ return drawWheel(inner,outer,opts||{}); },
   adapt:adapt,
-  dms:dms
+  dms:dms,
+  bagla:kur,
+  odakla:odakla,
+  secAci:secAci
 };
 })();

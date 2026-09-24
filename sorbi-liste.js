@@ -3,7 +3,7 @@
    data-bekle verilirse blok, o eleman görünür olunca açılır. Kayıt /api/liste'ye gider (ayrı onay kutusu şart). */
 (function(){
 'use strict';
-var CSS='.sbl{max-width:640px;margin:2.2rem auto;background:rgba(var(--ink-rgb),.035);border:1px solid rgba(var(--ink-rgb),.1);border-radius:20px;padding:1.8rem 1.3rem;text-align:center;font-family:Inter,system-ui,sans-serif;color:var(--ink)}'+
+var CSS='.sbl{max-width:640px;margin:2.2rem auto;background:rgba(var(--ink-rgb),.075);border:1px solid rgba(var(--ink-rgb),.1);border-radius:20px;padding:1.8rem 1.3rem;text-align:center;font-family:Inter,system-ui,sans-serif;color:var(--ink)}'+
 '.sbl h3{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:1.35rem;margin:0 0 .4rem;letter-spacing:-.01em}'+
 '.sbl p{color:var(--mut);font-size:.92rem;margin:0 auto 1rem;max-width:46ch;line-height:1.55}'+
 '.sbl .sbl-form{max-width:430px;margin:0 auto}'+

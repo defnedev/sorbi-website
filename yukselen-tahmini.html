@@ -12,7 +12,7 @@
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Yükselen Tahmini","applicationCategory":"LifestyleApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"url":"https://sorbiapp.com/yukselen-tahmini","provider":{"@type":"Organization","name":"Sorbi","url":"https://sorbiapp.com/"}}</script>
 <style>
-:root{--terra:var(--acc);--btn-ink:var(--acc-ink);--gold:var(--acc);--gold-light:var(--ink);--terra:var(--acc);--terra2:var(--acc);--text:var(--ink);--muted:var(--dim);--line:rgba(var(--ink-rgb),.25);--card:var(--bg)}
+:root{--terra:var(--acc);--btn-ink:var(--acc-ink);--gold:var(--acc);--gold-light:var(--ink);--terra:var(--acc);--terra2:var(--acc);--text:var(--ink);--muted:var(--dim);--line:rgba(var(--ink-rgb),.25);--card:rgba(var(--ink-rgb),.07)}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.65}
 .wrap{max-width:660px;margin:0 auto;padding:2.2rem 1.1rem 3rem}
 .top{text-align:center;margin-bottom:1.2rem}
@@ -23,9 +23,9 @@ h1{font-family:Fraunces,Georgia,serif;font-size:clamp(1.6rem,5.5vw,2.3rem);margi
 label{display:block;font-size:.78rem;color:var(--gold-light);text-transform:uppercase;letter-spacing:.5px;margin:.7rem 0 .3rem}
 input{width:100%;background:rgba(var(--bg-rgb),.6);border:1px solid var(--line);border-radius:10px;padding:.7rem .8rem;color:var(--text);font-size:.95rem;font-family:'Inter'}
 .note{font-size:.76rem;color:var(--muted);margin-top:.3rem}
-.geo{position:relative}.gr{position:absolute;left:0;right:0;top:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;margin-top:4px;z-index:5;display:none;max-height:210px;overflow:auto}.gr.show{display:block}.gi{padding:.55rem .7rem;cursor:pointer;font-size:.88rem;border-bottom:1px solid rgba(var(--ink-rgb),.04)}.gi:hover{background:rgba(var(--ink-rgb),.15)}.gi small{display:block;color:var(--muted);font-size:.72rem}
+.geo{position:relative}.gr{position:absolute;left:0;right:0;top:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;margin-top:4px;z-index:5;display:none;max-height:210px;overflow:auto}.gr.show{display:block}.gi{padding:.55rem .7rem;cursor:pointer;font-size:.88rem;border-bottom:1px solid rgba(var(--ink-rgb),.08)}.gi:hover{background:rgba(var(--ink-rgb),.15)}.gi small{display:block;color:var(--muted);font-size:.72rem}
 .btn{display:block;width:100%;background:var(--acc);color:var(--acc-ink);border:none;padding:.85rem;border-radius:12px;font-size:1rem;font-weight:600;cursor:pointer;margin-top:1.1rem;font-family:'Inter'}
-.res{display:none;text-align:center;margin-top:1.4rem;background:linear-gradient(180deg,rgba(var(--ink-rgb),.14),rgba(var(--ink-rgb),.03));border:1px solid var(--line);border-radius:18px;padding:1.6rem 1.1rem}
+.res{display:none;text-align:center;margin-top:1.4rem;background:linear-gradient(180deg,rgba(var(--ink-rgb),.14),rgba(var(--ink-rgb),.065));border:1px solid var(--line);border-radius:18px;padding:1.6rem 1.1rem}
 .glyph{font-size:3rem;font-family:'Noto Sans Symbols2','Segoe UI Symbol',sans-serif;color:var(--gold)}
 .rsign{font-family:Fraunces,Georgia,serif;font-size:1.9rem;color:var(--ink);margin:.2rem 0}
 .rlab{color:var(--gold-light);font-size:.85rem;letter-spacing:1px;text-transform:uppercase}
@@ -41,17 +41,17 @@ input{width:100%;background:rgba(var(--bg-rgb),.6);border:1px solid var(--line);
 </head><body>
 <!-- SORBI-NAV:START -->
 <style>
-.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(var(--bg-rgb),.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(var(--ink-rgb),.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
+.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(var(--bg-rgb),.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(var(--ink-rgb),.14);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
 .sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:var(--ink);font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
 .sbnav .sbnav-lg i{font-style:normal;color:var(--acc);margin-right:.45rem;letter-spacing:0}
 .sbnav .sbnav-lg:hover{text-decoration:none;color:#fff}
 .sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:-4px -4px -4px auto;padding:4px;max-width:none;flex-wrap:nowrap}
 .sbnav nav::-webkit-scrollbar{display:none}
 .sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:var(--mut);text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
-.sbnav nav a:hover{color:var(--ink);background:rgba(var(--ink-rgb),.08);box-shadow:inset 0 0 0 1px rgba(var(--ink-rgb),.14);text-decoration:none}
+.sbnav nav a:hover{color:var(--ink);background:rgba(var(--ink-rgb),.14);box-shadow:inset 0 0 0 1px rgba(var(--ink-rgb),.14);text-decoration:none}
 .sbnav nav a:active{transform:scale(.97)}
 .sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:var(--ink);background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:var(--acc)}
-.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:var(--ink);background:rgba(var(--ink-rgb),.06);box-shadow:none}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:var(--ink);background:rgba(var(--ink-rgb),.10);box-shadow:none}
 .sbnav nav a:focus{outline:none}
 .sbnav nav a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 .sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:var(--ink)}
@@ -88,11 +88,24 @@ input{width:100%;background:rgba(var(--bg-rgb),.6);border:1px solid var(--line);
   --acc:#E3A692;--acc-rgb:227,166,146;--acc-ink:#2B140C;color-scheme:dark}
 :root[data-tema="gunduz"]{--bg:#F6F3EC;--bg-rgb:246,243,236;--ink:#1A1720;--ink-rgb:26,23,32;
   --mut:#5C5966;--mut-rgb:92,89,102;--dim:#666370;--dim-rgb:102,99,112;
-  --acc:#A85A36;--acc-rgb:168,90,54;--acc-ink:#F6F3EC;color-scheme:light}
+  --acc:#803A1A;--acc-rgb:128,58,26;--acc-ink:#F6F3EC;color-scheme:light}
 html{background:var(--bg)}
 body{background:transparent!important}
 #temaDugme{margin-left:.4rem;width:34px;height:34px;border-radius:50%;border:1px solid rgba(var(--ink-rgb),.14);background:none;color:var(--mut);cursor:pointer;font-size:.95rem;line-height:1;flex:none;display:inline-flex;align-items:center;justify-content:center}
 #temaDugme:hover{color:var(--ink);border-color:rgba(var(--ink-rgb),.3)}
+/* Katman zanaatı: gölge görülmez, hissedilir. Mürekkep zemin gölgeyi yuttuğu için
+   kart kenar çizgisi ve iç parlamayla ayrışır — ağır gölge yok.
+   Kart yüzeyi üstten hafif aydınlanır, üst kenarda 1px ışık, altta zemine dikiş. */
+/* Kart yuzeyi yukselince --dim kart ustunde AA'nin altina dusuyor (4,40);
+   kart kapsaminda en sonuk metin rolu --mut kademesine cikar. */
+.card,.bk-kart,.bk-yol,.yol,.tablo,.b3,.tr,.sbg,.cta,.sectcard,.question-card,.how-step,.savecard,.uy-yol,
+.tool,.form,.lim,.ex-q,.pane,.modes,.adv,.adim,.nb,.per,.note,.ipucu,.hint{--dim:var(--mut);--muted:var(--mut)}
+.card,.bk-kart,.bk-yol,.yol,.tablo,.b3,.tr,.sbg,.cta,.sectcard,.question-card,.how-step,.savecard,.uy-yol{
+  background-image:linear-gradient(180deg,rgba(var(--ink-rgb),.035),rgba(var(--ink-rgb),0));
+  box-shadow:inset 0 1px 0 rgba(var(--ink-rgb),.14),0 1px 0 rgba(var(--bg-rgb),.55)}
+/* Girdi alanı kartın içinde bir kademe çukur dursun. */
+input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color]),textarea,select{
+  box-shadow:inset 0 1px 2px rgba(var(--bg-rgb),.45)}
 </style>
 <script>
 /* Gökyüzüne göre tema. İlk boyamadan önce çalışır ki sayfa titremesin.
@@ -139,8 +152,8 @@ body{background:transparent!important}
 .sec{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:.5rem;margin-top:.4rem}
 .sec button{background:none;border:1px solid var(--line);border-radius:10px;padding:.65rem .4rem;color:var(--ink);font:inherit;font-size:.88rem;cursor:pointer;line-height:1.25}
 .sec button small{color:var(--dim);font-size:.72rem}
-.sec button.on{border-color:var(--ink);background:rgba(var(--ink-rgb),.06)}
-.soru{border-top:1px solid rgba(var(--ink-rgb),.08);padding:1rem 0 .4rem;margin-top:.6rem}
+.sec button.on{border-color:var(--ink);background:rgba(var(--ink-rgb),.10)}
+.soru{border-top:1px solid rgba(var(--ink-rgb),.14);padding:1rem 0 .4rem;margin-top:.6rem}
 .soru p{margin:0 0 .5rem;color:var(--ink);font-size:.95rem}
 .soru .sat{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
 .soru input[type=month]{width:auto;min-width:150px}
@@ -363,7 +376,7 @@ try{var b=JSON.parse(localStorage.getItem('sorbi_birth')||'null');if(b&&b.date){
 <!-- SORBI-FOOTER:START -->
 <style>
 .sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:var(--mut);max-width:none;width:auto}
-.sbft{margin-top:3rem;border-top:1px solid rgba(var(--ink-rgb),.08);background:var(--bg);font-family:'Inter',system-ui,sans-serif}
+.sbft{margin-top:3rem;border-top:1px solid rgba(var(--ink-rgb),.14);background:var(--bg);font-family:'Inter',system-ui,sans-serif}
 .sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:repeat(4,1fr);text-align:left;gap:2rem}
 .sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin:0 0 .8rem;font-weight:600}
 .sbft a{display:block;color:var(--mut);text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
@@ -371,7 +384,7 @@ try{var b=JSON.parse(localStorage.getItem('sorbi_birth')||'null');if(b&&b.date){
 .sbft .sbft-brand b{font-size:1.05rem;color:var(--ink);font-weight:700}
 .sbft .sbft-brand b i{font-style:normal;color:var(--acc);margin-right:.3rem}
 .sbft .sbft-brand p{color:var(--mut);font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
-.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(var(--ink-rgb),.06);color:var(--mut);font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(var(--ink-rgb),.10);color:var(--mut);font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 @media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
 @media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
 </style>

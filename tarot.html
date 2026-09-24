@@ -144,11 +144,11 @@ nav.__eski{
 }
 .card-pos:hover{transform:translateY(-4px);}
 .card-pos:nth-child(1){
- background:rgba(var(--ink-rgb),.05);
+ background:rgba(var(--ink-rgb),.11);
  border:1px solid rgba(var(--ink-rgb),0.2);
 }
 .card-pos:nth-child(2){
- background:rgba(var(--ink-rgb),.05);
+ background:rgba(var(--ink-rgb),.11);
  border:1px solid rgba(var(--ink-rgb),0.2);
 }
 .card-pos:nth-child(3){
@@ -187,7 +187,7 @@ nav.__eski{
  gap:1rem;margin-top:1.5rem;
 }
 .when-item{
- background:rgba(var(--ink-rgb),.05);
+ background:rgba(var(--ink-rgb),.11);
  border:1px solid rgba(var(--ink-rgb),0.15);
  border-radius:var(--radius);
  padding:1.4rem;
@@ -270,17 +270,17 @@ footer a{color:var(--gold);}
 <body>
 <!-- SORBI-NAV:START -->
 <style>
-.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(var(--bg-rgb),.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(var(--ink-rgb),.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
+.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(var(--bg-rgb),.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(var(--ink-rgb),.14);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
 .sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:var(--ink);font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
 .sbnav .sbnav-lg i{font-style:normal;color:var(--acc);margin-right:.45rem;letter-spacing:0}
 .sbnav .sbnav-lg:hover{text-decoration:none;color:#fff}
 .sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:-4px -4px -4px auto;padding:4px;max-width:none;flex-wrap:nowrap}
 .sbnav nav::-webkit-scrollbar{display:none}
 .sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:var(--mut);text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
-.sbnav nav a:hover{color:var(--ink);background:rgba(var(--ink-rgb),.08);box-shadow:inset 0 0 0 1px rgba(var(--ink-rgb),.14);text-decoration:none}
+.sbnav nav a:hover{color:var(--ink);background:rgba(var(--ink-rgb),.14);box-shadow:inset 0 0 0 1px rgba(var(--ink-rgb),.14);text-decoration:none}
 .sbnav nav a:active{transform:scale(.97)}
 .sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:var(--ink);background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:var(--acc)}
-.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:var(--ink);background:rgba(var(--ink-rgb),.06);box-shadow:none}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:var(--ink);background:rgba(var(--ink-rgb),.10);box-shadow:none}
 .sbnav nav a:focus{outline:none}
 .sbnav nav a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 .sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:var(--ink)}
@@ -317,11 +317,24 @@ footer a{color:var(--gold);}
   --acc:#E3A692;--acc-rgb:227,166,146;--acc-ink:#2B140C;color-scheme:dark}
 :root[data-tema="gunduz"]{--bg:#F6F3EC;--bg-rgb:246,243,236;--ink:#1A1720;--ink-rgb:26,23,32;
   --mut:#5C5966;--mut-rgb:92,89,102;--dim:#666370;--dim-rgb:102,99,112;
-  --acc:#A85A36;--acc-rgb:168,90,54;--acc-ink:#F6F3EC;color-scheme:light}
+  --acc:#803A1A;--acc-rgb:128,58,26;--acc-ink:#F6F3EC;color-scheme:light}
 html{background:var(--bg)}
 body{background:transparent!important}
 #temaDugme{margin-left:.4rem;width:34px;height:34px;border-radius:50%;border:1px solid rgba(var(--ink-rgb),.14);background:none;color:var(--mut);cursor:pointer;font-size:.95rem;line-height:1;flex:none;display:inline-flex;align-items:center;justify-content:center}
 #temaDugme:hover{color:var(--ink);border-color:rgba(var(--ink-rgb),.3)}
+/* Katman zanaatı: gölge görülmez, hissedilir. Mürekkep zemin gölgeyi yuttuğu için
+   kart kenar çizgisi ve iç parlamayla ayrışır — ağır gölge yok.
+   Kart yüzeyi üstten hafif aydınlanır, üst kenarda 1px ışık, altta zemine dikiş. */
+/* Kart yuzeyi yukselince --dim kart ustunde AA'nin altina dusuyor (4,40);
+   kart kapsaminda en sonuk metin rolu --mut kademesine cikar. */
+.card,.bk-kart,.bk-yol,.yol,.tablo,.b3,.tr,.sbg,.cta,.sectcard,.question-card,.how-step,.savecard,.uy-yol,
+.tool,.form,.lim,.ex-q,.pane,.modes,.adv,.adim,.nb,.per,.note,.ipucu,.hint{--dim:var(--mut);--muted:var(--mut)}
+.card,.bk-kart,.bk-yol,.yol,.tablo,.b3,.tr,.sbg,.cta,.sectcard,.question-card,.how-step,.savecard,.uy-yol{
+  background-image:linear-gradient(180deg,rgba(var(--ink-rgb),.035),rgba(var(--ink-rgb),0));
+  box-shadow:inset 0 1px 0 rgba(var(--ink-rgb),.14),0 1px 0 rgba(var(--bg-rgb),.55)}
+/* Girdi alanı kartın içinde bir kademe çukur dursun. */
+input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color]),textarea,select{
+  box-shadow:inset 0 1px 2px rgba(var(--bg-rgb),.45)}
 </style>
 <script>
 /* Gökyüzüne göre tema. İlk boyamadan önce çalışır ki sayfa titremesin.
@@ -464,7 +477,7 @@ body{background:transparent!important}
 <!-- SORBI-FOOTER:START -->
 <style>
 .sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:var(--mut);max-width:none;width:auto}
-.sbft{margin-top:3rem;border-top:1px solid rgba(var(--ink-rgb),.08);background:var(--bg);font-family:'Inter',system-ui,sans-serif}
+.sbft{margin-top:3rem;border-top:1px solid rgba(var(--ink-rgb),.14);background:var(--bg);font-family:'Inter',system-ui,sans-serif}
 .sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:repeat(4,1fr);text-align:left;gap:2rem}
 .sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin:0 0 .8rem;font-weight:600}
 .sbft a{display:block;color:var(--mut);text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
@@ -472,7 +485,7 @@ body{background:transparent!important}
 .sbft .sbft-brand b{font-size:1.05rem;color:var(--ink);font-weight:700}
 .sbft .sbft-brand b i{font-style:normal;color:var(--acc);margin-right:.3rem}
 .sbft .sbft-brand p{color:var(--mut);font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
-.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(var(--ink-rgb),.06);color:var(--mut);font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(var(--ink-rgb),.10);color:var(--mut);font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 @media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
 @media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
 </style>

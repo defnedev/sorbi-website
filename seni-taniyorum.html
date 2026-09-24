@@ -24,8 +24,8 @@
 <script src="/sorbi-kart.js?v=3" defer></script>
 <style>
 /* Sorbi design tokens — varak okunur, terracotta basılır */
-:root{--panel:rgba(var(--ink-rgb),.03);--gold:var(--acc);--gold-lt:var(--ink);--gold-br:var(--ink);--terra:var(--acc);--btn-ink:var(--acc-ink);
---line:rgba(var(--ink-rgb),.06);--line2:rgba(var(--ink-rgb),.08);--lstrong:rgba(var(--ink-rgb),.14);--lineg:rgba(var(--ink-rgb),.18);--lineg2:rgba(var(--ink-rgb),.45);
+:root{--panel:rgba(var(--ink-rgb),.065);--gold:var(--acc);--gold-lt:var(--ink);--gold-br:var(--ink);--terra:var(--acc);--btn-ink:var(--acc-ink);
+--line:rgba(var(--ink-rgb),.10);--line2:rgba(var(--ink-rgb),.14);--lstrong:rgba(var(--ink-rgb),.14);--lineg:rgba(var(--ink-rgb),.18);--lineg2:rgba(var(--ink-rgb),.45);
 --foil:linear-gradient(135deg,var(--ink),var(--acc),var(--ink),var(--acc),var(--ink));--ease:cubic-bezier(.2,.8,.2,1)}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.62}
 .wrap{max-width:600px;margin:0 auto;padding:2.2rem 1.15rem 4rem}
@@ -92,9 +92,9 @@ body.sonuc .reveal{margin-top:.4rem}
 .nyer{display:none;max-width:520px;margin:1.6rem auto 0}
 .nyer .ny-head{text-align:center;font:600 .66rem 'Inter';letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem}
 .nyer .ny-alt{text-align:center;font-size:.76rem;color:var(--dim);margin:0 auto 1rem;max-width:36ch;line-height:1.5}
-.nyer .ny-k{background:rgba(var(--ink-rgb),.025);border:1px solid var(--line2);border-radius:14px;
+.nyer .ny-k{background:rgba(var(--ink-rgb),.055);border:1px solid var(--line2);border-radius:14px;
  padding:.85rem .95rem;margin-bottom:.6rem;animation:fadeUp .5s both}
-.nyer .ny-k.ust{background:rgba(var(--ink-rgb),.05);border-color:var(--lineg)}
+.nyer .ny-k.ust{background:rgba(var(--ink-rgb),.11);border-color:var(--lineg)}
 .nyer .ny-t{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap}
 .nyer .ny-b{font-family:Inter,system-ui,sans-serif;font-weight:600;font-size:.98rem;color:var(--ink);line-height:1.35}
 .nyer .ny-o{font:500 .7rem 'Inter';color:var(--gold);white-space:nowrap}
@@ -115,7 +115,7 @@ body.sonuc .reveal{margin-top:.4rem}
 @media(prefers-reduced-motion:reduce){.nyer .ny-k{animation:none}}
 .shareRow{display:flex;gap:.55rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
 .sbtn{display:inline-flex;align-items:center;justify-content:center;gap:.46rem;min-height:44px;
- background:linear-gradient(180deg,rgba(var(--ink-rgb),.16),rgba(var(--ink-rgb),.07));
+ background:linear-gradient(180deg,rgba(var(--ink-rgb),.16),rgba(var(--ink-rgb),.13));
  border:1px solid var(--lineg2);color:var(--gold-br);font:600 .86rem 'Inter',sans-serif;padding:.7rem 1.15rem;border-radius:999px;
  cursor:pointer;text-decoration:none;transition:transform .16s,border-color .16s,background .16s}
 .sbtn:hover{transform:translateY(-1px);border-color:var(--gold);background:linear-gradient(180deg,rgba(var(--ink-rgb),.24),rgba(var(--ink-rgb),.10))}
@@ -201,7 +201,7 @@ body.sonuc .reveal{margin-top:.4rem}
 .sh-form button{min-height:44px;padding:0 1.1rem;border-radius:12px;border:1px solid var(--lineg2);cursor:pointer;
  background:linear-gradient(180deg,rgba(var(--ink-rgb),.18),rgba(var(--ink-rgb),.10));color:var(--gold-br);font:600 .86rem 'Inter'}
 .sh-form button:hover{border-color:var(--gold)}
-.sh-cevap{max-width:520px;margin:1.2rem auto 0;background:rgba(var(--ink-rgb),.025);border:1px solid var(--line2);
+.sh-cevap{max-width:520px;margin:1.2rem auto 0;background:rgba(var(--ink-rgb),.055);border:1px solid var(--line2);
  border-radius:14px;padding:1rem 1.1rem;animation:fadeUp .5s both}
 .sh-cevap h4{margin:0 0 .5rem;font:600 .72rem 'Inter';letter-spacing:1.6px;text-transform:uppercase;color:var(--gold)}
 .sh-cevap p{margin:0 0 .6rem;font-size:.92rem;line-height:1.62;color:var(--ink)}
@@ -213,7 +213,7 @@ body.sonuc .reveal{margin-top:.4rem}
 .rk-yuva{min-height:250px;display:flex;align-items:center;justify-content:center;border:1px dashed var(--line2);border-radius:12px;
  color:var(--dim);font-size:.72rem}
 @media(prefers-reduced-motion:reduce){.sh-cevap{animation:none}}
-.karsi{max-width:460px;margin:1.1rem auto 0;background:rgba(var(--ink-rgb),.05);border:1px solid var(--lineg);
+.karsi{max-width:460px;margin:1.1rem auto 0;background:rgba(var(--ink-rgb),.11);border:1px solid var(--lineg);
  border-radius:14px;padding:.95rem 1.05rem;animation:fadeUp .6s both}
 .karsi h4{margin:0 0 .55rem;font:600 .68rem 'Inter';letter-spacing:1.8px;text-transform:uppercase;color:var(--gold)}
 .karsi p{margin:0 0 .38rem;font-size:.84rem;line-height:1.55;color:var(--ink)}
@@ -268,10 +268,10 @@ body.sonuc .reveal{margin-top:.4rem}
 .orb .role{font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
 .orb .sn{font-family:Inter,system-ui,sans-serif;font-weight:600;font-size:.95rem;color:var(--ink);margin-top:-.1rem}
 @keyframes orbPop{0%{opacity:0;transform:scale(.6)}60%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
-.el-fire{background:rgba(var(--ink-rgb),.04);border-color:rgba(var(--ink-rgb),.55)!important;color:var(--acc)}
-.el-earth{background:rgba(var(--ink-rgb),.04);border-color:rgba(var(--mut-rgb),.55)!important;color:var(--mut)}
-.el-air{background:rgba(var(--ink-rgb),.04);border-color:rgba(var(--mut-rgb),.55)!important;color:var(--mut)}
-.el-water{background:rgba(var(--ink-rgb),.04);border-color:rgba(var(--mut-rgb),.55)!important;color:var(--mut)}
+.el-fire{background:rgba(var(--ink-rgb),.08);border-color:rgba(var(--ink-rgb),.55)!important;color:var(--acc)}
+.el-earth{background:rgba(var(--ink-rgb),.08);border-color:rgba(var(--mut-rgb),.55)!important;color:var(--mut)}
+.el-air{background:rgba(var(--ink-rgb),.08);border-color:rgba(var(--mut-rgb),.55)!important;color:var(--mut)}
+.el-water{background:rgba(var(--ink-rgb),.08);border-color:rgba(var(--mut-rgb),.55)!important;color:var(--mut)}
 /* evrenin mesajı ayracı */
 .msg-head{text-align:center;opacity:0;transition:opacity .5s var(--ease);margin:1.3rem 0 1.5rem}
 .msg-head.show{opacity:1}
@@ -292,17 +292,17 @@ body.sonuc .reveal{margin-top:.4rem}
 <body>
 <!-- SORBI-NAV:START -->
 <style>
-.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(var(--bg-rgb),.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(var(--ink-rgb),.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
+.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(var(--bg-rgb),.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(var(--ink-rgb),.14);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
 .sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:var(--ink);font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
 .sbnav .sbnav-lg i{font-style:normal;color:var(--acc);margin-right:.45rem;letter-spacing:0}
 .sbnav .sbnav-lg:hover{text-decoration:none;color:#fff}
 .sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:-4px -4px -4px auto;padding:4px;max-width:none;flex-wrap:nowrap}
 .sbnav nav::-webkit-scrollbar{display:none}
 .sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:var(--mut);text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
-.sbnav nav a:hover{color:var(--ink);background:rgba(var(--ink-rgb),.08);box-shadow:inset 0 0 0 1px rgba(var(--ink-rgb),.14);text-decoration:none}
+.sbnav nav a:hover{color:var(--ink);background:rgba(var(--ink-rgb),.14);box-shadow:inset 0 0 0 1px rgba(var(--ink-rgb),.14);text-decoration:none}
 .sbnav nav a:active{transform:scale(.97)}
 .sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:var(--ink);background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:var(--acc)}
-.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:var(--ink);background:rgba(var(--ink-rgb),.06);box-shadow:none}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:var(--ink);background:rgba(var(--ink-rgb),.10);box-shadow:none}
 .sbnav nav a:focus{outline:none}
 .sbnav nav a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 .sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:var(--ink)}
@@ -339,11 +339,24 @@ body.sonuc .reveal{margin-top:.4rem}
   --acc:#E3A692;--acc-rgb:227,166,146;--acc-ink:#2B140C;color-scheme:dark}
 :root[data-tema="gunduz"]{--bg:#F6F3EC;--bg-rgb:246,243,236;--ink:#1A1720;--ink-rgb:26,23,32;
   --mut:#5C5966;--mut-rgb:92,89,102;--dim:#666370;--dim-rgb:102,99,112;
-  --acc:#A85A36;--acc-rgb:168,90,54;--acc-ink:#F6F3EC;color-scheme:light}
+  --acc:#803A1A;--acc-rgb:128,58,26;--acc-ink:#F6F3EC;color-scheme:light}
 html{background:var(--bg)}
 body{background:transparent!important}
 #temaDugme{margin-left:.4rem;width:34px;height:34px;border-radius:50%;border:1px solid rgba(var(--ink-rgb),.14);background:none;color:var(--mut);cursor:pointer;font-size:.95rem;line-height:1;flex:none;display:inline-flex;align-items:center;justify-content:center}
 #temaDugme:hover{color:var(--ink);border-color:rgba(var(--ink-rgb),.3)}
+/* Katman zanaatı: gölge görülmez, hissedilir. Mürekkep zemin gölgeyi yuttuğu için
+   kart kenar çizgisi ve iç parlamayla ayrışır — ağır gölge yok.
+   Kart yüzeyi üstten hafif aydınlanır, üst kenarda 1px ışık, altta zemine dikiş. */
+/* Kart yuzeyi yukselince --dim kart ustunde AA'nin altina dusuyor (4,40);
+   kart kapsaminda en sonuk metin rolu --mut kademesine cikar. */
+.card,.bk-kart,.bk-yol,.yol,.tablo,.b3,.tr,.sbg,.cta,.sectcard,.question-card,.how-step,.savecard,.uy-yol,
+.tool,.form,.lim,.ex-q,.pane,.modes,.adv,.adim,.nb,.per,.note,.ipucu,.hint{--dim:var(--mut);--muted:var(--mut)}
+.card,.bk-kart,.bk-yol,.yol,.tablo,.b3,.tr,.sbg,.cta,.sectcard,.question-card,.how-step,.savecard,.uy-yol{
+  background-image:linear-gradient(180deg,rgba(var(--ink-rgb),.035),rgba(var(--ink-rgb),0));
+  box-shadow:inset 0 1px 0 rgba(var(--ink-rgb),.14),0 1px 0 rgba(var(--bg-rgb),.55)}
+/* Girdi alanı kartın içinde bir kademe çukur dursun. */
+input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color]),textarea,select{
+  box-shadow:inset 0 1px 2px rgba(var(--bg-rgb),.45)}
 </style>
 <script>
 /* Gökyüzüne göre tema. İlk boyamadan önce çalışır ki sayfa titremesin.
@@ -1334,7 +1347,7 @@ document.getElementById('copyBtn').onclick=async()=>{
 <!-- SORBI-FOOTER:START -->
 <style>
 .sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:var(--mut);max-width:none;width:auto}
-.sbft{margin-top:3rem;border-top:1px solid rgba(var(--ink-rgb),.08);background:var(--bg);font-family:'Inter',system-ui,sans-serif}
+.sbft{margin-top:3rem;border-top:1px solid rgba(var(--ink-rgb),.14);background:var(--bg);font-family:'Inter',system-ui,sans-serif}
 .sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:repeat(4,1fr);text-align:left;gap:2rem}
 .sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin:0 0 .8rem;font-weight:600}
 .sbft a{display:block;color:var(--mut);text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
@@ -1342,7 +1355,7 @@ document.getElementById('copyBtn').onclick=async()=>{
 .sbft .sbft-brand b{font-size:1.05rem;color:var(--ink);font-weight:700}
 .sbft .sbft-brand b i{font-style:normal;color:var(--acc);margin-right:.3rem}
 .sbft .sbft-brand p{color:var(--mut);font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
-.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(var(--ink-rgb),.06);color:var(--mut);font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(var(--ink-rgb),.10);color:var(--mut);font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 @media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
 @media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
 </style>

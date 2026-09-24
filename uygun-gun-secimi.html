@@ -10,7 +10,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Uygun Gün Seçimi","applicationCategory":"LifestyleApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"url":"https://sorbiapp.com/uygun-gun-secimi","provider":{"@type":"Organization","name":"Sorbi","url":"https://sorbiapp.com/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Evlilik için uygun tarih nasıl seçilir?","acceptedAnswer":{"@type":"Answer","text":"Elektional astrolojide evlilik için Ay'ın artan evrede, uyumlu bir burçta ve boşlukta olmadığı; Venüs'ün güçlü olduğu bir gün seçilir. Bu araç bu ölçütleri anlık hesaplayarak sana en uygun günleri sıralar."}},{"@type":"Question","name":"Uğurlu gün ne demek?","acceptedAnswer":{"@type":"Answer","text":"Uğurlu gün, yapmak istediğin işin doğasına gökyüzünün destek verdiği gündür. Astrolojide bu, Ay'ın evresi ve burcu, günün gezegen yöneticisi ve retro durumlarına bakılarak belirlenir — batıl değil, klasik elektional yöntemdir."}},{"@type":"Question","name":"Ay boşlukta iş başlatmak neden sakıncalı?","acceptedAnswer":{"@type":"Answer","text":"Ay boşluktayken (void of course) başlatılan işler genellikle beklenen sonuca ulaşmaz. Bu yüzden imza, nikah veya yeni bir başlangıcı boşluk penceresinin dışına almak önerilir."}}]}</script>
 <style>
-:root{--terra:var(--acc);--btn-ink:var(--acc-ink);--gold:var(--acc);--gold-light:var(--ink);--terra:var(--acc);--terra2:var(--acc);--text:var(--ink);--muted:var(--dim);--line:rgba(var(--ink-rgb),.25);--card:var(--bg);--green:var(--mut);--yellow:var(--ink);--red:var(--acc)}
+:root{--terra:var(--acc);--btn-ink:var(--acc-ink);--gold:var(--acc);--gold-light:var(--ink);--terra:var(--acc);--terra2:var(--acc);--text:var(--ink);--muted:var(--dim);--line:rgba(var(--ink-rgb),.25);--card:rgba(var(--ink-rgb),.07);--green:var(--mut);--yellow:var(--ink);--red:var(--acc)}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.65}
 .wrap{max-width:680px;margin:0 auto;padding:2.2rem 1.1rem 3rem}
 .top{text-align:center;margin-bottom:1.2rem}
@@ -28,12 +28,12 @@ select,input{width:100%;background:rgba(var(--bg-rgb),.6);border:1px solid var(-
 .best .dt{font-family:Inter,system-ui,sans-serif;font-size:1.2rem;color:var(--ink)}
 .best .sc{float:right;font-family:Inter,system-ui,sans-serif;font-size:1.5rem;color:var(--green)}
 .rs{list-style:none;padding:0;margin:.6rem 0 0}.rs li{font-size:.86rem;color:var(--mut);padding:.15rem 0 .15rem 1.1rem;position:relative}.rs li:before{content:'·';position:absolute;left:.2rem;color:var(--gold)}
-.day{display:flex;align-items:center;gap:.7rem;padding:.55rem 0;border-bottom:1px solid rgba(var(--ink-rgb),.05);font-size:.9rem}
+.day{display:flex;align-items:center;gap:.7rem;padding:.55rem 0;border-bottom:1px solid rgba(var(--ink-rgb),.11);font-size:.9rem}
 .day .d1{min-width:118px;color:var(--mut)}.day .d2{flex:1;color:var(--muted);font-size:.82rem}
 .pill{font-size:.72rem;font-weight:700;padding:.2rem .55rem;border-radius:99px;min-width:42px;text-align:center}
 .pill.g{background:rgba(var(--mut-rgb),.18);color:var(--green)}.pill.y{background:rgba(var(--acc-rgb),.16);color:var(--yellow)}.pill.r{background:rgba(var(--acc-rgb),.16);color:var(--red)}
 .voc{background:rgba(var(--acc-rgb),.08);border:1px solid rgba(var(--acc-rgb),.25);border-radius:12px;padding:.7rem .9rem;margin-top:.8rem;font-size:.83rem;color:var(--mut)}
-.sell{background:linear-gradient(180deg,rgba(var(--ink-rgb),.16),rgba(var(--ink-rgb),.04));border:1px solid var(--line);border-radius:18px;padding:1.3rem 1.2rem;margin-top:1.5rem;text-align:center}
+.sell{background:linear-gradient(180deg,rgba(var(--ink-rgb),.16),rgba(var(--ink-rgb),.08));border:1px solid var(--line);border-radius:18px;padding:1.3rem 1.2rem;margin-top:1.5rem;text-align:center}
 .sell h3{font-family:Fraunces,Georgia,serif;color:var(--ink);font-size:1.35rem;margin:.1rem 0 .5rem}
 .sell p{font-size:.9rem;color:var(--mut);margin:0 auto .9rem;max-width:440px}
 .sell a{display:inline-block;background:var(--acc);color:var(--acc-ink);text-decoration:none;padding:.75rem 1.5rem;border-radius:99px;font-weight:600;font-size:.92rem;margin:.25rem}
@@ -47,17 +47,17 @@ select,input{width:100%;background:rgba(var(--bg-rgb),.6);border:1px solid var(-
 </head><body>
 <!-- SORBI-NAV:START -->
 <style>
-.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(var(--bg-rgb),.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(var(--ink-rgb),.08);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
+.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(var(--bg-rgb),.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(var(--ink-rgb),.14);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
 .sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:var(--ink);font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
 .sbnav .sbnav-lg i{font-style:normal;color:var(--acc);margin-right:.45rem;letter-spacing:0}
 .sbnav .sbnav-lg:hover{text-decoration:none;color:#fff}
 .sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:-4px -4px -4px auto;padding:4px;max-width:none;flex-wrap:nowrap}
 .sbnav nav::-webkit-scrollbar{display:none}
 .sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:var(--mut);text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
-.sbnav nav a:hover{color:var(--ink);background:rgba(var(--ink-rgb),.08);box-shadow:inset 0 0 0 1px rgba(var(--ink-rgb),.14);text-decoration:none}
+.sbnav nav a:hover{color:var(--ink);background:rgba(var(--ink-rgb),.14);box-shadow:inset 0 0 0 1px rgba(var(--ink-rgb),.14);text-decoration:none}
 .sbnav nav a:active{transform:scale(.97)}
 .sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:var(--ink);background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:var(--acc)}
-.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:var(--ink);background:rgba(var(--ink-rgb),.06);box-shadow:none}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:var(--ink);background:rgba(var(--ink-rgb),.10);box-shadow:none}
 .sbnav nav a:focus{outline:none}
 .sbnav nav a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 .sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:var(--ink)}
@@ -94,11 +94,24 @@ select,input{width:100%;background:rgba(var(--bg-rgb),.6);border:1px solid var(-
   --acc:#E3A692;--acc-rgb:227,166,146;--acc-ink:#2B140C;color-scheme:dark}
 :root[data-tema="gunduz"]{--bg:#F6F3EC;--bg-rgb:246,243,236;--ink:#1A1720;--ink-rgb:26,23,32;
   --mut:#5C5966;--mut-rgb:92,89,102;--dim:#666370;--dim-rgb:102,99,112;
-  --acc:#A85A36;--acc-rgb:168,90,54;--acc-ink:#F6F3EC;color-scheme:light}
+  --acc:#803A1A;--acc-rgb:128,58,26;--acc-ink:#F6F3EC;color-scheme:light}
 html{background:var(--bg)}
 body{background:transparent!important}
 #temaDugme{margin-left:.4rem;width:34px;height:34px;border-radius:50%;border:1px solid rgba(var(--ink-rgb),.14);background:none;color:var(--mut);cursor:pointer;font-size:.95rem;line-height:1;flex:none;display:inline-flex;align-items:center;justify-content:center}
 #temaDugme:hover{color:var(--ink);border-color:rgba(var(--ink-rgb),.3)}
+/* Katman zanaatı: gölge görülmez, hissedilir. Mürekkep zemin gölgeyi yuttuğu için
+   kart kenar çizgisi ve iç parlamayla ayrışır — ağır gölge yok.
+   Kart yüzeyi üstten hafif aydınlanır, üst kenarda 1px ışık, altta zemine dikiş. */
+/* Kart yuzeyi yukselince --dim kart ustunde AA'nin altina dusuyor (4,40);
+   kart kapsaminda en sonuk metin rolu --mut kademesine cikar. */
+.card,.bk-kart,.bk-yol,.yol,.tablo,.b3,.tr,.sbg,.cta,.sectcard,.question-card,.how-step,.savecard,.uy-yol,
+.tool,.form,.lim,.ex-q,.pane,.modes,.adv,.adim,.nb,.per,.note,.ipucu,.hint{--dim:var(--mut);--muted:var(--mut)}
+.card,.bk-kart,.bk-yol,.yol,.tablo,.b3,.tr,.sbg,.cta,.sectcard,.question-card,.how-step,.savecard,.uy-yol{
+  background-image:linear-gradient(180deg,rgba(var(--ink-rgb),.035),rgba(var(--ink-rgb),0));
+  box-shadow:inset 0 1px 0 rgba(var(--ink-rgb),.14),0 1px 0 rgba(var(--bg-rgb),.55)}
+/* Girdi alanı kartın içinde bir kademe çukur dursun. */
+input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color]),textarea,select{
+  box-shadow:inset 0 1px 2px rgba(var(--bg-rgb),.45)}
 </style>
 <script>
 /* Gökyüzüne göre tema. İlk boyamadan önce çalışır ki sayfa titremesin.
@@ -290,7 +303,7 @@ function run(){
 <!-- SORBI-FOOTER:START -->
 <style>
 .sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:var(--mut);max-width:none;width:auto}
-.sbft{margin-top:3rem;border-top:1px solid rgba(var(--ink-rgb),.08);background:var(--bg);font-family:'Inter',system-ui,sans-serif}
+.sbft{margin-top:3rem;border-top:1px solid rgba(var(--ink-rgb),.14);background:var(--bg);font-family:'Inter',system-ui,sans-serif}
 .sbft .sbft-in{max-width:1080px;margin:0 auto;padding:2.6rem 1.4rem 1.6rem;display:grid;grid-template-columns:repeat(4,1fr);text-align:left;gap:2rem}
 .sbft h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin:0 0 .8rem;font-weight:600}
 .sbft a{display:block;color:var(--mut);text-decoration:none;font-size:.86rem;padding:.22rem 0;transition:color .15s}
@@ -298,7 +311,7 @@ function run(){
 .sbft .sbft-brand b{font-size:1.05rem;color:var(--ink);font-weight:700}
 .sbft .sbft-brand b i{font-style:normal;color:var(--acc);margin-right:.3rem}
 .sbft .sbft-brand p{color:var(--mut);font-size:.84rem;line-height:1.6;margin:.7rem 0 0;max-width:24ch}
-.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(var(--ink-rgb),.06);color:var(--mut);font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.sbft .sbft-bot{max-width:1080px;margin:0 auto;padding:1rem 1.4rem 1.8rem;border-top:1px solid rgba(var(--ink-rgb),.10);color:var(--mut);font-size:.78rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 @media(max-width:860px){.sbft .sbft-in{grid-template-columns:1fr 1fr;gap:1.6rem}}
 @media(max-width:480px){.sbft .sbft-in{grid-template-columns:1fr}}
 </style>

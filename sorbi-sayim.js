@@ -61,7 +61,7 @@
 var W = typeof window !== 'undefined' ? window : globalThis;
 
 /* Veri dosyası her değiştiğinde artır. */
-var SURUM = '1';
+var SURUM = '2';   /* 2026-09-22: ozellik-veri.json kaydırmalı saat ızgarasıyla yeniden üretildi */
 
 /* ── kaynak kütüğü ────────────────────────────────────────────────── */
 var KAYNAK = {
@@ -72,7 +72,9 @@ var KAYNAK = {
     betik: '/sorbi-ozellik.js',      /* katalog: id → insan adı, grup */
     kglobal: 'SorbiOzellik',
     yontem: 'Katalogdaki her özellik için, örneklemdeki her haritada tek tek ' +
-            'tespit edilip kaç haritada gerçekleştiği sayıldı. Oran tahmin değil, sayımdır.'
+            'tespit edilip kaç haritada gerçekleştiği sayıldı. Oran tahmin değil, sayımdır. ' +
+            'Gün içi örnekler kaydırmalı saat ızgarasına düşer: sabit saat ızgarası yıldız ' +
+            'gününe göre örtüşme yapıp yükselen dağılımını çarpıtıyordu.'
   },
   uclu: {
     kod: 'uclu',
@@ -151,6 +153,8 @@ function ozellikKunye(v) {
     n: v.n, nMetin: bin(v.n),
     birim: 'harita', yil: v.yil, yer: v.yer,
     katalog: v.katalog, yontem: KAYNAK.ozellik.yontem,
+    /* örneklem ızgarası — sayfa künyeyi elle yazmasın diye burada durur */
+    gunAdim: v.gunAdim, saatAdet: v.saatAdet, izgara: v.izgara || 'sabit', hata: v.hata || 0,
     uretim: v.uretim, surum: SURUM
   };
   return kunyeBellek.ozellik;

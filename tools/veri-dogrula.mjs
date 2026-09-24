@@ -145,6 +145,7 @@ if (SV) {
 }
 
 /* ═══ 3 · ozellik-veri.json ═══ */
+let ascOzet = 'yükselen kapıları çalışmadı';
 const OV = oku('ozellik-veri.json');
 if (OV) {
   const n = OV.n, f = 'ozellik-veri.json', say = OV.say || {};
@@ -169,7 +170,100 @@ if (OV) {
     oran('Merkür retro', say['retro.mer'], n, 19, f);
     oran('29. derece (en az bir gezegen)', say['derece.anaretik.var'], n, 21, f);
     oran('dolunay evresi', say['evre.dolunay'], n, 12.5, f);
+
+    /* ═══ (a) SİMETRİ KAPISI ═══
+       Yükselen dağılımı ekinoks eksenine göre ayna simetriktir: Koç ile Balık,
+       Boğa ile Kova, İkizler ile Oğlak, Yengeç ile Yay, Aslan ile Akrep,
+       Başak ile Terazi aynı payı alır. Nedeni geometrik: ekliptiğin ufukla
+       yaptığı açı 0° Koç ve 0° Terazi noktalarına göre aynalanır, bu yüzden
+       ekinoksa eşit uzaklıktaki iki burç ufukta eşit süre kalır. Enlem bu
+       simetriyi bozmaz — yalnız payların büyüklüğünü değiştirir.
+       Sabit saat ızgarası bu simetriyi bozar — ama ÖLÇTÜK, ne kadar bozduğunu
+       burada yazalım ki gelecekte kimse bu kapıdan fazlasını beklemesin:
+       1930–2025 × 6 saat (n=210.384, Europe/Istanbul, yaz saati dahil)
+         sabit ızgara      → en büyük çift sapması %0,50 (Başak–Terazi), kat 2,199
+         kaydırmalı ızgara → en büyük çift sapması %0,14, kat 2,161
+       Yani %1 eşiği sabit ızgarayı TEK BAŞINA yakalamaz; onu yakalayan (b)
+       kuram kapısıdır (aynı sabit ızgarada 12 burcun 8'i kırmızı verir).
+       Bu kapı daha kaba bozulmalar içindir: ters işaret, kova kayması, elle
+       düzeltilmiş sayı, yanlış yarımküre — hepsi simetriyi puanlarca kırar.
+       Eşik neden %1 ve daha dar değil: yayındaki ozellik-veri.json'un kendi
+       en büyük çift sapması %0,30. %0,5'e indirmek yalnız 1,7 kat pay bırakır,
+       meşru örnekleme dalgalanması kırmızı verebilir. %1 üç kat pay demek. */
+    const BURC_AD = ['Koç', 'Boğa', 'İkizler', 'Yengeç', 'Aslan', 'Başak',
+      'Terazi', 'Akrep', 'Yay', 'Oğlak', 'Kova', 'Balık'];
+    const ASC_CIFT = [[0, 11], [1, 10], [2, 9], [3, 8], [4, 7], [5, 6]];
+    const ascTam = [...Array(12).keys()].every((i) => Number.isFinite(say['asc.' + i]));
+    if (!ascTam) hatalar.push(f + ': asc.0–asc.11 eksik — yükselen kapıları çalıştırılamadı');
+    else {
+      const asc = [...Array(12).keys()].map((i) => say['asc.' + i]);
+      const ta = asc.reduce((a, b) => a + b, 0);
+      if (ta !== n) hatalar.push(f + ': asc.* toplamı ' + ta + ' ≠ n = ' + n);
+      const SIM_ESIK = 1.0;                       /* yüzde, göreli */
+      for (const [i, j] of ASC_CIFT) {
+        const s = 200 * Math.abs(asc[i] - asc[j]) / (asc[i] + asc[j]);
+        if (s > SIM_ESIK) hatalar.push(f + ': simetri kırık — ' + BURC_AD[i] + ' ' + asc[i]
+          + ' ile ' + BURC_AD[j] + ' ' + asc[j] + ' arasında %' + s.toFixed(2)
+          + ' fark (eşik %' + SIM_ESIK + ') — ekinoks simetrisi bozuk:'
+          + ' kova kayması, elle düzeltilmiş sayı ya da yanlış enlem/yarımküre');
+      }
+
+      /* ═══ (b) KURAM KAPISI ═══
+         Kuramsal yükselen dağılımı yerinde hesaplanır; efemeris GEREKMEZ,
+         çünkü yükselen yalnız iki şeye bağlıdır: ARMC (yerel yıldız zamanının
+         derece karşılığı) ve gözlem enlemi φ. Gezegenlerin yeri hiç girmez.
+           Yükselen, ekliptiğin doğu ufkunu kestiği noktadır. Küresel üçgenden:
+             tan(Asc) = cos(ARMC) / −( sin(ARMC)·cos ε + tan φ · sin ε )
+           ε = ekliptik eğikliği ≈ 23,44°. Doğru dörtte biri için atan2 ile
+           yazılır: atan2( cos ARMC , −(sin ARMC·cos ε + tan φ·sin ε) ).
+         Uzun vadede ARMC düzgün dağılır: yıldız zamanı sabit hızla döner ve
+         doğum anları ona göre rastgeledir. O yüzden ARMC'yi 0–360° arasında
+         DÜZGÜN tarayıp her adımın düştüğü burcu saymak tam kuramsal dağılımı
+         verir — Monte Carlo'ya da efemerise de gerek yok.
+         Paylar neden eşit değil: 41°K gibi orta enlemlerde ekliptiğin ufukla
+         açısı burçtan burca değişir; "yavaş yükselen" kanat (Yengeç–Akrep)
+         ufukta daha uzun kalır, payı büyür. En büyük payın en küçüğe oranı
+         (kat farkı) 41°K'de ≈ 2,161'dir; 2,10–2,25 dışına çıkan bir ölçüm ya
+         yanlış enlemde ya bozuk bir ızgarayla üretilmiştir. */
+      const ENLEM = 41.0082;                      /* İstanbul — sayım bu enlemde yapıldı */
+      const DR = Math.PI / 180, EPS = 23.44 * DR, TANF = Math.tan(ENLEM * DR);
+      const TARAMA = 1000000;                     /* 0,00036°'lik ARMC adımı — kuantalama hatası ihmal edilir */
+      const kur = new Array(12).fill(0);
+      for (let i = 0; i < TARAMA; i++) {
+        const armc = 2 * Math.PI * (i + 0.5) / TARAMA;
+        const a = Math.atan2(Math.cos(armc),
+          -(Math.sin(armc) * Math.cos(EPS) + TANF * Math.sin(EPS)));
+        kur[Math.floor(((((a / DR) % 360) + 360) % 360) / 30)]++;
+      }
+      const KUR_ESIK = 0.1;                       /* puan */
+      let enCok = -1, enAz = 101;
+      for (let i = 0; i < 12; i++) {
+        const p = 100 * asc[i] / n, t = 100 * kur[i] / TARAMA;
+        if (p > enCok) enCok = p; if (p < enAz) enAz = p;
+        const s = Math.abs(p - t);
+        if (s > KUR_ESIK) hatalar.push(f + ': yükselen ' + BURC_AD[i] + ' %' + p.toFixed(2)
+          + ' — kuramsal %' + t.toFixed(2) + ', sapma ' + s.toFixed(2)
+          + ' puan (eşik ' + KUR_ESIK + ')');
+      }
+      const kat = enCok / enAz;
+      if (!(kat >= 2.10 && kat <= 2.25))
+        hatalar.push(f + ': yükselen kat farkı ' + kat.toFixed(3)
+          + ' — 2,10–2,25 dışında (41°K kuramsal ≈ 2,161)');
+      ascOzet = 'yükselen 6 simetrik çift %' + SIM_ESIK + ' içinde, 12 burç kuramın '
+        + KUR_ESIK + ' puanı içinde, kat farkı ' + kat.toFixed(3);
+    }
   }
+
+  /* ═══ (c) KÜNYE KAPISI ═══
+     Sabit saat ızgarasıyla üretilmiş dosya yayına çıkmasın. Künyede izgara
+     alanı 'kaydirmali' değilse ve gün içi örnek sayısı 24'ün altındaysa dosya
+     eski yöntemle üretilmiş demektir (24 ve üstü ızgara saat başlarını zaten
+     doldurur, örtüşme payı düşer). Hata değil UYARI: sayılar sayısal olarak
+     geçerli olabilir — ama yöntem künyesi düzelmeden yayına girmemeli. */
+  if (OV.izgara !== 'kaydirmali' && Number.isFinite(OV.saatAdet) && OV.saatAdet < 24)
+    uyarilar.push(f + ': künye izgara="' + (OV.izgara || '—') + '", saatAdet=' + OV.saatAdet
+      + ' — sabit saat ızgarası şüphesi; bu dosya yayına çıkmamalı'
+      + ' (kaydırmalı ızgarayla yeniden üretin)');
 }
 
 /* ═══ 4 · sayfa metinlerindeki istasyon / retro tarihleri ═══
@@ -291,4 +385,5 @@ if (hatalar.length) {
 for (const u of uyarilar) console.error('not: ' + u);
 console.log('temiz · ogren-veri.json ' + ogrenKare + ' kare motorla ' + ESIK
   + '° içinde · sayim-veri.json ve ozellik-veri.json yapısal ve kuramsal kontrollerden geçti ('
-  + PUAN_ESIK + ' puan eşik) · ' + iddiaSay + ' istasyon/retro tarihi motorla 1 gün içinde');
+  + PUAN_ESIK + ' puan eşik) · ' + ascOzet + ' · ' + iddiaSay
+  + ' istasyon/retro tarihi motorla 1 gün içinde');

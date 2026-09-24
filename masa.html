@@ -22,7 +22,7 @@
 :root{
  /* zemin: siteyle aynı mor-siyah; yüzeyler ona doğru ısıtıldı */
   --yuzey:var(--bg); --yuzey2:var(--bg);
- --cizgi:rgba(var(--ink-rgb),.075); --cizgi2:rgba(var(--ink-rgb),.14);
+ --cizgi:rgba(var(--ink-rgb),.135); --cizgi2:rgba(var(--ink-rgb),.14);
  --gold:var(--acc); --gold-br:var(--ink);
    
  /* anlam renkleri — vurgudan ayrı, yalnız veri kodlar */
@@ -73,8 +73,8 @@ button.yan:hover{color:var(--ink);border-color:var(--cizgi2)}
 .dsat{display:block;width:100%;text-align:left;background:none;border:none;border-left:2px solid transparent;
  padding:.55rem .75rem;cursor:pointer;color:var(--ink);transition:background .13s;position:relative}
 .dsat+.dsat{box-shadow:inset 0 1px 0 var(--cizgi)}
-.dsat:hover{background:rgba(var(--ink-rgb),.035)}
-.dsat.on{background:rgba(var(--ink-rgb),.09);border-left-color:var(--gold)}
+.dsat:hover{background:rgba(var(--ink-rgb),.075)}
+.dsat.on{background:rgba(var(--ink-rgb),.16);border-left-color:var(--gold)}
 .dsat b{font-size:.88rem;font-weight:500;display:block;line-height:1.3}
 .dsat span{font-family:var(--f-say);font-size:.7rem;color:var(--dim)}
 .icerik{padding:1.1rem 1.4rem 4rem;min-width:0}
@@ -125,7 +125,7 @@ h1.dad{font-family:var(--f-bas);font-size:1.45rem;font-weight:600;letter-spacing
 .aci.s-sert .tur{color:var(--sert)} .aci.s-yumusak .tur{color:var(--yumusak)} .aci.s-kavus .tur{color:var(--kavus)}
 .aci .ev{color:var(--dim);font-size:.78rem}
 .aci .sag{display:flex;align-items:center;gap:.55rem}
-.orb-cub{width:44px;height:3px;border-radius:2px;background:rgba(var(--ink-rgb),.09);overflow:hidden}
+.orb-cub{width:44px;height:3px;border-radius:2px;background:rgba(var(--ink-rgb),.16);overflow:hidden}
 .orb-cub i{display:block;height:100%;background:var(--gold);border-radius:2px}
 .aci.s-sert .orb-cub i{background:var(--sert)} .aci.s-yumusak .orb-cub i{background:var(--yumusak)}
 .yon{font-family:var(--f-say);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);
@@ -236,11 +236,24 @@ tbody tr:last-child td{border-bottom:none}
   --acc:#E3A692;--acc-rgb:227,166,146;--acc-ink:#2B140C;color-scheme:dark}
 :root[data-tema="gunduz"]{--bg:#F6F3EC;--bg-rgb:246,243,236;--ink:#1A1720;--ink-rgb:26,23,32;
   --mut:#5C5966;--mut-rgb:92,89,102;--dim:#666370;--dim-rgb:102,99,112;
-  --acc:#A85A36;--acc-rgb:168,90,54;--acc-ink:#F6F3EC;color-scheme:light}
+  --acc:#803A1A;--acc-rgb:128,58,26;--acc-ink:#F6F3EC;color-scheme:light}
 html{background:var(--bg)}
 body{background:transparent!important}
 #temaDugme{margin-left:.4rem;width:34px;height:34px;border-radius:50%;border:1px solid rgba(var(--ink-rgb),.14);background:none;color:var(--mut);cursor:pointer;font-size:.95rem;line-height:1;flex:none;display:inline-flex;align-items:center;justify-content:center}
 #temaDugme:hover{color:var(--ink);border-color:rgba(var(--ink-rgb),.3)}
+/* Katman zanaatı: gölge görülmez, hissedilir. Mürekkep zemin gölgeyi yuttuğu için
+   kart kenar çizgisi ve iç parlamayla ayrışır — ağır gölge yok.
+   Kart yüzeyi üstten hafif aydınlanır, üst kenarda 1px ışık, altta zemine dikiş. */
+/* Kart yuzeyi yukselince --dim kart ustunde AA'nin altina dusuyor (4,40);
+   kart kapsaminda en sonuk metin rolu --mut kademesine cikar. */
+.card,.bk-kart,.bk-yol,.yol,.tablo,.b3,.tr,.sbg,.cta,.sectcard,.question-card,.how-step,.savecard,.uy-yol,
+.tool,.form,.lim,.ex-q,.pane,.modes,.adv,.adim,.nb,.per,.note,.ipucu,.hint{--dim:var(--mut);--muted:var(--mut)}
+.card,.bk-kart,.bk-yol,.yol,.tablo,.b3,.tr,.sbg,.cta,.sectcard,.question-card,.how-step,.savecard,.uy-yol{
+  background-image:linear-gradient(180deg,rgba(var(--ink-rgb),.035),rgba(var(--ink-rgb),0));
+  box-shadow:inset 0 1px 0 rgba(var(--ink-rgb),.14),0 1px 0 rgba(var(--bg-rgb),.55)}
+/* Girdi alanı kartın içinde bir kademe çukur dursun. */
+input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color]),textarea,select{
+  box-shadow:inset 0 1px 2px rgba(var(--bg-rgb),.45)}
 </style>
 <script>
 /* Gökyüzüne göre tema. İlk boyamadan önce çalışır ki sayfa titremesin.

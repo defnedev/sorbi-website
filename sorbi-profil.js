@@ -58,7 +58,7 @@ function chip(){
   var css=document.createElement('style');
   css.textContent=[
    '#sbprofil{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;max-width:1120px;margin:.55rem auto 0;padding:.45rem .9rem;',
-   'background:rgba(var(--ink-rgb),.07);border:1px solid rgba(var(--ink-rgb),.22);border-radius:99px;width:fit-content;',
+   'background:rgba(var(--ink-rgb),.13);border:1px solid rgba(var(--ink-rgb),.22);border-radius:99px;width:fit-content;',
    'font:500 .78rem/1.4 Inter,system-ui,sans-serif;color:var(--mut)}',
    '#sbprofil b{color:var(--ink);font-weight:600}',
    '#sbprofil .sbp-dot{color:var(--dim)}',

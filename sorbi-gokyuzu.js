@@ -42,8 +42,21 @@ function ara(A,B,t){ /* iki harita arası */
  return {t:new Date(A.t.getTime()+(B.t.getTime()-A.t.getTime())*t),asc:lerpA(A.asc,B.asc,t),mc:lerpA(A.mc,B.mc,t),P:P};
 }
 
-/* ── açılar: yalnız ana, dar orb ── */
-var ACI=[[180,6,1],[90,6,1],[120,6,0],[60,4,0]];
+/* ── açılar: yalnız ana, dar orb ──
+   Harita çarkıyla AYNI açı dili: tür başına renk + desen + kalınlık.
+   Burası küçük bir halka; glif basılmaz, yalnız renk ve desen tutarlılığı. */
+var ACI=[[180,6,'kar'],[90,6,'kare'],[120,6,'ucg'],[60,4,'alt']];
+/* renkler tek kaynaktan: SorbiChart.THEMES[...].aci — yoksa aynı sistem paleti */
+var ACI_YEDEK={kav:'#C9A962',kar:'#CE4F4F',kare:'#DC7676',ucg:'#4E9C7B',alt:'#7FBFA0',min:'#A5A3AE'};
+function aciPal(){
+ try{
+  var t=(D.documentElement.getAttribute('data-tema')==='gunduz')?'paper':'night';
+  return W.SorbiChart.THEMES[t].aci.s;
+ }catch(e){ return ACI_YEDEK; }
+}
+/* karşıt kalın · üçgen orta · kare ince · altmışlık kesik (çarktaki hiyerarşinin aynısı) */
+var ACI_KAL={kar:1.6,ucg:1.3,kare:1.1,alt:1.1}, ACI_DES={alt:[5,4]};
+var ACI_ALF={kar:.66,kare:.66,ucg:.5,alt:.5};
 function acilar(P){
  var k=Object.keys(P),out=[];
  for(var i=0;i<k.length;i++)for(var j=i+1;j<k.length;j++){
@@ -51,6 +64,12 @@ function acilar(P){
   for(var a=0;a<ACI.length;a++){var f=M.abs(d-ACI[a][0]);if(f<=ACI[a][1]){out.push([k[i],k[j],ACI[a][2],1-f/ACI[a][1]]);break;}}
  }
  return out;
+}
+/* '#RRGGBB' + alfa → rgba() */
+function alf(hex,a){
+ var h=String(hex).replace('#','');
+ if(h.length!==6) return hex;
+ return 'rgba('+parseInt(h.slice(0,2),16)+','+parseInt(h.slice(2,4),16)+','+parseInt(h.slice(4,6),16)+','+a.toFixed(2)+')';
 }
 
 /* ── üç cümle: sembol değil, an. Yorum yok, gökyüzünde ne vardı ── */
@@ -118,11 +137,16 @@ function ciz(cv,H,o){
  c.fillText('AC',cx+cs(aA)*(R+12),cy+sn(aA)*(R+12));c.fillText('MC',cx+cs(aM)*(R+12),cy+sn(aM)*(R+12));
  /* açılar */
  var rp=ic-M.max(22,G*.045);
+ var PAL=aciPal();
  acilar(H.P).forEach(function(x){
-  var p=H.P[x[0]],q=H.P[x[1]],a=ang(p.lon),b2=ang(q.lon);
-  c.strokeStyle=x[2]?tkr('--acc',.10+.25*x[3]):tkr('--ink',.06+.12*x[3]);c.lineWidth=x[2]?1.1:.9;
+  var p=H.P[x[0]],q=H.P[x[1]],a=ang(p.lon),b2=ang(q.lon),t=x[2];
+  /* opaklık sabit tabanın altına inmez; orb yalnız kalınlığa yazılır */
+  c.strokeStyle=alf(PAL[t]||ACI_YEDEK[t], M.min(1,ACI_ALF[t]+x[3]*(1-ACI_ALF[t])*.45));
+  c.lineWidth=ACI_KAL[t]*(.8+x[3]*.35);
+  c.setLineDash(ACI_DES[t]||[]);
   c.beginPath();c.moveTo(cx+cs(a)*rp,cy+sn(a)*rp);c.lineTo(cx+cs(b2)*rp,cy+sn(b2)*rp);c.stroke();
  });
+ c.setLineDash([]);
  /* gezegenler */
  var sirali=Object.keys(H.P).map(function(k){return {k:k,lon:H.P[k].lon};}).sort(function(a,b){return a.lon-b.lon;});
  var kat={};for(var i=0;i<sirali.length;i++){var s=sirali[i],p=sirali[i-1];

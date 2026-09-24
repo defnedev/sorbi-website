@@ -6,6 +6,7 @@ if (!dosyalar.length) { console.error('kullanım: node tools/ozellik-birlestir.m
 const p = dosyalar.map(f => JSON.parse(fs.readFileSync(f, 'utf8')));
 const out = { n: 0, hata: 0, say: Object.create(null), uclu: Object.create(null),
   katalog: p[0].katalog, gunAdim: p[0].gunAdim, saatAdet: p[0].saatAdet,
+  izgara: p[0].izgara || 'sabit',          /* saat ızgarası künyeye taşınır — servis bunu basar */
   yer: p[0].yer, uretim: new Date().toISOString().slice(0, 10), parca: dosyalar.length };
 const yillar = [];
 for (const x of p) {

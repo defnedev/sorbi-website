@@ -26,13 +26,13 @@ var NT='Öncü Sabit Değişken'.split(' ');
 var YON='Mars Venüs Merkür Ay Güneş Merkür Venüs Mars Jüpiter Satürn Satürn Jüpiter'.split(' ');
 var YMO={7:'Plüton',10:'Uranüs',11:'Neptün'};
 var AZ=!!(W.matchMedia&&W.matchMedia('(prefers-reduced-motion: reduce)').matches);
-var CSS='.sbg{background:rgba(var(--ink-rgb),.032);border:1px solid rgba(var(--ink-rgb),.08);border-radius:16px;padding:1rem;margin:1.2rem 0}'
+var CSS='.sbg{background:rgba(var(--ink-rgb),.07);border:1px solid rgba(var(--ink-rgb),.14);border-radius:16px;padding:1rem;margin:1.2rem 0}'
 +'.sbg canvas{width:100%;height:auto;display:block;border-radius:10px;background:var(--bg)}'
 +'.sbg-k{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-top:.8rem}'
 +'.sbg-b{font:inherit;font-size:.84rem;font-weight:600;color:var(--bg);background:var(--acc);border:0;border-radius:10px;padding:0 1rem;min-height:40px;cursor:pointer}'
 +'.sbg-b:hover{background:var(--acc)}'
 +'.sbg-b.sbg-i{background:transparent;color:var(--mut);border:1px solid rgba(var(--ink-rgb),.14);font-weight:500}'
-+'.sbg-b.sbg-i:hover{background:rgba(var(--ink-rgb),.06);color:var(--ink)}'
++'.sbg-b.sbg-i:hover{background:rgba(var(--ink-rgb),.10);color:var(--ink)}'
 +'.sbg-s{flex:1 1 140px;min-width:110px;min-height:40px;accent-color:var(--acc);background:transparent}'
 +'.sbg-o{font-family:ui-monospace,Menlo,monospace;font-size:.78rem;color:var(--mut);font-variant-numeric:tabular-nums}'
 +'.sbg-o b{color:var(--ink);font-weight:600}'
@@ -41,7 +41,7 @@ var CSS='.sbg{background:rgba(var(--ink-rgb),.032);border:1px solid rgba(var(--i
 +'.sbg-p .sbg-s{flex:1 1 60px;min-width:60px}'
 +'.sbg-e{display:inline-block;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid currentColor;border-radius:99px;padding:.08rem .45rem;color:var(--mut)}'
 +'.sbg-e.g{color:var(--acc)}'
-+'.sbg-z{font-size:.86rem;font-weight:300;color:var(--mut);line-height:1.65;margin-top:.8rem;padding-top:.8rem;border-top:1px solid rgba(var(--ink-rgb),.08);max-width:74ch}'
++'.sbg-z{font-size:.86rem;font-weight:300;color:var(--mut);line-height:1.65;margin-top:.8rem;padding-top:.8rem;border-top:1px solid rgba(var(--ink-rgb),.14);max-width:74ch}'
 +'.sbg-z b{color:var(--ink);font-weight:500}.sbg-z i{font-style:normal;color:var(--ink)}'
 +'.sbg :focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:8px}'
 +'@media(max-width:560px){.sbg-k>.sbg-s,.sbg-p{flex-basis:100%}.sbg-o{overflow-wrap:anywhere}}';
