@@ -73,3 +73,18 @@
 # yapan sayfa Harita Atölyesi.
 /rapor-araci        /detayli-dogum-haritasi   301
 /rapor-araci.html   /detayli-dogum-haritasi   301
+
+# 24 Eylül 2026 · geçici kapatma — "part part açalım" kararı.
+# Sayfalar git'te duruyor, yalnız yayından çekildi. Sebepler:
+#   masa: kimlik doğrulaması yok, sunucusuz danışan paneli; panel tamamlanınca açılır.
+#   astrokartografi: harita altlığı her karoda "API KEY REQUIRED" filigranı basıyor.
+#   yasam-donguleri: "efemerisle hesaplandı" diyor ama motor yok, metin elle yazılmış.
+#   uygulama: gövde metni henüz yazılmadı (yer tutucu).
+/masa                /                         302
+/masa.html           /                         302
+/astrokartografi     /araclar                  302
+/astrokartografi.html /araclar                 302
+/yasam-donguleri     /bugun                    302
+/yasam-donguleri.html /bugun                   302
+/uygulama            /                         302
+/uygulama.html       /                         302
