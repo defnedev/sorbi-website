@@ -61,6 +61,7 @@ svg{display:block}
 .gk-simdi:hover{color:var(--ink);border-color:var(--ink)}
 .gk-simdi[hidden],.hero .ok[hidden]{display:none}
 .hero .ok{margin-top:1.6rem;font-size:.78rem;color:var(--dim);letter-spacing:.06em}
+.hero .ok.vaat{animation:none!important;margin-top:.4rem;opacity:.75}
 @media(prefers-reduced-motion:no-preference){.hero .ok{animation:gkOk 2.4s ease-in-out infinite}}
 @keyframes gkOk{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 .gk-iki{display:grid;grid-template-columns:1fr;justify-items:center;gap:1.6rem;width:100%}
@@ -259,7 +260,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
  if(t!=='gunduz'&&t!=='gece'){
   var lat=41.0082,lon=28.9784;
   try{var b=JSON.parse(localStorage.getItem('sorbi_birth')||'null'); if(b&&+b.lat&&+b.lon){lat=+b.lat;lon=+b.lon;}}catch(e){}
-  t='gece'; /* gündüz teması yalın kaldı; şimdilik yalnız düğmeyle, gökyüzüne göre değil */
+  t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'gunduz':'gece'; /* kullanıcı seçmediyse sistem tercihi */
  }
  if(t==='gunduz') H.setAttribute('data-tema','gunduz'); else H.removeAttribute('data-tema');
  function meta(){var m=document.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute('content',H.getAttribute('data-tema')==='gunduz'?'#F6F3EC':'#0B0810');}
@@ -289,6 +290,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
   <div class="gk-anlat" id="gkAnlat" hidden></div>
   <div class="gk-terim" id="gkTerim" hidden></div>
   <div class="ok">↓ tarihini yaz</div>
+  <div class="ok vaat">Tek form · kayıt yok · haritan saniyeler içinde</div>
 </div>
 
 <div class="calc" id="dogum-haritasi">
@@ -436,7 +438,7 @@ function draw(){
         terimKur(saatYok);
       });
       try{
-        document.querySelector('.hero .ok').hidden=true; document.querySelector('.hero > p').textContent='Doğduğun an ve şimdi, aynı halkada. Kim nereden nereye gelmiş, bak.';
+        [].forEach.call(document.querySelectorAll('.hero .ok'),function(o){o.hidden=true;}); document.querySelector('.hero > p').textContent='Doğduğun an ve şimdi, aynı halkada. Kim nereden nereye gelmiş, bak.';
         $('gkIki').classList.add('acik'); document.querySelector('#gokyuzu').previousElementSibling.hidden=false;
         var K=$('gkSimdiKol'); if(K.hidden){ K.hidden=false; if(!GOK2) GOK2=window.SorbiGokyuzu.kur($('gokSimdi'),{lat:o.lat,lon:o.lon,tz:o.tz,yer:PICKED.label||'',cizgi:false}); }
         if(!GOK_ILK) $('gokyuzu').scrollIntoView({behavior:'smooth',block:'center'}); GOK_ILK=false;
@@ -484,12 +486,15 @@ function big3html(lon){
   return '<span class="sg" style="color:'+ELC[x.s%4]+'">'+SorbiAstro.SGLYPH[x.s]+'</span>'+x.d+'° '+SorbiAstro.SIGNS[x.s]+' '+String(x.m).padStart(2,'0')+'′';
 }
 function fillBig3(){
+  var ilkGoster=$('big3').hidden;
   $('big3').hidden=false; $('big3').classList.add('rise');
   $('v-sun').innerHTML=big3html(pl('sun').lon);
   $('v-moon').innerHTML=big3html(pl('moon').lon);
   var asc=$('b3-asc');
   if(NOTIME){ asc.classList.add('na'); $('v-asc').textContent='saat gerekli'; }
   else { asc.classList.remove('na'); $('v-asc').innerHTML=big3html(CH.asc); }
+  /* sonuç ilk ekranda görünsün: klavye kapanınca form scroll pozisyonu keyfi kalabiliyor */
+  if(ilkGoster) try{ requestAnimationFrame(function(){ $('big3').scrollIntoView({behavior:'smooth',block:'start'}); }); }catch(e){}
 }
 var SLOW={jup:1,sat:1,ura:1,nep:1,plu:1};
 function fillTransits(){

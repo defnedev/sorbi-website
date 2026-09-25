@@ -138,7 +138,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
  if(t!=='gunduz'&&t!=='gece'){
   var lat=41.0082,lon=28.9784;
   try{var b=JSON.parse(localStorage.getItem('sorbi_birth')||'null'); if(b&&+b.lat&&+b.lon){lat=+b.lat;lon=+b.lon;}}catch(e){}
-  t='gece'; /* gündüz teması yalın kaldı; şimdilik yalnız düğmeyle, gökyüzüne göre değil */
+  t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'gunduz':'gece'; /* kullanıcı seçmediyse sistem tercihi */
  }
  if(t==='gunduz') H.setAttribute('data-tema','gunduz'); else H.removeAttribute('data-tema');
  function meta(){var m=document.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute('content',H.getAttribute('data-tema')==='gunduz'?'#F6F3EC':'#0B0810');}
@@ -174,6 +174,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
  <div class="card today" id="personalCard" style="display:none">
   <div class="sec-h">Sana Bugün</div>
   <div id="personal"></div>
+  <div class="chips tlist" id="tlist" style="margin-top:.7rem"></div>
   <div class="cta">
    <a class="buy" href="/soru-sor">Bugün bir şey mi var? Sorunu sor ✦</a>
   </div>
@@ -252,6 +253,15 @@ function draw(){
   const bu=localToUTC(y,mo,d,hh,mm,b.tz||'Europe/Istanbul');const bt=A.MakeTime(bu);
   const nat={'Güneş':ecl(A,A.Body.Sun,bt),'Ay':ecl(A,A.Body.Moon,bt),'Venüs':ecl(A,A.Body.Venus,bt),'Mars':ecl(A,A.Body.Mars,bt)};
   if(b.time&&b.lat){const e=obliquity(bt);const ramc=norm(A.SiderealTime(bt)*15+(+b.lon));nat['Yükselen']=ascendant(ramc,e,+b.lat);}
+  // gezegen listesi: transit burcu + (yükselen biliniyorsa) tam-burç natal evi
+  try{
+   const ascSign=nat['Yükselen']!=null?signOf(nat['Yükselen']):null;
+   const evOf=lon=>ascSign==null?null:((signOf(lon)-ascSign+12)%12)+1;
+   const TLP=[['Ay',A.Body.Moon],['Güneş',A.Body.Sun],['Merkür',A.Body.Mercury],['Venüs',A.Body.Venus],['Mars',A.Body.Mars],['Jüpiter',A.Body.Jupiter],['Satürn',A.Body.Saturn]];
+   const tl=document.getElementById('tlist');
+   tl.innerHTML=TLP.map(([n,bd3])=>{const lon=ecl(A,bd3,now);const ev=evOf(lon);
+    return `<span class="pill"><b>${n}</b> ${SIGNS[signOf(lon)]}${ev?' · '+ev+'. ev':''}</span>`;}).join('');
+  }catch(e){}
   const TB=[['Ay',A.Body.Moon,6],['Güneş',A.Body.Sun,4],['Merkür',A.Body.Mercury,4],['Venüs',A.Body.Venus,4],['Mars',A.Body.Mars,4],['Jüpiter',A.Body.Jupiter,3],['Satürn',A.Body.Saturn,3]];
   const hits=[];
   for(const[tn,tb,orb]of TB){const tl=ecl(A,tb,now);for(const nn of Object.keys(nat)){let dd=Math.abs(norm(tl-nat[nn]));if(dd>180)dd=360-dd;for(const[ang]of TASP){if(Math.abs(dd-ang)<=orb){hits.push({t:tn,n:nn,ang,orb:Math.abs(dd-ang)});break;}}}}

@@ -141,7 +141,7 @@ function aciCSS(T,PAL){
   c+='.sorbi-cark .rxl{fill:'+T.rx+';font-size:8.3px;font-weight:700}';
   c+='.sorbi-cark .hn{fill:'+T.hnum+';font-size:10.5px;font-weight:400}';
   c+='.sorbi-cark .lbC{display:none}';
-  c+='@media(max-width:600px){.sorbi-cark .lbF{display:none}.sorbi-cark .lbC{display:block}';
+  c+='@media(max-width:600px){.sorbi-cark .lbF{display:none}.sorbi-cark .lbC{display:block}.sorbi-cark .krsEtDis{display:none}';
   c+='.sorbi-cark .hn{font-size:12px}.sorbi-cark .ak .gg{font-size:20px}.sorbi-cark .ak .gd{r:13px}}';
   c+='@media(prefers-reduced-motion:reduce){.sorbi-cark .ak{transition:none}';
   c+='.sorbi-cark .ak.sec .v,.sorbi-cark .ak.hov .v{filter:none}}';
@@ -293,6 +293,9 @@ function drawWheel(inner,outer,opt){
   var yeniHalka=!outer;           /* tek çark: A · Odak dili */
   var renkMod=(opt.aciRenk==='k')?'k':'s';      /* varsayılan: S · sistem renkleri */
   var PAL=(T.aci||THEMES.night.aci)[renkMod];
+  /* çift çarkta tek doygun renk: transit doğal-natal karışımını beş renkle değil
+     tek vurgu rengiyle ayırt et (PO kararı 2026-09-25, rakip kıyası) */
+  if(outer && opt.crossMono){ var monoC=T.rx||'#E3A692', PALm={}; for(var _k in PAL) PALm[_k]=monoC; PAL=PALm; }
   var kutular=[];                  /* etiket kutuları — ev numarası çakışma çözümü için */
 
   function esc(v){ return String(v==null?'':v).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
@@ -479,6 +482,12 @@ function drawWheel(inner,outer,opt){
       siki:(x.abs<=orb*.4)?1:0, app:x.app
     });
   });
+  /* çift çarkta çizgi sayısı sınırlanır: en sıkı orb + kişisel gezegen önceliğiyle */
+  if(outer && opt.crossCap){
+    var oncelik=aciListe.slice().sort(function(p,q){ return (q.kis-p.kis)||(p.abs-q.abs); });
+    var izinli={}; oncelik.slice(0,opt.crossCap).forEach(function(x){ izinli[x.id]=1; });
+    aciListe=aciListe.filter(function(x){ return izinli[x.id]; });
+  }
   /* sakin açılış: kişisel gezegen içeren, aynası olmayan en sıkı N açı */
   var yanan={};
   if(sakin){
@@ -553,7 +562,7 @@ function drawWheel(inner,outer,opt){
   if(yeniHalka) o.push('<circle class="gobek" cx="'+cx+'" cy="'+cy+'" r="15"/>');
 
   /* ── gezegen halkası ── */
-  function ring(list,rg,rd,tickFrom,col,degCol,gsz){
+  function ring(list,rg,rd,tickFrom,col,degCol,gsz,disHalka){
     var items=list.slice().sort(function(a,b){return norm(a.lon-orient)-norm(b.lon-orient);});
     var disp=items.map(function(p){return norm(p.lon-orient);});
     var MIN = outer?8.6:9.6;
@@ -585,10 +594,12 @@ function drawWheel(inner,outer,opt){
       var cw=fs*0.575, gw=fs*1.15, gap=fs*0.32;
       var wd=dtxt.length*cw, wm=mtxt.length*cw, wr=rxVar?fs*0.72:0;
       var W=wd+gap+gw+gap+wm+wr, x0=lp[0]-W/2;
+      o.push('<g class="krsEt'+(disHalka?' krsEtDis':'')+'">');
       txtA(x0, lp[1], dtxt, degCol, fs, 'start', null, 1);
       glyph(x0+wd+gap+gw/2, lp[1], 'z'+si, fs*1.28, T.el[si%4], 0);
       txtA(x0+wd+gap+gw+gap, lp[1], mtxt, degCol, fs*0.86, 'start', null, 1);
       if(rxVar) txtA(x0+W, lp[1], 'R', T.rx, fs*0.9, 'end', 700, 1);
+      o.push('</g>');
     });
   }
 
@@ -664,8 +675,8 @@ function drawWheel(inner,outer,opt){
 
   if(outer){
     circ(R.div,T.ring,.9);
-    ring(outer.pls,R.g1,R.d1,R.zi,T.glyphB,T.degB,18);
-    ring(inner.pls,R.g2,R.d2,R.div,T.glyph,T.deg,18.5);
+    ring(outer.pls,R.g1,R.d1,R.zi,T.glyphB,T.degB,18,true);
+    ring(inner.pls,R.g2,R.d2,R.div,T.glyph,T.deg,18.5,false);
   } else {
     gezegenHalkasi();
   }

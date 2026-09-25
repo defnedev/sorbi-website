@@ -245,7 +245,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
  if(t!=='gunduz'&&t!=='gece'){
   var lat=41.0082,lon=28.9784;
   try{var b=JSON.parse(localStorage.getItem('sorbi_birth')||'null'); if(b&&+b.lat&&+b.lon){lat=+b.lat;lon=+b.lon;}}catch(e){}
-  t='gece'; /* gündüz teması yalın kaldı; şimdilik yalnız düğmeyle, gökyüzüne göre değil */
+  t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'gunduz':'gece'; /* kullanıcı seçmediyse sistem tercihi */
  }
  if(t==='gunduz') H.setAttribute('data-tema','gunduz'); else H.removeAttribute('data-tema');
  function meta(){var m=document.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute('content',H.getAttribute('data-tema')==='gunduz'?'#F6F3EC':'#0B0810');}
@@ -383,7 +383,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
     return kacta(b.biriKac);
   }
   /* sapma etiketi: %10 altı sıradan — dürüstlük kuralı bileşende, burada yalnız çağrılır */
-  function sapma(n){ var g=G(); return g?g.etiket(n,12):{kod:'siradan',ad:'sıradan',sap:0}; }
+  function sapma(n){ var g=G(); return g?g.etiket(n,12):{kod:'siradan',ad:'',sap:0}; }
   /* taban-merkezli şerit konumu: log2(pay/taban) → sol uç yarısı, sağ uç iki katı */
   function serit(p){
     var r=p>0?Math.log(p*12)/Math.LN2:-1, k=Math.max(-1,Math.min(1,r))*50;
@@ -455,7 +455,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
     var manset = enNadir
       ? { buyuk:kacKiside(enNadir.b),
           alt:(AD[enNadir.k]||enNadir.k)+' '+S[enNadir.burc]+' burcunda',
-          cum:'Herkeste '+kacta(12)+' · sende '+kacKiside(enNadir.b)+' → <b class="'+enEt.kod+'">'+esc(enEt.ad)+'</b>',
+          cum:'Herkeste '+kacta(12)+' · sende '+kacKiside(enNadir.b)+(enEt.ad?' → <b class="'+enEt.kod+'">'+esc(enEt.ad)+'</b>':''),
           not:(enEt.kod==='siradan'
             ? 'Beklenenden sapma %'+Math.round(Math.abs(enEt.sap)*100)+'. Bu bir nadirlik değil; en seyrek kişisel yerleşimin bile beklenenin yakınında.'
             : 'Beklenenden %'+Math.round(Math.abs(enEt.sap)*100)+(enEt.sap<0?' daha az':' daha çok')+' görülüyor. Haritandaki en seyrek kişisel yerleşim.')
@@ -470,8 +470,8 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
         return '<div class="satir'+(az?' nadir':'')+(ilk&&i===0?' ilk':'')+'">'+
           '<div class="ad"><span class="gl">'+GL[x.k]+'</span> <b>'+esc(AD[x.k]||x.k)+'</b> '+esc(S[x.burc])+
           (x.rx?' <span style="color:var(--terra)">℞</span>':'')+
-          '<span class="sap '+e.kod+'">'+esc(e.ad)+'</span></div>'+
-          '<div class="serit '+e.kod+'" '+serit(x.p)+' role="img" aria-label="'+esc(e.ad)+'"><i></i></div>'+
+          (e.ad?'<span class="sap '+e.kod+'">'+esc(e.ad)+'</span>':'')+'</div>'+
+          '<div class="serit '+e.kod+'" '+serit(x.p)+' role="img" aria-label="'+(e.ad?esc(e.ad):'beklenenin yakınında')+'"><i></i></div>'+
           '<div class="oran">'+esc(kacKiside(x.b))+'</div></div>';
       }).join('');
     }

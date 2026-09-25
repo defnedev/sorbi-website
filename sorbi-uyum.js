@@ -391,9 +391,7 @@ function sonucYaz(a,b){
  /* oyunlaştırma: hızlı ok tuşu gezintisi her adımı çift saymasın */
  if(GEC)W.clearTimeout(GEC);
  GEC=W.setTimeout(function(){ciftIsle(a,b);},700);
- try{W.fetch&&W.fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},
-  body:JSON.stringify({type:'uyum_hesaplandi',meta:S[a]+'-'+S[b]}),keepalive:true})
-  ['catch'](function(){});}catch(e){}
+ /* KVKK: hiçbir hesaplama sunucuya gönderilmiyor — bkz gizlilik.html */
 }
 /* aci-gosterimi bileşenini kendi kaydırıcıları üzerinden sürer */
 function aciSur(a,b){

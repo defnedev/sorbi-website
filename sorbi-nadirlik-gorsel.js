@@ -10,8 +10,9 @@
  * Dış bağımlılık yok. Renk yalnız sitenin altı rolü (--bg --ink --mut --dim --acc --acc-ink) ve alfaları;
  * SVG içinde var() doğrudan çalıştığı için tema değişince yeniden çizmeye gerek yok.
  *
- * DÜRÜSTLÜK KURALI (zorunlu): tek yerleşimde beklenenden sapma %10'un altındaysa "sıradan" yazılır.
- * Sıradan olan sıradan görünür; nadirlik sözü yalnız bileşimlerde (cetvel) mertebesiyle söylenir.
+ * DÜRÜSTLÜK KURALI (zorunlu): tek yerleşimde beklenenden sapma %10'un altındaysa hiçbir yargı
+ * sözü yazılmaz — halka zaten payı gösteriyor, "sıradan" başlığı kaldırıldı (bkz PO kararı 2026-09-25).
+ * Nadirlik sözü yalnız sapma belirginken (±%10 üstü) ya da bileşimlerde (cetvel) mertebesiyle söylenir.
  */
 (function(){
 'use strict';
@@ -68,7 +69,7 @@ function tip(n){ return (+n)<ESIK?'halka':'cetvel'; }
 /* Sapma etiketi — dürüstlük kuralı burada. */
 function etiket(n,taban){
   taban=+taban||12; var pay=taban/(+n||taban), sap=pay-1, kod, ad;
-  if(M.abs(sap)<.10){ kod='siradan'; ad='sıradan'; }
+  if(M.abs(sap)<.10){ kod='siradan'; ad=''; }
   else if(sap<0){ kod='seyrek'; ad=sap<-.35?'belirgin daha seyrek':'biraz daha seyrek'; }
   else { kod='sik'; ad=sap>.35?'belirgin daha sık':'biraz daha sık'; }
   return {kod:kod, ad:ad, sap:sap};
@@ -103,8 +104,8 @@ function halkaCiz(N,taban,alt){
     h+='<path class="sende'+(siradan?' sende-siradan':'')+'" d="'+dilim(cx,cy,r0-2,r1+2,m-yar,m+yar)+'"/>';
     h+='<text class="buyuk" x="'+cx+'" y="'+(cy-4)+'" text-anchor="middle" dominant-baseline="central">1/'+bin(N)+'</text>';
     h+='<text class="kucuk" x="'+cx+'" y="'+(cy+20)+'" text-anchor="middle" dominant-baseline="central">beklenen 1/'+bin(taban)+'</text>';
-    h+='<text class="etiket'+(siradan?' etiket-siradan':'')+'" x="'+cx+'" y="'+(cy+38)+'" text-anchor="middle" dominant-baseline="central">'+et.ad+'</text>';
-    aria='Herkeste '+yaz(taban)+', sende '+yaz(N)+' — '+et.ad+'.';
+    if(!siradan) h+='<text class="etiket" x="'+cx+'" y="'+(cy+38)+'" text-anchor="middle" dominant-baseline="central">'+et.ad+'</text>';
+    aria='Herkeste '+yaz(taban)+', sende '+yaz(N)+(siradan?'.':' — '+et.ad+'.');
   } else {
     h+='<text class="kucuk" x="'+cx+'" y="'+(cy-6)+'" text-anchor="middle" dominant-baseline="central">tek dilim değil</text>';
     h+='<text class="kucuk" x="'+cx+'" y="'+(cy+9)+'" text-anchor="middle" dominant-baseline="central">bileşim → cetvel</text>';

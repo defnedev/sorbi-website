@@ -356,7 +356,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
  if(t!=='gunduz'&&t!=='gece'){
   var lat=41.0082,lon=28.9784;
   try{var b=JSON.parse(localStorage.getItem('sorbi_birth')||'null'); if(b&&+b.lat&&+b.lon){lat=+b.lat;lon=+b.lon;}}catch(e){}
-  t='gece'; /* gündüz teması yalın kaldı; şimdilik yalnız düğmeyle, gökyüzüne göre değil */
+  t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'gunduz':'gece'; /* kullanıcı seçmediyse sistem tercihi */
  }
  if(t==='gunduz') H.setAttribute('data-tema','gunduz'); else H.removeAttribute('data-tema');
  function meta(){var m=document.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute('content',H.getAttribute('data-tema')==='gunduz'?'#F6F3EC':'#0B0810');}

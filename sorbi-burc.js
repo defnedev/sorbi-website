@@ -37,7 +37,9 @@ function G(){return W.SorbiNadirlikGorsel||null;}
 function kacta(v,t){var n=v>0?M.round(t/v):t,g=G();if(g)return g.yaz(n);
  var y=n<1000?n:M.round(n/100)*100;return bin(y)+"'de 1";}
 function sapma(v,t){var g=G(),n=v>0?M.round(t/v):t;if(g)return g.etiket(n,12);
- var sp=(12/n)-1;return {kod:M.abs(sp)<.1?'siradan':(sp<0?'seyrek':'sik'),ad:M.abs(sp)<.1?'sıradan':(sp<0?'biraz daha seyrek':'biraz daha sık'),sap:sp};}
+ var sp=(12/n)-1;return {kod:M.abs(sp)<.1?'siradan':(sp<0?'seyrek':'sik'),ad:M.abs(sp)<.1?'':(sp<0?'biraz daha seyrek':'biraz daha sık'),sap:sp};}
+/* et.ad boşsa (sapma %10 altı) yargı sözü yazılmaz — bkz nadirlik-gorsel.js dürüstlük kuralı */
+function etYaz(e,onek,sonek){ onek=onek||'';sonek=sonek||''; return e&&e.ad?onek+'<b>'+e.ad+'</b>'+sonek:''; }
 /* taban-merkezli sapma: log2(pay/taban) → -1..1 (yarısı..iki katı) */
 function sap2(v,t){var r=v>0?M.log(v/(t/12))/M.LN2:-1;return M.max(-1,M.min(1,r));}
 
@@ -139,7 +141,7 @@ function tipDagilim(d){
   z:'<b>'+bin(T)+' '+BR+'</b> içinde '+NOK[k][2]+' dağılımı: herkeste '+kacta(T/12,T)+' beklenir; en sık <i>'+S[en]+'</i> ('
    +bin(A[en])+' '+BR+', '+kacta(A[en],T)+'), en seyrek <i>'+S[az]+'</i> ('+bin(A[az])+' '+BR+', '+kacta(A[az],T)
    +'). En sık ile en seyrek arasında <b>'+kat+' kat</b> fark var.'
-   +(b0>=0?' '+S[b0]+' burcunda '+bin(me)+' '+BR+' — herkeste '+kacta(T/12,T)+' · burada '+kacta(me,T)+', <b>'+e.ad+'</b> (eşit dağılımın '
+   +(b0>=0?' '+S[b0]+' burcunda '+bin(me)+' '+BR+' — herkeste '+kacta(T/12,T)+' · burada '+kacta(me,T)+etYaz(e,', ')+' (eşit dağılımın '
      +(fk>=0?bin(M.abs(fk))+' '+BR+' üstünde':bin(M.abs(fk))+' '+BR+' altında')+').':'')
    +' Sayılar bu örneklemin kendisidir; genel bir nüfus oranı olarak değil, ölçülmüş bir dağılım olarak okunabilir.'};
  }};
@@ -246,13 +248,13 @@ function metinDoldur(){
    if(el.getAttribute('data-sayim')==='burc-ozet'){
     var e=sapma(B.sun[i],T);
     el.innerHTML='Güneş’i '+S[i]+' burcunda olan <b>'+bin(B.sun[i])+' '+BR+'</b> var: '
-     +'herkeste <b>'+kacta(esit,T)+'</b> · '+ekBulunma(S[i])+' <b>'+kacta(B.sun[i],T)+'</b> — <b>'+e.ad+'</b>. '
+     +'herkeste <b>'+kacta(esit,T)+'</b> · '+ekBulunma(S[i])+' <b>'+kacta(B.sun[i],T)+'</b>'+etYaz(e,' — ','.')+' '
      +'Eşit dağılımda her burca '+bin(esit)+' '+BR+' düşerdi; '+S[i]+' bu çizginin <b>'+bin(M.abs(fk))+' '+BR+(fk>=0?' üstünde':' altında')
      +'</b> kalıyor ve on iki burç arasında sıklık bakımından <b>'+sira(B.sun,i)+'. sırada</b>.';
    }else{
     var a=uclar(B.moon),y=uclar(B.asc);
     el.innerHTML='Aynı burç Ay’da '+bin(B.moon[i])+' '+BR+' ('+kacta(B.moon[i],T)+', '+sira(B.moon,i)
-     +'. sıra), yükselende '+bin(B.asc[i])+' '+BR+' ('+kacta(B.asc[i],T)+', '+sapma(B.asc[i],T).ad+', '+sira(B.asc,i)+'. sıra). '
+     +'. sıra), yükselende '+bin(B.asc[i])+' '+BR+' ('+kacta(B.asc[i],T)+(sapma(B.asc[i],T).ad?', '+sapma(B.asc[i],T).ad:'')+', '+sira(B.asc,i)+'. sıra). '
      +'Güneş ve Ay dağılımları neredeyse düz: Güneş’te en sık <b>'+S[g.en]+'</b> ile en seyrek <b>'+S[g.az]
      +'</b> arasında yalnızca <b>'+vir(g.kat,2)+' kat</b>, Ay’da '+vir(a.kat,2)+' kat fark var. '
      +'Yükselende fark <b>'+vir(y.kat,2)+' kata</b> çıkıyor — çünkü burçlar ufuktan eşit sürede doğmaz, '
