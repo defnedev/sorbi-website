@@ -31,7 +31,15 @@ var NOK=[['sun','Güneş burcu','Güneş'],['moon','Ay burcu','Ay'],['asc','Yük
 function bin(n){var s=String(M.round(n)),o='',i=s.length;
  while(i>3){o='.'+s.slice(i-3,i)+o;i-=3;}return s.slice(0,i)+o;}
 function vir(x,b){var s=(+x).toFixed(b==null?1:b);return s.replace('.',',');}
-function yuz(v,t){return vir(v/t*100)+'%';}
+/* ── nadirlik yazımı: tek kural (sorbi-nadirlik-gorsel.js) — "12'de 1", "1.300'de 1".
+   Yüzde ana metinden kalkar; sayı servisten gelir, burada yalnız biçimlenir. ── */
+function G(){return W.SorbiNadirlikGorsel||null;}
+function kacta(v,t){var n=v>0?M.round(t/v):t,g=G();if(g)return g.yaz(n);
+ var y=n<1000?n:M.round(n/100)*100;return bin(y)+"'de 1";}
+function sapma(v,t){var g=G(),n=v>0?M.round(t/v):t;if(g)return g.etiket(n,12);
+ var sp=(12/n)-1;return {kod:M.abs(sp)<.1?'siradan':(sp<0?'seyrek':'sik'),ad:M.abs(sp)<.1?'sıradan':(sp<0?'biraz daha seyrek':'biraz daha sık'),sap:sp};}
+/* taban-merkezli sapma: log2(pay/taban) → -1..1 (yarısı..iki katı) */
+function sap2(v,t){var r=v>0?M.log(v/(t/12))/M.LN2:-1;return M.max(-1,M.min(1,r));}
 
 /* ── Türkçe belirtme eki (-ı/-i/-u/-ü, sesliden sonra kaynaştırma -y-) ──
    Özel ad olduğu için kesme işaretiyle yazılır ve ünsüz yumuşaması UYGULANMAZ:
@@ -43,15 +51,16 @@ function kucult(h){
  if(h==='I')return 'ı'; if(h==='İ')return 'i';
  return h.toLocaleLowerCase('tr');
 }
-/* Ayrılma hali (-dan/-den/-tan/-ten): sert ünsüzden sonra t, sonra kalın/ince uyumu. */
+/* Bulunma hali (-da/-de/-ta/-te), özel ad: "Koç’ta", "Boğa’da", "İkizler’de".
+   Sert ünsüzden sonra t, sonra kalın/ince uyumu. */
 var SERT='fstkçşhp';
-function ekAyrilma(ad){
+function ekBulunma(ad){
  if(!ad)return '';
  var son=null,i,h;
  for(i=ad.length-1;i>=0;i--){h=ad.charAt(i);if(SESLI.indexOf(h)>=0){son=kucult(h);break;}}
  var ince=('eiöü'.indexOf(son)>=0);
  var d=(SERT.indexOf(kucult(ad.charAt(ad.length-1)))>=0)?'t':'d';
- return ad+d+(ince?'en':'an');
+ return ad+'’'+d+(ince?'e':'a');
 }
 function ekBelirtme(ad){
  if(!ad)return '';
@@ -89,31 +98,35 @@ function tipDagilim(d){
  en:1000,boy:function(G){return G<520?1.02:.52;},adet:3,hiz:2200,kare:0,durak:0,
  kay:[{ad:'k',min:0,max:2,etiket:'Nokta seç: Güneş burcu, Ay burcu, yükselen burç'}],
  ciz:function(c){
-  var o=c.o,G=c.G,Y=c.Y,k=c.k%3,V=c.veri||{},B=V.b||{},T=+V.t||0,A=B[NOK[k][0]];
-  var BR=(V.k&&V.k.birim)||'kayıt';
-  o.fillStyle=C.bg;o.fillRect(0,0,G,Y);
+  var o=c.o,G_=c.G,Y=c.Y,k=c.k%3,V=c.veri||{},B=V.b||{},T=+V.t||0,A=B[NOK[k][0]];
+  o.fillStyle=C.bg;o.fillRect(0,0,G_,Y);
   function yz(m,x,y,f,r,h){o.fillStyle=r;o.font=f+' ui-monospace,Menlo,monospace';
    o.textAlign=h||'left';o.textBaseline='middle';o.fillText(m,x,y);}
-  if(!A||!A.length||!T){yz('Veri yüklenemedi',G/2,Y/2,'12px',C.dim,'center');return;}
-  var az=G<430,LW=az?26:100,RW=az?54:112,ust=az?30:34,alt=Y-(az?18:22);
-  var x0=LW,x1=G-RW,gen=M.max(30,x1-x0),h=(alt-ust)/12,mx=0,i,v;
-  for(i=0;i<12;i++)mx=M.max(mx,A[i]);
-  var esit=T/12,ex=x0+esit/mx*gen;
-  yz(az?NOK[k][1]:NOK[k][1]+' · '+bin(T)+' '+BR+' içinde',0,ust/2,az?'11px':'13px',C.ink);
-  if(!az)yz('eşit dağılım '+bin(esit),G,ust/2,'11px',C.dim,'right');
+  if(!A||!A.length||!T){yz('Veri yüklenemedi',G_/2,Y/2,'12px',C.dim,'center');return;}
+  /* Taban-merkezli sapma şeridi: ortadaki çizgi "12'de 1" (on iki burca eşit dağılım),
+     çubuk ondan sola (seyrek) ya da sağa (sık) sapar. Ölçek logaritmik: sol uç yarısı,
+     sağ uç iki katı — nadirlik.html'deki satır şeridiyle aynı dil. Sıfır tabanlı çubuk kaldırıldı. */
+  var az=G_<430,LW=az?26:100,RW=az?60:150,ust=az?30:34,alt=Y-(az?30:36);
+  var x0=LW,x1=G_-RW,gen=M.max(30,x1-x0),xm=x0+gen/2,yar=gen/2,h=(alt-ust)/12,i,v;
+  yz(az?NOK[k][1]:NOK[k][1]+' · '+bin(T)+' '+((V.k&&V.k.birim)||'kayıt')+' içinde',0,ust/2,az?'11px':'13px',C.ink);
+  if(!az)yz('← seyrek · sık →',G_-RW,ust/2,'11px',C.dim,'right');
+  /* taban çizgisi + etiketi */
+  o.fillStyle=tkr('--ink',.08);o.fillRect(x0,ust,gen,alt-ust);
+  o.strokeStyle=tkr('--ink',.6);o.lineWidth=2;
+  o.beginPath();o.moveTo(xm,ust-4);o.lineTo(xm,alt+4);o.stroke();
   for(i=0;i<12;i++){
-   v=A[i];var y=ust+h*i,ym=y+h/2,bw=M.max(1,v/mx*gen),se=i===b0;
-   o.globalAlpha=se?.95:.44;o.fillStyle=se?C.gbr:ELC[i%4];
-   o.beginPath();o.rect(x0,y+h*.18,bw,h*.64);o.fill();o.globalAlpha=1;
-   if(se){o.strokeStyle=C.gbr;o.lineWidth=1;o.stroke();}
+   v=A[i];var y=ust+h*i,ym=y+h/2,se=i===b0,d=sap2(v,T),e=sapma(v,T),bw=M.max(2,M.abs(d)*yar),bx=d<0?xm-bw:xm;
+   if(se){o.fillStyle=tkr('--ink',.07);o.fillRect(0,y+h*.06,G_,h*.88);}
+   o.globalAlpha=se?.95:(e.kod==='siradan'?.35:.6);o.fillStyle=se?C.gbr:(e.kod==='siradan'?C.ink:C.gld);
+   o.beginPath();o.rect(bx,y+h*.2,bw,h*.6);o.fill();o.globalAlpha=1;
    yz(SG[i],az?0:2,ym,az?'11px':'12px',se?C.gbr:C.dim);
    if(!az)yz(S[i],22,ym,'11px',se?C.ink:C.mut);
-   yz(az?yuz(v,T):bin(v)+'  '+yuz(v,T),G,ym,az?'9px':'11px',se?C.gbr:C.mut,'right');
+   yz(az?kacta(v,T):bin(v)+'  '+kacta(v,T),G_,ym,az?'10px':'11px',se?C.gbr:C.mut,'right');
   }
-  o.setLineDash([4,4]);o.strokeStyle=tkr('--ink',.6);o.lineWidth=1;
-  o.beginPath();o.moveTo(ex,ust);o.lineTo(ex,alt);o.stroke();o.setLineDash([]);
-  yz(az?'kesikli çizgi: eşit dağılım '+bin(esit)
-     :'kesikli çizgi: on iki burca eşit dağılım',x0,(alt+Y)/2,az?'9px':'10px',C.dim);
+  /* taban etiketi çizginin hemen altında, açıklama bir satır aşağıda */
+  yz('herkeste '+kacta(T/12,T),xm,alt+(az?12:11),az?'9px':'11px',C.ink,'center');
+  if(az)yz('← seyrek · sık →  ·  %10 altı sapma sıradan',x0,alt+24,'9px',C.dim);
+  else yz('ortadaki çizgi: on iki burca eşit dağılım · %10 altı sapma sıradan sayılır',x0,alt+27,'10px',C.dim);
  },
  metin:function(c){
   var k=c.k%3,V=c.veri||{},B=V.b||{},T=+V.t||0,A=B[NOK[k][0]];
@@ -121,13 +134,13 @@ function tipDagilim(d){
   if(!A||!A.length||!T)return{o:'Veri yüklenemedi',z:''};
   var en=0,az=0,i;
   for(i=1;i<12;i++){if(A[i]>A[en])en=i;if(A[i]<A[az])az=i;}
-  var kat=vir(A[en]/A[az],2),me=b0>=0?A[b0]:0,fk=b0>=0?me-T/12:0;
-  return{o:NOK[k][1]+' · en sık <b>'+S[en]+'</b> '+yuz(A[en],T)+' · en seyrek <b>'+S[az]+'</b> '+yuz(A[az],T),
-  z:'<b>'+bin(T)+' '+BR+'</b> içinde '+NOK[k][2]+' dağılımı: en sık <i>'+S[en]+'</i> ('
-   +bin(A[en])+' '+BR+', '+yuz(A[en],T)+'), en seyrek <i>'+S[az]+'</i> ('+bin(A[az])+' '+BR+', '+yuz(A[az],T)
+  var kat=vir(A[en]/A[az],2),me=b0>=0?A[b0]:0,fk=b0>=0?me-T/12:0,e=b0>=0?sapma(me,T):null;
+  return{o:NOK[k][1]+' · en sık <b>'+S[en]+'</b> '+kacta(A[en],T)+' · en seyrek <b>'+S[az]+'</b> '+kacta(A[az],T),
+  z:'<b>'+bin(T)+' '+BR+'</b> içinde '+NOK[k][2]+' dağılımı: herkeste '+kacta(T/12,T)+' beklenir; en sık <i>'+S[en]+'</i> ('
+   +bin(A[en])+' '+BR+', '+kacta(A[en],T)+'), en seyrek <i>'+S[az]+'</i> ('+bin(A[az])+' '+BR+', '+kacta(A[az],T)
    +'). En sık ile en seyrek arasında <b>'+kat+' kat</b> fark var.'
-   +(b0>=0?' '+S[b0]+' burcunda '+bin(me)+' '+BR+' ('+yuz(me,T)+') — eşit dağılımın '
-     +(fk>=0?bin(M.abs(fk))+' '+BR+' üstünde':bin(M.abs(fk))+' '+BR+' altında')+'.':'')
+   +(b0>=0?' '+S[b0]+' burcunda '+bin(me)+' '+BR+' — herkeste '+kacta(T/12,T)+' · burada '+kacta(me,T)+', <b>'+e.ad+'</b> (eşit dağılımın '
+     +(fk>=0?bin(M.abs(fk))+' '+BR+' üstünde':bin(M.abs(fk))+' '+BR+' altında')+').':'')
    +' Sayılar bu örneklemin kendisidir; genel bir nüfus oranı olarak değil, ölçülmüş bir dağılım olarak okunabilir.'};
  }};
 }
@@ -224,21 +237,22 @@ function metinDoldur(){
   yaz('kunye',K.yil+' aralığından örneklenmiş <b>'+N+' '+BR+'</b>, '+K.yer.split('—')[0].trim()+' için hesaplandı');
   yaz('yontem',K.yontem);
   var g=uclar(B.sun);
-  yaz('burc-aralik','on iki burcun payı '+yuz(B.sun[g.az],T)+' ile '+yuz(B.sun[g.en],T)
-   +' arasında, birbirine çok yakın.');
+  var kA=kacta(B.sun[g.az],T),kE=kacta(B.sun[g.en],T);
+  yaz('burc-aralik','on iki burcun payı birbirine çok yakın — '+(kA===kE?'en seyreği de en sığı da '+kA:kA+' ile '+kE+' arasında')
+   +', yani herkes için beklenenin ('+kacta(T/12,T)+') hemen yanında.');
   [].forEach.call(D.querySelectorAll('[data-sayim="burc-ozet"],[data-sayim="burc-karsilastir"]'),function(el){
    var i=S.indexOf(el.getAttribute('data-burc'));if(i<0)return;
    var esit=T/12,fk=B.sun[i]-esit;
    if(el.getAttribute('data-sayim')==='burc-ozet'){
+    var e=sapma(B.sun[i],T);
     el.innerHTML='Güneş’i '+S[i]+' burcunda olan <b>'+bin(B.sun[i])+' '+BR+'</b> var: '
-     +N+' '+BR+' içinde <b>'+yuz(B.sun[i],T)+'</b>. Eşit dağılımda her burca '+bin(esit)+' '+BR
-     +' düşerdi; '+S[i]+' bu çizginin <b>'+bin(M.abs(fk))+' '+BR+(fk>=0?' üstünde':' altında')
-     +'</b> kalıyor ve on iki burç arasında sıklık bakımından <b>'+sira(B.sun,i)+'. sırada</b>. '
-     +'Örneklemde kabaca her <b>'+bin(Math.round(T/B.sun[i]))+' '+ekAyrilma(BR)+' biri</b> bu Güneş burcunu taşıyor.';
+     +'herkeste <b>'+kacta(esit,T)+'</b> · '+ekBulunma(S[i])+' <b>'+kacta(B.sun[i],T)+'</b> — <b>'+e.ad+'</b>. '
+     +'Eşit dağılımda her burca '+bin(esit)+' '+BR+' düşerdi; '+S[i]+' bu çizginin <b>'+bin(M.abs(fk))+' '+BR+(fk>=0?' üstünde':' altında')
+     +'</b> kalıyor ve on iki burç arasında sıklık bakımından <b>'+sira(B.sun,i)+'. sırada</b>.';
    }else{
     var a=uclar(B.moon),y=uclar(B.asc);
-    el.innerHTML='Aynı burç Ay’da '+bin(B.moon[i])+' '+BR+' ('+yuz(B.moon[i],T)+', '+sira(B.moon,i)
-     +'. sıra), yükselende '+bin(B.asc[i])+' '+BR+' ('+yuz(B.asc[i],T)+', '+sira(B.asc,i)+'. sıra). '
+    el.innerHTML='Aynı burç Ay’da '+bin(B.moon[i])+' '+BR+' ('+kacta(B.moon[i],T)+', '+sira(B.moon,i)
+     +'. sıra), yükselende '+bin(B.asc[i])+' '+BR+' ('+kacta(B.asc[i],T)+', '+sapma(B.asc[i],T).ad+', '+sira(B.asc,i)+'. sıra). '
      +'Güneş ve Ay dağılımları neredeyse düz: Güneş’te en sık <b>'+S[g.en]+'</b> ile en seyrek <b>'+S[g.az]
      +'</b> arasında yalnızca <b>'+vir(g.kat,2)+' kat</b>, Ay’da '+vir(a.kat,2)+' kat fark var. '
      +'Yükselende fark <b>'+vir(y.kat,2)+' kata</b> çıkıyor — çünkü burçlar ufuktan eşit sürede doğmaz, '

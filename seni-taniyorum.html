@@ -17,6 +17,7 @@
 <script src="/sorbi-astro.js?v=4" defer></script>
 <script src="/sorbi-dignite.js?v=2" defer></script>
 <script src="/sorbi-nadir.js?v=1" defer></script>
+<script src="/sorbi-nadirlik-gorsel.js?v=1" defer></script>
 <script src="/sorbi-yildiz-say.js?v=1" defer></script>
 <script src="/sorbi-yildiz.js?v=1" defer></script>
 <script src="/sorbi-sohbet.js?v=1" defer></script>
@@ -60,8 +61,8 @@ input{width:100%;background:rgba(var(--bg-rgb),.6);border:1px solid var(--line2)
 .nadir .nsub{margin-top:.42rem;font-size:.79rem;color:var(--mut);line-height:1.55;text-wrap:balance}
 .nadir .nsub b{white-space:nowrap;color:var(--ink);font-weight:600}
 @media(min-width:520px){.nadir .nbig{font-size:1.34rem}}
-.nadir .nbar{margin:.65rem auto 0;width:212px;height:3px;border-radius:2px;background:var(--line2);position:relative;overflow:hidden}
-.nadir .nbar i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,var(--gold),var(--gold-br));border-radius:2px}
+/* bileşim mertebesi: kademe cetveli (sorbi-nadirlik-gorsel.js); yüzdelik çubuğu kaldırıldı */
+.nadir .ncetvel{margin:.7rem auto 0;max-width:430px}
 .nadir details{margin-top:.55rem}
 .nadir summary{font-size:13px;color:rgba(var(--ink-rgb),.45);cursor:pointer;list-style:none;text-decoration:underline;text-underline-offset:3px}
 .nadir summary::-webkit-details-marker{display:none}
@@ -733,6 +734,7 @@ document.getElementById('go').onclick=()=>{
   document.getElementById('crTitle').textContent=arch;
   document.getElementById('crSub').textContent=ARCH_SUB[su];
   // nadirlik: gokyuzunun kendi dagilimi (sorbi-nadir.js) — uydurma degil, hesaplanmis
+  // yazim tek kural (sorbi-nadirlik-gorsel.js): "1.300'de 1"; bilesen yoksa ayni bicim burada kurulur
   window._sorbiPay=null;
   try{
    const N=window.SorbiNadir;
@@ -742,10 +744,11 @@ document.getElementById('go').onclick=()=>{
     if(!noTime){
      const u=N.uclu(su,mo,as);
      const enNadirYuzde=Math.max(1,u.yuzdelik);
-     el.innerHTML=`<div class="nbig">Bu üçlü, <b>100.000 kişiden yalnızca ${u.yuzbinde}</b> kişide oluşuyor</div>
-      <div class="nsub">${SIGNS[su]} ☉ · ${SIGNS[mo]} ☽ · ${SIGNS[as]} ↑ — yaklaşık <b>${u.biriKac.toLocaleString('tr-TR')} kişide bir</b>.<br>1728 kombinasyon içinde en nadir %${enNadirYuzde}'lik dilimde.</div>
-      <div class="nbar"><i style="width:${Math.max(4,100-u.yuzdelik)}%"></i></div>
-      <details><summary>Bu sayı nereden geliyor?</summary><div class="nnote">1960–2012 arası 20 dakikada bir örneklenmiş <b>${N.ornek.toLocaleString('tr-TR')}</b> gök anından hesaplandı (İstanbul enlemi). Bu, gökyüzünün kendi dağılımı — doğum istatistiği değil. Tek tek yerleşimlerin sıklığı <a href="/nadirlik">Nadirlik</a>'te ayrı bir örneklemle (210.384 harita, 1930–2025) sayılır; oranlar arasında küçük farklar bundandır.</div></details>`;
+     el.innerHTML=`<div class="nbig">Bu üçlü <b>${kacta(u.biriKac)}</b></div>
+      <div class="nsub">${SIGNS[su]} ☉ · ${SIGNS[mo]} ☽ · ${SIGNS[as]} ↑ — ${insanOlcek(u.biriKac)}.<br>1.728 üçlü içinde seyreklik sırası ${u.sira}.</div>
+      <div class="ncetvel" data-sorbi-nadirlik="cetvel" data-n="${u.biriKac}"></div>
+      <details><summary>Bu sayı nereden geliyor?</summary><div class="nnote">1960–2012 arası 20 dakikada bir örneklenmiş <b>${N.ornek.toLocaleString('tr-TR')}</b> gök anından hesaplandı (İstanbul enlemi): 100.000 anın ${u.yuzbinde}'inde, en nadir %${enNadirYuzde}'lik dilimde. Bu, gökyüzünün kendi dağılımı — doğum istatistiği değil. Tek tek yerleşimlerin sıklığı <a href="/nadirlik">Nadirlik</a>'te ayrı bir örneklemle (210.384 harita, 1930–2025) sayılır; oranlar arasında küçük farklar bundandır.</div></details>`;
+     try{ if(window.SorbiNadirlikGorsel) window.SorbiNadirlikGorsel.kur(el); }catch(e){}
      window._sorbiPay={uclu:u, ikili:ik, as:as};
      // paylasilan baglantidan gelen ucluyle karsilastir (viral dongu buradan kapaniyor)
      try{
@@ -766,7 +769,7 @@ document.getElementById('go').onclick=()=>{
      }catch(e){}
     }else{
      el.innerHTML=`<div class="nbig">Bu anın adı <b>144 addan biri</b></div>
-      <div class="nsub">${SIGNS[su]} ☉ · ${SIGNS[mo]} ☽ — yaklaşık <b>${ik.biriKac} kişide bir</b>.<br>Doğum saatini bilseydin yükselenini de katıp çok daha nadir bir üçlü çıkarabilirdim.</div>
+      <div class="nsub">${SIGNS[su]} ☉ · ${SIGNS[mo]} ☽ — <b>${kacta(ik.biriKac)}</b>.<br>Doğum saatini bilseydin yükselenini de katıp çok daha nadir bir üçlü çıkarabilirdim.</div>
       <details><summary>Bu sayı nereden geliyor?</summary><div class="nnote">1960–2012 arası 20 dakikada bir örneklenmiş <b>${N.ornek.toLocaleString('tr-TR')}</b> gök anından hesaplandı. Bu, gökyüzünün kendi dağılımı — doğum istatistiği değil. Tek tek yerleşimlerin sıklığı <a href="/nadirlik">Nadirlik</a>'te ayrı bir örneklemle (210.384 harita, 1930–2025) sayılır.</div></details>`;
      window._sorbiPay={uclu:null, ikili:ik, as:null};
      try{ if(window.SorbiKarsilastir) window._sorbiKendi={su:su,mo:mo}; }catch(e){}
@@ -807,8 +810,8 @@ document.getElementById('go').onclick=()=>{
      gos.forEach(function(b,i){
       var n = (b.ppm===null)
         ? (b.tur==='yildiz' ? '<span class="ny-n">1960–2012 gökyüzünde hiç oluşmadı</span>' : '')
-        : (b.yuzbinde<1 ? '<span class="ny-n">yüz binde birden az</span>'
-                        : '<span class="ny-n">yüz bin kişiden '+b.yuzbinde.toLocaleString('tr-TR')+' kişide</span>');
+        : (b.yuzbinde<1 ? '<span class="ny-n">'+kacta(100000)+'\'den seyrek</span>'
+                        : '<span class="ny-n">'+kacta(kactaPpm(b.ppm))+'</span>');
       var ank=(b.anahtar||b.tur||'').replace(/"/g,'');
       hh+='<div class="ny-k'+(i===0?' ust':'')+'" style="animation-delay:'+(i*90)+'ms">'+
        '<div class="ny-t"><span class="ny-b">'+b.baslik+'</span><span class="ny-o">'+b.olcu+'</span></div>'+
@@ -889,6 +892,18 @@ document.querySelectorAll('#react .rbtns button').forEach(b=>{b.onclick=()=>{
  document.getElementById('rthanks').textContent=msg;
  try{fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'seni_taniyorum_react',meta:r}),keepalive:true});}catch(e){}
 };});
+// nadirlik yazimi — tek kural: N < 1.000 tam, sonra yuzluge yuvarlanir; "1.300'de 1"
+function kacta(n){
+ var g=window.SorbiNadirlikGorsel; if(g) return g.yaz(n);
+ var y=n<1000?Math.round(n):Math.round(n/100)*100;
+ return y.toLocaleString('tr-TR')+"'de 1";
+}
+// ppm'den (milyonda) kac kiside bire; ppm yoksa null
+function kactaPpm(ppm){ return (ppm===null||ppm===undefined||!ppm)?null:Math.round(1e6/ppm); }
+function insanOlcek(n){
+ var g=window.SorbiNadirlikGorsel; if(g) return g.insan(n);
+ return n<=1000?'bir mahallede yaklaşık '+Math.max(1,Math.round(1000/n))+' kişi':'bir ilçede yaklaşık '+Math.max(1,Math.round(100000/n))+' kişi';
+}
 // text share (no image card — just a viral link)
 function sorbiPaylasMetni(){
  const a=window._sorbiArch, p=window._sorbiPay;
@@ -896,10 +911,10 @@ function sorbiPaylasMetni(){
  // en nadir yerlesim varsa kanca o: "herkeste olmaz" en paylasilabilir cumle
  var y=window._sorbiYer;
  if(y && y.yuzbinde && y.yuzbinde<2000){
-  return `${y.baslik} — yüz bin kişiden yalnızca ${y.yuzbinde.toLocaleString('tr-TR')} kişide. Doğduğum anın adı: “${a}”. Seninkinde ne var?`;
+  return `${y.baslik} — ${kacta(kactaPpm(y.ppm))}. Doğduğum anın adı: “${a}”. Seninkinde ne var?`;
  }
- if(p&&p.uclu) return `Doğduğum anın adı: “${a}” ✦ Bu üçlü yaklaşık ${p.uclu.biriKac.toLocaleString('tr-TR')} kişide bir çıkıyor. Sen kaçta birsin?`;
- if(p&&p.ikili) return `Doğduğum anın adı: “${a}” ✦ 144 addan biri, yaklaşık ${p.ikili.biriKac} kişide bir. Sen kaçta birsin?`;
+ if(p&&p.uclu) return `Doğduğum anın adı: “${a}” ✦ Bu üçlü ${kacta(p.uclu.biriKac)}. Sen kaçta birsin?`;
+ if(p&&p.ikili) return `Doğduğum anın adı: “${a}” ✦ 144 addan biri, ${kacta(p.ikili.biriKac)}. Sen kaçta birsin?`;
  return `Doğduğum anın adı: “${a}” ✦ Seninkinin adı ne?`;
 }
 function sorbiGeriBildir(btn,söz){
@@ -1052,11 +1067,11 @@ document.getElementById('copyBtn').onclick=async()=>{
    var u=P.uclu||P.ikili;
    d.push({tur:'sayi', ad:'Kaçta bir', damga:damga, url:url,
     etiket:P.uclu?'Bu üçlü':'Bu ikili',
-    sayi:(u.biriKac||0).toLocaleString('tr-TR'),
-    birim:'kişide bir',
+    sayi:kacta(u.biriKac||0).replace(/ 1$/,''),
+    birim:'1 kişi',
     ucluMetin:glifSat,
     dilim:P.uclu
-      ? ('1728 kombinasyon içinde en nadir %'+Math.max(1,P.uclu.yuzdelik)+"'lik dilimde")
+      ? ('1.728 üçlü içinde seyreklik sırası '+P.uclu.sira)
       : '144 addan biri — doğum saatiyle çok daha nadirleşir',
     kaynak:kaynakSatiri(),
     soru:'Sen kaçta birsin?'});
@@ -1069,8 +1084,8 @@ document.getElementById('copyBtn').onclick=async()=>{
       Kart da ayni susmayi uygulamali. */
    var n = (Y.ppm===null || Y.ppm===undefined)
      ? (Y.tur==='yildiz' ? '1960–2012 gökyüzünde hiç oluşmadı' : '')
-     : (Y.yuzbinde<1 ? 'yüz binde birden az'
-                     : 'yüz bin kişiden '+Y.yuzbinde.toLocaleString('tr-TR')+' kişide');
+     : (Y.yuzbinde<1 ? kacta(100000)+"'den seyrek"
+                     : kacta(kactaPpm(Y.ppm)));
    d.push({tur:'yerlesim', ad:'Herkeste olmayan', damga:damga, url:url,
     etiket:'Herkeste olmayan',
     baslik:duzMetin(Y.baslik), olcu:duzMetin(Y.olcu),
@@ -1089,7 +1104,7 @@ document.getElementById('copyBtn').onclick=async()=>{
      altbaslik:(document.getElementById('crSub')||{textContent:''}).textContent,
      ucluMetin:(document.querySelector('.nadir .nsub')||{textContent:''}).textContent.split('—')[0].trim(),
      nadirSatir:(document.querySelector('.nadir .nbig')||{textContent:''}).textContent
-                 .replace(/^Bu üçlü,\s*/,'').replace(/\s*oluşuyor$/,''),
+                 .replace(/^Bu üçlü,?\s*/,'').replace(/\s*oluşuyor$/,''),
      svg:svgKisaKunye(w), kaynak:kaynakSatiri(), soru:'Sen kaçta birsin?'});
    }
   }catch(e){}

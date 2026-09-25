@@ -298,6 +298,9 @@ function kunyeBas(K){
  for(var i=0;i<L.length;i++)L[i].textContent=K.yil+' aralığından örneklenmiş '
   +W.SorbiSayim.bin(K.n)+' '+K.birim+' tek tek sayılarak';
 }
+/* Pay yazımı tek kural (sorbi-nadirlik-gorsel.js): "12'de 1"; yüzde yalnız dipnotta. */
+function kacta(p){var n=p>0?M.round(1/p):0,g=W.SorbiNadirlikGorsel;if(g)return g.yaz(n);
+ var y=n<1000?n:M.round(n/100)*100;return bin(y)+"'de 1";}
 function veriYaz(a,b){
  var el=D.getElementById('uyVeri');if(!el)return;
  if(VERI_DURUM!==1||a==null||b==null){el.hidden=true;return;}
@@ -306,16 +309,15 @@ function veriYaz(a,b){
  el.hidden=false;
  el.innerHTML='<h2>Ölçülmüş Veri</h2>'
  +'<p class="uy-g">Örneklenen '+esc(W.SorbiSayim.bin(K.n))+' '+esc(K.birim)+' içinde Güneş’i <b>'+esc(S[a])
- +'</b> burcunda olan <b>'+bin(A)+'</b> '+esc(K.birim)+' var (%'+vir(pa*100)+'). '
+ +'</b> burcunda olan <b>'+bin(A)+'</b> '+esc(K.birim)+' var — herkeste '+kacta(1/12)+' beklenir, burada <b>'+kacta(pa)+'</b>. '
  +(ayni?'Aynı burç seçildiği için tek pay kullanılıyor.'
- :'Güneş’i <b>'+esc(S[b])+'</b> burcunda olan <b>'+bin(B)+'</b> '+esc(K.birim)+' var (%'+vir(pb*100)+').')+'</p>'
+ :'Güneş’i <b>'+esc(S[b])+'</b> burcunda olan <b>'+bin(B)+'</b> '+esc(K.birim)+' var — <b>'+kacta(pb)+'</b>.')+'</p>'
  +'<p class="uy-g">Bu örneklemden birbirinden bağımsız iki kişi seçilseydi ikisinin Güneş burcu bu ikili olurdu: '
- +(ayni?'%'+vir(pa*100)+' × %'+vir(pa*100):'2 × %'+vir(pa*100)+' × %'+vir(pb*100))
- +' = <b>%'+vir(ort*100,2)+'</b>.</p>'
+ +'<b>'+kacta(ort)+'</b> ('+(ayni?kacta(pa)+' × '+kacta(pa):'2 × '+kacta(pa)+' × '+kacta(pb))+').</p>'
  +'<p class="uy-k">Örneklemde çiftler ölçülmedi: sayım tek tek kayıtların burç dağılımını tutuyor ('
  +esc(K.yil)+'). '
  +'Yukarıdaki iki sayı doğrudan ölçüm, üçüncü satır ise bu iki paydan türetilmiş bir hesap — '
- +'gözlenmiş bir çift sıklığı değil.</p>';
+ +'gözlenmiş bir çift sıklığı değil. Yüzde olarak: %'+vir(pa*100)+(ayni?'':' ve %'+vir(pb*100))+' → %'+vir(ort*100,2)+'.</p>';
 }
 
 /* ══ 6 · SONUÇ PANELİ ═════════════════════════════════════════════════════ */

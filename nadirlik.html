@@ -77,40 +77,55 @@ button.ana:hover{background:var(--gold)}
 button.ana:disabled{opacity:.5;cursor:default}
 .st{font-size:.82rem;color:var(--dim);min-height:1.2em;margin-top:.5rem}
 .st.hata{color:var(--terra)}
-/* sonuç manşeti: tek büyük sayı + tek cümle + 100 nokta */
+/* sonuç manşeti: taban halkası + tek büyük sayı + tabanlı cümle.
+   100 noktalı ızgara kaldırıldı: manşet ters oran (13'te 1), noktalar düz oran (%8) — iki ölçek aynı kartta çöküyordu. */
 .manset{border:1px solid rgba(var(--ink-rgb),.3);background:linear-gradient(160deg,rgba(var(--ink-rgb),.21),rgba(var(--ink-rgb),.10));border-radius:20px;
- padding:1.6rem 1.5rem;margin:1.4rem 0;display:grid;grid-template-columns:1fr auto;gap:1.2rem 2rem;align-items:center}
+ padding:1.6rem 1.5rem;margin:1.4rem 0;display:grid;grid-template-columns:150px 1fr;gap:1.2rem 1.6rem;align-items:center}
+.manset .halka{width:150px}
 .manset .et{font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin-bottom:.45rem}
-.manset .buyuk{font-family:Fraunces,Georgia,serif;font-size:clamp(2.6rem,9vw,4.4rem);font-weight:600;
+.manset .buyuk{font-family:Fraunces,Georgia,serif;font-size:clamp(2.4rem,8vw,4rem);font-weight:600;
  color:var(--gold-br);line-height:.98;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.manset .buyuk small{font-size:.42em;color:var(--mut);font-weight:500;letter-spacing:0}
 .manset .alt{font-family:Fraunces,Georgia,serif;font-size:clamp(1.15rem,3vw,1.45rem);color:var(--ink);margin-top:.55rem;font-weight:500;line-height:1.25}
+.manset .cum{font-family:Fraunces,Georgia,serif;font-size:1.02rem;margin-top:.5rem;line-height:1.3}
+.manset .cum b{color:var(--gold);font-weight:600}
+.manset .cum b.siradan{color:var(--ink)}
 .manset .not{font-size:.86rem;color:var(--mut);margin-top:.45rem;font-weight:300;max-width:46ch}
 .manset .aksiyon{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem;grid-column:1/-1}
 .manset .aksiyon .ana{margin:0}
-.noktalar{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;width:150px;justify-self:end}
-.noktalar i{display:block;aspect-ratio:1;border-radius:50%;background:rgba(var(--ink-rgb),.16)}
-.noktalar i.on{background:var(--gold-br);box-shadow:0 0 6px rgba(var(--ink-rgb),.45)}
-.noktalar+.nokta-alt{grid-column:2;font-size:.7rem;color:var(--dim);text-align:right;justify-self:end;margin-top:-.7rem;letter-spacing:.04em}
-@media(max-width:560px){.manset{grid-template-columns:1fr;padding:1.3rem 1.1rem}.noktalar{justify-self:start;width:140px}.noktalar+.nokta-alt{grid-column:1;justify-self:start;text-align:left}}
+@media(max-width:560px){.manset{grid-template-columns:1fr;gap:.6rem;padding:1.3rem 1.1rem}.manset .halka{width:168px;margin:0 auto .2rem}.manset>div:nth-child(2){text-align:center}.manset .not{margin-left:auto;margin-right:auto}}
+/* kademe cetveli: bileşimler (üçlü, katalog) mertebesiyle */
+.cetvel{border:1px solid var(--stroke);border-radius:16px;padding:1rem 1rem .6rem;margin:.6rem 0 .4rem;background:var(--card)}
+.cetvel .b{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:.3rem}
+.cetvel .cum{font-family:Fraunces,Georgia,serif;font-size:1.05rem;line-height:1.3;margin-bottom:.3rem}
+.cetvel .cum b{color:var(--gold);font-weight:600}
+.cetvel .cum i{font-style:italic;color:var(--mut)}
 /* listeler */
 h2{font-family:Fraunces,Georgia,serif;font-size:1.1rem;font-weight:600;margin:1.9rem 0 .2rem}
 .ac{font-size:.82rem;color:var(--dim);font-weight:300;margin-bottom:.7rem}
-.satir{display:grid;grid-template-columns:1fr minmax(90px,150px) 62px;gap:.7rem;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--stroke)}
+.satir{display:grid;grid-template-columns:1fr minmax(96px,170px) 78px;gap:.7rem;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--stroke)}
 .satir:last-child{border-bottom:none}
 .satir .ad{font-size:.88rem;min-width:0}
 .satir .ad b{font-weight:500}
 .satir .ad .gl{color:var(--gold);margin-right:.15rem}
-.cubuk{position:relative;height:6px;border-radius:3px;background:rgba(var(--ink-rgb),.13)}
-.cubuk i{display:block;height:100%;background:var(--gold);border-radius:3px;max-width:100%}
-.cubuk[style*="--esit"]::after{content:"";position:absolute;top:-4px;bottom:-4px;left:var(--esit);width:1px;background:rgba(var(--ink-rgb),.35)}
-.satir.nadir .cubuk i{background:var(--terra)}
+.satir .ad .sap{display:block;font-size:.72rem;color:var(--dim);font-weight:300;line-height:1.3}
+.satir .ad .sap.sik,.satir .ad .sap.seyrek{color:var(--gold)}
+/* taban-merkezli sapma şeridi: ortada "12'de 1" tabanı, değer ondan sola (seyrek) / sağa (sık) sapar.
+   Ölçek logaritmik: sol uç yarısı, sağ uç iki katı. Sıfır tabanlı yüzde çubuğu kaldırıldı. */
+.serit{position:relative;height:10px;border-radius:5px;background:rgba(var(--ink-rgb),.08)}
+.serit::before{content:"";position:absolute;top:-5px;bottom:-5px;left:50%;width:2px;margin-left:-1px;background:rgba(var(--ink-rgb),.55);border-radius:1px}
+.serit i{position:absolute;top:2px;height:6px;border-radius:3px;background:var(--gold);left:var(--sol);width:var(--gen);min-width:3px}
+.serit.siradan i{background:rgba(var(--ink-rgb),.6)}
+.satir.bas{padding:.15rem 0 .2rem;border-bottom:none}
+.satir.bas .taban{display:flex;justify-content:space-between;align-items:baseline;gap:.3rem;font-size:.68rem;color:var(--dim);letter-spacing:.04em;white-space:nowrap}
+.satir.bas .taban b{font-weight:600;color:var(--ink);font-size:.72rem}
+@media(max-width:480px){.satir.bas .taban span{font-size:0}.satir.bas .taban span::before{font-size:.7rem}.satir.bas .taban span:first-child::before{content:"◂ seyrek"}.satir.bas .taban span:last-child::before{content:"sık ▸"}}
 .satir.ilk .ad b{color:var(--gold-br)}
 .oran{font-family:ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--mut);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.satir.genis{grid-template-columns:1fr 70px 118px}
-@media(max-width:480px){.satir{grid-template-columns:1fr 78px 50px;gap:.5rem}.satir.genis{grid-template-columns:1fr 50px 112px}}
 .satir.nadir .oran{color:var(--terra)}
+@media(max-width:480px){.satir{grid-template-columns:1fr 84px 64px;gap:.5rem}.oran{font-size:.74rem}}
 .lejant{font-size:.72rem;color:var(--dim);margin-top:.5rem;display:flex;gap:.4rem;align-items:center}
-.lejant i{display:inline-block;width:1px;height:12px;background:rgba(var(--ink-rgb),.35)}
+.lejant i{display:inline-block;width:2px;height:12px;background:rgba(var(--ink-rgb),.55)}
 details.kusak{border:1px solid var(--stroke);border-radius:14px;padding:.2rem .9rem;margin-top:1.6rem}
 details.kusak summary{cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:.6rem;padding:.6rem 0}
 details.kusak summary::-webkit-details-marker{display:none}
@@ -136,6 +151,7 @@ details.kusak .ic{padding-bottom:.4rem}
 </style>
 <script src="/sorbi-yer.js?v=3"></script>
 <script src="/sorbi-sayim.js?v=1"></script>
+<script src="/sorbi-nadirlik-gorsel.js?v=1" defer></script>
 <link rel="stylesheet" href="/sorbi-fonts.css?v=10">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6653215819266638"
      crossorigin="anonymous"></script>
@@ -354,13 +370,25 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
   document.addEventListener('click',function(e){ if(!e.target.closest('.geo')) $('geoList').hidden=true; });
 
   function yuzde(p){ var d=p>=0.01?1:2; return '%'+(p*100).toFixed(d).replace('.',','); }
-  /* Bir bulgunun nadirliğini insan diline çevirir. Sayı da sınır da servisten gelir. */
+  /* Tek yazım kuralı (sorbi-nadirlik-gorsel.js): "9'da 1", "1.600'de 1". Yüzde yalnız dipnotta.
+     Bileşen yüklenmediyse aynı biçimi burada kurar; sayı servisten gelir, burada yalnız yazılır. */
+  function G(){ return window.SorbiNadirlikGorsel||null; }
+  function kacta(n){
+    var g=G(); if(g) return g.yaz(n);
+    var y=n<1000?n:Math.round(n/100)*100; return SorbiSayim.bin(y)+"'de 1";
+  }
   function kacKiside(b){
     if(!b) return '—';
-    if(b.altSinir) return SorbiSayim.bin(b.kunye.n)+'’de 1’den seyrek';
-    var n=b.biriKac;
-    if(n<1000) return n+' kişiden 1';
-    return SorbiSayim.bin(Math.round(n/100)*100)+' kişiden 1';
+    if(b.altSinir) return kacta(b.kunye.n)+"'den seyrek";
+    return kacta(b.biriKac);
+  }
+  /* sapma etiketi: %10 altı sıradan — dürüstlük kuralı bileşende, burada yalnız çağrılır */
+  function sapma(n){ var g=G(); return g?g.etiket(n,12):{kod:'siradan',ad:'sıradan',sap:0}; }
+  /* taban-merkezli şerit konumu: log2(pay/taban) → sol uç yarısı, sağ uç iki katı */
+  function serit(p){
+    var r=p>0?Math.log(p*12)/Math.LN2:-1, k=Math.max(-1,Math.min(1,r))*50;
+    var sol=k<0?50+k:50, gen=Math.max(1.5,Math.abs(k));
+    return 'style="--sol:'+sol.toFixed(1)+'%;--gen:'+gen.toFixed(1)+'%"';
   }
 
   $('hesapla').addEventListener('click',function(){
@@ -420,72 +448,86 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
     var sect=H.al('sect.gunduz')||H.al('sect.gece');
     if(sect && ilginc.indexOf(sect)<0) ilginc.push(sect);
     function cumle(b){
-      return 'Örneklemin ' + yuzde(b.oran) + ' kadarında görülüyor — ' + kacKiside(b) + '. ' +
-             SorbiSayim.bin(K.n) + ' ' + K.birim + ' · ' + K.yil + '.';
+      return kacKiside(b) + '. ' + SorbiSayim.bin(K.n) + ' ' + K.birim + ' · ' + K.yil + ' · örneklemin ' + yuzde(b.oran) + ' kadarında.';
     }
 
-    var enNadir=kisisel[0];
+    var enNadir=kisisel[0], enEt=enNadir?sapma(enNadir.b.biriKac):null;
     var manset = enNadir
       ? { buyuk:kacKiside(enNadir.b),
           alt:(AD[enNadir.k]||enNadir.k)+' '+S[enNadir.burc]+' burcunda',
-          not:'Haritandaki en seyrek kişisel yerleşim. Örneklemde '+yuzde(enNadir.p)+' oranında görülüyor.' }
-      : { buyuk:'—', alt:'Saat olmadan kişisel yerleşim sıralanamaz', not:'' };
+          cum:'Herkeste '+kacta(12)+' · sende '+kacKiside(enNadir.b)+' → <b class="'+enEt.kod+'">'+esc(enEt.ad)+'</b>',
+          not:(enEt.kod==='siradan'
+            ? 'Beklenenden sapma %'+Math.round(Math.abs(enEt.sap)*100)+'. Bu bir nadirlik değil; en seyrek kişisel yerleşimin bile beklenenin yakınında.'
+            : 'Beklenenden %'+Math.round(Math.abs(enEt.sap)*100)+(enEt.sap<0?' daha az':' daha çok')+' görülüyor. Haritandaki en seyrek kişisel yerleşim.')
+            +' Örneklemde '+yuzde(enNadir.p)+'.' }
+      : { buyuk:'—', alt:'Saat olmadan kişisel yerleşim sıralanamaz', cum:'', not:'' };
 
-    function satirlar(liste,olcek,ilk){
-      var esit=Math.round(1/12/olcek*1000)/10;
-      return liste.map(function(x,i){
-        var az=x.p<0.05;
+    /* satırlar: taban-merkezli sapma şeridi; ortadaki çizgi 12'de 1 */
+    function satirlar(liste,ilk){
+      var bas='<div class="satir bas"><div></div><div class="taban"><span>seyrek</span><b>'+kacta(12)+'</b><span>sık</span></div><div></div></div>';
+      return bas+liste.map(function(x,i){
+        var az=x.p<0.05, e=sapma(x.b.biriKac);
         return '<div class="satir'+(az?' nadir':'')+(ilk&&i===0?' ilk':'')+'">'+
           '<div class="ad"><span class="gl">'+GL[x.k]+'</span> <b>'+esc(AD[x.k]||x.k)+'</b> '+esc(S[x.burc])+
-          (x.rx?' <span style="color:var(--terra)">℞</span>':'')+'</div>'+
-          '<div class="cubuk" style="--esit:'+esit+'%"><i style="width:'+Math.min(100,Math.max(3,Math.round(x.p/olcek*100)))+'%"></i></div>'+
-          '<div class="oran">'+yuzde(x.p)+'</div></div>';
+          (x.rx?' <span style="color:var(--terra)">℞</span>':'')+
+          '<span class="sap '+e.kod+'">'+esc(e.ad)+'</span></div>'+
+          '<div class="serit '+e.kod+'" '+serit(x.p)+' role="img" aria-label="'+esc(e.ad)+'"><i></i></div>'+
+          '<div class="oran">'+esc(kacKiside(x.b))+'</div></div>';
       }).join('');
     }
-    function noktalar(p){
-      var k=Math.round(p*100), h='';
-      for(var i=0;i<100;i++) h+='<i'+(i<k?' class="on"':'')+'></i>';
-      return '<div class="noktalar" role="img" aria-label="Her 100 kişiden yaklaşık '+k+'\'inde">'+h+'</div><div class="nokta-alt">her nokta 100 kişiden biri</div>';
-    }
 
-    /* üçlü: AYRI ve daha yoğun örneklem; künyesi de ayrı basılır */
+    /* üçlü: AYRI ve daha yoğun örneklem; künyesi de ayrı basılır. Bileşim → kademe cetveli. */
     var ucluHtml='';
     if(uc){
-      var UK=uc.kunye, olcekU=2/uc.toplam;   /* tam çubuk = eşit dağılımın iki katı */
+      var UK=uc.kunye, g=G();
       ucluHtml='<h2>Güneş · Ay · Yükselen üçlüsü</h2>'+
-        '<div class="ac">'+uc.toplam+' olası üçlüden biri. Bu satır daha yoğun bir örneklemden gelir: '+
+        '<div class="ac">'+SorbiSayim.bin(uc.toplam)+' olası üçlüden biri. Bu satır daha yoğun bir örneklemden gelir: '+
         esc(SorbiSayim.bin(UK.n))+' '+esc(UK.birim)+' · '+esc(UK.yil)+
         '. Seyreklik sırası: '+uc.sira+'/'+uc.toplam+'.</div>'+
-        '<div class="satir genis"><div class="ad"><b>'+esc(S[burc(pl.sun.lon)])+' · '+esc(S[burc(pl.moon.lon)])+' · '+esc(S[burc(ch.asc)])+'</b></div>'+
-        '<div class="cubuk"><i style="width:'+Math.min(100,Math.max(4,Math.round(uc.oran/olcekU*100)))+'%"></i></div>'+
-        '<div class="oran">'+esc(kacKiside(uc))+'</div></div>';
+        '<div class="cetvel"><div class="b">Kademe cetveli · insan ölçeği</div>'+
+        '<div class="cum">'+esc(S[burc(pl.sun.lon)])+' · '+esc(S[burc(pl.moon.lon)])+' · '+esc(S[burc(ch.asc)])+
+        ' — <b>'+esc(kacKiside(uc))+'</b>'+(g&&!uc.altSinir?' <i>· '+esc(g.insan(uc.biriKac))+'</i>':'')+'</div>'+
+        '<div data-sorbi-nadirlik="cetvel" data-n="'+(uc.altSinir?UK.n:uc.biriKac)+'" data-alt="'+(uc.altSinir?1:0)+'"></div></div>';
+    }
+    /* katalog bileşimi: dikkat çeken yanların en seyreği, N ≥ 50 ise cetvelde */
+    var katalogHtml='';
+    var enKat=ilginc.filter(function(b){ return b.altSinir || b.biriKac>=50; })[0];
+    if(enKat){
+      var gk=G();
+      katalogHtml='<div class="cetvel"><div class="b">Kademe cetveli · en seyrek özellik</div>'+
+        '<div class="cum">'+esc(enKat.ad)+' — <b>'+esc(kacKiside(enKat))+'</b>'+(gk&&!enKat.altSinir?' <i>· '+esc(gk.insan(enKat.biriKac))+'</i>':'')+'</div>'+
+        '<div data-sorbi-nadirlik="cetvel" data-n="'+(enKat.altSinir?K.n:enKat.biriKac)+'" data-alt="'+(enKat.altSinir?1:0)+'"></div></div>';
     }
 
-    var paylasMetni = manset.alt + ' — ' + manset.buyuk + '. Sorbi ile kendi haritanın nadirliğini ölç: sorbiapp.com/nadirlik';
+    var paylasMetni = manset.alt + ' — ' + (enNadir?'herkeste '+kacta(12)+', bende '+manset.buyuk+' ('+enEt.ad+')':manset.buyuk) +
+      (uc?'. Güneş · Ay · Yükselen üçlüm '+kacKiside(uc):'') + '. Sorbi ile kendi haritanın nadirliğini ölç: sorbiapp.com/nadirlik';
 
     $('sonuc').hidden=false;
     $('sonuc').innerHTML=
-      '<div class="manset"><div><div class="et">En nadir yanın</div>'+
+      '<div class="manset">'+
+      (enNadir?'<div class="halka" data-sorbi-nadirlik="halka" data-n="'+enNadir.b.biriKac+'" data-taban="12"></div>':'<div></div>')+
+      '<div><div class="et">En seyrek tek yerleşimin</div>'+
       '<div class="buyuk">'+esc(manset.buyuk)+'</div>'+
       '<div class="alt">'+esc(manset.alt)+'</div>'+
+      (manset.cum?'<div class="cum">'+manset.cum+'</div>':'')+
       (manset.not?'<div class="not">'+esc(manset.not)+'</div>':'')+'</div>'+
-      (enNadir?noktalar(enNadir.p):'')+
       '<div class="aksiyon"><button class="ana" id="kartIndir">Kartı indir ✦</button>'+
       '<button class="yan" id="kopyala">Sonucu kopyala</button></div></div>'+
 
       '<h2>Kişisel yerleşimlerin</h2>'+
       '<div class="ac">Seyrekten sığa. Bunlar gün içinde ve yıl içinde hızla değişir — kişiseldir.</div>'+
-      satirlar(kisisel,0.125,true)+
-      '<div class="lejant"><i></i>ince çizgi: eşit dağılım, her burç %8,3</div>'+
+      satirlar(kisisel,true)+
+      '<div class="lejant"><i></i>ortadaki çizgi: herkes için beklenen, '+kacta(12)+'. Sola sapan seyrek, sağa sapan sık; %10 altı sapma sıradan sayılır.</div>'+
 
       ucluHtml+
 
       '<details class="kusak"><summary><h2>Kuşak yerleşimleri</h2>'+
       '<div class="ac">Dış gezegenler bir burçta yıllarca kalır; bunlar seni değil, yaşıtlarını anlatır.</div></summary>'+
-      '<div class="ic">'+satirlar(kusak,0.25)+'</div></details>'+
+      '<div class="ic">'+satirlar(kusak)+'</div></details>'+
 
       '<h2>Dikkat çeken yanlar</h2><div class="ac">Yerleşimlerin ötesinde, haritanın yapısıyla ilgili olgular. '+
       esc(K.katalog)+' maddelik katalogdan, seyrekten sığa.</div>'+
+      katalogHtml+
       ilginc.map(function(b){ return '<div class="ozellik"><span class="im">✦</span><div><b>'+esc(b.ad)+'</b><span>'+esc(cumle(b))+'</span></div></div>'; }).join('')+
 
       '<div class="paylas">'+
@@ -496,14 +538,14 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
     $('kartIndir').addEventListener('click',function(){
       var b=this, eski=b.textContent; b.textContent='Hazırlanıyor…'; b.disabled=true;
       var kartSatir=kisisel.slice(0,3).map(function(x){
-        return { ad:(AD[x.k]||x.k)+' '+S[x.burc], oran:yuzde(x.p) };
+        return { ad:(AD[x.k]||x.k)+' '+S[x.burc], oran:kacKiside(x.b) };
       });
       if(uc) kartSatir.push({ ad:'Güneş · Ay · Yükselen', oran:kacKiside(uc) });
       window.SorbiKart.indir({
         tur:'liste',
         ustEt:'EN NADİR YANIN',
         buyuk:manset.buyuk,
-        alt:manset.alt,
+        alt:manset.alt+(enEt?' · '+enEt.ad:''),
         satirlar:kartSatir,
         dipnot:SorbiSayim.bin(K.n)+' '+K.birim+' örneklemi · '+K.yil,
         imza:'Veri ve hesaplama: Sorbi · sorbiapp.com'
@@ -521,6 +563,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
         .catch(function(){ b.textContent='Kopyalanamadı'; });
     });
 
+    if(G()) G().kur($('sonuc'));
     st.className='st'; st.textContent='';
     $('sonuc').scrollIntoView({behavior:'smooth',block:'start'});
   }
@@ -553,17 +596,17 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
       var sat=D.satirlar.filter(function(x){ return x.sayi>0; });
       if(!sat.length) return;
       var enSik=sat[0], enSeyrek=sat[sat.length-1];
-      kanca('asc', yuzde(enSeyrek.oran),
+      kanca('asc', kacta(enSeyrek.biriKac),
         '<em>'+esc(enSeyrek.ad)+'</em> en seyrek yükselen. En yaygını '+esc(enSik.ad)+
-        ' ('+yuzde(enSik.oran)+') — iki katından fazla. Burçlar ufuktan eşit sürede geçmez.');
+        ' ('+kacta(enSik.biriKac)+') — iki katından fazla. Burçlar ufuktan eşit sürede geçmez.');
     }).catch(function(){});
     SorbiSayim.ozellik('retro.mer').then(function(b){
-      kanca('retro', b.biriKac+"'te 1",
-        'Örneklenen haritaların <em>'+yuzde(b.oran)+' kadarında Merkür geri hareketli</em>. Nadir sanılan bu yerleşim aslında her beş haritadan birinde var.');
+      kanca('retro', kacta(b.biriKac),
+        'Örneklenen haritaların <em>'+kacta(b.biriKac)+'\'inde Merkür geri hareketli</em>. Nadir sanılan bu yerleşim aslında her beş haritadan birinde var.');
     }).catch(function(){});
     SorbiSayim.dagilim('uclu').then(function(D){
       var enSik=D.satirlar[0], K=D.kunye;
-      kanca('uclu', SorbiSayim.bin(enSik.biriKac)+"'de 1",
+      kanca('uclu', kacta(enSik.biriKac),
         D.satirlar.length+' olası <em>Güneş · Ay · Yükselen</em> üçlüsünün en yaygını bile ancak bu sıklıkta. '+
         SorbiSayim.bin(K.n)+' '+esc(K.birim)+' üzerinden.');
     }).catch(function(){});
