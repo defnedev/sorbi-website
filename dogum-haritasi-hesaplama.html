@@ -153,6 +153,7 @@ details.kat .sec{margin-top:0}
 <link rel="stylesheet" href="/sorbi-fonts.css?v=10">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6653215819266638"
      crossorigin="anonymous"></script>
+<style>.sz-ipucu{font-size:.78rem;color:var(--mut);margin:0 0 .6rem;opacity:.85}</style>
 </head>
 <body>
 <!-- SORBI-NAV:START -->
@@ -302,7 +303,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
   </div>
 
   <details class="kat" id="katKonum"><summary>Gezegen Konumları <small id="katKonumN"></small></summary><div class="kat-b">
-   <table id="pTable"><thead><tr><th>Gezegen</th><th>Konum</th><th id="thHouse">Ev</th></tr></thead><tbody></tbody></table>
+   <p class="sz-ipucu">Altı noktalı terimlere dokun, ne demek olduğunu gör.</p><table id="pTable"><thead><tr><th>Gezegen</th><th>Konum</th><th id="thHouse"><span data-sz="ev">Ev</span></th></tr></thead><tbody></tbody></table>
   </div></details>
 
   <details class="kat" id="katKaydet"><summary>Haritanı Kaydet <small>bir daha bilgi girme</small></summary><div class="kat-b">
@@ -328,7 +329,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
     <details class="kat" open><summary>Haritanın Üç Cümlesi</summary><div class="kat-b"><div id="pUc"></div></div></details>
     <details class="kat"><summary>Baskın İmzalar</summary><div class="kat-b"><div id="pImza"></div></div></details>
     <details class="kat"><summary>Denge <small>element · nitelik</small></summary><div class="kat-b"><div id="pDenge"></div></div></details>
-    <details class="kat"><summary>Açı Defteri <small id="katAciN"></small></summary><div class="kat-b"><div id="pAci"></div></div></details>
+    <details class="kat"><summary>Açı Defteri <small id="katAciN"></small></summary><div class="kat-b"><p class="sz-ipucu">Açı adına ya da sağdaki sapma derecesine dokun, ne anlattığını gör.</p><div id="pAci"></div></div></details>
     <details class="kat"><summary>Tek Gezegen Analizi</summary><div class="kat-b"><div class="pl-tabs" id="plTabs"></div><div id="plReading"></div></div></details>
     <details class="kat"><summary>Teknik Ek <small>sabit yıldızlar</small></summary><div class="kat-b"><table id="pStars"><tbody></tbody></table></div></details>
    </div>
@@ -417,7 +418,7 @@ function signatures(ch,noTime){
 function renderPlanet(pname){
  const ch=window._ch,noTime=window._noTime;if(!ch)return;
  const p=ch.pls.find(x=>x.n===pname);if(!p)return;const si=signOf(p.lon);
- let h=`<div class="pl-head">${PGLYPH[pname]||''} ${p.n} · ${SIGNS[si]}${(!noTime&&p.house)?' · '+p.house+'. ev':''}${p.rx?' <span class="rx">℞</span>':''}</div>`;
+ let h=`<div class="pl-head">${PGLYPH[pname]||''} ${p.n} · ${SIGNS[si]}${(!noTime&&p.house)?' · '+p.house+'. ev':''}${p.rx?' <span class="rx" data-sz="retro">℞</span>':''}</div>`;
  h+=`<p class="pl-gov">${p.n}, ${PGOV[pname]||''}.</p>`;
  h+=`<p>${(PSIGN[pname]||[])[si]||''}</p>`;
  if(!noTime&&p.house)h+=`<p class="pl-house">Bu enerjiyi en çok <strong>${p.house}. ev</strong> — ${HOUSE_AREA[p.house]} — alanında yaşıyorsun.</p>`;
@@ -538,8 +539,8 @@ document.getElementById('gen').onclick=()=>{
  document.getElementById('pDenge').innerHTML=dh;
 
  document.getElementById('thHouse').style.display=noTime?'none':'';
- let rows=ch.pls.map(p=>`<tr><td class="pl">${PGLYPH[p.n]} ${p.n}${p.rx?' <span class="rx">℞</span>':''}</td><td>${fmtDeg(p.lon)}</td>${noTime?'':`<td>${p.house}. ev</td>`}</tr>`).join('');
- if(!noTime)rows+=`<tr><td class="pl" style="color:var(--gold-lt)">⌖ Yükselen</td><td>${fmtDeg(ch.asc)}</td><td>1. ev</td></tr><tr><td class="pl" style="color:var(--gold-lt)">⊤ MC</td><td>${fmtDeg(ch.mc)}</td><td>10. ev</td></tr>`;
+ let rows=ch.pls.map(p=>`<tr><td class="pl">${PGLYPH[p.n]} ${p.n}${p.rx?' <span class="rx" data-sz="retro">℞</span>':''}</td><td>${fmtDeg(p.lon)}</td>${noTime?'':`<td><span data-sz="ev${p.house}">${p.house}. ev</span></td>`}</tr>`).join('');
+ if(!noTime)rows+=`<tr><td class="pl" style="color:var(--gold-lt)"><span data-sz="yukselen">⌖ Yükselen</span></td><td>${fmtDeg(ch.asc)}</td><td><span data-sz="ev1">1. ev</span></td></tr><tr><td class="pl" style="color:var(--gold-lt)"><span data-sz="mc">⊤ MC</span></td><td>${fmtDeg(ch.mc)}</td><td><span data-sz="ev10">10. ev</span></td></tr>`;
  document.querySelector('#pTable tbody').innerHTML=rows;
  document.getElementById('katKonumN').textContent=noTime?'10 gezegen · burç':'10 gezegen · Yükselen · MC · ev';
 
@@ -549,8 +550,9 @@ document.getElementById('gen').onclick=()=>{
  const sortedAsps=[...ch.asps].sort((a,b)=>Math.abs(a.orb)-Math.abs(b.orb));
  document.getElementById('katAciN').textContent=ch.asps.length+' açı';
  /* ℞ her gezegenin KENDİ adının yanında durur — yalnız o gezegen geri hareketteyse */
- const rxm=n=>rxset.has(n)?' <span class="rx">℞</span>':'';
- document.getElementById('pAci').innerHTML=(sortedAsps.length?sortedAsps.map(a=>`<div class="aci"><span class="ag">${PGLYPH[a.a]}</span><span class="ag" style="color:${acol[a.nm]}">${AGLYPH[a.nm]}</span><span class="ag">${PGLYPH[a.b]}</span><span class="an">${a.a}${rxm(a.a)} ${a.nm.toLowerCase()} ${a.b}${rxm(a.b)}</span><span class="ao">${orbFmt(a.orb)}</span></div>`).join(''):'<div style="color:var(--dim)">Belirgin major açı yok.</div>');
+ const rxm=n=>rxset.has(n)?' <span class="rx" data-sz="retro">℞</span>':'';
+ const SZA={'Kavuşum':'kavusum','Altmışlık':'altmislik','Kare':'kare','Üçgen':'ucgen','Karşıt':'karsit'};
+ document.getElementById('pAci').innerHTML=(sortedAsps.length?sortedAsps.map(a=>`<div class="aci"><span class="ag">${PGLYPH[a.a]}</span><span class="ag" style="color:${acol[a.nm]}">${AGLYPH[a.nm]}</span><span class="ag">${PGLYPH[a.b]}</span><span class="an">${a.a}${rxm(a.a)} <span data-sz="${SZA[a.nm]}">${a.nm.toLowerCase()}</span> ${a.b}${rxm(a.b)}</span><span class="ao" data-sz="orb">${orbFmt(a.orb)}</span></div>`).join(''):'<div style="color:var(--dim)">Belirgin major açı yok.</div>');
 
  /* okuma: lead + üç cümle üstteki 'Ne anlama geliyor' bloğunda */
 
@@ -658,5 +660,6 @@ function shareChart(){const url='https://sorbiapp.com/dogum-haritasi-hesaplama';
 <script src="/sorbi-form.js?v=4" defer></script>
 <script src="/sorbi-profil.js?v=3" defer></script>
   <script src="/sorbi-olcum.js?v=1" defer></script>
+  <script src="/sorbi-sozluk.js?v=1" defer></script>
 </body>
 </html>
