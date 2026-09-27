@@ -48,6 +48,7 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(1.6rem,5vw
 <link rel="stylesheet" href="/sorbi-fonts.css?v=10">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6653215819266638"
      crossorigin="anonymous"></script>
+<style>/* CLS-yer: sonradan dolan alanlara baştan yer ayır */.top .date{min-height:1.2rem}#sky{min-height:120px}@media(max-width:600px){#sky{min-height:177px}}</style>
 </head>
 <body>
 <!-- SORBI-NAV:START -->
@@ -168,7 +169,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
  <div class="card">
   <div class="sec-h">Gökyüzü Bugün</div>
   <div class="chips" id="sky"><div class="load">Gökyüzü okunuyor…</div></div>
-  <div class="voc" id="voc" style="display:none"></div>
+  <div class="voc" id="voc" style="visibility:hidden;min-height:68px"></div>
  </div>
 
  <div class="card today" id="personalCard" style="display:none">
@@ -240,7 +241,7 @@ function draw(){
   let last=null;if(ing)for(const bd2 of VP){let pT=nowMs-3*86400000,pS=nts(norm(ecl(A,A.Body.Moon,A.MakeTime(new Date(pT)))-ecl(A,bd2,A.MakeTime(new Date(pT)))));for(let t=pT+3600000;t<=ing;t+=3600000){const s=nts(norm(ecl(A,A.Body.Moon,A.MakeTime(new Date(t)))-ecl(A,bd2,A.MakeTime(new Date(t)))));if((pS<0)!==(s<0)){let lo=t-3600000,hi=t;for(let i=0;i<16;i++){const m=(lo+hi)/2;const sm=nts(norm(ecl(A,A.Body.Moon,A.MakeTime(new Date(m)))-ecl(A,bd2,A.MakeTime(new Date(m)))));if((sm<0)===(pS<0))lo=m;else hi=m;}const am=(lo+hi)/2;if(last==null||am>last)last=am;}pS=s;pT=t;}}
   const isVoid=(last!=null&&nowMs>=last&&ing&&nowMs<ing);
   const f=ms2=>new Date(ms2).toLocaleTimeString('tr-TR',{timeZone:'Europe/Istanbul',hour:'2-digit',minute:'2-digit'});
-  const vd=document.getElementById('voc');vd.style.display='block';
+  const vd=document.getElementById('voc');vd.style.display='block';vd.style.visibility='visible';vd.style.minHeight='';
   vd.innerHTML=isVoid?`<b style="color:var(--terra)">Ay şu an boşlukta</b> — ${burcE((ms+1)%12)} geçene dek (${ing?f(ing):''}). Yeni iş başlatmayı, imzayı ve kritik kararları ertelemek işine yarayabilir.`:`Ay ${burcDe(ms)}, ${MOODS[ms]} bir gün. ${ing?burcE((ms+1)%12)+" geçiş: "+f(ing):''}`;
  }catch(e){}
 
