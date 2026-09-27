@@ -12,7 +12,8 @@ var CSS = [
 ' border:1px solid rgba(var(--ink-rgb),.35);border-radius:99px;padding:.5rem 1rem;cursor:pointer;',
 ' backdrop-filter:blur(12px);box-shadow:0 8px 28px rgba(var(--bg-rgb),.4);transition:.16s}',
 '.gb-ac:hover{border-color:rgba(var(--ink-rgb),.7);color:var(--ink)}',
-'@media(max-width:560px){.gb-ac{right:12px;bottom:12px;padding:.45rem .85rem;font-size:.78rem}}',
+'@media(max-width:560px){.gb-ac{right:10px;bottom:10px;width:40px;height:40px;padding:0;font-size:1rem;line-height:40px;text-align:center}.gb-ac .gb-yazi{display:none}}',
+'.gb-ac.gb-gizli{opacity:0;pointer-events:none;transform:translateY(8px)}',
 '.gb-ort{position:fixed;inset:0;z-index:9001;background:rgba(var(--bg-rgb),.72);backdrop-filter:blur(4px);',
 ' display:flex;align-items:flex-end;justify-content:center;padding:16px}',
 '@media(min-width:640px){.gb-ort{align-items:center}}',
@@ -48,9 +49,15 @@ var st = document.createElement('style'); st.textContent = CSS; document.head.ap
 var dugme = document.createElement('button');
 dugme.className = 'gb-ac';
 dugme.type = 'button';
-dugme.textContent = '✦ Geri bildirim';
+dugme.innerHTML = '✦<span class="gb-yazi"> Geri bildirim</span>';
+dugme.setAttribute('aria-label', 'Geri bildirim');
 dugme.setAttribute('aria-haspopup', 'dialog');
 document.body.appendChild(dugme);
+/* S1: form alanına yazarken düğme alanın üstüne binmesin; sayfa sonu da örtülmesin */
+function gbAlan(e){ var t=e.target; return t && t.closest && !t.closest('.gb-kutu') && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName); }
+document.addEventListener('focusin', function(e){ if(gbAlan(e)) dugme.classList.add('gb-gizli'); });
+document.addEventListener('focusout', function(e){ if(gbAlan(e)) dugme.classList.remove('gb-gizli'); });
+try{ var gbPb=parseFloat(getComputedStyle(document.body).paddingBottom)||0; if(gbPb<56) document.body.style.paddingBottom='56px'; }catch(e){}
 
 var TURLER = [['ozellik','Şunu ekleyin'],['hata','Bir hata var'],['oneri','Görüşüm var']];
 var secili = 'ozellik', ortu = null, sonOdak = null;
