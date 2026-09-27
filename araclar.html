@@ -191,6 +191,17 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
 <script>
 (function(){try{var pr=JSON.parse(localStorage.getItem('sorbi_profile')||'null');if(!pr)return;var w=document.getElementById('welcome');w.style.display='block';w.innerHTML='Merhaba <b>'+((pr.name||(pr.email||'').split('@')[0])||'')+'</b> ✦ <a href="/bugun">Bugünün →</a> · <a href="/haritam" id="sorbiNavHaritam">✦ Profilim</a>';}catch(e){}})();
 </script>
+<section class="wrap" style="max-width:720px;margin:2.4rem auto 0;padding:0 1.2rem">
+<div class="sbft-acik" style="font-size:.92rem;line-height:1.7;color:var(--mut)">
+<h2 style="font-size:1.05rem;color:var(--ink);margin:0 0 .6rem">Hangi araçla başlamalıyım?</h2>
+<p><b>Doğum saatini biliyorsan</b> <a href="/dogum-haritasi-hesaplama" style="color:var(--gold)">doğum haritasıyla</a> başla. Güneş, Ay ve yükselen burcun, on gezegenin hangi evde olduğu ve aralarındaki açılar tek ekranda çıkar. Evleri, ev sistemini ya da transitleri daha ayrıntılı görmek istersen aynı harita <a href="/detayli-dogum-haritasi" style="color:var(--gold)">Harita Atölyesi'nde</a> açılır.</p>
+<p><b>Saatini bilmiyorsan</b> <a href="/ay-burcu-hesaplama" style="color:var(--gold)">Ay burcun</a> yine de büyük ihtimalle doğru çıkar, çünkü Ay bir burçta iki buçuk gün kalır. Yükselen için saat şart. Hiç bilmiyorsan <a href="/yukselen-tahmini" style="color:var(--gold)">yükselen tahmini</a> en olası seçenekleri daraltır.</p>
+<p><b>Bir ilişkiyi merak ediyorsan</b> <a href="/burc-uyumu" style="color:var(--gold)">uyum</a> aracı iki Güneş burcunu anında karşılaştırır. İki kişinin de doğum bilgisi varsa aynı sayfada haritaları üst üste koyan sinastri okuması da var.</p>
+<p><b>Bir tarih seçeceksen</b> <a href="/retro-ay-takvimi" style="color:var(--gold)">retro ve ay takvimi</a> önümüzdeki Merkür retrolarını, ay boşluk saatlerini, yeniay ve dolunayları gösterir. <a href="/uygun-gun-secimi" style="color:var(--gold)">Uygun gün seçimi</a> ise belirli bir iş için hangi günlerin daha elverişli olduğuna bakar.</p>
+<p><b>Haritan ne kadar sıradışı</b> diye merak ediyorsan <a href="/nadirlik" style="color:var(--gold)">nadirlik</a> sayfası yerleşimlerinin ne sıklıkta görüldüğünü sayar. Yöntemi ve rakamların kaynağı <a href="/sayim" style="color:var(--gold)">sayım</a> sayfalarında açık.</p>
+<p>Bütün hesaplar tarayıcında yapılır. Doğum bilgini bir kez girdiğinde bu cihazda saklanır ve diğer araçlar onu hatırlar. Hesap açman gerekmez, bilgin sunucuya gönderilmez.</p>
+</div>
+</section>
 <!-- SORBI-FOOTER:START -->
 <style>
 .sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:var(--mut);max-width:none;width:auto}
