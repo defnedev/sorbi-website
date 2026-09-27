@@ -12,6 +12,7 @@ cp -- sorbi-fonts.css _yayin/
 cp -- ozellik-veri.json sayim-veri.json ogren-veri.json nadirlik-veri.json _yayin/
 cp -- _redirects _headers robots.txt sitemap.xml ads.txt _yayin/
 cp -- og-*.png _yayin/
+cp -- favicon.ico _yayin/
 cp -R fontlar _yayin/fontlar
 cp -R functions _yayin/functions
 # kapalı sayfalar da kopyalanır; _redirects onları önce yakalar, dosya yedek olarak durur

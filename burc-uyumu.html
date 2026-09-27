@@ -81,7 +81,7 @@ h2{font-family:Fraunces,Georgia,serif;font-size:clamp(1.22rem,3.1vw,1.6rem);font
 .uy-dl{margin:1.2rem 0 0;border-top:1px solid rgba(var(--ink-rgb),.3);border-bottom:1px solid var(--stroke)}
 .uy-sat{display:grid;grid-template-columns:11rem minmax(0,1fr);gap:.2rem 1.2rem;
  padding:.85rem 0;border-top:1px solid var(--stroke)}
-.uy-sat:first-child{border-top:none}
+.uy-sat:first-child{border-top:none}dl.uy-sat{margin-top:0;margin-bottom:0}
 .uy-sat dt{font-size:.82rem;letter-spacing:.11em;text-transform:uppercase;color:var(--mut);font-weight:500}
 .uy-sat dd{margin:0;font-size:.98rem;color:var(--ink);font-weight:500;min-width:0}
 .uy-sat dd small{display:block;font-size:.85rem;color:var(--mut);font-weight:300;line-height:1.68;margin-top:.22rem}
@@ -188,6 +188,7 @@ h2{font-family:Fraunces,Georgia,serif;font-size:clamp(1.22rem,3.1vw,1.6rem);font
 <!-- SORBI-NAV:END -->
 <!-- SORBI-TEMA:START -->
 <style>
+p a:not([class]){text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
 /* Altı rol, iki gökyüzü. Gece varsayılan; gündüz [data-tema="gunduz"] ile.
    Renkler burada tanımlanır, sayfalar yalnız değişken kullanır. */
 :root{--bg:#0B0810;--bg-rgb:11,8,16;--ink:#F2EFE9;--ink-rgb:242,239,233;
@@ -363,10 +364,10 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
 <section class="uy-blok">
   <h2>Sık Sorulanlar</h2>
   <div class="uy-dl">
-    <div class="uy-sat"><dt>Nasıl çalışır</dt><dd>Burç uyumu hesaplama nasıl çalışır?<small>İki Güneş burcunun zodyaktaki uzaklığı taban puanı verir: aynı burç 82, iki burç ara 86, üç burç ara 62, dört burç ara 92, beş burç ara 52, tam karşı uç 78, yan yana 55. Element ilişkisi bu tabanı birkaç puan yukarı ya da aşağı çeker. Bütün girdi bu kadar olduğu için 144 burç kombinasyonu yedi farklı sonuca düşer.</small></dd></div>
-    <div class="uy-sat"><dt>Sınırı</dt><dd>Güneş burcu uyumu iki kişinin ilişkisini gösterir mi?<small>Tek başına göstermeyebilir. Güneş burcu haritanın bir parçasıdır; iki kişinin karşılaştırması için iki doğum haritasının birlikte okunması gerekir. Buna sinastri denir ve <a href="/sinastri">ayrı bir sayfada</a> anlatılıyor.</small></dd></div>
-    <div class="uy-sat"><dt>Aynı burç</dt><dd>Aynı burçtan iki kişi uyumlu olur mu?<small>Aynı burçtan iki kişi aynı element ve aynı niteliği paylaştığı için birbirini kolay okuyabilir; aynı nedenle zorlandıkları yerler de ortak olabilir. Bu hesapta aynı burç 82 taban puanıyla başlar, genel sonuç 87 çıkar. Yine de iki kişinin Ay ve yükselen yerleşimleri tabloyu bütünüyle değiştirebilir.</small></dd></div>
-    <div class="uy-sat"><dt>Açılar</dt><dd>Burçlar arasındaki açı ne anlama gelir?<small>Her burç 30 derecelik bir dilim. Dilim sayısı çarpı 30, aradaki açıyı verir: aynı burç kavuşum (0°), iki burç ara altmışlık (60°), üç burç ara kare (90°), dört burç ara üçgen (120°), altı burç ara karşıt (180°). Bir ve beş burç aralığı otuzluk (30°) ve yüzelli (150°) adını alır; ikisi de beş büyük açının dışında kalır.</small></dd></div>
+    <dl class="uy-sat"><dt>Nasıl çalışır</dt><dd>Burç uyumu hesaplama nasıl çalışır?<small>İki Güneş burcunun zodyaktaki uzaklığı taban puanı verir: aynı burç 82, iki burç ara 86, üç burç ara 62, dört burç ara 92, beş burç ara 52, tam karşı uç 78, yan yana 55. Element ilişkisi bu tabanı birkaç puan yukarı ya da aşağı çeker. Bütün girdi bu kadar olduğu için 144 burç kombinasyonu yedi farklı sonuca düşer.</small></dd></dl>
+    <dl class="uy-sat"><dt>Sınırı</dt><dd>Güneş burcu uyumu iki kişinin ilişkisini gösterir mi?<small>Tek başına göstermeyebilir. Güneş burcu haritanın bir parçasıdır; iki kişinin karşılaştırması için iki doğum haritasının birlikte okunması gerekir. Buna sinastri denir ve <a href="/sinastri">ayrı bir sayfada</a> anlatılıyor.</small></dd></dl>
+    <dl class="uy-sat"><dt>Aynı burç</dt><dd>Aynı burçtan iki kişi uyumlu olur mu?<small>Aynı burçtan iki kişi aynı element ve aynı niteliği paylaştığı için birbirini kolay okuyabilir; aynı nedenle zorlandıkları yerler de ortak olabilir. Bu hesapta aynı burç 82 taban puanıyla başlar, genel sonuç 87 çıkar. Yine de iki kişinin Ay ve yükselen yerleşimleri tabloyu bütünüyle değiştirebilir.</small></dd></dl>
+    <dl class="uy-sat"><dt>Açılar</dt><dd>Burçlar arasındaki açı ne anlama gelir?<small>Her burç 30 derecelik bir dilim. Dilim sayısı çarpı 30, aradaki açıyı verir: aynı burç kavuşum (0°), iki burç ara altmışlık (60°), üç burç ara kare (90°), dört burç ara üçgen (120°), altı burç ara karşıt (180°). Bir ve beş burç aralığı otuzluk (30°) ve yüzelli (150°) adını alır; ikisi de beş büyük açının dışında kalır.</small></dd></dl>
   </div>
 </section>
 
@@ -379,7 +380,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
 <script src="/sorbi-oyun.js?v=2" defer></script>
 <script src="/sorbi-sayim.js?v=2" defer></script>
 <script src="/sorbi-nadirlik-gorsel.js?v=1" defer></script>
-<script src="/sorbi-uyum.js?v=4" defer></script>
+<script src="/sorbi-uyum.js?v=5" defer></script>
 <!-- SORBI-FOOTER:START -->
 <style>
 .sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:var(--mut);max-width:none;width:auto}

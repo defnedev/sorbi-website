@@ -178,14 +178,14 @@ function kur(el,o){
  o=o||{};o.lat=+o.lat||41.0082;o.lon=+o.lon||28.9784;o.tz=o.tz||'Europe/Istanbul';
  el.innerHTML='<canvas class="gk-c" aria-label="Şu anın gökyüzü"></canvas>'
   +'<div class="gk-oku"><span class="gk-t"></span><span class="gk-f">şimdi</span></div>'
-  +'<div class="gk-cizgi" role="slider" aria-label="Zaman" tabindex="0"><i></i><b></b></div>'
+  +'<div class="gk-cizgi" role="slider" aria-label="Zaman" aria-valuemin="-365" aria-valuemax="365" aria-valuenow="0" tabindex="0"><i></i><b></b></div>'
   +'<button type="button" class="gk-simdi" hidden>şimdiye dön</button>';
  var cv=el.querySelector('.gk-c'),tEl=el.querySelector('.gk-t'),fEl=el.querySelector('.gk-f'),
      ciz_=el.querySelector('.gk-cizgi'),tut=ciz_.querySelector('b'),geri=el.querySelector('.gk-simdi');
  var ST={H:null,now:null,rid:0,ofs:0,dogum:false};
  if(o.cizgi===false){ciz_.hidden=true;}
  function goster(H){ST.H=H;ciz(cv,H,o);tEl.textContent=metin(H,o);var f=ST.dogum?'doğduğun an':fark(H.t-Date.now());fEl.textContent=f;
-  geri.hidden=(f==='şimdi')||o.cizgi===false;tut.style.left=(50+ST.ofs*50)+'%';}
+  geri.hidden=(f==='şimdi')||o.cizgi===false;tut.style.left=(50+ST.ofs*50)+'%';ciz_.setAttribute('aria-valuenow',M.round(ST.ofs*365));ciz_.setAttribute('aria-valuetext',f);}
  function suzul(A,B,sure,cb){ /* iki harita arası yumuşak geçiş */
   if(ST.rid)cancelAnimationFrame(ST.rid);
   if(AZ){goster(B);cb&&cb();return;}

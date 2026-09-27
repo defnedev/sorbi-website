@@ -232,7 +232,7 @@ function nisanBoya(){
  var n=ciftSay(),t=aciSay(),s=sinavD();
  kap.innerHTML=NISAN.map(function(N){
   var ac=false;try{ac=!!N.ko(n,t,s);}catch(e){}
-  return '<span class="sbo-r'+(ac?' ac':'')+'" title="'+esc(N.a)+'" aria-label="'
+  return '<span role="listitem" class="sbo-r'+(ac?' ac':'')+'" title="'+esc(N.a)+'" aria-label="'
    +esc(N.b+' — '+(ac?'açıldı':'henüz açılmadı')+'. '+N.a)+'">'
    +'<i aria-hidden="true">'+(ac?'✦':'·')+'</i>'+esc(N.b)+'</span>';
  }).join('');
@@ -322,7 +322,7 @@ function veriYaz(a,b){
 
 /* ══ 6 · SONUÇ PANELİ ═════════════════════════════════════════════════════ */
 function satir(k,v,h){
- return '<div class="uy-sat"><dt>'+k+'</dt><dd>'+v+'<small>'+h+'</small></dd></div>';
+ return '<dl class="uy-sat"><dt>'+k+'</dt><dd>'+v+'<small>'+h+'</small></dd></dl>';
 }
 function nedenYaz(h){
  var el=D.getElementById('uyNeden');if(!el)return;

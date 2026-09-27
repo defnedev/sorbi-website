@@ -61,7 +61,7 @@ svg{display:block}
 .gk-simdi:hover{color:var(--ink);border-color:var(--ink)}
 .gk-simdi[hidden],.hero .ok[hidden]{display:none}
 .hero .ok{margin-top:1.6rem;font-size:.78rem;color:var(--dim);letter-spacing:.06em}
-.hero .ok.vaat{animation:none!important;margin-top:.4rem;opacity:.75}
+.hero .ok.vaat{animation:none!important;margin-top:.4rem;opacity:1;color:var(--mut)}
 @media(prefers-reduced-motion:no-preference){.hero .ok{animation:gkOk 2.4s ease-in-out infinite}}
 @keyframes gkOk{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 .gk-iki{display:grid;grid-template-columns:1fr;justify-items:center;gap:1.6rem;width:100%}
@@ -215,6 +215,7 @@ footer .fine{text-align:center;line-height:1.85;font-weight:300}
 <!-- SORBI-NAV:END -->
 <!-- SORBI-TEMA:START -->
 <style>
+p a:not([class]){text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
 /* Altı rol, iki gökyüzü. Gece varsayılan; gündüz [data-tema="gunduz"] ile.
    Renkler burada tanımlanır, sayfalar yalnız değişken kullanır. */
 :root{--bg:#0B0810;--bg-rgb:11,8,16;--ink:#F2EFE9;--ink-rgb:242,239,233;
@@ -355,7 +356,7 @@ function loadEngine(cb){
   QUEUE.push(cb);
   if(LOADING) return;
   LOADING=true;
-  var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=13','/sorbi-astro.js?v=4','/sorbi-gokyuzu.js?v=3'];
+  var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=13','/sorbi-astro.js?v=4','/sorbi-gokyuzu.js?v=4'];
   (function next(i){
     if(i>=srcs.length){ READY=true; LOADING=false; var q=QUEUE;QUEUE=[];q.forEach(function(f){f();}); return; }
     var s=document.createElement('script');
