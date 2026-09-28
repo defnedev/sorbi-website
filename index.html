@@ -91,6 +91,8 @@ svg{display:block}
 /* ── hesaplayıcı ── */
 .calc{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:1.4rem;align-items:start;margin-top:3rem}
 @media(max-width:880px){.calc{grid-template-columns:minmax(0,1fr)}}
+/* sonuç gelmeden form tek sütun, ortada (Fable: sağ yarı boş kalıyordu) */
+.calc:has(> #chartwrap[hidden]){grid-template-columns:minmax(0,600px);justify-content:center}
 /* /#dogum-haritasi capasi sticky .sbnav altinda kalmasin.
    Nav yuksekligi .sbnav kuralindan: padding .55rem x2 + nav a min-height 40px = 57.6px;
    >=900px .sbnav min-height:70px; <=560px padding .3rem x2 + 40px = 49.6px. */
@@ -140,6 +142,10 @@ input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(var(
 .tr .gl{font-size:1.05rem;color:var(--soft)}
 .tr .tx{font-size:.84rem;line-height:1.45;color:var(--mut)}
 .tr .tx b{color:var(--ink);font-weight:500}
+.tr .tr-cumle{display:block;font-size:.92rem;line-height:1.45;color:var(--ink)}
+.tr .tr-cumle:empty{display:none}
+.tr .tr-kunye{display:block;font-size:.74rem;color:var(--dim);margin-top:.15rem}
+.tr .tr-kunye b{color:var(--mut);font-weight:500}
 .tr .orb{font-size:.71rem;color:var(--dim);white-space:nowrap;font-variant-numeric:tabular-nums}
 
 .after{display:none;gap:.55rem;flex-wrap:wrap;margin-top:1rem}
@@ -218,10 +224,10 @@ footer .fine{text-align:center;line-height:1.85;font-weight:300}
  <a href="/" class="sbnav-lg" aria-label="Sorbi ana sayfa"><i>✦</i>SORBİ</a>
  <nav>
   <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
-  <a href="/dogum-haritasi-hesaplama">Doğum Haritası</a>
+  <a href="/dogum-haritasi-hesaplama" class="ana" data-kisa="Haritam">Doğum Haritası</a>
   <a href="/araclar">Gökyüzü Hesaplayıcıları</a>
-  <a href="/bugun">Bugün</a>
-  <a href="/burc-ozellikleri">Burçlar</a>
+  <a href="/bugun" class="ana">Bugün</a>
+  <a href="/burc-ozellikleri" class="ana">Burçlar</a>
   <a href="/nadirlik">Nadirlik</a>
   <a href="/sayim">Sayım</a>
   <a href="/ogren">Öğren</a>
@@ -230,6 +236,45 @@ footer .fine{text-align:center;line-height:1.85;font-weight:300}
 </header>
 <script>(function(){try{var M={'/soru-sor':'/araclar','/horary':'/araclar','/natal-harita':'/araclar','/sinastri':'/araclar','/seni-taniyorum':'/araclar','/yukselen-burc-hesaplama':'/araclar','/yukselen-tahmini':'/araclar','/ay-burcu-hesaplama':'/araclar','/astrokartografi':'/araclar','/uygun-gun-secimi':'/araclar','/yasam-donguleri':'/araclar','/tarot':'/araclar','/gunun-karti':'/araclar','/retro-ay-takvimi':'/araclar','/burc-uyumu':'/burc-ozellikleri','/rapor-araci':'/araclar','/sayim-yildiz':'/sayim','/sayim-yukselen':'/sayim','/gunluk-burc-yorumlari':'/bugun'};var p=location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';if(M[p])p=M[p];else if(/burc/.test(p))p='/burc-ozellikleri';document.querySelectorAll('.sbnav nav a').forEach(function(a){var h=a.getAttribute('href').replace(/\.html$/,'');if(h===p||(h!=='/'&&h!=='/haritam'&&p.indexOf(h+'-')===0)){a.classList.add('on');a.setAttribute('aria-current','page');}});}catch(e){}})();</script>
 <script>(function(){var n=document.querySelector('.sbnav nav');if(!n)return;function f(){n.classList.toggle('son',n.scrollLeft+n.clientWidth>=n.scrollWidth-4);n.classList.toggle('ara',n.scrollLeft>4)}n.addEventListener('scroll',f,{passive:true});window.addEventListener('resize',f);f();var a=n.querySelector('a.on');function g(){if(a&&n.scrollWidth>n.clientWidth){var d=a.getBoundingClientRect().left-n.getBoundingClientRect().left+n.scrollLeft;n.scrollLeft=Math.max(0,Math.round(d-(n.clientWidth-a.offsetWidth)/2));}f();}g();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(g);})();</script>
+<style>
+/* Mobil menü (Fable denetimi P1): 9 maddelik kayan şerit yerine 3 ana link + Menü */
+.sbnav-menu{display:none}
+.sbnav-panel{display:none}
+@media(max-width:760px){
+ .sbnav nav{overflow:visible;-webkit-mask-image:none!important;mask-image:none!important;margin-left:auto}
+ .sbnav nav a:not(.ana){display:none}
+ .sbnav nav a[data-kisa]{font-size:0}
+ .sbnav nav a[data-kisa]::before{content:attr(data-kisa);font-size:.8rem}
+ .sbnav nav{order:1}#temaDugme{order:2}.sbnav-menu{order:3}
+ .sbnav-menu{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;margin-left:.1rem;border:1px solid rgba(var(--ink-rgb),.14);border-radius:50%;background:none;color:var(--ink);cursor:pointer;flex:none;padding:0}
+ .sbnav-menu svg{width:18px;height:18px}
+ .sbnav-menu[aria-expanded="true"]{background:rgba(var(--ink-rgb),.1)}
+ .sbnav-panel{position:fixed;left:0;right:0;top:var(--sbnav-h,52px);bottom:0;z-index:1999;background:var(--bg);overflow-y:auto;padding:.6rem 1.1rem 2rem;box-sizing:border-box;font-family:'Inter',system-ui,sans-serif}
+ .sbnav-panel.acik{display:block}
+ .sbnav-panel h3{font:600 .7rem/1 'Inter',system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin:1.2rem 0 .3rem}
+ .sbnav-panel a{display:flex;align-items:center;min-height:48px;color:var(--ink);text-decoration:none;font-size:1.02rem;border-bottom:1px solid rgba(var(--ink-rgb),.08)}
+ .sbnav-panel a[aria-current="page"]{color:var(--acc);font-weight:600}
+ body.sbnav-kilit{overflow:hidden}
+}
+@media(max-width:400px){.sbnav nav a{padding:0 .5rem}.sbnav{gap:.35rem}}@media(max-width:360px){.sbnav .sbnav-lg{font-size:0;letter-spacing:0}.sbnav .sbnav-lg i{font-size:1.1rem;margin:0}}
+</style>
+<script>(function(){try{
+ var h=document.querySelector('.sbnav'),n=h&&h.querySelector('nav');if(!h||!n||h.querySelector('.sbnav-menu'))return;
+ var G=[['Haritam',['/dogum-haritasi-hesaplama','/detayli-dogum-haritasi','/haritam']],['Gökyüzü',['/bugun','/araclar']],['Keşfet',['/burc-ozellikleri','/nadirlik','/sayim','/ogren']]];
+ var L={};[].forEach.call(n.querySelectorAll('a'),function(a){L[a.getAttribute('href')]=a;});
+ var p=document.createElement('div');p.className='sbnav-panel';p.id='sbnavPanel';p.setAttribute('role','dialog');p.setAttribute('aria-label','Menü');
+ G.forEach(function(g){var t=document.createElement('h3');t.textContent=g[0];p.appendChild(t);g[1].forEach(function(u){var a=L[u];if(!a)return;var k=document.createElement('a');k.href=u;k.textContent=(a.textContent||'').replace(/^✦\s*/,'');if(a.getAttribute('aria-current'))k.setAttribute('aria-current','page');if(a.id==='sorbiNavHaritam'&&getComputedStyle(a).display==='none'){k.hidden=true;k.dataset.profil='1';}p.appendChild(k);});});
+ var b=document.createElement('button');b.type='button';b.className='sbnav-menu';b.setAttribute('aria-label','Menüyü aç');b.setAttribute('aria-expanded','false');b.setAttribute('aria-controls','sbnavPanel');
+ b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+ h.appendChild(b);document.body.appendChild(p);
+ function ac(x){p.classList.toggle('acik',x);b.setAttribute('aria-expanded',x?'true':'false');b.setAttribute('aria-label',x?'Menüyü kapat':'Menüyü aç');document.body.classList.toggle('sbnav-kilit',x);
+  document.documentElement.style.setProperty('--sbnav-h',h.getBoundingClientRect().bottom+'px');
+  b.innerHTML=x?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+  if(x){var pr=p.querySelector('[data-profil]'),hr=document.getElementById('sorbiNavHaritam');if(pr&&hr)pr.hidden=getComputedStyle(hr).display==='none';var f=p.querySelector('a:not([hidden])');f&&f.focus();}}
+ b.addEventListener('click',function(){ac(!p.classList.contains('acik'));});
+ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&p.classList.contains('acik')){ac(false);b.focus();}});
+ window.addEventListener('resize',function(){if(window.innerWidth>760&&p.classList.contains('acik'))ac(false);});
+}catch(e){}})();</script>
 <!-- SORBI-NAV:END -->
 <!-- SORBI-TEMA:START -->
 <style>
@@ -521,6 +566,23 @@ function fillBig3(){
   if(ilkGoster && !window.__heroGiris) try{ requestAnimationFrame(function(){ $('big3').scrollIntoView({behavior:'smooth',block:'start'}); }); }catch(e){}
 }
 var SLOW={jup:1,sat:1,ura:1,nep:1,plu:1};
+/* transit satırı önce insan cümlesiyle konuşur, teknik künye altta (Fable denetimi P2) */
+var TR_OZNE={jup:'Jüpiter',sat:'Satürn',ura:'Uranüs',nep:'Neptün',plu:'Plüton'};
+var TR_ALAN={sun:'kendini ifade edişini',moon:'duygularını',mer:'düşüncelerini ve konuşmanı',ven:'ilişkilerini ve keyiflerini',mar:'enerjini ve cesaretini',
+  jup:'büyüme isteğini',sat:'sorumluluklarını',ura:'özgürlük ihtiyacını',nep:'hayallerini',plu:'derindeki gücünü',chi:'eski bir yaranı',nod:'yönünü',lil:'bastırdıklarını',asc:'dışa yansıyan tarzını',mc:'kariyerini ve hedeflerini'};
+var TR_FIIL={
+  jup:{kolay:'destekliyor; bir kapı kolayca açılabilir.',zor:'büyütüyor; abartıya kaçmamak iyi gelir.',birlik:'genişletiyor; iyimser bir dönem olabilir.'},
+  sat:{kolay:'sağlamlaştırıyor; emek verdiğin şey kalıcı olabilir.',zor:'sınıyor; zor gelebilir ama seni olgunlaştırır.',birlik:'ciddileştiriyor; sabır şart.'},
+  ura:{kolay:'tazeliyor; beklenmedik iyi bir fikir gelebilir.',zor:'alışılmışı kıpırdatıyor; beklenmedik bir değişim gündeme gelebilir.',birlik:'yeniliyor; alışkanlıkların değişebilir.'},
+  nep:{kolay:'yumuşatıyor; sezgilerin güçlü olabilir.',zor:'bulanıklaştırıyor; kararları biraz beklet.',birlik:'ilhamla dolduruyor; netlik biraz gecikebilir.'},
+  plu:{kolay:'derinleştiriyor; içten bir güç hissedebilirsin.',zor:'dönüştürüyor; bir şeyi bırakman gerekebilir.',birlik:'baştan kuruyor; köklü bir değişim olabilir.'}
+};
+function trCumle(x){
+  var t=x.as.a===0?'birlik':((x.as.a===90||x.as.a===180)?'zor':'kolay');
+  var f=(TR_FIIL[x.a.k]||{})[t]; if(!f) return '';
+  var alan=TR_ALAN[x.b.k]||(x.b.n+' konularını');
+  return TR_OZNE[x.a.k]+' '+alan+' '+f;
+}
 function fillTransits(){
   try{
     var tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'Europe/Istanbul';
@@ -539,7 +601,7 @@ function fillTransits(){
       var hardA=(x.as.a===90||x.as.a===180), softA=(x.as.a===60||x.as.a===120);
       var ac=hardA?'#E3A692':(softA?'#A5A3AE':'var(--gold-br)');
       return '<div class="tr"><span class="gl">'+x.a.g+'</span>'+
-        '<span class="tx">Şu an: transit <b style="color:var(--gold-br)">'+x.a.n+'</b> <span style="color:'+ac+'">· '+x.as.n.toLowerCase()+' ·</span> natal <b style="color:var(--gold-br)">'+x.b.n+'</b>'+ev+'</span>'+
+        '<span class="tx"><span class="tr-cumle">'+trCumle(x)+'</span><span class="tr-kunye">transit <b>'+x.a.n+'</b> <span style="color:'+ac+'">· '+x.as.n.toLowerCase()+' ·</span> natal <b>'+x.b.n+'</b>'+ev+'</span></span>'+
         '<span class="orb">'+x.abs.toFixed(1)+'°'+yon+'</span></div>';
     }).join('');
   }catch(e){ $('trBox').hidden=true; }
