@@ -59,7 +59,7 @@ var GECE = [
   [-18,'#0B0810','#181E28','#181E28',0],
   [-12,'#0E121C','#151C29','#29334D',0.15],
   [ -8,'#131A28','#182030','#434558',0.35],
-  [ -4,'#1A2033','#272C3F','#8C4801',0.55],
+  [ -4,'#1A2033','#272C3F','#8C4801',0.42],
   [ -1,'#1E2438','#2E3350','#AF6F1B',0.75],
   [  2,'#222A40','#353A55','#EFD08D',0.55],
   [  8,'#1B2233','#2A3148','#2A3148',0],
@@ -87,9 +87,11 @@ var css = document.createElement('style');
 css.textContent =
  '.hero{position:relative;isolation:isolate}' +
  '.gok-perde{position:absolute;z-index:-1;top:-64px;bottom:-1px;left:50%;width:100vw;transform:translateX(-50%);pointer-events:none;overflow:hidden;' +
- '-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 72%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 72%,transparent 100%)}' +
+ '-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 85%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 85%,transparent 100%)}' +
  '.gok-perde>div,.gok-perde>canvas{position:absolute;inset:0;width:100%;height:100%;transition:opacity 1.2s,background 1.2s}' +
- '.gok-durum{font:500 .72rem/1.5 "JetBrains Mono",ui-monospace,monospace;letter-spacing:.06em;color:var(--mut);margin:.35rem auto 0;max-width:34rem}' +
+ '.gok-durum{font:500 .8rem/1.6 "JetBrains Mono",ui-monospace,monospace;letter-spacing:.03em;color:var(--mut);margin:.6rem auto 0;max-width:34rem}' +
+ /* nav dikişi: ana sayfada menü gökyüzünü kesmesin */
+ '.sbnav{background:rgba(var(--bg-rgb),.55)!important;border-bottom-color:rgba(var(--ink-rgb),.06)!important}' +
  '.gok-durum b{font-weight:500;color:var(--ink)}';
 document.head.appendChild(css);
 
@@ -116,6 +118,8 @@ function yildizKur(){
 var ctx = cv.getContext('2d'), dpr = M.min(2, window.devicePixelRatio||1), gorunurluk = 0;
 var hareket = !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
 function boyut(){ cv.width = perde.clientWidth*dpr; cv.height = perde.clientHeight*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); yildizKur(); }
+var gorunur = true, calisiyor = false;
+function baslat(){ if(!calisiyor && gorunur){ calisiyor = true; requestAnimationFrame(ciz); } }
 function ciz(t){
   ctx.clearRect(0,0,cv.width,cv.height);
   if(gorunurluk > 0.01) for(var i=0;i<yildiz.length;i++){ var s = yildiz[i];
@@ -123,7 +127,7 @@ function ciz(t){
     ctx.globalAlpha = s.a*tit*gorunurluk; ctx.fillStyle = s.c;
     ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill(); }
   ctx.globalAlpha = 1;
-  if(hareket && gorunurluk > 0.01) requestAnimationFrame(ciz);
+  if(hareket && gorunurluk > 0.01 && gorunur) requestAnimationFrame(ciz); else calisiyor = false;
 }
 
 /* ── hesapla ve boya ── */
@@ -137,23 +141,49 @@ function evreAdi(h, saat){
   if(h > -18) return sabah ? 'tan ağarmadan önce' : 'gece iniyor';
   return 'gece';
 }
+/* "06:52'de", "19:10'da", "07:40'ta" — son okunan sayının ünlüsü ve sertliği */
+function saatEk(sa, dk){
+  var n = dk || sa % 12 || 12, son;
+  var BIR = {0:'',1:'bir',2:'iki',3:'üç',4:'dört',5:'beş',6:'altı',7:'yedi',8:'sekiz',9:'dokuz'};
+  var ON = {1:'on',2:'yirmi',3:'otuz',4:'kırk',5:'elli'};
+  son = n % 10 ? BIR[n % 10] : (ON[M.floor(n/10)] || 'on iki');
+  if(!dk && (sa % 12 === 0)) son = 'iki';
+  var unlu = son.replace(/[^aeıioöuü]/g,'').slice(-1), kalin = /[aıou]/.test(unlu);
+  var sert = /[çfhkpsşt]$/.test(son);
+  return "'" + (sert ? 't' : 'd') + (kalin ? 'a' : 'e');
+}
+/* bir sonraki gün doğumu (gece) ya da batımı (gündüz), 2 dk adımla ≤ 26 saat ileri */
+function sonrakiOlay(d, gunduz){
+  var t = d.getTime(), onceki = gunesYuk(d, yer.lat, yer.lon) + 0.833;
+  for(var k=1;k<=780;k++){
+    var u = new Date(t + k*120000), v = gunesYuk(u, yer.lat, yer.lon) + 0.833;
+    if(gunduz ? (onceki > 0 && v <= 0) : (onceki < 0 && v >= 0)){
+      var sa = ('0'+u.getHours()).slice(-2) + ':' + ('0'+u.getMinutes()).slice(-2);
+      var yarin = u.getDate() !== d.getDate() && d.getHours() >= 12;
+      return (yarin ? 'yarın ' : '') + sa + saatEk(u.getHours(), u.getMinutes()) + (gunduz ? ' batıyor' : ' doğuyor');
+    }
+    onceki = v;
+  }
+  return '';
+}
 function boya(){
   var d = simdi(), h = gunesYuk(d, yer.lat, yer.lon), gunduzTema = H.getAttribute('data-tema') === 'gunduz';
   var c = ara(gunduzTema ? GUNDUZ : GECE, h);
   zemin.style.background = 'linear-gradient(180deg,' + c.z + ' 0%,' + c.u + ' 100%)';
-  isik.style.background = 'radial-gradient(120% 55% at 50% 100%,' + c.i + ' 0%,rgba(0,0,0,0) 70%)';
+  isik.style.background = 'radial-gradient(120% 55% at 50% 82%,' + c.i + ' 0%,rgba(0,0,0,0) 70%)';
   isik.style.opacity = c.g.toFixed(2);
-  var eski = gorunurluk;
   gorunurluk = gunduzTema ? 0 : (h <= -12 ? 1 : h >= 4 ? 0.12 : 0.12 + 0.88*(4-h)/16);
-  if(eski <= 0.01 && gorunurluk > 0.01) requestAnimationFrame(ciz); else if(!hareket) ciz(0);
-  var ay = ayEvre(d), yk = M.round(M.abs(h));
-  var gun = 'Güneş ufkun <b>' + yk + '°</b> ' + (h > 0 ? 'üstünde' : 'altında');
+  if(hareket){ if(gorunurluk > 0.01) baslat(); } else ciz(0);
+  var ay = ayEvre(d), yk = M.round(M.abs(h)), gun;
+  if(M.abs(h) < 8){ gun = 'Güneş ufkun <b>' + yk + '°</b> ' + (h > 0 ? 'üstünde' : 'altında'); }
+  else { var olay = sonrakiOlay(d, h > 0); gun = olay ? 'Güneş <b>' + olay + '</b>' : ''; }
   var yerde = /[aıou][^aeıioöuü]*$/.test(yer.ad) ? "'da" : "'de";
   if(/[fstkçşhp]$/i.test(yer.ad)) yerde = yerde.replace('d','t');
   durum.innerHTML = '<span style="display:block">Şu an ' + yer.ad + yerde + ' <b>' + evreAdi(h, d.getHours()) + '</b></span>' +
-    '<span style="display:block">' + gun + ' · Ay <b>%' + ay.yuzde + '</b>, ' + ay.ad + '</span>';
+    '<span style="display:block">' + (gun ? gun + ' · ' : '') + 'Ay <b>%' + ay.yuzde + '</b>, ' + ay.ad.replace(/ ay$/, '') + '</span>';
 }
-boyut(); boya(); requestAnimationFrame(ciz);
+boyut(); boya(); if(hareket) baslat(); else ciz(0);
+if('IntersectionObserver' in window) new IntersectionObserver(function(e){ gorunur = e[0].isIntersecting; if(gorunur && hareket) baslat(); }).observe(perde);
 (function bekle(n){ if(window.Astronomy) boya(); else if(n < 60) setTimeout(function(){ bekle(n+1); }, 500); })(0);
 setInterval(boya, 60000);
 var rt; window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){ boyut(); if(!hareket) ciz(0); }, 150); });
