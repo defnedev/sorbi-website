@@ -249,7 +249,7 @@ function draw(){
 
  // personal
  const pr=getProfile();const b=pr&&pr.birth&&pr.birth.date?pr.birth:null;
- if(pr)document.getElementById('hello').textContent='Bugün, '+((pr.name||(pr.email||'').split('@')[0])||'');
+ if(pr){var ad=(pr.name||'').trim(); document.getElementById('hello').textContent=ad?'Bugün, '+ad:'Bugün';}
  if(!b){document.getElementById('empty').style.display='block';return;}
  try{
   const[y,mo,d]=b.date.split('-').map(Number);const[hh,mm]=(b.time||'12:00').split(':').map(Number);

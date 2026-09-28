@@ -96,7 +96,7 @@ function ara(tab, h){
 var css = document.createElement('style');
 css.textContent =
  '.hero{position:relative;isolation:isolate}' +
- '.gok-perde{position:absolute;z-index:-1;top:-64px;bottom:-1px;left:50%;width:100vw;transform:translateX(-50%);pointer-events:none;overflow:hidden;' +
+ '.gok-perde{position:absolute;z-index:-1;top:-64px;bottom:-30vh;left:50%;width:100vw;transform:translateX(-50%);pointer-events:none;overflow:hidden;' +
  '-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 85%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 85%,transparent 100%)}' +
  '.gok-perde>div,.gok-perde>canvas{position:absolute;inset:0;width:100%;height:100%;transition:opacity 1.2s,background 1.2s}' +
  '.gok-durum{font:400 .86rem/1.6 Inter,system-ui,sans-serif;letter-spacing:.005em;color:var(--mut);margin:.7rem auto 0;max-width:34rem}' +
@@ -111,7 +111,7 @@ perde.appendChild(zemin); perde.appendChild(cv); perde.appendChild(isik);
 hero.insertBefore(perde, hero.firstChild);
 
 var durum = document.createElement('div'); durum.className = 'gok-durum';
-var p = hero.querySelector('p'); if(p) p.insertAdjacentElement('afterend', durum);
+var p = hero.querySelector('.hero-tarih') || hero.querySelector('p'); if(p) p.insertAdjacentElement('afterend', durum);
 
 /* ── yıldızlar: GERÇEK gök. Çıplak gözle görülen 1.627 yıldız (kadir ≤ 5), konum ve B−V rengi
  *    d3-celestial yıldız verisinden (BSD-3-Clause, © Olaf Frohn). Ziyaretçinin konumundan o an
