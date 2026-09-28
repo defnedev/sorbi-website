@@ -130,6 +130,7 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(1.6rem,5vw
  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&p.classList.contains('acik')){ac(false);b.focus();}});
  window.addEventListener('resize',function(){if(window.innerWidth>760&&p.classList.contains('acik'))ac(false);});
 }catch(e){}})();</script>
+<script>(function(){try{if(!localStorage.getItem('sorbi_birth'))document.querySelectorAll('.sbnav a[data-kisa="Haritam"]').forEach(function(a){a.setAttribute('data-kisa','Harita')});}catch(e){}})();</script>
 <!-- SORBI-NAV:END -->
 <!-- SORBI-TEMA:START -->
 <style>
@@ -315,7 +316,7 @@ function draw(){
    const top=hits[0];const theme=TTHEME[top.t]||top.t;const nat2=NPT[top.n]||top.n;
    let h=`<div class="lead">${['Güçlü bir gün.','Akış günü.','Dikkat günü.'][top.ang===0?0:(top.ang===60||top.ang===120?1:2)]}</div>`;
    h+=`<p>${toneLine(theme,nat2,top.ang)}</p>`;
-   if(hits[1]){const t2=hits[1];h+=`<div class="more"><b>Ayrıca:</b> transit ${t2.t} — natal ${t2.n}: ${['kavuşum','altmışlık','kare','üçgen','karşıt'][[0,60,90,120,180].indexOf(t2.ang)]}.</div>`;}
+   if(hits[1]){const t2=hits[1];const an2=['kavuşum','altmışlık','kare','üçgen','karşıt'][[0,60,90,120,180].indexOf(t2.ang)];const k2=t2.t===t2.n?'haritandaki köküyle':(NPT[t2.n]||('natal '+t2.n+' noktanla'));const f2=t2.ang===0?'buluşuyor':((t2.ang===60||t2.ang===120)?'uyumlu akıyor':'biraz gerilimde, acele etmemek iyi gelebilir');h+=`<div class="more"><b>Ayrıca:</b> ${TTHEME[t2.t]||t2.t} ${k2} ${f2}.<span style="display:block;opacity:.6;font-size:.85em;margin-top:.2rem">transit ${t2.t} · ${an2} · natal ${t2.n}</span></div>`;}
    document.getElementById('personal').innerHTML=h;
   }
  }catch(e){document.getElementById('empty').style.display='block';}

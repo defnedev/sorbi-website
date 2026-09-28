@@ -275,6 +275,7 @@ footer .fine{text-align:center;line-height:1.85;font-weight:300}
  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&p.classList.contains('acik')){ac(false);b.focus();}});
  window.addEventListener('resize',function(){if(window.innerWidth>760&&p.classList.contains('acik'))ac(false);});
 }catch(e){}})();</script>
+<script>(function(){try{if(!localStorage.getItem('sorbi_birth'))document.querySelectorAll('.sbnav a[data-kisa="Haritam"]').forEach(function(a){a.setAttribute('data-kisa','Harita')});}catch(e){}})();</script>
 <!-- SORBI-NAV:END -->
 <!-- SORBI-TEMA:START -->
 <style>
@@ -573,14 +574,15 @@ var TR_ALAN={sun:'kendini ifade edişini',moon:'duygularını',mer:'düşüncele
 var TR_FIIL={
   jup:{kolay:'destekliyor; bir kapı kolayca açılabilir.',zor:'büyütüyor; abartıya kaçmamak iyi gelir.',birlik:'genişletiyor; iyimser bir dönem olabilir.'},
   sat:{kolay:'sağlamlaştırıyor; emek verdiğin şey kalıcı olabilir.',zor:'sınıyor; zor gelebilir ama seni olgunlaştırır.',birlik:'ciddileştiriyor; sabır şart.'},
-  ura:{kolay:'tazeliyor; beklenmedik iyi bir fikir gelebilir.',zor:'alışılmışı kıpırdatıyor; beklenmedik bir değişim gündeme gelebilir.',birlik:'yeniliyor; alışkanlıkların değişebilir.'},
+  ura:{kolay:'tazeliyor; beklenmedik iyi bir fikir gelebilir.',zor:'kıpırdatıyor; beklenmedik bir değişim gündeme gelebilir.',birlik:'yeniliyor; alışkanlıkların değişebilir.'},
   nep:{kolay:'yumuşatıyor; sezgilerin güçlü olabilir.',zor:'bulanıklaştırıyor; kararları biraz beklet.',birlik:'ilhamla dolduruyor; netlik biraz gecikebilir.'},
   plu:{kolay:'derinleştiriyor; içten bir güç hissedebilirsin.',zor:'dönüştürüyor; bir şeyi bırakman gerekebilir.',birlik:'baştan kuruyor; köklü bir değişim olabilir.'}
 };
-function trCumle(x){
+function trCumle(x,onceki){
   var t=x.as.a===0?'birlik':((x.as.a===90||x.as.a===180)?'zor':'kolay');
   var f=(TR_FIIL[x.a.k]||{})[t]; if(!f) return '';
   var alan=TR_ALAN[x.b.k]||(x.b.n+' konularını');
+  if(onceki&&onceki.b.k===x.b.k) alan='aynı alanı';
   return TR_OZNE[x.a.k]+' '+alan+' '+f;
 }
 function fillTransits(){
@@ -595,13 +597,13 @@ function fillTransits(){
     }).slice(0,3);
     if(!hits.length){ $('trBox').hidden=true; return; }
     $('trBox').hidden=false;
-    $('trList').innerHTML=hits.map(function(x){
+    $('trList').innerHTML=hits.map(function(x,i){
       var yon = x.app===null ? '' : (x.app?' · yaklaşıyor':' · ayrılıyor');
       var ev = (!NOTIME && x.b.house) ? ' <span style="color:var(--dim)">('+x.b.house+'. ev)</span>' : '';
       var hardA=(x.as.a===90||x.as.a===180), softA=(x.as.a===60||x.as.a===120);
       var ac=hardA?'#E3A692':(softA?'#A5A3AE':'var(--gold-br)');
       return '<div class="tr"><span class="gl">'+x.a.g+'</span>'+
-        '<span class="tx"><span class="tr-cumle">'+trCumle(x)+'</span><span class="tr-kunye">transit <b>'+x.a.n+'</b> <span style="color:'+ac+'">· '+x.as.n.toLowerCase()+' ·</span> natal <b>'+x.b.n+'</b>'+ev+'</span></span>'+
+        '<span class="tx"><span class="tr-cumle">'+trCumle(x,hits[i-1])+'</span><span class="tr-kunye">transit <b>'+x.a.n+'</b> <span style="color:'+ac+'">· '+x.as.n.toLowerCase()+' ·</span> natal <b>'+x.b.n+'</b>'+ev+'</span></span>'+
         '<span class="orb">'+x.abs.toFixed(1)+'°'+yon+'</span></div>';
     }).join('');
   }catch(e){ $('trBox').hidden=true; }

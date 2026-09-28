@@ -182,6 +182,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&p.classList.contains('acik')){ac(false);b.focus();}});
  window.addEventListener('resize',function(){if(window.innerWidth>760&&p.classList.contains('acik'))ac(false);});
 }catch(e){}})();</script>
+<script>(function(){try{if(!localStorage.getItem('sorbi_birth'))document.querySelectorAll('.sbnav a[data-kisa="Haritam"]').forEach(function(a){a.setAttribute('data-kisa','Harita')});}catch(e){}})();</script>
 <!-- SORBI-NAV:END -->
 <!-- Dar ekranda gövde dolgusu 1rem'e iniyor; ortak nav bloğu -2rem negatif
      kenar boşluğu uyguladığı için 16px yatay taşma oluyordu. Yerel düzeltme. -->
