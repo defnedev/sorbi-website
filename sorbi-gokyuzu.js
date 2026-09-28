@@ -114,6 +114,7 @@ function ciz(cv,H,o){
  if(cv.width!==M.round(G*dpr)){cv.width=M.round(G*dpr);cv.height=cv.width;}
  var c=cv.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);
  c.clearRect(0,0,G,G);
+ c.globalAlpha=o.sade?.5:1; /* sade: tarih girilmeden önce çizgisiz, soluk bir yıldız haritası */
  var cx=G/2,cy=G/2,R=G/2-14,ic=R-M.max(30,G*.055),kal=R-ic;
  var mono='ui-monospace,Menlo,monospace';
  /* burç halkası: ASC solda (9 yönünde), saat yönünün tersi */
@@ -138,7 +139,7 @@ function ciz(cv,H,o){
  /* açılar */
  var rp=ic-M.max(22,G*.045);
  var PAL=aciPal();
- acilar(H.P).forEach(function(x){
+ if(!o.sade) acilar(H.P).forEach(function(x){
   var p=H.P[x[0]],q=H.P[x[1]],a=ang(p.lon),b2=ang(q.lon),t=x[2];
   /* opaklık sabit tabanın altına inmez; orb yalnız kalınlığa yazılır */
   c.strokeStyle=alf(PAL[t]||ACI_YEDEK[t], M.min(1,ACI_ALF[t]+x[3]*(1-ACI_ALF[t])*.45));
@@ -161,11 +162,12 @@ function ciz(cv,H,o){
  }
  /* merkez */
  c.beginPath();c.arc(cx,cy,2,0,TAU);c.fillStyle=tkr('--ink',.5);c.fill();
+ c.globalAlpha=1;
 }
 
 function metin(H,o){
  var p=yerelParca(H.t,o.tz);
- return p.d+' '+AY[p.mo-1]+' '+p.y+' · '+pad(p.h)+':'+pad(p.mi)+(o.yer?' · '+o.yer:'');
+ return p.d+' '+AY[p.mo-1]+' '+p.y+' · '+(o.saatYok?'saat bilinmiyor':pad(p.h)+':'+pad(p.mi))+(o.yer?' · '+o.yer:'');
 }
 function fark(ms){
  var g=M.round(ms/864e5);if(M.abs(g)<1)return 'şimdi';
@@ -217,7 +219,7 @@ function kur(el,o){
  return {
   git:function(d,yer,cb){ /* doğum anına uç */
    var hedef=harita(d,yer?{lat:yer.lat,lon:yer.lon,tz:yer.tz||o.tz,yer:yer.yer}:o);
-   var A=ST.H||ST.now;ST.ofs=0;ciz_.hidden=true;ST.dogum=true;
+   var A=ST.H||ST.now;ST.ofs=0;ciz_.hidden=true;ST.dogum=true;o.sade=false;
    suzul(A,hedef,1800,function(){tEl.textContent=metin(hedef,yer||o);cb&&cb(hedef);});},
   anlat:function(H,saatYok){return anlat(H,saatYok);},
   simdi:function(){ciz_.hidden=false;geri.click();},

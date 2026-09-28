@@ -68,7 +68,7 @@
       return {
         name: d.il, latitude: d.lat, longitude: d.lon, timezone: TZ,
         country: 'Türkiye', country_code: 'TR',
-        admin1: d.merkez === d.il ? 'Türkiye' : d.merkez,
+        admin1: d.merkez === d.il ? '' : d.merkez,
         _sorbi: 'il'
       };
     });
@@ -81,8 +81,13 @@
     return anahtar(x.name) + '|' + anahtar(x.admin1 || '') + '|' + (x.country_code || '');
   }
 
-  function harmanla(yerelListe, uzakListe) {
+  function harmanla(yerelListe, uzakListe, q) {
     var goruldu = {}, cikti = [];
+    /* yerelde tam eşleşen il varsa yurt dışından yalnız adı sorguyla başlayanlar gelsin
+       ("Ankara" → Gürcistan'daki "Krist'esi" gibi bulanık eşleşmeler düşer) */
+    if (yerelListe.length && q) { var aq = anahtar(q);
+      var tam = yerelListe.some(function (x) { return anahtar(x.name) === aq; });
+      uzakListe = uzakListe.filter(function (x) { return x.country_code === 'TR' || (!tam && anahtar(x.name).indexOf(aq) === 0); }); }
     function ekle(x) { var id = kimlik(x); if (goruldu[id]) return; goruldu[id] = 1; cikti.push(x); }
     yerelListe.forEach(ekle);
     uzakListe.filter(function (x) { return x.country_code === 'TR'; }).forEach(ekle);
@@ -98,7 +103,7 @@
     return asilFetch(UC + '?name=' + encodeURIComponent(q) + '&count=10&language=tr&format=json')
       .then(function (r) { return r.json(); })
       .catch(function () { return {}; })
-      .then(function (j) { return { results: harmanla(y, (j && j.results) || []) }; });
+      .then(function (j) { return { results: harmanla(y, (j && j.results) || [], q) }; });
   }
 
   /* Sayfalardaki mevcut fetch çağrılarını olduğu gibi bırakıp araya giriyoruz. */

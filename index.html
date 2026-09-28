@@ -104,6 +104,7 @@ label{display:block;font-size:.72rem;font-weight:500;color:var(--mut);margin-bot
 input{width:100%;background:rgba(var(--bg-rgb),.35);border:1px solid var(--stroke2);color:var(--ink);border-radius:12px;padding:.78rem .85rem;font-size:.98rem;font-family:inherit;transition:border-color .15s,box-shadow .15s;color-scheme:dark}
 input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(var(--acc-rgb),.15)}
 .geo{position:relative}
+.geo:focus-within{z-index:80}.calc:focus-within,.calc:has(.geolist:not([hidden])){position:relative;z-index:80}
 .geolist{position:absolute;top:100%;left:0;right:0;z-index:60;background:var(--bg);border:1px solid var(--stroke2);border-radius:12px;margin-top:5px;max-height:220px;overflow:auto;box-shadow:0 16px 40px rgba(var(--bg-rgb),.5)}
 .geolist div{padding:.6rem .8rem;font-size:.9rem;cursor:pointer;border-bottom:1px solid rgba(var(--ink-rgb),.08)}
 .geolist div:hover{background:rgba(var(--ink-rgb),.1)}
@@ -166,11 +167,28 @@ footer a{color:var(--mut);transition:.15s}
 footer a:hover{color:var(--ink)}
 footer .fine{text-align:center;line-height:1.85;font-weight:300}
 </style>
-<script src="/sorbi-yer.js?v=3"></script>
+<script src="/sorbi-yer.js?v=5"></script>
 <link rel="stylesheet" href="/sorbi-fonts.css?v=10">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6653215819266638"
      crossorigin="anonymous"></script>
 <style>/* CLS-yer: sonradan dolan alanlara baştan yer ayır */#gokyuzu:empty::before{content:'';display:block;padding-top:100%;height:70px}</style>
+<style>/* hero tarih alanı */
+.hero-tarih{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;margin:1.2rem auto 0;max-width:30rem}
+.hero-tarih input{flex:1 1 12rem;min-width:0;height:52px;font:500 1.05rem Inter,system-ui,sans-serif;color:var(--ink);background:rgba(var(--bg-rgb),.55);border:1px solid rgba(var(--ink-rgb),.28);border-radius:14px;padding:0 1rem;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.hero-tarih input:focus{outline:none;border-color:var(--acc);box-shadow:0 0 0 3px rgba(var(--acc-rgb),.22)}
+.hero-tarih button{flex:0 0 auto;height:52px;padding:0 1.5rem;font:600 1rem Inter,system-ui,sans-serif;color:var(--acc-ink);background:var(--acc);border:0;border-radius:14px;cursor:pointer}
+.hero-tarih button:hover{filter:brightness(1.06)}
+.hero-tarih-alt{flex-basis:100%;font-size:.8rem;color:var(--mut)}
+.hero-tarih.hata input{border-color:#E07A6B}
+.gizli-etiket{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.hero-tarih .sfwrap{flex:1 1 13rem;min-width:0;height:52px;box-sizing:border-box;border-radius:14px;padding:0 1rem;background:rgba(var(--bg-rgb),.55);border-color:rgba(var(--ink-rgb),.28);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.hero-tarih .sfseg{font-size:1.1rem}
+.hero-tarih .sfhint,.hero-tarih .sfnot{flex-basis:100%;text-align:center}
+.hero-tarih.hata .sfwrap{border-color:#E07A6B}
+.hero-tarih.hata .hero-tarih-alt{color:#E9A195}
+.hero-tarih button.pasif{background:transparent;color:var(--mut);box-shadow:inset 0 0 0 1px rgba(var(--ink-rgb),.22)}
+@media(max-width:480px){.hero-tarih button{flex:1 1 100%}}
+</style>
 </head>
 <body>
 <!-- SORBI-NAV:START -->
@@ -284,15 +302,19 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
 
 <div class="hero">
     <h1>Doğduğun an <em>kaç kişide bir</em>?</h1>
-  <p>Şu an gökyüzü böyle. Tarihini yaz, senin anına gidelim.</p>
+  <p>Doğum tarihini yaz: doğduğun anın gökyüzünü ve haritanın kaç kişide bir görüldüğünü göstereyim.</p>
+  <form class="hero-tarih" id="heroTarih" novalidate>
+    <label for="heroBd" class="gizli-etiket">Doğum tarihin</label>
+    <input type="date" id="heroBd" required min="1850-01-01" max="2069-12-31">
+    <button type="submit">Göster</button>
+    <div class="hero-tarih-alt">Ücretsiz · kayıt yok · saat ve yeri sonra ekleyebilirsin</div>
+  </form>
   <div class="gk-iki" id="gkIki">
     <div class="gk-kol"><div class="gk-bas" hidden>doğduğun an</div><div class="gk" id="gokyuzu" aria-live="off"></div></div>
     <div class="gk-kol" id="gkSimdiKol" hidden><div class="gk-bas">şimdi</div><div class="gk" id="gokSimdi"></div></div>
   </div>
   <div class="gk-anlat" id="gkAnlat" hidden></div>
   <div class="gk-terim" id="gkTerim" hidden></div>
-  <div class="ok">↓ tarihini yaz</div>
-  <div class="ok vaat">Tek form · kayıt yok · haritan saniyeler içinde</div>
 </div>
 
 <div class="calc" id="dogum-haritasi">
@@ -356,7 +378,7 @@ function loadEngine(cb){
   QUEUE.push(cb);
   if(LOADING) return;
   LOADING=true;
-  var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=13','/sorbi-astro.js?v=4','/sorbi-gokyuzu.js?v=4'];
+  var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=13','/sorbi-astro.js?v=4','/sorbi-gokyuzu.js?v=6'];
   (function next(i){
     if(i>=srcs.length){ READY=true; LOADING=false; var q=QUEUE;QUEUE=[];q.forEach(function(f){f();}); return; }
     var s=document.createElement('script');
@@ -435,7 +457,7 @@ function draw(){
     CH=SorbiAstro.chart(o);
     CH.o.house=NOTIME?'W':'P';
     if(GOK){ var saatYok=NOTIME;
-      GOK.git(new Date(o.y,o.mo-1,o.d,o.h,o.mi),{lat:o.lat,lon:o.lon,tz:o.tz,yer:PICKED.label||''},function(H){
+      GOK.git(new Date(o.y,o.mo-1,o.d,o.h,o.mi),{lat:o.lat,lon:o.lon,tz:o.tz,yer:PICKED.label||'',saatYok:saatYok},function(H){
         try{ var A=$('gkAnlat'); A.innerHTML=GOK.anlat(H,saatYok).map(function(c){return '<p>'+c+'</p>';}).join(''); A.hidden=false; }catch(e){}
         terimKur(saatYok);
       });
@@ -496,7 +518,7 @@ function fillBig3(){
   if(NOTIME){ asc.classList.add('na'); $('v-asc').textContent='saat gerekli'; }
   else { asc.classList.remove('na'); $('v-asc').innerHTML=big3html(CH.asc); }
   /* sonuç ilk ekranda görünsün: klavye kapanınca form scroll pozisyonu keyfi kalabiliyor */
-  if(ilkGoster) try{ requestAnimationFrame(function(){ $('big3').scrollIntoView({behavior:'smooth',block:'start'}); }); }catch(e){}
+  if(ilkGoster && !window.__heroGiris) try{ requestAnimationFrame(function(){ $('big3').scrollIntoView({behavior:'smooth',block:'start'}); }); }catch(e){}
 }
 var SLOW={jup:1,sat:1,ura:1,nep:1,plu:1};
 function fillTransits(){
@@ -523,6 +545,22 @@ function fillTransits(){
   }catch(e){ $('trBox').hidden=true; }
 }
 ['bd','bt'].forEach(function(id){ $(id).addEventListener('change',render); });
+/* alttaki forma dokunan kullanıcı normal akışa (sonuç kartlarına kaydırma) döner */
+$('dogum-haritasi').addEventListener('focusin',function(){ window.__heroGiris=false; });
+(function(){ var f=$('heroTarih'), i=$('heroBd'); if(!f) return;
+  if($('bd').value) i.value=$('bd').value;
+  f.addEventListener('submit',function(e){ e.preventDefault();
+    var v=i.value, alt=f.querySelector('.hero-tarih-alt'), btn=f.querySelector('button');
+    if(!v){ f.classList.add('hata'); alt.textContent='Önce doğum tarihini yaz — gün, ay, yıl.'; var sg=f.querySelector('.sfseg'); (sg||i).focus(); return; }
+    f.classList.remove('hata'); f.dataset.son=v; btn.textContent='Gösterildi ✓'; btn.classList.add('pasif');
+    window.__heroGiris=true; $('bd').value=v; GOK_ILK=false; $('bd').dispatchEvent(new Event('change'));
+    alt.innerHTML='Saatini ve yerini <a href="#dogum-haritasi">aşağıdan ekle</a>, yükselen burcun da çıksın.';
+  });
+  $('bd').addEventListener('change',function(){ if($('bd').value && i.value!==$('bd').value) i.value=$('bd').value; });
+  /* tarih tamamlanınca düğmesiz de açılsın (Fable: sitenin kalbi bu anlık dönüşüm) */
+  f.addEventListener('input',function(){ var btn=f.querySelector('button'); if(btn.classList.contains('pasif') && i.value!==f.dataset.son){ btn.textContent='Göster'; btn.classList.remove('pasif'); } });
+  i.addEventListener('change',function(){ if(i.value && i.value!==$('bd').value) f.requestSubmit ? f.requestSubmit() : f.dispatchEvent(new Event('submit')); });
+})();
 
 
 /* ── girişte: şu anın gökyüzü, hareket halinde ── */
@@ -544,7 +582,7 @@ function gokKur(){
       if(GOK||!window.SorbiGokyuzu) return;
       var yer={lat:41.0082,lon:28.9784,tz:'Europe/Istanbul',yer:'İstanbul'};
       if(PICKED&&PICKED.lat){ yer={lat:PICKED.lat,lon:PICKED.lon,tz:PICKED.tz||yer.tz,yer:PICKED.label||''}; }
-      GOK=window.SorbiGokyuzu.kur($('gokyuzu'),yer);
+      yer.sade=!$('bd').value; GOK=window.SorbiGokyuzu.kur($('gokyuzu'),yer);
     }catch(e){}
   });
 }
@@ -572,7 +610,7 @@ if($('bd').value && PICKED){ GOK_ILK=true; render(); }
 <h2 style="margin-top:2rem">Sayım</h2>
 <div class="sy"><a href="/sayim">Tüm sayımlar</a><a href="/sayim-yukselen">Hangi yükselen daha sık?</a><a href="/sayim-retro">Merkür retrosunda doğmak</a><a href="/sayim-yigin">Stellium ne kadar nadir?</a><a href="/sayim-anaretik">29. derece</a><a href="/sayim-yildiz">Sabit yıldızlar</a></div>
 </section>
-<script src="/sorbi-gok-perde.js?v=4" defer></script>
+<script src="/sorbi-gok-perde.js?v=5" defer></script>
 <!-- SORBI-FOOTER:START -->
 <style>
 .sbft{text-align:left;padding:0;font-size:1rem;font-weight:400;color:var(--mut);max-width:none;width:auto}

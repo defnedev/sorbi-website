@@ -149,7 +149,7 @@ details.kusak .ic{padding-bottom:.4rem}
 .yontem b{color:var(--ink);font-weight:500}
 #sonuc[hidden]{display:none}
 </style>
-<script src="/sorbi-yer.js?v=3"></script>
+<script src="/sorbi-yer.js?v=5"></script>
 <script src="/sorbi-sayim.js?v=2"></script>
 <script src="/sorbi-nadirlik-gorsel.js?v=1" defer></script>
 <link rel="stylesheet" href="/sorbi-fonts.css?v=10">
@@ -464,6 +464,17 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
             +' Örneklemde '+yuzde(enNadir.p)+'.' }
       : { buyuk:'—', alt:'Saat olmadan kişisel yerleşim sıralanamaz', cum:'', not:'' };
 
+    /* Fable: sitenin vaadi "kaç kişide bir?" — manşet en vurucu sayı olan üçlüyle açılır,
+       tek yerleşim ikinci satıra iner. Saat yoksa ya da üçlü alt sınırdaysa eski manşet kalır. */
+    var ucluManset = uc && !uc.altSinir;
+    if(ucluManset){
+      var gI=G(), tek=manset;
+      manset = { et:'Güneş · Ay · Yükselen üçlün',
+        buyuk:kacKiside(uc),
+        alt:S[burc(pl.sun.lon)]+' · '+S[burc(pl.moon.lon)]+' · '+S[burc(ch.asc)],
+        cum:(gI?'<b>'+esc(gI.insan(uc.biriKac))+'</b>':''),
+        not:(enNadir?'En seyrek tek yerleşimin: '+tek.alt+' — '+tek.buyuk+'. ':'')+SorbiSayim.bin(uc.toplam)+' olası üçlüden biri.' };
+    }
     /* satırlar: taban-merkezli sapma şeridi; ortadaki çizgi 12'de 1 */
     function satirlar(liste,ilk){
       var bas='<div class="satir bas"><div></div><div class="taban"><span>seyrek</span><b>'+kacta(12)+'</b><span>sık</span></div><div></div></div>';
@@ -507,8 +518,9 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
     $('sonuc').hidden=false;
     $('sonuc').innerHTML=
       '<div class="manset">'+
-      (enNadir?'<div class="halka" data-sorbi-nadirlik="halka" data-n="'+enNadir.b.biriKac+'" data-taban="12"></div>':'<div></div>')+
-      '<div><div class="et">En seyrek tek yerleşimin</div>'+
+      (ucluManset?'<div></div>'
+        :enNadir?'<div class="halka" data-sorbi-nadirlik="halka" data-n="'+enNadir.b.biriKac+'" data-taban="12"></div>':'<div></div>')+
+      '<div><div class="et">'+esc(manset.et||'En seyrek tek yerleşimin')+'</div>'+
       '<div class="buyuk">'+esc(manset.buyuk)+'</div>'+
       '<div class="alt">'+esc(manset.alt)+'</div>'+
       (manset.cum?'<div class="cum">'+manset.cum+'</div>':'')+
@@ -516,12 +528,11 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
       '<div class="aksiyon"><button class="ana" id="kartIndir">Kartı indir ✦</button>'+
       '<button class="yan" id="kopyala">Sonucu kopyala</button></div></div>'+
 
+      ucluHtml+
       '<h2>Kişisel yerleşimlerin</h2>'+
       '<div class="ac">Seyrekten sığa. Bunlar gün içinde ve yıl içinde hızla değişir — kişiseldir.</div>'+
       satirlar(kisisel,true)+
       '<div class="lejant"><i></i>ortadaki çizgi: herkes için beklenen, '+kacta(12)+'. Sola sapan seyrek, sağa sapan sık; %10 altı sapma sıradan sayılır.</div>'+
-
-      ucluHtml+
 
       '<details class="kusak"><summary><h2>Kuşak yerleşimleri</h2>'+
       '<div class="ac">Dış gezegenler bir burçta yıllarca kalır; bunlar seni değil, yaşıtlarını anlatır.</div></summary>'+
