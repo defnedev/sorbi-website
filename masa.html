@@ -216,6 +216,7 @@ tbody tr:last-child td{border-bottom:none}
 #ciktiAlan th,#ciktiAlan td{border-bottom:1px solid rgba(26,23,32,.12);color:#1A1720}
 #ciktiAlan th{color:#666370}
 #ciktiAlan .imza{margin-top:1.5rem;padding-top:.8rem;border-top:1px solid rgba(26,23,32,.14);color:#666370;font-size:.73rem;line-height:1.7}
+.yt-izgara{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.6rem}.yt{border:1px solid var(--line,rgba(128,128,128,.25));border-radius:12px;padding:.7rem .8rem}.yt-e{font-family:var(--f-say);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}.yt-d{font-family:var(--f-bas);font-size:1.02rem;margin:.25rem 0 .15rem}.yt-a{font-size:.78rem;color:var(--mut);line-height:1.5}
 @page{size:A4;margin:14mm}
 @media print{
   html,body{background:#fff!important;color:#1A1720!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -335,7 +336,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
   function motor(cb){
     if(READY) return cb();
     QUEUE=cb; if(LOADING) return; LOADING=true;
-    var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=13','/sorbi-astro.js?v=4','/sorbi-dignite.js?v=2'];
+    var srcs=['/astronomy.browser.min.js?v=3','/sorbi-chart.js?v=14','/sorbi-astro.js?v=4','/sorbi-dignite.js?v=2'];
     (function next(i){
       if(i>=srcs.length){ READY=true; LOADING=false; if(QUEUE){var f=QUEUE;QUEUE=null;f();} return; }
       var s=document.createElement('script'); s.src=srcs[i]; s.async=false;
@@ -501,6 +502,65 @@ function dogumMetni(d){
              h:pd.getUTCHours(),mi:pd.getUTCMinutes(),tz:d.tz||'Europe/Istanbul',
              lat:+d.lat,lon:+d.lon,house:belirsiz?'W':'P'}), yas: yas };
   }
+
+  /* ── yıl teknikleri: profeksiyon, solar ark, güneş dönüşü ── */
+  var YON=['mar','ven','mer','moon','sun','mer','ven','mar','jup','sat','sat','jup'];
+  var BURC=['Koç','Boğa','İkizler','Yengeç','Aslan','Başak','Terazi','Akrep','Yay','Oğlak','Kova','Balık'];
+  function yerelZaman(dt,tz){
+    try{ return dt.toLocaleString('tr-TR',{timeZone:tz,day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}); }
+    catch(e){ return dt.toISOString().slice(0,16).replace('T',' ')+' UTC'; }
+  }
+  function yerelParca(dt,tz){
+    var o={}; try{ new Intl.DateTimeFormat('en-GB',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(dt).forEach(function(p){o[p.type]=p.value;}); }catch(e){}
+    return {y:+o.year,mo:+o.month,d:+o.day,h:+o.hour,mi:+o.minute};
+  }
+  function yilTeknik(d,CH,pr){
+    var ad=function(k){ var p=CH.pls.filter(function(x){return x.k===k;})[0]; return p?p.n:k; };
+    var nSun=CH.pls.filter(function(p){return p.k==='sun';})[0].lon;
+    var pSun=pr.ch.pls.filter(function(p){return p.k==='sun';})[0].lon;
+    var yas=Math.floor(pr.yas), h='';
+    /* profeksiyon */
+    var asc=(CH.pts||[]).filter(function(p){return p.k==='asc';})[0];
+    if(!CH.belirsiz && asc){
+      var s=(Math.floor(asc.lon/30)+yas)%12;
+      h+='<div class="yt"><div class="yt-e">Yıllık profeksiyon</div><div class="yt-d">'+(yas%12+1)+'. ev yılı · '+BURC[s]+'</div>'+
+         '<div class="yt-a">Yıl efendisi <b>'+esc(ad(YON[s]))+'</b></div></div>';
+    } else {
+      h+='<div class="yt"><div class="yt-e">Yıllık profeksiyon</div><div class="yt-d">Saat gerekli</div><div class="yt-a">Yükselen bilinmeden yıl evi kurulmaz.</div></div>';
+    }
+    /* solar ark */
+    var ark=SorbiAstro.norm(pSun-nSun);
+    h+='<div class="yt"><div class="yt-e">Solar ark</div><div class="yt-d">'+ark.toFixed(2).replace('.',',')+'°</div><div class="yt-a">İlerlemiş Güneş − natal Güneş</div></div>';
+    /* güneş dönüşü */
+    var srH='<div class="yt"><div class="yt-e">Güneş dönüşü</div><div class="yt-d">—</div></div>', sr=null;
+    try{
+      var A=window.Astronomy, now=new Date(), g=d.dogum_tarih.split('-');
+      var bas=new Date(Date.UTC(now.getUTCFullYear(),+g[1]-1,+g[2])-4*864e5);
+      var t=A.SearchSunLongitude(nSun,bas,12);
+      if(t && t.date>now){ var t0=A.SearchSunLongitude(nSun,new Date(bas.getTime()-365*864e5),12); if(t0) {sr={son:t0.date,sonraki:t.date};} }
+      else if(t){ var t2=A.SearchSunLongitude(nSun,new Date(bas.getTime()+365*864e5),12); sr={son:t.date,sonraki:t2?t2.date:null}; }
+      if(sr){
+        var tz=d.tz||'Europe/Istanbul', pp=yerelParca(sr.son,tz), src=null;
+        try{ src=SorbiAstro.chart({y:pp.y,mo:pp.mo,d:pp.d,h:pp.h,mi:pp.mi,tz:tz,lat:+d.lat,lon:+d.lon,house:'P'}); }catch(e){}
+        var srAsc=src&&(src.pts||[]).filter(function(p){return p.k==='asc';})[0], srAy=src&&src.pls.filter(function(p){return p.k==='moon';})[0];
+        srH='<div class="yt"><div class="yt-e">Güneş dönüşü</div><div class="yt-d">'+esc(yerelZaman(sr.son,tz))+'</div>'+
+          '<div class="yt-a">Dönüş haritası: '+(srAsc&&!CH.belirsiz?'yükselen <b>'+BURC[Math.floor(srAsc.lon/30)]+'</b> · ':'')+(srAy?'Ay <b>'+BURC[Math.floor(srAy.lon/30)]+'</b>':'')+
+          (CH.belirsiz?'<br>Doğum saati bilinmediği için ±12 saat oynayabilir.':'')+(sr.sonraki?'<br>Sıradaki: '+esc(yerelZaman(sr.sonraki,tz)):'')+'</div></div>';
+      }
+    }catch(e){}
+    h+=srH;
+    /* solar ark yönlendirmeleri */
+    var yasak=['pof','sno'].concat(CH.belirsiz?['asc','mc']:[]);
+    var yon=(CH.pts||CH.pls).filter(function(p){return yasak.indexOf(p.k)<0;}).map(function(p){ return Object.assign({},p,{lon:SorbiAstro.norm(p.lon+ark),speed:0}); });
+    var saAc=SorbiAstro.cross(CH,{pls:yon},1,false).filter(function(x){
+      return x.abs<=1 && yasak.indexOf(x.b.k)<0;
+    }).map(function(x){ return Object.assign({},x,{app:null}); }).slice(0,10);
+    return '<section class="bol"><div class="bol-bas"><h2>Yıl teknikleri</h2><span class="not">'+yas+' yaş</span></div>'+
+      '<div class="yt-izgara">'+h+'</div>'+
+      '<div class="bol-ac" style="margin-top:.8rem">Solar ark yönlendirmeleri · orb ≤ 1°</div>'+
+      (saAc.length?'<div class="satirlar">'+saAc.map(function(x){return aciSatir(x,'sa.','n.',1,false);}).join('')+'</div>'
+        :'<div class="bos ince">1° içinde solar ark açısı yok.</div>')+'</section>';
+  }
   function sinif(a){ return (a===90||a===180)?'sert':((a===60||a===120)?'yumusak':'kavus'); }
   function fmt(l){ return SorbiAstro.fmt(l); }
 
@@ -544,12 +604,13 @@ function dogumMetni(d){
           return x.abs<=1.5 && ['sun','moon','mer','ven','mar'].indexOf(x.a.k)>=0;
         }).slice(0,8);
         var pMoon=pr.ch.pls.filter(function(p){return p.k==='moon';})[0];
+        var yilHtml=''; try{ yilHtml=yilTeknik(d,CH,pr); }catch(e){ yilHtml=''; }
         var enDar=transitler[0];
         var zayif=dign[dign.length-1];
 
         var brif=
           '<dl class="brif">'+
-            '<div><dt>Sect</dt><dd>'+(sect.gunduz?'Gündüz':'Gece')+'<small>ışık: '+sect.isik+'</small></dd></div>'+
+            (CH.belirsiz?'<div><dt>Sect</dt><dd>Saat gerekli<small>gündüz/gece doğum saatine bağlı</small></dd></div>':'<div><dt>Sect</dt><dd>'+(sect.gunduz?'Gündüz':'Gece')+'<small>ışık: '+sect.isik+'</small></dd></div>')+
             '<div><dt>En dar transit</dt><dd>'+(enDar?esc(enDar.a.n)+' '+esc(enDar.as.n.toLowerCase()):'—')+
               '<small>'+(enDar?esc(enDar.b.n)+' · '+enDar.abs.toFixed(2)+'°':'2.5° içinde yok')+'</small></dd></div>'+
             '<div><dt>İlerlemiş Ay</dt><dd>'+fmt(pMoon.lon)+'<small>yaş '+pr.yas.toFixed(1)+'</small></dd></div>'+
@@ -569,7 +630,7 @@ function dogumMetni(d){
 
         $('pano').innerHTML = brif +
           '<div class="ikili">'+
-            '<div class="sol"><div class="yzy" id="cizim">'+cizimSvg+'</div>'+
+            '<div class="sol"><div class="yzy" id="cizim" data-baslik="'+esc(d.ad+' · '+dogumMetni(d))+'">'+cizimSvg+'</div>'+
               '<div class="bol-ac" style="margin-top:.6rem">'+esc(dogumMetni(d))+(CH.belirsiz?' — evler tam burç sistemiyle':'')+'</div></div>'+
             '<div>'+
               '<section class="bol"><div class="bol-bas"><h2>Bugünün transitleri</h2><span class="not">orb ≤ 2.5°</span></div>'+
@@ -579,6 +640,7 @@ function dogumMetni(d){
                 '<div class="bol-ac">İlerlemiş Güneş '+fmt(pr.ch.pls.filter(function(p){return p.k==="sun";})[0].lon)+' · Ay '+fmt(pMoon.lon)+'</div>'+
                 (prAcilar.length?'<div class="satirlar">'+prAcilar.map(function(x){return aciSatir(x,'p.','n.',1.5,false);}).join('')+'</div>'
                  :'<div class="bos ince">1.5° içinde ilerletim açısı yok.</div>')+'</section>'+
+              yilHtml+
               '<section class="bol"><div class="bol-bas"><h2>Esansiyel dignite</h2><span class="not">−9 … +9</span></div>'+
                 '<div class="bol-ac">Yönetici +5, yücelme +4, üçlü +3, sınır +2, dekan +1; düşüş −4, zararlı −5.</div>'+dignHtml+'</section>'+
               '<section class="bol"><div class="bol-bas"><h2>Natal açılar</h2><span class="not">'+acilar.length+' majör</span></div>'+
@@ -637,7 +699,7 @@ function dogumMetni(d){
                 '<div><dt>Kavuşum</dt><dd style="color:var(--kavus)">'+kav+'<small>birleşme noktaları</small></dd></div>'+
               '</dl>'+
               '<div class="ikili">'+
-                '<div class="sol"><div class="yzy" id="cizim2">'+cift+'</div>'+
+                '<div class="sol"><div class="yzy" id="cizim2" data-baslik="'+esc(d.ad+' × '+e.ad+' · sinastri')+'">'+cift+'</div>'+
                   '<div class="bol-ac" style="margin-top:.6rem">İç: '+esc(d.ad)+' · Dış: '+esc(e.ad)+'</div></div>'+
                 '<div>'+
                   '<section class="bol"><div class="bol-bas"><h2>Kişisel gezegenler arası</h2><span class="not">Güneş · Ay · Venüs · Mars · ASC</span></div>'+
@@ -802,7 +864,13 @@ function dogumMetni(d){
     });
 
     $('fKaydet').addEventListener('click',function(){
-      var st=$('fSt'); st.className='st'; st.textContent='Kaydediliyor…';
+      var st=$('fSt');
+      var yerMetin=$('fYer').value.trim();
+      if(yerMetin && !PICKED && (yerMetin!==(d.yer||'') || d.lat==null)){
+        st.className='st hata'; st.textContent='Şehri yazdıktan sonra listeden seç; koordinat oradan geliyor.';
+        try{$('fYer').focus();}catch(e){} return;
+      }
+      st.className='st'; st.textContent='Kaydediliyor…';
       var govde={
         ad:$('fAd').value, dogum_tarih:$('fTarih').value, dogum_saat:$('fSaat').value,
         saat_belirsiz:$('fBelirsiz').checked?1:0, yer:$('fYer').value,
