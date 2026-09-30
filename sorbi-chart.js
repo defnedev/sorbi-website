@@ -736,7 +736,14 @@ var SERIT_CSS =
  '.sorbi-serit .sb:hover{color:var(--ink,inherit)}'+
  '.sorbi-serit .sb[aria-pressed="true"]{color:var(--ink,inherit);border-color:rgba(128,128,128,.6);font-weight:600}'+
  '.sorbi-serit .sb[hidden]{display:none}'+
- '.sorbi-serit .sag{margin-left:auto;display:flex;gap:.4rem}';
+ '.sorbi-serit .sag{margin-left:auto;display:flex;gap:.4rem}'+
+ '.sorbi-tam{position:fixed;inset:0;z-index:5000;background:var(--bg,#0B0810);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:max(12px,env(safe-area-inset-top)) 12px 12px;overflow:auto;overscroll-behavior:contain}'+
+ '.sorbi-tam>svg.sorbi-cark{width:min(96vw,calc(100dvh - 130px))!important;height:auto!important;max-width:none!important;max-height:none!important;flex:none}'+
+ '.sorbi-tam>.sorbi-serit{width:min(96vw,900px);flex:none}'+
+ '.sorbi-tam-kapat{position:fixed;top:max(10px,env(safe-area-inset-top));right:12px;z-index:5001;font:500 .9rem Inter,system-ui,sans-serif;color:var(--ink,#F2EFE9);background:rgba(128,128,128,.16);border:1px solid rgba(128,128,128,.35);border-radius:99px;padding:0 1rem;min-height:44px;cursor:pointer}'+
+ '.sorbi-tam-bas{font:500 .88rem Inter,system-ui,sans-serif;color:var(--mut,#A5A3AE);margin:0 0 .5rem;padding-right:6.5rem;max-width:96vw;text-align:center}'+
+ 'html.sorbi-tam-acik,html.sorbi-tam-acik body{overflow:hidden}'+
+ '@media print{.sorbi-serit .sb[data-ac="buyut"]{display:none}}';
 
 function cssKur(){
   if(!document.head || document.getElementById('sorbi-cark-css')) return;
@@ -765,7 +772,8 @@ function seritBul(svg){
   d.className='sorbi-serit'; d.setAttribute('aria-live','polite');
   d.innerHTML='<span class="msj"></span><span class="sag">'+
     '<button type="button" class="sb" data-ac="hepsi" aria-pressed="false">Hepsini göster</button>'+
-    '<button type="button" class="sb" data-ac="birak" hidden>Seçimi bırak</button></span>';
+    '<button type="button" class="sb" data-ac="birak" hidden>Seçimi bırak</button>'+
+    '<button type="button" class="sb" data-ac="buyut" aria-label="Haritayı tam ekranda aç">Büyüt ⤢</button></span>';
   hedefKap.insertBefore(d, once);
   d.__svg=svg; svg.__serit=d;
   return d;
@@ -833,6 +841,39 @@ function durum(svg){
 function odakla(svg,k){ svg.__odak=(k&&k!==svg.__odak)?k:null; if(svg.__odak) svg.__sec=null; durum(svg); }
 function secAci(svg,id){ svg.__sec=(id&&id!==svg.__sec)?id:null; if(svg.__sec) svg.__odak=null; durum(svg); }
 
+
+/* Tam ekran: çizim ve şerit aynı düğümler olarak katmana taşınır (etkileşim korunur),
+   kapatınca yerlerine döner. iOS Safari'de Fullscreen API olmadığı için CSS katmanı. */
+var TAM=null;
+function tamKapat(){
+  if(!TAM) return;
+  var t=TAM; TAM=null;
+  if(t.svgYer && t.svgYer.parentNode) t.svgYer.parentNode.replaceChild(t.svg,t.svgYer);
+  if(t.sr && t.srYer && t.srYer.parentNode) t.srYer.parentNode.replaceChild(t.sr,t.srYer);
+  if(t.kat.parentNode) t.kat.parentNode.removeChild(t.kat);
+  document.documentElement.classList.remove('sorbi-tam-acik');
+  var b=t.sr&&t.sr.querySelector('[data-ac="buyut"]');
+  if(b){ b.textContent='Büyüt ⤢'; b.setAttribute('aria-label','Haritayı tam ekranda aç'); try{b.focus();}catch(e){} }
+}
+function tamEkran(svg){
+  if(TAM){ tamKapat(); return; }
+  var sr=svg.__serit||null;
+  var kat=document.createElement('div'); kat.className='sorbi-tam'; kat.setAttribute('role','dialog'); kat.setAttribute('aria-modal','true'); kat.setAttribute('aria-label','Harita, tam ekran');
+  var bk=svg.parentNode&&svg.parentNode.closest?svg.parentNode.closest('[data-baslik]'):null;
+  if(bk){ var bs=document.createElement('div'); bs.className='sorbi-tam-bas'; bs.textContent=bk.getAttribute('data-baslik'); kat.appendChild(bs); }
+  var svgYer=document.createComment('cark'), srYer=sr?document.createComment('serit'):null;
+  svg.parentNode.replaceChild(svgYer,svg);
+  if(sr&&sr.parentNode) sr.parentNode.replaceChild(srYer,sr);
+  var kp=document.createElement('button'); kp.type='button'; kp.className='sorbi-tam-kapat'; kp.textContent='Kapat ✕';
+  kp.addEventListener('click',tamKapat);
+  kat.appendChild(kp); kat.appendChild(svg); if(sr) kat.appendChild(sr);
+  document.body.appendChild(kat);
+  document.documentElement.classList.add('sorbi-tam-acik');
+  TAM={svg:svg,sr:sr,svgYer:svgYer,srYer:srYer,kat:kat};
+  var b=sr&&sr.querySelector('[data-ac="buyut"]');
+  if(b){ b.textContent='Küçült'; b.setAttribute('aria-label','Tam ekrandan çık'); }
+  try{kp.focus();}catch(e){}
+}
 function carkMi(el){ var s2=el&&el.closest?el.closest('svg.sorbi-cark'):null; return (s2&&s2.getAttribute('data-etk')!=='0')?s2:null; }
 function tikla(e){
   var t=e.target;
@@ -840,6 +881,7 @@ function tikla(e){
   if(sb){
     var kap=sb.closest('.sorbi-serit'), svg=kap&&kap.__svg;
     if(!svg||!svg.classList||!svg.classList.contains('sorbi-cark')) return;
+    if(sb.getAttribute('data-ac')==='buyut'){ tamEkran(svg); return; }
     if(sb.getAttribute('data-ac')==='hepsi'){ svg.__hepsi=!svg.__hepsi; svg.__odak=null; svg.__sec=null; }
     else { svg.__sec=null; svg.__odak=null; }
     durum(svg); return;
@@ -864,6 +906,7 @@ if(typeof document!=='undefined' && document.addEventListener){
   document.addEventListener('click',tikla,false);
   document.addEventListener('mouseover',function(e){ustune(e,true);},true);
   document.addEventListener('mouseout',function(e){ustune(e,false);},true);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&TAM){ e.preventDefault(); tamKapat(); } },true);
   document.addEventListener('keydown',function(e){
     if(e.key!=='Enter' && e.key!==' ') return;
     var t=e.target, svg=carkMi(t); if(!svg) return;
