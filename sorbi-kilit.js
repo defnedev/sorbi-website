@@ -68,7 +68,9 @@ function soruKilidi(){
     var yer=D.getElementById('chartbox'); if(!yer) return;
     if(yer.querySelector('.skl')) return;
     css(); yer.innerHTML='';
+    var gz=D.createElement('div'); gz.setAttribute('data-gorusme','soru');
     yer.appendChild(kart('Soru haritası Eğitim üyeliğinde','Sorunun anına göre çizilen harita, hükümdarlar ve Lilly kurallarıyla adım adım okuma Eğitim üyeliğiyle açılıyor. Nasıl çalıştığı ve örnek okuma aşağıda herkese açık.','soru-sor'));
+    yer.appendChild(gz); if(W.SorbiGorusme&&W.SorbiGorusme.hazir) W.SorbiGorusme.ciz(gz); else gz.remove();
     if(W.SorbiHesap) W.SorbiHesap.olay('kilit_gor','soru-sor');
   },true);
 }
