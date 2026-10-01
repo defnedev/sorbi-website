@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta name="robots" content="noindex,nofollow">
+ <title>Kurucu paneli — Sorbi</title>
+<link rel="canonical" href="https://sorbiapp.com/yonetim">
+ <meta name="description" content="Sorbi kurucu paneli.">
+<link rel="stylesheet" href="/sorbi-fonts.css?v=10">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+.yw{max-width:1180px;margin:0 auto;padding:1.6rem 16px 4rem}
+.yw h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:1.6rem;margin:0 0 .3rem}
+.ust{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem;margin:1rem 0 1.4rem}
+.ust div{border:1px solid rgba(var(--ink-rgb),.16);border-radius:14px;padding:.8rem .9rem}
+.ust b{display:block;font-family:Fraunces,Georgia,serif;font-size:1.6rem;font-weight:600}
+.ust span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+h2{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin:1.8rem 0 .6rem}
+.tb{width:100%;border-collapse:collapse;font-size:.82rem}
+.tb th,.tb td{text-align:left;padding:.45rem .5rem;border-bottom:1px solid rgba(var(--ink-rgb),.1);vertical-align:top}
+.tb th{color:var(--mut);font-weight:500}.tb td.s{text-align:right;font-variant-numeric:tabular-nums}
+.kay{overflow-x:auto}
+.cub{display:flex;align-items:flex-end;gap:3px;height:120px;border-bottom:1px solid rgba(var(--ink-rgb),.2);padding-top:6px}
+.cub i{flex:1;max-width:28px;background:rgba(var(--ink-rgb),.35);border-radius:3px 3px 0 0;min-height:1px;position:relative}
+.cub i.u{background:var(--acc)}
+.not{font-size:.76rem;color:var(--mut)}
+select{font:inherit;padding:.3rem .5rem;border-radius:8px;background:none;color:inherit;border:1px solid rgba(var(--ink-rgb),.25)}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+</style>
+</head>
+<body>
+<!-- SORBI-NAV:START -->
+<style>
+.sbnav{position:sticky;top:0;z-index:2000;display:flex;align-items:center;gap:1rem;margin:0;max-width:none;padding:.55rem 1.2rem;background:rgba(var(--bg-rgb),.9);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);border-bottom:1px solid rgba(var(--ink-rgb),.14);font-family:'Inter',system-ui,-apple-system,sans-serif;box-sizing:border-box}
+.sbnav .sbnav-lg{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:.16em;color:var(--ink);font-size:.95rem;line-height:1;text-decoration:none;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center}
+.sbnav .sbnav-lg i{font-style:normal;color:var(--acc);margin-right:.45rem;letter-spacing:0}
+.sbnav .sbnav-lg:hover{text-decoration:none;color:#fff}
+.sbnav nav{display:flex;gap:.1rem;align-items:center;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;margin:-4px -4px -4px auto;padding:4px;max-width:none;flex-wrap:nowrap}
+.sbnav nav::-webkit-scrollbar{display:none}
+.sbnav nav a{position:relative;display:inline-flex;align-items:center;min-height:40px;color:var(--mut);text-decoration:none;font-size:.85rem;font-weight:500;line-height:1.2;padding:0 .8rem;border-radius:99px;white-space:nowrap;transition:color .15s,background-color .15s,box-shadow .15s,transform .12s}
+.sbnav nav a:hover{color:var(--ink);background:rgba(var(--ink-rgb),.14);box-shadow:inset 0 0 0 1px rgba(var(--ink-rgb),.14);text-decoration:none}
+.sbnav nav a:active{transform:scale(.97)}
+.sbnav nav a.on,.sbnav nav a[aria-current="page"]{color:var(--ink);background:none;box-shadow:none;font-weight:600}.sbnav nav a.on::after,.sbnav nav a[aria-current="page"]::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:6px;height:2px;border-radius:2px;background:var(--acc)}
+.sbnav nav a.on:hover,.sbnav nav a[aria-current="page"]:hover{color:var(--ink);background:rgba(var(--ink-rgb),.10);box-shadow:none}
+.sbnav nav a:focus{outline:none}
+.sbnav nav a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.sbnav nav a.on:focus-visible,.sbnav nav a[aria-current="page"]:focus-visible{outline-color:var(--ink)}
+@media(prefers-reduced-motion:reduce){.sbnav nav a{transition:none}.sbnav nav a:active{transform:none}}
+@media(min-width:900px){.sbnav{padding:.9rem max(2rem,calc((100% - 1200px)/2));gap:2rem;min-height:70px}.sbnav .sbnav-lg{font-size:1.3rem}.sbnav nav a{font-size:.9rem;padding:0 .95rem}}
+@media(max-width:560px){.sbnav{padding:.3rem .7rem;gap:.5rem}.sbnav .sbnav-lg{font-size:.85rem;letter-spacing:.12em}.sbnav nav a{font-size:.8rem;padding:0 .66rem}}
+@media(min-width:900px) and (max-width:1120px){.sbnav{gap:1rem}.sbnav .sbnav-lg{font-size:1.15rem}.sbnav nav a{font-size:.84rem;padding:0 .5rem}}
+@media(max-width:1119px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,var(--bg) 85%,transparent);mask-image:linear-gradient(90deg,var(--bg) 85%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:var(--bg);mask-image:var(--bg)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,var(--bg) 8%);mask-image:linear-gradient(90deg,transparent,var(--bg) 8%)}}
+@media(max-width:560px){.sbnav nav{-webkit-mask-image:linear-gradient(90deg,var(--bg) 78%,transparent);mask-image:linear-gradient(90deg,var(--bg) 78%,transparent)}.sbnav nav.son{-webkit-mask-image:none;mask-image:none}.sbnav nav.ara{-webkit-mask-image:var(--bg);mask-image:var(--bg)}.sbnav nav.ara.son{-webkit-mask-image:linear-gradient(90deg,transparent,var(--bg) 14%);mask-image:linear-gradient(90deg,transparent,var(--bg) 14%)}}
+.sbnav{margin:-2rem -2rem 2rem!important}
+@media(min-width:900px){.sbnav{padding-left:calc(max(2rem,calc((100% - 1200px)/2)) + 2rem);padding-right:calc(max(2rem,calc((100% - 1200px)/2)) + 2rem)}}
+</style>
+<header class="sbnav">
+ <a href="/" class="sbnav-lg" aria-label="Sorbi ana sayfa"><i>✦</i>SORBİ</a>
+ <nav>
+  <a href="/detayli-dogum-haritasi">Harita Atölyesi</a>
+  <a href="/dogum-haritasi-hesaplama" class="ana" data-kisa="Haritam">Doğum Haritası</a>
+  <a href="/araclar">Gökyüzü Hesaplayıcıları</a>
+  <a href="/bugun" class="ana">Bugün</a>
+  <a href="/burc-ozellikleri" class="ana">Burçlar</a>
+  <a href="/nadirlik">Nadirlik</a>
+  <a href="/sayim">Sayım</a>
+  <a href="/ogren">Öğren</a>
+  <a href="/haritam" id="sorbiNavHaritam">✦ Profilim</a>
+ </nav>
+</header>
+<script>(function(){try{var M={'/soru-sor':'/araclar','/horary':'/araclar','/natal-harita':'/araclar','/sinastri':'/araclar','/seni-taniyorum':'/araclar','/yukselen-burc-hesaplama':'/araclar','/yukselen-tahmini':'/araclar','/ay-burcu-hesaplama':'/araclar','/astrokartografi':'/araclar','/uygun-gun-secimi':'/araclar','/yasam-donguleri':'/araclar','/tarot':'/araclar','/gunun-karti':'/araclar','/retro-ay-takvimi':'/araclar','/burc-uyumu':'/burc-ozellikleri','/rapor-araci':'/araclar','/sayim-yildiz':'/sayim','/sayim-yukselen':'/sayim','/gunluk-burc-yorumlari':'/bugun'};var p=location.pathname.replace(/\.html$/,'').replace(/\/$/,'')||'/';if(M[p])p=M[p];else if(/burc/.test(p))p='/burc-ozellikleri';document.querySelectorAll('.sbnav nav a').forEach(function(a){var h=a.getAttribute('href').replace(/\.html$/,'');if(h===p||(h!=='/'&&h!=='/haritam'&&p.indexOf(h+'-')===0)){a.classList.add('on');a.setAttribute('aria-current','page');}});}catch(e){}})();</script>
+<script>(function(){var n=document.querySelector('.sbnav nav');if(!n)return;function f(){n.classList.toggle('son',n.scrollLeft+n.clientWidth>=n.scrollWidth-4);n.classList.toggle('ara',n.scrollLeft>4)}n.addEventListener('scroll',f,{passive:true});window.addEventListener('resize',f);f();var a=n.querySelector('a.on');function g(){if(a&&n.scrollWidth>n.clientWidth){var d=a.getBoundingClientRect().left-n.getBoundingClientRect().left+n.scrollLeft;n.scrollLeft=Math.max(0,Math.round(d-(n.clientWidth-a.offsetWidth)/2));}f();}g();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(g);})();</script>
+<style>
+/* Mobil menü (Fable denetimi P1): 9 maddelik kayan şerit yerine 3 ana link + Menü */
+.sbnav-menu{display:none}
+.sbnav-panel{display:none}
+@media(max-width:760px){
+ .sbnav nav{overflow:visible;-webkit-mask-image:none!important;mask-image:none!important;margin-left:auto}
+ .sbnav nav a:not(.ana){display:none}
+ .sbnav nav a[data-kisa]{font-size:0}
+ .sbnav nav a[data-kisa]::before{content:attr(data-kisa);font-size:.8rem}
+ .sbnav nav{order:1}#temaDugme{order:2}.sbnav-menu{order:3}
+ .sbnav-menu{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;margin-left:.1rem;border:1px solid rgba(var(--ink-rgb),.14);border-radius:50%;background:none;color:var(--ink);cursor:pointer;flex:none;padding:0}
+ .sbnav-menu svg{width:18px;height:18px}
+ .sbnav-menu[aria-expanded="true"]{background:rgba(var(--ink-rgb),.1)}
+ .sbnav-panel{position:fixed;left:0;right:0;top:var(--sbnav-h,52px);bottom:0;z-index:1999;background:var(--bg);overflow-y:auto;padding:.6rem 1.1rem 2rem;box-sizing:border-box;font-family:'Inter',system-ui,sans-serif}
+ .sbnav-panel.acik{display:block}
+ .sbnav-panel h3{font:600 .7rem/1 'Inter',system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin:1.2rem 0 .3rem}
+ .sbnav-panel a{display:flex;align-items:center;min-height:48px;color:var(--ink);text-decoration:none;font-size:1.02rem;border-bottom:1px solid rgba(var(--ink-rgb),.08)}
+ .sbnav-panel a[aria-current="page"]{color:var(--acc);font-weight:600}
+ body.sbnav-kilit{overflow:hidden}
+}
+@media(max-width:400px){.sbnav nav a{padding:0 .5rem}.sbnav{gap:.35rem}}@media(max-width:360px){.sbnav .sbnav-lg{font-size:0;letter-spacing:0}.sbnav .sbnav-lg i{font-size:1.1rem;margin:0}}
+</style>
+<script>(function(){try{
+ var h=document.querySelector('.sbnav'),n=h&&h.querySelector('nav');if(!h||!n||h.querySelector('.sbnav-menu'))return;
+ var G=[['Haritam',['/dogum-haritasi-hesaplama','/detayli-dogum-haritasi','/haritam']],['Gökyüzü',['/bugun','/araclar']],['Keşfet',['/burc-ozellikleri','/nadirlik','/sayim','/ogren']]];
+ var L={};[].forEach.call(n.querySelectorAll('a'),function(a){L[a.getAttribute('href')]=a;});
+ var p=document.createElement('div');p.className='sbnav-panel';p.id='sbnavPanel';p.setAttribute('role','dialog');p.setAttribute('aria-label','Menü');
+ G.forEach(function(g){var t=document.createElement('h3');t.textContent=g[0];p.appendChild(t);g[1].forEach(function(u){var a=L[u];if(!a)return;var k=document.createElement('a');k.href=u;k.textContent=(a.textContent||'').replace(/^✦\s*/,'');if(a.getAttribute('aria-current'))k.setAttribute('aria-current','page');if(a.id==='sorbiNavHaritam'&&getComputedStyle(a).display==='none'){k.hidden=true;k.dataset.profil='1';}p.appendChild(k);});});
+ var b=document.createElement('button');b.type='button';b.className='sbnav-menu';b.setAttribute('aria-label','Menüyü aç');b.setAttribute('aria-expanded','false');b.setAttribute('aria-controls','sbnavPanel');
+ b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+ h.appendChild(b);document.body.appendChild(p);
+ function ac(x){p.classList.toggle('acik',x);b.setAttribute('aria-expanded',x?'true':'false');b.setAttribute('aria-label',x?'Menüyü kapat':'Menüyü aç');document.body.classList.toggle('sbnav-kilit',x);
+  document.documentElement.style.setProperty('--sbnav-h',h.getBoundingClientRect().bottom+'px');
+  b.innerHTML=x?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+  if(x){var pr=p.querySelector('[data-profil]'),hr=document.getElementById('sorbiNavHaritam');if(pr&&hr)pr.hidden=getComputedStyle(hr).display==='none';var f=p.querySelector('a:not([hidden])');f&&f.focus();}}
+ b.addEventListener('click',function(){ac(!p.classList.contains('acik'));});
+ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&p.classList.contains('acik')){ac(false);b.focus();}});
+ window.addEventListener('resize',function(){if(window.innerWidth>760&&p.classList.contains('acik'))ac(false);});
+}catch(e){}})();</script>
+<script>(function(){try{if(!localStorage.getItem('sorbi_birth'))document.querySelectorAll('.sbnav a[data-kisa="Haritam"]').forEach(function(a){a.setAttribute('data-kisa','Harita')});}catch(e){}})();</script>
+<!-- SORBI-NAV:END -->
+<!-- SORBI-TEMA:START -->
+<style>
+p a:not([class]){text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+/* Altı rol, iki gökyüzü. Gece varsayılan; gündüz [data-tema="gunduz"] ile.
+   Renkler burada tanımlanır, sayfalar yalnız değişken kullanır. */
+:root{--bg:#0B0810;--bg-rgb:11,8,16;--ink:#F2EFE9;--ink-rgb:242,239,233;
+  --mut:#A5A3AE;--mut-rgb:165,163,174;--dim:#807E8B;--dim-rgb:128,126,139;
+  --acc:#E3A692;--acc-rgb:227,166,146;--acc-ink:#2B140C;color-scheme:dark}
+:root[data-tema="gunduz"]{--bg:#F6F3EC;--bg-rgb:246,243,236;--ink:#1A1720;--ink-rgb:26,23,32;
+  --mut:#5C5966;--mut-rgb:92,89,102;--dim:#666370;--dim-rgb:102,99,112;
+  --acc:#803A1A;--acc-rgb:128,58,26;--acc-ink:#F6F3EC;color-scheme:light}
+html{background:var(--bg)}
+body{background:transparent!important}
+#temaDugme{margin-left:.4rem;width:34px;height:34px;border-radius:50%;border:1px solid rgba(var(--ink-rgb),.14);background:none;color:var(--mut);cursor:pointer;font-size:.95rem;line-height:1;flex:none;display:inline-flex;align-items:center;justify-content:center}
+#temaDugme:hover{color:var(--ink);border-color:rgba(var(--ink-rgb),.3)}
+/* Katman zanaatı: gölge görülmez, hissedilir. Mürekkep zemin gölgeyi yuttuğu için
+   kart kenar çizgisi ve iç parlamayla ayrışır — ağır gölge yok.
+   Kart yüzeyi üstten hafif aydınlanır, üst kenarda 1px ışık, altta zemine dikiş. */
+/* Kart yuzeyi yukselince --dim kart ustunde AA'nin altina dusuyor (4,40);
+   kart kapsaminda en sonuk metin rolu --mut kademesine cikar. */
+.card,.bk-kart,.bk-yol,.yol,.tablo,.b3,.tr,.sbg,.cta,.sectcard,.question-card,.how-step,.savecard,.uy-yol,
+.tool,.form,.lim,.ex-q,.pane,.modes,.adv,.adim,.nb,.per,.note,.ipucu,.hint{--dim:var(--mut);--muted:var(--mut)}
+.card,.bk-kart,.bk-yol,.yol,.tablo,.b3,.tr,.sbg,.cta,.sectcard,.question-card,.how-step,.savecard,.uy-yol{
+  background-image:linear-gradient(180deg,rgba(var(--ink-rgb),.035),rgba(var(--ink-rgb),0));
+  box-shadow:inset 0 1px 0 rgba(var(--ink-rgb),.14),0 1px 0 rgba(var(--bg-rgb),.55)}
+/* Girdi alanı kartın içinde bir kademe çukur dursun. */
+input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color]),textarea,select{
+  box-shadow:inset 0 1px 2px rgba(var(--bg-rgb),.45)}
+</style>
+<script>
+/* Gökyüzüne göre tema. İlk boyamadan önce çalışır ki sayfa titremesin.
+   Kullanıcı seçtiyse (sorbi_tema) o; seçmediyse gerçek gündoğumu/günbatımı
+   (NOAA yaklaşımı, kayıtlı doğum yeri ya da İstanbul). */
+(function(){
+ var H=document.documentElement;
+ function gunes(lat,lon,d){
+  var r=Math.PI/180, n=Math.floor((Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate())-Date.UTC(d.getUTCFullYear(),0,0))/864e5);
+  var g=2*Math.PI/365*(n-1+(d.getUTCHours()-12)/24);
+  var eq=229.18*(7.5e-5+1.868e-3*Math.cos(g)-0.032077*Math.sin(g)-0.014615*Math.cos(2*g)-0.040849*Math.sin(2*g));
+  var dec=0.006918-0.399912*Math.cos(g)+0.070257*Math.sin(g)-0.006758*Math.cos(2*g)+0.000907*Math.sin(2*g)-0.002697*Math.cos(3*g)+0.00148*Math.sin(3*g);
+  var ha=Math.acos(Math.cos(90.833*r)/(Math.cos(lat*r)*Math.cos(dec))-Math.tan(lat*r)*Math.tan(dec))/r;
+  var dogus=720-4*(lon+ha)-eq, batis=720-4*(lon-ha)-eq;   /* UTC dakika */
+  var simdi=d.getUTCHours()*60+d.getUTCMinutes();
+  return simdi>dogus&&simdi<batis?'gunduz':'gece';
+ }
+ var t=null; try{t=localStorage.getItem('sorbi_tema');}catch(e){}
+ if(t!=='gunduz'&&t!=='gece'){
+  var lat=41.0082,lon=28.9784;
+  try{var b=JSON.parse(localStorage.getItem('sorbi_birth')||'null'); if(b&&+b.lat&&+b.lon){lat=+b.lat;lon=+b.lon;}}catch(e){}
+  t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'gunduz':'gece'; /* kullanıcı seçmediyse sistem tercihi */
+ }
+ if(t==='gunduz') H.setAttribute('data-tema','gunduz'); else H.removeAttribute('data-tema');
+ function meta(){var m=document.querySelector('meta[name="theme-color"]'); if(m) m.setAttribute('content',H.getAttribute('data-tema')==='gunduz'?'#F6F3EC':'#0B0810');}
+ function dugme(){
+  var nav=document.querySelector('.sbnav'); if(!nav||document.getElementById('temaDugme')) return;
+  var b=document.createElement('button'); b.id='temaDugme'; b.type='button';
+  function yaz(){var g=H.getAttribute('data-tema')==='gunduz'; b.textContent=g?'☾':'☀'; b.setAttribute('aria-label',g?'Gece temasına geç':'Gündüz temasına geç'); b.title=b.getAttribute('aria-label');}
+  b.onclick=function(){var g=H.getAttribute('data-tema')==='gunduz'; if(g) H.removeAttribute('data-tema'); else H.setAttribute('data-tema','gunduz'); try{localStorage.setItem('sorbi_tema',g?'gece':'gunduz');}catch(e){} yaz(); meta(); if(window.SorbiChart&&window.SorbiChart.yenile) try{window.SorbiChart.yenile();}catch(e){}};
+  yaz(); nav.appendChild(b);
+ }
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){meta();dugme();}); else {meta();dugme();}
+})();
+</script>
+<!-- SORBI-TEMA:END -->
+<main class="yw">
+ <h1>Kurucu paneli</h1>
+ <p class="not">Kimler geliyor, kaçı üye oluyor, üyeler ne yapıyor. <label>Dönem <select id="gun"><option value="7">7 gün</option><option value="30" selected>30 gün</option><option value="90">90 gün</option></select></label></p>
+ <div id="yIc"><p class="not">Yükleniyor…</p></div>
+</main>
+<script src="/sorbi-hesap.js?v=2" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+ var H=window.SorbiHesap, esc=H.esc, ic=document.getElementById('yIc');
+ function n(x){return (x==null?0:x).toLocaleString('tr-TR');}
+ function yuk(){
+  var g=document.getElementById('gun').value;
+  H.api('/api/yonetim/ozet?gun='+g).then(function(j){
+   if(j.__durum===403){ ic.innerHTML='<p>Bu sayfa yalnız kurucu hesabına açık.</p><button class="hb" id="yG" style="font:600 .9rem Inter;min-height:44px;padding:0 1.2rem;border-radius:99px">Giriş yap</button>'; document.getElementById('yG').onclick=function(){H.giris({}).then(yuk);}; return; }
+   if(!j.toplam){ ic.innerHTML='<p>Veri alınamadı.</p>'; return; }
+   var T=j.toplam, um={}; (j.uyeGunluk||[]).forEach(function(r){um[r.g]=r.yeni;});
+   var mx=Math.max.apply(null,[1].concat(j.gunluk.map(function(r){return Math.max(r.ziyaretci||0,um[r.g]||0);})));
+   var h='<div class="ust">'+
+    '<div><span>Tekil ziyaretçi</span><b>'+n(T.ziyaretci)+'</b></div>'+
+    '<div><span>Yeni üye</span><b>'+n(T.yeni_uye)+'</b></div>'+
+    '<div><span>Dönüşüm</span><b>'+(T.donusum==null?'—':'%'+(T.donusum*100).toFixed(2).replace('.',','))+'</b></div>'+
+    '<div><span>Aktif üye</span><b>'+n(T.aktif_uye)+'</b></div>'+
+    '<div><span>Toplam üye</span><b>'+n(T.uye)+'</b></div>'+
+    '<div><span>Masa kasası</span><b>'+n(T.kasa)+'</b></div></div>';
+   h+='<h2>Günlük ziyaretçi (gri) · yeni üye (renkli)</h2><div class="cub">'+j.gunluk.map(function(r){var u=um[r.g]||0;return '<i title="'+r.g+': '+r.ziyaretci+' ziyaretçi, '+u+' yeni üye" style="height:'+Math.max(1,(r.ziyaretci||0)/mx*100)+'%"></i>'+(u?'<i class="u" title="'+r.g+': '+u+' yeni üye" style="height:'+Math.min(100,Math.max(4,u/mx*100))+'%;flex:.35"></i>':'');}).join('')+'</div><p class="not">'+esc(j.not)+'</p>';
+   h+='<h2>Bekleme listesi</h2><p>'+((j.bekleme||[]).map(function(b){return esc(b.plan)+': <b>'+n(b.adet)+'</b>';}).join(' · ')||'Henüz yok')+'</p>';
+   h+='<h2>Üyeler</h2><div class="kay"><table class="tb"><tr><th>Kullanıcı</th><th>Plan</th><th>Geldiği yer</th><th>Üyelik</th><th>Son görülme</th><th class="s">Sayfa</th><th class="s">Masa dosya</th><th class="s">Senkron</th><th>Bekleme</th><th>Son baktığı sayfalar</th></tr>'+
+    (j.uyeler||[]).map(function(u){return '<tr><td>'+(u.kullanici_adi?'@'+esc(u.kullanici_adi):'<i>ad yok</i>')+'<br><span class="not">'+esc(u.eposta||'')+'</span></td><td>'+esc(u.plan)+'</td><td>'+esc(u.kaynak||'')+'</td><td>'+esc((u.created_at||'').slice(0,10))+'</td><td>'+esc((u.son_gorulme||'').slice(0,16).replace('T',' '))+'</td><td class="s">'+n(u.sayfa)+'</td><td class="s">'+n(u.masa_dosya)+'</td><td class="s">'+n(u.senk)+'</td><td>'+esc(u.bekleme||'')+'</td><td class="not">'+esc((u.son_sayfalar||'').split(',').slice(0,6).join(' · '))+'</td></tr>';}).join('')+'</table></div>';
+   h+='<h2>En çok bakılan sayfalar</h2><div class="kay"><table class="tb"><tr><th>Sayfa</th><th class="s">Görüntüleme</th><th class="s">Tekil</th></tr>'+(j.sayfalar||[]).map(function(r){return '<tr><td>'+esc(r.yol)+'</td><td class="s">'+n(r.goruntu)+'</td><td class="s">'+n(r.tekil)+'</td></tr>';}).join('')+'</table></div>';
+   h+='<h2>Olaylar</h2><div class="kay"><table class="tb"><tr><th>Olay</th><th class="s">Adet</th><th class="s">Üye</th></tr>'+(j.olaylar||[]).map(function(r){return '<tr><td>'+esc(r.tur)+'</td><td class="s">'+n(r.adet)+'</td><td class="s">'+n(r.uye)+'</td></tr>';}).join('')+'</table></div>';
+   h+='<h2>E-posta listesi kaynakları</h2><p>'+((j.liste||[]).map(function(b){return esc(b.kaynak||'?')+': <b>'+n(b.adet)+'</b>';}).join(' · ')||'—')+'</p>';
+   ic.innerHTML=h;
+  });
+ }
+ document.getElementById('gun').onchange=yuk; yuk();
+});
+</script>
+<script src="/sorbi-olcum.js?v=1" defer></script>
+</body>
+</html>
