@@ -313,7 +313,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
   <div class="grid">
    <div class="fg full"><label>Adın <span style="opacity:.5">(opsiyonel)</span></label><input id="cName" placeholder="Haritada görünsün diye"></div>
    <div class="fg"><label>Doğum tarihi</label><input type="date" id="cDate"></div>
-   <div class="fg"><label>Doğum saati</label><input type="time" id="cTime" value="12:00"></div>
+   <div class="fg"><label>Doğum saati</label><input type="time" id="cTime" value=""></div>
    <div class="fg full geo"><label>Doğum yeri</label><input id="cPlace" placeholder="Şehir yaz (örn. İstanbul)" autocomplete="off"><div class="geo-results" id="geoResults"></div></div>
   </div>
   <div class="geo-picked" id="geoPicked">Varsayılan: İstanbul (41.0138, 28.9497)</div>
@@ -527,7 +527,7 @@ document.getElementById('advToggle').onclick=()=>document.getElementById('advBox
   const sc=document.getElementById('saveCard');if(sc)sc.innerHTML='<h3>Profilin hazır ✦</h3><p>Bu harita hesabında kayıtlı. <a href="/haritam" style="color:var(--gold)">Haritam’a git →</a></p>';const kk=document.getElementById('katKaydet');if(kk)kk.querySelector('summary small').textContent='profilin hazır';}
  if(!b)return;
  if(b.name||(pr&&pr.name))g('cName').value=b.name||pr.name; if(b.date)g('cDate').value=b.date; if(b.time)g('cTime').value=b.time;
- if(b.noTime)g('cNoTime').checked=true; if(b.house)g('cHouse').value=b.house;
+ if(b.noTime||(b.date&&!b.time))g('cNoTime').checked=true; if(b.house)g('cHouse').value=b.house;
  if(b.lat){g('cLat').value=b.lat;g('cLon').value=b.lon;g('cTz').value=b.tz;picked={lat:+b.lat,lon:+b.lon,tz:b.tz,label:b.place||''};}
  if(b.place){g('cPlace').value=b.place;pickedEl.textContent=`${b.place} — ${(+b.lat).toFixed(2)}, ${(+b.lon).toFixed(2)}`;}
 })();
@@ -546,7 +546,7 @@ document.getElementById('gen').onclick=()=>{
  const A=window.Astronomy;if(!A){alert('Motor yükleniyor, birkaç saniye sonra tekrar dene.');return;}
  const dv=document.getElementById('cDate').value;let tv=document.getElementById('cTime').value||'12:00';
  if(!dv){alert('Lütfen doğum tarihini gir.');return;}
- const noTime=document.getElementById('cNoTime').checked;if(noTime)tv='12:00';
+ const noTime=document.getElementById('cNoTime').checked||!document.getElementById('cTime').value;if(noTime){tv='12:00';document.getElementById('cNoTime').checked=true;}
  const[y,mo,d]=dv.split('-').map(Number),[h,mi]=tv.split(':').map(Number);
  const lat=parseFloat(document.getElementById('cLat').value)||picked.lat;
  const lon=parseFloat(document.getElementById('cLon').value)||picked.lon;

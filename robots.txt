@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /yonetim
+Disallow: /hesap
+Disallow: /api/
 Sitemap: https://sorbiapp.com/sitemap.xml
 
 User-agent: Googlebot

@@ -1,5 +1,5 @@
 // Sorbi — Cloudflare Pages Function.
-// İki uç kaldı: anonim sayfa sayacı ve e-posta listesi. Başka hiçbir şey.
+// Uçlar: sayfa/olay sayacı ve e-posta listesi. Hesap, kasa, bekleme ve yönetim kendi dosyalarında (1 Eki 2026).
 //
 // 2026-09-19 · Randevu, ödeme, yönetici paneli ve sunucu tarafı
 // profil kaydı söküldü. Gerekçeleri:
@@ -14,29 +14,7 @@
 //
 // D1 binding: env.DB · Secret: env.IP_TUZU (tanımlı değilse ip özeti tutulmaz)
 
-const json = (data, status = 200) =>
-  new Response(JSON.stringify(data), {
-    status,
-    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-  });
-
-const enc = new TextEncoder();
-const b64url = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf)))
-  .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-
-// Yalnız e-posta listesinin saatlik hız sınırı için. Tuz yoksa özet üretilmez
-// ve ip hiç kaydedilmez — varsayılan bir tuza düşmek sırrı sır olmaktan çıkarır.
-async function ipOzeti(env, ip) {
-  const tuz = env.IP_TUZU;
-  if (!tuz || !ip) return null;
-  const key = await crypto.subtle.importKey('raw', enc.encode(tuz), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
-  return b64url(await crypto.subtle.sign('HMAC', key, enc.encode('ip:' + ip)));
-}
-
-async function semaKur(env) {
-  await env.DB.exec("CREATE TABLE IF NOT EXISTS events (id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT NOT NULL, date TEXT, meta TEXT, referrer TEXT, created_at TEXT DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now')));");
-  await env.DB.exec("CREATE TABLE IF NOT EXISTS liste (id INTEGER PRIMARY KEY AUTOINCREMENT, eposta TEXT NOT NULL UNIQUE, kaynak TEXT, referrer TEXT, ip_ozet TEXT, created_at TEXT DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now')));");
-}
+import { json, semaKur, ipOzeti as ipOzetiReq, ziyaretciOzeti, oturumKullanici } from '../_lib/hesap.js';
 
 const KALDIRILDI = [
   '/api/bookings', '/api/pay', '/api/admin', '/api/profile',
@@ -68,13 +46,16 @@ export async function onRequest(context) {
     await semaKur(env);
 
     // Anonim sayfa sayacı. Kimlik yok, çerez yok, parmak izi yok.
-    if (p === '/api/track' && m === 'POST') {
+    if ((p === '/api/track' || p === '/api/olay') && m === 'POST') {
       const b = await request.json().catch(() => ({}));
       const type = String(b.type || '').slice(0, 40);
       if (!type) return json({ error: 'type gerekli' }, 400);
-      await env.DB.prepare("INSERT INTO events (type,date,meta,referrer) VALUES (?,?,?,?)")
+      const ziy = await ziyaretciOzeti(env, request);
+      let kid = null;
+      try { const k = await oturumKullanici(env, request); kid = k ? k.id : null; } catch (e) {}
+      await env.DB.prepare("INSERT INTO events (type,date,meta,referrer,ziyaretci,kullanici_id) VALUES (?,?,?,?,?,?)")
         .bind(type, b.date || null, b.meta ? String(b.meta).slice(0, 200) : null,
-              request.headers.get('referer') || null).run();
+              request.headers.get('referer') || null, ziy, kid).run();
       return json({ ok: true });
     }
 
@@ -86,7 +67,7 @@ export async function onRequest(context) {
       if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(eposta)) return json({ error: 'Geçerli bir e-posta gir.' }, 400);
       if (!b.kvkk) return json({ error: 'Devam için onay kutusunu işaretle.' }, 400);
 
-      const ozet = await ipOzeti(env, request.headers.get('cf-connecting-ip') || '');
+      const ozet = await ipOzetiReq(env, request);
       if (ozet) {
         const esik = new Date(Date.now() - 3600000).toISOString().slice(0, 19) + 'Z';
         const rc = await env.DB.prepare("SELECT COUNT(*) c FROM liste WHERE ip_ozet=? AND created_at > ?")

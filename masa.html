@@ -217,6 +217,14 @@ tbody tr:last-child td{border-bottom:none}
 #ciktiAlan th{color:#666370}
 #ciktiAlan .imza{margin-top:1.5rem;padding-top:.8rem;border-top:1px solid rgba(26,23,32,.14);color:#666370;font-size:.73rem;line-height:1.7}
 .yt-izgara{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.6rem}.yt{border:1px solid var(--line,rgba(128,128,128,.25));border-radius:12px;padding:.7rem .8rem}.yt-e{font-family:var(--f-say);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}.yt-d{font-family:var(--f-bas);font-size:1.02rem;margin:.25rem 0 .15rem}.yt-a{font-size:.78rem;color:var(--mut);line-height:1.5}
+.pro-not{font-size:.82rem;color:var(--mut);margin:-.3rem 0 1rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+#uyeIstem{margin:.2rem .7rem .6rem;padding:.75rem .8rem;border:1px solid rgba(var(--ink-rgb),.18);border-radius:12px;font-size:.8rem;line-height:1.5;color:var(--mut);background:rgba(var(--ink-rgb),.04);position:relative}
+#uyeIstem b{color:var(--ink)}#uyeIstem .ui-s{display:flex;gap:.4rem;margin-top:.5rem}
+#uyeIstem button{font:600 .78rem Inter,system-ui,sans-serif;min-height:36px;padding:0 .9rem;border-radius:99px;cursor:pointer;border:1px solid rgba(var(--ink-rgb),.3);background:none;color:var(--ink)}
+#uyeIstem button.ana2{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.kasa-p label{display:block;font-size:.8rem;color:var(--mut);margin:.6rem 0 .25rem}.kasa-p input[type=password]{width:100%;font:inherit;padding:.7rem .85rem;border-radius:12px;border:1px solid rgba(var(--ink-rgb),.25);background:rgba(var(--ink-rgb),.05);color:inherit}
+.kasa-p .kp-cb{display:flex!important;gap:.5rem;align-items:center;font-size:.82rem!important;color:var(--mut);margin-top:.8rem;text-transform:none!important;letter-spacing:0!important;font-family:Inter,system-ui,sans-serif}.kasa-p .kp-cb input{width:18px;height:18px;flex:none}
+@media(max-width:600px){.ust .sag{gap:.3rem}.ust .yan{white-space:nowrap;font-size:.72rem;padding:0 .55rem;min-height:36px}#senkDurum{display:none}}
 @page{size:A4;margin:14mm}
 @media print{
   html,body{background:#fff!important;color:#1A1720!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -229,6 +237,7 @@ tbody tr:last-child td{border-bottom:none}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 <script src="/sorbi-yer.js?v=5"></script>
+<script src="/sorbi-hesap.js?v=2"></script>
 <link rel="stylesheet" href="/sorbi-fonts.css?v=10">
 <!-- SORBI-TEMA:START -->
 <style>
@@ -302,7 +311,8 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
     <a href="/" class="lg"><i>✦</i>SORBİ</a>
     <span class="et">Astrolog Masası</span>
     <div class="sag">
-      <span class="et" style="opacity:.8">Veriler bu tarayıcıda kalır</span>
+      <span class="et" id="senkDurum" style="opacity:.8">Veriler bu tarayıcıda kalır</span>
+      <button class="yan" id="senkBtn" title="Dosyalarını şifreli olarak her cihazında tut">☁ Senkron</button>
       <button class="yan" id="disaBtn">Yedek al</button>
       <button class="yan" id="iceBtn">Yedek yükle</button>
       <input type="file" id="iceDosya" accept="application/json" hidden>
@@ -314,6 +324,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
         <input id="ara" type="search" placeholder="Danışan ara" autocomplete="off">
         <button class="ana" id="yeniBtn" title="Yeni danışan" aria-label="Yeni danışan">+</button>
       </div>
+      <div id="uyeIstem" hidden></div>
       <div class="dlist" id="dlist"></div>
     </aside>
     <main class="icerik" id="icerik">
@@ -780,6 +791,7 @@ function dogumMetni(d){
           '<button class="yan" id="svgBtn">Haritayı SVG indir</button>'+
           '<div class="st">Yazdır penceresinde hedefi “PDF olarak kaydet” seç.</div>'+
         '</div>'+
+        '<div class="yazdirma-gizle pro-not">Kendi adın, unvanın ve logonla, yorum alanlı rapor: <b>Pro · yakında</b> <button class="yan" id="proBekle" type="button">Açılınca haber ver</button></div>'+
         '<div id="cikti"><div id="ciktiAlan">'+
           '<h3>'+esc(d.ad)+' — Doğum Haritası</h3>'+
           '<div class="kim">'+esc(dogumMetni(d))+'</div>'+ svg +
@@ -919,6 +931,165 @@ function dogumMetni(d){
   });
 
   try{ if(!sessionStorage.getItem('masa_acilis')){ sessionStorage.setItem('masa_acilis','1'); olay('masa_acildi'); } }catch(e){}
+
+  /* ══ Üyelik + şifreli senkron ══
+     Kasa şifresi tarayıcıda PBKDF2 ile AES-GCM anahtarına çevrilir; sunucuya yalnız şifreli blob gider.
+     Şifre unutulursa buluttaki kopya açılamaz (bu cihazdaki dosyalar etkilenmez). */
+  var SENK={anahtar:null,tuz:null,surum:0,acik:false,zam:null,yaziyor:false};
+  var KAYIT_ANAHTAR='sorbiMasa_kasa_anahtar';
+  function b64u(buf){ var b=new Uint8Array(buf),s=''; for(var i=0;i<b.length;i++) s+=String.fromCharCode(b[i]); return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }
+  function b64uC(s){ s=s.replace(/-/g,'+').replace(/_/g,'/'); while(s.length%4) s+='='; var b=atob(s),o=new Uint8Array(b.length); for(var i=0;i<b.length;i++) o[i]=b.charCodeAt(i); return o; }
+  function anahtarTuret(sifre,tuz){
+    return crypto.subtle.importKey('raw',new TextEncoder().encode(sifre),'PBKDF2',false,['deriveKey']).then(function(k){
+      return crypto.subtle.deriveKey({name:'PBKDF2',salt:tuz,iterations:310000,hash:'SHA-256'},k,{name:'AES-GCM',length:256},true,['encrypt','decrypt']);
+    });
+  }
+  function sifrele(obj){
+    var iv=crypto.getRandomValues(new Uint8Array(12));
+    return crypto.subtle.encrypt({name:'AES-GCM',iv:iv},SENK.anahtar,new TextEncoder().encode(JSON.stringify(obj))).then(function(c){ return {veri:b64u(c),iv:b64u(iv),tuz:b64u(SENK.tuz)}; });
+  }
+  function coz(k,anahtar){
+    return crypto.subtle.decrypt({name:'AES-GCM',iv:b64uC(k.iv)},anahtar,b64uC(k.veri)).then(function(p){ return JSON.parse(new TextDecoder().decode(p)); });
+  }
+  function senkYaz(t){ var e=$('senkDurum'); if(e) e.textContent=t; }
+  function saatStr(){ return new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'}); }
+  function anahtarHatirla(){ try{ crypto.subtle.exportKey('raw',SENK.anahtar).then(function(r){ localStorage.setItem(KAYIT_ANAHTAR,JSON.stringify({k:b64u(r),t:b64u(SENK.tuz)})); }); }catch(e){} }
+  function hatirlanan(){
+    try{ var h=JSON.parse(localStorage.getItem(KAYIT_ANAHTAR)||'null'); if(!h) return Promise.resolve(null);
+      return crypto.subtle.importKey('raw',b64uC(h.k),{name:'AES-GCM'},true,['encrypt','decrypt']).then(function(k){ return {anahtar:k,tuz:b64uC(h.t)}; });
+    }catch(e){ return Promise.resolve(null); }
+  }
+  function it(){
+    if(!SENK.acik||!SENK.anahtar) return;
+    clearTimeout(SENK.zam);
+    SENK.zam=setTimeout(function(){
+      if(SENK.yaziyor){ it(); return; } SENK.yaziyor=true; senkYaz('Senkron: yazılıyor…');
+      sifrele(oku()).then(function(p){
+        p.surum=SENK.surum;
+        return fetch('/api/kasa',{method:'PUT',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)}).then(function(r){ return r.json().then(function(j){ j.__d=r.status; return j; }); });
+      }).then(function(j){
+        SENK.yaziyor=false;
+        if(j.ok){ SENK.surum=j.surum; senkYaz('Senkron açık · '+saatStr()); }
+        else if(j.__d===409){ senkYaz('Senkron: başka cihazda yeni sürüm'); if(confirm('Başka bir cihazda daha yeni bir sürüm var. Onu bu cihaza yükleyelim mi? (Hayır dersen bu cihazdaki sürüm buluta yazılır.)')){ cek(true); } else { SENK.surum=j.surum||SENK.surum; it(); } }
+        else if(j.__d===401){ SENK.acik=false; senkYaz('Senkron kapalı · oturum bitti'); }
+        else senkYaz('Senkron: yazılamadı, tekrar denenecek');
+      }).catch(function(){ SENK.yaziyor=false; senkYaz('Senkron: bağlantı yok, tekrar denenecek'); });
+    },1500);
+  }
+  function cek(uzerineYaz){
+    return fetch('/api/kasa',{credentials:'same-origin'}).then(function(r){ return r.json(); }).then(function(j){
+      if(!j.kasa) return null;
+      return coz(j.kasa,SENK.anahtar).then(function(v){
+        SENK.surum=j.kasa.surum;
+        if(uzerineYaz){ yazHam(v); SECILI=null; $('icerik').innerHTML='<div class="bos">Buluttaki sürüm yüklendi.</div>'; listele(); }
+        senkYaz('Senkron açık · '+saatStr()); return v;
+      });
+    });
+  }
+  var yazHam=yaz;
+  yaz=function(v){ yazHam(v); it(); };
+  function gercekDosya(v){ return (v.danisanlar||[]).filter(function(d){ return !/^Örnek/.test(d.ad||'') && !d.arsiv; }).length; }
+
+  function kasaPenceresi(yeni){
+    return new Promise(function(coz2){
+      if(window.SorbiHesap&&window.SorbiHesap.css) window.SorbiHesap.css();
+      var o=document.createElement('div'); o.className='shk-ort';
+      o.innerHTML='<div class="shk kasa-p" role="dialog" aria-modal="true"><button class="shk-x" type="button" aria-label="Kapat">×</button>'+
+        '<h2>'+(yeni?'Kasa şifresi belirle':'Kasa şifren')+'</h2>'+
+        '<p>'+(yeni?'Dosyaların bu şifreyle tarayıcında şifrelenip buluta gider. Şifreyi biz bilmiyoruz ve sıfırlayamayız; unutursan buluttaki kopya açılmaz (bu cihazdakiler yerinde kalır). En az 8 karakter.':'Bu hesabın bulut kasası var. Açmak için kasa şifreni gir.')+'</p>'+
+        '<label for="kp1">Kasa şifresi</label><input id="kp1" type="password" autocomplete="'+(yeni?'new-password':'current-password')+'" minlength="8">'+
+        (yeni?'<label for="kp2">Tekrar</label><input id="kp2" type="password" autocomplete="new-password">':'')+
+        '<label class="kp-cb"><input type="checkbox" id="kpH" checked> Bu cihazda hatırla · paylaşılan bilgisayarda işaretleme</label>'+
+        '<button class="shk-b" id="kpB" type="button">'+(yeni?'Şifrele ve senkronu aç':'Kasayı aç')+'</button><div class="shk-d" id="kpD"></div></div>';
+      document.body.appendChild(o);
+      var kapat=function(v){ if(o.parentNode) o.parentNode.removeChild(o); coz2(v); };
+      o.querySelector('.shk-x').onclick=function(){ kapat(null); };
+      try{ o.querySelector('#kp1').focus(); }catch(e){}
+      function tamam(){
+        var a=o.querySelector('#kp1').value, d=o.querySelector('#kpD');
+        if(a.length<8){ d.className='shk-d h'; d.textContent='En az 8 karakter.'; return; }
+        if(yeni && a!==o.querySelector('#kp2').value){ d.className='shk-d h'; d.textContent='İki şifre aynı değil.'; return; }
+        kapat({sifre:a,hatirla:o.querySelector('#kpH').checked});
+      }
+      o.querySelector('#kpB').onclick=tamam;
+      o.addEventListener('keydown',function(e){ if(e.key==='Enter') tamam(); if(e.key==='Escape') kapat(null); });
+    });
+  }
+
+  function senkronuAc(){
+    var H=window.SorbiHesap; if(!H) return;
+    H.olay('masa_senk_tik');
+    H.giris({neden:'Masa dosyalarını şifreli olarak her cihazında tutmak için ücretsiz üye ol.',kaynak:'masa-senkron'}).then(function(u){
+      if(!u) return;
+      senkYaz('Senkron: kasa kontrol ediliyor…');
+      return fetch('/api/kasa',{credentials:'same-origin'}).then(function(r){ return r.json(); }).then(function(j){
+        if(!j.kasa){
+          return kasaPenceresi(true).then(function(c){
+            if(!c){ senkYaz('Veriler bu tarayıcıda kalır'); return; }
+            SENK.tuz=crypto.getRandomValues(new Uint8Array(16)); SENK.surum=0;
+            return anahtarTuret(c.sifre,SENK.tuz).then(function(k){ SENK.anahtar=k; SENK.acik=true; if(c.hatirla) anahtarHatirla(); H.olay('masa_senk_acildi'); it(); senkDugme(); });
+          });
+        }
+        function dene(){
+          return kasaPenceresi(false).then(function(c){
+            if(!c){ senkYaz('Veriler bu tarayıcıda kalır'); return; }
+            var tuz=b64uC(j.kasa.tuz);
+            return anahtarTuret(c.sifre,tuz).then(function(k){
+              return coz(j.kasa,k).then(function(bulut){
+                SENK.anahtar=k; SENK.tuz=tuz; SENK.surum=j.kasa.surum; SENK.acik=true; if(c.hatirla) anahtarHatirla();
+                var yerel=oku();
+                if(gercekDosya(yerel)===0 || confirm('Bulutta '+gercekDosya(bulut)+' dosya, bu cihazda '+gercekDosya(yerel)+' dosya var. Buluttakini bu cihaza yükleyelim mi?\n(İptal: bu cihazdaki sürüm buluta yazılır.)')){
+                  yazHam(bulut); SECILI=null; $('icerik').innerHTML='<div class="bos">Buluttaki dosyalar yüklendi.</div>'; listele(); senkYaz('Senkron açık · '+saatStr());
+                } else it();
+                H.olay('masa_senk_acildi'); senkDugme();
+              }).catch(function(){ alert('Kasa şifresi yanlış.'); return dene(); });
+            });
+          });
+        }
+        return dene();
+      });
+    });
+  }
+  function senkDugme(){
+    var b=$('senkBtn'); if(!b) return;
+    b.textContent=SENK.acik?'☁ Senkron açık':'☁ Senkron';
+  }
+  function uyeIstemi(){
+    var H=window.SorbiHesap, k=$('uyeIstem'); if(!H||!k) return;
+    H.ben().then(function(u){
+      var kapandi=false; try{ kapandi=sessionStorage.getItem('masa_istem_kapat')==='1'; }catch(e){}
+      if(u||kapandi||gercekDosya(oku())<2){ k.hidden=true; return; }
+      if(!k.hidden) return;
+      k.innerHTML='<b>Dosyaların yalnız bu tarayıcıda.</b> Tarayıcı verisi silinirse gider. Ücretsiz üye ol, şifreli senkronla her cihazında olsun.<div class="ui-s"><button class="ana2" type="button" id="uiE">Üye ol</button><button type="button" id="uiH">Sonra</button></div>';
+      k.hidden=false; H.olay('masa_istem_gor');
+      $('uiE').onclick=function(){ H.olay('masa_istem_tik'); senkronuAc(); };
+      $('uiH').onclick=function(){ try{ sessionStorage.setItem('masa_istem_kapat','1'); }catch(e){} k.hidden=true; };
+    });
+  }
+  $('senkBtn').addEventListener('click',function(){ if(SENK.acik){ if(confirm('Senkron açık. Bu cihazdaki hatırlanan kasa anahtarı silinsin ve senkron bu cihazda kapatılsın mı?')){ try{localStorage.removeItem(KAYIT_ANAHTAR);}catch(e){} SENK.acik=false; SENK.anahtar=null; senkYaz('Veriler bu tarayıcıda kalır'); senkDugme(); } } else senkronuAc(); });
+  document.addEventListener('click',function(e){ var t=e.target; if(t&&t.id==='proBekle' && window.SorbiHesap){ window.SorbiHesap.bekleme('pro','masa-cikti').then(function(j){ if(j&&j.ok){ t.disabled=true; t.textContent='Listedesin ✓'; } }); } });
+  /* açılışta: oturum + hatırlanan anahtar varsa senkronu sessizce aç */
+  (function(){
+    var H=window.SorbiHesap; if(!H) return;
+    H.ben().then(function(u){
+      if(!u){ setTimeout(uyeIstemi,800); return; }
+      $('senkBtn').title='@'+(u.kullanici_adi||'')+' olarak girildi';
+      if(!u.kasa) return;
+      hatirlanan().then(function(h){
+        if(!h) { senkYaz('Bulut kasan var · ☁ ile aç'); return; }
+        SENK.anahtar=h.anahtar; SENK.tuz=h.tuz; SENK.acik=true; senkDugme();
+        fetch('/api/kasa',{credentials:'same-origin'}).then(function(r){return r.json();}).then(function(j){
+          if(!j.kasa) return;
+          coz(j.kasa,SENK.anahtar).then(function(bulut){
+            SENK.surum=j.kasa.surum;
+            if(JSON.stringify(bulut)!==JSON.stringify(oku())){ yazHam(bulut); listele(); }
+            senkYaz('Senkron açık · '+saatStr());
+          }).catch(function(){ SENK.acik=false; SENK.anahtar=null; senkDugme(); senkYaz('Kasa anahtarı değişmiş · ☁ ile aç'); });
+        });
+      });
+    });
+  })();
+  var listeleEski=listele; listele=function(sec){ listeleEski(sec); setTimeout(uyeIstemi,300); };
   tohumla();
   baslat();
   /* İlk açılışta yalnız örnek dosyalar varsa birini açık getir: ürün ilk saniyede görünsün. */
