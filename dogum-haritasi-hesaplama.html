@@ -343,6 +343,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
   <div class="sec ozet"><div class="sec-h">Ne anlama geliyor <small>özün · ihtiyacın · dışa yansıyan tarzın</small></div>
    <div class="reading"><span class="lead" id="pTeaser"></span><span id="pOzet"></span></div>
   </div>
+  <div data-gorusme="harita" hidden></div>
 
   <details class="kat" id="katKonum"><summary>Gezegen Konumları <small id="katKonumN"></small></summary><div class="kat-b">
    <p class="sz-ipucu">Altı noktalı terimlere dokun, ne demek olduğunu gör.</p><table id="pTable"><thead><tr><th>Gezegen</th><th>Konum</th><th id="thHouse"><span data-sz="ev">Ev</span></th></tr></thead><tbody></tbody></table>
@@ -573,6 +574,7 @@ document.getElementById('gen').onclick=()=>{
  document.getElementById('pImza').innerHTML=sigs.slice(0,Math.min(5,sigs.length)).map(x=>`<div class="imza"><div class="ig">${x.g}</div><div><div class="il">${x.lab}</div><div class="it">${x.head}</div></div></div>`).join('');
 
  const b3=[['Güneş',ch.pls[0].lon],['Ay',ch.pls[1].lon]];if(!noTime)b3.push(['Yükselen',ch.asc]);
+ try{window.__sorbiOzet={gunes:SIGNS[signOf(ch.pls[0].lon)],ay:SIGNS[signOf(ch.pls[1].lon)],yukselen:noTime?null:SIGNS[signOf(ch.asc)],tarih:dv,saat:noTime?null:tv,yer:(document.getElementById('cPlace')||{}).value||''};document.dispatchEvent(new Event('sorbi:ozet'));}catch(e){}
  document.getElementById('pBt3').innerHTML=b3.map(([r,l])=>{const s=signOf(l),g=norm(l)-s*30;return `<div class="c"><div class="g">${r==='Yükselen'?'⌖':PGLYPH[r]}</div><div class="r">${r}</div><div class="s">${SIGNS[s]}</div><div class="d">${Math.floor(g)}°${String(Math.round((g-Math.floor(g))*60)).padStart(2,'0')}</div></div>`;}).join('');
 
  const{ec,mo:mc}=elemCounts(ch);const emax=Math.max(...ec)||1,mmax=Math.max(...mc)||1;
@@ -702,7 +704,8 @@ function shareChart(){const url='https://sorbiapp.com/dogum-haritasi-hesaplama';
 <!-- SORBI-FOOTER:END -->
 <script src="/sorbi-form.js?v=4" defer></script>
 <script src="/sorbi-profil.js?v=3" defer></script>
-  <script src="/sorbi-olcum.js?v=1" defer></script>
+  <script src="/sorbi-gorusme.js?v=2" defer></script>
+<script src="/sorbi-olcum.js?v=1" defer></script>
   <script src="/sorbi-sozluk.js?v=1" defer></script>
   <script>/* çift profil bandı: genel profil şeridi (değiştir · çıkış) varsa hoş geldin bandı tekrar etmesin */
   window.addEventListener('load',function(){try{if(document.getElementById('sbprofil')){var w=document.getElementById('welcomeBar');if(w)w.style.display='none';}}catch(e){}});</script>

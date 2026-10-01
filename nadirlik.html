@@ -597,7 +597,8 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
       '<div class="paylas">'+
         '<a class="yan" href="/detayli-dogum-haritasi">Haritanın tamamını aç</a>'+
         '<a class="yan" href="/araclar">Diğer araçlar</a>'+
-      '</div>';
+      '</div>'+'<div data-gorusme="nadirlik"></div>';
+    try{var asc0=(ch.pts||[]).filter(function(p){return p.k==='asc';})[0];window.__sorbiOzet={gunes:S[burc(pl.sun.lon)],ay:S[burc(pl.moon.lon)],yukselen:(!saatsiz&&asc0)?S[burc(asc0.lon)]:null,tarih:$('tarih').value,saat:saatsiz?null:$('saat').value,yer:(SECILI&&SECILI.ad)||''};document.dispatchEvent(new Event('sorbi:ozet'));}catch(e){}
 
     $('kartIndir').addEventListener('click',function(){
       var b=this, eski=b.textContent; b.textContent='Hazırlanıyor…'; b.disabled=true;
@@ -681,7 +682,8 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
 </script>
 <script src="/sorbi-kart.js?v=3" defer></script>
 <script src="/sorbi-geri-bildirim.js?v=2" defer></script>
-  <script src="/sorbi-olcum.js?v=1" defer></script>
+  <script src="/sorbi-gorusme.js?v=2" defer></script>
+<script src="/sorbi-olcum.js?v=1" defer></script>
 <script src="/sorbi-liste.js?v=2" defer></script>
 <script src="/sorbi-profil.js?v=3" defer></script>
 <section class="wrap" style="max-width:720px;margin:2.4rem auto 0;padding:0 1.2rem">

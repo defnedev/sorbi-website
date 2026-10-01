@@ -534,7 +534,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
       <button data-p="p8,p9">Uzman</button>
       <button data-p="p11">Takvim</button>
     </div>
-    <div class="pane on" id="p0"><div id="sumBox"></div></div>
+    <div class="pane on" id="p0"><div id="sumBox"></div><div data-gorusme="sinastri" id="gSin" data-gorusme-kapali></div></div>
     <div class="pane" id="p1"><div class="subh">Gezegenler</div><div class="scroll"><table id="tPlanets"></table></div>
       <div class="scroll" id="tPlanetsB"></div>
       <details class="ynt"><summary>Yöntem notu</summary><div class="note">Konum derece°dakika′saniye″ olarak burç içindedir. <b>R</b> = geri hareket. Hız günlük ekliptik hareket.</div></details></div>
@@ -563,6 +563,7 @@ input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=color])
         <label style="display:flex;gap:.4rem;align-items:center;cursor:pointer"><input type="checkbox" id="calMars" style="width:auto"> Mars geçişlerini de göster</label>
       </div>
       <div id="calBox"></div>
+      <div data-gorusme="takvim"></div>
       <details class="ynt"><summary>Okuma notu</summary><div class="note">Yavaş gezegenlerin natal noktalarına <b>tam açı</b> yaptığı tarihler. Retro nedeniyle aynı temas 2–3 kez tekrarlanır; geçiş numarası yanında yazar. ℞ = temas anında gezegen geri harekette. Yükselen/MC temasları doğum saatinin kesinliğine bağlıdır.</div></details></div>
     <div class="pane" id="p9"><div class="subh">Deklinasyon & antisya</div><div class="scroll"><table id="tDecl"></table></div>
       <div class="scroll" style="margin-top:1rem"><table id="tAnti"></table></div>
@@ -1913,6 +1914,11 @@ function run(){
                  : aspectsWithin(inner.pts, o.orbMul, o.minor);
 
     CUR={inner:inner,outer:outer,aspects:asps,title:title,sub:sub,labelInner:li,labelOuter:lo,o:o,mode:MODE};
+    try{var _sg=function(c,k){var p=(c.pls||[]).filter(function(x){return x.k===k;})[0];return p?SIGNS[Math.floor(norm(p.lon)/30)]:null;};var _asc=(inner.pts||[]).filter(function(x){return x.k==='asc';})[0];
+      window.__sorbiOzet={gunes:_sg(inner,'sun'),ay:_sg(inner,'moon'),yukselen:(o.timeStr&&_asc)?SIGNS[Math.floor(norm(_asc.lon)/30)]:null,tarih:o.dateStr,saat:o.timeStr||null,yer:o.place||'',
+        ek:(MODE==='synastry'&&outer)?('Ben Güneş '+_sg(inner,'sun')+' · Ay '+_sg(inner,'moon')+', o Güneş '+_sg(outer,'sun')+' · Ay '+_sg(outer,'moon')):null};
+      var _gs=document.getElementById('gSin'); if(_gs){ if(MODE==='synastry'&&outer) _gs.removeAttribute('data-gorusme-kapali'); else _gs.setAttribute('data-gorusme-kapali',''); }
+      document.dispatchEvent(new Event('sorbi:ozet'));}catch(e){}
     renderAll();
 
     var HS={P:'Placidus',W:'Whole Sign',K:'Koch',E:'Eşit',O:'Porphyry',R:'Regiomontanus',C:'Campanus'};
@@ -2326,6 +2332,7 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
 <!-- SORBI-FOOTER:END -->
 <script src="/sorbi-form.js?v=4" defer></script>
 <script src="/sorbi-profil.js?v=3" defer></script>
-  <script src="/sorbi-olcum.js?v=1" defer></script>
+  <script src="/sorbi-gorusme.js?v=2" defer></script>
+<script src="/sorbi-olcum.js?v=1" defer></script>
 </body>
 </html>
